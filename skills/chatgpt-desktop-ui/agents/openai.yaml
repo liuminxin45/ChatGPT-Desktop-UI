@@ -1,0 +1,6 @@
+interface:
+  display_name: "ChatGPT Desktop UI"
+  short_description: "Reusable desktop controls and visual fidelity workflow"
+  default_prompt: "Use $chatgpt-desktop-ui to adapt this application's UI to the ChatGPT desktop visual language while preserving its workflows."
+policy:
+  allow_implicit_invocation: true

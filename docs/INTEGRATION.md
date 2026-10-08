@@ -1,0 +1,37 @@
+# Integration
+
+## Dependency ownership
+
+Use `@phd/chatgpt-desktop-kit` as the sole control, icon, token and base-style implementation. Pin an immutable commit or package version in the consumer lockfile. Update consumers together and validate them against that exact revision. Do not copy source into each client or synchronize implementations bidirectionally.
+
+PHD's `@phd/ui`, `@phd/icons` and local control paths are compatibility exports. Only platform adapters, service errors, localization catalogs and business-specific compositions remain in the client. Collector and Processor import this package directly. The library has no application IPC, credential service, business data root or Worker lifecycle.
+
+## Styles and surfaces
+
+Standalone React documents import `styles.css` once and mount `DesktopRoot` (also exported as `DesktopSurface`). An optional application-specific storage key controls theme persistence; native storage stays in the Host's managed profile. The root tracks system preference and restores document state on unmount.
+
+Tailwind hosts import `controls.css`, `host.css` and `host-shell.css` once, then run their normal Tailwind pipeline. Include this package's `src/**/*.{ts,tsx}` in Tailwind's content scan when using `compat/*`. These exports preserve utility-based adapters without maintaining another component implementation.
+
+Embedded Tools inherit Host styles and typography. They must not mount another theme root, title bar or renderer error boundary. `ToolVisibilityContext` closes overlays when a retained surface is hidden; it does not own the surface lease.
+
+## Host behavior
+
+`TitleBar` presents callbacks and capability flags. The Host owns history boundaries, sidebar availability, native editing, tray behavior, maximize and exit saving. Reuse one action definition for custom and native menus; disable unavailable actions.
+
+`DesktopShell` hides contextual sidebars with CSS and preserves their React subtree. Hosts retain selections, drafts and module-specific sidebar preferences. Avatar images come from validated Host identity; absent or failed images use a neutral fallback. Saving configuration does not establish authentication.
+
+## Localization and drafts
+
+English is the primitive default. Supply display labels through props or `UIStringsProvider` (`labels`, `locale`, `translate`). `configureUIRuntime` provides an optional Host callback for non-React translation and locale reads. It stores no preference and requires no application translation catalog. Translate interface copy only, not user-authored content.
+
+Protect unsaved changes before navigation or Dialog close. Failed saves preserve input. Theme, locale or sidebar changes must not remount business content, refetch business data or advance a Tool lease.
+
+## Usage and diagnostics
+
+Stable `actionId`, `data-phd-feature` and `data-phd-surface` markers support Host-owned usage tracking. Components do not emit telemetry. Hosts correlate invocation and asynchronous outcomes, without counting replies as second user actions.
+
+Log bounded diagnostic metadata, stages and correlation IDs only. Exclude inputs, credentials, prompts, user content and personal identities. The library neither uploads nor writes diagnostic or usage events.
+
+## Verification scope
+
+The gallery checks React interaction and computed geometry. Client probes verify real consumer imports, retained state and Electron adapters with isolated data. Browser `deviceScaleFactor` cases simulate scaling; native Windows controls and production service authentication require separate Host validation.

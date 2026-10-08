@@ -1,0 +1,11 @@
+node_modules/
+/dist/
+examples/gallery/build/
+*.tsbuildinfo
+*.tgz
+tests/output/
+artifacts/
+
+skills/chatgpt-desktop-ui/assets/
+skills/chatgpt-desktop-ui/references/
+skills/chatgpt-desktop-ui/origin.json

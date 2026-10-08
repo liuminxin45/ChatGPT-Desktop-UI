@@ -1,0 +1,4 @@
+* text=auto
+*.png binary
+# Upstream virtualizer diagnostic template strings intentionally contain blank indentation.
+skills/chatgpt-desktop-ui/assets/ui/dist/index.js whitespace=-blank-at-eol

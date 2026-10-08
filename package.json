@@ -1,0 +1,101 @@
+{
+  "name": "@phd/chatgpt-desktop-kit",
+  "version": "0.2.0",
+  "description": "Reusable neutral desktop UI primitives, shell patterns, visual references and an agent skill.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./compat/*": {
+      "types": "./dist/compat/*.d.ts",
+      "import": "./dist/compat/*.js",
+      "default": "./dist/compat/*.js"
+    },
+    "./source/*": "./src/*",
+    "./controls.css": "./dist/controls.css",
+    "./tokens.css": "./dist/tokens.css",
+    "./primitives.css": "./dist/primitives.css",
+    "./host.css": "./dist/compat/host.css",
+    "./fixed-virtual-list": {
+      "types": "./dist/fixed-virtual-list.d.ts",
+      "import": "./dist/fixed-virtual-list.js",
+      "default": "./dist/fixed-virtual-list.js"
+    },
+    "./host-shell.css": "./dist/compat/host-shell.css",
+    "./tab-navigation": {
+      "types": "./dist/tab-navigation.d.ts",
+      "import": "./dist/tab-navigation.js",
+      "default": "./dist/tab-navigation.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "LICENSE",
+    "NOTICE.md",
+    "licenses"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "engines": {
+    "node": "24.19.0"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.gallery.json --noEmit",
+    "build": "node scripts/build.mjs",
+    "gallery": "node scripts/serve.mjs",
+    "test": "node scripts/verify.mjs",
+    "skill:package": "node scripts/package-skill.mjs",
+    "skill:check": "node scripts/check-skill.mjs",
+    "skill:install": "node scripts/package-skill.mjs --install",
+    "prepare": "npm run build:library",
+    "build:library": "node scripts/build.mjs --library-only",
+    "audit:public": "node scripts/audit-public.mjs"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "dependencies": {
+    "@phosphor-icons/react": "2.1.10",
+    "@radix-ui/react-dropdown-menu": "2.1.6",
+    "@radix-ui/react-select": "2.1.6",
+    "@radix-ui/react-tooltip": "1.1.8",
+    "@tanstack/react-virtual": "3.13.12",
+    "lucide-react": "0.487.0",
+    "react-markdown": "10.1.0",
+    "remark-gfm": "4.0.1",
+    "@radix-ui/react-slot": "1.1.2",
+    "class-variance-authority": "0.7.1",
+    "clsx": "2.1.1",
+    "tailwind-merge": "3.2.0",
+    "@radix-ui/react-dialog": "1.1.6",
+    "@radix-ui/react-alert-dialog": "1.1.6",
+    "@radix-ui/react-avatar": "1.1.3",
+    "@radix-ui/react-checkbox": "1.1.4",
+    "@radix-ui/react-switch": "1.1.3",
+    "@radix-ui/react-label": "2.1.2",
+    "@radix-ui/react-popover": "1.1.6",
+    "@radix-ui/react-progress": "1.1.2",
+    "@radix-ui/react-separator": "1.1.2",
+    "date-fns": "3.6.0",
+    "react-day-picker": "8.10.1"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.28",
+    "@types/react-dom": "18.3.7",
+    "esbuild": "0.25.12",
+    "playwright": "1.62.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "typescript": "5.9.3"
+  }
+}

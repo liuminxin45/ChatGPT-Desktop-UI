@@ -1,0 +1,34 @@
+:where(.phd-focus-ring):focus-visible {
+  outline: 2px solid var(--phd-color-focus);
+  outline-offset: 1px;
+}
+
+:where(.phd-pressable) {
+  transition:
+    background-color var(--phd-motion-fast) ease,
+    border-color var(--phd-motion-fast) ease,
+    color var(--phd-motion-fast) ease,
+    transform var(--phd-motion-press) ease;
+}
+
+:where(.phd-pressable):active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+:where(.phd-surface) {
+  border: 0;
+  border-radius: var(--phd-radius-surface);
+  background: var(--phd-color-surface);
+  color: var(--phd-color-text);
+}
+
+:where(.phd-icon-button) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--phd-radius-control);
+}
+
+:where(.phd-muted-text) {
+  color: var(--phd-color-text-muted);
+}
