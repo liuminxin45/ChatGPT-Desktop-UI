@@ -1,0 +1,164 @@
+{
+  "status": "passed",
+  "node": "v24.19.0",
+  "browser": "msedge",
+  "renderCases": 18,
+  "renders": [
+    {
+      "page": "projects",
+      "theme": "light",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "overflow": false
+    },
+    {
+      "page": "inbox",
+      "theme": "light",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "overflow": false
+    },
+    {
+      "page": "settings",
+      "theme": "light",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "overflow": false
+    },
+    {
+      "page": "projects",
+      "theme": "light",
+      "width": 1280,
+      "height": 800,
+      "scale": 1,
+      "overflow": false
+    },
+    {
+      "page": "inbox",
+      "theme": "light",
+      "width": 1280,
+      "height": 800,
+      "scale": 1,
+      "overflow": false
+    },
+    {
+      "page": "settings",
+      "theme": "light",
+      "width": 1280,
+      "height": 800,
+      "scale": 1,
+      "overflow": false
+    },
+    {
+      "page": "projects",
+      "theme": "light",
+      "width": 1536,
+      "height": 864,
+      "scale": 1.25,
+      "overflow": false
+    },
+    {
+      "page": "inbox",
+      "theme": "light",
+      "width": 1536,
+      "height": 864,
+      "scale": 1.25,
+      "overflow": false
+    },
+    {
+      "page": "settings",
+      "theme": "light",
+      "width": 1536,
+      "height": 864,
+      "scale": 1.25,
+      "overflow": false
+    },
+    {
+      "page": "projects",
+      "theme": "dark",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "overflow": false
+    },
+    {
+      "page": "inbox",
+      "theme": "dark",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "overflow": false
+    },
+    {
+      "page": "settings",
+      "theme": "dark",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "overflow": false
+    },
+    {
+      "page": "projects",
+      "theme": "dark",
+      "width": 1280,
+      "height": 800,
+      "scale": 1,
+      "overflow": false
+    },
+    {
+      "page": "inbox",
+      "theme": "dark",
+      "width": 1280,
+      "height": 800,
+      "scale": 1,
+      "overflow": false
+    },
+    {
+      "page": "settings",
+      "theme": "dark",
+      "width": 1280,
+      "height": 800,
+      "scale": 1,
+      "overflow": false
+    },
+    {
+      "page": "projects",
+      "theme": "dark",
+      "width": 1536,
+      "height": 864,
+      "scale": 1.25,
+      "overflow": false
+    },
+    {
+      "page": "inbox",
+      "theme": "dark",
+      "width": 1536,
+      "height": 864,
+      "scale": 1.25,
+      "overflow": false
+    },
+    {
+      "page": "settings",
+      "theme": "dark",
+      "width": 1536,
+      "height": 864,
+      "scale": 1.25,
+      "overflow": false
+    }
+  ],
+  "checks": [
+    "search, empty recovery, filters and sorting",
+    "task completion",
+    "project validation, duplicate failure, discard guard, creation and details",
+    "per-conversation drafts survive theme, sidebar and route changes; Enter sends",
+    "workspace name and reminder preview",
+    "reload resets fictional edits; only theme is persisted"
+  ],
+  "limitations": [
+    "Fictional client-only demo; no backend, native window controls or authentication.",
+    "125% is browser deviceScaleFactor emulation, not Windows display scaling."
+  ]
+}

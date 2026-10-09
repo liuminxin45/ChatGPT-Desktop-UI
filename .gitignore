@@ -1,6 +1,7 @@
 node_modules/
 /dist/
 examples/gallery/build/
+examples/demo/build/
 *.tsbuildinfo
 *.tgz
 tests/output/

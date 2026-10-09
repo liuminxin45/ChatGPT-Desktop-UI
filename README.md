@@ -2,6 +2,29 @@
 
 An independent React component library for neutral desktop interfaces. It provides shared controls, semantic themes, compact navigation, layout primitives, synthetic visual examples and a companion agent Skill. It is not affiliated with OpenAI.
 
+## Try the demo
+
+[Open the interactive demo](https://liuminxin45.github.io/ChatGPT-Desktop-UI/) — an English product workspace with projects, a team inbox and settings. Search and filter projects, create one, complete a task, send a message, and switch between light and dark themes.
+
+![Northstar workspace in dark mode](docs/demo/projects-dark-1920.png)
+
+![Northstar workspace in light mode](docs/demo/projects-light-1920.png)
+
+All people, projects and conversations are fictional and written for this example. Edits stay in memory and reset on reload. Only the theme preference is stored in the browser. The demo has no backend, authentication, analytics or external data calls.
+
+To run it locally with Node **24.19.0**:
+
+```sh
+npm ci --ignore-scripts
+npm run demo
+```
+
+Open **http://127.0.0.1:4173**. If the port is occupied, set `PORT` to a free port. `npm run demo:build` exports a static site to `examples/demo/build/`; it can be served by any static web server. GitHub Actions builds and publishes that folder to GitHub Pages on a push to `main`.
+
+React does not require Electron or Tauri. The build compiles the actual library components into browser JavaScript, and the generated HTML loads that bundle. The existing `npm run gallery` remains a separate component and interaction reference.
+
+See [Demo verification](docs/demo/README.md) for screenshots and test scope.
+
 ## Development
 
 Use Node **24.19.0**.
@@ -11,6 +34,8 @@ npm ci --ignore-scripts
 npm run typecheck
 npm run build
 npm test
+npm run demo:build
+npm run test:demo
 npm run audit:public
 npm run skill:package
 npm run skill:check

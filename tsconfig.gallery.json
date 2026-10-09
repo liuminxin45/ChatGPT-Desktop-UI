@@ -1,5 +1,5 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": { "rootDir": ".", "declaration": false, "noEmit": true },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "examples/gallery/**/*.tsx", "examples/input-contract.tsx"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "examples/gallery/**/*.tsx", "examples/demo/**/*.tsx", "examples/input-contract.tsx"]
 }
