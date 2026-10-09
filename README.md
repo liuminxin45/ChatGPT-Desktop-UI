@@ -49,6 +49,8 @@ Related clients consume this repository at the same immutable Git revision. Exis
 
 Install from a Git URL pinned to a full commit hash, or an explicitly versioned package archive. Git installation runs `prepare` to produce the distribution. A local `file:` dependency is suitable for development, not a release pin. See [Integration](docs/INTEGRATION.md) for stylesheet and Host ownership.
 
+Release consumers use `git+https://github.com/liuminxin45/ChatGPT-Desktop-UI.git#<full-commit>` and run normal installation with scripts enabled. `node node_modules/chatgpt-desktop-kit/dist/check-consumer.mjs` verifies the public source, lockfiles, actual installed revision, prepared distribution and declared forwarding adapters. One immutable revision is shared by all clients; no local Git path or vendor snapshot is required.
+
 ```tsx
 import { DesktopRoot, Button, Select, WorkbenchPage } from 'chatgpt-desktop-kit';
 import 'chatgpt-desktop-kit/styles.css';
@@ -70,6 +72,8 @@ Buttons default to `type="button"`; form submission requires `type="submit"`. Em
 ## Documentation
 
 - [Design system](docs/DESIGN_SYSTEM.md): geometry, tokens and component states.
+- [Component map](docs/COMPONENTS.md): public API and Host ownership.
+- [Recreation contract](docs/REPLICA_CONTRACT.md): reference priority, surface inventory and acceptance gaps.
 - [Design guidance](docs/DESIGN_GUIDANCE.md): route auditing and visual adaptation.
 - [Integration](docs/INTEGRATION.md): exports, localization and Host boundaries.
 - [Visual examples](docs/VISUAL_REFERENCES.md): synthetic screenshots.

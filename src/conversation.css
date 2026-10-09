@@ -1,0 +1,25 @@
+.client-composer-wrap{width:calc(100% - 40px);max-width:736px;flex:none;align-self:center;margin:0 0 12px}.client-composer-context{height:38px;display:flex;align-items:center;gap:24px;margin:0 12px -1px;padding:0 12px;background:var(--desktop-color-surface);border-radius:16px 16px 0 0;font-size:12px}.client-composer-context>span{display:flex;align-items:center;gap:6px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.client-composer-context>.desktop-action-tooltip{margin-left:auto}.client-composer{width:100%!important;max-width:none!important;border-radius:28px!important;padding:10px 10px 8px;background:var(--desktop-color-client-input,var(--desktop-color-surface-muted));border:1px solid var(--desktop-color-border-strong)}.client-composer .desktop-textarea{display:block;border:0!important;box-shadow:none!important;background:transparent;min-height:46px;max-height:200px;resize:none;padding:3px 2px;font-size:14px;line-height:22px}.client-composer-actions{display:flex;align-items:center;gap:4px}.client-composer-actions>.desktop-icon-control{width:28px;height:28px}.client-access,.client-model{display:flex;align-items:center;gap:5px;border:0;border-radius:8px;background:transparent;color:var(--desktop-color-text);font:inherit;font-size:12px;padding:5px 6px;white-space:nowrap}.client-access{color:var(--desktop-color-warning)}.dark .client-access{color:var(--desktop-color-client-permissions)}.client-access:hover,.client-model:hover{background:var(--desktop-color-surface-hover)}.client-model>span{color:var(--desktop-color-text-muted)}.client-composer .desktop-send-control{width:30px;height:30px;min-width:30px;padding:0;border-radius:50%;background:var(--desktop-color-unread);color:var(--desktop-color-on-send)}
+/* Shared chat primitives. The desktop profile and Host determine font size and theme. */
+.client-spacer{flex:1;min-width:4px}
+.client-composer-wrap--chat{max-width:768px}
+.client-composer--chat{display:grid;grid-template-columns:28px minmax(0,1fr) auto;align-items:center;gap:8px;padding:7px 10px!important;min-height:52px;border-radius:28px!important;background:var(--desktop-color-composer)!important;border:1px solid var(--desktop-color-border-strong);box-shadow:0 2px 5px #00000008}
+.client-composer--chat .desktop-textarea{grid-column:2;grid-row:1;width:100%;min-height:24px!important;margin:0;padding:2px 0!important;line-height:24px;font-size:16px!important;border:0;background:none;resize:none;box-shadow:none!important}
+.client-composer--chat .client-composer-actions{display:contents}
+.client-composer--chat .client-composer-actions>:first-child{grid-column:1;grid-row:1}
+.client-composer--chat .client-spacer{display:none}
+.client-composer--chat .client-composer-actions>.desktop-action-tooltip{grid-column:3;grid-row:1}
+.client-composer--chat .client-composer-actions>.desktop-send-control,.client-composer--chat .client-composer-actions>.desktop-action-tooltip:has(>.desktop-send-control){grid-column:4;grid-row:1}
+.client-composer--chat .desktop-send-control{width:36px!important;height:36px!important;min-width:36px!important;border-radius:50%;padding:0;background:var(--desktop-color-text)!important;color:var(--desktop-color-background)!important}
+.client-composer--chat .desktop-send-control:disabled{opacity:.25}
+.client-composer-attachments{display:flex;flex-wrap:wrap;gap:8px;grid-column:1/-1;grid-row:1;padding:4px 0 8px}
+.client-composer--chat:has(.client-composer-attachments) .desktop-textarea,.client-composer--chat:has(.client-composer-attachments) .client-composer-actions>*{grid-row:2}
+.client-composer-status{padding:5px 12px;font-size:12px;color:var(--desktop-color-text-muted)}
+.desktop-conversation-message{margin:0 0 24px;line-height:1.65;overflow-wrap:anywhere}
+.desktop-conversation-message--user{width:fit-content;max-width:82%;margin-inline-start:auto}
+.desktop-conversation-message--user>div:first-child{padding:10px 18px;border-radius:24px;background:var(--desktop-color-surface-muted)}
+.desktop-conversation-message--assistant{width:100%}
+.desktop-conversation-message-actions{display:flex;gap:2px;margin-top:8px;color:var(--desktop-color-text-muted)}
+.desktop-conversation-message-actions .desktop-icon-control{width:28px;height:28px}
+.desktop-conversation-message--user .desktop-conversation-message-actions{justify-content:flex-end;opacity:0;transition:opacity var(--desktop-motion-fast)}
+.desktop-conversation-message--user:hover .desktop-conversation-message-actions,.desktop-conversation-message--user:focus-within .desktop-conversation-message-actions{opacity:1}
+@media(prefers-reduced-motion:reduce){.desktop-conversation-message-actions{transition:none}}

@@ -6,3 +6,4 @@ export { UIStringsProvider, configureUIRuntime } from './strings';
 export * from './shell';
 export * from './icons';
 export * from './client-patterns';
+export * from './conversation';

@@ -30,6 +30,7 @@ import {
   Paperclip,
 } from "@phosphor-icons/react";
 import {
+  ClientComposer,
   DesktopClientSurface,
   DesktopShell,
   DesktopMenu,
@@ -56,6 +57,7 @@ import {
   type DemoProject,
 } from "./client-data";
 import { ProjectDirectory, ScheduleLanding } from "./ClientDestinations";
+import { ClientChat } from "./ClientChat";
 import { ClientProfile } from "./ClientProfile";
 import { ClientSettings } from "./ClientSettings";
 import {
@@ -150,7 +152,7 @@ export function ClientDemo() {
     [effort, setEffort] = useState("High"),
     [access, setAccess] = useState("Full access");
   const composer = useRef<HTMLTextAreaElement>(null);
-  const key = route.chat || `new:${route.project}`,
+  const key = `${mode}:${route.chat || `new:${route.project}`}`,
     draft = drafts[key] || "";
   const chats = [...pinned, ...projects.flatMap((item) => item.chats)].filter(
       (item, index, items) =>
@@ -246,7 +248,7 @@ export function ClientDemo() {
         { own: true, text: draft.trim() },
         {
           own: false,
-          text: "The draft is ready for review. I kept the navigation compact and checked the menu and keyboard behavior.",
+          text: mode === "ChatGPT" ? "The next step is ready for review. This sample response is stored only in the browser preview." : "The draft is ready for review. I kept the navigation compact and checked the menu and keyboard behavior.",
         },
       ],
     }));
@@ -777,7 +779,7 @@ export function ClientDemo() {
               id: `client.mode.${label.toLowerCase()}`,
               label,
               checked: mode === label,
-              onSelect: () => setMode(label),
+              onSelect: () => { setMode(label); newChat(label === "ChatGPT" ? "" : "desktop"); },
             }))}
           />
           <div className="client-sidebar-actions">
@@ -949,144 +951,28 @@ export function ClientDemo() {
       )}
     </ClientSidebar>
   );
-  const composerNode = (
-    <div className="client-composer-wrap">
-      {project ? (
-        <div className="client-composer-context">
-          <span>
-            <Folder size={14} />
-            {project.name}
-          </span>
-          <span>
-            <Desktop size={14} />
-            This computer
-          </span>
-          <IconButton
-            aria-label="Project settings"
-            actionId="client.project.settings"
-            onClick={() => settings()}
-          >
-            <Gear size={14} />
-          </IconButton>
-        </div>
-      ) : null}
-      <form
-        className="desktop-composer client-composer"
-        onSubmit={(e) => {
-          e.preventDefault();
-          send();
-        }}
-      >
-        <Textarea
-          ref={composer}
-          aria-label="Message"
-          placeholder={chat ? "Work with Codex" : "Do anything"}
-          value={draft}
-          data-desktop-action="client.message.edit"
-          onChange={(e) =>
-            setDrafts((old) => ({ ...old, [key]: e.target.value }))
-          }
-        />
-        <div className="client-composer-actions">
-          <DesktopMenu
-            trigger={
-              <button
-                className="desktop-icon-control"
-                type="button"
-                aria-label="Add files and more"
-              >
-                <Plus size={18} />
-              </button>
-            }
-            items={[
-              {
-                id: "client.composer.attach",
-                label: "Add files",
-                icon: <Paperclip />,
-                disabled: true,
-              },
-              {
-                id: "client.composer.project",
-                label: "New project",
-                icon: <Folder />,
-                onSelect: actions.create,
-              },
-            ]}
-          />
-          <DesktopMenu
-            trigger={
-              <button
-                type="button"
-                className="client-access"
-                aria-label="Change permissions"
-              >
-                <ShieldWarning size={14} />
-                {access}
-              </button>
-            }
-            items={["Full access", "Default permissions"].map((label) => ({
-              id: `client.permissions.${label === "Full access" ? "full" : "default"}`,
-              label,
-              checked: label === access,
-              onSelect: () => setAccess(label),
-            }))}
-          />
-          <div className="client-spacer" />
-          <DesktopMenu
-            trigger={
-              <button type="button" className="client-model">
-                {model}
-                <span>{effort}</span>
-                <CaretDown size={12} />
-              </button>
-            }
-            items={["GPT-6.1 Sol", "GPT-6 Sol", "GPT-6 Luna"].map((label) => ({
-              id: `client.model.${label.toLowerCase().replaceAll(" ", "-")}`,
-              label,
-              children: ["Low", "Medium", "High"].map((value) => ({
-                id: `client.model.effort.${value.toLowerCase()}`,
-                label: value,
-                checked: model === label && effort === value,
-                onSelect: () => {
-                  setModel(label);
-                  setEffort(value);
-                },
-              })),
-            }))}
-          />
-          <IconButton
-            aria-label="Dictate"
-            actionId="client.voice.preview"
-            onClick={() =>
-              showInfo(
-                "Dictate",
-                "Microphone access is not requested in this preview.",
-              )
-            }
-          >
-            <Microphone size={16} />
-          </IconButton>
-          <Button
-            type={draft.trim() ? "submit" : "button"}
-            className="desktop-send-control"
-            aria-label={draft.trim() ? "Send message" : "Start voice mode"}
-            actionId="client.message.send"
-            onClick={
-              !draft.trim()
-                ? () =>
-                    showInfo(
-                      "Voice mode",
-                      "Voice is simulated in this preview.",
-                    )
-                : undefined
-            }
-          >
-            {draft.trim() ? <ArrowUp size={18} /> : <Waveform size={18} />}
-          </Button>
-        </div>
-      </form>
-    </div>
-  );
+  const composerNode = <ClientComposer
+    ref={composer} value={draft} label="Message" actionId="client.message"
+    variant={mode === "ChatGPT" ? "chat" : "work"}
+    placeholder={mode === "ChatGPT" ? "Ask ChatGPT" : chat ? "Work with Codex" : "Do anything"}
+    onValueChange={value => setDrafts(old => ({ ...old, [key]: value }))} onSubmit={send}
+    onVoice={mode === "Codex" ? () => showInfo("Voice mode", "Voice is simulated in this preview.") : undefined}
+    context={mode === "Codex" && project ? <><span><Folder size={14} />{project.name}</span><span><Desktop size={14} />This computer</span><IconButton aria-label="Project settings" actionId="client.project.settings" onClick={() => settings()}><Gear size={14} /></IconButton></> : undefined}
+    leading={<>
+      <DesktopMenu trigger={<button className="desktop-icon-control" type="button" aria-label="Add files and more"><Plus size={18} /></button>}
+        items={mode === "ChatGPT" ? [
+          { id: "client.composer.attach", label: "Add photos & files", icon: <Paperclip />, disabled: true },
+          { id: "client.composer.search", label: "Web search", icon: <Globe />, onSelect: () => showInfo("Web search", "Search services are not connected in this preview.") },
+        ] : [{ id: "client.composer.attach", label: "Add files", icon: <Paperclip />, disabled: true }, { id: "client.composer.project", label: "New project", icon: <Folder />, onSelect: actions.create }]} />
+      {mode === "Codex" ? <DesktopMenu trigger={<button type="button" className="client-access" aria-label="Change permissions"><ShieldWarning size={14} />{access}</button>}
+        items={["Full access", "Default permissions"].map(label => ({ id: `client.permissions.${label === "Full access" ? "full" : "default"}`, label, checked: label === access, onSelect: () => setAccess(label) }))} /> : null}
+    </>}
+    trailing={<>
+      {mode === "Codex" ? <DesktopMenu trigger={<button type="button" className="client-model">{model}<span>{effort}</span><CaretDown size={12} /></button>}
+        items={["GPT-6.1 Sol", "GPT-6 Sol", "GPT-6 Luna"].map(label => ({ id: `client.model.${label.toLowerCase().replaceAll(" ", "-")}`, label, children: ["Low", "Medium", "High"].map(value => ({ id: `client.model.effort.${value.toLowerCase()}`, label: value, checked: model === label && effort === value, onSelect: () => { setModel(label); setEffort(value); } })) }))} /> : null}
+      <IconButton aria-label="Dictate" actionId="client.voice.preview" onClick={() => showInfo("Dictate", "Microphone access is not requested in this preview.")}><Microphone size={16} /></IconButton>
+    </>}
+  />;
   return (
     <DesktopClientSurface>
       <DesktopShell
@@ -1178,10 +1064,10 @@ export function ClientDemo() {
           data-desktop-feature="demo.client"
           data-desktop-surface="demo.client.workspace"
         >
-          <section className="client-chat-page" hidden={route.page !== "home"}>
+          <section className={`client-chat-page${mode === "ChatGPT" ? " client-chat-page--chat" : ""}`} hidden={route.page !== "home"}>
             {chat ? (
               <div className="client-chat-toolbar">
-                <Folder size={16} />
+                {mode === "Codex" ? <Folder size={16} /> : null}
                 <strong>{chat.title}</strong>
                 <div className="client-spacer" />
                 <DesktopMenu
@@ -1217,7 +1103,7 @@ export function ClientDemo() {
             ) : null}
             {chat ? (
               <InternalScrollArea className="client-thread-scroll">
-                <div className="client-thread">
+                {mode === "ChatGPT" ? <ClientChat messages={messages[route.chat] || []} /> : <div className="client-thread">
                   <div className="client-user-message">
                     Can you help refine the desktop navigation and settings?
                   </div>
@@ -1268,13 +1154,13 @@ export function ClientDemo() {
                       {item.text}
                     </div>
                   ))}
-                </div>
+                </div>}
               </InternalScrollArea>
             ) : (
               <div className="client-empty-project">
-                <CodexMark />
+                {mode === "Codex" ? <CodexMark /> : null}
                 <h1>
-                  {project ? (
+                  {mode === "ChatGPT" ? "Where should we begin?" : project ? (
                     <>
                       What should we build in{" "}
                       <button

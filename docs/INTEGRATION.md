@@ -6,6 +6,12 @@ Use `chatgpt-desktop-kit` as the sole control, icon, token and base-style implem
 
 Application-local component and icon paths may remain as compatibility exports. Only platform adapters, service errors, localization catalogs and business-specific compositions remain in the client. Standalone clients import this package directly. The library has no application IPC, credential service, business data root or Worker lifecycle.
 
+Release manifests use `git+https://github.com/liuminxin45/ChatGPT-Desktop-UI.git#<full-40-character-commit>`. Install with normal `npm ci` or `npm install`; Git `prepare` builds the JavaScript, CSS and declarations. Do not use `--ignore-scripts` in consumers. A `git+file:` source, local symlink or vendor directory is not a portable release dependency. Each private adapter's peer version must match the installed kit release.
+
+Run `node node_modules/chatgpt-desktop-kit/dist/check-consumer.mjs` after installation. Optionally set `DESKTOP_UI_REVISION` and `DESKTOP_UI_VERSION` to coordinate multiple clients. The exported `checkConsumer(root, options)` from `chatgpt-desktop-kit/integration-check` returns a bounded result instead of exiting. Declare pure `forwarders`, `styleForwarders`, `adapterManifests` and `retiredPaths` in a consumer-owned `ui.integration.json`; paths stay inside that consumer. This checker compares the manifest, both lockfiles, installed version, distribution and declared adapters without scanning business data.
+
+Before upgrading production consumers, install the public pinned commit in a fresh isolated fixture and build a small React composition. Then run the real consumers' typechecks, builds and relevant interaction probes. Do not silently switch the release pin back to a local checkout after a network failure.
+
 Version 0.3 changes the package identity to `chatgpt-desktop-kit` and uses `--desktop-*` tokens, `desktop-*` classes, `data-desktop-*` markers, `DesktopIconProps` and the `desktop:restore-list-anchor` event. Update imports, Tailwind content scans, CSS references and Host marker readers together. Existing stable feature, surface and action ID values remain unchanged; this migration does not reset usage series or stored preferences. No legacy application namespace aliases are shipped.
 
 ## Styles and surfaces

@@ -27,7 +27,7 @@ await removeRetiredReferences(skill);
 await cp(path.join(root,'docs/VALIDATION.json'),path.join(skill,'references/VALIDATION.json'));
 await cp(path.join(root,'docs/CLIENT_ALIGNMENT.json'),path.join(skill,'references/CLIENT_ALIGNMENT.json'));
 await cp(path.join(root,'docs/demo'),path.join(skill,'references/demo'),{recursive:true});
-for(const [from,to] of [['DESIGN_SYSTEM.md','design-system.md'],['DESIGN_GUIDANCE.md','design-guidance.md'],['INTEGRATION.md','integration.md'],['VISUAL_REFERENCES.md','visual-references.md']]) await cp(path.join(root,'docs',from),path.join(skill,'references',to));
+for(const [from,to] of [['DESIGN_SYSTEM.md','design-system.md'],['DESIGN_GUIDANCE.md','design-guidance.md'],['INTEGRATION.md','integration.md'],['VISUAL_REFERENCES.md','visual-references.md'],['REPLICA_CONTRACT.md','REPLICA_CONTRACT.md'],['COMPONENTS.md','COMPONENTS.md'],['DESIGN_SYSTEM.md','DESIGN_SYSTEM.md'],['CLIENT_ALIGNMENT.json','CLIENT_ALIGNMENT.json']]) await cp(path.join(root,'docs',from),path.join(skill,'references',to));
 await cp(path.join(root,'docs/gallery'),path.join(skill,'references/gallery'),{recursive:true});
 await cp(path.join(root,'dist'),path.join(skill,'assets/ui/dist'),{recursive:true});
 await cp(path.join(root,'src'),path.join(skill,'assets/ui/src'),{recursive:true});

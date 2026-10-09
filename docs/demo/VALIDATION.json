@@ -2,8 +2,8 @@
   "status": "passed",
   "node": "v24.19.0",
   "referenceClient": "26.1002.7124.0",
-  "renderCases": 42,
-  "interactionGroups": 15,
+  "renderCases": 54,
+  "interactionGroups": 16,
   "renders": [
     {
       "page": "home",
@@ -111,6 +111,36 @@
       }
     },
     {
+      "page": "chatgpt-home",
+      "theme": "light",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 0,
+        "background": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "page": "chatgpt-thread",
+      "theme": "light",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 0,
+        "background": "rgb(255, 255, 255)"
+      }
+    },
+    {
       "page": "home",
       "theme": "light",
       "width": 1280,
@@ -216,6 +246,36 @@
       }
     },
     {
+      "page": "chatgpt-home",
+      "theme": "light",
+      "width": 1280,
+      "height": 800,
+      "scale": 1,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 0,
+        "background": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "page": "chatgpt-thread",
+      "theme": "light",
+      "width": 1280,
+      "height": 800,
+      "scale": 1,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 0,
+        "background": "rgb(255, 255, 255)"
+      }
+    },
+    {
       "page": "home",
       "theme": "light",
       "width": 1536,
@@ -321,6 +381,36 @@
       }
     },
     {
+      "page": "chatgpt-home",
+      "theme": "light",
+      "width": 1536,
+      "height": 864,
+      "scale": 1.25,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 0,
+        "background": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "page": "chatgpt-thread",
+      "theme": "light",
+      "width": 1536,
+      "height": 864,
+      "scale": 1.25,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 0,
+        "background": "rgb(255, 255, 255)"
+      }
+    },
+    {
       "page": "home",
       "theme": "dark",
       "width": 1920,
@@ -426,6 +516,36 @@
       }
     },
     {
+      "page": "chatgpt-home",
+      "theme": "dark",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 0,
+        "background": "rgb(24, 24, 24)"
+      }
+    },
+    {
+      "page": "chatgpt-thread",
+      "theme": "dark",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 0,
+        "background": "rgb(24, 24, 24)"
+      }
+    },
+    {
       "page": "home",
       "theme": "dark",
       "width": 1280,
@@ -531,6 +651,36 @@
       }
     },
     {
+      "page": "chatgpt-home",
+      "theme": "dark",
+      "width": 1280,
+      "height": 800,
+      "scale": 1,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 0,
+        "background": "rgb(24, 24, 24)"
+      }
+    },
+    {
+      "page": "chatgpt-thread",
+      "theme": "dark",
+      "width": 1280,
+      "height": 800,
+      "scale": 1,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 0,
+        "background": "rgb(24, 24, 24)"
+      }
+    },
+    {
       "page": "home",
       "theme": "dark",
       "width": 1536,
@@ -632,6 +782,36 @@
         "titlebar": 44,
         "sidebar": 372,
         "settings": 728,
+        "background": "rgb(24, 24, 24)"
+      }
+    },
+    {
+      "page": "chatgpt-home",
+      "theme": "dark",
+      "width": 1536,
+      "height": 864,
+      "scale": 1.25,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 0,
+        "background": "rgb(24, 24, 24)"
+      }
+    },
+    {
+      "page": "chatgpt-thread",
+      "theme": "dark",
+      "width": 1536,
+      "height": 864,
+      "scale": 1.25,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 0,
         "background": "rgb(24, 24, 24)"
       }
     }
@@ -651,6 +831,7 @@
     "usage periods, grouping, history boundaries and day inspection",
     "all settings destinations and standalone profile activity",
     "project directory filtering and scheduled landing",
+    "distinct ChatGPT and Codex composer layouts, multiline drafts and response actions",
     "reduced-motion preference"
   ],
   "consoleErrors": []

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createPortal } from 'react-dom';
-import { Button, DesktopRoot, Input, Textarea } from '../src';
+import { Button, ClientComposer, DesktopRoot, Input, Textarea } from '../src';
 import { Input as HostInput } from '../src/compat/input';
 import { Textarea as HostTextarea } from '../src/compat/textarea';
 import '../src/styles.css';
@@ -13,6 +13,8 @@ function record(id: string) { counts[id] = (counts[id] || 0) + 1; }
 function Example() {
   const [draft, setDraft] = useState('');
   const [disabled, setDisabled] = useState(false);
+  const [sharedDraft, setSharedDraft] = useState('');
+  const [busy, setBusy] = useState(false);
   return <main style={{ padding: 24, maxWidth: 760, margin: 'auto' }}>
     <form onSubmit={event => { event.preventDefault(); record('form'); }}>
       <Input aria-label="Form field" required />
@@ -34,6 +36,12 @@ function Example() {
       <Button confirmOnEnter actionId="example.message.send" disabled={!draft.trim()} onClick={() => { record('send'); setDraft(''); }}>Send</Button>
     </div>
     <div className="desktop-toolbar-search"><Input aria-label="Live filter" /></div>
+    <ClientComposer label="Shared composer" variant="chat" actionId="example.shared.message"
+      value={sharedDraft} onValueChange={setSharedDraft} busy={busy}
+      sendLabel="Send sample" stopLabel="Stop sample"
+      onSubmit={() => { record('clientSend'); setBusy(true); }}
+      onStop={() => { record('clientStop'); setBusy(false); }}
+      leading={<Button aria-label="Sample attachments" disabled>+</Button>} />
     <div className="legacy-search"><Input aria-label="Legacy filter" /></div>
     <Textarea aria-label="Read only" readOnly value="Read only content" />
     <div data-desktop-input-scope><Input aria-label="Ambiguous field" /><Button confirmOnEnter onClick={() => record('first')}>First</Button><Button confirmOnEnter onClick={() => record('second')}>Second</Button></div>

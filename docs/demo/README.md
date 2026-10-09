@@ -13,7 +13,9 @@ The actual React exports provide the titlebar, retained sidebar, nested menus, g
 | Notifications, 1280 × 800 | [Light](notifications-light-1280.png) | [Dark](notifications-dark-1280.png) |
 | Usage analytics, 1280 × 800 | [Light](analytics-light-1280.png) | [Dark](analytics-dark-1280.png) |
 
-`npm run demo:build && npm run test:demo` checks seven primary states in both themes at 1920 × 1080, 1280 × 800 and 1536 × 864 with `deviceScaleFactor: 1.25` (42 render cases). The scaling case emulates browser rendering; it does not change Windows display scaling. [VALIDATION.json](VALIDATION.json) records the executed checks.
+`npm run demo:build && npm run test:demo` checks nine primary states in both themes at 1920 × 1080, 1280 × 800 and 1536 × 864 with `deviceScaleFactor: 1.25` (54 render cases). The scaling case emulates browser rendering; it does not change Windows display scaling. [VALIDATION.json](VALIDATION.json) records the executed checks.
+
+ChatGPT and Codex are separate input layouts, composed from the exported `ClientComposer` and `ConversationMessage`. [Chat landing](chatgpt-home-light-1280.png) and [chat thread](chatgpt-thread-dark-1280.png) supplement the desktop reference with the signed-out [web interface](https://chatgpt.com/) inspected on 2026-10-09. The authenticated desktop chat layout still needs a direct comparison; see [the surface acceptance matrix](../REPLICA_CONTRACT.md).
 
 Interaction coverage includes history, retained drafts, sidebar folding, File/Edit/View/Help menus, Explore pins, chat pin/rename, project create/edit and discard validation, search, activity view, new tabs, theme switching, all settings destinations, usage grouping and periods, daily inspection, profile activity and reduced motion. Separate captures include [profile Help](profile-help-menu.png), [project actions](project-menu.png), [chat actions](chat-actions.png), [search](search.png) and [the new tab](new-tab.png).
 

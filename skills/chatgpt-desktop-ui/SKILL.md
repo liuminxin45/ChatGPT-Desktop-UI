@@ -9,15 +9,19 @@ The versioned reference is Windows ChatGPT **26.1002.7124.0**, observed on 2026-
 
 Inspect missing reference surfaces only within the user's authorization. Confirm the installed package version and retain measurements without publishing private captures or chat titles. Record alignment in `CLIENT_ALIGNMENT.json` and tag a published replica with the observed client version. Do not claim exact fidelity for unobserved screens, proprietary glyphs or disconnected native services.
 
+For explicit 1:1 requests, read [the recreation contract](references/REPLICA_CONTRACT.md) and [the component map](references/COMPONENTS.md). Use the desktop package as the primary reference and ChatGPT web only as a dated supplement for shared UI. Inventory every destination and state; a navigation placeholder remains an open fidelity item. Reuse `ClientComposer` for separate chat/work input layouts and `ConversationMessage` for message geometry. Record unobserved screens explicitly, and never describe the complete client as 1:1 accepted while that inventory has gaps.
+
 Create a faithful adaptation of the supplied client design language while preserving the target product's workflows. This Skill carries a portable React UI package and clean visual examples; it does not require an originating application repository or a specific absolute directory.
 
 Read [design-system.md](references/design-system.md) and the relevant images in [visual-references.md](references/visual-references.md). For a redesign, also read [design-guidance.md](references/design-guidance.md). Read [integration.md](references/integration.md) before adapting host behavior, persistence or embedded surfaces.
 
 ## Implement
 
-Inventory the target routes, dialogs, menus, states and repeated controls. Choose workspace/list, settings, reading/chat or utility layouts based on the user's actual work. Preserve language, data, selections, drafts and existing authorization. Remove redundant module titles and decorative nested frames; do not invent unrelated features or imitate ChatGPT's product identity.
+Inventory the target routes, dialogs, menus, states and repeated controls. Choose workspace/list, settings, reading/chat or utility layouts based on the user's actual work. Preserve language, data, selections, drafts and existing authorization. Remove redundant module titles and decorative nested frames. An explicitly requested client Demo follows the observed client structure; other products retain their own identity and workflows.
 
 For React, first reuse an existing compatible `chatgpt-desktop-kit` dependency. Otherwise install a pinned library revision or use the packaged `assets/ui/` as one application-level dependency. Do not create separately maintained copies in every client. Import its `styles.css` once and reuse `Button`, `Input`, `Select`, `Tabs`, `Dialog`, `InternalScrollArea` and the layout exports. The package includes source and declarations; `assets/starter/` shows real composition. Use the target's React/runtime constraints and validate compatibility rather than silently upgrading its stack. This repository's Node pinning is not an instruction to change another project's toolchain.
+
+Release clients pin `git+https://github.com/liuminxin45/ChatGPT-Desktop-UI.git#<full-40-character-commit>` and install with lifecycle scripts enabled. Run the packaged integration checker after install; validate the manifest, lockfile, actual installed revision, prepared distribution and pure forwarding adapters. All coordinated clients use the same revision. A local Git/file dependency, copied vendor source, old adapter peer version or skipped prepare step fails release acceptance. Packaged `assets/ui/` remains an isolated starter path, not a substitute for a coordinated public release dependency.
 
 For another framework, use the reference tokens and measurements to adapt the project's shared component layer once. Keep equivalent keyboard, focus, portal and scrolling behavior. Do not sprinkle approximations across individual pages or rewrite a working product into React without authorization.
 

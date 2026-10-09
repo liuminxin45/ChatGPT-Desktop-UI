@@ -48,6 +48,8 @@ try {
         "notifications",
         "usage",
         "analytics",
+        "chatgpt-home",
+        "chatgpt-thread",
       ]) {
         if (id === "chat")
           await page
@@ -74,6 +76,15 @@ try {
           await page
             .getByRole("tab", { name: "Analytics", exact: true })
             .click();
+        if (id === "chatgpt-home") {
+          await page.getByRole('button', { name: 'Home', exact: true }).click();
+          await page.getByRole('button', { name: 'Switch mode', exact: true }).click();
+          await page.getByRole('menuitem', { name: 'ChatGPT', exact: true }).click();
+          await page.getByRole('heading', { name: 'Where should we begin?', exact: true }).waitFor();
+          assert.equal(await page.getByRole('button', { name: 'Send message', exact: true }).isEnabled(), false);
+        }
+        if (id === "chatgpt-thread")
+          await page.getByRole('button', { name: 'Refine desktop navigation', exact: true }).first().click();
         await settle(page);
         const geometry = await page.evaluate(() => ({
           overflow: document.documentElement.scrollWidth > innerWidth,
@@ -449,6 +460,28 @@ try {
   await page.getByRole('heading',{name:'Schedule a task',exact:true}).waitFor();
   await screenshot(page,'scheduled');
   checks.push('project directory filtering and scheduled landing');
+  await page.getByRole('button', { name: 'Home', exact: true }).click();
+  await page.getByRole('button', { name: 'Switch mode', exact: true }).click();
+  await page.getByRole('menuitem', { name: 'Codex', exact: true }).click();
+  await page.getByRole('textbox', { name: 'Message', exact: true }).fill('Work draft stays in Codex');
+  await page.getByRole('button', { name: 'Switch mode', exact: true }).click();
+  await page.getByRole('menuitem', { name: 'ChatGPT', exact: true }).click();
+  await page.getByRole('textbox', { name: 'Message', exact: true }).fill('Chat draft with typography');
+  await page.keyboard.press('Shift+Enter');
+  await page.keyboard.type('Second line');
+  assert.match(await page.getByRole('textbox', { name: 'Message', exact: true }).inputValue(), /\nSecond line/);
+  await page.getByRole('button', { name: 'Switch mode', exact: true }).click();
+  await page.getByRole('menuitem', { name: 'Codex', exact: true }).click();
+  assert.equal(await page.getByRole('textbox', { name: 'Message', exact: true }).inputValue(), 'Work draft stays in Codex');
+  await page.getByRole('button', { name: 'Switch mode', exact: true }).click();
+  await page.getByRole('menuitem', { name: 'ChatGPT', exact: true }).click();
+  assert.match(await page.getByRole('textbox', { name: 'Message', exact: true }).inputValue(), /Chat draft with typography\nSecond line/);
+  await page.getByRole('button', { name: 'Send message', exact: true }).click();
+  await page.getByRole('button', { name: 'Good response', exact: true }).first().click();
+  assert.equal(await page.getByRole('button', { name: 'Good response', exact: true }).first().getAttribute('aria-pressed'), 'true');
+  await page.getByRole('button', { name: 'Good response', exact: true }).first().click();
+  assert.equal(await page.getByRole('button', { name: 'Good response', exact: true }).first().getAttribute('aria-pressed'), 'false');
+  checks.push('distinct ChatGPT and Codex composer layouts, multiline drafts and response actions');
   await context.close();
   const reduced = await browser.newContext({
     viewport: { width: 1280, height: 800 },

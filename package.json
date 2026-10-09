@@ -1,6 +1,6 @@
 {
   "name": "chatgpt-desktop-kit",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Reusable neutral desktop UI primitives, shell patterns, visual references and an agent skill.",
   "license": "MIT",
   "type": "module",
@@ -33,7 +33,8 @@
       "types": "./dist/tab-navigation.d.ts",
       "import": "./dist/tab-navigation.js",
       "default": "./dist/tab-navigation.js"
-    }
+    },
+    "./integration-check": "./dist/check-consumer.mjs"
   },
   "files": [
     "dist",
@@ -65,7 +66,9 @@
     "skill:install": "node scripts/package-skill.mjs --install",
     "prepare": "npm run build:library",
     "build:library": "node scripts/build.mjs --library-only",
-    "audit:public": "node scripts/audit-public.mjs"
+    "audit:public": "node scripts/audit-public.mjs",
+    "test:integration": "node --test tests/integration-check.test.mjs",
+    "test:public-install": "node scripts/verify-public-install.mjs"
   },
   "peerDependencies": {
     "react": "^18.3.1",

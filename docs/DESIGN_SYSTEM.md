@@ -85,6 +85,7 @@ Text controls use a 20px line box with descender clearance; never clip a selecte
 | Theme/document root | `DesktopRoot`, `useDesktopTheme` |
 | Desktop shell | `DesktopShell`, `TitleBar`, `NavigationRail`, `AvatarMenu` |
 | Versioned client layouts | `DesktopClientSurface`, `ClientSidebar`, `SidebarSection` |
+| Chat/work input and messages | `ClientComposer`, `ConversationMessage` |
 | Nested action menus | `DesktopMenu`, `DesktopMenuItem` |
 | Grouped client settings | `SettingsGroup`, `SettingsField`, `SettingsDisclosure` |
 | Name-only tooltip | `Tooltip` |
@@ -97,6 +98,8 @@ Text controls use a 20px line box with descender clearance; never clip a selecte
 | Plain workspace | `WorkbenchPage`, `PageBar`, `PageToolbar` |
 
 Select/Menu portals inherit tokens and close predictably. Dialog supports Escape, backdrop close, focus containment and return to trigger; the consumer intercepts `onClose` to protect drafts. Default `Button` is secondary and `type=button`; explicitly opt into primary and form submit.
+
+The controlled `ClientComposer` separates work and chat input layouts. Work input has a contextual toolbar; chat input has a compact 52px pill, a 24px multiline line box and a 36px circular send target. Text grows to 200px before internal scrolling. Empty, submitting, stoppable and unavailable voice states are explicit. These chat measurements supplement the desktop reference with the signed-out web interface inspected on 2026-10-09; authenticated desktop ChatGPT mode remains a separate fidelity acceptance item. `ConversationMessage` defines neutral user bubbles and response actions, without embedding data services. See `COMPONENTS.md` for ownership and `REPLICA_CONTRACT.md` for the acceptance matrix.
 
 Arrow cursors across the standalone desktop document are an explicit originating user preference. Hover/focus/disabled states still signal affordance. Respect a different target user's cursor preference rather than secretly imposing it on unrelated applications.
 
