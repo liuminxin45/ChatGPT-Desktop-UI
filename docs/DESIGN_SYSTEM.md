@@ -41,7 +41,7 @@ Remove the selected rail's left stripe. Tooltips sit immediately beside the rail
 
 ## Typography
 
-Use `system-ui, sans-serif`, normal weight 400. Hierarchy comes from size, color, space and position. `font-synthesis:none` prevents accidental synthetic bold. The kit retains originating token names.
+Use `system-ui, sans-serif`, normal weight 400 for body copy and controls. Settings titles, category group headings, section headings and field labels use `--phd-font-weight-emphasis` (600), following the supplied 2026-10-09 references. Keep emphasis selective. `font-synthesis:none` prevents accidental synthetic bold. Native Tool Hosts continue to enforce their own regular-weight contract.
 
 | Role | Size / line height |
 | --- | --- |
@@ -55,6 +55,12 @@ Use `system-ui, sans-serif`, normal weight 400. Hierarchy comes from size, color
 | Settings heading/emphasis | 20 / 28px |
 
 PHD's special wordmark and chat-sender weights are local exceptions, not generalized ChatGPT measurements. Preserve explicit typography requested by the target product. Do not enlarge every heading, uppercase field captions, add a display font or make all selected labels bold.
+
+Text controls use a 20px line box with descender clearance; never clip a selected value to `line-height:1`. Center toolbar navigation, values and glyphs vertically, including at fractional scaling. Hover fills and dropdown chevrons transition with the shared motion tokens. Reduced-motion preferences disable decorative transitions.
+
+`NavigationRail` can receive controlled `pinnedIds` and `onPinnedChange` props. Its More menu lists every available destination and exposes a separate pin toggle. The Host owns the pinned set; opening and closing this menu cannot remount page content. `DesktopShell.navigationVisible` retains the navigation subtree when collapsed.
+
+`SettingsCategory.group` provides optional named category sections. Settings sections use a distinct semantic surface and neutral internal row dividers in both themes. Menus use real 16px chevrons rather than a tiny text arrow.
 
 ## Layout choice
 

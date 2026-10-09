@@ -28,6 +28,10 @@ The compatibility DropdownMenuItem accepts `icon` and `actionId`, always display
 
 `DesktopShell` hides contextual sidebars with CSS and preserves their React subtree. Hosts retain selections, drafts and module-specific sidebar preferences. Avatar images come from validated Host identity; absent or failed images use a neutral fallback. Saving configuration does not establish authentication.
 
+`DesktopShell.navigationVisible` also retains the global rail when hidden. `NavigationRail` optionally accepts controlled `pinnedIds` and `onPinnedChange`; More remains reachable when every destination is unpinned. Hosts own persistence and pin policy. Defaults preserve existing integrations without a More menu. Supply `moreLabel`, `pinLabel` and `unpinLabel` for localization.
+
+`SettingsCategory.group` is optional and participates in category search. Settings headings and field labels use the semantic emphasis weight; body text and controls remain regular. Native Tool Host typography overrides remain authoritative.
+
 ## Localization and drafts
 
 English is the primitive default. Supply display labels through props or `UIStringsProvider` (`labels`, `locale`, `translate`). `configureUIRuntime` provides an optional Host callback for non-React translation and locale reads. It stores no preference and requires no application translation catalog. Translate interface copy only, not user-authored content.

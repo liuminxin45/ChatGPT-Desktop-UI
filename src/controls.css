@@ -109,3 +109,11 @@ html:root,html:root body,html:root body *,html:root body *::before,html:root bod
 
 .phd-chat-message[data-own=true]{justify-content:flex-end}
 .phd-chat-message[data-own=true] .phd-chat-message__body{flex:0 1 auto;width:fit-content;max-width:85%}
+
+/* Text metrics must leave room for ascenders/descenders at fractional scaling. */
+.phd-select{line-height:var(--phd-line-height-ui);transition:background-color var(--phd-motion-fast),color var(--phd-motion-fast),box-shadow var(--phd-motion-fast)}
+.phd-select>span:first-child{line-height:var(--phd-line-height-ui);padding-block:1px}
+.phd-select__icon{transition:transform var(--phd-motion-fast)}.phd-select[data-state=open] .phd-select__icon{transform:rotate(180deg)}
+.phd-menu-item{transition:background-color var(--phd-motion-fast),color var(--phd-motion-fast)}
+.phd-select-item,.phd-tabs button{transition:background-color var(--phd-motion-fast),color var(--phd-motion-fast),border-color var(--phd-motion-fast)}
+.phd-tool-page-bar__navigation{display:flex;align-items:center}.phd-tool-page-bar__navigation>.phd-tabs{align-self:stretch}

@@ -2,7 +2,7 @@
   "status": "passed",
   "node": "v24.19.0",
   "browser": "msedge",
-  "renderCases": 18,
+  "renderCases": 24,
   "renders": [
     {
       "page": "projects",
@@ -21,6 +21,14 @@
       "overflow": false
     },
     {
+      "page": "activity",
+      "theme": "light",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "overflow": false
+    },
+    {
       "page": "settings",
       "theme": "light",
       "width": 1920,
@@ -38,6 +46,14 @@
     },
     {
       "page": "inbox",
+      "theme": "light",
+      "width": 1280,
+      "height": 800,
+      "scale": 1,
+      "overflow": false
+    },
+    {
+      "page": "activity",
       "theme": "light",
       "width": 1280,
       "height": 800,
@@ -69,6 +85,14 @@
       "overflow": false
     },
     {
+      "page": "activity",
+      "theme": "light",
+      "width": 1536,
+      "height": 864,
+      "scale": 1.25,
+      "overflow": false
+    },
+    {
       "page": "settings",
       "theme": "light",
       "width": 1536,
@@ -93,6 +117,14 @@
       "overflow": false
     },
     {
+      "page": "activity",
+      "theme": "dark",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "overflow": false
+    },
+    {
       "page": "settings",
       "theme": "dark",
       "width": 1920,
@@ -117,6 +149,14 @@
       "overflow": false
     },
     {
+      "page": "activity",
+      "theme": "dark",
+      "width": 1280,
+      "height": 800,
+      "scale": 1,
+      "overflow": false
+    },
+    {
       "page": "settings",
       "theme": "dark",
       "width": 1280,
@@ -134,6 +174,14 @@
     },
     {
       "page": "inbox",
+      "theme": "dark",
+      "width": 1536,
+      "height": 864,
+      "scale": 1.25,
+      "overflow": false
+    },
+    {
+      "page": "activity",
       "theme": "dark",
       "width": 1536,
       "height": 864,
@@ -150,11 +198,15 @@
     }
   ],
   "checks": [
+    "More menu, live pin/unpin and keyboard/metric/period chart exploration",
     "search, empty recovery, filters and sorting",
     "task completion",
     "project validation, duplicate failure, discard guard, creation and details",
     "per-conversation drafts survive theme, sidebar and route changes; Enter sends",
     "workspace name and reminder preview",
+    "real Back/Forward history, 16px appearance chevron and Help menu",
+    "vertically centered text, descender clearance and shared hover transitions",
+    "reduced motion disables decorative transitions",
     "reload resets fictional edits; only theme is persisted"
   ],
   "limitations": [

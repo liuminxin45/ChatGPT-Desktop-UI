@@ -3,7 +3,8 @@ import type { Icon } from '@phosphor-icons/react';
 import { ActionTooltip } from './action-tooltip';
 import * as Menu from '@radix-ui/react-dropdown-menu';
 import { IconButton, Input, InternalScrollArea } from './controls';
-import { ArrowLeft, ArrowRight, SidebarSimple, UserCircle, Gear, Moon, Sun, SignOut } from './icons';
+import { ArrowLeft, ArrowRight, SidebarSimple, UserCircle, Gear, Moon, Sun, SignOut, DotsThree } from './icons';
+import { CaretRight, PushPin } from '@phosphor-icons/react';
 import { useDesktopTheme, type Theme } from './theme';
 
 export function Tooltip({ label, children, side = 'right' }: { label: string; children: ReactNode; side?: 'right' | 'bottom' | 'top' | 'left' }) {
@@ -31,11 +32,12 @@ export function TitleBar({ onBack, onForward, onToggleSidebar, canBack = false, 
 }
 
 export interface NavigationItem { id: string; label: string; icon: Icon; unread?: boolean; disabled?: boolean }
-export function NavigationRail({ items, selected, onSelect, footer, ariaLabel = 'Application navigation', unreadLabel = 'Unread' }: { items: NavigationItem[]; selected: string; onSelect(id: string): void; footer?: ReactNode; ariaLabel?: string; unreadLabel?: string }) {
+export function NavigationRail({ items, selected, onSelect, footer, pinnedIds, onPinnedChange, ariaLabel = 'Application navigation', unreadLabel = 'Unread', moreLabel = 'More', pinLabel = 'Pin', unpinLabel = 'Unpin' }: { items: NavigationItem[]; selected: string; onSelect(id: string): void; footer?: ReactNode; pinnedIds?: readonly string[]; onPinnedChange?(ids: string[]): void; ariaLabel?: string; unreadLabel?: string; moreLabel?: string; pinLabel?: string; unpinLabel?: string }) {
+  const shown = pinnedIds ? items.filter(item => pinnedIds.includes(item.id)) : items;
   return <nav className="kit-rail" aria-label={ariaLabel} data-phd-feature="shell" data-phd-surface="navigation">
-    <div className="kit-rail__items">{items.map(item => { const ItemIcon = item.icon; const active = item.id === selected; return <Tooltip label={item.label} key={item.id}>
+    <div className="kit-rail__items">{shown.map(item => { const ItemIcon = item.icon; const active = item.id === selected; return <Tooltip label={item.label} key={item.id}>
       <IconButton className="kit-rail__item" aria-label={item.label} aria-current={active ? 'page' : undefined} actionId={`navigation.${item.id}`} disabled={item.disabled} onClick={() => onSelect(item.id)}><ItemIcon size={20} weight={active ? 'fill' : 'regular'} aria-hidden="true"/>{item.unread ? <span className="kit-unread" aria-label={unreadLabel}/> : null}</IconButton>
-    </Tooltip>; })}</div><div className="kit-rail__footer">{footer}</div>
+    </Tooltip>; })}{pinnedIds ? <Menu.Root><Tooltip label={moreLabel}><Menu.Trigger asChild><button type="button" className="phd-icon-control kit-rail__item" aria-label={moreLabel} aria-current={!pinnedIds.includes(selected) ? 'page' : undefined} data-phd-action="navigation.more.open"><DotsThree size={20} aria-hidden="true"/></button></Menu.Trigger></Tooltip><Menu.Portal><Menu.Content className="phd-menu kit-navigation-menu" side="right" align="start" sideOffset={6} collisionPadding={8} data-phd-feature="shell" data-phd-surface="navigation.more">{items.map(item => { const ItemIcon = item.icon; const pinned = pinnedIds.includes(item.id); return <div className="kit-navigation-menu__row" key={item.id}><Menu.Item className="phd-menu-item kit-navigation-menu__destination" disabled={item.disabled} data-phd-action={`navigation.${item.id}`} onSelect={() => onSelect(item.id)}><ItemIcon size={16} weight={selected === item.id ? 'fill' : 'regular'} aria-hidden="true"/>{item.label}</Menu.Item><Menu.CheckboxItem className="phd-menu-item kit-navigation-menu__pin" checked={pinned} disabled={!onPinnedChange || item.disabled} aria-label={`${pinned ? unpinLabel : pinLabel} ${item.label}`} data-phd-action={`navigation.pin.${item.id}`} onSelect={event => event.preventDefault()} onCheckedChange={() => onPinnedChange?.(pinned ? pinnedIds.filter(id => id !== item.id) : [...pinnedIds, item.id])}><PushPin size={15} weight={pinned ? 'fill' : 'regular'} aria-hidden="true"/></Menu.CheckboxItem></div>; })}</Menu.Content></Menu.Portal></Menu.Root> : null}</div><div className="kit-rail__footer">{footer}</div>
   </nav>;
 }
 
@@ -48,7 +50,7 @@ export function AvatarMenu({ name = 'Account', status, image, onAccount, onSetti
   return <Menu.Root><Menu.Trigger className="kit-avatar" aria-label={name} data-phd-action="account.menu.open">{image && !failedImage ? <img src={image} alt="" onError={() => setFailedImage(true)}/> : <UserCircle size={26} weight="regular" aria-hidden="true"/>}</Menu.Trigger>
     <Menu.Portal><Menu.Content className="phd-menu kit-account-menu" side="right" align="end" sideOffset={6} collisionPadding={8} data-phd-feature="account" data-phd-surface="account.menu">
       <Menu.Label className="kit-account-menu__identity">{name}{status ? <small>{status}</small> : null}</Menu.Label>
-      <Menu.Sub><Menu.SubTrigger className="phd-menu-item"><Moon size={16}/>{labels.appearance}<span className="kit-menu-chevron">›</span></Menu.SubTrigger><Menu.Portal><Menu.SubContent className="phd-menu" sideOffset={6} collisionPadding={8}><Menu.RadioGroup value={theme} onValueChange={value => setTheme(value as Theme)}>{(['system','light','dark'] as const).map(value => <Menu.RadioItem key={value} className="phd-menu-item" value={value} data-phd-action={`appearance.${value}`}>{labels[value]}<Menu.ItemIndicator className="kit-menu-chevron">✓</Menu.ItemIndicator></Menu.RadioItem>)}</Menu.RadioGroup></Menu.SubContent></Menu.Portal></Menu.Sub>
+      <Menu.Sub><Menu.SubTrigger className="phd-menu-item"><Moon size={16}/>{labels.appearance}<CaretRight className="kit-menu-chevron" size={16} aria-hidden="true"/></Menu.SubTrigger><Menu.Portal><Menu.SubContent className="phd-menu" sideOffset={6} collisionPadding={8}><Menu.RadioGroup value={theme} onValueChange={value => setTheme(value as Theme)}>{(['system','light','dark'] as const).map(value => <Menu.RadioItem key={value} className="phd-menu-item" value={value} data-phd-action={`appearance.${value}`}>{labels[value]}<Menu.ItemIndicator className="kit-menu-chevron">✓</Menu.ItemIndicator></Menu.RadioItem>)}</Menu.RadioGroup></Menu.SubContent></Menu.Portal></Menu.Sub>
       <Menu.Item className="phd-menu-item" data-phd-action="account.manage" disabled={!onAccount} onSelect={onAccount}><UserCircle size={16}/>{labels.account}</Menu.Item>
       <Menu.Item className="phd-menu-item" data-phd-action="settings.open" disabled={!onSettings} onSelect={onSettings}><Gear size={16}/>{labels.settings}</Menu.Item>
       <Menu.Item className="phd-menu-item" data-phd-action="application.exit" disabled={!onExit} onSelect={onExit}><SignOut size={16}/>{labels.exit}</Menu.Item>
@@ -56,15 +58,15 @@ export function AvatarMenu({ name = 'Account', status, image, onAccount, onSetti
   </Menu.Root>;
 }
 
-export function DesktopShell({ titlebar, navigation, sidebar, sidebarVisible = true, children }: { titlebar?: ReactNode; navigation: ReactNode; sidebar?: ReactNode; sidebarVisible?: boolean; children: ReactNode }) {
-  return <div className="kit-shell">{titlebar}<div className="kit-shell__body">{navigation}<aside className="kit-sidebar" hidden={!sidebarVisible || !sidebar}>{sidebar}</aside><main className="kit-shell__main">{children}</main></div></div>;
+export function DesktopShell({ titlebar, navigation, navigationVisible = true, sidebar, sidebarVisible = true, children }: { titlebar?: ReactNode; navigation: ReactNode; navigationVisible?: boolean; sidebar?: ReactNode; sidebarVisible?: boolean; children: ReactNode }) {
+  return <div className="kit-shell">{titlebar}<div className="kit-shell__body"><div className="kit-shell__navigation" hidden={!navigationVisible}>{navigation}</div><aside className="kit-sidebar" hidden={!sidebarVisible || !sidebar}>{sidebar}</aside><main className="kit-shell__main">{children}</main></div></div>;
 }
 
-export interface SettingsCategory { id: string; label: string; keywords?: string[]; icon?: Icon }
+export interface SettingsCategory { id: string; label: string; group?: string; keywords?: string[]; icon?: Icon }
 export function SettingsNavigation({ categories, selected, onSelect, title = 'Settings', searchLabel = 'Search settings', noMatchesLabel = 'No matching categories' }: { categories: SettingsCategory[]; selected: string; onSelect(id: string): void; title?: string; searchLabel?: string; noMatchesLabel?: string }) {
   const [search, setSearch] = useState(''); const query = search.trim().toLocaleLowerCase();
-  const filtered = categories.filter(category => [category.label, ...(category.keywords || [])].some(text => text.toLocaleLowerCase().includes(query)));
-  return <div className="kit-settings-nav"><h2>{title}</h2><Input data-phd-action="settings.category.search" aria-label={searchLabel} placeholder={searchLabel} value={search} onChange={event => setSearch(event.target.value)}/><InternalScrollArea className="kit-settings-nav__list"><nav aria-label={title}>{filtered.map(category => { const CategoryIcon = category.icon; return <button type="button" key={category.id} className="kit-category" data-phd-action={`settings.category.${category.id}`} aria-current={category.id === selected ? 'page' : undefined} onClick={() => onSelect(category.id)}>{CategoryIcon ? <CategoryIcon size={16}/> : null}{category.label}</button>; })}</nav>{!filtered.length ? <p className="kit-muted" role="status">{noMatchesLabel}</p> : null}</InternalScrollArea></div>;
+  const filtered = categories.filter(category => [category.label, category.group || '', ...(category.keywords || [])].some(text => text.toLocaleLowerCase().includes(query)));
+  return <div className="kit-settings-nav"><h2>{title}</h2><Input data-phd-action="settings.category.search" aria-label={searchLabel} placeholder={searchLabel} value={search} onChange={event => setSearch(event.target.value)}/><InternalScrollArea className="kit-settings-nav__list"><nav aria-label={title}>{filtered.map((category, index) => { const CategoryIcon = category.icon; return <div key={category.id}>{category.group && category.group !== filtered[index - 1]?.group ? <h3 className="kit-settings-group">{category.group}</h3> : null}<button type="button" className="kit-category" data-phd-action={`settings.category.${category.id}`} aria-current={category.id === selected ? 'page' : undefined} onClick={() => onSelect(category.id)}>{CategoryIcon ? <CategoryIcon size={16}/> : null}{category.label}</button></div>; })}</nav>{!filtered.length ? <p className="kit-muted" role="status">{noMatchesLabel}</p> : null}</InternalScrollArea></div>;
 }
 
 export function SettingsPage({ title, children }: { title: ReactNode; children: ReactNode }) {

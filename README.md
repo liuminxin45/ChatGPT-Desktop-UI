@@ -4,7 +4,7 @@ An independent React component library for neutral desktop interfaces. It provid
 
 ## Try the demo
 
-[Open the interactive demo](https://liuminxin45.github.io/ChatGPT-Desktop-UI/) — an English product workspace with projects, a team inbox and settings. Search and filter projects, create one, complete a task, send a message, and switch between light and dark themes.
+[Open the interactive demo](https://liuminxin45.github.io/ChatGPT-Desktop-UI/) — an English product workspace with projects, a team inbox, activity charts and grouped settings. Search and filter projects, create one, complete a task, send a message, pin destinations, explore weekly trends, and switch between light and dark themes. Back/Forward follows visited pages; File/Edit/View/Help provides working actions, including task Undo/Redo.
 
 ![Northstar workspace in dark mode](docs/demo/projects-dark-1920.png)
 

@@ -7,7 +7,7 @@ Read `docs/DESIGN_SYSTEM.md` and `docs/DESIGN_GUIDANCE.md` before changing UI. R
 - Workspaces fill available width/height. Settings use a 248px contextual sidebar and a maximum 720px reading/form column. Retain a 48px global rail only when the product needs global navigation.
 - Avoid duplicate module titles, redundant subtitles, nested card outlines and competing primary actions. Ordinary sections use color and spacing.
 - Idle buttons/selects are transparent; inputs use subtle filled surfaces. Hover, focus, checked, selected, disabled and error states must remain distinguishable in both themes.
-- UI uses system fonts and 400 weight by default. The originating PHD product has explicit exceptions; these are not an instruction to add bold UI throughout other products.
+- UI uses system fonts and 400 weight by default. Settings titles, category group headings, section titles and field labels use the semantic 600 emphasis weight, as requested on 2026-10-09. Body copy and controls stay regular; native Tool Hosts retain their enforced 400 policy.
 - Use outline/fill icon pairs, a 32px selected tile, 20px icon and 8px blue unread dot. Rail tooltips contain only a name; no shortcut text or arrow.
 - Preserve visible keyboard focus, labels, menu navigation, dialog focus containment and reduced-motion behavior. Arrow cursors do not replace these signals.
 - The host owns native window commands, history, credentials, persistence, language, data and analytics. No Electron IPC, storage service or production data root belongs in this library. Unsupported native actions are disabled.

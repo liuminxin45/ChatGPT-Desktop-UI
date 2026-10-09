@@ -20,13 +20,22 @@ try {
     const page = await context.newPage();
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(url);
-    for (const [id, label] of [['projects','Projects'],['inbox','Inbox'],['settings','Settings']]) {
+    for (const [id, label] of [['projects','Projects'],['inbox','Inbox'],['activity','Activity'],['settings','Settings']]) {
       await page.getByRole('button', { name: label, exact: true }).click();
       await page.waitForTimeout(150);
+      await page.locator('.demo-chart-line:visible').evaluateAll(lines => Promise.all(lines.flatMap(el => el.getAnimations().map(animation => animation.finished.catch(() => {})))));
       const geometry = await page.evaluate(() => ({ overflow: document.documentElement.scrollWidth > innerWidth, rail: document.querySelector('.kit-rail').getBoundingClientRect().width, weights: [...document.querySelectorAll('button,h1,h2,p')].filter(el => el.getBoundingClientRect().height).map(el => getComputedStyle(el).fontWeight), background: getComputedStyle(document.querySelector('.kit-shell__main')).backgroundColor }));
       assert.equal(geometry.overflow, false);
       assert.equal(geometry.rail, 48);
-      assert.ok(geometry.weights.every(weight => weight === '400'));
+      assert.ok(geometry.weights.every(weight => weight === '400' || weight === '600'));
+      for (const heading of await page.locator('.kit-settings-nav h2,.kit-settings-group,.kit-settings-content h1,.kit-settings-section h2').all()) {
+        if (await heading.isVisible()) assert.equal(await heading.evaluate(el => getComputedStyle(el).fontWeight), '600');
+      }
+      for (const control of await page.locator('.phd-select:visible,.demo-message p:visible').all()) assert.equal(await control.evaluate(el => getComputedStyle(el).fontWeight), '400');
+      assert.equal(await page.locator('.kit-titlebar').evaluate(el => el.getBoundingClientRect().height), 40);
+      for (const icon of await page.locator('.phd-select__icon svg:visible').all()) {
+        const bounds = await icon.boundingBox(); assert.ok(bounds.width <= 20 && bounds.height <= 20);
+      }
       assert.equal(geometry.background, theme === 'dark' ? 'rgb(24, 24, 24)' : 'rgb(255, 255, 255)');
       await page.screenshot({ path: path.join(root, width === 1280 || (width === 1920 && id === 'projects') ? 'docs/demo' : 'tests/output/demo', `${id}-${theme}-${width}.png`) });
       renders.push({ page: id, theme, width, height, scale, overflow: geometry.overflow });
@@ -37,6 +46,29 @@ try {
   const page = await context.newPage();
   page.on('pageerror', error => errors.push(error.message));
   await page.goto(url);
+  assert.equal(await page.getByRole('button', { name:'Back', exact:true }).isEnabled(), false);
+  assert.equal(await page.getByRole('link', { name:'View source', exact:true }).locator('svg').count(), 1);
+  assert.equal(await page.getByText('Interactive demo', { exact:true }).count(), 0);
+  await page.getByRole('button', { name:'More', exact:true }).click();
+  await page.getByRole('menuitemcheckbox', { name:'Unpin Activity', exact:true }).click();
+  assert.equal(await page.getByRole('button', { name:'Activity', exact:true }).count(), 0);
+  await page.getByRole('menuitem', { name:'Activity', exact:true }).click();
+  assert.equal(await page.getByRole('button', { name:'More', exact:true }).getAttribute('aria-current'), 'page');
+  await page.getByRole('button', { name:'More', exact:true }).click();
+  await page.getByRole('menuitemcheckbox', { name:'Pin Activity', exact:true }).click();
+  await page.screenshot({ path:path.join(root,'docs/demo/navigation-menu.png') });
+  await page.keyboard.press('Escape');
+  assert.equal(await page.getByRole('button', { name:'Activity', exact:true }).count(), 1);
+  const chart = page.locator('section:not([hidden]) .demo-chart');
+  await chart.getByRole('combobox', { name:'Chart metric' }).click();
+  await page.getByRole('option', { name:'Opened tasks', exact:true }).click();
+  await chart.getByRole('tab', { name:'12 weeks' }).click();
+  assert.equal(await chart.locator('.demo-chart-dot').count(), 12);
+  assert.ok((await chart.locator('.demo-chart-line').getAttribute('d')).includes('C '));
+  await chart.getByRole('img').focus(); await page.keyboard.press('ArrowRight');
+  assert.match(await chart.locator('.demo-chart-readout').innerText(), /opened/);
+  checks.push('More menu, live pin/unpin and keyboard/metric/period chart exploration');
+  await page.getByRole('button', { name:'Projects', exact:true }).click();
   await page.getByRole('textbox', { name:'Search projects' }).fill('search');
   assert.equal(await page.locator('.demo-project').count(), 1);
   await page.getByRole('textbox', { name:'Search projects' }).fill('no matching project');
@@ -51,6 +83,12 @@ try {
   assert.match(await page.locator('.demo-project').first().innerText(), /A better first five minutes/);
   checks.push('search, empty recovery, filters and sorting');
   await page.getByRole('checkbox', { name:'Complete Review the invite flow', exact:true }).check();
+  assert.equal(await page.getByRole('checkbox', { name:'Complete Review the invite flow', exact:true }).isChecked(), true);
+  await page.getByRole('button', { name:'Edit', exact:true }).click();
+  await page.getByRole('menuitem', { name:'Undo task change' }).click();
+  assert.equal(await page.getByRole('checkbox', { name:'Complete Review the invite flow', exact:true }).isChecked(), false);
+  await page.getByRole('button', { name:'Edit', exact:true }).click();
+  await page.getByRole('menuitem', { name:'Redo task change' }).click();
   assert.equal(await page.getByRole('checkbox', { name:'Complete Review the invite flow', exact:true }).isChecked(), true);
   checks.push('task completion');
   await page.getByRole('button', { name:'New project', exact:true }).click();
@@ -81,8 +119,10 @@ try {
   await page.getByRole('textbox', { name:'Message', exact:true }).fill('Draft for design');
   await page.getByRole('button', { name:/October launch.*10:42/ }).click();
   assert.equal(await page.getByRole('textbox', { name:'Message', exact:true }).inputValue(), 'Draft for the launch review');
-  await page.getByRole('button', { name:'Toggle conversations' }).click();
+  await page.getByRole('button', { name:'Toggle sidebar' }).click();
   assert.equal(await page.locator('.kit-sidebar').isVisible(), false);
+  assert.equal(await page.locator('.kit-rail').isVisible(), false);
+  await page.getByRole('button', { name:'Toggle sidebar' }).click();
   await page.getByRole('button', { name:'Projects', exact:true }).click();
   await page.getByRole('button', { name:'Inbox', exact:true }).click();
   assert.equal(await page.getByRole('textbox', { name:'Message', exact:true }).inputValue(), 'Draft for the launch review');
@@ -93,10 +133,40 @@ try {
   await page.getByRole('button', { name:'Settings', exact:true }).click();
   await page.getByRole('button', { name:'Preferences', exact:true }).click();
   await page.getByRole('textbox', { name:'Workspace name' }).fill('Northstar Studio');
+  await page.getByRole('button', { name:'Notifications', exact:true }).click();
   await page.getByRole('switch', { name:'In-app reminders' }).click();
   await page.getByRole('status').waitFor();
   assert.match(await page.locator('.demo-wordmark').innerText(), /Northstar Studio/);
   checks.push('workspace name and reminder preview');
+  await page.getByRole('button', { name:'Back', exact:true }).click();
+  assert.equal(await page.getByRole('textbox', { name:'Workspace name' }).inputValue(), 'Northstar Studio');
+  await page.getByRole('button', { name:'Forward', exact:true }).click();
+  await page.getByRole('switch', { name:'In-app reminders' }).waitFor();
+  await page.getByRole('button', { name:'Alex Taylor', exact:true }).click();
+  const submenu = page.getByRole('menuitem', { name:'Appearance', exact:true });
+  assert.equal(await submenu.locator('svg.kit-menu-chevron').evaluate(el => el.getBoundingClientRect().width), 16);
+  await submenu.hover(); await page.getByRole('menuitemradio', { name:'Dark', exact:true }).waitFor();
+  await page.screenshot({ path:path.join(root,'docs/demo/appearance-menu.png') });
+  await page.keyboard.press('Escape'); await page.keyboard.press('Escape');
+  await page.getByRole('button', { name:'Help', exact:true }).click();
+  await page.getByRole('menuitem', { name:'About Northstar' }).click();
+  await page.getByRole('dialog', { name:'Northstar', exact:true }).waitFor(); await page.keyboard.press('Escape');
+  checks.push('real Back/Forward history, 16px appearance chevron and Help menu');
+  const selectMetrics = await page.getByRole('combobox', { name:'Theme', exact:true }).evaluate(el => {
+    const span = el.querySelector('span'), box = el.getBoundingClientRect(), text = span.getBoundingClientRect();
+    const range = document.createRange(); range.selectNodeContents(span); const glyphs = range.getBoundingClientRect();
+    return { center:Math.abs((text.top + text.bottom - box.top - box.bottom) / 2), textHeight:text.height, glyphHeight:glyphs.height, transition:getComputedStyle(el).transitionDuration };
+  });
+  assert.ok(selectMetrics.center <= 1);
+  assert.ok(selectMetrics.textHeight >= selectMetrics.glyphHeight);
+  assert.ok(parseFloat(selectMetrics.transition) > 0);
+  await page.getByRole('button', { name:'Projects', exact:true }).click();
+  const titleMetrics = await page.locator('.demo-project-link').first().evaluate(el => ({ height:el.getBoundingClientRect().height, lineHeight:parseFloat(getComputedStyle(el).lineHeight), align:getComputedStyle(el).alignItems }));
+  assert.equal(titleMetrics.align, 'center'); assert.ok(titleMetrics.height >= titleMetrics.lineHeight + 12);
+  checks.push('vertically centered text, descender clearance and shared hover transitions');
+  await page.emulateMedia({ reducedMotion:'reduce' });
+  assert.ok(parseFloat(await page.getByRole('combobox', { name:'Theme', exact:true }).evaluate(el => getComputedStyle(el).transitionDuration)) <= 0.00001);
+  checks.push('reduced motion disables decorative transitions');
   await page.reload();
   assert.equal(await page.evaluate(() => document.documentElement.classList.contains('dark')), false);
   assert.equal(await page.locator('.demo-project').count(), 4);
