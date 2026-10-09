@@ -64,7 +64,7 @@ html:root,html:root body,html:root body *,html:root body *::before,html:root bod
 .phd-tabs button:hover:not(:disabled){background:var(--phd-color-surface-hover);color:var(--phd-color-text)}
 .phd-button:focus-visible,.phd-icon-control:focus-visible,.phd-tabs button:focus-visible{outline:2px solid var(--phd-color-focus);outline-offset:-2px}
 .phd-toolbar-search{display:flex;height:34px;align-items:center;gap:8px;border:0;border-radius:var(--phd-radius-control);background:var(--phd-color-surface-muted);padding:0 10px;color:var(--phd-color-text-muted)}
-.phd-toolbar-search:focus-within{box-shadow:var(--phd-focus-ring)}
+.phd-toolbar-search:focus-within{box-shadow:none}
 .phd-toolbar-search input{min-width:0;border:0;background:transparent;outline:none;box-shadow:none;font:inherit;color:var(--phd-color-text)}
 .phd-workbench-empty{min-height:calc(100dvh - 180px)}
 .phd-pending-workbench{padding-inline:var(--phd-space-page-inline);padding-bottom:var(--phd-space-page-block)}
@@ -78,6 +78,7 @@ html:root,html:root body,html:root body *,html:root body *::before,html:root bod
 :where(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="file"]),textarea,[contenteditable="true"]):focus{outline:none!important;border-color:var(--phd-color-border-strong)!important;box-shadow:var(--phd-input-focus-ring)!important}
 :where(input,textarea,[contenteditable="true"])[aria-invalid="true"]:focus{border-color:var(--phd-color-danger)!important;box-shadow:inset 0 0 0 1px var(--phd-color-danger)!important}
 .phd-composer :where(input,textarea,[contenteditable="true"]):focus{box-shadow:none!important}
+:where(div,label,section):has(> :is(input,textarea,[contenteditable="true"]):focus){outline:none!important;border-color:var(--phd-color-border-strong)!important;box-shadow:none!important}
 [data-phd-input-scope]:focus-within{border-color:var(--phd-color-border-strong);box-shadow:none}
 .phd-button.phd-send-control{width:32px;height:32px;padding:0;border-radius:50%;background:var(--phd-color-info);color:var(--phd-color-on-navigation-selected)}
 .phd-button.phd-send-control:hover:not(:disabled){background:var(--phd-color-info-hover)}

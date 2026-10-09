@@ -5,6 +5,7 @@ import { Button, DesktopRoot, Input, Textarea } from '../src';
 import { Input as HostInput } from '../src/compat/input';
 import { Textarea as HostTextarea } from '../src/compat/textarea';
 import '../src/styles.css';
+import './input-contract.css';
 
 const counts: Record<string, number> = {};
 Object.assign(window, { inputContract: counts });
@@ -32,7 +33,8 @@ function Example() {
       <Textarea aria-label="Message" value={draft} onChange={event => setDraft(event.target.value)} />
       <Button confirmOnEnter actionId="example.message.send" disabled={!draft.trim()} onClick={() => { record('send'); setDraft(''); }}>Send</Button>
     </div>
-    <Input aria-label="Live filter" />
+    <div className="phd-toolbar-search"><Input aria-label="Live filter" /></div>
+    <div className="legacy-search"><Input aria-label="Legacy filter" /></div>
     <Textarea aria-label="Read only" readOnly value="Read only content" />
     <div data-phd-input-scope><Input aria-label="Ambiguous field" /><Button confirmOnEnter onClick={() => record('first')}>First</Button><Button confirmOnEnter onClick={() => record('second')}>Second</Button></div>
     <div data-phd-input-scope><Input aria-label="Hidden action field" /><Button confirmOnEnter hidden onClick={() => record('hidden')}>Hidden</Button></div>

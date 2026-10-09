@@ -51,6 +51,7 @@ try {
     await page.getByLabel('Read only').press('Enter'); assert.equal(await page.getByLabel('Read only').inputValue(), 'Read only content');
     await page.getByLabel('Portal field').press('Enter'); assert.equal(await count('portal'), 1);
     await page.getByLabel('Live filter').press('Enter'); assert.equal(await page.getByLabel('Live filter').evaluate(element => document.activeElement === element), false);
+    for(const label of ['Live filter','Legacy filter']){const field=page.getByLabel(label);await field.focus();assert.equal(await field.evaluate(e=>getComputedStyle(e.parentElement).boxShadow),'none');}
     const message = page.getByLabel('Message', {exact:true});
     await message.fill('First'); await message.press('Shift+Enter'); await page.keyboard.type('Second');
     assert.equal(await message.inputValue(), 'First\nSecond'); assert.equal(await count('send'), 0);
