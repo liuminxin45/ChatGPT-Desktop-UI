@@ -5,7 +5,7 @@ import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import { Check, ChevronRight, Circle } from "lucide-react";
 
 import { cn } from './utils';
-import { ActionTooltip, actionLabel } from '../action-tooltip';
+import { actionLabel } from '../action-tooltip';
 
 const DropdownMenu = DropdownMenuPrimitive.Root;
 
@@ -84,19 +84,19 @@ const DropdownMenuItem = React.forwardRef<
   }
 >(({ className, inset, icon, actionId, children, ...props }, ref) => {
   const label = actionLabel(children) || props['aria-label'] || '';
-  return <ActionTooltip label={icon ? label : ''} side="right" disabled={!!props.disabled}><DropdownMenuPrimitive.Item
+  return <DropdownMenuPrimitive.Item
     ref={ref}
     className={cn(
       "relative flex cursor-default select-none items-center phd-menu-item px-2 py-1.5 text-sm outline-none transition-colors focus:bg-[var(--phd-color-surface-hover)] focus:text-[var(--phd-color-text)] data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       inset && "pl-8",
       className,
-      icon && 'phd-menu-item--icon',
+      icon && 'gap-2',
     )}
     {...props}
     data-phd-action={actionId || props['data-phd-action' as keyof typeof props] as string | undefined}
     aria-label={props['aria-label'] || (icon ? label : undefined)}
     textValue={props.textValue || (icon ? label : undefined)}
-  >{icon ? <span className="phd-action-glyph" aria-hidden="true">{icon}</span> : children}</DropdownMenuPrimitive.Item></ActionTooltip>;
+  >{icon ? <span className="phd-action-glyph" aria-hidden="true">{icon}</span> : null}{children}</DropdownMenuPrimitive.Item>;
 });
 DropdownMenuItem.displayName = DropdownMenuPrimitive.Item.displayName;
 

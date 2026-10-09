@@ -92,17 +92,19 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'sm' | 'md';
   actionId?: string;
   confirmOnEnter?: boolean;
-  /** An action glyph; children become its tooltip and accessible name. */
+  /** An action glyph, displayed beside the visible label by default. */
   icon?: ReactNode;
+  /** Opt in only for familiar, compact toolbar controls. */
+  iconOnly?: boolean;
   badge?: ReactNode;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  function Button({ className, variant = 'secondary', size = 'md', type = 'button', actionId, confirmOnEnter, title, icon, badge, children, ...props }, ref) {
+  function Button({ className, variant = 'secondary', size = 'md', type = 'button', actionId, confirmOnEnter, title, icon, iconOnly = false, badge, children, ...props }, ref) {
   const phdT = useTranslation();
     const label = (icon ? actionLabel(children) : '') || props['aria-label'] || title || '';
-    const node = <button ref={ref} type={type} data-phd-action={actionId} data-phd-enter-confirm={confirmOnEnter || undefined} className={classes('phd-button', `phd-button--${variant}`, `phd-button--${size}`, className, !!icon && 'phd-button--icon')} {...props} aria-label={props['aria-label'] || (icon ? label : title)}>{icon ? <span className="phd-action-glyph" aria-hidden="true">{icon}{badge ? <span className="phd-action-badge">{badge}</span> : null}</span> : children}</button>;
-    return <ActionTooltip label={icon || title || props['aria-label'] ? label : ''} disabled={!!props.disabled}>{node}</ActionTooltip>;
+    const node = <button ref={ref} type={type} data-phd-action={actionId} data-phd-enter-confirm={confirmOnEnter || undefined} className={classes('phd-button', `phd-button--${variant}`, `phd-button--${size}`, className, !!icon && iconOnly && 'phd-button--icon')} {...props} aria-label={props['aria-label'] || (iconOnly ? label : title)}>{icon ? <span className="phd-action-glyph" aria-hidden="true">{icon}{iconOnly && badge ? <span className="phd-action-badge">{badge}</span> : null}</span> : null}{icon && iconOnly ? null : children}</button>;
+    return <ActionTooltip label={iconOnly || title || props['aria-label'] ? label : ''} disabled={!!props.disabled}>{node}</ActionTooltip>;
   },
 );
 

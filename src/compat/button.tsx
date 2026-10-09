@@ -43,15 +43,18 @@ const Button = React.forwardRef<
       /** Stable product-usage identifier. Required for new or changed actions. */
       actionId?: string;
       confirmOnEnter?: boolean;
-      /** An action glyph; children become its tooltip and accessible name. */
+      /** An action glyph, displayed beside the visible label by default. */
       icon?: React.ReactNode;
+      /** Familiar compact controls only; size="icon" also opts in. */
+      iconOnly?: boolean;
       /** A real count/state badge, separate from the hidden action caption. */
       badge?: React.ReactNode;
     }
->(({ className, variant, size, asChild = false, actionId, confirmOnEnter, icon, badge, children, ...props }, ref) => {
+>(({ className, variant, size, asChild = false, actionId, confirmOnEnter, icon, iconOnly, badge, children, ...props }, ref) => {
   const Comp = asChild ? Slot : "button";
   const { title, type, ...restProps } = props;
   const label = (icon ? actionLabel(children) : '') || restProps['aria-label'] || title || '';
+  const compact = iconOnly ?? size === 'icon';
 
   const buttonNode = (
     <Comp
@@ -59,15 +62,15 @@ const Button = React.forwardRef<
       data-slot="button"
       data-phd-action={actionId}
       data-phd-enter-confirm={confirmOnEnter || undefined}
-      className={cn(buttonVariants({ variant, size, className }), icon && 'phd-button--icon')}
+      className={cn(buttonVariants({ variant, size, className }), icon && compact && 'phd-button--icon')}
       title={undefined}
       type={asChild ? type : type ?? "button"}
       {...restProps}
-      aria-label={restProps['aria-label'] || (icon ? label : title)}
-    >{icon ? <span className="phd-action-glyph" aria-hidden="true">{icon}{badge ? <span className="phd-action-badge">{badge}</span> : null}</span> : children}</Comp>
+      aria-label={restProps['aria-label'] || (compact ? label : title)}
+    >{icon ? <><span className="phd-action-glyph" aria-hidden="true">{icon}{compact && badge ? <span className="phd-action-badge">{badge}</span> : null}</span>{compact ? null : children}</> : children}</Comp>
   );
 
-  return <ActionTooltip label={icon || size === 'icon' || title || restProps['aria-label'] ? label : ''} disabled={!!restProps.disabled}>{buttonNode}</ActionTooltip>;
+  return <ActionTooltip label={compact || title || restProps['aria-label'] ? label : ''} disabled={!!restProps.disabled}>{buttonNode}</ActionTooltip>;
 });
 Button.displayName = "Button";
 

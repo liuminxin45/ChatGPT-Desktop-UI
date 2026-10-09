@@ -16,9 +16,11 @@ Embedded Tools inherit Host styles and typography. They must not mount another t
 
 ## Icon actions
 
-Pass the action glyph as `icon` to either Button entry and keep its translated label in `children`. The control renders a compact square glyph, exposes an accessible name, and shows the label on hover or keyboard focus. Busy and disabled actions retain their names and hints. Existing `title` values become shared tooltips; a surrounding Tooltip suppresses a duplicate nested hint. Do not move record names, people, selectable values or check-state indicators into action tooltips.
+Pass the action glyph as `icon` to either Button entry and keep its translated label in `children`. Labels remain visible by default. Menus, view/filter choices, primary workflow actions, confirmation/destructive actions and business-specific operations need visible names; an icon alone is insufficient.
 
-The compatibility DropdownMenuItem accepts `icon` and `actionId` with the same label rule and retains keyboard typeahead. Use stable Host-owned action identifiers. These primitives add no analytics events or diagnostic content. Shared portals close when their Tool Surface becomes hidden.
+Opt in to `iconOnly` for familiar, compact toolbar/row controls such as close, remove, search, refresh and message hover actions. The compatibility Button's `size="icon"` also opts in. These controls show their names on hover/focus, including busy and disabled states. Existing `title` values become shared tooltips; a surrounding Tooltip suppresses duplicate hints. Preserve counts, state, record names and selected values.
+
+The compatibility DropdownMenuItem accepts `icon` and `actionId`, always displays its label and shortcut, and retains keyboard typeahead. Use stable Host-owned action identifiers. These primitives add no analytics events or diagnostic content. Shared portals close when their Tool Surface becomes hidden.
 
 ## Host behavior
 

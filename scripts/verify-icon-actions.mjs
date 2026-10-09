@@ -27,6 +27,13 @@ try {
     const page = await context.newPage(), errors=[];
     page.on('pageerror',e=>errors.push(e.message));
     await page.goto(`http://127.0.0.1:${server.address().port}`);
+    for (const name of ['Confirm and submit', 'AI review', '3 replies', 'Tasks', 'Forward']) {
+      const button = page.getByRole('button', {name, exact:true});
+      assert.equal(await button.textContent(), name);
+      assert.equal(await button.evaluate(e=>e.classList.contains('phd-button--icon')), false);
+      assert.equal(await button.locator('svg').count(), 1);
+    }
+    assert.equal(await page.locator('[data-phd-action="fixture.reply"] .phd-action-badge').count(), 0);
     for(const name of ['Show fields','Create new node','Save']) {
       const button=page.getByRole('button',{name,exact:true});
       assert.equal(await button.evaluate(e=>e.textContent.includes(e.getAttribute('aria-label'))),false);
@@ -38,7 +45,7 @@ try {
     assert.equal(await page.getByRole('status').textContent(),'1');
     await page.getByRole('button',{name:'Save',exact:true}).click();
     const disabled=page.getByRole('button',{name:'Saving',exact:true}); assert.equal(await disabled.isDisabled(),true);
-    await disabled.locator('..').hover(); await page.getByRole('tooltip',{name:'Saving',exact:true}).waitFor();
+    await page.mouse.move(0,0); await disabled.locator('..').hover(); await page.getByRole('tooltip',{name:'Saving',exact:true}).waitFor();
     await page.getByRole('button',{name:'Reset',exact:true}).click();
     await page.getByRole('button',{name:'Show fields',exact:true}).focus(); await page.getByRole('tooltip',{name:'Show fields',exact:true}).waitFor();
     await page.getByRole('button',{name:'Send',exact:true}).hover(); await page.getByRole('tooltip',{name:'Send',exact:true}).waitFor();
@@ -46,7 +53,12 @@ try {
     assert.equal(await page.getByLabel('API Token',{exact:true}).inputValue(),'isolated-fixture');
     await page.getByRole('button',{name:'Inner label',exact:true}).hover(); await page.getByRole('tooltip',{name:'Outer label',exact:true}).waitFor(); assert.equal(await page.getByRole('tooltip').count(),1);
     await page.getByRole('button',{name:'Menu',exact:true}).click(); const item=page.getByRole('menuitem',{name:'Delete',exact:true});
-    await item.focus(); await page.getByRole('tooltip',{name:'Delete',exact:true}).waitFor(); await page.keyboard.press('Enter');
+    assert.equal(await item.textContent(), 'Delete');
+    assert.ok((await item.boundingBox()).width > 100);
+    await page.getByRole('menuitem',{name:'Manage account',exact:true}).focus();
+    assert.match(await page.locator('[data-phd-action="fixture.menu.settings"]').textContent(), /Settings.*Ctrl\+,/);
+    await page.keyboard.press('d'); await page.waitForFunction(()=>document.activeElement?.getAttribute('data-phd-action')==='fixture.menu.delete');
+    await page.keyboard.press('Enter');
     assert.equal(await page.getByRole('status').textContent(),'2');
     await page.getByRole('button',{name:'Surface action',exact:true}).hover(); await page.getByRole('tooltip',{name:'Surface action',exact:true}).waitFor();
     await page.getByRole('button',{name:'Hide surface',exact:true}).click(); assert.equal(await page.getByRole('tooltip',{name:'Surface action',exact:true}).count(),0);
@@ -54,10 +66,11 @@ try {
     await page.getByRole('button',{name:'显示字段',exact:true}).hover(); await page.getByRole('tooltip',{name:'显示字段',exact:true}).waitFor();
     assert.equal(await page.getByRole('link',{name:'Download',exact:true}).getAttribute('href'),'#download');
     assert.deepEqual(errors,[]);
+    await page.getByRole('button',{name:'Menu',exact:true}).click();
     await page.screenshot({path:path.join(evidence,`actions-${theme}-${width}.png`)});
     await context.close();
   }
-  console.log('PASS icon actions: 6 themed/scaled renders, hover/focus, disabled/busy, menus, links, locale, one invocation and retained Surface visibility');
+  console.log('PASS action labels: 6 themed/scaled renders, visible menus/shortcuts/workflows/counts/views, explicit compact controls, hover/focus, busy states, typeahead, one invocation and retained Surface visibility');
 } finally {
   await browser?.close(); await new Promise(r=>server.close(r));
   await fs.rm(temp,{recursive:true,force:true});

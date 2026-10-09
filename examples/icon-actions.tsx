@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Settings, Plus, Loader2, Check, X } from 'lucide-react';
+import { Settings, Plus, Loader2, Check, X, UserRound, LogOut, Forward, ListTodo, Sparkles } from 'lucide-react';
 import { Button, DesktopRoot, Input, ToolVisibilityContext, Tooltip } from '../src';
 import { Button as HostButton } from '../src/compat/button';
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '../src/compat/dropdown-menu';
@@ -15,18 +15,30 @@ function Fixture() {
   return <DesktopRoot><main style={{padding:24}}>
     <h1>Icon actions</h1>
     <div style={{display:'flex',gap:8,alignItems:'center'}}>
-      <HostButton actionId="fixture.fields.toggle" icon={<Settings size={16}/>} aria-pressed={false}>{chinese ? '显示字段' : 'Show fields'}</HostButton>
-      <HostButton actionId="fixture.node.create" badge={3} icon={<Plus size={16}/>} onClick={() => setCount(n => n + 1)}>{chinese ? '新建节点' : 'Create new node'}</HostButton>
-      <Button actionId="fixture.save" icon={busy ? <Loader2 size={16} className="spin"/> : <Check size={16}/>} disabled={busy} onClick={() => setBusy(true)}>{save}</Button>
+      <HostButton actionId="fixture.fields.toggle" iconOnly icon={<Settings size={16}/>} aria-pressed={false}>{chinese ? '显示字段' : 'Show fields'}</HostButton>
+      <HostButton actionId="fixture.node.create" iconOnly badge={3} icon={<Plus size={16}/>} onClick={() => setCount(n => n + 1)}>{chinese ? '新建节点' : 'Create new node'}</HostButton>
+      <Button actionId="fixture.save" iconOnly icon={busy ? <Loader2 size={16} className="spin"/> : <Check size={16}/>} disabled={busy} onClick={() => setBusy(true)}>{save}</Button>
       <Tooltip label="Outer label"><HostButton actionId="fixture.nested" size="icon" aria-label="Inner label"><Plus size={16}/></HostButton></Tooltip>
       <DropdownMenu><DropdownMenuTrigger asChild><HostButton size="icon" aria-label="Menu" actionId="fixture.menu"><Settings size={16}/></HostButton></DropdownMenuTrigger>
-        <DropdownMenuContent><DropdownMenuItem actionId="fixture.menu.delete" icon={<X size={16}/>} onSelect={() => setCount(n => n + 1)}>Delete</DropdownMenuItem></DropdownMenuContent>
+        <DropdownMenuContent>
+          <DropdownMenuItem actionId="fixture.menu.account" icon={<UserRound size={16}/>}>Manage account</DropdownMenuItem>
+          <DropdownMenuItem actionId="fixture.menu.settings" icon={<Settings size={16}/>}>Settings <span style={{marginLeft:'auto'}}>Ctrl+,</span></DropdownMenuItem>
+          <DropdownMenuItem actionId="fixture.menu.quit" icon={<LogOut size={16}/>}>Quit</DropdownMenuItem>
+          <DropdownMenuItem actionId="fixture.menu.delete" icon={<X size={16}/>} onSelect={() => setCount(n => n + 1)}>Delete</DropdownMenuItem>
+        </DropdownMenuContent>
       </DropdownMenu>
-      <ToolVisibilityContext.Provider value={visible}><Button icon={<Plus size={16}/>} actionId="fixture.surface">Surface action</Button></ToolVisibilityContext.Provider>
+      <ToolVisibilityContext.Provider value={visible}><Button iconOnly icon={<Plus size={16}/>} actionId="fixture.surface">Surface action</Button></ToolVisibilityContext.Provider>
       <Button actionId="fixture.aria-only" aria-label="Send"><Plus size={16}/></Button>
     </div>
     <p role="status">{count}</p>
-    <label>API Token<Input type="password"/><HostButton actionId="fixture.token.clear" icon={<X size={16}/>}>Clear token</HostButton></label>
+    <div style={{display:'flex',gap:8,marginTop:16}}>
+      <Button actionId="fixture.submit" icon={<Check size={16}/>}>Confirm and submit</Button>
+      <HostButton actionId="fixture.review" icon={<Sparkles size={16}/>}>AI review</HostButton>
+      <HostButton actionId="fixture.reply" badge={3} icon={<Forward size={16}/>}>3 replies</HostButton>
+      <HostButton actionId="fixture.view" icon={<ListTodo size={16}/>}>Tasks</HostButton>
+    </div>
+    <HostButton actionId="fixture.forward" className="w-full justify-start" icon={<Forward size={16}/>}>Forward</HostButton>
+    <label>API Token<Input type="password"/><HostButton actionId="fixture.token.clear" iconOnly icon={<X size={16}/>}>Clear token</HostButton></label>
     <Button actionId="fixture.locale" onClick={() => setChinese(v=>!v)}>Language</Button>
     <Button actionId="fixture.retry" onClick={() => setBusy(false)}>Reset</Button>
     <Button actionId="fixture.visibility" onClick={() => setVisible(v=>!v)}>Hide surface</Button>
