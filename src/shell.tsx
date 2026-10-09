@@ -1,16 +1,13 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode, type ReactElement } from 'react';
 import type { Icon } from '@phosphor-icons/react';
-import * as TooltipPrimitive from '@radix-ui/react-tooltip';
+import { ActionTooltip } from './action-tooltip';
 import * as Menu from '@radix-ui/react-dropdown-menu';
 import { IconButton, Input, InternalScrollArea } from './controls';
 import { ArrowLeft, ArrowRight, SidebarSimple, UserCircle, Gear, Moon, Sun, SignOut } from './icons';
 import { useDesktopTheme, type Theme } from './theme';
 
 export function Tooltip({ label, children, side = 'right' }: { label: string; children: ReactNode; side?: 'right' | 'bottom' | 'top' | 'left' }) {
-  return <TooltipPrimitive.Provider delayDuration={300} skipDelayDuration={100}><TooltipPrimitive.Root>
-    <TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
-    <TooltipPrimitive.Portal><TooltipPrimitive.Content className="phd-tooltip" side={side} sideOffset={5} collisionPadding={8}>{label}</TooltipPrimitive.Content></TooltipPrimitive.Portal>
-  </TooltipPrimitive.Root></TooltipPrimitive.Provider>;
+  return <ActionTooltip label={label} side={side}>{children as ReactElement}</ActionTooltip>;
 }
 
 export interface ShellAction { id: string; label: string; onSelect?: () => void; disabled?: boolean }

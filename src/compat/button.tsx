@@ -3,6 +3,7 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from './utils';
+import { ActionTooltip, actionLabel } from '../action-tooltip';
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap phd-button rounded-md text-sm font-normal transition-all-custom focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 active:scale-[0.98]",
@@ -42,10 +43,15 @@ const Button = React.forwardRef<
       /** Stable product-usage identifier. Required for new or changed actions. */
       actionId?: string;
       confirmOnEnter?: boolean;
+      /** An action glyph; children become its tooltip and accessible name. */
+      icon?: React.ReactNode;
+      /** A real count/state badge, separate from the hidden action caption. */
+      badge?: React.ReactNode;
     }
->(({ className, variant, size, asChild = false, actionId, confirmOnEnter, ...props }, ref) => {
+>(({ className, variant, size, asChild = false, actionId, confirmOnEnter, icon, badge, children, ...props }, ref) => {
   const Comp = asChild ? Slot : "button";
   const { title, type, ...restProps } = props;
+  const label = (icon ? actionLabel(children) : '') || restProps['aria-label'] || title || '';
 
   const buttonNode = (
     <Comp
@@ -53,15 +59,15 @@ const Button = React.forwardRef<
       data-slot="button"
       data-phd-action={actionId}
       data-phd-enter-confirm={confirmOnEnter || undefined}
-      className={cn(buttonVariants({ variant, size, className }))}
+      className={cn(buttonVariants({ variant, size, className }), icon && 'phd-button--icon')}
       title={undefined}
       type={asChild ? type : type ?? "button"}
       {...restProps}
-      aria-label={restProps['aria-label'] || title}
-    />
+      aria-label={restProps['aria-label'] || (icon ? label : title)}
+    >{icon ? <span className="phd-action-glyph" aria-hidden="true">{icon}{badge ? <span className="phd-action-badge">{badge}</span> : null}</span> : children}</Comp>
   );
 
-  return buttonNode;
+  return <ActionTooltip label={icon || size === 'icon' || title || restProps['aria-label'] ? label : ''} disabled={!!restProps.disabled}>{buttonNode}</ActionTooltip>;
 });
 Button.displayName = "Button";
 

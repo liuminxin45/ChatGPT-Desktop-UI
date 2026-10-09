@@ -14,6 +14,12 @@ Tailwind hosts import `controls.css`, `host.css` and `host-shell.css` once, then
 
 Embedded Tools inherit Host styles and typography. They must not mount another theme root, title bar or renderer error boundary. `ToolVisibilityContext` closes overlays when a retained surface is hidden; it does not own the surface lease.
 
+## Icon actions
+
+Pass the action glyph as `icon` to either Button entry and keep its translated label in `children`. The control renders a compact square glyph, exposes an accessible name, and shows the label on hover or keyboard focus. Busy and disabled actions retain their names and hints. Existing `title` values become shared tooltips; a surrounding Tooltip suppresses a duplicate nested hint. Do not move record names, people, selectable values or check-state indicators into action tooltips.
+
+The compatibility DropdownMenuItem accepts `icon` and `actionId` with the same label rule and retains keyboard typeahead. Use stable Host-owned action identifiers. These primitives add no analytics events or diagnostic content. Shared portals close when their Tool Surface becomes hidden.
+
 ## Host behavior
 
 `TitleBar` presents callbacks and capability flags. The Host owns history boundaries, sidebar availability, native editing, tray behavior, maximize and exit saving. Reuse one action definition for custom and native menus; disable unavailable actions.

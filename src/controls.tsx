@@ -7,11 +7,13 @@ import ReactMarkdown, { type Components } from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon, CloseIcon } from './icons';
 import { nextEnabledTabIndex } from './tab-navigation';
+import { ActionTooltip, actionLabel } from './action-tooltip';
+import { ToolVisibilityContext } from './surface-visibility';
 
 export { nextEnabledTabIndex } from './tab-navigation';
 
 /** Shared overlays inherit the native Surface visibility without owning its lifecycle. */
-export const ToolVisibilityContext = createContext(true);
+export { ToolVisibilityContext } from './surface-visibility';
 
 function classes(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(' ');
@@ -90,18 +92,23 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'sm' | 'md';
   actionId?: string;
   confirmOnEnter?: boolean;
+  /** An action glyph; children become its tooltip and accessible name. */
+  icon?: ReactNode;
+  badge?: ReactNode;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  function Button({ className, variant = 'secondary', size = 'md', type = 'button', actionId, confirmOnEnter, title: _title, ...props }, ref) {
+  function Button({ className, variant = 'secondary', size = 'md', type = 'button', actionId, confirmOnEnter, title, icon, badge, children, ...props }, ref) {
   const phdT = useTranslation();
-    return <button ref={ref} type={type} data-phd-action={actionId} data-phd-enter-confirm={confirmOnEnter || undefined} className={classes('phd-button', `phd-button--${variant}`, `phd-button--${size}`, className)} {...props} />;
+    const label = (icon ? actionLabel(children) : '') || props['aria-label'] || title || '';
+    const node = <button ref={ref} type={type} data-phd-action={actionId} data-phd-enter-confirm={confirmOnEnter || undefined} className={classes('phd-button', `phd-button--${variant}`, `phd-button--${size}`, className, !!icon && 'phd-button--icon')} {...props} aria-label={props['aria-label'] || (icon ? label : title)}>{icon ? <span className="phd-action-glyph" aria-hidden="true">{icon}{badge ? <span className="phd-action-badge">{badge}</span> : null}</span> : children}</button>;
+    return <ActionTooltip label={icon || title || props['aria-label'] ? label : ''} disabled={!!props.disabled}>{node}</ActionTooltip>;
   },
 );
 
-export function IconButton({ className, type = 'button', actionId, title: _title, ...props }: ButtonHTMLAttributes<HTMLButtonElement> & { actionId?: string }) {
+export function IconButton({ className, type = 'button', actionId, title, ...props }: ButtonHTMLAttributes<HTMLButtonElement> & { actionId?: string }) {
   const phdT = useTranslation();
-  return <button type={type} data-phd-action={actionId} className={classes('phd-icon-control', className)} {...props} />;
+  return <ActionTooltip label={props['aria-label'] || title || ''} disabled={!!props.disabled}><button type={type} data-phd-action={actionId} className={classes('phd-icon-control', className)} {...props} aria-label={props['aria-label'] || title} /></ActionTooltip>;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>>(

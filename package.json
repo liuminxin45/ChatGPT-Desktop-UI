@@ -54,6 +54,7 @@
     "gallery": "node scripts/serve.mjs",
     "test": "node scripts/verify.mjs",
     "test:input": "node scripts/verify-input.mjs",
+    "test:icons": "node scripts/verify-icon-actions.mjs",
     "skill:package": "node scripts/package-skill.mjs",
     "skill:check": "node scripts/check-skill.mjs",
     "skill:install": "node scripts/package-skill.mjs --install",
