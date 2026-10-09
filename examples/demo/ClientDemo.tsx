@@ -152,6 +152,7 @@ export function ClientDemo() {
     [effort, setEffort] = useState("High"),
     [access, setAccess] = useState("Full access");
   const composer = useRef<HTMLTextAreaElement>(null);
+  const [contextProjects, setContextProjects] = useState<Record<string, string>>({});
   const key = `${mode}:${route.chat || `new:${route.project}`}`,
     draft = drafts[key] || "";
   const chats = [...pinned, ...projects.flatMap((item) => item.chats)].filter(
@@ -160,6 +161,7 @@ export function ClientDemo() {
     ),
     chat = chats.find((item) => item.id === route.chat),
     project = projects.find((item) => item.id === route.project);
+  const contextProject = projects.find((item) => item.id === contextProjects[key]) || project;
   const newChat = (projectId = route.project) => {
     navigate({ page: "home", project: projectId, chat: "" });
     setTimeout(() => composer.current?.focus(), 0);
@@ -228,18 +230,19 @@ export function ClientDemo() {
         id,
         title: draft.trim().slice(0, 62),
         preview: draft.trim(),
-        project: route.project,
+        project: contextProject?.id || "",
       };
-      if (route.project)
+      if (item.project)
         setProjects((old) =>
           old.map((project) =>
-            project.id === route.project
+            project.id === item.project
               ? { ...project, chats: [item, ...project.chats] }
               : project,
           ),
         );
       else setPinned((old) => [...old, item]);
-      navigate({ chat: id });
+      navigate({ chat: id, project: item.project });
+      if (contextProject) setContextProjects(old => ({ ...old, [`${mode}:${id}`]: contextProject.id }));
     }
     setMessages((old) => ({
       ...old,
@@ -957,7 +960,13 @@ export function ClientDemo() {
     placeholder={mode === "ChatGPT" ? "Ask ChatGPT" : chat ? "Work with Codex" : "Do anything"}
     onValueChange={value => setDrafts(old => ({ ...old, [key]: value }))} onSubmit={send}
     onVoice={mode === "Codex" ? () => showInfo("Voice mode", "Voice is simulated in this preview.") : undefined}
-    context={mode === "Codex" && project ? <><span><Folder size={14} />{project.name}</span><span><Desktop size={14} />This computer</span><IconButton aria-label="Project settings" actionId="client.project.settings" onClick={() => settings()}><Gear size={14} /></IconButton></> : undefined}
+    context={mode === "Codex" && contextProject ? <>
+      <DesktopMenu side="top" trigger={<button type="button" className="client-context-select" aria-label="Choose project"><Folder size={14} /><span>{contextProject.name}</span></button>}
+        items={projects.map(item => ({ id: `client.composer.project.select.${item.id}`, label: item.name, icon: <Folder />, checked: item.id === contextProject.id, onSelect: () => setContextProjects(old => ({ ...old, [key]: item.id })) }))} />
+      <DesktopMenu side="top" trigger={<button type="button" className="client-context-select" aria-label="Choose computer"><Desktop size={14} /><span>This computer</span></button>}
+        items={[{ id: "client.composer.computer.local", label: "This computer", icon: <Desktop />, checked: true, onSelect: () => composer.current?.focus() }, { id: "client.composer.computer.remote", label: "Set up remote", icon: <Desktop />, disabled: true }]} />
+      <IconButton aria-label="Project settings" actionId="client.project.settings" onClick={() => settings()}><Gear size={14} /></IconButton>
+    </> : undefined}
     leading={<>
       <DesktopMenu trigger={<button className="desktop-icon-control" type="button" aria-label="Add files and more"><Plus size={18} /></button>}
         items={mode === "ChatGPT" ? [

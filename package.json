@@ -1,6 +1,6 @@
 {
   "name": "chatgpt-desktop-kit",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Reusable neutral desktop UI primitives, shell patterns, visual references and an agent skill.",
   "license": "MIT",
   "type": "module",
@@ -61,6 +61,7 @@
     "demo:build": "node scripts/build-demo.mjs",
     "demo:serve": "node scripts/serve-demo.mjs",
     "test:demo": "node scripts/verify-demo.mjs",
+    "test:polish": "node scripts/verify-client-polish.mjs",
     "test": "node scripts/verify.mjs",
     "test:input": "node scripts/verify-input.mjs",
     "test:icons": "node scripts/verify-icon-actions.mjs",

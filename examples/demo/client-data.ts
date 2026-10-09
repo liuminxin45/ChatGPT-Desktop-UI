@@ -28,11 +28,12 @@ import {
   Clock,
   SquaresFour,
   Circle,
+  Cards,
 } from "@phosphor-icons/react";
 export const CLIENT_VERSION = "26.1002.7124.0";
 export const railItems = [
   { id: "home", label: "Home", icon: House },
-  { id: "space", label: "Space", icon: Images },
+  { id: "space", label: "Space", icon: Cards },
   { id: "scheduled", label: "Scheduled", icon: Clock },
   { id: "plugins", label: "Plugins", icon: Plugs },
   { id: "projects", label: "Projects", icon: Folder },

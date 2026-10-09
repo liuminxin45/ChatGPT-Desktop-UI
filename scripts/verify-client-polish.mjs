@@ -1,0 +1,81 @@
+import assert from 'node:assert/strict';
+import { mkdir, writeFile } from 'node:fs/promises';
+import { chromium } from 'playwright';
+import { createDemoServer } from './serve-demo.mjs';
+const output = new URL('../tests/output/client-polish/', import.meta.url);
+await mkdir(output, { recursive: true });
+const server = createDemoServer();
+await new Promise(r => server.listen(0, '127.0.0.1', r));
+const results = [], errors = [];
+let browser;
+try {
+    browser = await chromium.launch({ headless: true, channel: process.env.UI_BROWSER_CHANNEL || 'msedge' });
+    for (const theme of ['light', 'dark'])
+        for (const [width, height, scale] of [[1920, 1080, 1], [1280, 800, 1], [1536, 864, 1.25]]) {
+            const context = await browser.newContext({ viewport: { width, height }, colorScheme: theme, deviceScaleFactor: scale });
+            const page = await context.newPage();
+            page.on('pageerror', e => errors.push(e.message));
+            await page.goto(process.env.DEMO_URL || `http://127.0.0.1:${server.address().port}`);
+            await page.getByRole('button', { name: 'Switch mode', exact: true }).waitFor();
+            for (const selector of ['.client-project-row:first-child', '.client-chat-row--selected']) {
+                if (selector.includes('selected'))
+                    await page.getByRole('button', { name: 'Refine desktop navigation', exact: true }).first().click();
+                const row = page.locator(selector).first();
+                await row.hover();
+                const trigger = row.locator('button[aria-haspopup=menu]').first();
+                await trigger.click();
+                await page.getByRole('menu').waitFor();
+                await page.mouse.move(width - 40, 200);
+                await page.waitForTimeout(200);
+                const anchor = await trigger.boundingBox(), menu = await page.getByRole('menu').boundingBox();
+                assert.ok(anchor && anchor.width > 0, 'open menu keeps its row anchor visible');
+                assert.ok(menu.x > 52 && menu.y >= 8, 'row menu never falls back to window origin');
+                assert.ok(Math.abs(menu.x - anchor.x) < menu.width + 10, 'menu stays next to the trigger');
+                assert.ok(menu.x + menu.width <= width && menu.y + menu.height <= height, 'menu stays in viewport');
+                await page.screenshot({ path: new URL(`${selector.includes('selected') ? 'chat' : 'project'}-menu-${theme}-${width}.png`, output).pathname.replace(/^\/([A-Za-z]:)/, '$1') });
+                await page.keyboard.press('Escape');
+                await page.waitForTimeout(250);
+                assert.equal(await trigger.evaluate(el => document.activeElement === el), true);
+            }
+            const input = page.getByRole('textbox', { name: 'Message', exact: true });
+            await input.fill('Work with Codex\ngyq typography');
+            await input.press('Control+Home');
+            const geometry = await input.evaluate(el => { const s = getComputedStyle(el); return { radius: s.borderRadius, scrollLeft: el.scrollLeft, scrollTop: el.scrollTop, paddingLeft: parseFloat(s.paddingLeft), height: el.clientHeight, scrollHeight: el.scrollHeight }; });
+            assert.equal(geometry.radius, '0px');
+            assert.equal(geometry.scrollLeft, 0);
+            assert.equal(geometry.scrollTop, 0);
+            assert.ok(geometry.paddingLeft >= 2);
+            const bar = await page.locator('.client-composer-context').boundingBox(), form = await page.locator('.client-composer--work').boundingBox();
+            assert.ok(bar.y + bar.height - form.y >= 15, 'context background extends under the rounded composer');
+            await page.getByRole('button', { name: 'Choose project', exact: true }).click();
+            await page.getByRole('menuitem', { name: 'design-studio', exact: true }).click();
+            assert.equal(await input.inputValue(), 'Work with Codex\ngyq typography');
+            assert.match(await page.getByRole('button', { name: 'Choose project', exact: true }).innerText(), /design-studio/);
+            await page.getByRole('button', { name: 'Choose computer', exact: true }).click();
+            assert.equal(await page.getByRole('menuitem', { name: 'Set up remote', exact: true }).isEnabled(), false);
+            await page.getByRole('menuitem', { name: 'This computer', exact: true }).click();
+            assert.equal(await input.inputValue(), 'Work with Codex\ngyq typography');
+            await input.focus();
+            await page.screenshot({ path: new URL(`composer-${theme}-${width}.png`, output).pathname.replace(/^\/([A-Za-z]:)/, '$1') });
+            const link = page.getByRole('button', { name: 'New chat', exact: true }).first();
+            await link.hover();
+            await page.mouse.down();
+            assert.equal(await link.evaluate(el => getComputedStyle(el).transform), 'none');
+            await page.mouse.up();
+            await page.getByRole('button', { name: 'Switch mode', exact: true }).click();
+            await page.getByRole('menuitem', { name: 'ChatGPT', exact: true }).click();
+            await input.fill('Work with Codex\ngyq');
+            await input.press('Control+Home');
+            assert.equal(await input.evaluate(el => getComputedStyle(el).borderRadius), '0px');
+            await page.screenshot({ path: new URL(`chat-input-${theme}-${width}.png`, output).pathname.replace(/^\/([A-Za-z]:)/, '$1') });
+            results.push({ theme, width, height, scale, status: 'passed', geometry });
+            await context.close();
+        }
+    assert.deepEqual(errors, []);
+    await writeFile(new URL('report.json', output), JSON.stringify({ status: 'passed', results, errors }, null, 2));
+    console.log(`PASS ${results.length} cases: sidebar buttons, menu anchors, context selection, input clipping and draft retention.`);
+}
+finally {
+    await browser?.close();
+    await new Promise(r => server.close(r));
+}
