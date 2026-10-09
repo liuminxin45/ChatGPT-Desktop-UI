@@ -4,6 +4,8 @@ import { fileURLToPath } from 'node:url';
 
 const packageName = 'chatgpt-desktop-kit';
 const publicGit = /^git\+https:\/\/github\.com\/liuminxin45\/ChatGPT-Desktop-UI\.git#([a-f0-9]{40})$/;
+// npm's hosted Git resolver canonicalizes GitHub HTTPS specs to public SSH URLs in lockfiles.
+const lockedGit = /^git\+(?:https:\/\/github\.com\/|ssh:\/\/git@github\.com\/)liuminxin45\/ChatGPT-Desktop-UI\.git#([a-f0-9]{40})$/;
 const readJson = file => JSON.parse(fs.readFileSync(file, 'utf8'));
 
 /** Check only dependency metadata and declared forwarding files; no Host data is read. */
@@ -27,7 +29,7 @@ export function checkConsumer(root, options = {}) {
     const entries = Object.keys(lock.packages || {}).filter(key => key === packageKey || key.endsWith('/' + packageKey));
     expect(entries.length === 1, 'single-installed-implementation', 'package-lock.json');
     const entry = lock.packages?.[packageKey];
-    expect(entry?.resolved === dependencies[0], 'lock-source-agreement', 'package-lock.json');
+    expect(Boolean(revision) && lockedGit.exec(entry?.resolved || '')?.[1] === revision, 'lock-source-agreement', 'package-lock.json');
     const installedRoot = path.join(directory, packageKey);
     expect(!fs.lstatSync(installedRoot).isSymbolicLink(), 'installed-package-not-local-link', packageKey);
     const installed = readJson(path.join(installedRoot, 'package.json'));

@@ -27,6 +27,15 @@ test('a prepared, public, coordinated release has a single authority', () => {
   const { root } = fixture();
   assert.equal(checkConsumer(root, { revision, version: '0.3.1' }).status, 'passed');
 });
+test('accepts npm GitHub normalization but rejects a different remote with the same revision', () => {
+  const { root, write, lock } = fixture();
+  lock.packages['node_modules/chatgpt-desktop-kit'].resolved = source.replace('git+https://github.com/', 'git+ssh://git@github.com/');
+  write('package-lock.json', lock); write('node_modules/.package-lock.json', lock);
+  assert.equal(checkConsumer(root).status, 'passed');
+  lock.packages['node_modules/chatgpt-desktop-kit'].resolved = source.replace('liuminxin45', 'different-owner');
+  write('package-lock.json', lock); write('node_modules/.package-lock.json', lock);
+  assert.ok(checkConsumer(root).errors.some(error => error.code === 'lock-source-agreement'));
+});
 test('rejects local release sources and mismatched coordinated revisions', () => {
   const { root, write } = fixture();
   write('package.json', { dependencies: { 'chatgpt-desktop-kit': 'git+file:///workspace/ui#' + revision } });
