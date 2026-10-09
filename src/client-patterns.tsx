@@ -1,4 +1,4 @@
-import { type ReactNode, type ReactElement, useState, cloneElement } from "react";
+import { type ReactNode, type ReactElement, useState, useId, cloneElement } from "react";
 import * as Menu from "@radix-ui/react-dropdown-menu";
 import { CaretRight, Check } from "@phosphor-icons/react";
 import { InternalScrollArea } from "./controls";
@@ -136,18 +136,40 @@ export function SidebarSection({
   title,
   actions,
   children,
+  open = true,
+  onOpenChange,
+  actionId,
 }: {
   title: string;
   actions?: ReactNode;
   children: ReactNode;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  actionId?: string;
 }) {
+  const contentId = useId();
   return (
     <section className="client-sidebar-section">
       <header>
-        <h2>{title}</h2>
+        <h2>
+          {onOpenChange ? (
+            <button
+              type="button"
+              className="client-section-toggle"
+              aria-expanded={open}
+              aria-controls={contentId}
+              data-desktop-action={actionId}
+              onClick={() => onOpenChange(!open)}
+            >
+              {title}<CaretRight size={12} aria-hidden="true" />
+            </button>
+          ) : title}
+        </h2>
         <div>{actions}</div>
       </header>
-      {children}
+      {onOpenChange ? (
+        <div id={contentId} hidden={!open}>{children}</div>
+      ) : children}
     </section>
   );
 }

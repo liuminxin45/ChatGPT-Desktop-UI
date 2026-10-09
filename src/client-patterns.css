@@ -1,4 +1,11 @@
 /* Windows client reference profile, measured against the version in docs/CLIENT_ALIGNMENT.json. */
+.client-section-toggle{display:flex;align-items:center;gap:4px;height:24px;margin:-2px -4px;padding:2px 4px;border:0;border-radius:6px;background:transparent;color:inherit;font:inherit;text-align:left}
+.client-section-toggle:hover{color:var(--desktop-color-text)}
+.client-section-toggle:focus-visible{outline:2px solid var(--desktop-color-focus);outline-offset:1px}
+.client-section-toggle>svg{opacity:0;transform:rotate(90deg);transition:opacity var(--desktop-motion-fast),transform var(--desktop-motion-fast)}
+.client-section-toggle:is(:hover,:focus-visible)>svg,.client-section-toggle[aria-expanded=false]>svg{opacity:1}
+.client-section-toggle[aria-expanded=false]>svg{transform:rotate(0deg)}
+@media(prefers-reduced-motion:reduce){.client-section-toggle>svg{transition:none}}
 .desktop-client{height:100%;font-size:14px;line-height:20px;--desktop-size-client-sidebar:372px;--desktop-color-client-topbar:#e9e9ed;--desktop-color-client-input:#efefef;--desktop-color-client-pill:#eeeeee}
 .dark .desktop-client{--desktop-color-client-topbar:#1e2128;--desktop-color-client-input:#303030;--desktop-color-client-pill:#2c2c2c;--desktop-color-sidebar:#191b1d;--desktop-color-surface-overlay:#2c2c2c;--desktop-color-surface-hover:#363636}
 .desktop-client .kit-titlebar{height:44px;background:var(--desktop-color-client-topbar)}

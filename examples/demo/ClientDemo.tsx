@@ -16,6 +16,7 @@ import {
   MagnifyingGlass,
   Circle,
   CaretDown,
+  CaretRight,
   Gear,
   List,
   Files,
@@ -130,6 +131,8 @@ export function ClientDemo() {
     [mode, setMode] = useState("Codex"),
     [pins, setPins] = useState(["projects", "sites", "maps", "gpts", "review"]);
   const [moreChats, setMoreChats] = useState<string[]>([]);
+  const [projectsOpen, setProjectsOpen] = useState(true),
+    [recentsOpen, setRecentsOpen] = useState(true);
   const [projects, setProjects] = useState(initialProjects),
     [pinned, setPinned] = useState(pinnedChats),
     [expanded, setExpanded] = useState(["desktop", "studio", "notes"]);
@@ -858,6 +861,7 @@ export function ClientDemo() {
           </SidebarSection>
           <SidebarSection
             title="Projects"
+            open={projectsOpen} onOpenChange={setProjectsOpen} actionId="client.projects.toggle"
             actions={
               <>
                 <IconButton
@@ -887,15 +891,18 @@ export function ClientDemo() {
                   <button
                     type="button"
                     className="client-project-select"
-                    data-desktop-action="client.project.select"
+                    data-desktop-action="client.project.chats.toggle"
+                    aria-expanded={expanded.includes(item.id)}
+                    aria-controls={`client-project-chats-${item.id}`}
                     onClick={() => {
-                      newChat(item.id);
                       setExpanded((old) =>
-                        old.includes(item.id) ? old : [...old, item.id],
+                        old.includes(item.id) ? old.filter(id => id !== item.id) : [...old, item.id],
                       );
                     }}
                   >
-                    <Folder size={16} />
+                    <span className="client-project-glyph" aria-hidden="true">
+                      <Folder size={16} /><CaretRight size={14} />
+                    </span>
                     <span>{item.name}</span>
                   </button>
                   <div className="client-row-actions">
@@ -920,34 +927,32 @@ export function ClientDemo() {
                     </IconButton>
                   </div>
                 </div>
-                {expanded.includes(item.id) ? (
-                  <div className="client-project-chats">
-                    {item.chats
-                      .slice(0, moreChats.includes(item.id) ? undefined : 5)
-                      .map((item) => chatRow(item))}
-                    {item.chats.length > 5 ? (
-                      <Button
-                        className="client-show-more"
-                        actionId="client.project.chats.expand"
-                        onClick={() =>
-                          setMoreChats((old) =>
-                            old.includes(item.id)
-                              ? old.filter((id) => id !== item.id)
-                              : [...old, item.id],
-                          )
-                        }
-                      >
-                        {moreChats.includes(item.id)
-                          ? "Show less"
-                          : "Show more"}
-                      </Button>
-                    ) : null}
-                  </div>
-                ) : null}
+                <div className="client-project-chats" id={`client-project-chats-${item.id}`} hidden={!expanded.includes(item.id)}>
+                  {item.chats
+                    .slice(0, moreChats.includes(item.id) ? undefined : 5)
+                    .map((item) => chatRow(item))}
+                  {item.chats.length > 5 ? (
+                    <Button
+                      className="client-show-more"
+                      actionId="client.project.chats.expand"
+                      onClick={() =>
+                        setMoreChats((old) =>
+                          old.includes(item.id)
+                            ? old.filter((id) => id !== item.id)
+                            : [...old, item.id],
+                        )
+                      }
+                    >
+                      {moreChats.includes(item.id)
+                        ? "Show less"
+                        : "Show more"}
+                    </Button>
+                  ) : null}
+                </div>
               </div>
             ))}
           </SidebarSection>
-          <SidebarSection title="Recents">
+          <SidebarSection title="Recents" open={recentsOpen} onOpenChange={setRecentsOpen} actionId="client.recents.toggle">
             {chats.slice(3, 10).map((item) => chatRow(item))}
           </SidebarSection>
         </>

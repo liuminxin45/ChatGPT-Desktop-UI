@@ -3,9 +3,9 @@
   "platform": "Windows x64",
   "packageIdentity": "OpenAI.Codex",
   "packageVersion": "26.1002.7124.0",
-  "kitVersion": "0.3.2",
+  "kitVersion": "0.3.3",
   "observedOn": "2026-10-09",
-  "releaseTag": "chatgpt-desktop-26.1002.7124.0-ui-v0.3.2",
+  "releaseTag": "chatgpt-desktop-26.1002.7124.0-ui-v0.3.3",
   "versionEvidence": "Installed Windows package metadata",
   "referenceMethod": "User-supplied screenshots and read-only native UI inspection",
   "geometry": {
@@ -56,7 +56,10 @@
       "sidebar navigation",
       "general settings dialog"
     ],
-    "authority": "Supplementary shared chat UI; does not establish authenticated desktop geometry"
+    "authority": "Supplementary shared chat UI; does not establish authenticated desktop geometry",
+    "unobservedSurfaces": [
+      "Authenticated project and recent disclosures (signed-out reference has no project or chat lists); fold behavior follows the user specification and supplied desktop captures"
+    ]
   },
   "surfaceContract": "REPLICA_CONTRACT.md"
 }

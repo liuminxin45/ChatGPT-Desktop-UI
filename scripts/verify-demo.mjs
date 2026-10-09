@@ -451,8 +451,8 @@ try {
   await page.getByRole("button", { name: "Weekly", exact: true }).click();
   assert.equal(await page.locator(".client-token-heatmap button").count(), 364);
   checks.push("all settings destinations and standalone profile activity");
-  await page.getByRole('button',{name:'Projects',exact:true}).click();
-  await page.getByRole('heading',{name:'Projects',exact:true}).waitFor();
+  await page.getByRole('navigation',{name:'App navigation',exact:true}).getByRole('button',{name:'Projects',exact:true}).click();
+  await page.locator('.client-project-directory').getByRole('heading',{name:'Projects',exact:true}).waitFor();
   await page.getByRole('textbox',{name:'Search projects',exact:true}).fill('design');
   assert.equal(await page.locator('.client-project-directory-row').count(),1);
   await screenshot(page,'project-directory');

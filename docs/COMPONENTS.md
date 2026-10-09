@@ -24,4 +24,6 @@ This is the public reuse contract. Components own visual geometry, accessible in
 
 `ConversationMessage` owns the user bubble and response action spacing. Its content and action slots accept existing shared buttons/menus. It does not generate responses, vote on behalf of users or write clipboard data; those callbacks belong to the consumer.
 
+`SidebarSection` optionally accepts controlled `open`, `onOpenChange` and `actionId` props. Its heading becomes a keyboard-operable disclosure with `aria-expanded` and `aria-controls`; header actions stay independent. Collapsed children remain mounted and hidden. Hosts retain section and project disclosure state without changing the active conversation, selection or draft.
+
 When adding a reusable control, export it from `src/index.ts`, document its ownership here and in the design system, and verify its interaction states in the gallery or Demo. Repeated source in consumer repositories is a defect even if screenshots happen to match.
