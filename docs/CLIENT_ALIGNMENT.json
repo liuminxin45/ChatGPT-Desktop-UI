@@ -1,0 +1,14 @@
+{
+  "displayName": "ChatGPT",
+  "platform": "Windows x64",
+  "packageIdentity": "OpenAI.Codex",
+  "packageVersion": "26.1002.7124.0",
+  "kitVersion": "0.3.0",
+  "observedOn": "2026-10-09",
+  "releaseTag": "chatgpt-desktop-26.1002.7124.0-ui-v0.3.0",
+  "versionEvidence": "Installed Windows package metadata",
+  "referenceMethod": "User-supplied screenshots and read-only native UI inspection",
+  "geometry": { "titlebar": 44, "rail": 52, "railTile": 36, "sidebar": 372, "settingsColumn": 728, "settingsHeading": 28, "body": 14 },
+  "recreatedSurfaces": ["Codex project and chat sidebar", "activity sidebar", "project landing and composer", "chat thread and action menu", "navigation Explore and pin controls", "profile and Help menus", "project menu and create dialog", "chat search", "File, Edit and View menus", "new browser tab", "grouped Settings", "Usage overview and analytics", "standalone profile and token activity", "project directory", "Scheduled landing"],
+  "limits": ["Synthetic English projects, chats and identities replace private content", "Native filesystem, account, microphone, terminal and AI services are not connected", "Reference captures are not redistributed", "This tag identifies the observed version; it does not track future client releases automatically", "Browser layout and interaction fidelity is verified; exact proprietary glyph paths and native Windows rendering are not asserted"]
+}

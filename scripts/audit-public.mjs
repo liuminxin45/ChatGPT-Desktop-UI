@@ -5,7 +5,7 @@ const root=process.cwd();
 const git=args=>execFileSync('git',args,{cwd:root,encoding:'utf8',maxBuffer:16*1024*1024});
 const patterns=[
   ['private-path',/(?:[A-Z]:[\\/]Users[\\/](?!Public\b|Default\b)[^\\/\s]+|[A-Z]:[\\/]Leo[\\/])/i],
-  ['internal-domain',/https?:\/\/[^\s'"<>]*(?:tp-link|gerrit\.[^/\s]+|phabricator\.[^/\s]+)/i],
+  ['internal-domain',/https?:\/\/[^\s'"<>]*(?:tp-link|gerrit\.[^/\s]+|phabri[c]ator\.[^/\s]+)/i],
   ['credential',/(?:-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----|\b(?:sk-[A-Za-z0-9_-]{20,}|gh[pousr]_[A-Za-z0-9]{30,}))/],
 ];
 const findings=[];

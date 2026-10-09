@@ -5,6 +5,7 @@ Read `docs/DESIGN_SYSTEM.md` and `docs/DESIGN_GUIDANCE.md` before changing UI. R
 - Visual quality includes geometry and interaction states, not merely a gray palette. Use the synthetic gallery examples to compare actual pixels.
 - Preserve one source for controls and semantic tokens. Business layouts compose exported components; they do not restyle buttons, inputs, selects, menus or typography.
 - Workspaces fill available width/height. Settings use a 248px contextual sidebar and a maximum 720px reading/form column. Retain a 48px global rail only when the product needs global navigation.
+- An explicit client recreation uses the versioned `DesktopClientSurface` profile in `docs/CLIENT_ALIGNMENT.json` (44px title bar, 52px rail, 372px sidebar and 728px Settings column). Match inspected client structures rather than inventing product screens; portable defaults and embedded Tool contracts stay independent.
 - Avoid duplicate module titles, redundant subtitles, nested card outlines and competing primary actions. Ordinary sections use color and spacing.
 - Idle buttons/selects are transparent; inputs use subtle filled surfaces. Hover, focus, checked, selected, disabled and error states must remain distinguishable in both themes.
 - UI uses system fonts and 400 weight by default. Settings titles, category group headings, section titles and field labels use the semantic 600 emphasis weight, as requested on 2026-10-09. Body copy and controls stay regular; native Tool Hosts retain their enforced 400 policy.

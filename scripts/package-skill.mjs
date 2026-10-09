@@ -1,10 +1,20 @@
-import { cp, mkdir, readFile, writeFile, access, unlink } from 'node:fs/promises';
+import { cp, mkdir, readFile, writeFile, access, unlink, rm, lstat } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const skill = path.join(root,'skills/chatgpt-desktop-ui');
 await access(path.join(root,'dist/index.js'));
+async function cleanGenerated(base) {
+  for(const name of ['assets','references']) {
+    const target=path.resolve(base,name);
+    if(path.dirname(target)!==path.resolve(base)) throw Error('Invalid generated Skill directory.');
+    const previous=await lstat(target).catch(error=>{if(error.code!=='ENOENT') throw error;return null;});
+    if(previous?.isSymbolicLink()) throw Error('Generated Skill directory must not be redirected.');
+    await rm(target,{recursive:true,force:true});
+  }
+}
+await cleanGenerated(skill);
 await mkdir(path.join(skill,'references'),{recursive:true});
 // Retire previously generated official crops from this managed package only.
 async function removeRetiredReferences(directory) {
@@ -15,6 +25,8 @@ async function removeRetiredReferences(directory) {
 }
 await removeRetiredReferences(skill);
 await cp(path.join(root,'docs/VALIDATION.json'),path.join(skill,'references/VALIDATION.json'));
+await cp(path.join(root,'docs/CLIENT_ALIGNMENT.json'),path.join(skill,'references/CLIENT_ALIGNMENT.json'));
+await cp(path.join(root,'docs/demo'),path.join(skill,'references/demo'),{recursive:true});
 for(const [from,to] of [['DESIGN_SYSTEM.md','design-system.md'],['DESIGN_GUIDANCE.md','design-guidance.md'],['INTEGRATION.md','integration.md'],['VISUAL_REFERENCES.md','visual-references.md']]) await cp(path.join(root,'docs',from),path.join(skill,'references',to));
 await cp(path.join(root,'docs/gallery'),path.join(skill,'references/gallery'),{recursive:true});
 await cp(path.join(root,'dist'),path.join(skill,'assets/ui/dist'),{recursive:true});
@@ -28,7 +40,7 @@ delete pkg.devDependencies; delete pkg.scripts; delete pkg.engines;
 await writeFile(path.join(skill,'assets/ui/package.json'),JSON.stringify(pkg,null,2)+'\n');
 await cp(path.join(root,'examples/gallery/App.tsx'),path.join(skill,'assets/starter/App.tsx'));
 let starter = await readFile(path.join(skill,'assets/starter/App.tsx'),'utf8');
-starter = starter.replace("from '../../src'","from '@phd/chatgpt-desktop-kit'").replace("import '../../src/styles.css'","import '@phd/chatgpt-desktop-kit/styles.css'");
+starter = starter.replace("from '../../src'","from 'chatgpt-desktop-kit'").replace("import '../../src/styles.css'","import 'chatgpt-desktop-kit/styles.css'");
 await writeFile(path.join(skill,'assets/starter/App.tsx'),starter);
 await cp(path.join(root,'examples/gallery/gallery.css'),path.join(skill,'assets/starter/gallery.css'));
 await cp(path.join(root,'examples/gallery/index.html'),path.join(skill,'assets/starter/index.html'));
@@ -46,7 +58,7 @@ if(process.argv.includes('--install')) {
     try { const previous=JSON.parse(await readFile(path.join(destination,'origin.json'),'utf8')); if(previous.managedBy!=='chatgpt-desktop-kit') throw Error('UNRELATED_SKILL'); }
     catch(error) { throw Error(`Refusing to overwrite an unrelated Skill: ${destination}`,{cause:error}); }
   }
-  await removeRetiredReferences(destination);
+  await cleanGenerated(destination);
   await cp(skill,destination,{recursive:true});
   console.log(`Installed Skill: ${destination}`);
 }

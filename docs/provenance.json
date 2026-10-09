@@ -1,42 +1,42 @@
 {
-  "sourceRepository": "phabricator-dashboard",
+  "sourceRepository": "Originating application (identity omitted)",
   "commit": "d52fbb43a78e431ea5e0c53797678a998549d56e",
   "inputs": [
     {
-      "source": "packages/phd-design-tokens/tokens.css",
+      "sourceComponent": "Semantic token stylesheet",
       "target": "src/tokens.css",
       "sha256": "f1d83fc955261c2676199b16fb0dbfc65856e9fdce30c5616ff6b894d00337ed"
     },
     {
-      "source": "packages/phd-ui-primitives/primitives.css",
+      "sourceComponent": "Primitive stylesheet",
       "target": "src/primitives.css",
       "sha256": "5c8259d3338ddc12ca920b1ce9d983d65437f952268441f494595722ecb7ded9"
     },
     {
-      "source": "packages/phd-ui/src/tab-navigation.ts",
+      "sourceComponent": "Tab navigation helper",
       "target": "src/tab-navigation.ts",
       "sha256": "f7d314ec45e975bbfd2319bfb620881015d223bf0a7449420d8ab244f6bb40c4"
     },
     {
-      "source": "packages/phd-ui/src/fixed-virtual-list.tsx",
+      "sourceComponent": "Fixed virtual list",
       "target": "src/fixed-virtual-list.tsx",
       "sha256": "38b7d8e7fec4e8fd000bd74871ae6793c835aaa6cdf349c6c137ef31650c664c"
     },
     {
-      "source": "packages/phd-ui/styles.css",
+      "sourceComponent": "Control stylesheet",
       "target": "src/controls.css",
       "sha256": "518e9a9311c7bc364a7c005c4a8cfe1bc8f3cbfcdab2237a0496e69588d1e674"
     },
     {
-      "source": "packages/phd-ui/standalone.css",
+      "sourceComponent": "Standalone base stylesheet",
       "target": "src/base.css",
       "sha256": "f03bc9b81d7d25b104c1c45fa95f287cf4279494a8e8914d30e7acb8728f8c75"
     },
     {
-      "source": "packages/phd-ui/src/components.tsx",
+      "sourceComponent": "React controls",
       "target": "src/controls.tsx",
       "sha256": "34b5444a2c0e3d0c9a51a4bcd13af8a334b9a21916d1b92512740cf8a3ae24a5"
     }
   ],
-  "notes": "Initial extraction. Localized defaults adapted to portable UIStringsProvider. No business data or application persistence services copied."
+  "notes": "Initial extraction fingerprints refer to the original files, before namespace migration. Application identity and private source paths are omitted. Localized defaults use UIStringsProvider. No business data or application persistence services copied."
 }

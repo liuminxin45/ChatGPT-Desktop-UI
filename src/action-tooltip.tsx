@@ -28,9 +28,9 @@ export function ActionTooltip({ label, children, side = 'bottom', disabled = fal
     <Primitive.Provider delayDuration={300} skipDelayDuration={100}>
       <Primitive.Root open={visible && open} onOpenChange={setOpen} disableHoverableContent>
         <Primitive.Trigger asChild>
-          <span className="phd-action-tooltip" tabIndex={disabled ? 0 : undefined}>{children}</span>
+          <span className="desktop-action-tooltip" tabIndex={disabled ? 0 : undefined}>{children}</span>
         </Primitive.Trigger>
-        <Primitive.Portal><Primitive.Content side={side} sideOffset={5} collisionPadding={8} className="phd-tooltip">{label}</Primitive.Content></Primitive.Portal>
+        <Primitive.Portal><Primitive.Content side={side} sideOffset={5} collisionPadding={8} className="desktop-tooltip">{label}</Primitive.Content></Primitive.Portal>
       </Primitive.Root>
     </Primitive.Provider>
   </TooltipBoundary.Provider>;

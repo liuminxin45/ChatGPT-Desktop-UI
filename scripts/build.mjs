@@ -1,11 +1,16 @@
 import { build } from 'esbuild';
-import { mkdir, copyFile, readFile, readdir, writeFile } from 'node:fs/promises';
+import { mkdir, copyFile, readFile, readdir, writeFile, rm, lstat } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 if (process.version !== 'v24.19.0') throw Error('Use the repository Node 24.19.0 runtime.');
-await mkdir(path.join(root, 'dist'), { recursive: true });
+const output = path.resolve(root, 'dist');
+if (path.dirname(output) !== root || path.basename(output) !== 'dist') throw Error('Invalid library output directory.');
+const previous = await lstat(output).catch(error => { if(error.code !== 'ENOENT') throw error; return null; });
+if(previous?.isSymbolicLink()) throw Error('Library output must not be redirected.');
+await rm(output, {recursive:true, force:true});
+await mkdir(output, { recursive: true });
 const types = spawnSync(process.execPath, ['node_modules/typescript/bin/tsc', '--emitDeclarationOnly'], { cwd: root, stdio: 'inherit' });
 if (types.status) process.exit(types.status);
 const compat = (await readdir(path.join(root,'src/compat'))).filter(file=>/\.tsx?$/.test(file)).map(file=>'src/compat/'+file);

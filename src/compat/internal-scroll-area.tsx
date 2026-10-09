@@ -3,7 +3,7 @@ import { forwardRef, type HTMLAttributes } from "react";
 import { cn } from './utils';
 
 export const internalScrollAreaClassName =
-  "phd-internal-scroll overscroll-contain [scrollbar-gutter:stable]";
+  "desktop-internal-scroll overscroll-contain [scrollbar-gutter:stable]";
 
 export const InternalScrollArea = forwardRef<
   HTMLDivElement,

@@ -33,7 +33,7 @@ export interface VirtualListHandle {
 }
 /**
  * Standard internal long-list surface. It owns viewport scrolling, row
- * virtualization, dynamic measurement, overscan, and the PHD scrollbar skin.
+ * virtualization, dynamic measurement, overscan, and the shared scrollbar skin.
  */
 export function VirtualList<T>({
   items,

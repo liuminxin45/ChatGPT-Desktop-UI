@@ -10,7 +10,7 @@ import { chromium } from 'playwright';
 if (process.version !== 'v24.19.0') throw Error('Node 24.19.0 required');
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const temp = await fs.mkdtemp(path.join(os.tmpdir(), 'desktop-kit-icon-actions-'));
-const evidence = process.env.PHD_UI_EVIDENCE_DIR || path.join(root, 'tests/output/icon-actions');
+const evidence = process.env.DESKTOP_UI_EVIDENCE_DIR || path.join(root, 'tests/output/icon-actions');
 await fs.mkdir(evidence, {recursive:true});
 await build({absWorkingDir:root,entryPoints:['examples/icon-actions.tsx'],outdir:temp,bundle:true,platform:'browser',jsx:'automatic',define:{'process.env.NODE_ENV':'"production"'}});
 const server = http.createServer(async(req,res)=>{
@@ -30,10 +30,10 @@ try {
     for (const name of ['Confirm and submit', 'AI review', '3 replies', 'Tasks', 'Forward']) {
       const button = page.getByRole('button', {name, exact:true});
       assert.equal(await button.textContent(), name);
-      assert.equal(await button.evaluate(e=>e.classList.contains('phd-button--icon')), false);
+      assert.equal(await button.evaluate(e=>e.classList.contains('desktop-button--icon')), false);
       assert.equal(await button.locator('svg').count(), 1);
     }
-    assert.equal(await page.locator('[data-phd-action="fixture.reply"] .phd-action-badge').count(), 0);
+    assert.equal(await page.locator('[data-desktop-action="fixture.reply"] .desktop-action-badge').count(), 0);
     for(const name of ['Show fields','Create new node','Save']) {
       const button=page.getByRole('button',{name,exact:true});
       assert.equal(await button.evaluate(e=>e.textContent.includes(e.getAttribute('aria-label'))),false);
@@ -41,7 +41,7 @@ try {
       await button.hover(); await page.getByRole('tooltip',{name,exact:true}).waitFor();
     }
     await page.getByRole('button',{name:'Create new node',exact:true}).click();
-    assert.equal(await page.locator('[data-phd-action="fixture.node.create"] .phd-action-badge').textContent(),'3');
+    assert.equal(await page.locator('[data-desktop-action="fixture.node.create"] .desktop-action-badge').textContent(),'3');
     assert.equal(await page.getByRole('status').textContent(),'1');
     await page.getByRole('button',{name:'Save',exact:true}).click();
     const disabled=page.getByRole('button',{name:'Saving',exact:true}); assert.equal(await disabled.isDisabled(),true);
@@ -56,8 +56,8 @@ try {
     assert.equal(await item.textContent(), 'Delete');
     assert.ok((await item.boundingBox()).width > 100);
     await page.getByRole('menuitem',{name:'Manage account',exact:true}).focus();
-    assert.match(await page.locator('[data-phd-action="fixture.menu.settings"]').textContent(), /Settings.*Ctrl\+,/);
-    await page.keyboard.press('d'); await page.waitForFunction(()=>document.activeElement?.getAttribute('data-phd-action')==='fixture.menu.delete');
+    assert.match(await page.locator('[data-desktop-action="fixture.menu.settings"]').textContent(), /Settings.*Ctrl\+,/);
+    await page.keyboard.press('d'); await page.waitForFunction(()=>document.activeElement?.getAttribute('data-desktop-action')==='fixture.menu.delete');
     await page.keyboard.press('Enter');
     assert.equal(await page.getByRole('status').textContent(),'2');
     await page.getByRole('button',{name:'Surface action',exact:true}).hover(); await page.getByRole('tooltip',{name:'Surface action',exact:true}).waitFor();

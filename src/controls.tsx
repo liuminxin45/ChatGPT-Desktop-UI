@@ -1,4 +1,4 @@
-import { t as phdT, useTranslation, currentLocale } from './strings';
+import { t as translate, useTranslation, currentLocale } from './strings';
 import { createContext, useContext, forwardRef, useEffect, useId, useLayoutEffect, useMemo, useRef, useState, type ButtonHTMLAttributes, type CSSProperties , type HTMLAttributes, type InputHTMLAttributes, type ReactNode, type TextareaHTMLAttributes } from 'react';
 import * as SelectPrimitive from '@radix-ui/react-select';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
@@ -19,11 +19,11 @@ function classes(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(' ');
 }
 
-export const internalScrollAreaClassName = 'phd-internal-scroll';
+export const internalScrollAreaClassName = 'desktop-internal-scroll';
 
 export const InternalScrollArea = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   function InternalScrollArea({ className, ...props }, ref) {
-  const phdT = useTranslation();
+  const translate = useTranslation();
     return <div ref={ref} className={classes(internalScrollAreaClassName, className)} {...props} />;
   },
 );
@@ -45,7 +45,7 @@ export interface VirtualListProps<T> {
 
 export function VirtualList<T>({ items, getItemKey, renderItem, estimateSize, ariaLabel, resetKey, overscan = 8, className, contentClassName, itemClassName, role = 'list', style }: VirtualListProps<T>) {
   'use no memo';
-  const phdT = useTranslation();
+  const translate = useTranslation();
   const scrollRef = useRef<HTMLDivElement>(null);
   const virtualizer = useVirtualizer({
     count: items.length,
@@ -69,16 +69,16 @@ export function VirtualList<T>({ items, getItemKey, renderItem, estimateSize, ar
       virtualizer.scrollToOffset(Math.max(0, offset + (index >= 0 ? detail.offset : 0)));
       detail.handled = true;
     };
-    element?.addEventListener('phd:restore-list-anchor', restore);
-    return () => element?.removeEventListener('phd:restore-list-anchor', restore);
+    element?.addEventListener('desktop:restore-list-anchor', restore);
+    return () => element?.removeEventListener('desktop:restore-list-anchor', restore);
   }, [items, getItemKey, virtualizer]);
   return (
-    <InternalScrollArea ref={scrollRef} role={role} aria-label={ariaLabel} className={classes('phd-virtual-list', className)} style={style}>
-      <div className={classes('phd-virtual-list__content', contentClassName)} style={{ height: virtualizer.getTotalSize() }}>
+    <InternalScrollArea ref={scrollRef} role={role} aria-label={ariaLabel} className={classes('desktop-virtual-list', className)} style={style}>
+      <div className={classes('desktop-virtual-list__content', contentClassName)} style={{ height: virtualizer.getTotalSize() }}>
         {virtualizer.getVirtualItems().map((row) => {
           const item = items[row.index];
           if (!item) return null;
-          return <div key={row.key} ref={virtualizer.measureElement} data-index={row.index} data-phd-item-key={String(getItemKey(item, row.index))} role={role === 'listbox' ? 'option' : 'listitem'} className={classes('phd-virtual-list__item', typeof itemClassName === 'function' ? itemClassName(item, row.index) : itemClassName)} style={{ transform: `translateY(${row.start}px)` }}>{renderItem(item, row.index)}</div>;
+          return <div key={row.key} ref={virtualizer.measureElement} data-index={row.index} data-desktop-item-key={String(getItemKey(item, row.index))} role={role === 'listbox' ? 'option' : 'listitem'} className={classes('desktop-virtual-list__item', typeof itemClassName === 'function' ? itemClassName(item, row.index) : itemClassName)} style={{ transform: `translateY(${row.start}px)` }}>{renderItem(item, row.index)}</div>;
         })}
       </div>
     </InternalScrollArea>
@@ -101,38 +101,38 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   function Button({ className, variant = 'secondary', size = 'md', type = 'button', actionId, confirmOnEnter, title, icon, iconOnly = false, badge, children, ...props }, ref) {
-  const phdT = useTranslation();
+  const translate = useTranslation();
     const label = (icon ? actionLabel(children) : '') || props['aria-label'] || title || '';
-    const node = <button ref={ref} type={type} data-phd-action={actionId} data-phd-enter-confirm={confirmOnEnter || undefined} className={classes('phd-button', `phd-button--${variant}`, `phd-button--${size}`, className, !!icon && iconOnly && 'phd-button--icon')} {...props} aria-label={props['aria-label'] || (iconOnly ? label : title)}>{icon ? <span className="phd-action-glyph" aria-hidden="true">{icon}{iconOnly && badge ? <span className="phd-action-badge">{badge}</span> : null}</span> : null}{icon && iconOnly ? null : children}</button>;
+    const node = <button ref={ref} type={type} data-desktop-action={actionId} data-desktop-enter-confirm={confirmOnEnter || undefined} className={classes('desktop-button', `desktop-button--${variant}`, `desktop-button--${size}`, className, !!icon && iconOnly && 'desktop-button--icon')} {...props} aria-label={props['aria-label'] || (iconOnly ? label : title)}>{icon ? <span className="desktop-action-glyph" aria-hidden="true">{icon}{iconOnly && badge ? <span className="desktop-action-badge">{badge}</span> : null}</span> : null}{icon && iconOnly ? null : children}</button>;
     return <ActionTooltip label={iconOnly || title || props['aria-label'] ? label : ''} disabled={!!props.disabled}>{node}</ActionTooltip>;
   },
 );
 
 export function IconButton({ className, type = 'button', actionId, title, ...props }: ButtonHTMLAttributes<HTMLButtonElement> & { actionId?: string }) {
-  const phdT = useTranslation();
-  return <ActionTooltip label={props['aria-label'] || title || ''} disabled={!!props.disabled}><button type={type} data-phd-action={actionId} className={classes('phd-icon-control', className)} {...props} aria-label={props['aria-label'] || title} /></ActionTooltip>;
+  const translate = useTranslation();
+  return <ActionTooltip label={props['aria-label'] || title || ''} disabled={!!props.disabled}><button type={type} data-desktop-action={actionId} className={classes('desktop-icon-control', className)} {...props} aria-label={props['aria-label'] || title} /></ActionTooltip>;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>>(
   function Input({ className, ...props }, ref) {
-  const phdT = useTranslation();
-    return <input ref={ref} className={classes('phd-input', className)} {...props} />;
+  const translate = useTranslation();
+    return <input ref={ref} className={classes('desktop-input', className)} {...props} />;
   },
 );
 
 export function Checkbox({ className, type: _type, ...props }: InputHTMLAttributes<HTMLInputElement>) {
-  const phdT = useTranslation();
-  return <input type="checkbox" className={classes('phd-checkbox', className)} {...props} />;
+  const translate = useTranslation();
+  return <input type="checkbox" className={classes('desktop-checkbox', className)} {...props} />;
 }
 
 export function Switch({ className, checked = false, type = 'button', actionId, children, ...props }: ButtonHTMLAttributes<HTMLButtonElement> & { checked?: boolean; actionId?: string }) {
-  const phdT = useTranslation();
+  const translate = useTranslation();
   return <button
     type={type}
     role="switch"
     aria-checked={checked}
-    data-phd-action={actionId}
-    className={classes('phd-switch', checked && 'phd-switch--checked', className)}
+    data-desktop-action={actionId}
+    className={classes('desktop-switch', checked && 'desktop-switch--checked', className)}
     {...props}
   ><span aria-hidden="true" />{children}</button>;
 }
@@ -148,7 +148,7 @@ export interface EditableComboboxProps extends Omit<InputHTMLAttributes<HTMLInpu
 }
 
 export function EditableCombobox({ actionId, value, options, onValueChange, onCommit, emptyMessage, className, onFocus, onBlur, onKeyDown, ...props }: EditableComboboxProps) {
-  const phdT = useTranslation();
+  const translate = useTranslation();
   const listId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
@@ -171,10 +171,10 @@ export function EditableCombobox({ actionId, value, options, onValueChange, onCo
     onCommit?.(next, option);
     setOpen(false);
   };
-  return <div ref={rootRef} className="phd-editable-combobox">
+  return <div ref={rootRef} className="desktop-editable-combobox">
     <Input
       {...props}
-      data-phd-action={actionId ? `${actionId}.change` : undefined}
+      data-desktop-action={actionId ? `${actionId}.change` : undefined}
       className={className}
       value={value}
       role="combobox"
@@ -193,16 +193,15 @@ export function EditableCombobox({ actionId, value, options, onValueChange, onCo
         onKeyDown?.(event);
       }}
     />
-    {open ? <div id={listId} className="phd-editable-combobox__content" role="listbox">
-      {visibleOptions.length ? visibleOptions.map((option, index) => <button data-phd-action={actionId ? `${actionId}.select` : undefined} id={`${listId}-${index}`} key={option.value} type="button" role="option" aria-selected={option.value === value} data-highlighted={index === activeIndex ? '' : undefined} onPointerDown={(event) => event.preventDefault()} onMouseEnter={() => setActiveIndex(index)} onClick={() => commit(option)}><span>{option.label ?? option.value}</span><small>{option.value}</small></button>) : <div className="phd-editable-combobox__empty">{emptyMessage ?? phdT("没有匹配项")}</div>}
+    {open ? <div id={listId} className="desktop-editable-combobox__content" role="listbox">
+      {visibleOptions.length ? visibleOptions.map((option, index) => <button data-desktop-action={actionId ? `${actionId}.select` : undefined} id={`${listId}-${index}`} key={option.value} type="button" role="option" aria-selected={option.value === value} data-highlighted={index === activeIndex ? '' : undefined} onPointerDown={(event) => event.preventDefault()} onMouseEnter={() => setActiveIndex(index)} onClick={() => commit(option)}><span>{option.label ?? option.value}</span><small>{option.value}</small></button>) : <div className="desktop-editable-combobox__empty">{emptyMessage ?? translate("没有匹配项")}</div>}
     </div> : null}
   </div>;
 }
 
-export function Textarea({ className, ...props }: TextareaHTMLAttributes<HTMLTextAreaElement>) {
-  const phdT = useTranslation();
-  return <textarea className={classes('phd-textarea', className)} {...props} />;
-}
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaHTMLAttributes<HTMLTextAreaElement>>(function Textarea({ className, ...props }, ref) {
+  return <textarea ref={ref} className={classes('desktop-textarea', className)} {...props} />;
+});
 
 export interface SelectOption { value: string; label: ReactNode; disabled?: boolean }
 export interface SelectProps {
@@ -226,10 +225,10 @@ export interface SelectProps {
   'aria-labelledby'?: string;
 }
 
-const EMPTY_SELECT_VALUE = '__phd_empty_select_value__';
+const EMPTY_SELECT_VALUE = '__desktop_empty_select_value__';
 
 export function Select({ actionId, featureId, surfaceId, toolId, className, contentClassName, options, value, defaultValue, onValueChange, placeholder, disabled, name, required, id, title, 'aria-label': ariaLabel, 'aria-labelledby': ariaLabelledBy }: SelectProps) {
-  const phdT = useTranslation();
+  const translate = useTranslation();
   const visible = useContext(ToolVisibilityContext);
   const [open, setOpen] = useState(false);
   useEffect(() => { if (!visible) setOpen(false); }, [visible]);
@@ -246,22 +245,22 @@ export function Select({ actionId, featureId, surfaceId, toolId, className, cont
       name={name}
       required={required}
     >
-      <SelectPrimitive.Trigger data-phd-action={actionId ? `${actionId}.open` : undefined} id={id} aria-label={ariaLabel || title} aria-labelledby={ariaLabelledBy} className={classes('phd-select', className)}>
+      <SelectPrimitive.Trigger data-desktop-action={actionId ? `${actionId}.open` : undefined} id={id} aria-label={ariaLabel || title} aria-labelledby={ariaLabelledBy} className={classes('desktop-select', className)}>
         <SelectPrimitive.Value placeholder={placeholder} />
-        <SelectPrimitive.Icon className="phd-select__icon"><ChevronDownIcon size={15} aria-hidden="true" /></SelectPrimitive.Icon>
+        <SelectPrimitive.Icon className="desktop-select__icon"><ChevronDownIcon size={15} aria-hidden="true" /></SelectPrimitive.Icon>
       </SelectPrimitive.Trigger>
       <SelectPrimitive.Portal>
-        <SelectPrimitive.Content data-phd-feature={featureId} data-phd-surface={surfaceId} data-phd-tool-surface={toolId} onCloseAutoFocus={(event) => { if (!visible) event.preventDefault(); }} position="popper" sideOffset={4} className={classes('phd-select-content', contentClassName)}>
-          <SelectPrimitive.ScrollUpButton className="phd-select-scroll"><ChevronUpIcon size={15} aria-hidden="true" /></SelectPrimitive.ScrollUpButton>
-          <SelectPrimitive.Viewport className="phd-select-viewport">
+        <SelectPrimitive.Content data-desktop-feature={featureId} data-desktop-surface={surfaceId} data-desktop-tool-surface={toolId} onCloseAutoFocus={(event) => { if (!visible) event.preventDefault(); }} position="popper" sideOffset={4} className={classes('desktop-select-content', contentClassName)}>
+          <SelectPrimitive.ScrollUpButton className="desktop-select-scroll"><ChevronUpIcon size={15} aria-hidden="true" /></SelectPrimitive.ScrollUpButton>
+          <SelectPrimitive.Viewport className="desktop-select-viewport">
             {options.map((option) => (
-              <SelectPrimitive.Item data-phd-action={actionId} key={option.value} value={encode(option.value)!} disabled={option.disabled} className="phd-select-item">
+              <SelectPrimitive.Item data-desktop-action={actionId} key={option.value} value={encode(option.value)!} disabled={option.disabled} className="desktop-select-item">
                 <SelectPrimitive.ItemText>{option.label}</SelectPrimitive.ItemText>
-                <SelectPrimitive.ItemIndicator className="phd-select-item__indicator"><CheckIcon size={14} aria-hidden="true" /></SelectPrimitive.ItemIndicator>
+                <SelectPrimitive.ItemIndicator className="desktop-select-item__indicator"><CheckIcon size={14} aria-hidden="true" /></SelectPrimitive.ItemIndicator>
               </SelectPrimitive.Item>
             ))}
           </SelectPrimitive.Viewport>
-          <SelectPrimitive.ScrollDownButton className="phd-select-scroll"><ChevronDownIcon size={15} aria-hidden="true" /></SelectPrimitive.ScrollDownButton>
+          <SelectPrimitive.ScrollDownButton className="desktop-select-scroll"><ChevronDownIcon size={15} aria-hidden="true" /></SelectPrimitive.ScrollDownButton>
         </SelectPrimitive.Content>
       </SelectPrimitive.Portal>
     </SelectPrimitive.Root>
@@ -277,18 +276,18 @@ export interface TabsItem {
 }
 
 export function Tabs({ value, items, onValueChange, ariaLabel, actionId = 'tabs' }: { value: string; items: TabsItem[]; onValueChange(value: string): void; ariaLabel?: string; actionId?: string }) {
-  const phdT = useTranslation();
+  const translate = useTranslation();
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const selectedIndex = items.findIndex((item) => item.value === value && !item.disabled);
   const activeIndex = selectedIndex >= 0 ? selectedIndex : items.findIndex((item) => !item.disabled);
-  return <div className="phd-tabs" role="tablist" aria-label={ariaLabel ?? phdT("页面导航")} aria-orientation="horizontal">{items.map((item, index) => <button
+  return <div className="desktop-tabs" role="tablist" aria-label={ariaLabel ?? translate("页面导航")} aria-orientation="horizontal">{items.map((item, index) => <button
     key={item.value}
     ref={(element) => { tabRefs.current[index] = element; }}
     id={item.tabId}
     type="button"
     role="tab"
     tabIndex={index === activeIndex ? 0 : -1}
-    data-phd-action={`${actionId}.${item.value}`}
+    data-desktop-action={`${actionId}.${item.value}`}
     aria-selected={item.value === value}
     aria-controls={item.panelId}
     disabled={item.disabled}
@@ -305,42 +304,42 @@ export function Tabs({ value, items, onValueChange, ariaLabel, actionId = 'tabs'
 
 /** Compact first row for independent Tools: page navigation on the left, contextual actions on the right. */
 export function ToolPageBar({ navigation, status, actions, className, ariaLabel }: { navigation?: ReactNode; status?: ReactNode; actions?: ReactNode; className?: string; ariaLabel?: string }) {
-  const phdT = useTranslation();
-  return <div className={classes('phd-tool-page-bar', className)} role="group" aria-label={ariaLabel ?? phdT("页面导航与操作")}>
-    {navigation ? <div className="phd-tool-page-bar__navigation">{navigation}</div> : <div className="phd-tool-page-bar__navigation"/>}
-    {status ? <div className="phd-tool-page-bar__status" role="status">{status}</div> : null}
-    {actions ? <div className="phd-tool-page-bar__actions">{actions}</div> : null}
+  const translate = useTranslation();
+  return <div className={classes('desktop-tool-page-bar', className)} role="group" aria-label={ariaLabel ?? translate("页面导航与操作")}>
+    {navigation ? <div className="desktop-tool-page-bar__navigation">{navigation}</div> : <div className="desktop-tool-page-bar__navigation"/>}
+    {status ? <div className="desktop-tool-page-bar__status" role="status">{status}</div> : null}
+    {actions ? <div className="desktop-tool-page-bar__actions">{actions}</div> : null}
   </div>;
 }
 
 /** Host and Native Tools share the same full-width workspace and compact toolbar. */
 export function WorkbenchPage({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={classes('phd-workbench', className)} {...props} />;
+  return <div className={classes('desktop-workbench', className)} {...props} />;
 }
 
 export const PageBar = ToolPageBar;
 
 export function PageToolbar({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={classes('phd-page-toolbar', className)} {...props} />;
+  return <div className={classes('desktop-page-toolbar', className)} {...props} />;
 }
 
 export function MenuButton({ label, actionId, featureId, surfaceId, toolId, items }: { label?: string; actionId: string; featureId?: string; surfaceId?: string; toolId?: string; items: Array<{ label: ReactNode; actionId: string; disabled?: boolean; onSelect(): void }> }) {
-  const phdT = useTranslation();
+  const translate = useTranslation();
   const visible = useContext(ToolVisibilityContext);
   const [open, setOpen] = useState(false);
   useEffect(() => { if (!visible) setOpen(false); }, [visible]);
   return <DropdownMenuPrimitive.Root open={open && visible} onOpenChange={setOpen}>
     <DropdownMenuPrimitive.Trigger asChild onPointerDown={event => event.preventDefault()} onKeyDown={event => {
       if (['Enter', ' ', 'ArrowDown'].includes(event.key)) { event.preventDefault(); event.currentTarget.click(); }
-    }} onClick={() => setOpen(value => !value)}><Button size="sm" variant="ghost" actionId={actionId}>{label ?? phdT("更多")}<ChevronDownIcon size={14} aria-hidden="true"/></Button></DropdownMenuPrimitive.Trigger>
-    <DropdownMenuPrimitive.Portal><DropdownMenuPrimitive.Content className="phd-menu" align="end" sideOffset={5} data-phd-feature={featureId} data-phd-surface={surfaceId} data-phd-tool-surface={toolId} onCloseAutoFocus={event => { if (!visible) event.preventDefault(); }}>
-      {items.map(item => <DropdownMenuPrimitive.Item key={item.actionId} className="phd-menu-item" data-phd-action={item.actionId} disabled={item.disabled} onSelect={item.onSelect}>{item.label}</DropdownMenuPrimitive.Item>)}
+    }} onClick={() => setOpen(value => !value)}><Button size="sm" variant="ghost" actionId={actionId}>{label ?? translate("更多")}<ChevronDownIcon size={14} aria-hidden="true"/></Button></DropdownMenuPrimitive.Trigger>
+    <DropdownMenuPrimitive.Portal><DropdownMenuPrimitive.Content className="desktop-menu" align="end" sideOffset={5} data-desktop-feature={featureId} data-desktop-surface={surfaceId} data-desktop-tool-surface={toolId} onCloseAutoFocus={event => { if (!visible) event.preventDefault(); }}>
+      {items.map(item => <DropdownMenuPrimitive.Item key={item.actionId} className="desktop-menu-item" data-desktop-action={item.actionId} disabled={item.disabled} onSelect={item.onSelect}>{item.label}</DropdownMenuPrimitive.Item>)}
     </DropdownMenuPrimitive.Content></DropdownMenuPrimitive.Portal>
   </DropdownMenuPrimitive.Root>;
 }
 
 export function Dialog({ actionId, className, open, title, description, children, footer, onClose }: { actionId?: string; className?: string; open: boolean; title: ReactNode; description?: ReactNode; children?: ReactNode; footer?: ReactNode; onClose(): void }) {
-  const phdT = useTranslation();
+  const translate = useTranslation();
   const visible = useContext(ToolVisibilityContext);
   const titleId = useId();
   const dialogRef = useRef<HTMLElement>(null);
@@ -365,51 +364,51 @@ export function Dialog({ actionId, className, open, title, description, children
     return () => { window.removeEventListener('keydown', onKeyDown); if (previouslyFocused && !previouslyFocused.closest('[aria-hidden="true"]') && (document.activeElement === document.body || dialog?.contains(document.activeElement))) previouslyFocused.focus(); };
   }, [open, visible]);
   if (!open) return null;
-  return <div className="phd-dialog-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}><section ref={dialogRef} className={classes('phd-dialog', className)} role="dialog" aria-modal="true" aria-labelledby={titleId} tabIndex={-1}><header><div><h2 id={titleId}>{title}</h2>{description ? <p>{description}</p> : null}</div><IconButton actionId={actionId ? `${actionId}.close` : undefined} aria-label={phdT("关闭")}  onClick={onClose}><CloseIcon size={15} aria-hidden="true" /></IconButton></header><InternalScrollArea className="phd-dialog__body">{children}</InternalScrollArea>{footer ? <footer>{footer}</footer> : null}</section></div>;
+  return <div className="desktop-dialog-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}><section ref={dialogRef} className={classes('desktop-dialog', className)} role="dialog" aria-modal="true" aria-labelledby={titleId} tabIndex={-1}><header><div><h2 id={titleId}>{title}</h2>{description ? <p>{description}</p> : null}</div><IconButton actionId={actionId ? `${actionId}.close` : undefined} aria-label={translate("关闭")}  onClick={onClose}><CloseIcon size={15} aria-hidden="true" /></IconButton></header><InternalScrollArea className="desktop-dialog__body">{children}</InternalScrollArea>{footer ? <footer>{footer}</footer> : null}</section></div>;
 }
 
 export function Surface({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
-  const phdT = useTranslation();
-  return <div className={classes('phd-ui-surface', className)} {...props} />;
+  const translate = useTranslation();
+  return <div className={classes('desktop-ui-surface', className)} {...props} />;
 }
 
 export function PageHeader({ title, description, actions }: { title: ReactNode; description?: ReactNode; actions?: ReactNode }) {
-  const phdT = useTranslation();
+  const translate = useTranslation();
   return (
-    <header className="phd-page-header">
-      <div className="phd-page-header__copy">
+    <header className="desktop-page-header">
+      <div className="desktop-page-header__copy">
         <h1>{title}</h1>
         {description ? <p>{description}</p> : null}
       </div>
-      {actions ? <div className="phd-page-header__actions">{actions}</div> : null}
+      {actions ? <div className="desktop-page-header__actions">{actions}</div> : null}
     </header>
   );
 }
 
 export function EmptyState({ title, description, action }: { title: ReactNode; description?: ReactNode; action?: ReactNode }) {
-  const phdT = useTranslation();
-  return <div className="phd-state"><strong>{title}</strong>{description ? <p>{description}</p> : null}{action}</div>;
+  const translate = useTranslation();
+  return <div className="desktop-state"><strong>{title}</strong>{description ? <p>{description}</p> : null}{action}</div>;
 }
 
 export function ErrorState({ title, description, action }: { title?: ReactNode; description: ReactNode; action?: ReactNode }) {
-  const phdT = useTranslation();
-  return <div className="phd-state phd-state--error" role="alert"><strong>{title ?? phdT("出现问题")}</strong><p>{description}</p>{action}</div>;
+  const translate = useTranslation();
+  return <div className="desktop-state desktop-state--error" role="alert"><strong>{title ?? translate("出现问题")}</strong><p>{description}</p>{action}</div>;
 }
 
 export function LoadingSkeleton({ className }: { className?: string }) {
-  const phdT = useTranslation();
-  return <span className={classes('phd-skeleton', className)} aria-hidden="true" />;
+  const translate = useTranslation();
+  return <span className={classes('desktop-skeleton', className)} aria-hidden="true" />;
 }
 
 export function Markdown({ children, components }: { children: string; components?: Components }) {
-  const phdT = useTranslation();
+  const translate = useTranslation();
   return <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>{children}</ReactMarkdown>;
 }
 
 /** Reusable floating surfaces; positioning and application state belong to the Host. */
 export const FloatingLauncher = forwardRef<HTMLButtonElement, ButtonProps>(function FloatingLauncher({ className, ...props }, ref) {
-  return <Button ref={ref} variant="ghost" className={classes('phd-floating-launcher', className)} {...props} />;
+  return <Button ref={ref} variant="ghost" className={classes('desktop-floating-launcher', className)} {...props} />;
 });
 export const FloatingPanel = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(function FloatingPanel({ className, ...props }, ref) {
-  return <div ref={ref} className={classes('phd-floating-panel', className)} {...props} />;
+  return <div ref={ref} className={classes('desktop-floating-panel', className)} {...props} />;
 });

@@ -58,8 +58,8 @@ export function FixedVirtualList<T>({
       const top = Math.max(0, index >= 0 ? index * rowHeight + detail.offset : detail.top);
       element.scrollTop = top; setScrollTop(element.scrollTop); detail.handled = true;
     };
-    element?.addEventListener('phd:restore-list-anchor', restore);
-    return () => element?.removeEventListener('phd:restore-list-anchor', restore);
+    element?.addEventListener('desktop:restore-list-anchor', restore);
+    return () => element?.removeEventListener('desktop:restore-list-anchor', restore);
   }, [items, getItemKey, rowHeight]);
 
   const handleScroll = (event: UIEvent<HTMLDivElement>) => setScrollTop(event.currentTarget.scrollTop);
@@ -79,7 +79,7 @@ export function FixedVirtualList<T>({
           return (
             <div
               key={getItemKey(item, index)}
-              data-phd-item-key={String(getItemKey(item, index))}
+              data-desktop-item-key={String(getItemKey(item, index))}
               role="listitem"
               style={{ height: rowHeight, left: 0, position: "absolute", right: 0, top: index * rowHeight }}
             >

@@ -1,6 +1,6 @@
 "use client";
 
-import { t as phdT, useTranslation, currentLocale } from '../strings';
+import { t as translate, useTranslation, currentLocale } from '../strings';
 import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
@@ -67,7 +67,7 @@ export const AppDialogContent = React.forwardRef<
   onInteractOutside,
   ...props
 }, ref) {
-  const phdT = useTranslation();
+  const translate = useTranslation();
   const childNodes = React.Children.toArray(children);
   const hasExplicitBody = childNodes.some(
     (child) => React.isValidElement(child) && child.type === AppDialogBody,
@@ -107,8 +107,8 @@ export const AppDialogContent = React.forwardRef<
             <Button
               variant="ghost"
               size="icon"
-              className="absolute right-3 top-3 z-10 h-8 w-8 rounded-md text-[var(--phd-color-text-muted)] hover:bg-[var(--phd-color-surface-muted)] hover:text-[var(--phd-color-text)]"
-              aria-label={phdT("关闭弹窗")}
+              className="absolute right-3 top-3 z-10 h-8 w-8 rounded-md text-[var(--desktop-color-text-muted)] hover:bg-[var(--desktop-color-surface-muted)] hover:text-[var(--desktop-color-text)]"
+              aria-label={translate("关闭弹窗")}
               actionId={closeActionId}
               disabled={closeDisabled}
             >
@@ -122,7 +122,7 @@ export const AppDialogContent = React.forwardRef<
 });
 
 export function AppDialogHeader({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  const phdT = useTranslation();
+  const translate = useTranslation();
   return <div className={cn(appDialogHeaderClassName, className)} {...props} />;
 }
 
@@ -130,38 +130,38 @@ export const AppDialogTitle = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
 >(function AppDialogTitle({ className, ...props }, ref) {
-  const phdT = useTranslation();
-  return <DialogPrimitive.Title ref={ref} className={cn("text-base font-normal leading-6 text-[var(--phd-color-text)]", className)} {...props} />;
+  const translate = useTranslation();
+  return <DialogPrimitive.Title ref={ref} className={cn("text-base font-normal leading-6 text-[var(--desktop-color-text)]", className)} {...props} />;
 });
 
 export const AppDialogDescription = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Description>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
 >(function AppDialogDescription({ className, ...props }, ref) {
-  const phdT = useTranslation();
-  return <DialogPrimitive.Description ref={ref} className={cn("mt-1 text-sm leading-5 text-[var(--phd-color-text-muted)]", className)} {...props} />;
+  const translate = useTranslation();
+  return <DialogPrimitive.Description ref={ref} className={cn("mt-1 text-sm leading-5 text-[var(--desktop-color-text-muted)]", className)} {...props} />;
 });
 
 export const AppDialogBody = React.forwardRef<
   HTMLDivElement,
   React.ComponentPropsWithoutRef<typeof InternalScrollArea>
 >(function AppDialogBody({ className, ...props }, ref) {
-  const phdT = useTranslation();
+  const translate = useTranslation();
   return <InternalScrollArea ref={ref} className={cn(appDialogBodyClassName, className)} {...props} />;
 });
 
 export function AppDialogFooter({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  const phdT = useTranslation();
+  const translate = useTranslation();
   return <div className={cn(appDialogFooterClassName, className)} {...props} />;
 }
 
 export function AppDialogAction(props: React.ComponentPropsWithoutRef<typeof Button>) {
-  const phdT = useTranslation();
+  const translate = useTranslation();
   return <Button {...props} />;
 }
 
 export function AppDialogCancel(props: React.ComponentPropsWithoutRef<typeof Button>) {
-  const phdT = useTranslation();
+  const translate = useTranslation();
   return <Button variant="ghost" {...props} />;
 }
 
@@ -174,7 +174,7 @@ export const AppAlertDialogContent = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content> & { size?: AppDialogSize }
 >(function AppAlertDialogContent({ className, size = "sm", ...props }, ref) {
-  const phdT = useTranslation();
+  const translate = useTranslation();
   const childNodes = React.Children.toArray(props.children);
   const arrangedChildren = (
     <>
@@ -208,12 +208,12 @@ export const AppAlertDialogContent = React.forwardRef<
 });
 
 export function AppAlertDialogHeader({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  const phdT = useTranslation();
+  const translate = useTranslation();
   return <div className={cn(appDialogHeaderClassName, "flex-col", className)} {...props} />;
 }
 
 export function AppAlertDialogFooter({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  const phdT = useTranslation();
+  const translate = useTranslation();
   return <div className={cn(appDialogFooterClassName, className)} {...props} />;
 }
 
@@ -221,16 +221,16 @@ export const AppAlertDialogTitle = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Title>
 >(function AppAlertDialogTitle({ className, ...props }, ref) {
-  const phdT = useTranslation();
-  return <AlertDialogPrimitive.Title ref={ref} className={cn("text-base font-normal leading-6 text-[var(--phd-color-text)]", className)} {...props} />;
+  const translate = useTranslation();
+  return <AlertDialogPrimitive.Title ref={ref} className={cn("text-base font-normal leading-6 text-[var(--desktop-color-text)]", className)} {...props} />;
 });
 
 export const AppAlertDialogDescription = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Description>,
   React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Description>
 >(function AppAlertDialogDescription({ className, ...props }, ref) {
-  const phdT = useTranslation();
-  return <AlertDialogPrimitive.Description ref={ref} className={cn("mt-1 text-sm leading-5 text-[var(--phd-color-text-muted)]", className)} {...props} />;
+  const translate = useTranslation();
+  return <AlertDialogPrimitive.Description ref={ref} className={cn("mt-1 text-sm leading-5 text-[var(--desktop-color-text-muted)]", className)} {...props} />;
 });
 
 export type AppConfirmDialogProps = {
@@ -252,15 +252,15 @@ export function AppConfirmDialog({
   onOpenChange,
   title,
   description,
-  confirmLabel = phdT("确定"),
-  cancelLabel = phdT("取消"),
+  confirmLabel = translate("确定"),
+  cancelLabel = translate("取消"),
   destructive = false,
   busy = false,
   confirmActionId = "dialog.confirm",
   cancelActionId = "dialog.cancel",
   onConfirm,
 }: AppConfirmDialogProps) {
-  const phdT = useTranslation();
+  const translate = useTranslation();
   const [submitting, setSubmitting] = React.useState(false);
   const [submitError, setSubmitError] = React.useState("");
   const pending = busy || submitting;
@@ -288,7 +288,7 @@ export function AppConfirmDialog({
     } catch (error) {
       setSubmitError(error instanceof Error && error.message
         ? error.message
-        : phdT("操作失败，请重试"));
+        : translate("操作失败，请重试"));
     } finally {
       setSubmitting(false);
     }
@@ -301,18 +301,18 @@ export function AppConfirmDialog({
         <AlertDialogPrimitive.Content className={cn(appDialogContentClassName, SIZE_CLASS.sm)}>
           <div className={appDialogHeaderClassName}>
             <div className="min-w-0">
-              <AlertDialogPrimitive.Title className="text-base font-normal leading-6 text-[var(--phd-color-text)]">
+              <AlertDialogPrimitive.Title className="text-base font-normal leading-6 text-[var(--desktop-color-text)]">
                 {title}
               </AlertDialogPrimitive.Title>
               {description && (
-                <AlertDialogPrimitive.Description className="mt-1 text-sm leading-5 text-[var(--phd-color-text-muted)]">
+                <AlertDialogPrimitive.Description className="mt-1 text-sm leading-5 text-[var(--desktop-color-text-muted)]">
                   {description}
                 </AlertDialogPrimitive.Description>
               )}
             </div>
           </div>
           {submitError ? (
-            <div className="border-b border-[var(--phd-color-border)] px-5 py-3 text-sm text-[var(--phd-color-danger)]" role="alert">
+            <div className="border-b border-[var(--desktop-color-border)] px-5 py-3 text-sm text-[var(--desktop-color-danger)]" role="alert">
               {submitError}
             </div>
           ) : null}

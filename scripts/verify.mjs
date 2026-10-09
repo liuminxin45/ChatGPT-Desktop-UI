@@ -38,7 +38,7 @@ try {
   await page.goto(`http://127.0.0.1:${server.address().port}`);
   // Virtualized long lists remain bounded and reach the last row.
   const list = page.getByRole('list',{name:'Work items'}); assert.ok(await list.getByRole('listitem').count() < 100);
-  await list.evaluate(element=>element.scrollTop=element.scrollHeight); await page.locator('[data-phd-item-key="99"]').waitFor();
+  await list.evaluate(element=>element.scrollTop=element.scrollHeight); await page.locator('[data-desktop-item-key="99"]').waitFor();
   // Open/floating controls are keyboard reachable and collision bounded.
   await page.getByRole('button',{name:'Workspace',exact:true}).hover(); await page.getByRole('tooltip',{name:'Workspace',exact:true}).waitFor(); await page.screenshot({path:path.join(root,'docs/gallery/rail-tooltip.png')});
   await page.getByRole('button',{name:'Example account',exact:true}).click(); await page.getByRole('menu').waitFor();

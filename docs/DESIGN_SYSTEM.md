@@ -1,26 +1,32 @@
 # Desktop design system
 
-This specification combines measured screenshot patterns with the originating PHD implementation. Values below are implementation targets, not a claim that every ChatGPT version has the same pixels. Use the synthetic gallery examples and inspect the target viewport before tuning.
+This specification combines measured screenshot patterns with an existing desktop implementation. Values below are implementation targets, not a claim that every ChatGPT version has the same pixels. Use the synthetic gallery examples and inspect the target viewport before tuning.
 
 ## Color is the boundary
 
 | Role | Light | Dark | Token |
 | --- | --- | --- | --- |
-| Window shell | #f0f3f9 | #202123 | `--phd-color-shell` |
-| Contextual sidebar | #fafbfd | #1c1d1e | `--phd-color-sidebar` |
-| Main canvas | #ffffff | #181818 | `--phd-color-background` |
-| Grouped settings | #fafbfd | #232323 | `--phd-color-surface` |
-| Input | #ededed | #2a2a2a | `--phd-color-surface-muted` |
-| Composer | #ffffff | #2a2a2a | `--phd-color-composer` |
-| Floating menu | #ffffff | #2b2b2b | `--phd-color-surface-overlay` |
-| Hover | #f0f1f3 | #333333 | `--phd-color-surface-hover` |
-| Selected rail | #e4e7ec | #303134 | `--phd-color-navigation-selected` |
+| Window shell | #f0f3f9 | #202123 | `--desktop-color-shell` |
+| Contextual sidebar | #fafbfd | #1c1d1e | `--desktop-color-sidebar` |
+| Main canvas | #ffffff | #181818 | `--desktop-color-background` |
+| Grouped settings | #fafbfd | #232323 | `--desktop-color-surface` |
+| Input | #ededed | #2a2a2a | `--desktop-color-surface-muted` |
+| Composer | #ffffff | #2a2a2a | `--desktop-color-composer` |
+| Floating menu | #ffffff | #2b2b2b | `--desktop-color-surface-overlay` |
+| Hover | #f0f1f3 | #333333 | `--desktop-color-surface-hover` |
+| Selected rail | #e4e7ec | #303134 | `--desktop-color-navigation-selected` |
 
 Use tokens in application CSS, not the literals from this table. Main canvas, sidebar, groups and floats have distinct surfaces. Neutral grays carry hierarchy; blue carries unread/send and non-text control focus states; danger remains available for business errors. Do not recolor errors blue merely to match unread dots.
 
 Idle buttons and dropdown triggers have no decorative border or fill. The dropdown is text with a small down chevron. Hover introduces a compact filled target; the opened menu has a rounded surface and subtle shadow. Inputs have a light surface rather than a surrounding box. Text entry uses neutral inset focus or a subtly filled composer, without a blue outer ring. Preserve visible keyboard focus, table boundaries, actual drag targets and error state boundaries. “Boundary-free” does not mean invisible states.
 
 ## Geometry
+
+### Versioned client profile
+
+The Demo recreates Windows ChatGPT **26.1002.7124.0**, inspected on 2026-10-09. `DesktopClientSurface` opts into the measured 44px title bar, 52px rail, 36px tile, 372px sidebar, 728px Settings column and 28/36px bold Settings heading. Its body is 14/20px; compact setting labels are 13/20px bold and descriptions 12/16px regular. Sidebar chat rows are 31px. Settings groups use a 16px rounded surface, internal dividers and 52px between groups. Menus use a 16px radius, 29px rows and 16px submenu arrows; the native application menu uses a smaller corner radius.
+
+These values belong to the versioned client profile, not embedded Tools. Portable defaults below remain available for existing products. A browser recreation must follow the observed client structure; do not invent dashboard cards, explanatory badges or alternate workflows. Keep private content synthetic. Record an observed package version and an annotated tag for every alignment release; never infer it from a publication date. See [CLIENT_ALIGNMENT.json](CLIENT_ALIGNMENT.json).
 
 | Element | Target |
 | --- | --- |
@@ -41,7 +47,7 @@ Remove the selected rail's left stripe. Tooltips sit immediately beside the rail
 
 ## Typography
 
-Use `system-ui, sans-serif`, normal weight 400 for body copy and controls. Settings titles, category group headings, section headings and field labels use `--phd-font-weight-emphasis` (600), following the supplied 2026-10-09 references. Keep emphasis selective. `font-synthesis:none` prevents accidental synthetic bold. Native Tool Hosts continue to enforce their own regular-weight contract.
+Use `system-ui, sans-serif`, normal weight 400 for body copy and controls. Settings titles, category group headings, section headings and field labels use `--desktop-font-weight-emphasis` (600), following the supplied 2026-10-09 references. Keep emphasis selective. `font-synthesis:none` prevents accidental synthetic bold. Native Tool Hosts continue to enforce their own regular-weight contract.
 
 | Role | Size / line height |
 | --- | --- |
@@ -54,7 +60,7 @@ Use `system-ui, sans-serif`, normal weight 400 for body copy and controls. Setti
 | Page title | 18 / 24px |
 | Settings heading/emphasis | 20 / 28px |
 
-PHD's special wordmark and chat-sender weights are local exceptions, not generalized ChatGPT measurements. Preserve explicit typography requested by the target product. Do not enlarge every heading, uppercase field captions, add a display font or make all selected labels bold.
+Host-specific wordmark and chat-sender weights are local exceptions, not generalized ChatGPT measurements. Preserve explicit typography requested by the target product. Do not enlarge every heading, uppercase field captions, add a display font or make all selected labels bold.
 
 Text controls use a 20px line box with descender clearance; never clip a selected value to `line-height:1`. Center toolbar navigation, values and glyphs vertically, including at fractional scaling. Hover fills and dropdown chevrons transition with the shared motion tokens. Reduced-motion preferences disable decorative transitions.
 
@@ -78,6 +84,9 @@ Text controls use a 20px line box with descender clearance; never clip a selecte
 | --- | --- |
 | Theme/document root | `DesktopRoot`, `useDesktopTheme` |
 | Desktop shell | `DesktopShell`, `TitleBar`, `NavigationRail`, `AvatarMenu` |
+| Versioned client layouts | `DesktopClientSurface`, `ClientSidebar`, `SidebarSection` |
+| Nested action menus | `DesktopMenu`, `DesktopMenuItem` |
+| Grouped client settings | `SettingsGroup`, `SettingsField`, `SettingsDisclosure` |
 | Name-only tooltip | `Tooltip` |
 | Button/icon action | `Button`, `IconButton` |
 | Inputs | `Input`, `Textarea`, `Checkbox`, `Switch`, `EditableCombobox` |

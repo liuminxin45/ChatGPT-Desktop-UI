@@ -1,4 +1,4 @@
-import { t as phdT, useTranslation, useLocale } from '../strings';
+import { t as translate, useTranslation, useLocale } from '../strings';
 import * as React from "react";
 import { Calendar as CalendarIcon, X } from "lucide-react";
 import { format } from "date-fns";
@@ -28,7 +28,7 @@ export function DatePicker({
   className = "",
   triggerClassName = "",
 }: DatePickerProps) {
-  const phdT = useTranslation();
+  const translate = useTranslation();
   const locale = useLocale();
   const [isOpen, setIsOpen] = React.useState(false);
 
@@ -49,7 +49,7 @@ export function DatePicker({
             <span className="truncate">
               {value
                 ? format(value, "PP", { locale: locale === 'zh-CN' ? zhCN : enUS })
-                : placeholder || phdT('选择日期')}
+                : placeholder || translate('选择日期')}
             </span>
           </Button>
         </PopoverTrigger>
@@ -75,7 +75,7 @@ export function DatePicker({
                 }}
               >
                 <X className="mr-1 h-3 w-3" />
-                {phdT("清除日期 ")}</Button>
+                {translate("清除日期 ")}</Button>
             </div>
           )}
         </PopoverContent>
@@ -89,7 +89,7 @@ export function DatePicker({
             e.stopPropagation();
             onChange(undefined);
           }}
-          aria-label={phdT("清除日期")}
+          aria-label={translate("清除日期")}
         >
           <X className="h-3.5 w-3.5" />
         </Button>

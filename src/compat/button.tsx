@@ -6,19 +6,19 @@ import { cn } from './utils';
 import { ActionTooltip, actionLabel } from '../action-tooltip';
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap phd-button rounded-md text-sm font-normal transition-all-custom focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 active:scale-[0.98]",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap desktop-button rounded-md text-sm font-normal transition-all-custom focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 active:scale-[0.98]",
   {
     variants: {
       variant: {
-        default: "phd-button--secondary",
-        primary: "phd-button--primary",
+        default: "desktop-button--secondary",
+        primary: "desktop-button--primary",
         destructive:
-          "phd-button--danger",
+          "desktop-button--danger",
         outline:
-          "phd-button--secondary",
+          "desktop-button--secondary",
         secondary:
-          "phd-button--secondary",
-        ghost: "phd-button--ghost",
+          "desktop-button--secondary",
+        ghost: "desktop-button--ghost",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
@@ -60,14 +60,14 @@ const Button = React.forwardRef<
     <Comp
       ref={ref}
       data-slot="button"
-      data-phd-action={actionId}
-      data-phd-enter-confirm={confirmOnEnter || undefined}
-      className={cn(buttonVariants({ variant, size, className }), icon && compact && 'phd-button--icon')}
+      data-desktop-action={actionId}
+      data-desktop-enter-confirm={confirmOnEnter || undefined}
+      className={cn(buttonVariants({ variant, size, className }), icon && compact && 'desktop-button--icon')}
       title={undefined}
       type={asChild ? type : type ?? "button"}
       {...restProps}
       aria-label={restProps['aria-label'] || (compact ? label : title)}
-    >{icon ? <><span className="phd-action-glyph" aria-hidden="true">{icon}{compact && badge ? <span className="phd-action-badge">{badge}</span> : null}</span>{compact ? null : children}</> : children}</Comp>
+    >{icon ? <><span className="desktop-action-glyph" aria-hidden="true">{icon}{compact && badge ? <span className="desktop-action-badge">{badge}</span> : null}</span>{compact ? null : children}</> : children}</Comp>
   );
 
   return <ActionTooltip label={compact || title || restProps['aria-label'] ? label : ''} disabled={!!restProps.disabled}>{buttonNode}</ActionTooltip>;

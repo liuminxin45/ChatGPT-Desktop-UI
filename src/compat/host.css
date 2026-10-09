@@ -1,77 +1,77 @@
 
 
 /*
- * PHD typography contract: the product uses one calm, regular font weight.
+ * Host typography contract: the product uses one calm, regular font weight.
  * The wordmark and explicitly marked chat sender names use bold treatment.
  * Keep this override global so rich text, third-party primitives, and legacy
  * utility classes cannot reintroduce competing emphasis.
  */
-html body *:not([data-phd-wordmark]) {
-  font-weight: var(--phd-font-weight-regular) !important;
+html body *:not([data-desktop-wordmark]) {
+  font-weight: var(--desktop-font-weight-regular) !important;
 }
 
 /* Sender emphasis replaces initial avatars without changing message typography. */
-html body [data-phd-chat-sender] {
+html body [data-desktop-chat-sender] {
   font-weight: 600 !important;
 }
 
 /* Match the native recovery page throughout every application surface. */
 html body,
 html body * {
-  font-family: var(--phd-font-sans) !important;
+  font-family: var(--desktop-font-sans) !important;
 }
 
-[data-phd-wordmark] {
-  font-weight: var(--phd-font-weight-wordmark) !important;
+[data-desktop-wordmark] {
+  font-weight: var(--desktop-font-weight-wordmark) !important;
 }
 
-[data-phd-unread-sender="true"],
-[data-phd-unread-subject="true"] {
-  color: var(--phd-color-info) !important;
+[data-desktop-unread-sender="true"],
+[data-desktop-unread-subject="true"] {
+  color: var(--desktop-color-info) !important;
 }
 
 
 :root {
   /* Typography */
-  --font-size: var(--phd-font-size-root); /* Slightly smaller for density */
+  --font-size: var(--desktop-font-size-root); /* Slightly smaller for density */
 
   /* Premium utilitarian baseline */
-  --background: var(--phd-hsl-surface);
-  --foreground: var(--phd-hsl-text);
+  --background: var(--desktop-hsl-surface);
+  --foreground: var(--desktop-hsl-text);
 
   /* Cards & Surfaces */
-  --card: var(--phd-hsl-surface);
-  --card-foreground: var(--phd-hsl-text);
-  --popover: var(--phd-hsl-surface);
-  --popover-foreground: var(--phd-hsl-text);
+  --card: var(--desktop-hsl-surface);
+  --card-foreground: var(--desktop-hsl-text);
+  --popover: var(--desktop-hsl-surface);
+  --popover-foreground: var(--desktop-hsl-text);
 
-  --primary: var(--phd-hsl-text);
-  --primary-foreground: var(--phd-hsl-surface);
+  --primary: var(--desktop-hsl-text);
+  --primary-foreground: var(--desktop-hsl-surface);
 
   /* Secondary - Neutral/Subtle */
-  --secondary: var(--phd-hsl-surface-muted);
-  --secondary-foreground: var(--phd-hsl-text);
+  --secondary: var(--desktop-hsl-surface-muted);
+  --secondary-foreground: var(--desktop-hsl-text);
 
   /* Muted - Backgrounds */
-  --muted: var(--phd-hsl-surface-muted);
-  --muted-foreground: var(--phd-hsl-text-muted);
+  --muted: var(--desktop-hsl-surface-muted);
+  --muted-foreground: var(--desktop-hsl-text-muted);
 
   /* Accent - Interactive States */
-  --accent: var(--phd-hsl-surface-muted);
-  --accent-foreground: var(--phd-hsl-text);
+  --accent: var(--desktop-hsl-surface-muted);
+  --accent-foreground: var(--desktop-hsl-text);
 
   /* Destructive - Errors */
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 210 40% 98%;
 
   /* Borders & Inputs */
-  --border: var(--phd-hsl-border);
-  --input: var(--phd-hsl-border-strong);
-  --input-background: var(--phd-hsl-surface);
-  --ring: var(--phd-hsl-focus);
+  --border: var(--desktop-hsl-border);
+  --input: var(--desktop-hsl-border-strong);
+  --input-background: var(--desktop-hsl-surface);
+  --ring: var(--desktop-hsl-focus);
 
   /* Switch */
-  --switch-background: var(--phd-hsl-border-strong);
+  --switch-background: var(--desktop-hsl-border-strong);
 
   /* Charts - Vibrant Palette */
   --chart-1: 221 83% 53%;   /* Blue */
@@ -81,46 +81,46 @@ html body * {
   --chart-5: 27 87% 67%;    /* Orange */
 
   /* Sidebar */
-  --sidebar: var(--phd-hsl-surface);
-  --sidebar-foreground: var(--phd-hsl-text);
-  --sidebar-primary: var(--phd-hsl-text);
-  --sidebar-primary-foreground: var(--phd-hsl-surface);
-  --sidebar-accent: var(--phd-hsl-surface-muted);
-  --sidebar-accent-foreground: var(--phd-hsl-text);
-  --sidebar-border: var(--phd-hsl-border);
-  --sidebar-ring: var(--phd-hsl-focus);
+  --sidebar: var(--desktop-hsl-surface);
+  --sidebar-foreground: var(--desktop-hsl-text);
+  --sidebar-primary: var(--desktop-hsl-text);
+  --sidebar-primary-foreground: var(--desktop-hsl-surface);
+  --sidebar-accent: var(--desktop-hsl-surface-muted);
+  --sidebar-accent-foreground: var(--desktop-hsl-text);
+  --sidebar-border: var(--desktop-hsl-border);
+  --sidebar-ring: var(--desktop-hsl-focus);
 
   /* Radius */
-  --radius: var(--phd-radius-surface);
+  --radius: var(--desktop-radius-surface);
 }
 
 .dark {
-  --background: var(--phd-hsl-surface);
-  --foreground: var(--phd-hsl-text);
-  --card: var(--phd-hsl-surface);
-  --card-foreground: var(--phd-hsl-text);
-  --popover: var(--phd-hsl-surface);
-  --popover-foreground: var(--phd-hsl-text);
-  --primary: var(--phd-hsl-text);
-  --primary-foreground: var(--phd-hsl-surface);
-  --secondary: var(--phd-hsl-surface-muted);
-  --secondary-foreground: var(--phd-hsl-text);
-  --muted: var(--phd-hsl-surface-muted);
-  --muted-foreground: var(--phd-hsl-text-muted);
-  --accent: var(--phd-hsl-surface-muted);
-  --accent-foreground: var(--phd-hsl-text);
-  --border: var(--phd-hsl-border);
-  --input: var(--phd-hsl-border-strong);
-  --input-background: var(--phd-hsl-surface);
-  --ring: var(--phd-hsl-focus);
-  --sidebar: var(--phd-hsl-surface);
-  --sidebar-foreground: var(--phd-hsl-text);
-  --sidebar-primary: var(--phd-hsl-text);
-  --sidebar-primary-foreground: var(--phd-hsl-surface);
-  --sidebar-accent: var(--phd-hsl-surface-muted);
-  --sidebar-accent-foreground: var(--phd-hsl-text);
-  --sidebar-border: var(--phd-hsl-border);
-  --sidebar-ring: var(--phd-hsl-focus);
+  --background: var(--desktop-hsl-surface);
+  --foreground: var(--desktop-hsl-text);
+  --card: var(--desktop-hsl-surface);
+  --card-foreground: var(--desktop-hsl-text);
+  --popover: var(--desktop-hsl-surface);
+  --popover-foreground: var(--desktop-hsl-text);
+  --primary: var(--desktop-hsl-text);
+  --primary-foreground: var(--desktop-hsl-surface);
+  --secondary: var(--desktop-hsl-surface-muted);
+  --secondary-foreground: var(--desktop-hsl-text);
+  --muted: var(--desktop-hsl-surface-muted);
+  --muted-foreground: var(--desktop-hsl-text-muted);
+  --accent: var(--desktop-hsl-surface-muted);
+  --accent-foreground: var(--desktop-hsl-text);
+  --border: var(--desktop-hsl-border);
+  --input: var(--desktop-hsl-border-strong);
+  --input-background: var(--desktop-hsl-surface);
+  --ring: var(--desktop-hsl-focus);
+  --sidebar: var(--desktop-hsl-surface);
+  --sidebar-foreground: var(--desktop-hsl-text);
+  --sidebar-primary: var(--desktop-hsl-text);
+  --sidebar-primary-foreground: var(--desktop-hsl-surface);
+  --sidebar-accent: var(--desktop-hsl-surface-muted);
+  --sidebar-accent-foreground: var(--desktop-hsl-text);
+  --sidebar-border: var(--desktop-hsl-border);
+  --sidebar-ring: var(--desktop-hsl-focus);
 }
 
 @layer base {
@@ -130,9 +130,9 @@ html body * {
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: var(--phd-font-sans);
+    font-family: var(--desktop-font-sans);
     font-feature-settings: "rlig" 1, "calt" 1;
-    line-height: var(--phd-line-height-body);
+    line-height: var(--desktop-line-height-body);
   }
 
   html.electron-app,
@@ -237,7 +237,7 @@ html body * {
     font-size: 13px;
     line-height: 1.5;
     letter-spacing: 0.01em;
-    font-family: var(--phd-font-sans);
+    font-family: var(--desktop-font-sans);
     max-width: 76ch;
     text-wrap: pretty;
   }
@@ -267,65 +267,65 @@ html body * {
 }
 
 @layer components {
-  .phd-internal-scroll {
+  .desktop-internal-scroll {
     scrollbar-width: thin;
-    scrollbar-color: color-mix(in srgb, var(--phd-color-text-muted) 38%, transparent) transparent;
+    scrollbar-color: color-mix(in srgb, var(--desktop-color-text-muted) 38%, transparent) transparent;
   }
 
-  .phd-internal-scroll::-webkit-scrollbar {
+  .desktop-internal-scroll::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
 
-  .phd-internal-scroll::-webkit-scrollbar-track {
+  .desktop-internal-scroll::-webkit-scrollbar-track {
     background: transparent;
   }
 
-  .phd-internal-scroll::-webkit-scrollbar-thumb {
+  .desktop-internal-scroll::-webkit-scrollbar-thumb {
     border: 2px solid transparent;
     border-radius: 9999px;
-    background: color-mix(in srgb, var(--phd-color-text-muted) 38%, transparent);
+    background: color-mix(in srgb, var(--desktop-color-text-muted) 38%, transparent);
     background-clip: padding-box;
   }
 
-  .phd-internal-scroll::-webkit-scrollbar-thumb:hover {
-    background: color-mix(in srgb, var(--phd-color-text-muted) 62%, transparent);
+  .desktop-internal-scroll::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in srgb, var(--desktop-color-text-muted) 62%, transparent);
     background-clip: padding-box;
   }
 
-  .phd-workspace-page {
+  .desktop-workspace-page {
     min-height: 100%;
-    background: var(--phd-color-background);
-    color: var(--phd-color-text);
+    background: var(--desktop-color-background);
+    color: var(--desktop-color-text);
   }
 
-  .phd-workspace-shell {
+  .desktop-workspace-shell {
     margin-inline: auto;
     width: 100%;
     max-width: none;
-    padding: var(--phd-space-page-block) var(--phd-space-page-inline);
+    padding: var(--desktop-space-page-block) var(--desktop-space-page-inline);
   }
 
-  .phd-workspace-header {
+  .desktop-workspace-header {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
     gap: 20px;
-    border-bottom: 1px solid var(--phd-color-border);
+    border-bottom: 1px solid var(--desktop-color-border);
     padding-bottom: 16px;
   }
 
-  .phd-workspace-title {
-    color: var(--phd-color-text);
+  .desktop-workspace-title {
+    color: var(--desktop-color-text);
     font-size: 18px;
     font-weight: 600;
     line-height: 24px;
     letter-spacing: -0.015em;
   }
 
-  .phd-workspace-meta {
+  .desktop-workspace-meta {
     margin-top: 3px;
-    color: var(--phd-color-text-muted);
+    color: var(--desktop-color-text-muted);
     font-size: 12px;
     line-height: 18px;
   }
@@ -335,16 +335,16 @@ html body * {
    * Keep this quiet: hierarchy comes from spacing and a crisp edge, not from
    * a bright white fill or a heavy floating shadow.
    */
-  .phd-card-surface {
+  .desktop-card-surface {
     border: 0;
-    border-radius: var(--phd-radius-surface);
-    background: var(--phd-color-surface);
+    border-radius: var(--desktop-radius-surface);
+    background: var(--desktop-color-surface);
     box-shadow:
       0 1px 2px rgb(15 23 42 / 0.025),
       0 6px 18px rgb(15 23 42 / 0.025);
   }
 
-  .phd-card-interactive {
+  .desktop-card-interactive {
     transition:
       border-color 160ms ease,
       background-color 160ms ease,
@@ -352,55 +352,55 @@ html body * {
       transform 160ms ease;
   }
 
-  .phd-card-interactive:hover {
-    border-color: var(--phd-color-border-strong);
-    background: var(--phd-color-surface-hover);
+  .desktop-card-interactive:hover {
+    border-color: var(--desktop-color-border-strong);
+    background: var(--desktop-color-surface-hover);
     box-shadow:
       0 1px 2px rgb(15 23 42 / 0.035),
       0 10px 24px rgb(15 23 42 / 0.055);
     transform: translateY(-1px);
   }
 
-  .phd-card-interactive:active {
+  .desktop-card-interactive:active {
     transform: translateY(0);
   }
 
-  .phd-card-interactive:focus-visible {
-    outline: 2px solid var(--phd-color-focus);
+  .desktop-card-interactive:focus-visible {
+    outline: 2px solid var(--desktop-color-focus);
     outline-offset: 2px;
   }
 
-  .dark .phd-card-surface {
+  .dark .desktop-card-surface {
     box-shadow: 0 1px 2px rgb(0 0 0 / 0.12);
   }
 
-  .dark .phd-card-interactive:hover {
+  .dark .desktop-card-interactive:hover {
     box-shadow: 0 8px 22px rgb(0 0 0 / 0.18);
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .phd-card-interactive {
+    .desktop-card-interactive {
       transition: border-color 160ms ease, background-color 160ms ease;
     }
 
-    .phd-card-interactive:hover,
-    .phd-card-interactive:active {
+    .desktop-card-interactive:hover,
+    .desktop-card-interactive:active {
       transform: none;
     }
   }
 
   @media (min-width: 768px) {
-    .phd-workspace-shell {
-      padding-inline: var(--phd-space-page-inline);
+    .desktop-workspace-shell {
+      padding-inline: var(--desktop-space-page-inline);
     }
   }
 
   @media (max-width: 639px) {
-    .phd-workspace-shell {
+    .desktop-workspace-shell {
       padding: 16px;
     }
 
-    .phd-workspace-header {
+    .desktop-workspace-header {
       align-items: stretch;
       flex-direction: column;
       gap: 12px;
@@ -410,7 +410,7 @@ html body * {
   .glass-page {
     position: relative;
     overflow: hidden;
-    background: var(--phd-color-background);
+    background: var(--desktop-color-background);
   }
 
   .glass-orb {
@@ -422,7 +422,7 @@ html body * {
     height: 280px;
     left: -58px;
     top: 56px;
-    background: var(--phd-color-surface);
+    background: var(--desktop-color-surface);
   }
 
   .glass-orb-b {
@@ -430,7 +430,7 @@ html body * {
     height: 240px;
     right: -42px;
     top: 142px;
-    background: var(--phd-color-surface);
+    background: var(--desktop-color-surface);
   }
 
   .glass-orb-c {
@@ -438,26 +438,26 @@ html body * {
     height: 190px;
     right: 36%;
     bottom: -74px;
-    background: var(--phd-color-surface);
+    background: var(--desktop-color-surface);
   }
 
   .glass-panel {
     border: 0;
-    background: var(--phd-color-surface);
+    background: var(--desktop-color-surface);
     box-shadow: none;
     transition: border-color 160ms ease, background-color 160ms ease;
   }
 
   .glass-panel-strong {
     border: 0;
-    background: var(--phd-color-surface);
-    box-shadow: var(--phd-shadow-subtle);
+    background: var(--desktop-color-surface);
+    box-shadow: var(--desktop-shadow-subtle);
     transition: border-color 160ms ease, background-color 160ms ease;
   }
 
   .glass-page-header {
     border: 0;
-    background: var(--phd-color-surface);
+    background: var(--desktop-color-surface);
     box-shadow: none;
     transition: border-color 160ms ease, background-color 160ms ease;
   }
@@ -465,7 +465,7 @@ html body * {
   .glass-toolbar {
     border: 0;
     border-radius: 8px;
-    background: var(--phd-color-surface);
+    background: var(--desktop-color-surface);
     box-shadow: none;
     padding: 0.5rem;
     transition: transform 220ms ease, box-shadow 220ms ease, background-color 220ms ease, border-color 220ms ease;
@@ -473,14 +473,14 @@ html body * {
 
   .glass-input {
     border: 1px solid transparent !important;
-    background: var(--phd-color-surface-muted) !important;
+    background: var(--desktop-color-surface-muted) !important;
     box-shadow: none;
   }
 
   .glass-section {
     border: 0;
     border-radius: 8px;
-    background: var(--phd-color-surface);
+    background: var(--desktop-color-surface);
     box-shadow: none;
     padding: 1rem;
     transition: transform 220ms ease, box-shadow 220ms ease, background-color 220ms ease, border-color 220ms ease;
@@ -492,39 +492,39 @@ html body * {
 
   .glass-interactive:hover {
     transform: none;
-    border-color: var(--phd-color-border-strong);
-    box-shadow: var(--phd-shadow-subtle);
-    background: var(--phd-color-surface-hover);
+    border-color: var(--desktop-color-border-strong);
+    box-shadow: var(--desktop-shadow-subtle);
+    background: var(--desktop-color-surface-hover);
   }
 
   .glass-dot {
     width: 8px;
     height: 8px;
     border-radius: 9999px;
-    background: var(--phd-color-text);
+    background: var(--desktop-color-text);
     box-shadow: none;
   }
 
   .glass-modal-overlay {
-    background: var(--phd-color-backdrop);
+    background: var(--desktop-color-backdrop);
   }
 
   .glass-modal-content {
     border: 0;
-    background: var(--phd-color-surface-overlay);
-    box-shadow: var(--phd-shadow-overlay);
+    background: var(--desktop-color-surface-overlay);
+    box-shadow: var(--desktop-shadow-overlay);
   }
 
 
   .glass-toast {
-    border: 1px solid var(--phd-color-border) !important;
-    background: var(--phd-color-surface-overlay) !important;
-    color: var(--phd-color-text) !important;
-    box-shadow: var(--phd-shadow-overlay) !important;
+    border: 1px solid var(--desktop-color-border) !important;
+    background: var(--desktop-color-surface-overlay) !important;
+    color: var(--desktop-color-text) !important;
+    box-shadow: var(--desktop-shadow-overlay) !important;
   }
 
   .glass-toast-title {
-    color: var(--phd-color-text) !important;
+    color: var(--desktop-color-text) !important;
     font-weight: 600 !important;
   }
 
@@ -568,7 +568,7 @@ html body * {
   html.electron-app .glass-modal-content {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    background: var(--phd-color-surface-overlay);
+    background: var(--desktop-color-surface-overlay);
   }
 }
 
@@ -585,51 +585,51 @@ html body * {
 
 /* Dark theme tokens and legacy neutral bridge. */
 .dark {
-  --secondary-foreground: var(--phd-hsl-text);
-  --accent-foreground: var(--phd-hsl-text);
+  --secondary-foreground: var(--desktop-hsl-text);
+  --accent-foreground: var(--desktop-hsl-text);
   --destructive: 0 72% 51%;
   --destructive-foreground: 210 40% 98%;
-  --sidebar: var(--phd-hsl-surface);
-  --sidebar-foreground: var(--phd-hsl-text);
-  --sidebar-primary: var(--phd-hsl-text);
-  --sidebar-primary-foreground: var(--phd-hsl-surface);
-  --sidebar-accent: var(--phd-hsl-surface-muted);
-  --sidebar-accent-foreground: var(--phd-hsl-text);
-  --sidebar-border: var(--phd-hsl-border);
-  --sidebar-ring: var(--phd-hsl-focus);
+  --sidebar: var(--desktop-hsl-surface);
+  --sidebar-foreground: var(--desktop-hsl-text);
+  --sidebar-primary: var(--desktop-hsl-text);
+  --sidebar-primary-foreground: var(--desktop-hsl-surface);
+  --sidebar-accent: var(--desktop-hsl-surface-muted);
+  --sidebar-accent-foreground: var(--desktop-hsl-text);
+  --sidebar-border: var(--desktop-hsl-border);
+  --sidebar-ring: var(--desktop-hsl-focus);
 }
 
 /* Shared dark-mode interaction contract.
    Keep foreground changes paired with surface changes so hover/focus states
    never collapse into low-contrast grey-on-grey combinations. */
 .dark :where(button, a, [role="button"], [role="menuitem"]):focus-visible {
-  outline-color: var(--phd-color-focus);
+  outline-color: var(--desktop-color-focus);
 }
 
 .dark :where(.prose) {
-  --tw-prose-body: var(--phd-color-text-subtle);
-  --tw-prose-headings: var(--phd-color-text);
-  --tw-prose-lead: var(--phd-color-text-subtle);
-  --tw-prose-links: var(--phd-color-info);
-  --tw-prose-bold: var(--phd-color-text);
-  --tw-prose-counters: var(--phd-color-text-muted);
-  --tw-prose-bullets: var(--phd-color-border-strong);
-  --tw-prose-hr: var(--phd-color-border);
-  --tw-prose-quotes: var(--phd-color-text-subtle);
-  --tw-prose-quote-borders: var(--phd-color-border-strong);
-  --tw-prose-captions: var(--phd-color-text-muted);
-  --tw-prose-code: var(--phd-color-text);
-  --tw-prose-pre-code: var(--phd-color-code-text);
-  --tw-prose-pre-bg: var(--phd-color-code-surface);
-  --tw-prose-th-borders: var(--phd-color-border-strong);
-  --tw-prose-td-borders: var(--phd-color-border);
+  --tw-prose-body: var(--desktop-color-text-subtle);
+  --tw-prose-headings: var(--desktop-color-text);
+  --tw-prose-lead: var(--desktop-color-text-subtle);
+  --tw-prose-links: var(--desktop-color-info);
+  --tw-prose-bold: var(--desktop-color-text);
+  --tw-prose-counters: var(--desktop-color-text-muted);
+  --tw-prose-bullets: var(--desktop-color-border-strong);
+  --tw-prose-hr: var(--desktop-color-border);
+  --tw-prose-quotes: var(--desktop-color-text-subtle);
+  --tw-prose-quote-borders: var(--desktop-color-border-strong);
+  --tw-prose-captions: var(--desktop-color-text-muted);
+  --tw-prose-code: var(--desktop-color-text);
+  --tw-prose-pre-code: var(--desktop-color-code-text);
+  --tw-prose-pre-bg: var(--desktop-color-code-surface);
+  --tw-prose-th-borders: var(--desktop-color-border-strong);
+  --tw-prose-td-borders: var(--desktop-color-border);
 }
 
 .dark .glass-page,
 .dark .glass-orb-a,
 .dark .glass-orb-b,
 .dark .glass-orb-c {
-  background: var(--phd-color-background);
+  background: var(--desktop-color-background);
 }
 
 .dark .glass-panel,
@@ -637,46 +637,46 @@ html body * {
 .dark .glass-page-header,
 .dark .glass-toolbar,
 .dark .glass-section {
-  border-color: var(--phd-color-border);
-  background: var(--phd-color-surface);
-  color: var(--phd-color-text);
+  border-color: var(--desktop-color-border);
+  background: var(--desktop-color-surface);
+  color: var(--desktop-color-text);
   box-shadow: none;
 }
 
 .dark .glass-input {
   border-color: transparent !important;
-  background: var(--phd-color-surface-muted) !important;
-  color: var(--phd-color-text);
+  background: var(--desktop-color-surface-muted) !important;
+  color: var(--desktop-color-text);
 }
 
 .dark .glass-interactive:hover {
-  border-color: var(--phd-color-border-strong);
-  background: var(--phd-color-surface-hover);
+  border-color: var(--desktop-color-border-strong);
+  background: var(--desktop-color-surface-hover);
   box-shadow: none;
 }
 
-.dark .glass-modal-overlay { background: var(--phd-color-backdrop); }
-.dark .glass-dot { background: var(--phd-color-text); }
+.dark .glass-modal-overlay { background: var(--desktop-color-backdrop); }
+.dark .glass-dot { background: var(--desktop-color-text); }
 .dark .glass-toast {
-  border-color: var(--phd-color-border) !important;
-  background: var(--phd-color-surface) !important;
-  color: var(--phd-color-text) !important;
-  box-shadow: var(--phd-shadow-overlay) !important;
+  border-color: var(--desktop-color-border) !important;
+  background: var(--desktop-color-surface) !important;
+  color: var(--desktop-color-text) !important;
+  box-shadow: var(--desktop-shadow-overlay) !important;
 }
-.dark .glass-toast-title { color: var(--phd-color-text) !important; }
-.dark .glass-toast-description { color: var(--phd-color-text-muted) !important; }
+.dark .glass-toast-title { color: var(--desktop-color-text) !important; }
+.dark .glass-toast-description { color: var(--desktop-color-text-muted) !important; }
 .dark .glass-toast-action,
 .dark .glass-toast-cancel {
-  border-color: var(--phd-color-border-strong) !important;
-  background: var(--phd-color-surface-muted) !important;
-  color: var(--phd-color-text) !important;
+  border-color: var(--desktop-color-border-strong) !important;
+  background: var(--desktop-color-surface-muted) !important;
+  color: var(--desktop-color-text) !important;
 }
 
 .dark input,
 .dark textarea,
 .dark select { color-scheme: dark; }
 .dark input::placeholder,
-.dark textarea::placeholder { color: var(--phd-color-text-muted); }
+.dark textarea::placeholder { color: var(--desktop-color-text-muted); }
 .dark ::selection {
   background: rgb(14 116 144 / 0.55);
   color: #f8fafc;
@@ -688,7 +688,7 @@ html body * {
 .dark .diff-code .token.prolog,
 .dark .diff-code .token.doctype,
 .dark .diff-code .token.cdata { color: #94a3b8; }
-html.electron-app.dark .glass-modal-content { background: var(--phd-color-surface-overlay); }
+html.electron-app.dark .glass-modal-content { background: var(--desktop-color-surface-overlay); }
 html[data-mail-compose-open] [data-codex-center-launcher] {
   visibility: hidden;
   pointer-events: none;

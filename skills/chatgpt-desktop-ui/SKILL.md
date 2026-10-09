@@ -5,7 +5,11 @@ description: Build or refactor a desktop-style app to match the supplied ChatGPT
 
 # ChatGPT-style desktop UI
 
-Create a faithful adaptation of the supplied client design language while preserving the target product's workflows. This Skill carries a portable React UI package and clean visual examples; it does not require a local PHD repository or a specific absolute directory.
+The versioned reference is Windows ChatGPT **26.1002.7124.0**, observed on 2026-10-09. For an explicit client replica, reuse `DesktopClientSurface`, `ClientSidebar`, `SidebarSection`, `DesktopMenu` and grouped `SettingsGroup`/`SettingsField`; match the observed layouts instead of designing a new dashboard. This profile uses 44px title bar, 52px rail, 36px selected tile, 372px contextual sidebar, 728px settings body, 28px bold settings heading and 14px body. Portable defaults below apply to adaptations that do not opt into the profile. Embedded Tool typography and Host ownership remain authoritative.
+
+Inspect missing reference surfaces only within the user's authorization. Confirm the installed package version and retain measurements without publishing private captures or chat titles. Record alignment in `CLIENT_ALIGNMENT.json` and tag a published replica with the observed client version. Do not claim exact fidelity for unobserved screens, proprietary glyphs or disconnected native services.
+
+Create a faithful adaptation of the supplied client design language while preserving the target product's workflows. This Skill carries a portable React UI package and clean visual examples; it does not require an originating application repository or a specific absolute directory.
 
 Read [design-system.md](references/design-system.md) and the relevant images in [visual-references.md](references/visual-references.md). For a redesign, also read [design-guidance.md](references/design-guidance.md). Read [integration.md](references/integration.md) before adapting host behavior, persistence or embedded surfaces.
 
@@ -13,7 +17,7 @@ Read [design-system.md](references/design-system.md) and the relevant images in 
 
 Inventory the target routes, dialogs, menus, states and repeated controls. Choose workspace/list, settings, reading/chat or utility layouts based on the user's actual work. Preserve language, data, selections, drafts and existing authorization. Remove redundant module titles and decorative nested frames; do not invent unrelated features or imitate ChatGPT's product identity.
 
-For React, first reuse an existing compatible `@phd/chatgpt-desktop-kit` dependency. Otherwise install a pinned library revision or use the packaged `assets/ui/` as one application-level dependency. Do not create separately maintained copies in every client. Import its `styles.css` once and reuse `Button`, `Input`, `Select`, `Tabs`, `Dialog`, `InternalScrollArea` and the layout exports. The package includes source and declarations; `assets/starter/` shows real composition. Use the target's React/runtime constraints and validate compatibility rather than silently upgrading its stack. PHD-specific Node pinning is not an instruction to change another project's toolchain.
+For React, first reuse an existing compatible `chatgpt-desktop-kit` dependency. Otherwise install a pinned library revision or use the packaged `assets/ui/` as one application-level dependency. Do not create separately maintained copies in every client. Import its `styles.css` once and reuse `Button`, `Input`, `Select`, `Tabs`, `Dialog`, `InternalScrollArea` and the layout exports. The package includes source and declarations; `assets/starter/` shows real composition. Use the target's React/runtime constraints and validate compatibility rather than silently upgrading its stack. This repository's Node pinning is not an instruction to change another project's toolchain.
 
 For another framework, use the reference tokens and measurements to adapt the project's shared component layer once. Keep equivalent keyboard, focus, portal and scrolling behavior. Do not sprinkle approximations across individual pages or rewrite a working product into React without authorization.
 

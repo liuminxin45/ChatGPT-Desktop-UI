@@ -4,13 +4,13 @@ An independent React component library for neutral desktop interfaces. It provid
 
 ## Try the demo
 
-[Open the interactive demo](https://liuminxin45.github.io/ChatGPT-Desktop-UI/) — an English product workspace with projects, a team inbox, activity charts and grouped settings. Search and filter projects, create one, complete a task, send a message, pin destinations, explore weekly trends, and switch between light and dark themes. Back/Forward follows visited pages; File/Edit/View/Help provides working actions, including task Undo/Redo.
+[Open the demo](https://liuminxin45.github.io/ChatGPT-Desktop-UI/) — a browser recreation of the Windows **ChatGPT 26.1002.7124.0** client, with synthetic English content. It follows the observed project/chat sidebar, composer, menus, search, new-tab surface and grouped Settings. Create projects, rename and pin chats, explore nested menus, preserve drafts, use navigation history and switch themes.
 
-![Northstar workspace in dark mode](docs/demo/projects-dark-1920.png)
+![ChatGPT desktop reference layout in dark mode](docs/demo/home-dark-1920.png)
 
-![Northstar workspace in light mode](docs/demo/projects-light-1920.png)
+![ChatGPT desktop reference layout in light mode](docs/demo/home-light-1920.png)
 
-All people, projects and conversations are fictional and written for this example. Edits stay in memory and reset on reload. Only the theme preference is stored in the browser. The demo has no backend, authentication, analytics or external data calls.
+All people, projects and conversations are fictional. Edits stay in memory and reset on reload. Only the theme preference is stored in the browser. Native files, accounts, terminals, microphones and AI services are simulated or unavailable. Reference screenshots containing private content are not redistributed. See [client alignment](docs/CLIENT_ALIGNMENT.json) for version evidence, measured geometry and fidelity limits.
 
 To run it locally with Node **24.19.0**:
 
@@ -45,13 +45,13 @@ npm run skill:check
 
 ## Integration
 
-PHD, Collector and Processor consume this repository at the same immutable Git revision. PHD retains `@phd/ui` and `@phd/icons` as compatibility exports and Host adapters. Collector and Processor import this package directly. Consumers must not maintain copied control implementations or generated vendor snapshots.
+Related clients consume this repository at the same immutable Git revision. Existing application imports may remain as compatibility exports and Host adapters. Consumers must not maintain copied control implementations or generated vendor snapshots.
 
 Install from a Git URL pinned to a full commit hash, or an explicitly versioned package archive. Git installation runs `prepare` to produce the distribution. A local `file:` dependency is suitable for development, not a release pin. See [Integration](docs/INTEGRATION.md) for stylesheet and Host ownership.
 
 ```tsx
-import { DesktopRoot, Button, Select, WorkbenchPage } from '@phd/chatgpt-desktop-kit';
-import '@phd/chatgpt-desktop-kit/styles.css';
+import { DesktopRoot, Button, Select, WorkbenchPage } from 'chatgpt-desktop-kit';
+import 'chatgpt-desktop-kit/styles.css';
 
 export function App({ sort, setSort, createProject }) {
   return <DesktopRoot storageKey="example.theme">
@@ -78,7 +78,7 @@ Buttons default to `type="button"`; form submission requires `type="submit"`. Em
 
 ## Source and distribution
 
-`src/` is the implementation authority. `compat/` preserves compound Radix APIs used by existing consumers; both APIs share the same semantic styles and tokens. `docs/provenance.json` records extraction origins. The historical `phd-*` namespace does not require a PHD service.
+`src/` is the implementation authority. `compat/` preserves compound Radix APIs used by existing consumers; both APIs share the same semantic styles and tokens. `docs/provenance.json` records anonymized extraction origins. The `desktop-*` namespace has no application service dependency.
 
 `dist/`, Skill assets and copied Skill references are generated and excluded from Git. Edit source and canonical documentation, then run `npm run build && npm run skill:package`. `npm run skill:install` installs the generated Skill locally and verifies ownership before replacing an existing installation.
 

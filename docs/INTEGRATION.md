@@ -2,9 +2,11 @@
 
 ## Dependency ownership
 
-Use `@phd/chatgpt-desktop-kit` as the sole control, icon, token and base-style implementation. Pin an immutable commit or package version in the consumer lockfile. Update consumers together and validate them against that exact revision. Do not copy source into each client or synchronize implementations bidirectionally.
+Use `chatgpt-desktop-kit` as the sole control, icon, token and base-style implementation. Pin an immutable commit or package version in the consumer lockfile. Update consumers together and validate them against that exact revision. Do not copy source into each client or synchronize implementations bidirectionally.
 
-PHD's `@phd/ui`, `@phd/icons` and local control paths are compatibility exports. Only platform adapters, service errors, localization catalogs and business-specific compositions remain in the client. Collector and Processor import this package directly. The library has no application IPC, credential service, business data root or Worker lifecycle.
+Application-local component and icon paths may remain as compatibility exports. Only platform adapters, service errors, localization catalogs and business-specific compositions remain in the client. Standalone clients import this package directly. The library has no application IPC, credential service, business data root or Worker lifecycle.
+
+Version 0.3 changes the package identity to `chatgpt-desktop-kit` and uses `--desktop-*` tokens, `desktop-*` classes, `data-desktop-*` markers, `DesktopIconProps` and the `desktop:restore-list-anchor` event. Update imports, Tailwind content scans, CSS references and Host marker readers together. Existing stable feature, surface and action ID values remain unchanged; this migration does not reset usage series or stored preferences. No legacy application namespace aliases are shipped.
 
 ## Styles and surfaces
 
@@ -40,7 +42,7 @@ Protect unsaved changes before navigation or Dialog close. Failed saves preserve
 
 ## Usage and diagnostics
 
-Stable `actionId`, `data-phd-feature` and `data-phd-surface` markers support Host-owned usage tracking. Components do not emit telemetry. Hosts correlate invocation and asynchronous outcomes, without counting replies as second user actions.
+Stable `actionId`, `data-desktop-feature` and `data-desktop-surface` markers support Host-owned usage tracking. Components do not emit telemetry. Hosts correlate invocation and asynchronous outcomes, without counting replies as second user actions.
 
 Log bounded diagnostic metadata, stages and correlation IDs only. Exclude inputs, credentials, prompts, user content and personal identities. The library neither uploads nor writes diagnostic or usage events.
 
@@ -52,4 +54,4 @@ The gallery checks React interaction and computed geometry. Client probes verify
 
 Mount `InputBehaviorRoot` once in a Tailwind Host. `DesktopRoot` includes it for standalone clients. Enter confirms the scoped action; Shift+Enter inserts a line break in multiline fields. IME composition (including key code 229), held-key repeats and modified Enter never invoke a command.
 
-Mark the existing confirmation button with `confirmOnEnter` and bound its form composition with `data-phd-input-scope`. Composer and dialog scopes are recognized automatically; nested scopes prevent a search or attachment field from submitting an outer editor. The boundary clicks that exact visible button, preserves disabled state, and emits no additional telemetry. Native forms use their submit action; live filters and automatically applied fields confirm on blur. Ambiguous scopes never choose a button by its label or position. Read-only fields remain read-only.
+Mark the existing confirmation button with `confirmOnEnter` and bound its form composition with `data-desktop-input-scope`. Composer and dialog scopes are recognized automatically; nested scopes prevent a search or attachment field from submitting an outer editor. The boundary clicks that exact visible button, preserves disabled state, and emits no additional telemetry. Native forms use their submit action; live filters and automatically applied fields confirm on blur. Ambiguous scopes never choose a button by its label or position. Read-only fields remain read-only.

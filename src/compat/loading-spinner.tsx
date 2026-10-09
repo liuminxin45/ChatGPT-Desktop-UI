@@ -1,4 +1,4 @@
-import { t as phdT, useTranslation } from '../strings';
+import { t as translate, useTranslation } from '../strings';
 import { Loader2 } from "lucide-react";
 
 interface LoadingSpinnerProps {
@@ -8,7 +8,7 @@ interface LoadingSpinnerProps {
 }
 
 export function LoadingSpinner({
-  message = phdT("加载中..."),
+  message = translate("加载中..."),
   size = "md",
   className = "",
 }: LoadingSpinnerProps) {
@@ -27,8 +27,8 @@ export function LoadingSpinner({
 
   return (
     <div className={`flex items-center justify-center gap-2 ${className}`}>
-      <Loader2 className={`${sizeClasses[size]} animate-spin text-[var(--phd-color-info)]`} />
-      <span className={`${textSizeClasses[size]} text-[var(--phd-color-text-muted)]`}>
+      <Loader2 className={`${sizeClasses[size]} animate-spin text-[var(--desktop-color-info)]`} />
+      <span className={`${textSizeClasses[size]} text-[var(--desktop-color-text-muted)]`}>
         {message}
       </span>
     </div>

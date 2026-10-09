@@ -20,7 +20,7 @@ export function DesktopRoot({ children, storageKey, defaultTheme = 'system' }: {
     if (storageKey) { try { localStorage.setItem(storageKey, theme); } catch { /* Preferences cannot block the UI. */ } }
     return () => { media.removeEventListener('change', apply); document.documentElement.classList.toggle('dark', previousDark); document.documentElement.style.colorScheme = previousScheme; };
   }, [theme, storageKey]);
-  return <ThemeContext.Provider value={{ theme, setTheme }}><InputBehaviorRoot><div className="phd-desktop-surface">{children}</div></InputBehaviorRoot></ThemeContext.Provider>;
+  return <ThemeContext.Provider value={{ theme, setTheme }}><InputBehaviorRoot><div className="desktop-desktop-surface">{children}</div></InputBehaviorRoot></ThemeContext.Provider>;
 }
 export function useDesktopTheme() { return useContext(ThemeContext); }
 
@@ -32,7 +32,7 @@ export function DesktopThemeSelect({ onAction, labels = {appearance:'Appearance'
 }) {
   const {theme,setTheme}=useDesktopTheme();
   useEffect(()=>{onAction?.('exposed');},[]);
-  return <Select actionId="appearance.theme" aria-label={labels.appearance} className="phd-desktop-theme" value={theme}
+  return <Select actionId="appearance.theme" aria-label={labels.appearance} className="desktop-desktop-theme" value={theme}
     options={(['system','light','dark'] as const).map(value=>({value,label:labels[value]}))}
     onValueChange={value=>{setTheme(value as Theme);onAction?.('invoked');}}/>;
 }

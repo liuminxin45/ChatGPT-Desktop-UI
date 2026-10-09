@@ -28,7 +28,7 @@ const DropdownMenuSubTrigger = React.forwardRef<
   <DropdownMenuPrimitive.SubTrigger
     ref={ref}
     className={cn(
-      "flex cursor-default select-none items-center phd-menu-item px-2 py-1.5 text-sm text-[var(--phd-color-text-subtle)] outline-none focus:bg-[var(--phd-color-surface-hover)] focus:text-[var(--phd-color-text)] data-[state=open]:bg-[var(--phd-color-surface-hover)] data-[state=open]:text-[var(--phd-color-text)]",
+      "flex cursor-default select-none items-center desktop-menu-item px-2 py-1.5 text-sm text-[var(--desktop-color-text-subtle)] outline-none focus:bg-[var(--desktop-color-surface-hover)] focus:text-[var(--desktop-color-text)] data-[state=open]:bg-[var(--desktop-color-surface-hover)] data-[state=open]:text-[var(--desktop-color-text)]",
       inset && "pl-8",
       className,
     )}
@@ -48,7 +48,7 @@ const DropdownMenuSubContent = React.forwardRef<
   <DropdownMenuPrimitive.SubContent
     ref={ref}
     className={cn(
-      "phd-menu-content z-50 min-w-[8rem] overflow-hidden p-1 text-[var(--phd-color-text)] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+      "desktop-menu-content z-50 min-w-[8rem] overflow-hidden p-1 text-[var(--desktop-color-text)] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
       className,
     )}
     {...props}
@@ -66,7 +66,7 @@ const DropdownMenuContent = React.forwardRef<
       ref={ref}
       sideOffset={sideOffset}
       className={cn(
-        "phd-menu-content z-50 min-w-[8rem] overflow-hidden p-1 text-[var(--phd-color-text)] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+        "desktop-menu-content z-50 min-w-[8rem] overflow-hidden p-1 text-[var(--desktop-color-text)] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
         className,
       )}
       {...props}
@@ -87,16 +87,16 @@ const DropdownMenuItem = React.forwardRef<
   return <DropdownMenuPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex cursor-default select-none items-center phd-menu-item px-2 py-1.5 text-sm outline-none transition-colors focus:bg-[var(--phd-color-surface-hover)] focus:text-[var(--phd-color-text)] data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "relative flex cursor-default select-none items-center desktop-menu-item px-2 py-1.5 text-sm outline-none transition-colors focus:bg-[var(--desktop-color-surface-hover)] focus:text-[var(--desktop-color-text)] data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       inset && "pl-8",
       className,
       icon && 'gap-2',
     )}
     {...props}
-    data-phd-action={actionId || props['data-phd-action' as keyof typeof props] as string | undefined}
+    data-desktop-action={actionId || props['data-desktop-action' as keyof typeof props] as string | undefined}
     aria-label={props['aria-label'] || (icon ? label : undefined)}
     textValue={props.textValue || (icon ? label : undefined)}
-  >{icon ? <span className="phd-action-glyph" aria-hidden="true">{icon}</span> : null}{children}</DropdownMenuPrimitive.Item>;
+  >{icon ? <span className="desktop-action-glyph" aria-hidden="true">{icon}</span> : null}{children}</DropdownMenuPrimitive.Item>;
 });
 DropdownMenuItem.displayName = DropdownMenuPrimitive.Item.displayName;
 
@@ -107,7 +107,7 @@ const DropdownMenuCheckboxItem = React.forwardRef<
   <DropdownMenuPrimitive.CheckboxItem
     ref={ref}
     className={cn(
-      "relative flex cursor-default select-none items-center phd-menu-item py-1.5 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-[var(--phd-color-surface-hover)] focus:text-[var(--phd-color-text)] data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "relative flex cursor-default select-none items-center desktop-menu-item py-1.5 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-[var(--desktop-color-surface-hover)] focus:text-[var(--desktop-color-text)] data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       className,
     )}
     checked={checked}
@@ -131,7 +131,7 @@ const DropdownMenuRadioItem = React.forwardRef<
   <DropdownMenuPrimitive.RadioItem
     ref={ref}
     className={cn(
-      "relative flex cursor-default select-none items-center phd-menu-item py-1.5 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-[var(--phd-color-surface-hover)] focus:text-[var(--phd-color-text)] data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "relative flex cursor-default select-none items-center desktop-menu-item py-1.5 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-[var(--desktop-color-surface-hover)] focus:text-[var(--desktop-color-text)] data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       className,
     )}
     {...props}

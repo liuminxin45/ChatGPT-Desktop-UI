@@ -20,7 +20,7 @@ export {
   ChevronDown as ChevronDownIcon,
   ChevronUp as ChevronUpIcon,
 } from 'lucide-react';
-export type { LucideProps as PhdIconProps } from 'lucide-react';
+export type { LucideProps as DesktopIconProps } from 'lucide-react';
 
 export { House, ChatCircle, Clock, FolderSimple, Gear, MagnifyingGlass, ArrowLeft, ArrowRight, SidebarSimple, UserCircle, Plus, ArrowUp, Bell, Sliders, DotsThree, Moon, Sun, SignOut } from '@phosphor-icons/react';
 

@@ -1,32 +1,39 @@
 {
   "status": "passed",
   "node": "v24.19.0",
-  "browser": "msedge",
-  "renderCases": 24,
+  "referenceClient": "26.1002.7124.0",
+  "renderCases": 42,
+  "interactionGroups": 15,
   "renders": [
     {
-      "page": "projects",
+      "page": "home",
       "theme": "light",
       "width": 1920,
       "height": 1080,
       "scale": 1,
-      "overflow": false
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 0,
+        "background": "rgb(255, 255, 255)"
+      }
     },
     {
-      "page": "inbox",
+      "page": "chat",
       "theme": "light",
       "width": 1920,
       "height": 1080,
       "scale": 1,
-      "overflow": false
-    },
-    {
-      "page": "activity",
-      "theme": "light",
-      "width": 1920,
-      "height": 1080,
-      "scale": 1,
-      "overflow": false
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 0,
+        "background": "rgb(255, 255, 255)"
+      }
     },
     {
       "page": "settings",
@@ -34,31 +41,104 @@
       "width": 1920,
       "height": 1080,
       "scale": 1,
-      "overflow": false
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(255, 255, 255)"
+      }
     },
     {
-      "page": "projects",
+      "page": "appearance",
+      "theme": "light",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "page": "notifications",
+      "theme": "light",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "page": "usage",
+      "theme": "light",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "page": "analytics",
+      "theme": "light",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "page": "home",
       "theme": "light",
       "width": 1280,
       "height": 800,
       "scale": 1,
-      "overflow": false
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 0,
+        "background": "rgb(255, 255, 255)"
+      }
     },
     {
-      "page": "inbox",
+      "page": "chat",
       "theme": "light",
       "width": 1280,
       "height": 800,
       "scale": 1,
-      "overflow": false
-    },
-    {
-      "page": "activity",
-      "theme": "light",
-      "width": 1280,
-      "height": 800,
-      "scale": 1,
-      "overflow": false
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 0,
+        "background": "rgb(255, 255, 255)"
+      }
     },
     {
       "page": "settings",
@@ -66,31 +146,104 @@
       "width": 1280,
       "height": 800,
       "scale": 1,
-      "overflow": false
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(255, 255, 255)"
+      }
     },
     {
-      "page": "projects",
+      "page": "appearance",
+      "theme": "light",
+      "width": 1280,
+      "height": 800,
+      "scale": 1,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "page": "notifications",
+      "theme": "light",
+      "width": 1280,
+      "height": 800,
+      "scale": 1,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "page": "usage",
+      "theme": "light",
+      "width": 1280,
+      "height": 800,
+      "scale": 1,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "page": "analytics",
+      "theme": "light",
+      "width": 1280,
+      "height": 800,
+      "scale": 1,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "page": "home",
       "theme": "light",
       "width": 1536,
       "height": 864,
       "scale": 1.25,
-      "overflow": false
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 0,
+        "background": "rgb(255, 255, 255)"
+      }
     },
     {
-      "page": "inbox",
+      "page": "chat",
       "theme": "light",
       "width": 1536,
       "height": 864,
       "scale": 1.25,
-      "overflow": false
-    },
-    {
-      "page": "activity",
-      "theme": "light",
-      "width": 1536,
-      "height": 864,
-      "scale": 1.25,
-      "overflow": false
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 0,
+        "background": "rgb(255, 255, 255)"
+      }
     },
     {
       "page": "settings",
@@ -98,31 +251,104 @@
       "width": 1536,
       "height": 864,
       "scale": 1.25,
-      "overflow": false
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(255, 255, 255)"
+      }
     },
     {
-      "page": "projects",
+      "page": "appearance",
+      "theme": "light",
+      "width": 1536,
+      "height": 864,
+      "scale": 1.25,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "page": "notifications",
+      "theme": "light",
+      "width": 1536,
+      "height": 864,
+      "scale": 1.25,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "page": "usage",
+      "theme": "light",
+      "width": 1536,
+      "height": 864,
+      "scale": 1.25,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "page": "analytics",
+      "theme": "light",
+      "width": 1536,
+      "height": 864,
+      "scale": 1.25,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "page": "home",
       "theme": "dark",
       "width": 1920,
       "height": 1080,
       "scale": 1,
-      "overflow": false
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 0,
+        "background": "rgb(24, 24, 24)"
+      }
     },
     {
-      "page": "inbox",
+      "page": "chat",
       "theme": "dark",
       "width": 1920,
       "height": 1080,
       "scale": 1,
-      "overflow": false
-    },
-    {
-      "page": "activity",
-      "theme": "dark",
-      "width": 1920,
-      "height": 1080,
-      "scale": 1,
-      "overflow": false
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 0,
+        "background": "rgb(24, 24, 24)"
+      }
     },
     {
       "page": "settings",
@@ -130,31 +356,104 @@
       "width": 1920,
       "height": 1080,
       "scale": 1,
-      "overflow": false
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(24, 24, 24)"
+      }
     },
     {
-      "page": "projects",
+      "page": "appearance",
+      "theme": "dark",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(24, 24, 24)"
+      }
+    },
+    {
+      "page": "notifications",
+      "theme": "dark",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(24, 24, 24)"
+      }
+    },
+    {
+      "page": "usage",
+      "theme": "dark",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(24, 24, 24)"
+      }
+    },
+    {
+      "page": "analytics",
+      "theme": "dark",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(24, 24, 24)"
+      }
+    },
+    {
+      "page": "home",
       "theme": "dark",
       "width": 1280,
       "height": 800,
       "scale": 1,
-      "overflow": false
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 0,
+        "background": "rgb(24, 24, 24)"
+      }
     },
     {
-      "page": "inbox",
+      "page": "chat",
       "theme": "dark",
       "width": 1280,
       "height": 800,
       "scale": 1,
-      "overflow": false
-    },
-    {
-      "page": "activity",
-      "theme": "dark",
-      "width": 1280,
-      "height": 800,
-      "scale": 1,
-      "overflow": false
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 0,
+        "background": "rgb(24, 24, 24)"
+      }
     },
     {
       "page": "settings",
@@ -162,31 +461,104 @@
       "width": 1280,
       "height": 800,
       "scale": 1,
-      "overflow": false
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(24, 24, 24)"
+      }
     },
     {
-      "page": "projects",
+      "page": "appearance",
+      "theme": "dark",
+      "width": 1280,
+      "height": 800,
+      "scale": 1,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(24, 24, 24)"
+      }
+    },
+    {
+      "page": "notifications",
+      "theme": "dark",
+      "width": 1280,
+      "height": 800,
+      "scale": 1,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(24, 24, 24)"
+      }
+    },
+    {
+      "page": "usage",
+      "theme": "dark",
+      "width": 1280,
+      "height": 800,
+      "scale": 1,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(24, 24, 24)"
+      }
+    },
+    {
+      "page": "analytics",
+      "theme": "dark",
+      "width": 1280,
+      "height": 800,
+      "scale": 1,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(24, 24, 24)"
+      }
+    },
+    {
+      "page": "home",
       "theme": "dark",
       "width": 1536,
       "height": 864,
       "scale": 1.25,
-      "overflow": false
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 0,
+        "background": "rgb(24, 24, 24)"
+      }
     },
     {
-      "page": "inbox",
+      "page": "chat",
       "theme": "dark",
       "width": 1536,
       "height": 864,
       "scale": 1.25,
-      "overflow": false
-    },
-    {
-      "page": "activity",
-      "theme": "dark",
-      "width": 1536,
-      "height": 864,
-      "scale": 1.25,
-      "overflow": false
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 0,
+        "background": "rgb(24, 24, 24)"
+      }
     },
     {
       "page": "settings",
@@ -194,23 +566,92 @@
       "width": 1536,
       "height": 864,
       "scale": 1.25,
-      "overflow": false
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(24, 24, 24)"
+      }
+    },
+    {
+      "page": "appearance",
+      "theme": "dark",
+      "width": 1536,
+      "height": 864,
+      "scale": 1.25,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(24, 24, 24)"
+      }
+    },
+    {
+      "page": "notifications",
+      "theme": "dark",
+      "width": 1536,
+      "height": 864,
+      "scale": 1.25,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(24, 24, 24)"
+      }
+    },
+    {
+      "page": "usage",
+      "theme": "dark",
+      "width": 1536,
+      "height": 864,
+      "scale": 1.25,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(24, 24, 24)"
+      }
+    },
+    {
+      "page": "analytics",
+      "theme": "dark",
+      "width": 1536,
+      "height": 864,
+      "scale": 1.25,
+      "geometry": {
+        "overflow": false,
+        "rail": 52,
+        "titlebar": 44,
+        "sidebar": 372,
+        "settings": 728,
+        "background": "rgb(24, 24, 24)"
+      }
     }
   ],
   "checks": [
-    "More menu, live pin/unpin and keyboard/metric/period chart exploration",
-    "search, empty recovery, filters and sorting",
-    "task completion",
-    "project validation, duplicate failure, discard guard, creation and details",
-    "per-conversation drafts survive theme, sidebar and route changes; Enter sends",
-    "workspace name and reminder preview",
-    "real Back/Forward history, 16px appearance chevron and Help menu",
-    "vertically centered text, descender clearance and shared hover transitions",
-    "reduced motion disables decorative transitions",
-    "reload resets fictional edits; only theme is persisted"
+    "native menu trees and navigation destination pin/unpin",
+    "account and nested Help with GitHub logo",
+    "history, mounted sidebar and per-chat draft retention",
+    "chat action menu, pin and rename",
+    "local message submission",
+    "chat search and selection",
+    "project creation, missing/duplicate validation and unsaved discard guard",
+    "project menu and editing",
+    "new-tab panel open/close",
+    "grouped Settings, theme modes, advanced controls and state retention",
+    "settings search and empty recovery",
+    "usage periods, grouping, history boundaries and day inspection",
+    "all settings destinations and standalone profile activity",
+    "project directory filtering and scheduled landing",
+    "reduced-motion preference"
   ],
-  "limitations": [
-    "Fictional client-only demo; no backend, native window controls or authentication.",
-    "125% is browser deviceScaleFactor emulation, not Windows display scaling."
-  ]
+  "consoleErrors": []
 }

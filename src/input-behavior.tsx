@@ -24,9 +24,9 @@ export function confirmTextInput(event: KeyboardEvent) {
   if (!target || target.matches(':disabled,[readonly],[aria-readonly="true"]')) return;
   event.preventDefault();
   if (event.repeat) return;
-  const scopeSelector = '[data-phd-input-scope],.phd-composer,form,[role="dialog"],[role="alertdialog"]';
+  const scopeSelector = '[data-desktop-input-scope],.desktop-composer,form,[role="dialog"],[role="alertdialog"]';
   const scope = target.closest(scopeSelector);
-  const actions = scope ? [...scope.querySelectorAll<HTMLButtonElement>('button[data-phd-enter-confirm],button[type="submit"],input[type="submit"]')]
+  const actions = scope ? [...scope.querySelectorAll<HTMLButtonElement>('button[data-desktop-enter-confirm],button[type="submit"],input[type="submit"]')]
     .filter(button => button.closest(scopeSelector) === scope && button.getClientRects().length > 0 && !button.closest('[hidden],[aria-hidden="true"],[inert]')) : [];
   if (actions.length === 1) {
     if (!actions[0].disabled && actions[0].getAttribute('aria-disabled') !== 'true') actions[0].click();

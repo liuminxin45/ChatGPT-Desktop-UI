@@ -14,13 +14,13 @@ export const glassModalOverlayClass = "glass-modal-overlay";
 export const glassModalContentClass = "glass-modal-content";
 
 const glassIconButtonVariants = cva(
-  "h-9 w-9 rounded-md border-0 bg-transparent text-[var(--phd-color-text-muted)] transition-colors duration-150 hover:bg-[var(--phd-color-canvas)] hover:text-[var(--phd-color-text)]",
+  "h-9 w-9 rounded-md border-0 bg-transparent text-[var(--desktop-color-text-muted)] transition-colors duration-150 hover:bg-[var(--desktop-color-canvas)] hover:text-[var(--desktop-color-text)]",
   {
     variants: {
       tone: {
         neutral: "",
-        primary: "text-[var(--phd-color-info)] hover:text-[var(--phd-color-info)]",
-        warning: "text-[var(--phd-color-warning)] hover:text-[var(--phd-color-warning)]",
+        primary: "text-[var(--desktop-color-info)] hover:text-[var(--desktop-color-info)]",
+        warning: "text-[var(--desktop-color-warning)] hover:text-[var(--desktop-color-warning)]",
       },
     },
     defaultVariants: {

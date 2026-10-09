@@ -10,7 +10,7 @@ import { chromium } from 'playwright';
 if (process.version !== 'v24.19.0') throw Error('Node 24.19.0 required');
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const temp = await fs.mkdtemp(path.join(os.tmpdir(), 'desktop-kit-input-'));
-const evidence = process.env.PHD_UI_EVIDENCE_DIR || path.join(root, 'tests/output/input');
+const evidence = process.env.DESKTOP_UI_EVIDENCE_DIR || path.join(root, 'tests/output/input');
 await fs.mkdir(evidence, { recursive: true });
 await build({ absWorkingDir: root, entryPoints: ['examples/input-contract.tsx'], outdir: temp, bundle: true, format: 'esm', platform: 'browser', jsx: 'automatic', define: { 'process.env.NODE_ENV': '"production"' } });
 const server = http.createServer(async (req, res) => {
@@ -57,7 +57,7 @@ try {
     assert.equal(await message.inputValue(), 'First\nSecond'); assert.equal(await count('send'), 0);
     await message.press('Enter'); assert.equal(await count('send'), 1); assert.equal(await message.inputValue(), '');
     await message.fill('Focused message');
-    const geometry = await page.locator('.phd-composer').evaluate(element => ({radius:getComputedStyle(element).borderRadius,shadow:getComputedStyle(element).boxShadow}));
+    const geometry = await page.locator('.desktop-composer').evaluate(element => ({radius:getComputedStyle(element).borderRadius,shadow:getComputedStyle(element).boxShadow}));
     assert.equal(geometry.radius, '16px'); assert.equal(geometry.shadow, 'none');
     assert.deepEqual(errors, []);
     await page.screenshot({path:path.join(evidence,`input-${theme}-${width}.png`)});

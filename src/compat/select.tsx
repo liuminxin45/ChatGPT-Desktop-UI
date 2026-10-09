@@ -6,7 +6,7 @@ import { cn } from './utils';
 const Select = SelectPrimitive.Root;
 const SelectGroup = SelectPrimitive.Group;
 const SelectValue = SelectPrimitive.Value;
-const EMPTY_SELECT_VALUE = "__phd_empty_select_value__";
+const EMPTY_SELECT_VALUE = "__desktop_empty_select_value__";
 
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
@@ -14,7 +14,7 @@ const SelectTrigger = React.forwardRef<
 >(({ className = "", children, ...props }, ref) => (
   <SelectPrimitive.Trigger
     ref={ref}
-    className={cn('phd-select flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1', className)}
+    className={cn('desktop-select flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1', className)}
     {...props}
   >
     {children}
@@ -61,7 +61,7 @@ const SelectContent = React.forwardRef<
   <SelectPrimitive.Portal>
     <SelectPrimitive.Content
       ref={ref}
-      className={`phd-select-content relative z-[11000] max-h-96 min-w-[8rem] overflow-hidden text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[side=bottom]:slide-in-from-top-1 data-[side=left]:slide-in-from-right-1 data-[side=right]:slide-in-from-left-1 data-[side=top]:slide-in-from-bottom-1 ${
+      className={`desktop-select-content relative z-[11000] max-h-96 min-w-[8rem] overflow-hidden text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[side=bottom]:slide-in-from-top-1 data-[side=left]:slide-in-from-right-1 data-[side=right]:slide-in-from-left-1 data-[side=top]:slide-in-from-bottom-1 ${
         position === "popper" &&
         "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1"
       } ${className}`}
@@ -101,7 +101,7 @@ const SelectItem = React.forwardRef<
 >(({ className = "", children, ...props }, ref) => (
   <SelectPrimitive.Item
     ref={ref}
-    className={`relative flex w-full cursor-default select-none items-center phd-menu-item py-1.5 pl-2 pr-8 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 ${className}`}
+    className={`relative flex w-full cursor-default select-none items-center desktop-menu-item py-1.5 pl-2 pr-8 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 ${className}`}
     {...props}
   >
     <span className="absolute right-2 flex h-3.5 w-3.5 items-center justify-center">
@@ -164,12 +164,12 @@ function SelectControl({ options, value, defaultValue, onValueChange, placeholde
       name={name}
       required={required}
     >
-      <SelectTrigger id={id} aria-label={ariaLabel || title} aria-labelledby={ariaLabelledBy} data-phd-action={actionId ? `${actionId}.open` : undefined} className={className}>
+      <SelectTrigger id={id} aria-label={ariaLabel || title} aria-labelledby={ariaLabelledBy} data-desktop-action={actionId ? `${actionId}.open` : undefined} className={className}>
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
-      <SelectContent className={contentClassName} data-phd-feature={featureId} data-phd-surface={surfaceId}>
+      <SelectContent className={contentClassName} data-desktop-feature={featureId} data-desktop-surface={surfaceId}>
         {options.map((option) => (
-          <SelectItem data-phd-action={actionId} key={option.value} value={encode(option.value)!} disabled={option.disabled}>{option.label}</SelectItem>
+          <SelectItem data-desktop-action={actionId} key={option.value} value={encode(option.value)!} disabled={option.disabled}>{option.label}</SelectItem>
         ))}
       </SelectContent>
     </Select>

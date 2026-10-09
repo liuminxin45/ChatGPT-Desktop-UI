@@ -49,7 +49,7 @@ export function SegmentedControl<T extends string>({
       className={cn(
         "inline-flex items-center",
         appearance === "surface"
-          ? "h-9 rounded-md bg-[var(--phd-color-surface-muted)] p-1"
+          ? "h-9 rounded-md bg-[var(--desktop-color-surface-muted)] p-1"
           : "h-12 gap-4",
         className,
       )}
@@ -90,9 +90,9 @@ export function SegmentedControl<T extends string>({
                 : "relative h-full rounded-none px-0 text-sm after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:bg-transparent",
               selected
                 ? appearance === "surface"
-                  ? "bg-[var(--phd-color-surface)] text-[var(--phd-color-text)] shadow-sm hover:bg-[var(--phd-color-surface)]"
-                  : "text-[var(--phd-color-text)] after:bg-[var(--phd-color-info)] hover:bg-transparent"
-                : "text-[var(--phd-color-text-muted)] hover:bg-transparent hover:text-[var(--phd-color-text)]",
+                  ? "bg-[var(--desktop-color-surface)] text-[var(--desktop-color-text)] shadow-sm hover:bg-[var(--desktop-color-surface)]"
+                  : "text-[var(--desktop-color-text)] after:bg-[var(--desktop-color-info)] hover:bg-transparent"
+                : "text-[var(--desktop-color-text-muted)] hover:bg-transparent hover:text-[var(--desktop-color-text)]",
             )}
           >
             {item.label}
