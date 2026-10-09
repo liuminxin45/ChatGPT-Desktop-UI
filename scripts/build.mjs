@@ -29,6 +29,7 @@ await writeFile(path.join(root,'dist/THIRD_PARTY_NOTICES.txt'),notices.replace(/
 await build({ absWorkingDir: root, entryPoints: ['src/styles.css','src/controls.css','src/tokens.css','src/primitives.css','src/compat/host.css','src/compat/host-shell.css'], outdir: 'dist', outbase:'src', bundle: true, minify: true });
 await copyFile(path.join(root,'LICENSE'),path.join(root,'dist/LICENSE'));
 await copyFile(path.join(root,'scripts/check-consumer.mjs'),path.join(root,'dist/check-consumer.mjs'));
+await copyFile(path.join(root,'scripts/check-consumer.d.mts'),path.join(root,'dist/check-consumer.d.mts'));
 if(process.argv.includes('--library-only')) { console.log('Built UI package, declarations, styles and license notices.'); process.exit(0); }
 await build({ absWorkingDir: root, entryPoints: ['examples/gallery/App.tsx'], outfile: 'examples/gallery/build/app.js', bundle: true, format: 'esm', platform: 'browser', target: 'es2022', jsx: 'automatic', minify: true, define: { 'process.env.NODE_ENV': '"production"' } });
 await copyFile(path.join(root, 'examples/gallery/index.html'), path.join(root, 'examples/gallery/build/index.html'));

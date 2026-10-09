@@ -34,7 +34,11 @@
       "import": "./dist/tab-navigation.js",
       "default": "./dist/tab-navigation.js"
     },
-    "./integration-check": "./dist/check-consumer.mjs"
+    "./integration-check": {
+      "types": "./dist/check-consumer.d.mts",
+      "import": "./dist/check-consumer.mjs",
+      "default": "./dist/check-consumer.mjs"
+    }
   },
   "files": [
     "dist",
