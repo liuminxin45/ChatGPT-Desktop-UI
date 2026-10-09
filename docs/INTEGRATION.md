@@ -35,3 +35,9 @@ Log bounded diagnostic metadata, stages and correlation IDs only. Exclude inputs
 ## Verification scope
 
 The gallery checks React interaction and computed geometry. Client probes verify real consumer imports, retained state and Electron adapters with isolated data. Browser `deviceScaleFactor` cases simulate scaling; native Windows controls and production service authentication require separate Host validation.
+
+## Text input confirmation
+
+Mount `InputBehaviorRoot` once in a Tailwind Host. `DesktopRoot` includes it for standalone clients. Enter confirms the scoped action; Shift+Enter inserts a line break in multiline fields. IME composition (including key code 229), held-key repeats and modified Enter never invoke a command.
+
+Mark the existing confirmation button with `confirmOnEnter` and bound its form composition with `data-phd-input-scope`. Composer and dialog scopes are recognized automatically; nested scopes prevent a search or attachment field from submitting an outer editor. The boundary clicks that exact visible button, preserves disabled state, and emits no additional telemetry. Native forms use their submit action; live filters and automatically applied fields confirm on blur. Ambiguous scopes never choose a button by its label or position. Read-only fields remain read-only.

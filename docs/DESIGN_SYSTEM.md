@@ -15,9 +15,9 @@ This specification combines measured screenshot patterns with the originating PH
 | Hover | #e6e6e6 | #333333 | `--phd-color-surface-hover` |
 | Selected rail | #3b3b3b | #303134 | `--phd-color-navigation-selected` |
 
-Use tokens in application CSS, not the literals from this table. Main canvas, sidebar, groups and floats have distinct surfaces. Neutral grays carry hierarchy; blue carries focus/unread/send states; danger remains available for business errors. Do not recolor errors blue merely to match unread dots.
+Use tokens in application CSS, not the literals from this table. Main canvas, sidebar, groups and floats have distinct surfaces. Neutral grays carry hierarchy; blue carries unread/send and non-text control focus states; danger remains available for business errors. Do not recolor errors blue merely to match unread dots.
 
-Idle buttons and dropdown triggers have no decorative border or fill. The dropdown is text with a small down chevron. Hover introduces a compact filled target; the opened menu has a rounded surface and subtle shadow. Inputs have a light surface rather than a surrounding box. Preserve necessary input focus, table boundaries, actual drag targets and error state boundaries. “Boundary-free” does not mean invisible states.
+Idle buttons and dropdown triggers have no decorative border or fill. The dropdown is text with a small down chevron. Hover introduces a compact filled target; the opened menu has a rounded surface and subtle shadow. Inputs have a light surface rather than a surrounding box. Text entry uses neutral inset focus or a subtly filled composer, without a blue outer ring. Preserve visible keyboard focus, table boundaries, actual drag targets and error state boundaries. “Boundary-free” does not mean invisible states.
 
 ## Geometry
 

@@ -95,6 +95,8 @@
 
   /* Shape and motion */
   --phd-radius-control: 8px;
+  --phd-radius-composer: 16px;
+  --phd-input-focus-ring: inset 0 0 0 1px var(--phd-color-border-strong);
   --phd-radius-surface: 8px;
   --phd-radius-window: 12px;
   --phd-motion-press: 120ms;

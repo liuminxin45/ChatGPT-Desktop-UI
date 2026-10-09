@@ -41,8 +41,9 @@ const Button = React.forwardRef<
       asChild?: boolean;
       /** Stable product-usage identifier. Required for new or changed actions. */
       actionId?: string;
+      confirmOnEnter?: boolean;
     }
->(({ className, variant, size, asChild = false, actionId, ...props }, ref) => {
+>(({ className, variant, size, asChild = false, actionId, confirmOnEnter, ...props }, ref) => {
   const Comp = asChild ? Slot : "button";
   const { title, type, ...restProps } = props;
 
@@ -51,6 +52,7 @@ const Button = React.forwardRef<
       ref={ref}
       data-slot="button"
       data-phd-action={actionId}
+      data-phd-enter-confirm={confirmOnEnter || undefined}
       className={cn(buttonVariants({ variant, size, className }))}
       title={undefined}
       type={asChild ? type : type ?? "button"}

@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import { Select } from './controls';
+import { InputBehaviorRoot } from './input-behavior';
 
 export type Theme = 'light' | 'dark' | 'system';
 const ThemeContext = createContext<{ theme: Theme; setTheme(value: Theme): void }>({ theme: 'system', setTheme() {} });
@@ -19,7 +20,7 @@ export function DesktopRoot({ children, storageKey, defaultTheme = 'system' }: {
     if (storageKey) { try { localStorage.setItem(storageKey, theme); } catch { /* Preferences cannot block the UI. */ } }
     return () => { media.removeEventListener('change', apply); document.documentElement.classList.toggle('dark', previousDark); document.documentElement.style.colorScheme = previousScheme; };
   }, [theme, storageKey]);
-  return <ThemeContext.Provider value={{ theme, setTheme }}><div className="phd-desktop-surface">{children}</div></ThemeContext.Provider>;
+  return <ThemeContext.Provider value={{ theme, setTheme }}><InputBehaviorRoot><div className="phd-desktop-surface">{children}</div></InputBehaviorRoot></ThemeContext.Provider>;
 }
 export function useDesktopTheme() { return useContext(ThemeContext); }
 

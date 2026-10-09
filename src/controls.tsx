@@ -89,12 +89,13 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: 'sm' | 'md';
   actionId?: string;
+  confirmOnEnter?: boolean;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  function Button({ className, variant = 'secondary', size = 'md', type = 'button', actionId, title: _title, ...props }, ref) {
+  function Button({ className, variant = 'secondary', size = 'md', type = 'button', actionId, confirmOnEnter, title: _title, ...props }, ref) {
   const phdT = useTranslation();
-    return <button ref={ref} type={type} data-phd-action={actionId} className={classes('phd-button', `phd-button--${variant}`, `phd-button--${size}`, className)} {...props} />;
+    return <button ref={ref} type={type} data-phd-action={actionId} data-phd-enter-confirm={confirmOnEnter || undefined} className={classes('phd-button', `phd-button--${variant}`, `phd-button--${size}`, className)} {...props} />;
   },
 );
 

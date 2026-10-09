@@ -1,4 +1,5 @@
 export * from './controls';
+export * from './input-behavior';
 export * from './fixed-virtual-list';
 export * from './theme';
 export { UIStringsProvider, configureUIRuntime } from './strings';
