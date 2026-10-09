@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import ts from 'typescript';
+import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 
 export const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -74,6 +75,7 @@ export function createCatalog() {
   const program = ts.createProgram(parsed.fileNames, parsed.options);
   const checker = program.getTypeChecker();
   const entries = [];
+  const nativeAttributes = {};
   const modules = [
     'src/index.ts',
     ...fs
@@ -125,6 +127,17 @@ export function createCatalog() {
             description: ts.displayPartsToString(prop.getDocumentationComment(checker)),
           };
         });
+      const nativeProps = props
+        .filter((prop) => prop.native)
+        .map((prop) => {
+          // Share React's inherited attributes instead of duplicating them for every primitive.
+          const normalized = { ...prop, description: '' };
+          const id = createHash('sha256').update(JSON.stringify(normalized)).digest('hex').slice(0, 16);
+          if (nativeAttributes[id] && JSON.stringify(nativeAttributes[id]) !== JSON.stringify(normalized))
+            throw Error('Native attribute identity collision');
+          nativeAttributes[id] = normalized;
+          return id;
+        });
       entries.push({
         id: `${importPath}:${exported.name}`,
         name: exported.name,
@@ -140,11 +153,17 @@ export function createCatalog() {
         family,
         implementation,
         description: ts.displayPartsToString(symbol.getDocumentationComment(checker)),
-        props,
+        props: props.filter((prop) => !prop.native),
+        nativeProps,
       });
     }
   }
-  return { schemaVersion: 1, families, components: entries.sort((a, b) => a.id.localeCompare(b.id)) };
+  return {
+    schemaVersion: 2,
+    families,
+    nativeAttributes,
+    components: entries.sort((a, b) => a.id.localeCompare(b.id)),
+  };
 }
 
 export function catalogOutputs(catalog) {

@@ -4,6 +4,9 @@ import assert from 'node:assert/strict';
 import { createCatalog, families, root } from './component-catalog.mjs';
 import { auditAdoption } from './audit-adoption.mjs';
 const catalog = createCatalog();
+for (const component of catalog.components)
+  for (const attribute of component.nativeProps)
+    assert.ok(catalog.nativeAttributes[attribute], `Missing inherited prop ${component.id}`);
 for (const [family, metadata] of Object.entries(families)) {
   assert.ok(
     catalog.components.some((component) => component.family === family),

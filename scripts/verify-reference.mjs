@@ -54,6 +54,9 @@ try {
     assert.match(await page.getByRole('heading', { level: 3 }).textContent(), /FloatingPanel/);
     await page.getByRole('textbox', { name: 'Search components' }).fill('IconButton');
     assert.match(await page.getByRole('heading', { level: 3 }).textContent(), /IconButton/);
+    await page.getByRole('button', { name: 'Show native attributes' }).click();
+    assert.ok(await page.getByRole('rowheader', { name: 'onClick', exact: true }).isVisible());
+    await page.getByRole('button', { name: 'Hide native attributes' }).click();
     await page.getByRole('textbox', { name: 'Search components' }).fill('');
     await navigation.getByRole('button', { name: 'forms', exact: true }).click();
     await page.getByRole('textbox', { name: 'Project name', exact: true }).fill('Retained draft');

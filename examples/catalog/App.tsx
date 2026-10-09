@@ -32,6 +32,16 @@ function Reference() {
     [family, query],
   );
   const component = matches.find((item) => item.id === selected) || matches[0];
+  const props = component
+    ? [
+        ...component.props,
+        ...(native
+          ? component.nativeProps.map(
+              (id) => catalogData.nativeAttributes[id as keyof typeof catalogData.nativeAttributes],
+            )
+          : []),
+      ]
+    : [];
   const displayedFamily = component?.family || family;
   const metadata = catalogData.families[displayedFamily as keyof typeof catalogData.families];
   const code = component
@@ -146,18 +156,16 @@ function Reference() {
                     </tr>
                   </thead>
                   <tbody>
-                    {component.props
-                      .filter((prop) => native || !prop.native)
-                      .map((prop) => (
-                        <tr key={prop.name}>
-                          <th scope="row">{prop.name}</th>
-                          <td>
-                            <code>{prop.type}</code>
-                            {prop.description && <p>{prop.description}</p>}
-                          </td>
-                          <td>{prop.required ? 'Yes' : '—'}</td>
-                        </tr>
-                      ))}
+                    {props.map((prop) => (
+                      <tr key={prop.name}>
+                        <th scope="row">{prop.name}</th>
+                        <td>
+                          <code>{prop.type}</code>
+                          {prop.description && <p>{prop.description}</p>}
+                        </td>
+                        <td>{prop.required ? 'Yes' : '—'}</td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>
