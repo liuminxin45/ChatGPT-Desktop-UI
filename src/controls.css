@@ -100,3 +100,6 @@ html:root,html:root body,html:root body *,html:root body *::before,html:root bod
 .phd-chat-time{display:flex;height:24px;align-items:center;justify-content:center;color:var(--phd-color-text-muted);font-size:var(--phd-font-size-caption);line-height:var(--phd-line-height-caption)}
 .phd-chat-time time{border:1px solid var(--phd-color-panel-boundary);border-radius:999px;padding:2px 10px;background:var(--phd-color-surface)}
 [data-slot=avatar]{box-shadow:0 0 0 1px var(--phd-color-avatar-boundary)}
+
+.phd-chat-message[data-own=true]{justify-content:flex-end}
+.phd-chat-message[data-own=true] .phd-chat-message__body{flex:0 1 auto;width:fit-content;max-width:85%}
