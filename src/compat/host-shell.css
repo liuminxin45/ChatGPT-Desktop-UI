@@ -32,3 +32,8 @@
 .phd-setting-row>.phd-select{width:auto;min-width:112px;flex-shrink:0}
 @media(max-width:900px){.phd-settings-sidebar{width:210px}.phd-settings-column{padding:32px 24px}.phd-menubar-trigger.phd-button{padding:0 7px}}
 @media(max-width:640px){.phd-settings-sidebar{width:172px}.phd-settings-column{padding:24px 16px}.phd-chrome-actions{gap:2px}.phd-window-controls{margin-left:0}.phd-window-controls>.phd-button{width:32px}}
+
+.phd-settings-sidebar{border-right:1px solid var(--phd-color-panel-boundary)}
+.phd-setting-row{border:1px solid var(--phd-color-panel-boundary)}
+
+.phd-page-sidebar{border-right:1px solid var(--phd-color-panel-boundary)}

@@ -1,4 +1,6 @@
 export {
+  TerminalSquare as AssistantIcon,
+  ArrowUp as SendIcon,
   Bug as BugIcon,
   CircleHelp as HelpIcon,
   ClipboardCheck as ReviewIcon,

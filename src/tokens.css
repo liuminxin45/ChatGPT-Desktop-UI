@@ -2,12 +2,12 @@
   color-scheme: light;
 
   /* Color primitives */
-  --phd-color-canvas: #f3f3f3;
+  --phd-color-canvas: #f0f3f9;
   --phd-color-background: #ffffff;
   --phd-color-surface: #f7f7f7;
   --phd-color-surface-muted: #ededed;
-  --phd-color-surface-hover: #e6e6e6;
-  --phd-color-surface-selected: #dddddd;
+  --phd-color-surface-hover: #f0f1f3;
+  --phd-color-surface-selected: #edeff1;
   --phd-color-surface-overlay: #ffffff;
   --phd-color-border: #e5e5e5;
   --phd-color-border-strong: #d4d4d4;
@@ -45,8 +45,8 @@
   --phd-color-on-media: #ffffff;
   --phd-color-backdrop: rgb(0 0 0 / 0.32);
   --phd-shadow-subtle: 0 2px 8px rgb(15 23 42 / 0.05);
-  --phd-shadow-overlay: 0 12px 40px rgb(15 23 42 / 0.12);
-  --phd-shadow-floating: 0 20px 70px rgb(15 23 42 / 0.18);
+  --phd-shadow-overlay: 0 4px 14px rgb(0 0 0 / 0.08);
+  --phd-shadow-floating: 0 6px 24px rgb(0 0 0 / 0.08);
   --phd-shadow-side-panel: -12px 0 32px rgb(15 23 42 / 0.1);
 
   /* HSL channels for Tailwind/shadcn consumers */
@@ -59,18 +59,24 @@
   --phd-hsl-focus: 218 90% 59%;
 
   /* Desktop shell hierarchy; all consumers inherit these semantic surfaces. */
-  --phd-color-shell: #f3f3f3;
-  --phd-color-sidebar: #f7f7f7;
-  --phd-color-navigation-selected: #3b3b3b;
-  --phd-color-on-navigation-selected: #ffffff;
+  --phd-color-shell: #f0f3f9;
+  --phd-color-sidebar: #fafbfd;
+  --phd-color-navigation-selected: #e4e7ec;
+  --phd-color-on-navigation-selected: #202123;
   --phd-color-unread: #387cf4;
+  --phd-color-on-send: #ffffff;
   --phd-radius-overlay: 12px;
   --phd-radius-navigation: 10px;
   --phd-space-page-inline: 24px;
   --phd-space-page-block: 20px;
   --phd-size-page-bar: 48px;
-  --phd-size-reading-column: 760px;
+  --phd-size-reading-column: 1120px;
   --phd-size-settings-column: 720px;
+
+  --phd-color-panel-boundary: #e8e9ec;
+  --phd-color-avatar-boundary: #c9cdd3;
+  --phd-color-composer: #ffffff;
+  --phd-color-chat-own: #edeff1;
 
   /* Typography */
   --phd-font-sans: system-ui, sans-serif;
@@ -105,6 +111,10 @@
 }
 
 .dark {
+  --phd-color-panel-boundary: transparent;
+  --phd-color-avatar-boundary: transparent;
+  --phd-color-composer: #2a2a2a;
+  --phd-color-chat-own: #303030;
   color-scheme: dark;
   --phd-color-background: #181818;
   --phd-color-shell: #202123;

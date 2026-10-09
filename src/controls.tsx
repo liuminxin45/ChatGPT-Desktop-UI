@@ -396,3 +396,11 @@ export function Markdown({ children, components }: { children: string; component
   const phdT = useTranslation();
   return <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>{children}</ReactMarkdown>;
 }
+
+/** Reusable floating surfaces; positioning and application state belong to the Host. */
+export const FloatingLauncher = forwardRef<HTMLButtonElement, ButtonProps>(function FloatingLauncher({ className, ...props }, ref) {
+  return <Button ref={ref} variant="ghost" className={classes('phd-floating-launcher', className)} {...props} />;
+});
+export const FloatingPanel = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(function FloatingPanel({ className, ...props }, ref) {
+  return <div ref={ref} className={classes('phd-floating-panel', className)} {...props} />;
+});

@@ -13,3 +13,9 @@ Apply shared components first; business CSS handles only layout and domain state
 Inspect actual rendered screens side by side with references at the same viewport. Check rail geometry, header height, content width, baseline alignment, menu padding and font weight before details such as animation. Check hovered, selected, disabled and focused states. Open menus near each edge; check long labels, long lists, loading, real failures and failed avatar loading.
 
 When a fidelity detail conflicts with existing functionality, preserve the functionality and adapt its presentation. Do not add fake native controls, replace history behavior with page guesses, clear drafts on theme change, hide errors or break a host-mounted Tool's lifecycle. Explain measured limitations instead of claiming pixel perfection from only one screenshot.
+
+## Light-theme boundaries and conversation geometry
+
+Light mode uses a cool pale window shell, near-white sidebar and white content. Selected navigation tiles stay pale gray with dark filled icons; dark mode retains white filled icons. Fine neutral outlines separate white overlays, grouped settings and composers. Avatar images have a subtle outline in light mode. Avoid decorative nested frames.
+
+Conversation messages and their composer share one responsive reading column (maximum 1120px). Use compact centered time markers, regular sender labels and a neutral own-message surface. Keep long messages, code and attachments readable without widening the viewport. Shared floating launcher and panel primitives own color, border, radius and shadow; Hosts own placement and state.

@@ -6,14 +6,15 @@ This specification combines measured screenshot patterns with the originating PH
 
 | Role | Light | Dark | Token |
 | --- | --- | --- | --- |
-| Window shell | #f3f3f3 | #202123 | `--phd-color-shell` |
-| Contextual sidebar | #f7f7f7 | #1c1d1e | `--phd-color-sidebar` |
+| Window shell | #f0f3f9 | #202123 | `--phd-color-shell` |
+| Contextual sidebar | #fafbfd | #1c1d1e | `--phd-color-sidebar` |
 | Main canvas | #ffffff | #181818 | `--phd-color-background` |
-| Grouped settings | #f7f7f7 | #232323 | `--phd-color-surface` |
-| Input/composer | #ededed | #2a2a2a | `--phd-color-surface-muted` |
+| Grouped settings | #fafbfd | #232323 | `--phd-color-surface` |
+| Input | #ededed | #2a2a2a | `--phd-color-surface-muted` |
+| Composer | #ffffff | #2a2a2a | `--phd-color-composer` |
 | Floating menu | #ffffff | #2b2b2b | `--phd-color-surface-overlay` |
-| Hover | #e6e6e6 | #333333 | `--phd-color-surface-hover` |
-| Selected rail | #3b3b3b | #303134 | `--phd-color-navigation-selected` |
+| Hover | #f0f1f3 | #333333 | `--phd-color-surface-hover` |
+| Selected rail | #e4e7ec | #303134 | `--phd-color-navigation-selected` |
 
 Use tokens in application CSS, not the literals from this table. Main canvas, sidebar, groups and floats have distinct surfaces. Neutral grays carry hierarchy; blue carries unread/send and non-text control focus states; danger remains available for business errors. Do not recolor errors blue merely to match unread dots.
 
@@ -26,13 +27,13 @@ Idle buttons and dropdown triggers have no decorative border or fill. The dropdo
 | Window bar | 40px, full width; Back / Forward / Sidebar, then File / Edit / View / Help |
 | Global rail | 48px, fixed; bottom avatar remains reachable |
 | Selected rail tile | 32×32px, 10px radius |
-| Rail icon | 20px; outline idle, white fill selected |
+| Rail icon | 20px; outline idle, dark fill selected in light mode / white fill in dark mode |
 | Unread | 8px blue circle at upper right |
 | Contextual sidebar | 248px desktop; content independently scrolls |
 | Page/action row | 48px, module tabs left, current actions right |
 | Workspace padding | 24px horizontal, 20px vertical; 16px at compact widths |
 | Settings body | maximum 720px, centered in remaining main area |
-| Reading/chat column | maximum 760px; lists/workspaces have no arbitrary page max-width |
+| Reading/chat column | maximum 1120px; lists/workspaces have no arbitrary page max-width |
 | Controls | 8px radius; 36px default, 30px compact button |
 | Menus/dialogs | 12px radius; collision-aware, bounded to viewport |
 
@@ -83,3 +84,9 @@ PHD's special wordmark and chat-sender weights are local exceptions, not general
 Select/Menu portals inherit tokens and close predictably. Dialog supports Escape, backdrop close, focus containment and return to trigger; the consumer intercepts `onClose` to protect drafts. Default `Button` is secondary and `type=button`; explicitly opt into primary and form submit.
 
 Arrow cursors across the standalone desktop document are an explicit originating user preference. Hover/focus/disabled states still signal affordance. Respect a different target user's cursor preference rather than secretly imposing it on unrelated applications.
+
+## Light-theme boundaries and conversation geometry
+
+Light mode uses a cool pale window shell, near-white sidebar and white content. Selected navigation tiles stay pale gray with dark filled icons; dark mode retains white filled icons. Fine neutral outlines separate white overlays, grouped settings and composers. Avatar images have a subtle outline in light mode. Avoid decorative nested frames.
+
+Conversation messages and their composer share one responsive reading column (maximum 1120px). Use compact centered time markers, regular sender labels and a neutral own-message surface. Keep long messages, code and attachments readable without widening the viewport. Shared floating launcher and panel primitives own color, border, radius and shadow; Hosts own placement and state.

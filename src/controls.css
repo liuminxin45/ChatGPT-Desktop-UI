@@ -69,7 +69,7 @@ html:root,html:root body,html:root body *,html:root body *::before,html:root bod
 .phd-workbench-empty{min-height:calc(100dvh - 180px)}
 .phd-pending-workbench{padding-inline:var(--phd-space-page-inline);padding-bottom:var(--phd-space-page-block)}
 .phd-pending-workbench>.phd-workbench__bar{margin-inline:calc(-1 * var(--phd-space-page-inline))}
-.phd-composer{border:0;border-radius:var(--phd-radius-composer);background:var(--phd-color-surface-muted);color:var(--phd-color-text)}
+.phd-composer{border:1px solid var(--phd-color-panel-boundary);border-radius:var(--phd-radius-composer);background:var(--phd-color-composer);color:var(--phd-color-text);box-shadow:var(--phd-shadow-subtle)}
 .phd-composer:focus-within{box-shadow:none}
 .phd-composer> :first-child{border-top-left-radius:inherit;border-top-right-radius:inherit}
 .phd-composer> :last-child{border-bottom-left-radius:inherit;border-bottom-right-radius:inherit}
@@ -80,6 +80,23 @@ html:root,html:root body,html:root body *,html:root body *::before,html:root bod
 .phd-composer :where(input,textarea,[contenteditable="true"]):focus{box-shadow:none!important}
 :where(div,label,section):has(> :is(input,textarea,[contenteditable="true"]):focus){outline:none!important;border-color:var(--phd-color-border-strong)!important;box-shadow:none!important}
 [data-phd-input-scope]:focus-within{border-color:var(--phd-color-border-strong);box-shadow:none}
-.phd-button.phd-send-control{width:32px;height:32px;padding:0;border-radius:50%;background:var(--phd-color-info);color:var(--phd-color-on-navigation-selected)}
+.phd-button.phd-send-control{width:32px;height:32px;padding:0;border-radius:50%;background:var(--phd-color-info);color:var(--phd-color-on-send)}
 .phd-button.phd-send-control:hover:not(:disabled){background:var(--phd-color-info-hover)}
 @media(max-width:760px){:root{--phd-space-page-inline:16px;--phd-space-page-block:16px}.phd-tool-page-bar{grid-template-columns:minmax(0,1fr) auto;gap:6px}.phd-tool-page-bar__actions{gap:4px}}
+
+/* Light surfaces need a fine boundary where equal white surfaces meet. Dark
+   surfaces keep their established tonal separation. */
+.phd-menu-content,.phd-menu,.phd-select-content,.phd-editable-combobox__content,.phd-dialog,.phd-dialog-surface,.phd-card-surface,.phd-ui-surface,.phd-tooltip{border:1px solid var(--phd-color-panel-boundary)}
+.phd-workbench__bar,.phd-page-toolbar,.phd-tool-page-bar{border-bottom:1px solid var(--phd-color-panel-boundary)}
+.phd-floating-launcher.phd-button{width:40px;height:40px;padding:0;border:1px solid var(--phd-color-panel-boundary);border-radius:var(--phd-radius-overlay);background:var(--phd-color-surface-overlay);color:var(--phd-color-text-subtle);box-shadow:var(--phd-shadow-overlay)}
+.phd-floating-launcher.phd-button:hover{background:var(--phd-color-surface-hover);color:var(--phd-color-text)}
+.phd-floating-launcher svg{width:20px;height:20px}
+.phd-floating-panel{border:1px solid var(--phd-color-panel-boundary);border-radius:var(--phd-radius-overlay);background:var(--phd-color-background);box-shadow:var(--phd-shadow-floating)}
+.phd-floating-panel>header{border-bottom:1px solid var(--phd-color-panel-boundary)}
+.phd-chat-column{width:100%;max-width:var(--phd-size-reading-column);margin-inline:auto;min-width:0}
+.phd-chat-message{padding-inline:0;border-radius:var(--phd-radius-overlay)}
+.phd-chat-message__body{min-width:0;width:100%;padding:8px 12px;border-radius:var(--phd-radius-overlay)}
+.phd-chat-message[data-own=true] .phd-chat-message__body{background:var(--phd-color-chat-own)}
+.phd-chat-time{display:flex;height:24px;align-items:center;justify-content:center;color:var(--phd-color-text-muted);font-size:var(--phd-font-size-caption);line-height:var(--phd-line-height-caption)}
+.phd-chat-time time{border:1px solid var(--phd-color-panel-boundary);border-radius:999px;padding:2px 10px;background:var(--phd-color-surface)}
+[data-slot=avatar]{box-shadow:0 0 0 1px var(--phd-color-avatar-boundary)}

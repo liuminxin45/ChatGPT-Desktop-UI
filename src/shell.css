@@ -41,3 +41,8 @@
 .kit-avatar:focus-visible,.kit-category:focus-visible,.kit-titlebar__menu:focus-visible{outline:2px solid var(--phd-color-focus);outline-offset:-2px}
 @media(max-width:760px){.kit-sidebar{width:200px}.kit-settings-scroll{padding:32px 16px}.kit-setting-row{gap:12px}.kit-setting-row__control{max-width:160px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+.kit-sidebar{border-right:1px solid var(--phd-color-panel-boundary)}
+.kit-settings-section__rows{border:1px solid var(--phd-color-panel-boundary);background:var(--phd-color-background)}
+.kit-setting-row+.kit-setting-row{border-top:1px solid var(--phd-color-panel-boundary)}
+.kit-avatar img{box-shadow:0 0 0 1px var(--phd-color-avatar-boundary)}
