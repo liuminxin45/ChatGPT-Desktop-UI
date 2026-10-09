@@ -3,12 +3,12 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-export function createGalleryServer() {
+export function createGalleryServer(directory = 'examples/gallery/build', allowed = ['index.html', 'app.js', 'app.css']) {
   return http.createServer((req, res) => {
     const name = new URL(req.url, 'http://localhost').pathname.slice(1) || 'index.html';
-    if (!['index.html', 'app.js', 'app.css'].includes(name)) { res.writeHead(404); return res.end(); }
+    if (!allowed.includes(name)) { res.writeHead(404); return res.end(); }
     res.setHeader('Content-Type', name.endsWith('.css') ? 'text/css' : name.endsWith('.js') ? 'text/javascript' : 'text/html');
-    try { res.end(fs.readFileSync(path.join(root, 'examples/gallery/build', name))); }
+    try { res.end(fs.readFileSync(path.join(root, directory, name))); }
     catch { res.writeHead(404); res.end('Run npm run build first.'); }
   });
 }

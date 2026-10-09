@@ -1,9 +1,8 @@
 import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from './utils';
-import { ActionTooltip, actionLabel } from '../action-tooltip';
+import { ControlButton } from '../components/actions/control-button';
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap desktop-button rounded-md text-sm font-normal transition-all-custom focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 active:scale-[0.98]",
@@ -51,26 +50,21 @@ const Button = React.forwardRef<
       badge?: React.ReactNode;
     }
 >(({ className, variant, size, asChild = false, actionId, confirmOnEnter, icon, iconOnly, badge, children, ...props }, ref) => {
-  const Comp = asChild ? Slot : "button";
-  const { title, type, ...restProps } = props;
-  const label = (icon ? actionLabel(children) : '') || restProps['aria-label'] || title || '';
   const compact = iconOnly ?? size === 'icon';
-
-  const buttonNode = (
-    <Comp
+  return (
+    <ControlButton
       ref={ref}
       data-slot="button"
-      data-desktop-action={actionId}
-      data-desktop-enter-confirm={confirmOnEnter || undefined}
+      asChild={asChild}
+      actionId={actionId}
+      confirmOnEnter={confirmOnEnter}
+      icon={icon}
+      iconOnly={compact}
+      badge={badge}
       className={cn(buttonVariants({ variant, size, className }), icon && compact && 'desktop-button--icon')}
-      title={undefined}
-      type={asChild ? type : type ?? "button"}
-      {...restProps}
-      aria-label={restProps['aria-label'] || (compact ? label : title)}
-    >{icon ? <><span className="desktop-action-glyph" aria-hidden="true">{icon}{compact && badge ? <span className="desktop-action-badge">{badge}</span> : null}</span>{compact ? null : children}</> : children}</Comp>
+      {...props}
+    >{children}</ControlButton>
   );
-
-  return <ActionTooltip label={compact || title || restProps['aria-label'] ? label : ''} disabled={!!restProps.disabled}>{buttonNode}</ActionTooltip>;
 });
 Button.displayName = "Button";
 

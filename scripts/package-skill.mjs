@@ -1,4 +1,4 @@
-import { cp, mkdir, readFile, writeFile, access, unlink, rm, lstat } from 'node:fs/promises';
+import { cp, mkdir, readFile, writeFile, access, unlink, rm, lstat, readdir } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -28,6 +28,14 @@ await cp(path.join(root,'docs/VALIDATION.json'),path.join(skill,'references/VALI
 await cp(path.join(root,'docs/CLIENT_ALIGNMENT.json'),path.join(skill,'references/CLIENT_ALIGNMENT.json'));
 await cp(path.join(root,'docs/demo'),path.join(skill,'references/demo'),{recursive:true});
 for(const [from,to] of [['DESIGN_SYSTEM.md','design-system.md'],['DESIGN_GUIDANCE.md','design-guidance.md'],['INTEGRATION.md','integration.md'],['VISUAL_REFERENCES.md','visual-references.md'],['REPLICA_CONTRACT.md','REPLICA_CONTRACT.md'],['COMPONENTS.md','COMPONENTS.md'],['DESIGN_SYSTEM.md','DESIGN_SYSTEM.md'],['CLIENT_ALIGNMENT.json','CLIENT_ALIGNMENT.json']]) await cp(path.join(root,'docs',from),path.join(skill,'references',to));
+await cp(path.join(root,'docs/design-system/catalog.json'),path.join(skill,'references/catalog.json'));
+await cp(path.join(root,'docs/design-system/components'),path.join(skill,'references/api'),{recursive:true});
+// Generated API references point at public source/example locations, not a second maintained copy.
+for(const file of await readdir(path.join(skill,'references/api'))) {
+  const target=path.join(skill,'references/api',file);
+  const text=await readFile(target,'utf8');
+  await writeFile(target,text.replaceAll('../../../','https://github.com/liuminxin45/ChatGPT-Desktop-UI/blob/main/'));
+}
 await cp(path.join(root,'docs/gallery'),path.join(skill,'references/gallery'),{recursive:true});
 await cp(path.join(root,'dist'),path.join(skill,'assets/ui/dist'),{recursive:true});
 await cp(path.join(root,'src'),path.join(skill,'assets/ui/src'),{recursive:true});

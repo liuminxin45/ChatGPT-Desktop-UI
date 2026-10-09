@@ -3,9 +3,9 @@
   "platform": "Windows x64",
   "packageIdentity": "OpenAI.Codex",
   "packageVersion": "26.1002.7124.0",
-  "kitVersion": "0.3.3",
+  "kitVersion": "0.4.0",
   "observedOn": "2026-10-09",
-  "releaseTag": "chatgpt-desktop-26.1002.7124.0-ui-v0.3.3",
+  "releaseTag": "chatgpt-desktop-26.1002.7124.0-ui-v0.4.0",
   "versionEvidence": "Installed Windows package metadata",
   "referenceMethod": "User-supplied screenshots and read-only native UI inspection",
   "geometry": {

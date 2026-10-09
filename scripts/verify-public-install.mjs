@@ -26,8 +26,10 @@ try {
   if (result.status !== 'passed') throw Error(JSON.stringify(result));
   await fs.writeFile(path.join(fixture, 'App.tsx'), `import {createRoot} from 'react-dom/client';
 import {DesktopRoot,DesktopClientSurface,ClientComposer,ConversationMessage} from 'chatgpt-desktop-kit';
+import {Button} from 'chatgpt-desktop-kit/components/actions';
+import {Input} from 'chatgpt-desktop-kit/compat/input';
 import 'chatgpt-desktop-kit/styles.css';
-createRoot(document.getElementById('root')!).render(<DesktopRoot><DesktopClientSurface><ConversationMessage role="assistant" label="Response">A synthetic response.</ConversationMessage><ClientComposer actionId="fixture.message" label="Message" value="A draft" onValueChange={()=>{}} onSubmit={()=>{}} /></DesktopClientSurface></DesktopRoot>);`);
+createRoot(document.getElementById('root')!).render(<DesktopRoot><DesktopClientSurface><Input aria-label="Project"/><Button actionId="fixture.create">Create</Button><ConversationMessage role="assistant" label="Response">A synthetic response.</ConversationMessage><ClientComposer actionId="fixture.message" label="Message" value="A draft" onValueChange={()=>{}} onSubmit={()=>{}} /></DesktopClientSurface></DesktopRoot>);`);
   const bundle = await build({ absWorkingDir: fixture, entryPoints: ['App.tsx'], outfile: 'build/app.js', bundle: true, format: 'esm', platform: 'browser', jsx: 'automatic', metafile: true });
   if (!Object.keys(bundle.metafile.inputs).some(file => /node_modules\/chatgpt-desktop-kit\/dist\//.test(file))) throw Error('Build did not use the installed distribution');
   const report = { ...result, node: process.version, isolatedPublicInstall: 'passed', reactBuild: 'passed', localCheckoutDependency: false };

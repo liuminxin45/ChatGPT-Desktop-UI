@@ -9,7 +9,8 @@ await new Promise(r => server.listen(0, '127.0.0.1', r));
 const results = [], errors = [];
 let browser;
 try {
-    browser = await chromium.launch({ headless: true, channel: process.env.UI_BROWSER_CHANNEL || 'msedge' });
+    const channel = process.env.UI_BROWSER_CHANNEL || 'msedge';
+    browser = await chromium.launch({ headless: true, ...(channel === 'chromium' ? {} : { channel }) });
     for (const theme of ['light', 'dark'])
         for (const [width, height, scale] of [[1920, 1080, 1], [1280, 800, 1], [1536, 864, 1.25]]) {
             const context = await browser.newContext({ viewport: { width, height }, colorScheme: theme, deviceScaleFactor: scale });

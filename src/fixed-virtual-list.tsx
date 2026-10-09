@@ -70,6 +70,7 @@ export function FixedVirtualList<T>({
       className={className}
       style={{ overflowY: "auto", scrollbarGutter: "stable", ...style }}
       role="list"
+      tabIndex={0}
       aria-label={ariaLabel}
       onScroll={handleScroll}
     >

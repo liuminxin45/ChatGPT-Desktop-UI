@@ -1,4 +1,4 @@
-name: Deploy browser demo
+name: Validate library and deploy reference
 on:
   push:
     branches: [main]
@@ -18,8 +18,10 @@ jobs:
           node-version: '24.19.0'
           cache: npm
       - run: npm ci --ignore-scripts
-      - run: npm run typecheck
-      - run: npm run demo:build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run ci
+        env:
+          UI_BROWSER_CHANNEL: chromium
       - uses: actions/upload-pages-artifact@v3
         with:
           path: examples/demo/build

@@ -1,0 +1,193 @@
+.reference-app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font: 400 13px/20px var(--desktop-font-sans);
+}
+.reference-app a {
+  color: var(--desktop-color-text);
+  text-decoration: none;
+}
+.reference-app a:hover {
+  text-decoration: underline;
+}
+.reference-header {
+  height: 56px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 0 24px;
+  background: var(--desktop-color-sidebar);
+  border-bottom: 1px solid var(--desktop-color-border);
+}
+.reference-brand {
+  font-weight: 600;
+}
+.reference-header nav {
+  display: flex;
+  gap: 20px;
+  flex: 1;
+}
+.reference-body {
+  min-height: 0;
+  flex: 1;
+  display: grid;
+  grid-template-columns: 248px minmax(0, 1fr);
+}
+.reference-body aside {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px 16px;
+  background: var(--desktop-color-sidebar);
+  overflow: auto;
+}
+.reference-body aside h1 {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0;
+}
+.reference-body aside nav {
+  display: grid;
+  gap: 4px;
+}
+.reference-body aside nav button {
+  justify-content: flex-start;
+  text-transform: capitalize;
+}
+.reference-body aside [aria-current='page'] {
+  background: var(--desktop-color-navigation-selected);
+}
+.reference-main {
+  padding: 32px clamp(20px, 4vw, 64px);
+}
+.reference-main h2 {
+  font-size: 24px;
+  font-weight: 600;
+  text-transform: capitalize;
+  margin: 0 0 16px;
+}
+.reference-main h3 {
+  font-weight: 600;
+}
+.reference-muted {
+  color: var(--desktop-color-text-muted);
+}
+.reference-preview {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 24px;
+  margin: 24px 0;
+  border: 1px solid var(--desktop-color-border);
+  border-radius: 12px;
+  min-height: 120px;
+  background: var(--desktop-color-background);
+}
+.reference-fields {
+  display: grid;
+  gap: 12px;
+  width: min(100%, 480px);
+}
+.reference-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.reference-list {
+  height: 220px;
+}
+.reference-list > div {
+  height: 100%;
+}
+.reference-list [role='listitem'] {
+  padding: 8px;
+}
+.reference-chat {
+  width: 100%;
+}
+.reference-client {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  min-height: 280px;
+  width: 100%;
+  gap: 24px;
+}
+.reference-client .client-sidebar {
+  height: 280px;
+}
+.reference-shell {
+  width: 100%;
+  height: 380px;
+  position: relative;
+  overflow: hidden;
+}
+.reference-toolbar {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.reference-code {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px;
+  margin: 16px 0;
+  background: var(--desktop-color-surface-muted);
+  border-radius: 8px;
+}
+.reference-code pre {
+  margin: 0;
+  overflow: auto;
+  flex: 1;
+}
+.reference-table {
+  overflow: auto;
+}
+.reference-table table {
+  border-collapse: collapse;
+  width: 100%;
+  text-align: left;
+}
+.reference-table th,
+.reference-table td {
+  vertical-align: top;
+  border-bottom: 1px solid var(--desktop-color-border);
+  padding: 12px 16px;
+}
+.reference-table th {
+  font-weight: 600;
+}
+.reference-table td code {
+  overflow-wrap: anywhere;
+  font-size: 12px;
+}
+.reference-table td:nth-child(2) {
+  width: 75%;
+}
+.reference-skeleton {
+  height: 20px;
+  width: 160px;
+}
+@media (max-width: 800px) {
+  .reference-header {
+    gap: 16px;
+    padding: 0 16px;
+  }
+  .reference-header nav a:nth-child(n + 3) {
+    display: none;
+  }
+  .reference-body {
+    grid-template-columns: 184px minmax(0, 1fr);
+  }
+  .reference-main {
+    padding: 24px 16px;
+  }
+  .reference-client {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,9 @@
+node_modules/
+dist/
+artifacts/
+tests/output/
+examples/*/build/
+docs/design-system/catalog.json
+docs/design-system/components/
+skills/chatgpt-desktop-ui/references/
+skills/chatgpt-desktop-ui/assets/

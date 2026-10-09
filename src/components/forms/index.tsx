@@ -1,0 +1,310 @@
+import * as SelectPrimitive from '@radix-ui/react-select';
+import {
+  forwardRef,
+  useContext,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+  type ButtonHTMLAttributes,
+  type InputHTMLAttributes,
+  type ReactNode,
+  type TextareaHTMLAttributes,
+} from 'react';
+import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '../../icons';
+import { currentLocale, useTranslation } from '../../strings';
+import { ToolVisibilityContext } from '../../surface-visibility';
+import { classes } from '../classes';
+
+export const Input = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>>(function Input(
+  { className, ...props },
+  ref,
+) {
+  return <input ref={ref} className={classes('desktop-input', className)} {...props} />;
+});
+
+export function Checkbox({ className, type: _type, ...props }: InputHTMLAttributes<HTMLInputElement>) {
+  return <input type="checkbox" className={classes('desktop-checkbox', className)} {...props} />;
+}
+
+export function Switch({
+  className,
+  checked = false,
+  type = 'button',
+  actionId,
+  children,
+  ...props
+}: ButtonHTMLAttributes<HTMLButtonElement> & { checked?: boolean; actionId?: string }) {
+  return (
+    <button
+      type={type}
+      role="switch"
+      aria-checked={checked}
+      data-desktop-action={actionId}
+      className={classes('desktop-switch', checked && 'desktop-switch--checked', className)}
+      {...props}
+    >
+      <span aria-hidden="true" />
+      {children}
+    </button>
+  );
+}
+
+export interface EditableComboboxOption {
+  value: string;
+  label?: ReactNode;
+  searchText?: string;
+}
+
+export interface EditableComboboxProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'defaultValue' | 'onChange'> {
+  actionId?: string;
+  value: string;
+  options: readonly EditableComboboxOption[];
+  onValueChange(value: string): void;
+  onCommit?(value: string, option?: EditableComboboxOption): void;
+  emptyMessage?: ReactNode;
+}
+
+export function EditableCombobox({
+  actionId,
+  value,
+  options,
+  onValueChange,
+  onCommit,
+  emptyMessage,
+  className,
+  onFocus,
+  onBlur,
+  onKeyDown,
+  ...props
+}: EditableComboboxProps) {
+  const translate = useTranslation();
+  const listId = useId();
+  const rootRef = useRef<HTMLDivElement>(null);
+  const [open, setOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const visibleOptions = useMemo(() => {
+    const query = value.trim().toLocaleLowerCase();
+    if (!query || options.some((option) => option.value === value)) return [...options];
+    return options.filter((option) =>
+      `${option.value} ${option.searchText || ''}`.toLocaleLowerCase().includes(query),
+    );
+  }, [options, value, currentLocale()]);
+  useEffect(() => {
+    setActiveIndex(0);
+  }, [value]);
+  useEffect(() => {
+    if (!open) return undefined;
+    const close = (event: PointerEvent) => {
+      if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
+    };
+    document.addEventListener('pointerdown', close);
+    return () => document.removeEventListener('pointerdown', close);
+  }, [open]);
+  const commit = (option?: EditableComboboxOption) => {
+    const next = option?.value ?? value;
+    if (option) onValueChange(next);
+    onCommit?.(next, option);
+    setOpen(false);
+  };
+  return (
+    <div ref={rootRef} className="desktop-editable-combobox">
+      <Input
+        {...props}
+        data-desktop-action={actionId ? `${actionId}.change` : undefined}
+        className={className}
+        value={value}
+        role="combobox"
+        aria-autocomplete="list"
+        aria-expanded={open}
+        aria-controls={listId}
+        aria-activedescendant={open && visibleOptions[activeIndex] ? `${listId}-${activeIndex}` : undefined}
+        onFocus={(event) => {
+          setOpen(true);
+          onFocus?.(event);
+        }}
+        onBlur={(event) => {
+          onCommit?.(
+            value,
+            options.find((option) => option.value === value),
+          );
+          onBlur?.(event);
+        }}
+        onChange={(event) => {
+          onValueChange(event.target.value);
+          setOpen(true);
+        }}
+        onKeyDown={(event) => {
+          if (event.key === 'ArrowDown' && visibleOptions.length) {
+            event.preventDefault();
+            setOpen(true);
+            setActiveIndex((index) => Math.min(visibleOptions.length - 1, index + 1));
+          } else if (event.key === 'ArrowUp' && visibleOptions.length) {
+            event.preventDefault();
+            setOpen(true);
+            setActiveIndex((index) => Math.max(0, index - 1));
+          } else if (event.key === 'Enter' && open && visibleOptions[activeIndex]) {
+            event.preventDefault();
+            commit(visibleOptions[activeIndex]);
+          } else if (event.key === 'Escape') {
+            event.preventDefault();
+            setOpen(false);
+          }
+          onKeyDown?.(event);
+        }}
+      />
+      {open ? (
+        <div id={listId} className="desktop-editable-combobox__content" role="listbox">
+          {visibleOptions.length ? (
+            visibleOptions.map((option, index) => (
+              <button
+                data-desktop-action={actionId ? `${actionId}.select` : undefined}
+                id={`${listId}-${index}`}
+                key={option.value}
+                type="button"
+                role="option"
+                aria-selected={option.value === value}
+                data-highlighted={index === activeIndex ? '' : undefined}
+                onPointerDown={(event) => event.preventDefault()}
+                onMouseEnter={() => setActiveIndex(index)}
+                onClick={() => commit(option)}
+              >
+                <span>{option.label ?? option.value}</span>
+                <small>{option.value}</small>
+              </button>
+            ))
+          ) : (
+            <div className="desktop-editable-combobox__empty">{emptyMessage ?? translate('没有匹配项')}</div>
+          )}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaHTMLAttributes<HTMLTextAreaElement>>(
+  function Textarea({ className, ...props }, ref) {
+    return <textarea ref={ref} className={classes('desktop-textarea', className)} {...props} />;
+  },
+);
+
+export interface SelectOption {
+  value: string;
+  label: ReactNode;
+  disabled?: boolean;
+}
+
+export interface SelectProps {
+  actionId?: string;
+  featureId?: string;
+  surfaceId?: string;
+  toolId?: string;
+  options: readonly SelectOption[];
+  value?: string;
+  defaultValue?: string;
+  onValueChange?(value: string): void;
+  placeholder?: ReactNode;
+  className?: string;
+  contentClassName?: string;
+  disabled?: boolean;
+  name?: string;
+  required?: boolean;
+  id?: string;
+  title?: string;
+  'aria-label'?: string;
+  'aria-labelledby'?: string;
+}
+
+const EMPTY_SELECT_VALUE = '__desktop_empty_select_value__';
+
+export function Select({
+  actionId,
+  featureId,
+  surfaceId,
+  toolId,
+  className,
+  contentClassName,
+  options,
+  value,
+  defaultValue,
+  onValueChange,
+  placeholder,
+  disabled,
+  name,
+  required,
+  id,
+  title,
+  'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
+}: SelectProps) {
+  const visible = useContext(ToolVisibilityContext);
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    if (!visible) setOpen(false);
+  }, [visible]);
+  const encode = (next: string | undefined) => (next === '' ? EMPTY_SELECT_VALUE : next);
+  const decode = (next: string) => (next === EMPTY_SELECT_VALUE ? '' : next);
+  return (
+    <SelectPrimitive.Root
+      open={visible && open}
+      onOpenChange={setOpen}
+      value={encode(value)}
+      defaultValue={encode(defaultValue)}
+      onValueChange={(next) => onValueChange?.(decode(next))}
+      disabled={disabled}
+      name={name}
+      required={required}
+    >
+      <SelectPrimitive.Trigger
+        data-desktop-action={actionId ? `${actionId}.open` : undefined}
+        id={id}
+        aria-label={ariaLabel || title}
+        aria-labelledby={ariaLabelledBy}
+        className={classes('desktop-select', className)}
+      >
+        <SelectPrimitive.Value placeholder={placeholder} />
+        <SelectPrimitive.Icon className="desktop-select__icon">
+          <ChevronDownIcon size={15} aria-hidden="true" />
+        </SelectPrimitive.Icon>
+      </SelectPrimitive.Trigger>
+      <SelectPrimitive.Portal>
+        <SelectPrimitive.Content
+          data-desktop-feature={featureId}
+          data-desktop-surface={surfaceId}
+          data-desktop-tool-surface={toolId}
+          onCloseAutoFocus={(event) => {
+            if (!visible) event.preventDefault();
+          }}
+          position="popper"
+          sideOffset={4}
+          className={classes('desktop-select-content', contentClassName)}
+        >
+          <SelectPrimitive.ScrollUpButton className="desktop-select-scroll">
+            <ChevronUpIcon size={15} aria-hidden="true" />
+          </SelectPrimitive.ScrollUpButton>
+          <SelectPrimitive.Viewport className="desktop-select-viewport">
+            {options.map((option) => (
+              <SelectPrimitive.Item
+                data-desktop-action={actionId}
+                key={option.value}
+                value={encode(option.value)!}
+                disabled={option.disabled}
+                className="desktop-select-item"
+              >
+                <SelectPrimitive.ItemText>{option.label}</SelectPrimitive.ItemText>
+                <SelectPrimitive.ItemIndicator className="desktop-select-item__indicator">
+                  <CheckIcon size={14} aria-hidden="true" />
+                </SelectPrimitive.ItemIndicator>
+              </SelectPrimitive.Item>
+            ))}
+          </SelectPrimitive.Viewport>
+          <SelectPrimitive.ScrollDownButton className="desktop-select-scroll">
+            <ChevronDownIcon size={15} aria-hidden="true" />
+          </SelectPrimitive.ScrollDownButton>
+        </SelectPrimitive.Content>
+      </SelectPrimitive.Portal>
+    </SelectPrimitive.Root>
+  );
+}

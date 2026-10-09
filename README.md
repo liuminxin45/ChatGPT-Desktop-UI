@@ -1,5 +1,9 @@
 # ChatGPT Desktop UI Kit
 
+[Client replica](https://liuminxin45.github.io/ChatGPT-Desktop-UI/) · [Component reference](https://liuminxin45.github.io/ChatGPT-Desktop-UI/components/) · [Gallery](https://liuminxin45.github.io/ChatGPT-Desktop-UI/gallery/) · [Documentation](docs/README.md) · [Upgrade plan](docs/UPGRADE_PLAN.md)
+
+Use [usage](docs/usage/README.md) for integration, [design system](docs/design-system/README.md) for composition, and [development](docs/development/README.md) for component changes.
+
 An independent React component library for neutral desktop interfaces. It provides shared controls, semantic themes, compact navigation, layout primitives, synthetic visual examples and a companion agent Skill. It is not affiliated with OpenAI.
 
 ## Try the demo
