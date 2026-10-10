@@ -59,6 +59,7 @@ import {
 } from "./client-data";
 import { ProjectDirectory, ScheduleLanding } from "./ClientDestinations";
 import { ClientChat } from "./ClientChat";
+import { ChatToolbar, BrowserPanel } from "./ClientPane";
 import { ClientProfile } from "./ClientProfile";
 import { ClientSettings } from "./ClientSettings";
 import {
@@ -143,6 +144,8 @@ export function ClientDemo() {
     [folder, setFolder] = useState(""),
     [error, setError] = useState(""),
     [discard, setDiscard] = useState(false);
+  const [panelFull, setPanelFull] = useState(false), [chatFull, setChatFull] = useState(false);
+  const openPane = () => { setPanel(true); setPanelFull(false); setChatFull(false); };
   const [panel, setPanel] = useState(false),
     [info, setInfo] = useState<{ title: string; body: string } | null>(null),
     [editing, setEditing] = useState<DemoProject | null>(null),
@@ -198,7 +201,7 @@ export function ClientDemo() {
     settings,
     create: () => setCreate(true),
     info: showInfo,
-    panel: () => setPanel(true),
+    panel: openPane,
     pin,
     archive,
     rename: (item) => {
@@ -254,7 +257,7 @@ export function ClientDemo() {
         { own: true, text: draft.trim() },
         {
           own: false,
-          text: mode === "ChatGPT" ? "The next step is ready for review. This sample response is stored only in the browser preview." : "The draft is ready for review. I kept the navigation compact and checked the menu and keyboard behavior.",
+          text: mode === "ChatGPT" ? "The next step is ready for review." : "The draft is ready for review. I kept the navigation compact and checked the menu and keyboard behavior.",
         },
       ],
     }));
@@ -263,13 +266,14 @@ export function ClientDemo() {
   useEffect(() => {
     const handle = (e: KeyboardEvent) => {
       if (!(e.ctrlKey || e.metaKey)) return;
-      if (["k", "n", ",", "b", "t"].includes(e.key.toLowerCase())) {
+      if (["k", "n", ",", "b", "t"].includes(e.key.toLowerCase()) || (e.shiftKey && e.key.toLowerCase() === "f")) {
         e.preventDefault();
         if (e.key === "k") setSearch(true);
         if (e.key === "n") newChat();
         if (e.key === ",") settings();
-        if (e.key === "b") setSidebar((old) => !old);
-        if (e.key === "t") setPanel(true);
+        if (e.key.toLowerCase() === "b") { if (e.shiftKey) openPane(); else setSidebar(old => !old); }
+        if (e.key.toLowerCase() === "f" && e.shiftKey) { setPanel(true); setPanelFull(true); setChatFull(false); }
+        if (e.key === "t") openPane();
       }
     };
     window.addEventListener("keydown", handle);
@@ -971,7 +975,7 @@ export function ClientDemo() {
     variant={mode === "ChatGPT" ? "chat" : "work"}
     placeholder={mode === "ChatGPT" ? "Ask ChatGPT" : chat ? "Work with Codex" : "Do anything"}
     onValueChange={value => setDrafts(old => ({ ...old, [key]: value }))} onSubmit={send}
-    onVoice={mode === "Codex" ? () => showInfo("Voice mode", "Voice is simulated in this preview.") : undefined}
+    onVoice={mode === "Codex" ? () => showInfo("Voice mode", "Unavailable in this demo.") : undefined}
     context={mode === "Codex" && contextProject ? <>
       <DesktopMenu side="top" trigger={<button type="button" className="client-context-select" aria-label="Choose project"><Folder size={14} /><span>{contextProject.name}</span></button>}
         items={projects.map(item => ({ id: `client.composer.project.select.${item.id}`, label: item.name, icon: <Folder />, checked: item.id === contextProject.id, onSelect: () => setContextProjects(old => ({ ...old, [key]: item.id })) }))} />
@@ -983,7 +987,7 @@ export function ClientDemo() {
       <DesktopMenu trigger={<button className="desktop-icon-control" type="button" aria-label="Add files and more"><Plus size={18} /></button>}
         items={mode === "ChatGPT" ? [
           { id: "client.composer.attach", label: "Add photos & files", icon: <Paperclip />, disabled: true },
-          { id: "client.composer.search", label: "Web search", icon: <Globe />, onSelect: () => showInfo("Web search", "Search services are not connected in this preview.") },
+          { id: "client.composer.search", label: "Web search", icon: <Globe />, onSelect: () => showInfo("Web search", "Unavailable in this demo.") },
         ] : [{ id: "client.composer.attach", label: "Add files", icon: <Paperclip />, disabled: true }, { id: "client.composer.project", label: "New project", icon: <Folder />, onSelect: actions.create }]} />
       {mode === "Codex" ? <DesktopMenu trigger={<button type="button" className="client-access" aria-label="Change permissions"><ShieldWarning size={14} />{access}</button>}
         items={["Full access", "Default permissions"].map(label => ({ id: `client.permissions.${label === "Full access" ? "full" : "default"}`, label, checked: label === access, onSelect: () => setAccess(label) }))} /> : null}
@@ -991,7 +995,7 @@ export function ClientDemo() {
     trailing={<>
       {mode === "Codex" ? <DesktopMenu trigger={<button type="button" className="client-model">{model}<span>{effort}</span><CaretDown size={12} /></button>}
         items={["GPT-6.1 Sol", "GPT-6 Sol", "GPT-6 Luna"].map(label => ({ id: `client.model.${label.toLowerCase().replaceAll(" ", "-")}`, label, children: ["Low", "Medium", "High"].map(value => ({ id: `client.model.effort.${value.toLowerCase()}`, label: value, checked: model === label && effort === value, onSelect: () => { setModel(label); setEffort(value); } })) }))} /> : null}
-      <IconButton aria-label="Dictate" actionId="client.voice.preview" onClick={() => showInfo("Dictate", "Microphone access is not requested in this preview.")}><Microphone size={16} /></IconButton>
+      <IconButton aria-label="Dictate" actionId="client.voice.preview" onClick={() => showInfo("Dictate", "Unavailable in this demo.")}><Microphone size={16} /></IconButton>
     </>}
   />;
   return (
@@ -1033,7 +1037,7 @@ export function ClientDemo() {
                   onClick={() =>
                     showInfo(
                       "New task",
-                      "Scheduling is unavailable in this browser preview.",
+                      "Unavailable in this demo.",
                     )
                   }
                 >
@@ -1081,47 +1085,12 @@ export function ClientDemo() {
         }
       >
         <div
-          className="client-content"
+          className={`client-content${panel && panelFull ? " client-content--pane-full" : ""}${chatFull ? " client-content--chat-full" : ""}`}
           data-desktop-feature="demo.client"
           data-desktop-surface="demo.client.workspace"
         >
           <section className={`client-chat-page${mode === "ChatGPT" ? " client-chat-page--chat" : ""}`} hidden={route.page !== "home"}>
-            {chat ? (
-              <div className="client-chat-toolbar">
-                {mode === "Codex" ? <Folder size={16} /> : null}
-                <strong>{chat.title}</strong>
-                <div className="client-spacer" />
-                <DesktopMenu
-                  trigger={
-                    <button
-                      className="desktop-icon-control"
-                      aria-label="Chat actions"
-                    >
-                      <DotsThree size={18} />
-                    </button>
-                  }
-                  items={chatMenu(
-                    chat,
-                    pinned.some((item) => item.id === chat.id),
-                    actions,
-                  )}
-                />
-                <IconButton
-                  aria-label="Toggle pinned summary"
-                  actionId="client.summary.toggle"
-                  onClick={() => showInfo("Pinned summary", chat.preview)}
-                >
-                  <List size={17} />
-                </IconButton>
-                <IconButton
-                  aria-label="New tab"
-                  actionId="client.tab.new"
-                  onClick={() => setPanel(true)}
-                >
-                  <Plus size={17} />
-                </IconButton>
-              </div>
-            ) : null}
+            <ChatToolbar chat={chat} project={project} pinned={!!chat && pinned.some(item => item.id === chat.id)} actions={actions} codex={mode === "Codex"} panel={panel && !chatFull} full={chatFull} onFull={() => { setChatFull(!chatFull); setPanelFull(false); }} onPanel={full => { setChatFull(false); if (chat && full === undefined) setPanel(old => !old); else setPanel(true); setPanelFull(!!full); }} />
             {chat ? (
               <InternalScrollArea className="client-thread-scroll">
                 {mode === "ChatGPT" ? <ClientChat messages={messages[route.chat] || []} /> : <div className="client-thread">
@@ -1233,11 +1202,6 @@ export function ClientDemo() {
             <h1>{railItems.find((item) => item.id === route.page)?.label}</h1>
             <div className="client-secondary-inner">
               <CodexMark />
-              <h2>
-                {route.page === "scheduled"
-                  ? "No tasks scheduled"
-                  : railItems.find((item) => item.id === route.page)?.label}
-              </h2>
               <Button
                 actionId="client.home.return"
                 onClick={() => navigate({ page: "home" })}
@@ -1246,99 +1210,7 @@ export function ClientDemo() {
               </Button>
             </div>
           </section>
-          {panel ? (
-            <aside className="client-right-panel">
-              <div className="client-tabbar">
-                <span>
-                  <Globe size={14} />
-                  New tab
-                  <IconButton
-                    aria-label="Close tab"
-                    actionId="client.tab.close"
-                    onClick={() => setPanel(false)}
-                  >
-                    <X size={13} />
-                  </IconButton>
-                </span>
-                <IconButton
-                  aria-label="Add tab"
-                  actionId="client.tab.add"
-                  onClick={() =>
-                    showInfo("New tab", "Choose a tool from the preview.")
-                  }
-                >
-                  <Plus size={16} />
-                </IconButton>
-              </div>
-              <div className="client-browserbar">
-                <ArrowLeft size={16} />
-                <ArrowRight size={16} />
-                <Input
-                  aria-label="Search or enter a URL"
-                  placeholder="Search or enter a URL"
-                />
-              </div>
-              <InternalScrollArea>
-                <div className="client-new-tab">
-                  <h2>Tools</h2>
-                  <div className="client-tools-grid">
-                    {[
-                      ["Changes", Files],
-                      ["Terminal", Terminal],
-                      ["Files", Folder],
-                      ["Side chat", ChatCircle],
-                      ["New page", NotePencil],
-                    ].map(([label, Icon]) => {
-                      const I = Icon as typeof Files;
-                      return (
-                        <Button
-                          key={String(label)}
-                          actionId={`client.tab.tool.${String(label).toLowerCase().replaceAll(" ", "-")}`}
-                          onClick={() =>
-                            showInfo(
-                              String(label),
-                              "Native tool content is simulated in this browser preview.",
-                            )
-                          }
-                        >
-                          <I size={15} />
-                          {String(label)}
-                        </Button>
-                      );
-                    })}
-                  </div>
-                  <h2>Suggested</h2>
-                  <div className="client-suggested">
-                    <span>
-                      🌐<small>Design review</small>
-                    </span>
-                    <span>
-                      📁<small>Workspace files</small>
-                    </span>
-                    <span>
-                      ⌘<small>Release checklist</small>
-                    </span>
-                  </div>
-                  <h2>Recents</h2>
-                  <Button
-                    actionId="client.tab.recent"
-                    onClick={() =>
-                      showInfo(
-                        "Desktop UI",
-                        "Reference client " + CLIENT_VERSION,
-                      )
-                    }
-                  >
-                    <Globe size={20} />
-                    <span>
-                      ChatGPT Desktop UI<small>Website</small>
-                    </span>
-                    <span>4:25 PM</span>
-                  </Button>
-                </div>
-              </InternalScrollArea>
-            </aside>
-          ) : null}
+          {panel ? <BrowserPanel full={panelFull} onFull={() => setPanelFull(!panelFull)} onClose={() => { setPanel(false); setPanelFull(false); }} onInfo={showInfo} /> : null}
         </div>
       </DesktopShell>
       <Dialog

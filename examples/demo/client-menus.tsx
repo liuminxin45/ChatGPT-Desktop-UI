@@ -24,6 +24,8 @@ import {
   BookOpen,
   Shield,
   GithubLogo,
+  UploadSimple,
+  Browsers,
 } from "@phosphor-icons/react";
 import type { DesktopMenuItem } from "../../src";
 import type { DemoChat, DemoProject } from "./client-data";
@@ -152,12 +154,12 @@ export function chatMenu(
     {
       id: "client.chat.share",
       label: "Share",
-      icon: <ArrowSquareOut />,
+      icon: <UploadSimple />,
       separator: true,
       onSelect: () =>
         a.info(
           "Share chat",
-          "Sharing is not connected in this browser preview.",
+          "Unavailable in this demo.",
         ),
     },
     {
@@ -178,16 +180,10 @@ export function chatMenu(
       ],
     },
     {
-      id: "client.chat.right",
-      label: "Move to right pane",
-      icon: <ArrowRight />,
-      separator: true,
-      onSelect: a.panel,
-    },
-    {
       id: "client.chat.window",
       label: "Open in new window",
-      icon: <SquaresFour />,
+      icon: <Browsers />,
+      separator: true,
       onSelect: a.panel,
     },
     {

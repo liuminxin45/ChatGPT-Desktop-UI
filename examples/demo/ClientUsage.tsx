@@ -91,7 +91,7 @@ export function ClientUsage({
               onClick={() =>
                 onDialog(
                   "View plans",
-                  "Subscriptions are not connected in this preview.",
+                  "Unavailable in this demo.",
                 )
               }
             >

@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.4.3
+
+- Keep shared list, menu, dropdown and tab hover targets spaced within their containers.
+- Keep a single GitHub action in the reference title bar; remove repeated documentation navigation and hierarchy labels.
+- Remove demonstration labels, duplicate settings and repetitive availability text across the example site.
+- Match the supplied desktop chat toolbar, anchored Sources panel, chat action menu and browser pane; preserve drafts across full and split views.
+- Align release metadata with the current package version so deployment validation can complete.
+
+## 0.4.2
+
+- Unify compound input focus boundaries while preserving input adornments and keyboard behavior.
+
 ## 0.4.1
 
 - Add a direct Components entry to the client title bar.

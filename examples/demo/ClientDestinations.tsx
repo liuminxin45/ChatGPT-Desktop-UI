@@ -141,7 +141,7 @@ export function ScheduleLanding({
               onClick={() =>
                 onDialog(
                   title,
-                  "Scheduling services are not connected in this browser preview.",
+                  "Unavailable in this demo.",
                 )
               }
             >

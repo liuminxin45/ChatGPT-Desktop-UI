@@ -166,9 +166,6 @@ function Reference() {
           </a>
         </nav>
         <div className="reference-header-actions">
-          <ReferenceLink href={repository + '/tree/main/docs'} label="Documentation">
-            <BookOpen size={18} aria-hidden="true" />
-          </ReferenceLink>
           <ReferenceLink href={repository} label="GitHub">
             <GithubLogo size={18} aria-hidden="true" />
           </ReferenceLink>
@@ -265,19 +262,11 @@ function Reference() {
         </aside>
         <InternalScrollArea ref={scroll} role="main" className="reference-main">
           <div className="reference-content">
-            <div className="reference-breadcrumb">
-              <span>Components</span>
-              <CaretRight size={12} aria-hidden="true" />
-              <span>{labels[family]}</span>
-            </div>
             <header className="reference-heading">
               <div>
                 <h2>{component.name}</h2>
                 <p>{component.description || metadata.description}</p>
               </div>
-              <ReferenceLink href={repository + '/blob/main/' + component.implementation} label="View source">
-                <GithubLogo size={18} aria-hidden="true" />
-              </ReferenceLink>
             </header>
             <section className="reference-preview-frame" aria-label="Live example">
               <header className="reference-section-bar">

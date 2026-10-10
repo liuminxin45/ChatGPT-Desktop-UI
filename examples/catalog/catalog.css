@@ -171,14 +171,6 @@
   max-width: 1040px;
   margin: 0 auto;
 }
-.reference-breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 14px;
-  color: var(--desktop-color-text-subtle);
-  font-size: 12px;
-}
 .reference-heading {
   display: flex;
   align-items: flex-start;

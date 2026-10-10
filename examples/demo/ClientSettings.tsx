@@ -116,7 +116,7 @@ export function ClientSettings({
                   onClick={() =>
                     onDialog(
                       "Full access",
-                      "Native access is simulated in this browser preview. No files or commands are accessed.",
+                      "Unavailable in this demo.",
                     )
                   }
                   data-desktop-action="client.settings.permissions.learn"
@@ -761,7 +761,7 @@ export function ClientSettings({
             onClick={() =>
               onDialog(
                 "Create pet",
-                "Pet generation is not connected in this browser preview.",
+                "Unavailable in this demo.",
               )
             }
           >

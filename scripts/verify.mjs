@@ -41,7 +41,7 @@ try {
   await list.evaluate(element=>element.scrollTop=element.scrollHeight); await page.locator('[data-desktop-item-key="99"]').waitFor();
   // Open/floating controls are keyboard reachable and collision bounded.
   await page.getByRole('button',{name:'Workspace',exact:true}).hover(); await page.getByRole('tooltip',{name:'Workspace',exact:true}).waitFor(); await page.screenshot({path:path.join(root,'docs/gallery/rail-tooltip.png')});
-  await page.getByRole('button',{name:'Example account',exact:true}).click(); await page.getByRole('menu').waitFor();
+  await page.getByRole('button',{name:'Alex Taylor',exact:true}).click(); await page.getByRole('menu').waitFor();
   const menuBounds = await page.getByRole('menu').evaluate(element=>{const r=element.getBoundingClientRect();return{left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:innerWidth,height:innerHeight};});
   assert.ok(menuBounds.left>=0&&menuBounds.right<=menuBounds.width&&menuBounds.top>=0&&menuBounds.bottom<=menuBounds.height);
   await page.screenshot({path:path.join(root,'docs/gallery/avatar-menu.png')}); await page.keyboard.press('Escape');
