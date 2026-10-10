@@ -45,7 +45,6 @@ import {
   Plus,
   House,
   Gear,
-  useDesktopTheme,
 } from '../../src';
 
 export function Examples({ family }: { family: string }) {
@@ -55,7 +54,6 @@ export function Examples({ family }: { family: string }) {
   const [open, setOpen] = useState(false);
   const [section, setSection] = useState(true);
   const [submitted, setSubmitted] = useState('');
-  const { theme } = useDesktopTheme();
   const field = (
     <Input aria-label="Project name" value={value} onChange={(event) => setValue(event.target.value)} />
   );
@@ -217,7 +215,6 @@ export function Examples({ family }: { family: string }) {
       <UIStringsProvider>
         <InputBehaviorRoot>
           <div className="reference-fields">
-            <span>Current theme: {theme}</span>
             {field}
             <div className="reference-list">
               <FixedVirtualList

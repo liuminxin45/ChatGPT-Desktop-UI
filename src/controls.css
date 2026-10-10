@@ -70,6 +70,9 @@ html:root,html:root body,html:root body *,html:root body *::before,html:root bod
 .desktop-tabs button{border-radius:var(--desktop-radius-control) var(--desktop-radius-control) 0 0;white-space:nowrap;transition:background-color var(--desktop-motion-fast),color var(--desktop-motion-fast)}
 .desktop-tabs button:hover:not(:disabled){background:var(--desktop-color-surface-hover);color:var(--desktop-color-text)}
 .desktop-button:focus-visible,.desktop-icon-control:focus-visible,.desktop-tabs button:focus-visible{outline:2px solid var(--desktop-color-focus);outline-offset:-2px}
+/* Radix restores trigger focus after a pointer selection. That restoration is not keyboard navigation.
+   Keep focus in the DOM and retain the normal keyboard indicator, including inside React portals. */
+:root:has([data-desktop-input-modality="pointer"]) :is(.desktop-select,[aria-haspopup]:not([aria-haspopup="false"])):focus-visible{outline:none!important;box-shadow:none!important}
 .desktop-toolbar-search{display:flex;height:34px;align-items:center;gap:8px;border:0;border-radius:var(--desktop-radius-control);background:var(--desktop-color-surface-muted);padding:0 10px;color:var(--desktop-color-text-muted)}
 .desktop-toolbar-search:focus-within{box-shadow:none}
 .desktop-toolbar-search input{min-width:0;border:0;background:transparent;outline:none;box-shadow:none;font:inherit;color:var(--desktop-color-text)}

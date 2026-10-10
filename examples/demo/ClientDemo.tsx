@@ -578,6 +578,13 @@ export function ClientDemo() {
         ))}
       </div>
       <div className="client-window-actions">
+        <a
+          href="components/"
+          className="desktop-button desktop-button--sm desktop-button--ghost"
+          data-desktop-action="demo.components.open"
+        >
+          Components
+        </a>
         <IconButton aria-label="Minimize window" disabled>
           <Minus size={14} />
         </IconButton>

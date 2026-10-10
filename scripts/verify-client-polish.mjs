@@ -18,6 +18,12 @@ try {
             page.on('pageerror', e => errors.push(e.message));
             await page.goto(process.env.DEMO_URL || `http://127.0.0.1:${server.address().port}`);
             await page.getByRole('button', { name: 'Switch mode', exact: true }).waitFor();
+            const componentsLink = page.locator('.client-window-actions').getByRole('link', { name: 'Components', exact: true });
+            assert.equal(await componentsLink.getAttribute('href'), 'components/');
+            await componentsLink.click();
+            await page.getByRole('navigation', { name: 'Component families' }).waitFor();
+            await page.getByRole('link', { name: 'Client', exact: true }).click();
+            await page.getByRole('button', { name: 'Switch mode', exact: true }).waitFor();
             for (const selector of ['.client-project-row:first-child', '.client-chat-row--selected']) {
                 if (selector.includes('selected'))
                     await page.getByRole('button', { name: 'Refine desktop navigation', exact: true }).first().click();

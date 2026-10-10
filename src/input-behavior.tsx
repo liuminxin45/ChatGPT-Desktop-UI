@@ -1,4 +1,4 @@
-import { type KeyboardEvent, type ReactNode } from 'react';
+import { useEffect, useRef, type KeyboardEvent, type ReactNode } from 'react';
 
 /** IME confirmation is text entry, never an application command. */
 export function isInputComposing(event: { nativeEvent: { isComposing?: boolean; keyCode?: number } }) {
@@ -57,5 +57,31 @@ export function protectTextInput(event: KeyboardEvent) {
 
 /** One event boundary per Host; DOM scopes also work for React portal dialogs. */
 export function InputBehaviorRoot({ children }: { children: ReactNode }) {
-  return <div style={{ display: 'contents' }} onKeyDownCapture={protectTextInput} onKeyDown={confirmTextInput}>{children}</div>;
+  const root = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const element = root.current;
+    if (!element) return;
+    const document = element.ownerDocument;
+    const pointer = () => { element.dataset.desktopInputModality = 'pointer'; };
+    const keyboard = (event: globalThis.KeyboardEvent) => {
+      if (!['Shift', 'Control', 'Alt', 'Meta'].includes(event.key) && !event.isComposing) {
+        element.dataset.desktopInputModality = 'keyboard';
+      }
+    };
+    // Document capture includes portals and the first Tab from the document body.
+    // Only modality is retained: no keys, input values or usage events are recorded.
+    document.addEventListener('pointerdown', pointer, true);
+    document.addEventListener('keydown', keyboard, true);
+    return () => {
+      document.removeEventListener('pointerdown', pointer, true);
+      document.removeEventListener('keydown', keyboard, true);
+    };
+  }, []);
+  return <div
+    ref={root}
+    style={{ display: 'contents' }}
+    data-desktop-input-modality="keyboard"
+    onKeyDownCapture={protectTextInput}
+    onKeyDown={confirmTextInput}
+  >{children}</div>;
 }

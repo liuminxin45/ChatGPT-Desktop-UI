@@ -5,8 +5,11 @@ import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export function createDemoServer() {
   return http.createServer(async (req, res) => {
-    const name = new URL(req.url, 'http://localhost').pathname.slice(1) || 'index.html';
-    if (!['index.html', 'app.js', 'app.css', 'LICENSE.txt', 'NOTICE.txt', 'THIRD_PARTY_NOTICES.txt'].includes(name)) { res.writeHead(404); return res.end(); }
+    const pathname = new URL(req.url, 'http://localhost').pathname;
+    const name = pathname === '/' ? 'index.html' : pathname.endsWith('/') ? pathname.slice(1) + 'index.html' : pathname.slice(1);
+    const files = ['index.html', 'app.js', 'app.css', 'LICENSE.txt', 'NOTICE.txt', 'THIRD_PARTY_NOTICES.txt'];
+    const allowed = [...files, ...['components', 'gallery'].flatMap(section => [...files, 'utilities.css'].map(file => section + '/' + file))];
+    if (!allowed.includes(name)) { res.writeHead(404); return res.end(); }
     try {
       const contents = await readFile(path.join(root, 'examples/demo/build', name));
       res.setHeader('Content-Type', name.endsWith('.css') ? 'text/css' : name.endsWith('.js') ? 'text/javascript' : name.endsWith('.txt') ? 'text/plain; charset=utf-8' : 'text/html');

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.1
+
+- Add a direct Components entry to the client title bar.
+- Refine the component reference with grouped navigation, component selection, icon actions, readable import snippets and structured property tables.
+- Preserve preview drafts when choosing an API or changing theme; provide an explicit preview reset.
+- Remove dropdown focus outlines restored after pointer dismissal while retaining keyboard focus, including portal controls.
+- Verify clipboard behavior, accessible contrasts, focus return and reference layouts in both themes and at 125% emulation.
+
 ## 0.4.0
 
 - Organize portable controls and client patterns by responsibility behind stable public facades.

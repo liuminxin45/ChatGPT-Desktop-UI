@@ -18,7 +18,7 @@ Tailwind Hosts keep `compat/*` imports and scan `node_modules/chatgpt-desktop-ki
 
 ## 0.3 → 0.4 migration
 
-Existing root/compat/source/style imports remain valid. Internal source was reorganized behind stable facades. Native Button/Input/Textarea/scroll rendering is now shared across APIs. Keep existing controlled state and stable action IDs. Upgrade every coordinated Host to the same complete public commit; set private adapter peers to `^0.4.0`. Install with Git prepare enabled; run `ui:check` and the Host's typecheck/build.
+Existing root/compat/source/style imports remain valid. Internal source was reorganized behind stable facades. Native Button/Input/Textarea/scroll rendering is now shared across APIs. Keep existing controlled state and stable action IDs. Upgrade every coordinated Host to the same complete public commit; set private adapter peers to `^0.4.1`. Install with Git prepare enabled; run `ui:check` and the Host's typecheck/build.
 
 Run `npm run audit:adoption -- <consumer-source-root> ...` from the library checkout to inspect actual source imports and forwarding declarations. It reads source/dependency metadata only, never runtime profiles or business data. Its detailed report stays in ignored `artifacts/` because Host source names may be private. The integration checker rejects copied forwarders, vendor implementations, local links and mismatched pins.
 
