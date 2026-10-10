@@ -35,11 +35,15 @@ The key visual relationships are a neutral window shell, quiet contextual sideba
 
 Use semantic tokens, not per-page gray literals. Respect explicit user cursor/font preferences; the packaged arrow-cursor policy is an originating desktop preference. Distinguish errors from unread states. Keep visible keyboard focus and labels. Name-only navigation tooltips must have no shortcut line or arrow.
 
+For labelled actions, pass the leading glyph through `Button.icon` instead of placing an SVG directly beside the text. Sibling navigation actions share an icon column, label start and baseline even when visible glyph sizes differ. Use the canonical sidebar action profile described in [design-system.md](references/design-system.md); fix shared geometry rather than adding page-local margins or offsets.
+
 The host owns native window actions, history, credentials, language, application state and analytics. Disable unavailable actions. A theme/language change or sidebar fold cannot remount content, discard drafts, fetch business data again or change a Tool lease. Protect unsaved changes and preserve drafts on failure.
 
 ## Verify
 
 Run the target's relevant typecheck/build and meaningful interaction checks. Inspect actual light and dark screens at 1920×1080 and 1280×800; include 125% scaling/emulation if available and say which was used. Compare reference and target at the same viewport. Check container width, toolbar height, rail geometry, text baseline, hover/selected/focus states, menus near edges, long lists, empty/loading/error states, failed avatar images and save failures.
+
+When changing icon-labelled rows, measure sibling label left edges and vertical baselines, and verify that glyph slots stay centered at every supported scale. Inspect the actual renders; a palette check or matching declared SVG sizes does not establish alignment.
 
 Review all affected routes rather than demonstrating only a new settings page. Repair differences in the shared layer where possible. Do not claim high fidelity based only on a palette or a screenshot that was never viewed.
 
