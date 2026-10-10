@@ -42,6 +42,7 @@ try {
     assert.equal(await page.locator('body').getAttribute('data-collection-open'), 'true');
     await page.getByRole('menuitem', {name:'Full collection',exact:true}).waitFor();
     await page.keyboard.press('Escape');
+    await page.waitForFunction(() => document.body.dataset.collectionOpen === 'false');
     assert.equal(await page.locator('body').getAttribute('data-collection-open'), 'false');
     for (const name of ['Confirm and submit', 'AI review', '3 replies', 'Tasks', 'Forward']) {
       const button = page.getByRole('button', {name, exact:true});
