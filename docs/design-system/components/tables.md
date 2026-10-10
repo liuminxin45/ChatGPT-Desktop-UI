@@ -16,7 +16,7 @@ Semantic table. The Host owns column geometry; cells own consistent content inse
 
 | Prop | Required | Type |
 | --- | --- | --- |
-| density | no | `"comfortable" \| "compact" \| undefined` |
+| density | no | `"compact" \| "comfortable" \| undefined` |
 
 ## TableBody (chatgpt-desktop-kit)
 

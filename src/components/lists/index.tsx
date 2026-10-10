@@ -1,6 +1,8 @@
 import { useVirtualizer } from '@tanstack/react-virtual';
 import {
   forwardRef,
+  useCallback,
+  useContext,
   useEffect,
   useRef,
   useState,
@@ -10,6 +12,14 @@ import {
 } from 'react';
 import { classes } from '../classes';
 import { listRowGap, listRowInset } from '../../list-geometry';
+import { ScrollEdgeFadeContext, scrollEdgeFadeSize } from './scroll-edge-fade';
+export {
+  ScrollEdgeFade,
+  ComposerDock,
+  scrollEdgeFadeSize,
+  type ScrollEdgeFadeProps,
+  type ComposerDockProps,
+} from './scroll-edge-fade';
 
 export const internalScrollAreaClassName = 'desktop-internal-scroll';
 
@@ -33,8 +43,74 @@ export const ListStack = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElemen
 });
 
 export const InternalScrollArea = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-  function InternalScrollArea({ className, ...props }, ref) {
-    return <div ref={ref} className={classes(internalScrollAreaClassName, className)} {...props} />;
+  function InternalScrollArea({ className, children, onFocusCapture, ...props }, ref) {
+    const fade = useContext(ScrollEdgeFadeContext);
+    const elementRef = useRef<HTMLDivElement | null>(null);
+    const attach = useCallback(
+      (element: HTMLDivElement | null) => {
+        elementRef.current = element;
+        if (typeof ref === 'function') ref(element);
+        else if (ref) ref.current = element;
+      },
+      [ref],
+    );
+    useEffect(() => {
+      const element = elementRef.current;
+      if (!fade || !element) return;
+      const measure = () => {
+        const style = getComputedStyle(element);
+        const vertical = Math.max(
+          0,
+          element.offsetWidth -
+            element.clientWidth -
+            parseFloat(style.borderLeftWidth) -
+            parseFloat(style.borderRightWidth),
+        );
+        const horizontal = Math.max(
+          0,
+          element.offsetHeight -
+            element.clientHeight -
+            parseFloat(style.borderTopWidth) -
+            parseFloat(style.borderBottomWidth),
+        );
+        element.style.setProperty('--desktop-scroll-fade-gutter', `${vertical}px`);
+        element.style.setProperty('--desktop-scroll-fade-bottom-gutter', `${horizontal}px`);
+      };
+      measure();
+      const observer = new ResizeObserver(measure);
+      observer.observe(element);
+      return () => {
+        observer.disconnect();
+        for (const property of ['--desktop-scroll-fade-gutter', '--desktop-scroll-fade-bottom-gutter'])
+          element.style.removeProperty(property);
+      };
+    }, [fade]);
+    return (
+      <div
+        ref={attach}
+        className={classes(internalScrollAreaClassName, className)}
+        {...props}
+        data-desktop-scroll-fade={fade ? 'bottom' : undefined}
+        data-desktop-scroll-fade-padding={fade === 'virtual' ? 'virtual' : undefined}
+        onFocusCapture={(event) => {
+          onFocusCapture?.(event);
+          if (!fade || event.defaultPrevented || event.target === event.currentTarget) return;
+          const viewport = event.currentTarget;
+          const target = event.target as HTMLElement;
+          if (target.closest('.desktop-internal-scroll') !== viewport) return;
+          const bounds = viewport.getBoundingClientRect();
+          const item = target.getBoundingClientRect();
+          const fadeHeight =
+            parseFloat(getComputedStyle(viewport).getPropertyValue('--desktop-size-scroll-edge-fade')) || 24;
+          const bottom = bounds.top + viewport.clientTop + viewport.clientHeight - fadeHeight;
+          if (item.bottom > bottom) viewport.scrollTop += item.bottom - bottom;
+          else if (item.top < bounds.top + viewport.clientTop)
+            viewport.scrollTop -= bounds.top + viewport.clientTop - item.top;
+        }}
+      >
+        <ScrollEdgeFadeContext.Provider value={false}>{children}</ScrollEdgeFadeContext.Provider>
+      </div>
+    );
   },
 );
 
@@ -81,6 +157,7 @@ export function VirtualList<T>({
   style,
 }: VirtualListProps<T>) {
   'use no memo';
+  const fade = useContext(ScrollEdgeFadeContext);
   const scrollRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const anchorRef = useRef(initialScrollAnchor);
@@ -113,7 +190,8 @@ export function VirtualList<T>({
     overscan,
     gap: listRowGap,
     paddingStart: listRowGap / 2,
-    paddingEnd: listRowGap / 2,
+    paddingEnd: listRowGap / 2 + (fade ? scrollEdgeFadeSize : 0),
+    scrollPaddingEnd: fade ? scrollEdgeFadeSize : 0,
     scrollMargin: headerHeight,
     getItemKey: (index) => (items[index] ? getItemKey(items[index], index) : index),
   });
@@ -162,53 +240,58 @@ export function VirtualList<T>({
     return () => element?.removeEventListener('desktop:restore-list-anchor', restore);
   }, [items, getItemKey, virtualizer]);
   return (
-    <InternalScrollArea
-      ref={scrollRef}
-      role={role}
-      tabIndex={0}
-      aria-label={ariaLabel}
-      className={classes('desktop-virtual-list', className)}
-      style={style}
-      onScroll={(event) => {
-        if (restoringRef.current) return;
-        const top = event.currentTarget.scrollTop;
-        const row = virtualizer.getVirtualItems().find((item) => item.end > top + headerHeight);
-        if (!row) return;
-        const anchor = { key: String(row.key), offset: top - row.start, top };
-        anchorRef.current = anchor;
-        onScrollAnchorChange?.(anchor);
-      }}
-    >
-      {header ? (
-        <div ref={headerRef} className="desktop-virtual-list__header">
-          {header}
-        </div>
-      ) : null}
-      <div
-        className={classes('desktop-virtual-list__content', contentClassName)}
-        style={{ height: virtualizer.getTotalSize() }}
+    <ScrollEdgeFadeContext.Provider value={fade ? 'virtual' : false}>
+      <InternalScrollArea
+        ref={scrollRef}
+        role={role}
+        tabIndex={0}
+        aria-label={ariaLabel}
+        className={classes('desktop-virtual-list', className)}
+        style={style}
+        onScroll={(event) => {
+          if (restoringRef.current) return;
+          const top = event.currentTarget.scrollTop;
+          const row = virtualizer.getVirtualItems().find((item) => item.end > top + headerHeight);
+          if (!row) return;
+          const anchor = { key: String(row.key), offset: top - row.start, top };
+          anchorRef.current = anchor;
+          onScrollAnchorChange?.(anchor);
+        }}
       >
-        {virtualizer.getVirtualItems().map((row) => {
-          const item = items[row.index];
-          if (!item) return null;
-          return (
-            <div
-              key={row.key}
-              ref={virtualizer.measureElement}
-              data-index={row.index}
-              data-desktop-item-key={String(getItemKey(item, row.index))}
-              role={role === 'listbox' ? 'option' : 'listitem'}
-              className={classes(
-                'desktop-virtual-list__item',
-                typeof itemClassName === 'function' ? itemClassName(item, row.index) : itemClassName,
-              )}
-              style={{ transform: `translateY(${row.start - headerHeight}px)`, paddingInline: listRowInset }}
-            >
-              {renderItem(item, row.index)}
-            </div>
-          );
-        })}
-      </div>
-    </InternalScrollArea>
+        {header ? (
+          <div ref={headerRef} className="desktop-virtual-list__header">
+            {header}
+          </div>
+        ) : null}
+        <div
+          className={classes('desktop-virtual-list__content', contentClassName)}
+          style={{ height: virtualizer.getTotalSize() }}
+        >
+          {virtualizer.getVirtualItems().map((row) => {
+            const item = items[row.index];
+            if (!item) return null;
+            return (
+              <div
+                key={row.key}
+                ref={virtualizer.measureElement}
+                data-index={row.index}
+                data-desktop-item-key={String(getItemKey(item, row.index))}
+                role={role === 'listbox' ? 'option' : 'listitem'}
+                className={classes(
+                  'desktop-virtual-list__item',
+                  typeof itemClassName === 'function' ? itemClassName(item, row.index) : itemClassName,
+                )}
+                style={{
+                  transform: `translateY(${row.start - headerHeight}px)`,
+                  paddingInline: listRowInset,
+                }}
+              >
+                {renderItem(item, row.index)}
+              </div>
+            );
+          })}
+        </div>
+      </InternalScrollArea>
+    </ScrollEdgeFadeContext.Provider>
   );
 }

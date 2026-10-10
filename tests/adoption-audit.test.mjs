@@ -10,7 +10,7 @@ test('adoption scans pages and resolves private shared-control classes without m
     const files = {
       'pages/view.tsx':
         'import {Button as Action} from "@phd/ui"; const entryClass="entry"; const className="bg-red-500"; export const view=<Action className={entryClass}>Open</Action>;',
-      'styles/view.css': '.entry {padding:0;background:red}.entry small{color:gray}',
+      'styles/view.css': '.entry {padding:0;background:red}.entry small{color:gray}.table-wrap{padding:10px}',
       'tools/other/style.css': '.entry {background:blue}',
       'pages/files.tsx': 'export const view=<input type="file" hidden/>;',
     };
@@ -26,6 +26,11 @@ test('adoption scans pages and resolves private shared-control classes without m
     assert.equal(result.controlOverrides.length, 1);
     assert.equal(result.controlOverrides[0].selector, '.entry');
     assert.equal(result.exceptions.length, 1);
+    fs.appendFileSync(path.join(root, 'styles/view.css'), '.document th,.document td{padding:0}');
+    const tableStyles = auditControls(root, Object.keys(files).map((file) => path.join(root, file)));
+    assert.equal(tableStyles.controlOverrides.length, 2);
+    assert.equal(tableStyles.controlOverrides[1].selector, '.document th,.document td');
+    fs.writeFileSync(path.join(root, 'styles/view.css'), files['styles/view.css']);
     fs.writeFileSync(
       path.join(root, 'pages/view.tsx'),
       'import {Button as Action} from "@phd/ui"; const entryClass="entry px-0 text-[11px]"; export const view=<Action className={entryClass}>Open</Action>;',

@@ -1,5 +1,6 @@
 import { useEffect, useImperativeHandle, useMemo, useRef, useState, type CSSProperties, type ReactNode, type Ref, type UIEvent } from "react";
 import { listRowGap, listRowInset } from './list-geometry';
+import { InternalScrollArea } from './components/lists';
 
 export interface FixedVirtualListHandle {
   /** Scroll using the managed content height and row gap, including offscreen rows. */
@@ -82,7 +83,7 @@ export function FixedVirtualList<T>({
   const handleScroll = (event: UIEvent<HTMLDivElement>) => setScrollTop(event.currentTarget.scrollTop);
 
   return (
-    <div
+    <InternalScrollArea
       ref={viewportRef}
       className={['desktop-internal-scroll', 'desktop-fixed-virtual-list', className].filter(Boolean).join(' ')}
       style={style}
@@ -106,6 +107,6 @@ export function FixedVirtualList<T>({
           );
         })}
       </div>
-    </div>
+    </InternalScrollArea>
   );
 }

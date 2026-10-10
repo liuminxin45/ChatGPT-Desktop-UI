@@ -117,16 +117,33 @@ try {
       await list.evaluate((el) => (el.scrollTop = el.scrollHeight));
       await page.getByText('BUG-1999', { exact: true }).waitFor();
       assert.ok((await list.locator('[role=listitem]').count()) < 60);
-      const captureAnchor = () =>
-        list.evaluate((el) => {
+      const captureAnchor = async () => {
+        await page.waitForFunction(
+          () => {
+            const el = document.querySelector('[role="list"][aria-label="Records"]');
+            const bounds = el.getBoundingClientRect();
+            const top =
+              bounds.top + el.querySelector('.desktop-virtual-list__header').getBoundingClientRect().height;
+            return [...el.querySelectorAll('[data-desktop-item-key]')].some(
+              (row) =>
+                row.getBoundingClientRect().bottom > top && row.getBoundingClientRect().top < bounds.bottom,
+            );
+          },
+          null,
+          { timeout: 3000 },
+        );
+        return list.evaluate((el) => {
           const top =
             el.getBoundingClientRect().top +
             el.querySelector('.desktop-virtual-list__header').getBoundingClientRect().height;
           const row = [...el.querySelectorAll('[data-desktop-item-key]')].find(
-            (row) => row.getBoundingClientRect().bottom > top,
+            (row) =>
+              row.getBoundingClientRect().bottom > top &&
+              row.getBoundingClientRect().top < el.getBoundingClientRect().bottom,
           );
           return { key: row.dataset.desktopItemKey, offset: row.getBoundingClientRect().top - top };
         });
+      };
       await list.evaluate((el) => (el.scrollTop = el.scrollHeight / 2));
       await page.waitForTimeout(150);
       const anchor = await captureAnchor();

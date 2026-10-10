@@ -1,5 +1,6 @@
 import {
   useEffect,
+  useContext,
   useImperativeHandle,
   useRef,
   type CSSProperties,
@@ -10,6 +11,7 @@ import { useVirtualizer } from "@tanstack/react-virtual";
 
 import { cn } from './utils';
 import { InternalScrollArea } from './internal-scroll-area';
+import { ScrollEdgeFadeContext, scrollEdgeFadeSize } from '../components/lists/scroll-edge-fade';
 
 export interface VirtualListProps<T> {
   items: readonly T[];
@@ -51,6 +53,7 @@ export function VirtualList<T>({
   apiRef,
 }: VirtualListProps<T>) {
   "use no memo";
+  const fade = useContext(ScrollEdgeFadeContext);
 
   const scrollRef = useRef<HTMLDivElement>(null);
   // eslint-disable-next-line react-hooks/incompatible-library -- TanStack Virtual owns row measurement; this leaf is excluded from compiler memoization.
@@ -65,6 +68,8 @@ export function VirtualList<T>({
         : estimateSize(item, index);
     },
     overscan,
+    paddingEnd: fade ? scrollEdgeFadeSize : 0,
+    scrollPaddingEnd: fade ? scrollEdgeFadeSize : 0,
     getItemKey: (index) => {
       const item = items[index];
       return item ? getItemKey(item, index) : index;
@@ -85,6 +90,7 @@ export function VirtualList<T>({
   }, [resetKey]);
 
   return (
+    <ScrollEdgeFadeContext.Provider value={fade ? 'virtual' : false}>
     <InternalScrollArea
       ref={scrollRef}
       role={role}
@@ -118,5 +124,6 @@ export function VirtualList<T>({
         })}
       </div>
     </InternalScrollArea>
+    </ScrollEdgeFadeContext.Provider>
   );
 }

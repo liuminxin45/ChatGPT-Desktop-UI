@@ -122,7 +122,7 @@ export function auditControls(directory, files) {
         );
         if (
           !privateControlClass &&
-          !/(?:\.desktop-(?:button|input|textarea|select|table)(?=[\s.:#>+~\[]|$)|\b(?:button|input|textarea|select)\b)/.test(
+          !/(?:\.desktop-(?:button|input|textarea|select|table)(?=[\s.:#>+~\[]|$)|\b(?:button|input|textarea|select)\b|(?:^|[\s>+~])(?:table|th|td)(?=[\s.:#>+~\[)]|$))/.test(
             rule.selector,
           )
         )

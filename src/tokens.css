@@ -73,6 +73,8 @@
   --desktop-space-page-inline: 24px;
   --desktop-space-page-block: 20px;
   --desktop-size-page-bar: 48px;
+  --desktop-size-scroll-edge-fade: 24px;
+  --desktop-space-composer-dock: 12px;
   --desktop-size-reading-column: 1120px;
   --desktop-size-settings-column: 720px;
 
