@@ -1,0 +1,71 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "theme": "light",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "monospace": "ui-monospace, SFMono-Regular, Consolas, \"Liberation Mono\", Menlo, monospace",
+      "status": "passed"
+    },
+    {
+      "theme": "light",
+      "width": 1280,
+      "height": 800,
+      "scale": 1,
+      "monospace": "ui-monospace, SFMono-Regular, Consolas, \"Liberation Mono\", Menlo, monospace",
+      "status": "passed"
+    },
+    {
+      "theme": "light",
+      "width": 1536,
+      "height": 864,
+      "scale": 1.25,
+      "monospace": "ui-monospace, SFMono-Regular, Consolas, \"Liberation Mono\", Menlo, monospace",
+      "status": "passed"
+    },
+    {
+      "theme": "light",
+      "width": 420,
+      "height": 700,
+      "scale": 1,
+      "monospace": "ui-monospace, SFMono-Regular, Consolas, \"Liberation Mono\", Menlo, monospace",
+      "status": "passed"
+    },
+    {
+      "theme": "dark",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "monospace": "ui-monospace, SFMono-Regular, Consolas, \"Liberation Mono\", Menlo, monospace",
+      "status": "passed"
+    },
+    {
+      "theme": "dark",
+      "width": 1280,
+      "height": 800,
+      "scale": 1,
+      "monospace": "ui-monospace, SFMono-Regular, Consolas, \"Liberation Mono\", Menlo, monospace",
+      "status": "passed"
+    },
+    {
+      "theme": "dark",
+      "width": 1536,
+      "height": 864,
+      "scale": 1.25,
+      "monospace": "ui-monospace, SFMono-Regular, Consolas, \"Liberation Mono\", Menlo, monospace",
+      "status": "passed"
+    },
+    {
+      "theme": "dark",
+      "width": 420,
+      "height": 700,
+      "scale": 1,
+      "monospace": "ui-monospace, SFMono-Regular, Consolas, \"Liberation Mono\", Menlo, monospace",
+      "status": "passed"
+    }
+  ],
+  "errors": [],
+  "reference": "User supplied static captures; sweep and reveal timing are requested adaptations, not native timing measurements."
+}

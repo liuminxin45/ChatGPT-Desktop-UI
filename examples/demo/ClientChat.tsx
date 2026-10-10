@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Copy, Check, ThumbsUp, ThumbsDown, SpeakerHigh, ArrowsClockwise, DotsThree } from '@phosphor-icons/react';
-import { ConversationMessage, IconButton, DesktopMenu } from '../../src';
+import { AIResponse, ConversationMessage, IconButton, DesktopMenu } from '../../src';
 
 export function ClientChat({ messages }: { messages: { own: boolean; text: string }[] }) {
   const [copied, setCopied] = useState<number | null>(null);
@@ -29,7 +29,7 @@ export function ClientChat({ messages }: { messages: { own: boolean; text: strin
           <DesktopMenu trigger={<button className="desktop-icon-control" aria-label="More response actions"><DotsThree size={16} /></button>}
             items={[{ id: 'client.response.report', label: 'Report', disabled: true }, { id: 'client.response.share', label: 'Share', disabled: true }]} />
         </> : null}
-      </>}><div className="client-message-text">{message.text}</div></ConversationMessage>)}
+      </>}>{message.own ? <div className="client-message-text">{message.text}</div> : <AIResponse responseId={`chat-demo-${index}-${message.text.length}`} content={message.text} animate={index >= initial.length} />}</ConversationMessage>)}
     {notice ? <p role="status">{notice}</p> : null}
   </div>;
 }

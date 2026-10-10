@@ -1,0 +1,26 @@
+.desktop-ai-activity{display:inline-block;color:var(--desktop-color-text-muted);font-size:var(--desktop-font-size-body);line-height:var(--desktop-line-height-ui)}
+.desktop-ai-activity--compact{font-size:var(--desktop-font-size-supporting)}
+.desktop-ai-activity:not(.desktop-ai-activity--active){color:inherit;font:inherit}
+.desktop-ai-activity--active{background:linear-gradient(100deg,var(--desktop-color-text-muted) 38%,var(--desktop-color-text) 50%,var(--desktop-color-text-muted) 62%);background-size:250% 100%;background-clip:text;-webkit-background-clip:text;color:transparent;animation:desktop-ai-sweep 1.8s linear infinite}
+@keyframes desktop-ai-sweep{from{background-position:100% 0}to{background-position:-100% 0}}
+.desktop-ai-markdown.desktop-ai-markdown{min-width:0;max-width:100%;color:var(--desktop-color-text);font-size:inherit;line-height:1.65;overflow-wrap:anywhere}
+.desktop-ai-markdown.desktop-ai-markdown>:first-child{margin-top:0}.desktop-ai-markdown.desktop-ai-markdown>:last-child{margin-bottom:0}
+.desktop-ai-markdown.desktop-ai-markdown p{color:inherit;margin:0 0 1em;line-height:inherit}
+.desktop-ai-markdown.desktop-ai-markdown :is(h1,h2,h3,h4,h5,h6){color:inherit;line-height:1.35;margin:1.3em 0 .55em;font-weight:var(--desktop-font-weight-emphasis,600)}
+.desktop-ai-markdown.desktop-ai-markdown h1{font-size:1.4em}.desktop-ai-markdown.desktop-ai-markdown h2{font-size:1.25em}.desktop-ai-markdown.desktop-ai-markdown h3{font-size:1.12em}.desktop-ai-markdown.desktop-ai-markdown :is(h4,h5,h6){font-size:1em}
+.desktop-ai-markdown.desktop-ai-markdown :is(ul,ol){padding-inline-start:1.7em;margin:.7em 0 1em}.desktop-ai-markdown.desktop-ai-markdown li{margin:.25em 0;padding-inline-start:.2em}.desktop-ai-markdown.desktop-ai-markdown li>p{margin:.3em 0}.desktop-ai-markdown.desktop-ai-markdown li>:is(ul,ol){margin:.3em 0}
+.desktop-ai-markdown.desktop-ai-markdown blockquote{margin:1em 0;padding-inline-start:1em;border-inline-start:3px solid var(--desktop-color-border-strong);color:var(--desktop-color-text-subtle)}
+.desktop-ai-markdown.desktop-ai-markdown a{color:var(--desktop-color-text);text-decoration:underline;text-underline-offset:3px}
+.desktop-ai-markdown.desktop-ai-markdown code{font-family:var(--desktop-font-ai-code);font-size:.9em;line-height:inherit;font-weight:400}
+.desktop-ai-markdown.desktop-ai-markdown :not(pre)>code{background:var(--desktop-color-surface-muted);color:inherit;border-radius:4px;padding:.1em .32em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.desktop-ai-markdown.desktop-ai-markdown code::before,.desktop-ai-markdown.desktop-ai-markdown code::after{content:none}
+.desktop-ai-markdown.desktop-ai-markdown .desktop-markdown-codeblock{margin:1em 0;overflow:hidden;border-radius:10px;background:var(--desktop-color-surface-muted)}
+.desktop-ai-markdown.desktop-ai-markdown .desktop-markdown-codebar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 14px;background:var(--desktop-color-surface-hover);color:var(--desktop-color-text-muted);font-size:var(--desktop-font-size-supporting)}
+.desktop-markdown-copy{border:0;border-radius:4px;background:transparent;color:inherit;padding:2px 4px;font:inherit}.desktop-markdown-copy:hover{color:var(--desktop-color-text)}.desktop-markdown-copy:focus-visible{outline:2px solid var(--desktop-color-focus);outline-offset:2px}.desktop-markdown-copy:disabled{opacity:.5}
+.desktop-ai-markdown.desktop-ai-markdown pre{margin:0;padding:14px 16px;overflow-x:auto;max-width:100%;white-space:pre;line-height:1.6;color:var(--desktop-color-text);border:0;max-height:none}
+.desktop-ai-markdown.desktop-ai-markdown pre code{padding:0;background:transparent;white-space:inherit;overflow-wrap:normal}
+.desktop-ai-markdown.desktop-ai-markdown table{display:block;width:max-content;max-width:100%;overflow-x:auto;border-collapse:collapse;table-layout:auto;margin:1em 0}
+.desktop-ai-markdown.desktop-ai-markdown :is(th,td){border-bottom:1px solid var(--desktop-color-border);padding:8px 12px;text-align:start;min-width:90px;overflow-wrap:normal;color:inherit;font-size:inherit}
+.desktop-ai-markdown.desktop-ai-markdown tbody tr:hover{background:transparent}.desktop-ai-markdown.desktop-ai-markdown hr{border:0;border-top:1px solid var(--desktop-color-border);margin:1.5em 0}.desktop-ai-markdown.desktop-ai-markdown img{max-width:100%;height:auto}
+@media(prefers-reduced-motion:reduce){.desktop-ai-activity--active{animation:none;background:none;color:var(--desktop-color-text-muted)}}
+@media(forced-colors:active){.desktop-ai-activity--active{animation:none;background:none;color:CanvasText}}

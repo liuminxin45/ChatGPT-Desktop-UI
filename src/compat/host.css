@@ -21,6 +21,11 @@ html body * {
   font-family: var(--desktop-font-sans) !important;
 }
 
+/* Explicit AI Markdown exception; other Host and Tool typography is unchanged. */
+html body .desktop-ai-markdown code, html body .desktop-ai-markdown code * {
+  font-family: var(--desktop-font-ai-code) !important;
+}
+
 [data-desktop-wordmark] {
   font-weight: var(--desktop-font-weight-wordmark) !important;
 }

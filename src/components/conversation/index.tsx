@@ -82,6 +82,7 @@ export const ComposerActionButton = forwardRef<HTMLButtonElement, ComposerAction
     );
   },
 );
+export { AIResponse, AIResponseProvider, type AIResponseProps } from './ai-response';
 
 export interface ClientComposerProps {
   value: string;

@@ -159,3 +159,13 @@ Message composers use `ComposerActionButton` in chat, Codex/work, threads, follo
 State is explicit, never inferred from button text or a CSS class. `sendDisabled` only affects Send; an empty next draft cannot disable Stop. Sending must not claim cancellation is possible unless the Host provides it. Disabled/busy controls retain a localized accessible name and tooltip. Enter submits only a ready Send, Shift+Enter/IME remain text input, and Enter in an active response must not stop it. Stop is a pointer/Space command. Hosts own duplicate suppression, operation acknowledgements, failure recovery, draft preservation and correlated usage outcomes. The component owns presentation and action markers only.
 
 A labelled business operation (create, publish a report, apply, run a batch, stop a service) remains a labelled action; use its semantic icon. It is not a message composer simply because its handler submits data. Do not apply the circle to every form submit or Worker lifecycle command. The composer state gallery is `examples/composer-actions.tsx`; `npm run test:composer` covers all states, work/chat profile parity, keyboard behavior, draft preservation, reduced motion, both themes and 125% emulation.
+
+## AI activity and response presentation
+
+Use `AIActivity` for AI thinking, tool execution and generation: a quiet text-only neutral sweep, never a rotating glyph. Ordinary loading controls are independent. Reduced motion and forced colors use static readable text.
+
+AI prose uses `Markdown variant="ai"` or `AIResponse`: neutral code surfaces, baseline-aligned inline code, language/copy headers, wrapped prose and horizontally scrollable code/tables. Only AI code uses `--desktop-font-ai-code`; other Host typography retains its existing contract. No decorative backticks are rendered.
+
+Mount `AIResponseProvider` above virtualized conversation rows. Supply a stable `responseId` and set `animate` only for a newly received response. The provider retains bounded offsets/timing without response text; history is static. Streaming and complete responses share grapheme-safe batched presentation. Complete output catches up within approximately two seconds; cancellation, failure, hidden surfaces and reduced motion show all received content immediately. Host storage, copy/export/apply and diagnostics continue using canonical content, never the visible prefix.
+
+The Host remeasures dynamic rows and follows output only while the reader is at the bottom. Preserve history scroll position, drafts, selections and message state across theme/language changes. Animation timing is an adaptation requested on 2026-10-10, not a measured native-client fidelity claim. See the synthetic `/?ai-demo=1` scenario page for repeatable states.
