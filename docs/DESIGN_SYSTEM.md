@@ -2,6 +2,8 @@
 
 ## Action meaning and reading order
 
+Notifications and popup surfaces belong to the shared library. Use `Toaster`/`toast` for a global queue and `ToastNotice` for Host-owned transient state; preserve Host timing, command outcomes and localized labels. Notifications use the neutral overlay surface without success-colored left borders. Use `Popover` for anchored popup content and `InlineNotice` for persistent conditions. Hosts must not import a third-party notification renderer, hand-paint toast/popover containers, or override shared backgrounds, corners, shadows and control insets. Domain content may own its internal layout. Review temporary and failure surfaces as well as default pages.
+
 Organize around the current work: understand the object, perform its actions, record progress, then adjust secondary properties. Use one primary action at a time. Keep the title once, actions beside their objects, and dangerous actions apart from routine completion. A detail editor has one main scroll owner; long summaries and action text wrap instead of disappearing inside short fields. Use `Textarea autoSize` when the surrounding document should scroll.
 
 Use icon-only controls for familiar contextual actions: attachment, edit, delete entry, refresh and source. Keep short visible labels for save, complete, apply, process recording, menu items and destructive confirmations. Add both glyph and caption only when the glyph contributes meaning or live state, such as an assistant handoff or busy indicator. Do not decorate every label.

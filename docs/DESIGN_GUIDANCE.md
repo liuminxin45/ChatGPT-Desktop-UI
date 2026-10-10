@@ -1,5 +1,7 @@
 # Design guidance for a faithful adaptation
 
+Review transient notifications, undo actions, popup search, menus and failure conditions explicitly. An import audit that ignores hand-written containers misses incompatible UI. Shared library renderers own popup/notification paint; business layout must not restyle the surrounding Dialog or Popover. Verify close tooltips, Escape, focus return, long descriptions, narrow viewports and successful/failed commands through the actual consumer CSS pipeline.
+
 Audit the work sequence and action meaning before changing glyphs. Inventory every route, dialog, menu and nested detail across coordinated clients. For each, record primary/secondary actions, scrolling, icon semantics, useful text, fixes and observed states. Distinguish source review from rendered acceptance; inaccessible states remain open. A passing source audit cannot establish visual quality.
 
 Prefer a familiar icon for contextual auxiliary actions, a short caption for workflow/confirmation actions, and both only when the glyph adds meaning or status. Remove repeated titles and instructions, not necessary names or consequences. Start with shared components and document the same rules in the maintained Skill before migrating consumers.

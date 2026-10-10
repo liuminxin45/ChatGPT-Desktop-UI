@@ -73,3 +73,32 @@ AI typography is opt-in; default parsing and custom element adapters stay compat
 | components | no | `Components \| undefined` |
 | variant | no | `"default" \| "ai" \| undefined` |
 | copyDisabled | no | `boolean \| undefined` |
+
+## Toaster (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/feedback/toast.tsx)
+
+Single shared notification appearance; Sonner only owns queueing and dismissal behavior.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| position | no | `"bottom-left" \| "bottom-right" \| "top-left" \| "top-right" \| undefined` |
+| duration | no | `number \| undefined` |
+| label | no | `string \| undefined` |
+| actionId | no | `string \| undefined` |
+| surfaceId | no | `string \| undefined` |
+
+## ToastNotice (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/feedback/toast.tsx)
+
+Host-owned transient result; state, dismissal timing and commands stay in the Host.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| title | yes | `ReactNode` |
+| description | no | `ReactNode` |
+| tone | no | `"danger" \| "info" \| "warning" \| "success" \| undefined` |
+| onClose | yes | `() => void` |
+| closeLabel | yes | `string` |
+| actionId | yes | `string` |

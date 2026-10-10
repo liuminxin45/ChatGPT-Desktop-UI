@@ -23,6 +23,17 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | footer | no | `ReactNode` |
 | onClose | yes | `() => void` |
 
+## DropOverlay (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/overlays/index.tsx)
+
+Non-interactive file drop feedback; the Host owns drag events and attachment scope.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| label | yes | `string` |
+| surfaceId | no | `string \| undefined` |
+
 ## MenuButton (chatgpt-desktop-kit)
 
 [Implementation](../../../src/components/overlays/index.tsx)

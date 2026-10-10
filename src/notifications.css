@@ -1,0 +1,13 @@
+.desktop-toast-placement{position:fixed;right:24px;bottom:24px;z-index:1001;width:min(380px,calc(100vw - 48px));pointer-events:none}
+.desktop-toast{display:flex;align-items:center;gap:12px;width:100%;padding:14px 16px;border:1px solid var(--desktop-color-panel-boundary)!important;border-radius:var(--desktop-radius-overlay)!important;background:var(--desktop-color-surface-overlay)!important;color:var(--desktop-color-text)!important;box-shadow:var(--desktop-shadow-overlay)!important;font:400 var(--desktop-font-size-body)/var(--desktop-line-height-ui) var(--desktop-font-sans)!important;overflow-wrap:anywhere;pointer-events:auto}
+.desktop-toast-content,.desktop-toast [data-content]{flex:1;min-width:0;display:grid;gap:4px}
+.desktop-toast-title{color:var(--desktop-color-text)!important;font-weight:400!important}
+.desktop-toast-description{color:var(--desktop-color-text-muted)!important;font-size:var(--desktop-font-size-supporting)!important;line-height:var(--desktop-line-height-ui)!important}
+.desktop-toast-action,.desktop-toast-cancel,.desktop-toast-close{flex:none;display:inline-flex;align-items:center;justify-content:center;border:0!important;border-radius:var(--desktop-radius-control);background:transparent!important;color:var(--desktop-color-text)!important;font:400 var(--desktop-font-size-supporting)/var(--desktop-line-height-ui) var(--desktop-font-sans)!important;padding:5px 8px}
+.desktop-toast-action:hover,.desktop-toast-cancel:hover,.desktop-toast-close:hover{background:var(--desktop-color-surface-hover)!important}
+.desktop-toast-action:focus-visible,.desktop-toast-cancel:focus-visible,.desktop-toast-close:focus-visible{outline:2px solid var(--desktop-color-focus);outline-offset:2px}
+.desktop-toast-close[data-close-button]{order:3;position:relative;inset:auto;transform:none;width:28px;height:28px;padding:6px;margin-left:auto;border-radius:var(--desktop-radius-control)}
+.desktop-toast-close svg,.desktop-toast [data-icon] svg{width:16px;height:16px}
+.desktop-toast-close:is(:hover,:focus-visible)::after{content:attr(aria-label);position:absolute;right:0;bottom:calc(100% + 8px);width:max-content;padding:5px 8px;border-radius:var(--desktop-radius-control);background:var(--desktop-color-surface-overlay);color:var(--desktop-color-text);box-shadow:var(--desktop-shadow-overlay);font:400 var(--desktop-font-size-supporting)/var(--desktop-line-height-ui) var(--desktop-font-sans);pointer-events:none}
+.desktop-toast-notice>.desktop-button{flex:none}
+@media(max-width:480px){.desktop-toast-placement{right:12px;bottom:12px;width:calc(100vw - 24px)}}

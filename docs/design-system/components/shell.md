@@ -120,4 +120,4 @@ The host provides native/history actions. No native window IPC or persistence is
 | --- | --- | --- |
 | label | yes | `string` |
 | children | yes | `ReactNode` |
-| side | no | `"left" \| "right" \| "top" \| "bottom" \| undefined` |
+| side | no | `"top" \| "right" \| "bottom" \| "left" \| undefined` |

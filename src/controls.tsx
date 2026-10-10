@@ -9,3 +9,4 @@ export * from './components/layout';
 export * from './components/overlays';
 export * from './components/feedback';
 export * from './components/tables';
+export { Popover, PopoverTrigger, PopoverContent } from './components/radix/popover';

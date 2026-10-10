@@ -1,11 +1,20 @@
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { useContext, useEffect, useId, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
-import { ChevronDownIcon, CloseIcon } from '../../icons';
+import { AttachmentIcon, ChevronDownIcon, CloseIcon } from '../../icons';
 import { useTranslation } from '../../strings';
 import { ToolVisibilityContext } from '../../surface-visibility';
 import { Button, IconButton } from '../actions';
 import { classes } from '../classes';
 import { InternalScrollArea } from '../lists';
+/** Non-interactive file drop feedback; the Host owns drag events and attachment scope. */
+export function DropOverlay({ label, surfaceId }: { label: string; surfaceId?: string }) {
+  return (
+    <div className="desktop-drop-overlay" role="status" data-desktop-surface={surfaceId}>
+      <AttachmentIcon size={20} aria-hidden="true" />
+      <span>{label}</span>
+    </div>
+  );
+}
 export function MenuButton({
   label,
   actionId,

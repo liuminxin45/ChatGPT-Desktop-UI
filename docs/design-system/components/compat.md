@@ -8,6 +8,52 @@ Runnable composition: [example](../../../examples/catalog/CompatExamples.tsx).
 
 Generated from TypeScript exports; edit implementation props/JSDoc, then run `npm run docs:generate`. Native React attributes remain available in the online API catalog.
 
+## Popover (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/radix/popover.tsx)
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| children | no | `React.ReactNode` |
+| open | no | `boolean \| undefined` |
+| defaultOpen | no | `boolean \| undefined` |
+| onOpenChange | no | `((open: boolean) => void) \| undefined` |
+| modal | no | `boolean \| undefined` |
+
+## PopoverContent (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/radix/popover.tsx)
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| asChild | no | `boolean \| undefined` |
+| align | no | `"center" \| "end" \| "start" \| undefined` |
+| side | no | `"top" \| "right" \| "bottom" \| "left" \| undefined` |
+| sideOffset | no | `number \| undefined` |
+| alignOffset | no | `number \| undefined` |
+| arrowPadding | no | `number \| undefined` |
+| avoidCollisions | no | `boolean \| undefined` |
+| collisionBoundary | no | `(Element \| null) \| (Element \| null)[] \| undefined` |
+| collisionPadding | no | `number \| Partial<Record<"top" \| "right" \| "bottom" \| "left", number>> \| undefined` |
+| sticky | no | `"partial" \| "always" \| undefined` |
+| hideWhenDetached | no | `boolean \| undefined` |
+| updatePositionStrategy | no | `"always" \| "optimized" \| undefined` |
+| onEscapeKeyDown | no | `((event: KeyboardEvent) => void) \| undefined` |
+| onPointerDownOutside | no | `((event: CustomEvent<{ originalEvent: PointerEvent; }>) => void) \| undefined` |
+| onFocusOutside | no | `((event: CustomEvent<{ originalEvent: FocusEvent; }>) => void) \| undefined` |
+| onInteractOutside | no | `((event: CustomEvent<{ originalEvent: PointerEvent; }> \| CustomEvent<{ originalEvent: FocusEvent; }>) => void) \| undefined` |
+| onOpenAutoFocus | no | `((event: Event) => void) \| undefined` |
+| onCloseAutoFocus | no | `((event: Event) => void) \| undefined` |
+| forceMount | no | `true \| undefined` |
+
+## PopoverTrigger (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/radix/popover.tsx)
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| asChild | no | `boolean \| undefined` |
+
 ## AlertDialog (chatgpt-desktop-kit/compat/alert-dialog)
 
 [Implementation](../../../src/components/radix/app-dialog.tsx)
@@ -202,14 +248,14 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 | Prop | Required | Type |
 | --- | --- | --- |
-| variant | no | `"link" \| "primary" \| "secondary" \| "ghost" \| "default" \| "destructive" \| "outline" \| null \| undefined` |
-| size | no | `"icon" \| "sm" \| "default" \| "lg" \| null \| undefined` |
+| asChild | no | `boolean \| undefined` |
+| size | no | `"default" \| "icon" \| "sm" \| "lg" \| null \| undefined` |
+| variant | no | `"link" \| "default" \| "primary" \| "secondary" \| "ghost" \| "destructive" \| "outline" \| null \| undefined` |
 | actionId | no | `string \| undefined` |
 | confirmOnEnter | no | `boolean \| undefined` |
 | icon | no | `React.ReactNode` |
 | iconOnly | no | `boolean \| undefined` |
 | badge | no | `React.ReactNode` |
-| asChild | no | `boolean \| undefined` |
 
 ## AppDialogBody (chatgpt-desktop-kit/compat/app-dialog)
 
@@ -224,14 +270,14 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 | Prop | Required | Type |
 | --- | --- | --- |
-| variant | no | `"link" \| "primary" \| "secondary" \| "ghost" \| "default" \| "destructive" \| "outline" \| null \| undefined` |
-| size | no | `"icon" \| "sm" \| "default" \| "lg" \| null \| undefined` |
+| asChild | no | `boolean \| undefined` |
+| size | no | `"default" \| "icon" \| "sm" \| "lg" \| null \| undefined` |
+| variant | no | `"link" \| "default" \| "primary" \| "secondary" \| "ghost" \| "destructive" \| "outline" \| null \| undefined` |
 | actionId | no | `string \| undefined` |
 | confirmOnEnter | no | `boolean \| undefined` |
 | icon | no | `React.ReactNode` |
 | iconOnly | no | `boolean \| undefined` |
 | badge | no | `React.ReactNode` |
-| asChild | no | `boolean \| undefined` |
 
 ## AppDialogClose (chatgpt-desktop-kit/compat/app-dialog)
 
@@ -343,14 +389,14 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 | Prop | Required | Type |
 | --- | --- | --- |
-| variant | no | `"link" \| "primary" \| "secondary" \| "ghost" \| "default" \| "destructive" \| "outline" \| null \| undefined` |
-| size | no | `"icon" \| "sm" \| "default" \| "lg" \| null \| undefined` |
+| asChild | no | `boolean \| undefined` |
+| size | no | `"default" \| "icon" \| "sm" \| "lg" \| null \| undefined` |
+| variant | no | `"link" \| "default" \| "primary" \| "secondary" \| "ghost" \| "destructive" \| "outline" \| null \| undefined` |
 | actionId | no | `string \| undefined` |
 | confirmOnEnter | no | `boolean \| undefined` |
 | icon | no | `React.ReactNode` |
 | iconOnly | no | `boolean \| undefined` |
 | badge | no | `React.ReactNode` |
-| asChild | no | `boolean \| undefined` |
 
 ## DialogClose (chatgpt-desktop-kit/compat/app-dialog)
 
@@ -469,7 +515,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 | Prop | Required | Type |
 | --- | --- | --- |
-| variant | no | `"secondary" \| "default" \| "destructive" \| "outline" \| null \| undefined` |
+| variant | no | `"default" \| "secondary" \| "destructive" \| "outline" \| null \| undefined` |
 | asChild | no | `boolean \| undefined` |
 
 ## Button (chatgpt-desktop-kit/compat/button)
@@ -478,8 +524,8 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 | Prop | Required | Type |
 | --- | --- | --- |
-| variant | no | `"link" \| "primary" \| "secondary" \| "ghost" \| "default" \| "destructive" \| "outline" \| null \| undefined` |
-| size | no | `"icon" \| "sm" \| "default" \| "lg" \| null \| undefined` |
+| size | no | `"default" \| "icon" \| "sm" \| "lg" \| null \| undefined` |
+| variant | no | `"link" \| "default" \| "primary" \| "secondary" \| "ghost" \| "destructive" \| "outline" \| null \| undefined` |
 | asChild | no | `boolean \| undefined` |
 | actionId | no | `string \| undefined` |
 | confirmOnEnter | no | `boolean \| undefined` |
@@ -493,7 +539,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 | Prop | Required | Type |
 | --- | --- | --- |
-| mode | no | `"range" \| "multiple" \| "default" \| "single" \| undefined` |
+| mode | no | `"multiple" \| "default" \| "range" \| "single" \| undefined` |
 | className | no | `string \| undefined` |
 | classNames | no | `Partial<StyledElement<string>> \| undefined` |
 | modifiersClassNames | no | `ModifiersClassNames \| undefined` |
@@ -519,8 +565,8 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | hideHead | no | `boolean \| undefined` |
 | showOutsideDays | no | `boolean \| undefined` |
 | showWeekNumber | no | `boolean \| undefined` |
-| weekStartsOn | no | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6 \| undefined` |
-| firstWeekContainsDate | no | `1 \| 4 \| undefined` |
+| weekStartsOn | no | `0 \| 3 \| 4 \| 1 \| 2 \| 5 \| 6 \| undefined` |
+| firstWeekContainsDate | no | `4 \| 1 \| undefined` |
 | ISOWeek | no | `boolean \| undefined` |
 | components | no | `CustomComponents \| undefined` |
 | footer | no | `React.ReactNode` |
@@ -648,10 +694,10 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 | Prop | Required | Type |
 | --- | --- | --- |
-| onSelect | no | `((event: Event) => void) \| undefined` |
 | disabled | no | `boolean \| undefined` |
-| checked | no | `(boolean \| "indeterminate") \| undefined` |
+| onSelect | no | `((event: Event) => void) \| undefined` |
 | asChild | no | `boolean \| undefined` |
+| checked | no | `(boolean \| "indeterminate") \| undefined` |
 | textValue | no | `string \| undefined` |
 | onCheckedChange | no | `((checked: boolean) => void) \| undefined` |
 
@@ -661,25 +707,25 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 | Prop | Required | Type |
 | --- | --- | --- |
-| align | no | `"center" \| "start" \| "end" \| undefined` |
 | asChild | no | `boolean \| undefined` |
+| loop | no | `boolean \| undefined` |
+| align | no | `"center" \| "end" \| "start" \| undefined` |
+| side | no | `"top" \| "right" \| "bottom" \| "left" \| undefined` |
+| sideOffset | no | `number \| undefined` |
+| alignOffset | no | `number \| undefined` |
+| arrowPadding | no | `number \| undefined` |
+| avoidCollisions | no | `boolean \| undefined` |
+| collisionBoundary | no | `(Element \| null) \| (Element \| null)[] \| undefined` |
+| collisionPadding | no | `number \| Partial<Record<"top" \| "right" \| "bottom" \| "left", number>> \| undefined` |
+| sticky | no | `"partial" \| "always" \| undefined` |
+| hideWhenDetached | no | `boolean \| undefined` |
+| updatePositionStrategy | no | `"always" \| "optimized" \| undefined` |
 | onEscapeKeyDown | no | `((event: KeyboardEvent) => void) \| undefined` |
 | onPointerDownOutside | no | `((event: CustomEvent<{ originalEvent: PointerEvent; }>) => void) \| undefined` |
 | onFocusOutside | no | `((event: CustomEvent<{ originalEvent: FocusEvent; }>) => void) \| undefined` |
 | onInteractOutside | no | `((event: CustomEvent<{ originalEvent: PointerEvent; }> \| CustomEvent<{ originalEvent: FocusEvent; }>) => void) \| undefined` |
 | onCloseAutoFocus | no | `((event: Event) => void) \| undefined` |
 | forceMount | no | `true \| undefined` |
-| loop | no | `boolean \| undefined` |
-| side | no | `"left" \| "right" \| "top" \| "bottom" \| undefined` |
-| sideOffset | no | `number \| undefined` |
-| alignOffset | no | `number \| undefined` |
-| arrowPadding | no | `number \| undefined` |
-| avoidCollisions | no | `boolean \| undefined` |
-| collisionBoundary | no | `(Element \| null) \| (Element \| null)[] \| undefined` |
-| collisionPadding | no | `number \| Partial<Record<"left" \| "right" \| "top" \| "bottom", number>> \| undefined` |
-| sticky | no | `"partial" \| "always" \| undefined` |
-| hideWhenDetached | no | `boolean \| undefined` |
-| updatePositionStrategy | no | `"always" \| "optimized" \| undefined` |
 
 ## DropdownMenuGroup (chatgpt-desktop-kit/compat/dropdown-menu)
 
@@ -695,8 +741,8 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 | Prop | Required | Type |
 | --- | --- | --- |
-| onSelect | no | `((event: Event) => void) \| undefined` |
 | disabled | no | `boolean \| undefined` |
+| onSelect | no | `((event: Event) => void) \| undefined` |
 | asChild | no | `boolean \| undefined` |
 | textValue | no | `string \| undefined` |
 | inset | no | `boolean \| undefined` |
@@ -729,8 +775,8 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | Prop | Required | Type |
 | --- | --- | --- |
 | value | no | `string \| undefined` |
-| onValueChange | no | `((value: string) => void) \| undefined` |
 | asChild | no | `boolean \| undefined` |
+| onValueChange | no | `((value: string) => void) \| undefined` |
 
 ## DropdownMenuRadioItem (chatgpt-desktop-kit/compat/dropdown-menu)
 
@@ -738,9 +784,9 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 | Prop | Required | Type |
 | --- | --- | --- |
-| onSelect | no | `((event: Event) => void) \| undefined` |
 | disabled | no | `boolean \| undefined` |
 | value | yes | `string` |
+| onSelect | no | `((event: Event) => void) \| undefined` |
 | asChild | no | `boolean \| undefined` |
 | textValue | no | `string \| undefined` |
 
@@ -777,21 +823,21 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | Prop | Required | Type |
 | --- | --- | --- |
 | asChild | no | `boolean \| undefined` |
-| onEscapeKeyDown | no | `((event: KeyboardEvent) => void) \| undefined` |
-| onPointerDownOutside | no | `((event: CustomEvent<{ originalEvent: PointerEvent; }>) => void) \| undefined` |
-| onFocusOutside | no | `((event: CustomEvent<{ originalEvent: FocusEvent; }>) => void) \| undefined` |
-| onInteractOutside | no | `((event: CustomEvent<{ originalEvent: PointerEvent; }> \| CustomEvent<{ originalEvent: FocusEvent; }>) => void) \| undefined` |
-| forceMount | no | `true \| undefined` |
 | loop | no | `boolean \| undefined` |
 | sideOffset | no | `number \| undefined` |
 | alignOffset | no | `number \| undefined` |
 | arrowPadding | no | `number \| undefined` |
 | avoidCollisions | no | `boolean \| undefined` |
 | collisionBoundary | no | `(Element \| null) \| (Element \| null)[] \| undefined` |
-| collisionPadding | no | `number \| Partial<Record<"left" \| "right" \| "top" \| "bottom", number>> \| undefined` |
+| collisionPadding | no | `number \| Partial<Record<"top" \| "right" \| "bottom" \| "left", number>> \| undefined` |
 | sticky | no | `"partial" \| "always" \| undefined` |
 | hideWhenDetached | no | `boolean \| undefined` |
 | updatePositionStrategy | no | `"always" \| "optimized" \| undefined` |
+| onEscapeKeyDown | no | `((event: KeyboardEvent) => void) \| undefined` |
+| onPointerDownOutside | no | `((event: CustomEvent<{ originalEvent: PointerEvent; }>) => void) \| undefined` |
+| onFocusOutside | no | `((event: CustomEvent<{ originalEvent: FocusEvent; }>) => void) \| undefined` |
+| onInteractOutside | no | `((event: CustomEvent<{ originalEvent: PointerEvent; }> \| CustomEvent<{ originalEvent: FocusEvent; }>) => void) \| undefined` |
+| forceMount | no | `true \| undefined` |
 
 ## DropdownMenuSubTrigger (chatgpt-desktop-kit/compat/dropdown-menu)
 
@@ -871,8 +917,18 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 | Prop | Required | Type |
 | --- | --- | --- |
-| align | no | `"center" \| "start" \| "end" \| undefined` |
 | asChild | no | `boolean \| undefined` |
+| align | no | `"center" \| "end" \| "start" \| undefined` |
+| side | no | `"top" \| "right" \| "bottom" \| "left" \| undefined` |
+| sideOffset | no | `number \| undefined` |
+| alignOffset | no | `number \| undefined` |
+| arrowPadding | no | `number \| undefined` |
+| avoidCollisions | no | `boolean \| undefined` |
+| collisionBoundary | no | `(Element \| null) \| (Element \| null)[] \| undefined` |
+| collisionPadding | no | `number \| Partial<Record<"top" \| "right" \| "bottom" \| "left", number>> \| undefined` |
+| sticky | no | `"partial" \| "always" \| undefined` |
+| hideWhenDetached | no | `boolean \| undefined` |
+| updatePositionStrategy | no | `"always" \| "optimized" \| undefined` |
 | onEscapeKeyDown | no | `((event: KeyboardEvent) => void) \| undefined` |
 | onPointerDownOutside | no | `((event: CustomEvent<{ originalEvent: PointerEvent; }>) => void) \| undefined` |
 | onFocusOutside | no | `((event: CustomEvent<{ originalEvent: FocusEvent; }>) => void) \| undefined` |
@@ -880,16 +936,6 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | onOpenAutoFocus | no | `((event: Event) => void) \| undefined` |
 | onCloseAutoFocus | no | `((event: Event) => void) \| undefined` |
 | forceMount | no | `true \| undefined` |
-| side | no | `"left" \| "right" \| "top" \| "bottom" \| undefined` |
-| sideOffset | no | `number \| undefined` |
-| alignOffset | no | `number \| undefined` |
-| arrowPadding | no | `number \| undefined` |
-| avoidCollisions | no | `boolean \| undefined` |
-| collisionBoundary | no | `(Element \| null) \| (Element \| null)[] \| undefined` |
-| collisionPadding | no | `number \| Partial<Record<"left" \| "right" \| "top" \| "bottom", number>> \| undefined` |
-| sticky | no | `"partial" \| "always" \| undefined` |
-| hideWhenDetached | no | `boolean \| undefined` |
-| updatePositionStrategy | no | `"always" \| "optimized" \| undefined` |
 
 ## PopoverTrigger (chatgpt-desktop-kit/compat/popover)
 
@@ -950,21 +996,21 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 | Prop | Required | Type |
 | --- | --- | --- |
-| align | no | `"center" \| "start" \| "end" \| undefined` |
 | asChild | no | `boolean \| undefined` |
-| onEscapeKeyDown | no | `((event: KeyboardEvent) => void) \| undefined` |
-| onPointerDownOutside | no | `((event: CustomEvent<{ originalEvent: PointerEvent; }>) => void) \| undefined` |
-| onCloseAutoFocus | no | `((event: Event) => void) \| undefined` |
-| side | no | `"left" \| "right" \| "top" \| "bottom" \| undefined` |
+| align | no | `"center" \| "end" \| "start" \| undefined` |
+| side | no | `"top" \| "right" \| "bottom" \| "left" \| undefined` |
 | sideOffset | no | `number \| undefined` |
 | alignOffset | no | `number \| undefined` |
 | arrowPadding | no | `number \| undefined` |
 | avoidCollisions | no | `boolean \| undefined` |
 | collisionBoundary | no | `(Element \| null) \| (Element \| null)[] \| undefined` |
-| collisionPadding | no | `number \| Partial<Record<"left" \| "right" \| "top" \| "bottom", number>> \| undefined` |
+| collisionPadding | no | `number \| Partial<Record<"top" \| "right" \| "bottom" \| "left", number>> \| undefined` |
 | sticky | no | `"partial" \| "always" \| undefined` |
 | hideWhenDetached | no | `boolean \| undefined` |
 | updatePositionStrategy | no | `"always" \| "optimized" \| undefined` |
+| onEscapeKeyDown | no | `((event: KeyboardEvent) => void) \| undefined` |
+| onPointerDownOutside | no | `((event: CustomEvent<{ originalEvent: PointerEvent; }>) => void) \| undefined` |
+| onCloseAutoFocus | no | `((event: Event) => void) \| undefined` |
 | position | no | `"item-aligned" \| "popper" \| undefined` |
 
 ## SelectControl (chatgpt-desktop-kit/compat/select)
@@ -1083,9 +1129,9 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | Prop | Required | Type |
 | --- | --- | --- |
 | defaultChecked | no | `boolean \| undefined` |
+| asChild | no | `boolean \| undefined` |
 | checked | no | `boolean \| undefined` |
 | required | no | `boolean \| undefined` |
-| asChild | no | `boolean \| undefined` |
 | onCheckedChange | no | `((checked: boolean) => void) \| undefined` |
 
 ## Textarea (chatgpt-desktop-kit/compat/textarea)

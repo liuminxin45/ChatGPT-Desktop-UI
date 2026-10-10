@@ -9,6 +9,7 @@ export function auditControls(directory, files) {
     exceptions = [],
     controlOverrides = [];
   const sharedClasses = new Map();
+  const feedbackClasses = new Map();
   const scope = (file) =>
     path
       .relative(directory, file)
@@ -18,6 +19,8 @@ export function auditControls(directory, files) {
   for (const { file, source } of sources.filter((item) => /\.[jt]sx?$/.test(item.file))) {
     const classes = sharedClasses.get(scope(file)) || new Set();
     sharedClasses.set(scope(file), classes);
+    const feedback = feedbackClasses.get(scope(file)) || new Set();
+    feedbackClasses.set(scope(file), feedback);
     const tree = ts.createSourceFile(
       file,
       source,
@@ -34,22 +37,62 @@ export function auditControls(directory, files) {
     }
     index(tree);
     tree.forEachChild((node) => {
+      if (ts.isImportDeclaration(node) && node.moduleSpecifier.text === 'sonner') {
+        controlOverrides.push({
+          file: path.relative(directory, file).replaceAll('\\', '/'),
+          line: tree.getLineAndCharacterOfPosition(node.getStart(tree)).line + 1,
+          selector: 'sonner import',
+          properties: ['notification ownership must use chatgpt-desktop-kit'],
+        });
+      }
       if (
         !ts.isImportDeclaration(node) ||
-        !/(?:^@phd\/ui|^chatgpt-desktop-kit|components\/ui|packages\/ph[d]-ui)/.test(node.moduleSpecifier.text)
+        !/(?:^@phd\/ui|^chatgpt-desktop-kit|components\/ui|packages\/ph[d]-ui)/.test(
+          node.moduleSpecifier.text,
+        )
       )
         return;
       const bindings = node.importClause?.namedBindings;
       if (!bindings || !ts.isNamedImports(bindings)) return;
       for (const binding of bindings.elements)
         if (
-          /^(?:Button|IconButton|Input|Textarea|Select|SelectTrigger|Checkbox|Radio|Switch|Table|TableHeaderCell|TableCell)$/.test(
+          /^(?:Button|IconButton|Input|Textarea|Select|SelectTrigger|Checkbox|Radio|Switch|Table|TableHeaderCell|TableCell|ToastNotice|Toaster|DropOverlay|PopoverContent|DropdownMenuContent|TooltipContent|DialogContent|DialogHeader|DialogTitle|DialogDescription|DialogFooter|DialogBody|AlertDialogContent|AlertDialogHeader|AlertDialogTitle|AlertDialogDescription|AlertDialogFooter|InlineNotice|ErrorState|EmptyState)$/.test(
             (binding.propertyName || binding.name).text,
           )
         )
           controls.add(binding.name.text);
     });
     function visit(node) {
+      if (
+        (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) &&
+        /^(?:div|p|section|aside)$/.test(node.tagName.getText(tree))
+      ) {
+        const role = node.attributes.properties.find(
+          (item) => ts.isJsxAttribute(item) && item.name.getText(tree) === 'role',
+        );
+        if (role?.initializer && /^(?:"|')(?:alert|status)(?:"|')$/.test(role.initializer.getText(tree))) {
+          const className = node.attributes.properties.find(
+            (item) => ts.isJsxAttribute(item) && item.name.getText(tree) === 'className',
+          );
+          const painted = new Set();
+          function inspect(value) {
+            if (ts.isStringLiteral(value) || ts.isNoSubstitutionTemplateLiteral(value))
+              for (const token of value.text.split(/\s+/)) {
+                if (/^[\w-]+$/.test(token)) feedback.add(token);
+                if (/(^|:)(?:bg-|rounded|border(?:-|$)|shadow)/.test(token)) painted.add(token);
+              }
+            ts.forEachChild(value, inspect);
+          }
+          if (className?.initializer) inspect(className.initializer);
+          if (painted.size)
+            controlOverrides.push({
+              file: path.relative(directory, file).replaceAll('\\', '/'),
+              line: tree.getLineAndCharacterOfPosition(node.getStart(tree)).line + 1,
+              selector: 'custom ' + role.initializer.text + ' surface',
+              properties: [...painted],
+            });
+        }
+      }
       if (
         (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) &&
         controls.has(node.tagName.getText(tree))
@@ -120,9 +163,30 @@ export function auditControls(directory, files) {
               .matchAll(/\.([\w-]+)/g),
           ].some((match) => classes.has(match[1])),
         );
+        const privateOverlay =
+          /\.(?:[\w-]*toast[\w-]*|[\w-]*popover[\w-]*)(?=[\s.:#>+~\[]|$)/.test(rule.selector) &&
+          rule.nodes.some(
+            (node) =>
+              node.type === 'decl' && /^(?:background(?:-color)?|border(?:-.+)?|box-shadow)$/.test(node.prop),
+          );
+        const privateFeedback =
+          rule.selectors.some((selector) =>
+            [
+              ...selector
+                .split(/[\s>+~]+/)
+                .at(-1)
+                .matchAll(/\.([\w-]+)/g),
+            ].some((match) => feedbackClasses.get(scope(file))?.has(match[1])),
+          ) &&
+          rule.nodes.some(
+            (node) =>
+              node.type === 'decl' && /^(?:background(?:-color)?|border(?:-.+)?|box-shadow)$/.test(node.prop),
+          );
         if (
+          !privateOverlay &&
+          !privateFeedback &&
           !privateControlClass &&
-          !/(?:\.desktop-(?:button|input|textarea|select|table)(?=[\s.:#>+~\[]|$)|\b(?:button|input|textarea|select)\b|(?:^|[\s>+~])(?:table|th|td)(?=[\s.:#>+~\[)]|$))/.test(
+          !/(?:\.desktop-(?:button|input|textarea|select|table|toast|popover|menu-content|dialog)(?=[\s.:#>+~\[]|$)|\b(?:button|input|textarea|select)\b|(?:^|[\s>+~])(?:table|th|td)(?=[\s.:#>+~\[)]|$))/.test(
             rule.selector,
           )
         )

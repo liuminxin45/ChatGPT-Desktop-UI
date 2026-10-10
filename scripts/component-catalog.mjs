@@ -107,13 +107,15 @@ export function createCatalog() {
       if (implementation === 'src/navigation.tsx') continue; // Icon API has its own ownership contract.
       const family = entry.includes('/compat/')
         ? 'compat'
-        : implementation.match(/components\/([^/]+)/)?.[1] ||
-          ({
-            'src/shell.tsx': 'shell',
-            'src/client-patterns.tsx': 'client',
-            'src/conversation.tsx': 'conversation',
-          }[implementation] ??
-            'runtime');
+        : implementation.includes('/radix/')
+          ? 'compat'
+          : implementation.match(/components\/([^/]+)/)?.[1] ||
+            ({
+              'src/shell.tsx': 'shell',
+              'src/client-patterns.tsx': 'client',
+              'src/conversation.tsx': 'conversation',
+            }[implementation] ??
+              'runtime');
       if (!families[family]) throw Error(`Unregistered family: ${implementation}`);
       const propsType = checker.getTypeOfSymbolAtLocation(signature.parameters[0], declaration);
       const props = checker

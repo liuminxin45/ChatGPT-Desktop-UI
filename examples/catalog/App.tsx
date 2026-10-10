@@ -31,7 +31,7 @@ import './catalog.css';
 const groups = [
   {
     name: 'Controls',
-    families: ['actions', 'forms', 'navigation', 'layout', 'overlays', 'lists', 'feedback'],
+    families: ['actions', 'forms', 'navigation', 'layout', 'overlays', 'lists', 'tables', 'feedback'],
   },
   { name: 'Patterns', families: ['shell', 'client', 'conversation'] },
   { name: 'Integration', families: ['runtime', 'compat'] },
@@ -43,6 +43,7 @@ const labels: Record<string, string> = {
   layout: 'Layout',
   overlays: 'Overlays',
   lists: 'Lists',
+  tables: 'Tables',
   feedback: 'Feedback',
   shell: 'Shell',
   client: 'Client',

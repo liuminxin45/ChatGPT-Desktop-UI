@@ -38,8 +38,8 @@ A host-owned action tree; no native commands or external transmission are inferr
 | trigger | yes | `ReactElement<any, string \| JSXElementConstructor<any>>` |
 | items | yes | `DesktopMenuItem[]` |
 | heading | no | `ReactNode` |
-| side | no | `"left" \| "right" \| "top" \| "bottom" \| undefined` |
-| align | no | `"center" \| "start" \| "end" \| undefined` |
+| side | no | `"top" \| "right" \| "bottom" \| "left" \| undefined` |
+| align | no | `"center" \| "end" \| "start" \| undefined` |
 | className | no | `string \| undefined` |
 | onOpenChange | no | `((open: boolean) => void) \| undefined` |
 

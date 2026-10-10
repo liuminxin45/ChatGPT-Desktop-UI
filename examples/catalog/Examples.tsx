@@ -22,8 +22,15 @@ import {
   Tabs,
   MenuButton,
   Dialog,
+  DropOverlay,
   EmptyState,
   ErrorState,
+  ToastNotice,
+  Toaster,
+  toast,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
   LoadingSkeleton,
   Markdown,
   Surface,
@@ -65,6 +72,7 @@ export function Examples({ family }: { family: string }) {
   const [open, setOpen] = useState(false);
   const [section, setSection] = useState(true);
   const [submitted, setSubmitted] = useState('');
+  const [dragPreview, setDragPreview] = useState(false);
   const field = (
     <Input aria-label="Project name" value={value} onChange={(event) => setValue(event.target.value)} />
   );
@@ -238,6 +246,30 @@ export function Examples({ family }: { family: string }) {
           }
         />
         <LoadingSkeleton />
+        <Toaster />
+        <Button
+          actionId="reference.toast.show"
+          onClick={() => {
+            toast.success('Changes saved');
+            setSubmitted('Changes saved');
+          }}
+        >
+          Show notification
+        </Button>
+        {submitted ? (
+          <ToastNotice
+            title={submitted}
+            actionId="reference.toast.close"
+            closeLabel="Close notification"
+            onClose={() => setSubmitted('')}
+          />
+        ) : null}
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button actionId="reference.popover.open">Details</Button>
+          </PopoverTrigger>
+          <PopoverContent align="start">Additional details</PopoverContent>
+        </Popover>
         <Markdown>{'**Release checklist**\n\n- Review changes\n- Verify the build'}</Markdown>
         <span role="status">{submitted}</span>
       </>
@@ -245,6 +277,14 @@ export function Examples({ family }: { family: string }) {
   if (family === 'layout')
     return (
       <Surface>
+        <Button actionId="reference.drop.preview" onClick={() => setDragPreview((v) => !v)}>
+          Preview file drop
+        </Button>
+        {dragPreview ? (
+          <div style={{ position: 'relative', height: 72 }}>
+            <DropOverlay label="Drop files to attach" surfaceId="reference.attachments.drop" />
+          </div>
+        ) : null}
         <WorkbenchPage>
           <PageBar
             navigation={<span>Release planning</span>}

@@ -16,7 +16,7 @@ Fixed input region adjoining ScrollEdgeFade. Hosts retain state and controls.
 
 | Prop | Required | Type |
 | --- | --- | --- |
-| inset | no | `"compact" \| "responsive" \| "none" \| undefined` |
+| inset | no | `"none" \| "compact" \| "responsive" \| undefined` |
 
 ## InternalScrollArea (chatgpt-desktop-kit)
 

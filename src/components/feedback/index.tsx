@@ -3,6 +3,7 @@ import ReactMarkdown, { type Components } from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { useTranslation } from '../../strings';
 import { classes } from '../classes';
+export { ToastNotice, Toaster, toast } from './toast';
 
 /** A compact inline condition with static content and separately operable recovery actions. */
 export function InlineNotice({

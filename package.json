@@ -1,6 +1,6 @@
 {
   "name": "chatgpt-desktop-kit",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "ChatGPT desktop UI controls, semantic tokens, measured reference profiles and an agent skill.",
   "license": "MIT",
   "type": "module",
@@ -92,10 +92,11 @@
     "test:reference": "node scripts/verify-reference.mjs",
     "format:check": "prettier --check src/components examples/catalog \"scripts/{component-catalog,audit-adoption,check-library,build-catalog,build-site,verify-reference}.mjs\"",
     "check": "npm run typecheck && npm run build:library && npm run docs:check && npm run check:library && npm run format:check && npm run test:namespace && npm run test:integration",
-    "ci": "npm run check && npm run site:build && npm run test:reference && npm test && npm run test:demo && npm run test:polish && npm run test:input && npm run test:menus && npm run test:composer && npm run test:ai && npm run test:scroll-edge-fade && npm run test:list-spacing && npm run test:tables && npm run test:record-actions && npm run test:icons && npm run skill:package && npm run skill:check && npm run audit:public",
+    "ci": "npm run check && npm run site:build && npm run test:reference && npm test && npm run test:demo && npm run test:polish && npm run test:input && npm run test:menus && npm run test:composer && npm run test:ai && npm run test:scroll-edge-fade && npm run test:list-spacing && npm run test:tables && npm run test:record-actions && npm run test:icons && npm run test:notifications && npm run skill:package && npm run skill:check && npm run audit:public",
     "test:tables": "node scripts/verify-tables.mjs",
     "test:ai": "node scripts/verify-ai.mjs",
-    "test:scroll-edge-fade": "node scripts/verify-scroll-edge-fade.mjs"
+    "test:scroll-edge-fade": "node scripts/verify-scroll-edge-fade.mjs",
+    "test:notifications": "node scripts/verify-notifications.mjs"
   },
   "peerDependencies": {
     "react": "^18.3.1",
@@ -124,6 +125,7 @@
     "react-day-picker": "8.10.1",
     "react-markdown": "10.1.0",
     "remark-gfm": "4.0.1",
+    "sonner": "2.0.3",
     "tailwind-merge": "3.2.0"
   },
   "devDependencies": {
@@ -132,11 +134,11 @@
     "@types/react-dom": "18.3.7",
     "esbuild": "0.25.12",
     "playwright": "1.62.1",
+    "postcss": "8.5.29",
     "prettier": "3.6.2",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "tailwindcss": "3.4.17",
-    "typescript": "5.9.3",
-    "postcss": "8.5.29"
+    "typescript": "5.9.3"
   }
 }

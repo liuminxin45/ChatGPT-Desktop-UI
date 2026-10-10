@@ -4,6 +4,57 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { auditControls } from '../scripts/audit-controls.mjs';
+test('painted feedback cannot hide behind an arbitrary business class', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-audit-feedback-'));
+  try {
+    const source = path.join(root, 'view.tsx'),
+      styles = path.join(root, 'view.css');
+    fs.writeFileSync(
+      source,
+      'export const view=<div role="status" className="operation-result">Saved</div>;',
+    );
+    fs.writeFileSync(
+      styles,
+      '.operation-result{background:green;border-left:3px solid green}.field-error{color:red}',
+    );
+    assert.equal(auditControls(root, [source, styles]).controlOverrides[0].selector, '.operation-result');
+    fs.writeFileSync(source, 'export const view=<p role="alert" className="field-error">Invalid field</p>;');
+    fs.writeFileSync(styles, '.field-error{color:red}');
+    const domain = auditControls(root, [source, styles]);
+    assert.equal(domain.controlOverrides.length, 0);
+    assert.equal(domain.exceptions.length, 0);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+test('custom floating notifications and popovers cannot bypass ownership checks', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-audit-floats-'));
+  try {
+    const source = path.join(root, 'view.tsx'),
+      styles = path.join(root, 'view.css');
+    fs.writeFileSync(
+      source,
+      'import {Toaster} from "sonner"; import {PopoverContent as Popup} from "@phd/ui"; export const view=<Popup className="bg-red-500 p-0"/>',
+    );
+    fs.writeFileSync(
+      styles,
+      '.dinner-toast{position:fixed;background:red;border-left:3px solid green}.people-popover{position:absolute;background:white}.business-meta{color:gray}',
+    );
+    const result = auditControls(root, [source, styles]);
+    assert.deepEqual(
+      result.controlOverrides.map((item) => item.selector),
+      ['sonner import', 'Popup className', '.dinner-toast', '.people-popover'],
+    );
+    fs.writeFileSync(
+      source,
+      'import {ToastNotice,PopoverContent} from "chatgpt-desktop-kit"; export const view=<PopoverContent/>',
+    );
+    fs.writeFileSync(styles, '.business-meta{color:gray}');
+    assert.equal(auditControls(root, [source, styles]).controlOverrides.length, 0);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
 test('adoption scans pages and resolves private shared-control classes without matching descendants', () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-audit-'));
   try {
@@ -27,7 +78,10 @@ test('adoption scans pages and resolves private shared-control classes without m
     assert.equal(result.controlOverrides[0].selector, '.entry');
     assert.equal(result.exceptions.length, 1);
     fs.appendFileSync(path.join(root, 'styles/view.css'), '.document th,.document td{padding:0}');
-    const tableStyles = auditControls(root, Object.keys(files).map((file) => path.join(root, file)));
+    const tableStyles = auditControls(
+      root,
+      Object.keys(files).map((file) => path.join(root, file)),
+    );
     assert.equal(tableStyles.controlOverrides.length, 2);
     assert.equal(tableStyles.controlOverrides[1].selector, '.document th,.document td');
     fs.writeFileSync(path.join(root, 'styles/view.css'), files['styles/view.css']);
