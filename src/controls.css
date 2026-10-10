@@ -151,6 +151,6 @@ html:root,html:root body,html:root body *,html:root body *::before,html:root bod
 
 .desktop-radio{width:15px;height:15px;flex:none;margin:0;accent-color:var(--desktop-color-text);cursor:default}.desktop-radio:focus-visible{outline:2px solid var(--desktop-color-focus);outline-offset:3px}
 
-.desktop-button:is([aria-pressed=true],[aria-selected=true],[data-desktop-selected=true]){background:var(--desktop-color-surface-selected);color:var(--desktop-color-text)}
+.desktop-button:is([aria-pressed=true],[aria-selected=true],[aria-current=true],[aria-current=page],[data-desktop-selected=true]){background:var(--desktop-color-surface-selected);color:var(--desktop-color-text)}
 
 .desktop-virtual-list__header{position:sticky;top:0;z-index:2;padding-inline:4px;background:var(--desktop-color-background)}

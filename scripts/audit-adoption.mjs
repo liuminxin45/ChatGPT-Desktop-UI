@@ -135,8 +135,13 @@ export function auditAdoption(directories, { integration = true } = {}) {
   return {
     schemaVersion: 1,
     status:
-      consumers.some((item) => item.integration?.status === 'failed' || !item.componentImports) ||
-      new Set(consumers.map((item) => item.integration?.revision).filter(Boolean)).size > 1
+      consumers.some(
+        (item) =>
+          item.integration?.status === 'failed' ||
+          !item.componentImports ||
+          item.controls?.nativeControls.length ||
+          item.controls?.controlOverrides.length,
+      ) || new Set(consumers.map((item) => item.integration?.revision).filter(Boolean)).size > 1
         ? 'failed'
         : 'passed',
     consumers,
