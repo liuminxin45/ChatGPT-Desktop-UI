@@ -16,6 +16,9 @@
   flex-shrink: 0;
   padding: 0 var(--desktop-space-composer-dock) var(--desktop-space-composer-dock);
 }
+.desktop-internal-scroll[data-desktop-scroll-fade-padding='virtual'] {
+  padding-bottom: 0 !important;
+}
 .desktop-internal-scroll[data-desktop-scroll-fade='bottom']:dir(rtl) {
   --desktop-scroll-fade-gutter-position: left;
 }

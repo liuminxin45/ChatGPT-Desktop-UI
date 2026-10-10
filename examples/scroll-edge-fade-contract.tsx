@@ -10,11 +10,16 @@ import {
   VirtualList,
   FixedVirtualList,
 } from '../src';
+import { VirtualList as CompatVirtualList } from '../src/compat/virtual-list';
 import '../src/styles.css';
 
 const host = window as any;
 function App() {
   const ref = useRef<HTMLDivElement>(null);
+  const compatApi = useRef<any>(null);
+  const fixedApi = useRef<any>(null);
+  host.compatApi = compatApi;
+  host.fixedApi = fixedApi;
   const [enabled, setEnabled] = useState(true);
   const [short, setShort] = useState(false);
   const [draft, setDraft] = useState('');
@@ -29,7 +34,7 @@ function App() {
         height: '100%',
         padding: 20,
         display: 'grid',
-        gridTemplateColumns: 'repeat(3,minmax(0,1fr))',
+        gridTemplateColumns: 'repeat(4,minmax(0,1fr))',
         gap: 20,
       }}
     >
@@ -79,7 +84,8 @@ function App() {
       </section>
       <section id="virtual" style={{ display: 'flex', flexDirection: 'column', minHeight: 0 }}>
         <ScrollEdgeFade>
-          <VirtualList
+          <CompatVirtualList
+            apiRef={compatApi}
             items={rows}
             getItemKey={(item) => item.id}
             estimateSize={48}
@@ -95,6 +101,7 @@ function App() {
       <section id="fixed" style={{ display: 'flex', flexDirection: 'column', minHeight: 0 }}>
         <ScrollEdgeFade>
           <FixedVirtualList
+            apiRef={fixedApi}
             items={rows}
             getItemKey={(item) => item.id}
             rowHeight={48}
@@ -105,6 +112,21 @@ function App() {
         </ScrollEdgeFade>
         <ComposerDock>
           <Textarea aria-label="Fixed draft" />
+        </ComposerDock>
+      </section>
+      <section id="native" style={{ display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+        <ScrollEdgeFade>
+          <VirtualList
+            items={rows}
+            getItemKey={(item) => item.id}
+            estimateSize={48}
+            ariaLabel="Native conversation"
+            style={{ flex: 1, minHeight: 0 }}
+            renderItem={(item) => <Button actionId="fixture.native-row">{item.text}</Button>}
+          />
+        </ScrollEdgeFade>
+        <ComposerDock>
+          <Textarea aria-label="Native draft" />
         </ComposerDock>
       </section>
       {portal &&

@@ -55,6 +55,7 @@ Bottom optical boundary above a fixed composer. Adds no layout wrapper.
 | --- | --- | --- |
 | children | yes | `ReactNode` |
 | enabled | no | `boolean \| undefined` |
+| virtualized | no | `boolean \| undefined` |
 
 ## VirtualList (chatgpt-desktop-kit)
 

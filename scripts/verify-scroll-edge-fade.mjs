@@ -4,6 +4,7 @@ import path from 'node:path';
 import os from 'node:os';
 import http from 'node:http';
 import zlib from 'node:zlib';
+import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { build } from 'esbuild';
 import { chromium } from 'playwright';
@@ -35,10 +36,12 @@ function pixels(png) {
   return (x, y) => [...result.subarray((y * width + x) * channels, (y * width + x) * channels + 3)];
 }
 await build({ absWorkingDir: root, entryPoints: ['examples/scroll-edge-fade-contract.tsx'], outdir: temp, bundle: true, format: 'esm', jsx: 'automatic', define: { 'process.env.NODE_ENV': '"production"' } });
+await fs.writeFile(path.join(temp, 'utilities-input.css'), '@tailwind utilities;');
+execFileSync(process.execPath, [path.join(root,'node_modules/tailwindcss/lib/cli.js'), '-i', path.join(temp,'utilities-input.css'), '-o', path.join(temp,'utilities.css'), '--content', 'examples/scroll-edge-fade-contract.tsx,src/compat/virtual-list.tsx'], {cwd:root,stdio:'pipe',windowsHide:true});
 const server = http.createServer(async (req, res) => {
-  const asset = req.url === '/scroll-edge-fade-contract.js' || req.url === '/scroll-edge-fade-contract.css';
+  const asset = req.url === '/scroll-edge-fade-contract.js' || req.url === '/scroll-edge-fade-contract.css' || req.url === '/utilities.css';
   res.setHeader('Content-Type', asset ? req.url.endsWith('.js') ? 'text/javascript' : 'text/css' : 'text/html');
-  res.end(asset ? await fs.readFile(path.join(temp, req.url.slice(1))) : '<html><head><link rel="stylesheet" href="/scroll-edge-fade-contract.css"><style>.fixed-list{flex:1;min-height:0}</style></head><body><div id="root"></div><script type="module" src="/scroll-edge-fade-contract.js"></script></body></html>');
+  res.end(asset ? await fs.readFile(path.join(temp, req.url.slice(1))) : '<html><head><link rel="stylesheet" href="/scroll-edge-fade-contract.css"><link rel="stylesheet" href="/utilities.css"><style>.fixed-list{flex:1;min-height:0}</style></head><body><div id="root"></div><script type="module" src="/scroll-edge-fade-contract.js"></script></body></html>');
 });
 await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
 let browser; const cases = [];
@@ -103,11 +106,15 @@ try {
     const value = await page.getByLabel('Draft', { exact: true }).inputValue();
     await page.evaluate(() => document.documentElement.classList.toggle('dark'));
     assert.equal(await page.getByLabel('Draft', { exact: true }).inputValue(), value);
-    for (const label of ['Virtual conversation', 'Fixed conversation']) {
-      const list = page.getByLabel(label); await list.evaluate(element => element.scrollTop = element.scrollHeight);
+    for (const label of ['Virtual conversation', 'Fixed conversation', 'Native conversation']) {
+      const list = page.getByLabel(label);
+      if (label === 'Virtual conversation') await page.evaluate(() => window.compatApi.current.scrollToIndex(99, 'end'));
+      else if (label === 'Fixed conversation') await page.evaluate(() => window.fixedApi.current.scrollToIndex(99));
+      else await list.evaluate(element => element.scrollTop = element.scrollHeight);
       await page.waitForTimeout(100);
       assert.equal(await list.getByRole('button', {name:'Message 100', exact:true}).count(), 1);
-      assert.ok(await list.getByRole('button', {name:'Message 100', exact:true}).evaluate(button => { const v=button.closest('.desktop-internal-scroll'),r=v.getBoundingClientRect();return button.getBoundingClientRect().bottom <= r.top+v.clientHeight-24+1; }));
+      const lastGeometry=await list.getByRole('button', {name:'Message 100', exact:true}).evaluate(button => { const v=button.closest('.desktop-internal-scroll'),r=v.getBoundingClientRect();return {bottom:button.getBoundingClientRect().bottom, readable:r.top+v.clientHeight-24,scrollTop:v.scrollTop,total:v.scrollHeight,padding:getComputedStyle(v).paddingBottom}; });
+      assert.ok(lastGeometry.bottom <= lastGeometry.readable+1, JSON.stringify({label,...lastGeometry}));
     }
     await page.evaluate(() => { window.setEnabled(false); window.setShort(true); });
     await page.waitForTimeout(50); assert.equal(await viewport.evaluate(element => getComputedStyle(element).maskImage), 'none');

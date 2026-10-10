@@ -30490,6 +30490,13 @@
           "type": "boolean | undefined",
           "native": false,
           "description": "Fade the nearest shared scroll viewport; surrounding viewports remain unchanged."
+        },
+        {
+          "name": "virtualized",
+          "required": false,
+          "type": "boolean | undefined",
+          "native": false,
+          "description": "Host virtualizers include scrollEdgeFadeSize in paddingEnd and scrollPaddingEnd."
         }
       ],
       "nativeProps": []
