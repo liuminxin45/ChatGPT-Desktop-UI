@@ -37,8 +37,9 @@ export const TableHeaderCell = forwardRef<HTMLTableCellElement, ThHTMLAttributes
     return <th ref={ref} scope="col" {...props} />;
   },
 );
-export const TableCell = forwardRef<HTMLTableCellElement, TdHTMLAttributes<HTMLTableCellElement>>(
-  function TableCell(props, ref) {
-    return <td ref={ref} {...props} />;
-  },
-);
+export const TableCell = forwardRef<
+  HTMLTableCellElement,
+  TdHTMLAttributes<HTMLTableCellElement> & { pinned?: boolean; tone?: 'neutral' | 'warning' }
+>(function TableCell({ pinned = false, tone = 'neutral', ...props }, ref) {
+  return <td ref={ref} data-pinned={pinned || undefined} data-tone={tone} {...props} />;
+});

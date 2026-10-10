@@ -68,6 +68,25 @@ try {
         };
       });
       assert.ok(metrics.inset >= 12);
+      assert.equal(
+        await page.locator('td[data-pinned=true]').evaluate((el) => getComputedStyle(el).backgroundColor),
+        await page
+          .evaluate(() =>
+            getComputedStyle(document.documentElement)
+              .getPropertyValue('--desktop-color-warning-soft')
+              .trim(),
+          )
+          .then((value) =>
+            page.evaluate((value) => {
+              const span = document.createElement('span');
+              span.style.color = value;
+              document.body.append(span);
+              const color = getComputedStyle(span).color;
+              span.remove();
+              return color;
+            }, value),
+          ),
+      );
       assert.ok(metrics.labelHeight > 20);
       assert.notEqual(metrics.ellipsis, 'ellipsis');
       assert.equal(metrics.overflow, false);

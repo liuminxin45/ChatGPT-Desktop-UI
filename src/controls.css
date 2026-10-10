@@ -165,3 +165,5 @@ html:root,html:root body,html:root body *,html:root body *::before,html:root bod
 .desktop-composer-progress{animation:desktop-composer-spin 1s linear infinite}
 @keyframes desktop-composer-spin{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.desktop-composer-progress{animation:none}}
+.desktop-table td[data-pinned=true]{background:var(--desktop-color-surface)}.desktop-table td[data-tone=warning]{background:var(--desktop-color-warning-soft)}
+.desktop-table th{background:var(--desktop-color-background)}

@@ -41,7 +41,9 @@ function App() {
           </TableHead>
           <TableBody>
             <TableRow>
-              <TableCell>1219473</TableCell>
+              <TableCell pinned tone="warning">
+                1219473
+              </TableCell>
               <TableCell>Long category with independent editing controls</TableCell>
             </TableRow>
           </TableBody>

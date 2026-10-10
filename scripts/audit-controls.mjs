@@ -26,10 +26,17 @@ export function auditControls(directory, files) {
       /\.tsx$/.test(file) ? ts.ScriptKind.TSX : ts.ScriptKind.TS,
     );
     const controls = new Set();
+    const definitions = new Map();
+    function index(node) {
+      if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name) && node.initializer)
+        definitions.set(node.name.text, node.initializer);
+      ts.forEachChild(node, index);
+    }
+    index(tree);
     tree.forEachChild((node) => {
       if (
         !ts.isImportDeclaration(node) ||
-        !/^(?:@phd\/ui|chatgpt-desktop-kit|@\/components\/ui)/.test(node.moduleSpecifier.text)
+        !/(?:^@phd\/ui|^chatgpt-desktop-kit|components\/ui|packages\/ph[d]-ui)/.test(node.moduleSpecifier.text)
       )
         return;
       const bindings = node.importClause?.namedBindings;
@@ -50,6 +57,8 @@ export function auditControls(directory, files) {
         const attribute = node.attributes.properties.find(
           (item) => ts.isJsxAttribute(item) && item.name.getText(tree) === 'className',
         );
+        const utilities = new Set();
+        const visited = new Set();
         function strings(value) {
           if (
             ts.isStringLiteral(value) ||
@@ -58,10 +67,39 @@ export function auditControls(directory, files) {
             ts.isTemplateTail(value) ||
             ts.isTemplateMiddle(value)
           )
-            for (const token of value.text.split(/\s+/)) if (/^[\w-]+$/.test(token)) classes.add(token);
+            for (const token of value.text.split(/\s+/)) {
+              if (/^[\w-]+$/.test(token)) classes.add(token);
+              if (
+                /(^|:)(?:bg-|rounded|border(?:-|$)|shadow|ring|outline|font-|leading-|p[xytrblse]?-(?:\d|\[)|text-(?:xs|sm|base|lg|xl|\d|\[|primary|secondary|muted|destructive|foreground|white|black)|truncate|whitespace-nowrap)/.test(
+                  token,
+                )
+              )
+                utilities.add(token);
+            }
+          if (ts.isIdentifier(value) && definitions.has(value.text) && !visited.has(value.text)) {
+            visited.add(value.text);
+            const definition = definitions.get(value.text);
+            if (
+              ts.isStringLiteral(definition) ||
+              ts.isNoSubstitutionTemplateLiteral(definition) ||
+              ts.isTemplateExpression(definition) ||
+              ts.isConditionalExpression(definition) ||
+              ts.isBinaryExpression(definition) ||
+              (ts.isCallExpression(definition) &&
+                /^(?:cn|clsx|classNames)$/.test(definition.expression.getText(tree)))
+            )
+              strings(definition);
+          }
           ts.forEachChild(value, strings);
         }
-        if (attribute) strings(attribute);
+        if (attribute?.initializer) strings(attribute.initializer);
+        if (utilities.size)
+          controlOverrides.push({
+            file: path.relative(directory, file).replaceAll('\\', '/'),
+            line: tree.getLineAndCharacterOfPosition(node.getStart(tree)).line + 1,
+            selector: node.tagName.getText(tree) + ' className',
+            properties: [...utilities],
+          });
       }
       ts.forEachChild(node, visit);
     }

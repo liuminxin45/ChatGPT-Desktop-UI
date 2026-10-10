@@ -31751,7 +31751,22 @@
       "family": "tables",
       "implementation": "src/components/tables/index.tsx",
       "description": "",
-      "props": [],
+      "props": [
+        {
+          "name": "pinned",
+          "required": false,
+          "type": "boolean | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "tone",
+          "required": false,
+          "type": "\"warning\" | \"neutral\" | undefined",
+          "native": false,
+          "description": ""
+        }
+      ],
       "nativeProps": [
         "ac055d79a7a6b032",
         "cb417735d2cf3891",
