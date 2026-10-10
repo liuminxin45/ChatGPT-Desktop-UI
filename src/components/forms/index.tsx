@@ -9,6 +9,7 @@ import {
   useState,
   type ButtonHTMLAttributes,
   type InputHTMLAttributes,
+  type FormHTMLAttributes,
   type LabelHTMLAttributes,
   type ReactNode,
   type TextareaHTMLAttributes,
@@ -17,6 +18,21 @@ import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '../../icons';
 import { currentLocale, useTranslation } from '../../strings';
 import { ToolVisibilityContext } from '../../surface-visibility';
 import { classes } from '../classes';
+
+/** Explicit responsive form layout; never repaint arbitrary Host forms or labels. */
+export function SettingsForm({ className, ...props }: FormHTMLAttributes<HTMLFormElement>) {
+  return <form className={classes('desktop-settings-form', className)} {...props} />;
+}
+
+export function FieldRow({
+  className,
+  inline = false,
+  ...props
+}: LabelHTMLAttributes<HTMLLabelElement> & { inline?: boolean }) {
+  return (
+    <label className={classes('desktop-field-row', className)} data-inline={inline || undefined} {...props} />
+  );
+}
 
 export const Input = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>>(function Input(
   { className, ...props },

@@ -15,6 +15,15 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | Prop | Required | Type |
 | --- | --- | --- |
 
+## MetadataList (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/layout/index.tsx)
+
+Bounded metadata pairs, with text wrapping independent of the controls.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+
 ## PageBar (chatgpt-desktop-kit)
 
 [Implementation](../../../src/components/layout/index.tsx)
@@ -43,6 +52,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 | Prop | Required | Type |
 | --- | --- | --- |
+| inline | no | `boolean \| undefined` |
 
 ## Surface (chatgpt-desktop-kit)
 

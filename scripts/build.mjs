@@ -27,7 +27,7 @@ for(const modulePath of modules) {
   }
 }
 await writeFile(path.join(root,'dist/THIRD_PARTY_NOTICES.txt'),notices.replace(/\r\n/g,'\n').trimEnd()+'\n');
-await build({ absWorkingDir: root, entryPoints: ['src/styles.css','src/controls.css','src/tokens.css','src/primitives.css','src/compat/host.css','src/compat/host-shell.css'], outdir: 'dist', outbase:'src', bundle: true, minify: true });
+await build({ absWorkingDir: root, entryPoints: ['src/styles.css','src/controls.css','src/tokens.css','src/primitives.css','src/shell.css','src/compound.css'], outdir: 'dist', outbase:'src', bundle: true, minify: true });
 await copyFile(path.join(root,'LICENSE'),path.join(root,'dist/LICENSE'));
 await copyFile(path.join(root,'scripts/check-consumer.mjs'),path.join(root,'dist/check-consumer.mjs'));
 await copyFile(path.join(root,'scripts/check-consumer.d.mts'),path.join(root,'dist/check-consumer.d.mts'));

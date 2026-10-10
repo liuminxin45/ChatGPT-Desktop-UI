@@ -3,7 +3,7 @@
   color-scheme: light;
 
   /* Color primitives */
-  --desktop-color-canvas: #f0f3f9;
+  --desktop-color-canvas: #f9f9f9;
   --desktop-color-background: #ffffff;
   --desktop-color-surface: #f7f7f7;
   --desktop-color-surface-muted: #ededed;
@@ -50,19 +50,11 @@
   --desktop-shadow-floating: 0 6px 24px rgb(0 0 0 / 0.08);
   --desktop-shadow-side-panel: -12px 0 32px rgb(15 23 42 / 0.1);
 
-  /* HSL channels for Tailwind/shadcn consumers */
-  --desktop-hsl-surface: 0 0% 97%;
-  --desktop-hsl-text: 0 0% 7%;
-  --desktop-hsl-surface-muted: 0 0% 93%;
-  --desktop-hsl-text-muted: 0 0% 45%;
-  --desktop-hsl-border: 0 0% 92%;
-  --desktop-hsl-border-strong: 0 0% 88%;
-  --desktop-hsl-focus: 218 90% 59%;
 
   /* Desktop shell hierarchy; all consumers inherit these semantic surfaces. */
-  --desktop-color-shell: #f0f3f9;
-  --desktop-color-sidebar: #fafbfd;
-  --desktop-color-navigation-selected: #e4e7ec;
+  --desktop-color-shell: #f9f9f9;
+  --desktop-color-sidebar: #f9f9f9;
+  --desktop-color-navigation-selected: #e9e9e9;
   --desktop-color-on-navigation-selected: #202123;
   --desktop-color-unread: #387cf4;
   --desktop-color-send: #2b6bcc;
@@ -172,12 +164,5 @@
   --desktop-shadow-overlay: 0 12px 40px rgb(0 0 0 / 0.42);
   --desktop-shadow-floating: 0 20px 70px rgb(0 0 0 / 0.48);
   --desktop-shadow-side-panel: -12px 0 32px rgb(0 0 0 / 0.36);
-  --desktop-hsl-surface: 0 0% 14%;
-  --desktop-hsl-text: 0 0% 94%;
-  --desktop-hsl-surface-muted: 0 0% 16%;
-  --desktop-hsl-text-muted: 0 0% 60%;
-  --desktop-hsl-border: 0 0% 20%;
-  --desktop-hsl-border-strong: 0 0% 29%;
-  --desktop-hsl-focus: 217 100% 63%;
   --desktop-focus-ring: 0 0 0 2px rgb(67 139 250 / 0.35);
 }

@@ -10,6 +10,9 @@ import {
   Button,
   IconButton,
   Input,
+  FieldRow,
+  SettingsForm,
+  MetadataList,
   InputGroup,
   Textarea,
   Checkbox,
@@ -127,6 +130,11 @@ export function Examples({ family }: { family: string }) {
   if (family === 'forms')
     return (
       <div className="reference-fields">
+        <SettingsForm onSubmit={(event) => event.preventDefault()}>
+          <FieldRow>
+            Project <Input defaultValue="Design review" />
+          </FieldRow>
+        </SettingsForm>
         {field}
         <InputGroup>
           <span aria-hidden="true">⌕</span>
@@ -244,6 +252,12 @@ export function Examples({ family }: { family: string }) {
           />
           <PageToolbar>{select}</PageToolbar>
           <PageHeader title="Milestones" />
+          <MetadataList>
+            <dt>Owner</dt>
+            <dd>Product team</dd>
+            <dt>Status</dt>
+            <dd>Ready for review</dd>
+          </MetadataList>
           <InternalScrollArea>Project content fills the available workspace.</InternalScrollArea>
         </WorkbenchPage>
       </Surface>

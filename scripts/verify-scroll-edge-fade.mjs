@@ -37,7 +37,7 @@ function pixels(png) {
 }
 await build({ absWorkingDir: root, entryPoints: ['examples/scroll-edge-fade-contract.tsx'], outdir: temp, bundle: true, format: 'esm', jsx: 'automatic', define: { 'process.env.NODE_ENV': '"production"' } });
 await fs.writeFile(path.join(temp, 'utilities-input.css'), '@tailwind utilities;');
-execFileSync(process.execPath, [path.join(root,'node_modules/tailwindcss/lib/cli.js'), '-i', path.join(temp,'utilities-input.css'), '-o', path.join(temp,'utilities.css'), '--content', 'examples/scroll-edge-fade-contract.tsx,src/compat/virtual-list.tsx'], {cwd:root,stdio:'pipe',windowsHide:true});
+execFileSync(process.execPath, [path.join(root,'node_modules/tailwindcss/lib/cli.js'), '-i', path.join(temp,'utilities-input.css'), '-o', path.join(temp,'utilities.css'), '--content', 'examples/scroll-edge-fade-contract.tsx,src/components/radix/**/*.tsx'], {cwd:root,stdio:'pipe',windowsHide:true});
 const server = http.createServer(async (req, res) => {
   const asset = req.url === '/scroll-edge-fade-contract.js' || req.url === '/scroll-edge-fade-contract.css' || req.url === '/utilities.css';
   res.setHeader('Content-Type', asset ? req.url.endsWith('.js') ? 'text/javascript' : 'text/css' : 'text/html');

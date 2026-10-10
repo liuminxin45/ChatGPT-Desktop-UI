@@ -91,8 +91,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 | Prop | Required | Type |
 | --- | --- | --- |
-| title | yes | `ReactNode` |
-| children | yes | `ReactNode` |
+| title | no | `ReactNode` |
 
 ## TitleBar (chatgpt-desktop-kit)
 

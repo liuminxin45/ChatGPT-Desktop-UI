@@ -10,7 +10,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## AlertDialog (chatgpt-desktop-kit/compat/alert-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -21,7 +21,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## AlertDialogAction (chatgpt-desktop-kit/compat/alert-dialog)
 
-[Implementation](../../../src/compat/alert-dialog.tsx)
+[Implementation](../../../src/components/radix/alert-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -29,7 +29,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## AlertDialogCancel (chatgpt-desktop-kit/compat/alert-dialog)
 
-[Implementation](../../../src/compat/alert-dialog.tsx)
+[Implementation](../../../src/components/radix/alert-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -37,7 +37,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## AlertDialogContent (chatgpt-desktop-kit/compat/alert-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -51,7 +51,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## AlertDialogDescription (chatgpt-desktop-kit/compat/alert-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -59,21 +59,21 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## AlertDialogFooter (chatgpt-desktop-kit/compat/alert-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
 
 ## AlertDialogHeader (chatgpt-desktop-kit/compat/alert-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
 
 ## AlertDialogTitle (chatgpt-desktop-kit/compat/alert-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -81,7 +81,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## AlertDialogTrigger (chatgpt-desktop-kit/compat/alert-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -89,7 +89,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## AppAlertDialog (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -100,7 +100,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## AppAlertDialogAction (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -108,7 +108,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## AppAlertDialogCancel (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -116,7 +116,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## AppAlertDialogContent (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -130,7 +130,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## AppAlertDialogDescription (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -138,21 +138,21 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## AppAlertDialogFooter (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
 
 ## AppAlertDialogHeader (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
 
 ## AppAlertDialogTitle (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -160,7 +160,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## AppAlertDialogTrigger (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -168,7 +168,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## AppConfirmDialog (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -186,7 +186,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## AppDialog (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -198,7 +198,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## AppDialogAction (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -213,14 +213,14 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## AppDialogBody (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
 
 ## AppDialogCancel (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -235,7 +235,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## AppDialogClose (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -243,7 +243,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## AppDialogContent (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -263,7 +263,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## AppDialogDescription (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -271,21 +271,21 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## AppDialogFooter (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
 
 ## AppDialogHeader (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
 
 ## AppDialogOverlay (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -294,7 +294,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## AppDialogPortal (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -304,7 +304,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## AppDialogTitle (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -312,7 +312,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## AppDialogTrigger (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -320,7 +320,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## Dialog (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -332,14 +332,14 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## DialogBody (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
 
 ## DialogCancel (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -354,7 +354,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## DialogClose (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -362,7 +362,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## DialogContent (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -382,7 +382,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## DialogDescription (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -390,21 +390,21 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## DialogFooter (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
 
 ## DialogHeader (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
 
 ## DialogOverlay (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -413,7 +413,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## DialogPortal (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -423,7 +423,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## DialogTitle (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -431,7 +431,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## DialogTrigger (chatgpt-desktop-kit/compat/app-dialog)
 
-[Implementation](../../../src/compat/app-dialog.tsx)
+[Implementation](../../../src/components/radix/app-dialog.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -439,7 +439,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## Avatar (chatgpt-desktop-kit/compat/avatar)
 
-[Implementation](../../../src/compat/avatar.tsx)
+[Implementation](../../../src/components/radix/avatar.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -447,7 +447,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## AvatarFallback (chatgpt-desktop-kit/compat/avatar)
 
-[Implementation](../../../src/compat/avatar.tsx)
+[Implementation](../../../src/components/radix/avatar.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -456,7 +456,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## AvatarImage (chatgpt-desktop-kit/compat/avatar)
 
-[Implementation](../../../src/compat/avatar.tsx)
+[Implementation](../../../src/components/radix/avatar.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -465,7 +465,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## Badge (chatgpt-desktop-kit/compat/badge)
 
-[Implementation](../../../src/compat/badge.tsx)
+[Implementation](../../../src/components/radix/badge.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -474,7 +474,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## Button (chatgpt-desktop-kit/compat/button)
 
-[Implementation](../../../src/compat/button.tsx)
+[Implementation](../../../src/components/radix/button.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -489,7 +489,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## Calendar (chatgpt-desktop-kit/compat/calendar)
 
-[Implementation](../../../src/compat/calendar.tsx)
+[Implementation](../../../src/components/radix/calendar.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -557,56 +557,56 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## Card (chatgpt-desktop-kit/compat/card)
 
-[Implementation](../../../src/compat/card.tsx)
+[Implementation](../../../src/components/radix/card.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
 
 ## CardAction (chatgpt-desktop-kit/compat/card)
 
-[Implementation](../../../src/compat/card.tsx)
+[Implementation](../../../src/components/radix/card.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
 
 ## CardContent (chatgpt-desktop-kit/compat/card)
 
-[Implementation](../../../src/compat/card.tsx)
+[Implementation](../../../src/components/radix/card.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
 
 ## CardDescription (chatgpt-desktop-kit/compat/card)
 
-[Implementation](../../../src/compat/card.tsx)
+[Implementation](../../../src/components/radix/card.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
 
 ## CardFooter (chatgpt-desktop-kit/compat/card)
 
-[Implementation](../../../src/compat/card.tsx)
+[Implementation](../../../src/components/radix/card.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
 
 ## CardHeader (chatgpt-desktop-kit/compat/card)
 
-[Implementation](../../../src/compat/card.tsx)
+[Implementation](../../../src/components/radix/card.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
 
 ## CardTitle (chatgpt-desktop-kit/compat/card)
 
-[Implementation](../../../src/compat/card.tsx)
+[Implementation](../../../src/components/radix/card.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
 
 ## Checkbox (chatgpt-desktop-kit/compat/checkbox)
 
-[Implementation](../../../src/compat/checkbox.tsx)
+[Implementation](../../../src/components/radix/checkbox.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -618,7 +618,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## DatePicker (chatgpt-desktop-kit/compat/date-picker)
 
-[Implementation](../../../src/compat/date-picker.tsx)
+[Implementation](../../../src/components/radix/date-picker.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -627,10 +627,11 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | placeholder | no | `string \| undefined` |
 | className | no | `string \| undefined` |
 | triggerClassName | no | `string \| undefined` |
+| actionId | no | `string \| undefined` |
 
 ## DropdownMenu (chatgpt-desktop-kit/compat/dropdown-menu)
 
-[Implementation](../../../src/compat/dropdown-menu.tsx)
+[Implementation](../../../src/components/radix/dropdown-menu.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -643,7 +644,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## DropdownMenuCheckboxItem (chatgpt-desktop-kit/compat/dropdown-menu)
 
-[Implementation](../../../src/compat/dropdown-menu.tsx)
+[Implementation](../../../src/components/radix/dropdown-menu.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -656,7 +657,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## DropdownMenuContent (chatgpt-desktop-kit/compat/dropdown-menu)
 
-[Implementation](../../../src/compat/dropdown-menu.tsx)
+[Implementation](../../../src/components/radix/dropdown-menu.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -682,7 +683,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## DropdownMenuGroup (chatgpt-desktop-kit/compat/dropdown-menu)
 
-[Implementation](../../../src/compat/dropdown-menu.tsx)
+[Implementation](../../../src/components/radix/dropdown-menu.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -690,7 +691,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## DropdownMenuItem (chatgpt-desktop-kit/compat/dropdown-menu)
 
-[Implementation](../../../src/compat/dropdown-menu.tsx)
+[Implementation](../../../src/components/radix/dropdown-menu.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -704,7 +705,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## DropdownMenuLabel (chatgpt-desktop-kit/compat/dropdown-menu)
 
-[Implementation](../../../src/compat/dropdown-menu.tsx)
+[Implementation](../../../src/components/radix/dropdown-menu.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -713,7 +714,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## DropdownMenuPortal (chatgpt-desktop-kit/compat/dropdown-menu)
 
-[Implementation](../../../src/compat/dropdown-menu.tsx)
+[Implementation](../../../src/components/radix/dropdown-menu.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -723,7 +724,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## DropdownMenuRadioGroup (chatgpt-desktop-kit/compat/dropdown-menu)
 
-[Implementation](../../../src/compat/dropdown-menu.tsx)
+[Implementation](../../../src/components/radix/dropdown-menu.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -733,7 +734,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## DropdownMenuRadioItem (chatgpt-desktop-kit/compat/dropdown-menu)
 
-[Implementation](../../../src/compat/dropdown-menu.tsx)
+[Implementation](../../../src/components/radix/dropdown-menu.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -745,7 +746,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## DropdownMenuSeparator (chatgpt-desktop-kit/compat/dropdown-menu)
 
-[Implementation](../../../src/compat/dropdown-menu.tsx)
+[Implementation](../../../src/components/radix/dropdown-menu.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -753,14 +754,14 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## DropdownMenuShortcut (chatgpt-desktop-kit/compat/dropdown-menu)
 
-[Implementation](../../../src/compat/dropdown-menu.tsx)
+[Implementation](../../../src/components/radix/dropdown-menu.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
 
 ## DropdownMenuSub (chatgpt-desktop-kit/compat/dropdown-menu)
 
-[Implementation](../../../src/compat/dropdown-menu.tsx)
+[Implementation](../../../src/components/radix/dropdown-menu.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -771,7 +772,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## DropdownMenuSubContent (chatgpt-desktop-kit/compat/dropdown-menu)
 
-[Implementation](../../../src/compat/dropdown-menu.tsx)
+[Implementation](../../../src/components/radix/dropdown-menu.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -794,7 +795,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## DropdownMenuSubTrigger (chatgpt-desktop-kit/compat/dropdown-menu)
 
-[Implementation](../../../src/compat/dropdown-menu.tsx)
+[Implementation](../../../src/components/radix/dropdown-menu.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -805,72 +806,29 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## DropdownMenuTrigger (chatgpt-desktop-kit/compat/dropdown-menu)
 
-[Implementation](../../../src/compat/dropdown-menu.tsx)
+[Implementation](../../../src/components/radix/dropdown-menu.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
 | asChild | no | `boolean \| undefined` |
-
-## GlassIconButton (chatgpt-desktop-kit/compat/glass)
-
-[Implementation](../../../src/compat/glass.tsx)
-
-| Prop | Required | Type |
-| --- | --- | --- |
-| actionId | no | `string \| undefined` |
-| confirmOnEnter | no | `boolean \| undefined` |
-| icon | no | `React.ReactNode` |
-| iconOnly | no | `boolean \| undefined` |
-| badge | no | `React.ReactNode` |
-| asChild | no | `boolean \| undefined` |
-| tone | no | `"primary" \| "warning" \| "neutral" \| null \| undefined` |
-
-## GlassPage (chatgpt-desktop-kit/compat/glass)
-
-[Implementation](../../../src/compat/glass.tsx)
-
-| Prop | Required | Type |
-| --- | --- | --- |
-| showOrbs | no | `boolean \| undefined` |
-
-## GlassPanel (chatgpt-desktop-kit/compat/glass)
-
-[Implementation](../../../src/compat/glass.tsx)
-
-| Prop | Required | Type |
-| --- | --- | --- |
-
-## GlassSection (chatgpt-desktop-kit/compat/glass)
-
-[Implementation](../../../src/compat/glass.tsx)
-
-| Prop | Required | Type |
-| --- | --- | --- |
-
-## GlassToolbar (chatgpt-desktop-kit/compat/glass)
-
-[Implementation](../../../src/compat/glass.tsx)
-
-| Prop | Required | Type |
-| --- | --- | --- |
 
 ## Input (chatgpt-desktop-kit/compat/input)
 
-[Implementation](../../../src/compat/input.tsx)
+[Implementation](../../../src/components/radix/input.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
 
 ## InternalScrollArea (chatgpt-desktop-kit/compat/internal-scroll-area)
 
-[Implementation](../../../src/compat/internal-scroll-area.tsx)
+[Implementation](../../../src/components/radix/internal-scroll-area.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
 
 ## Label (chatgpt-desktop-kit/compat/label)
 
-[Implementation](../../../src/compat/label.tsx)
+[Implementation](../../../src/components/radix/label.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -878,7 +836,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## LoadingSpinner (chatgpt-desktop-kit/compat/loading-spinner)
 
-[Implementation](../../../src/compat/loading-spinner.tsx)
+[Implementation](../../../src/components/radix/loading-spinner.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -888,7 +846,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## Popover (chatgpt-desktop-kit/compat/popover)
 
-[Implementation](../../../src/compat/popover.tsx)
+[Implementation](../../../src/components/radix/popover.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -900,7 +858,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## PopoverAnchor (chatgpt-desktop-kit/compat/popover)
 
-[Implementation](../../../src/compat/popover.tsx)
+[Implementation](../../../src/components/radix/popover.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -909,7 +867,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## PopoverContent (chatgpt-desktop-kit/compat/popover)
 
-[Implementation](../../../src/compat/popover.tsx)
+[Implementation](../../../src/components/radix/popover.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -935,7 +893,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## PopoverTrigger (chatgpt-desktop-kit/compat/popover)
 
-[Implementation](../../../src/compat/popover.tsx)
+[Implementation](../../../src/components/radix/popover.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -943,7 +901,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## Progress (chatgpt-desktop-kit/compat/progress)
 
-[Implementation](../../../src/compat/progress.tsx)
+[Implementation](../../../src/components/radix/progress.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -954,7 +912,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## SegmentedControl (chatgpt-desktop-kit/compat/segmented-control)
 
-[Implementation](../../../src/compat/segmented-control.tsx)
+[Implementation](../../../src/components/radix/segmented-control.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -962,14 +920,13 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | items | yes | `readonly SegmentedControlItem<T>[]` |
 | onValueChange | yes | `(value: T) => void` |
 | ariaLabel | yes | `string` |
-| appearance | no | `"surface" \| "underline" \| undefined` |
 | disabled | no | `boolean \| undefined` |
 | className | no | `string \| undefined` |
 | actionId | no | `string \| undefined` |
 
 ## Select (chatgpt-desktop-kit/compat/select)
 
-[Implementation](../../../src/compat/select.tsx)
+[Implementation](../../../src/components/radix/select.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -989,7 +946,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## SelectContent (chatgpt-desktop-kit/compat/select)
 
-[Implementation](../../../src/compat/select.tsx)
+[Implementation](../../../src/components/radix/select.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -1012,7 +969,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## SelectControl (chatgpt-desktop-kit/compat/select)
 
-[Implementation](../../../src/compat/select.tsx)
+[Implementation](../../../src/components/radix/select.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -1036,7 +993,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## SelectGroup (chatgpt-desktop-kit/compat/select)
 
-[Implementation](../../../src/compat/select.tsx)
+[Implementation](../../../src/components/radix/select.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -1044,7 +1001,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## SelectItem (chatgpt-desktop-kit/compat/select)
 
-[Implementation](../../../src/compat/select.tsx)
+[Implementation](../../../src/components/radix/select.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -1055,7 +1012,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## SelectLabel (chatgpt-desktop-kit/compat/select)
 
-[Implementation](../../../src/compat/select.tsx)
+[Implementation](../../../src/components/radix/select.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -1063,7 +1020,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## SelectScrollDownButton (chatgpt-desktop-kit/compat/select)
 
-[Implementation](../../../src/compat/select.tsx)
+[Implementation](../../../src/components/radix/select.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -1071,7 +1028,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## SelectScrollUpButton (chatgpt-desktop-kit/compat/select)
 
-[Implementation](../../../src/compat/select.tsx)
+[Implementation](../../../src/components/radix/select.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -1079,7 +1036,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## SelectSeparator (chatgpt-desktop-kit/compat/select)
 
-[Implementation](../../../src/compat/select.tsx)
+[Implementation](../../../src/components/radix/select.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -1087,7 +1044,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## SelectTrigger (chatgpt-desktop-kit/compat/select)
 
-[Implementation](../../../src/compat/select.tsx)
+[Implementation](../../../src/components/radix/select.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -1095,7 +1052,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## SelectValue (chatgpt-desktop-kit/compat/select)
 
-[Implementation](../../../src/compat/select.tsx)
+[Implementation](../../../src/components/radix/select.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -1104,7 +1061,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## Separator (chatgpt-desktop-kit/compat/separator)
 
-[Implementation](../../../src/compat/separator.tsx)
+[Implementation](../../../src/components/radix/separator.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -1114,14 +1071,14 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## Skeleton (chatgpt-desktop-kit/compat/skeleton)
 
-[Implementation](../../../src/compat/skeleton.tsx)
+[Implementation](../../../src/components/radix/skeleton.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
 
 ## Switch (chatgpt-desktop-kit/compat/switch)
 
-[Implementation](../../../src/compat/switch.tsx)
+[Implementation](../../../src/components/radix/switch.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -1133,7 +1090,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## Textarea (chatgpt-desktop-kit/compat/textarea)
 
-[Implementation](../../../src/compat/textarea.tsx)
+[Implementation](../../../src/components/radix/textarea.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -1141,7 +1098,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## Tooltip (chatgpt-desktop-kit/compat/tooltip)
 
-[Implementation](../../../src/compat/tooltip.tsx)
+[Implementation](../../../src/components/radix/tooltip.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
@@ -1150,7 +1107,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 ## VirtualList (chatgpt-desktop-kit/compat/virtual-list)
 
-[Implementation](../../../src/compat/virtual-list.tsx)
+[Implementation](../../../src/components/radix/virtual-list.tsx)
 
 Standard internal long-list surface. It owns viewport scrolling, row
 virtualization, dynamic measurement, overscan, and the shared scrollbar skin.

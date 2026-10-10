@@ -28,6 +28,14 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | onCommit | no | `((value: string, option?: EditableComboboxOption) => void) \| undefined` |
 | emptyMessage | no | `ReactNode` |
 
+## FieldRow (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/forms/index.tsx)
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| inline | no | `boolean \| undefined` |
+
 ## Input (chatgpt-desktop-kit)
 
 [Implementation](../../../src/components/forms/index.tsx)
@@ -78,6 +86,15 @@ Native mutually exclusive choice; the Host supplies name, value and grouping lab
 | title | no | `string \| undefined` |
 | aria-label | no | `string \| undefined` |
 | aria-labelledby | no | `string \| undefined` |
+
+## SettingsForm (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/forms/index.tsx)
+
+Explicit responsive form layout; never repaint arbitrary Host forms or labels.
+
+| Prop | Required | Type |
+| --- | --- | --- |
 
 ## Switch (chatgpt-desktop-kit)
 

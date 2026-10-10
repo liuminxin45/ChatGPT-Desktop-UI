@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, type CSSProperties } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createPortal } from 'react-dom';
 import { Button, ClientComposer, DesktopRoot, Input, InputGroup, Textarea } from '../src';
 import { Input as HostInput } from '../src/compat/input';
 import { Textarea as HostTextarea } from '../src/compat/textarea';
+import { AppDialog, AppDialogTrigger, AppDialogContent, AppDialogHeader, AppDialogTitle, AppDialogDescription, AppDialogBody, AppDialogClose } from '../src/compat/app-dialog';
 import '../src/styles.css';
 import './input-contract.css';
 
@@ -36,7 +37,7 @@ function Example() {
       <Textarea aria-label="Message" value={draft} onChange={event => setDraft(event.target.value)} />
       <Button confirmOnEnter actionId="example.message.send" disabled={!draft.trim()} onClick={() => { record('send'); setDraft(''); }}>Send</Button>
     </div>
-    <div className="desktop-toolbar-search"><Input aria-label="Live filter" /></div>
+    <InputGroup><Input aria-label="Live filter" /></InputGroup>
     <InputGroup data-testid="compound"><span aria-hidden="true">⌕</span><Input aria-label="Compound filter" value={draft} onChange={event => setDraft(event.target.value)} /><Button actionId="example.compound.clear" onClick={() => setDraft('')}>Clear</Button></InputGroup>
     <InputGroup><span aria-hidden="true">⌕</span><HostInput aria-label="Invalid compound" aria-invalid="true" /></InputGroup>
     <InputGroup><span aria-hidden="true">⌕</span><Input aria-label="Disabled compound" disabled value="Disabled" readOnly /></InputGroup>
@@ -49,6 +50,13 @@ function Example() {
       leading={<Button aria-label="Sample attachments" disabled>+</Button>} />
     <InputGroup className="legacy-search"><Input aria-label="Legacy filter" /></InputGroup>
     <Textarea aria-label="Read only" readOnly value="Read only content" />
+    <section aria-label="Typography inheritance">
+      <label style={{fontSize:7,lineHeight:'9px',fontWeight:600}}>Small label<Input aria-label="Small label input" /><HostTextarea aria-label="Small label notes" /></label>
+      <label style={{fontSize:24,lineHeight:'32px',fontWeight:600}}>Large label<HostInput aria-label="Large label input" /><Textarea aria-label="Large label notes" /></label>
+      <div className="desktop-native-tool-surface" style={{fontSize:19,lineHeight:'28px'}}><label style={{fontSize:8}}>Tool label<HostInput aria-label="Native tool input" /><HostTextarea aria-label="Native tool notes" /></label><Button size="sm" actionId="example.typography.compact">Native tool compact</Button></div>
+      <div style={{'--desktop-font-size-body':'14px','--desktop-line-height-ui':'22px'} as CSSProperties}><label style={{fontSize:7}}>Scoped Host label<Input aria-label="Scoped token input" /><HostTextarea aria-label="Scoped token notes" /></label></div>
+      <AppDialog><AppDialogTrigger asChild><Button actionId="example.typography.dialog.open">Open typography dialog</Button></AppDialogTrigger><AppDialogContent><AppDialogHeader><AppDialogTitle>Typography dialog</AppDialogTitle><AppDialogDescription>Supporting dialog description</AppDialogDescription></AppDialogHeader><AppDialogBody><label style={{fontSize:7}}>Dialog label<HostInput aria-label="Portal typography input" /><HostTextarea aria-label="Portal typography notes" /></label><AppDialogClose asChild><Button actionId="example.typography.dialog.close">Close typography dialog</Button></AppDialogClose></AppDialogBody></AppDialogContent></AppDialog>
+    </section>
     <div data-desktop-input-scope><Input aria-label="Ambiguous field" /><Button confirmOnEnter onClick={() => record('first')}>First</Button><Button confirmOnEnter onClick={() => record('second')}>Second</Button></div>
     <div data-desktop-input-scope><Input aria-label="Hidden action field" /><Button confirmOnEnter hidden onClick={() => record('hidden')}>Hidden</Button></div>
     {createPortal(<section role="dialog" aria-label="Portal form"><Input aria-label="Portal field" /><Button confirmOnEnter actionId="example.portal.confirm" onClick={() => record('portal')}>Confirm portal</Button></section>, document.body)}

@@ -183,3 +183,12 @@ The Host remeasures dynamic rows and follows output only while the reader is at 
 `TableCell` 的 `pinned` 为固定列提供不透明共享背景，`tone="warning"` 表达单元格业务警告。列的定位与宽度仍由业务布局决定。采用审计解析基础控件的静态、条件、模板与常量 className；字体、填色、描边、圆角和 padding 必须由共享 props/state 表达，工具类也不是例外。
 
 Host-owned virtualizers use `ScrollEdgeFade virtualized` and the exported `scrollEdgeFadeSize` for both `paddingEnd` and `scrollPaddingEnd`. Shared VirtualList does this automatically. Virtual padding replaces viewport padding, so total height, end alignment and anchor offsets include exactly one fade allowance.
+
+## Computed control typography
+
+Input and Textarea own the semantic Body size, regular weight and UI line height; a smaller field label or larger surrounding heading must not resize editable content. Hosts customize semantic tokens, not control classes. Native Tool roots inherit the font family without resetting shared compact button or input typography. Compound Dialog and AlertDialog titles use the dialog-title and heading-line-height tokens; descriptions use Supporting. Visual acceptance must compare computed font sizes and line heights against these tokens through the actual Tailwind and portal pipeline, including nested labels, compact controls and scoped Host token overrides. Imports and source adoption alone do not prove a design-system match.
+
+Module Tabs use one quiet ChatGPT-style selected surface with a fully rounded target, regular text and preserved gaps. Do not combine a filled selected target with a bottom indicator or tab-shaped corners. Hover and keyboard focus remain independently visible. Compatibility APIs reuse the same canonical rendering; the library does not offer a separate legacy or generic visual system. Audit the maintained components against reference relationships rather than accepting them because they are already exported.
+## One visual system; no migrated compatibility styles
+
+`src/compat` contains export forwarding only. Compound Radix controls live in `src/components/radix` and use the canonical semantic control CSS. Glass, orbs, separate underline Tab variants, copied shadcn appearance utilities, Host business selectors and the retired `host.css` / `host-shell.css` are removed. Do not copy them into a consuming app or hide them behind overrides. Host-specific platform fonts/window behavior remain a thin Host policy. Settings forms, field rows and metadata lists opt into explicit shared components; the library never styles arbitrary product `form`, `label`, `table` or business class names.

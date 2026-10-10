@@ -44,7 +44,7 @@ const css = await Promise.all(
   [
     'dist/tokens.css',
     'dist/controls.css',
-    'dist/compat/host.css',
+    'dist/compound.css',
     'tests/output/menu-focus/utilities.css',
   ].map((file) => fs.readFile(path.join(root, file), 'utf8')),
 );

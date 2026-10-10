@@ -20,7 +20,7 @@ Version 0.3 changes the package identity to `chatgpt-desktop-kit` and uses `--de
 
 Standalone React documents import `styles.css` once and mount `DesktopRoot` (also exported as `DesktopSurface`). An optional application-specific storage key controls theme persistence; native storage stays in the Host's managed profile. The root tracks system preference and restores document state on unmount.
 
-Tailwind hosts import `controls.css`, `host.css` and `host-shell.css` once, then run their normal Tailwind pipeline. Include this package's `src/**/*.{ts,tsx}` in Tailwind's content scan when using `compat/*`. These exports preserve utility-based adapters without maintaining another component implementation.
+Hosts import `controls.css` and, when using the portable shell, `shell.css` once. The package owns control appearance through semantic CSS. `compat/*` only forwards compound APIs to canonical renderers in `src/components/radix`; it contains no JSX, styles or second visual variants. The removed `host.css`, `host-shell.css` and Glass exports must not be copied into a Host. A Host may keep a thin platform font/window policy and business compositions, without repainting shared controls. Tailwind hosts still scan the package sources for layout utilities.
 
 Embedded Tools inherit Host styles and typography. They must not mount another theme root, title bar or renderer error boundary. `ToolVisibilityContext` closes overlays when a retained surface is hidden; it does not own the surface lease.
 
@@ -101,3 +101,9 @@ Use `AIResponseProvider` at a retained conversation boundary and `AIResponse` wi
 Replace only AI busy spinners with `AIActivity` (including button labels), keeping stop/retry actions and real progress. Use `Markdown variant="ai"` for AI prose; keep domain-specific Remarkup and non-AI documents on their existing rendering path. Custom link adapters remain available through `components`. Do not override shared AI typography with local prose/code CSS. Code copy labels use the Host translation bridge.
 
 Host-owned virtualizers use `ScrollEdgeFade virtualized` and the exported `scrollEdgeFadeSize` for both `paddingEnd` and `scrollPaddingEnd`. Shared VirtualList does this automatically. Virtual padding replaces viewport padding, so total height, end alignment and anchor offsets include exactly one fade allowance.
+
+## Computed control typography
+
+Input and Textarea own the semantic Body size, regular weight and UI line height; a smaller field label or larger surrounding heading must not resize editable content. Hosts customize semantic tokens, not control classes. Native Tool roots inherit the font family without resetting shared compact button or input typography. Compound Dialog and AlertDialog titles use the dialog-title and heading-line-height tokens; descriptions use Supporting. Visual acceptance must compare computed font sizes and line heights against these tokens through the actual Tailwind and portal pipeline, including nested labels, compact controls and scoped Host token overrides. Imports and source adoption alone do not prove a design-system match.
+
+Module Tabs use one quiet ChatGPT-style selected surface with a fully rounded target, regular text and preserved gaps. Do not combine a filled selected target with a bottom indicator or tab-shaped corners. Hover and keyboard focus remain independently visible. Compatibility APIs reuse the same canonical rendering; the library does not offer a separate legacy or generic visual system. Audit the maintained components against reference relationships rather than accepting them because they are already exported.

@@ -1,7 +1,7 @@
 {
   "name": "chatgpt-desktop-kit",
-  "version": "0.4.5",
-  "description": "Reusable neutral desktop UI primitives, shell patterns, visual references and an agent skill.",
+  "version": "0.5.0",
+  "description": "ChatGPT desktop UI controls, semantic tokens, measured reference profiles and an agent skill.",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -22,13 +22,11 @@
     "./controls.css": "./dist/controls.css",
     "./tokens.css": "./dist/tokens.css",
     "./primitives.css": "./dist/primitives.css",
-    "./host.css": "./dist/compat/host.css",
     "./fixed-virtual-list": {
       "types": "./dist/fixed-virtual-list.d.ts",
       "import": "./dist/fixed-virtual-list.js",
       "default": "./dist/fixed-virtual-list.js"
     },
-    "./host-shell.css": "./dist/compat/host-shell.css",
     "./tab-navigation": {
       "types": "./dist/tab-navigation.d.ts",
       "import": "./dist/tab-navigation.js",
@@ -44,7 +42,8 @@
       "import": "./dist/components/*/index.js",
       "default": "./dist/components/*/index.js"
     },
-    "./adoption-audit": "./dist/audit-controls.mjs"
+    "./adoption-audit": "./dist/audit-controls.mjs",
+    "./shell.css": "./dist/shell.css"
   },
   "files": [
     "dist",

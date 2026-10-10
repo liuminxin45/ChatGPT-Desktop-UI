@@ -2,7 +2,7 @@
 
 ## Structure
 
-`src/components/{actions,forms,navigation,layout,overlays,lists,feedback,shell,client,conversation}` owns portable/profile implementations. Root source entry files are stable facades. `src/compat/` owns compound Radix API adaptation. Runtime/theme/input helpers and semantic CSS live in `src/`. `examples/demo/` is the versioned replica, `examples/catalog/` is the interactive typed reference, and `examples/gallery/` covers workspace/settings contracts. `scripts/` contains build, generation and verification; `tests/` contains source/distribution contracts.
+`src/components/{actions,forms,navigation,layout,overlays,lists,feedback,shell,client,conversation}` owns portable/profile implementations. Root source entry files are stable facades. `src/components/radix/` owns compound APIs using the same canonical control styles. `src/compat/` contains only export forwarding. Runtime/theme/input helpers and semantic CSS live in `src/`. `examples/demo/` is the versioned replica, `examples/catalog/` is the interactive typed reference, and `examples/gallery/` covers workspace/settings contracts. `scripts/` contains build, generation and verification; `tests/` contains source/distribution contracts.
 
 ## Component change
 

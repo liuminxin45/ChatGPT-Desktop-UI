@@ -4,6 +4,7 @@ import path from 'node:path';
 import os from 'node:os';
 import http from 'node:http';
 import { fileURLToPath } from 'node:url';
+import { spawnSync } from 'node:child_process';
 import { build } from 'esbuild';
 import { chromium } from 'playwright';
 
@@ -13,6 +14,12 @@ const temp = await fs.mkdtemp(path.join(os.tmpdir(), 'desktop-kit-input-'));
 const evidence = process.env.DESKTOP_UI_EVIDENCE_DIR || path.join(root, 'tests/output/input');
 await fs.mkdir(evidence, { recursive: true });
 await build({ absWorkingDir: root, entryPoints: ['examples/input-contract.tsx'], outdir: temp, bundle: true, format: 'esm', platform: 'browser', jsx: 'automatic', define: { 'process.env.NODE_ENV': '"production"' } });
+// Reproduce a consumer's real Tailwind pipeline; token ownership must survive
+// preflight, compound adapter utilities, nested labels and Radix portals.
+await fs.appendFile(path.join(temp,'input-contract.css'),'\n@tailwind base;\n@tailwind utilities;\n');
+await fs.writeFile(path.join(temp,'tailwind.config.cjs'),`module.exports={content:[${JSON.stringify(path.join(root,'src/**/*.{ts,tsx}'))},${JSON.stringify(path.join(root,'examples/input-contract.tsx'))}],darkMode:'class'};`);
+const tw=spawnSync(process.execPath,[path.join(root,'node_modules/tailwindcss/lib/cli.js'),'-i',path.join(temp,'input-contract.css'),'-o',path.join(temp,'processed.css'),'-c',path.join(temp,'tailwind.config.cjs')],{cwd:root,encoding:'utf8'});
+assert.equal(tw.status,0,tw.stderr);await fs.rename(path.join(temp,'processed.css'),path.join(temp,'input-contract.css'));
 const server = http.createServer(async (req, res) => {
   const asset = req.url === '/input-contract.js' || req.url === '/input-contract.css';
   res.setHeader('Content-Type', asset ? req.url.endsWith('.js') ? 'text/javascript' : 'text/css' : 'text/html');
@@ -103,7 +110,17 @@ try {
     assert.equal(await shared.evaluate(element => getComputedStyle(element).overflowY), 'auto');
     assert.deepEqual(errors, []);
     await page.screenshot({path:path.join(evidence,`input-${theme}-${width}.png`)});
-    results.push({theme,width,height,scale,geometry,groups}); await context.close();
+    const typography=[];
+    for(const label of ['Small label input','Small label notes','Large label input','Large label notes','Native tool input','Native tool notes','Scoped token input','Scoped token notes']){
+      const measured=await page.getByLabel(label,{exact:true}).evaluate(element=>{const css=getComputedStyle(element);return {fontSize:css.fontSize,lineHeight:css.lineHeight,fontWeight:css.fontWeight,bodyToken:css.getPropertyValue('--desktop-font-size-body').trim(),lineToken:css.getPropertyValue('--desktop-line-height-ui').trim()};});
+      assert.equal(measured.fontSize,measured.bodyToken,label+' must use Body instead of its parent label size');assert.equal(measured.lineHeight,measured.lineToken,label+' UI line height');assert.equal(measured.fontWeight,'400',label+' regular control weight');typography.push({label,...measured});
+    }
+    const compact=await page.getByRole('button',{name:'Native tool compact',exact:true}).evaluate(element=>{const css=getComputedStyle(element);return {fontSize:css.fontSize,lineHeight:css.lineHeight,supporting:css.getPropertyValue('--desktop-font-size-supporting').trim(),lineToken:css.getPropertyValue('--desktop-line-height-supporting').trim()};});assert.equal(compact.fontSize,compact.supporting);assert.equal(compact.lineHeight,compact.lineToken);
+    await page.getByRole('button',{name:'Open typography dialog',exact:true}).click();
+    const title=await page.getByRole('heading',{name:'Typography dialog',exact:true}).evaluate(element=>{const css=getComputedStyle(element);return {fontSize:css.fontSize,lineHeight:css.lineHeight,token:css.getPropertyValue('--desktop-font-size-dialog-title').trim(),lineToken:css.getPropertyValue('--desktop-line-height-heading').trim()};});assert.equal(title.fontSize,title.token);assert.equal(title.lineHeight,title.lineToken);
+    for(const label of ['Portal typography input','Portal typography notes']){const measured=await page.getByLabel(label).evaluate(element=>{const css=getComputedStyle(element);return {fontSize:css.fontSize,lineHeight:css.lineHeight,bodyToken:css.getPropertyValue('--desktop-font-size-body').trim(),lineToken:css.getPropertyValue('--desktop-line-height-ui').trim()};});assert.equal(measured.fontSize,measured.bodyToken);assert.equal(measured.lineHeight,measured.lineToken);typography.push({label,...measured});}
+    await page.getByRole('button',{name:'Close typography dialog',exact:true}).click();
+    results.push({theme,width,height,scale,geometry,groups,typography,compact,dialogTitle:title}); await context.close();
   }
   await fs.writeFile(path.join(evidence, 'input-results.json'), JSON.stringify({node:process.version,results},null,2));
   console.log('PASS text input confirmation, IME, repeats, scopes, portals, disabled state, neutral focus and 6 themed renders');

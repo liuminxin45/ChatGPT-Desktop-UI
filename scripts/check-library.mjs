@@ -24,6 +24,27 @@ for (const file of ['button', 'input', 'textarea', 'internal-scroll-area']) {
   assert.doesNotMatch(source, /<(?:button|input|textarea|div)\b/, `Duplicate native renderer: ${file}`);
 }
 const manifest = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
+// Compatibility import paths may preserve APIs, never migrated visual systems.
+for (const file of fs.readdirSync(path.join(root, 'src/compat'))) {
+  assert.ok(/\.tsx?$/.test(file), `Styles are forbidden in compatibility facades: ${file}`);
+  const source = fs.readFileSync(path.join(root, 'src/compat', file), 'utf8');
+  assert.match(source, /export \* from '\.\.\/components\/radix\//);
+  assert.doesNotMatch(
+    source,
+    /className|style=|cva\(|function\s|forwardRef\s*\(/,
+    `Compatibility implementation: ${file}`,
+  );
+}
+assert.ok(!manifest.exports['./host.css'] && !manifest.exports['./host-shell.css']);
+for (const file of ['base.css', 'controls.css', 'compound.css', 'shell.css']) {
+  const source = fs.readFileSync(path.join(root, 'src', file), 'utf8');
+  assert.doesNotMatch(
+    source,
+    /glass-|\.diff-code|\.review-commit-message|data-mail-compose-open|\.desktop-settings-(?:layout|sidebar|category|content|column)|\.desktop-navigation-|\.source-panel|\.settings-section/,
+    `Migrated Host visual rules: ${file}`,
+  );
+}
+assert.doesNotMatch(fs.readFileSync(path.join(root, 'src/tokens.css'), 'utf8'), /--desktop-hsl-/);
 assert.deepEqual(manifest.sideEffects, ['**/*.css']);
 assert.ok(manifest.exports['./components/*'], 'Missing modular exports');
 const adoption = auditAdoption([root], { integration: false });

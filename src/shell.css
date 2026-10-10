@@ -1,6 +1,15 @@
 .kit-shell{display:flex;flex-direction:column;width:100%;height:100%;background:var(--desktop-color-shell)}
 .kit-titlebar{height:40px;flex:none;display:flex;align-items:center;justify-content:space-between;padding-inline:6px;background:var(--desktop-color-shell);-webkit-app-region:drag}
 .kit-titlebar__actions,.kit-titlebar__trailing{display:flex;align-items:center;gap:2px;-webkit-app-region:no-drag}
+.kit-titlebar__actions{min-width:0}.kit-titlebar__trailing{margin-left:auto}
+.kit-titlebar:has(.kit-window-controls){padding-right:0}
+.kit-titlebar .kit-titlebar__icon.desktop-button{width:28px;height:28px;padding:0}
+.kit-titlebar .kit-titlebar__menu.desktop-button{height:28px}
+.kit-window-controls{display:flex;align-items:stretch;margin-left:8px;-webkit-app-region:no-drag}.kit-window-controls>.desktop-action-tooltip>.desktop-button,.kit-window-controls>.desktop-button{width:46px;min-width:46px;height:40px;padding:0;border-radius:0;color:var(--desktop-color-text-subtle)}
+.kit-window-controls .kit-window-close:hover:not(:disabled){background:var(--desktop-color-danger);color:var(--desktop-color-on-danger)}
+.kit-window-controls .desktop-button>svg,.kit-window-controls .desktop-action-glyph svg{width:12px;height:12px}
+.kit-avatar.desktop-button{width:32px;min-width:32px;height:32px;padding:0}
+@media(max-width:640px){.kit-window-controls{margin-left:0}.kit-window-controls>.desktop-action-tooltip>.desktop-button,.kit-window-controls>.desktop-button{width:32px;min-width:32px}}
 .kit-titlebar .desktop-icon-control{width:28px;height:28px}
 .kit-titlebar__menu{border:0;border-radius:var(--desktop-radius-control);padding:5px 10px;background:transparent;color:var(--desktop-color-text-muted);font:inherit;font-size:var(--desktop-font-size-supporting)}
 .kit-titlebar__menu:hover,.kit-titlebar__menu[data-state=open]{background:var(--desktop-color-surface-hover);color:var(--desktop-color-text)}
@@ -10,6 +19,9 @@
 .kit-rail__items{display:flex;flex:1;min-height:0;flex-direction:column;align-items:center;gap:8px;overflow:auto;scrollbar-width:none}
 .kit-rail__footer{padding-top:8px}
 .kit-rail .kit-rail__item{position:relative;width:32px;height:32px;border-radius:var(--desktop-radius-navigation);color:var(--desktop-color-text-muted)}
+.kit-rail .kit-rail__item{display:inline-flex;align-items:center;justify-content:center;border:0;padding:0;background:transparent;text-decoration:none}
+.kit-rail .kit-rail__item:focus-visible{outline:2px solid var(--desktop-color-focus);outline-offset:2px}
+.kit-rail>.desktop-internal-scroll{width:100%;scrollbar-gutter:auto;scrollbar-width:none}.kit-rail>.desktop-internal-scroll::-webkit-scrollbar{width:0}
 .kit-rail .kit-rail__item:hover:not(:disabled){background:var(--desktop-color-navigation-selected);color:var(--desktop-color-on-navigation-selected)}
 .kit-rail .kit-rail__item[aria-current=page]{background:var(--desktop-color-navigation-selected);color:var(--desktop-color-on-navigation-selected)}
 .kit-unread{position:absolute;width:8px;height:8px;border-radius:50%;top:3px;right:3px;background:var(--desktop-color-unread)}
@@ -32,6 +44,8 @@
 .kit-category{width:100%;display:flex;align-items:center;gap:8px;padding:6px 8px;border:0;border-radius:var(--desktop-radius-control);background:transparent;color:var(--desktop-color-text);font:inherit;text-align:left;white-space:nowrap}
 .kit-category:hover,.kit-category[aria-current=page]{background:var(--desktop-color-surface-hover)}
 .kit-settings-scroll{height:100%;padding:64px var(--desktop-space-page-inline) 32px}
+.kit-settings-layout{display:flex;height:100%;min-height:0;background:var(--desktop-color-background)}.kit-settings-layout>.kit-settings-scroll{flex:1;min-width:0;min-height:0}
+.kit-setting-row>.desktop-select{width:auto;min-width:112px}
 .kit-settings-content{width:100%;max-width:var(--desktop-size-settings-column);margin-inline:auto}
 .kit-settings-content h1{font-size:var(--desktop-font-size-emphasis);line-height:var(--desktop-line-height-emphasis);margin:0 0 40px;font-weight:var(--desktop-font-weight-regular)}
 .kit-settings-section{margin-bottom:40px}

@@ -79,6 +79,37 @@ try {
       await page.getByRole('tab', { name: 'Organize' }).focus();
       await page.keyboard.press('ArrowRight');
       assert.equal(await tab.getAttribute('aria-selected'), 'true');
+      await page.waitForFunction(() => {
+        const element = document.querySelector('[role="tab"][aria-selected="true"]');
+        const probe = document.createElement('span');
+        probe.style.background = 'var(--desktop-color-surface-selected)';
+        element.append(probe);
+        const ready = getComputedStyle(element).backgroundColor === getComputedStyle(probe).backgroundColor;
+        probe.remove();
+        return ready;
+      });
+      const tabAppearance = await tab.evaluate((element) => {
+        const css = getComputedStyle(element);
+        const probe = document.createElement('span');
+        probe.style.background = 'var(--desktop-color-surface-selected)';
+        element.append(probe);
+        const selected = getComputedStyle(probe).backgroundColor;
+        probe.remove();
+        return {
+          border: css.borderWidth,
+          fill: css.backgroundColor,
+          selected,
+          radius: css.borderRadius,
+          bottomRadius: css.borderBottomLeftRadius,
+          fontWeight: css.fontWeight,
+          outline: css.outlineStyle,
+        };
+      });
+      assert.equal(tabAppearance.border, '0px', 'selected Tabs must not retain a legacy bottom line');
+      assert.equal(tabAppearance.fill, tabAppearance.selected);
+      assert.equal(tabAppearance.bottomRadius, tabAppearance.radius);
+      assert.equal(tabAppearance.fontWeight, '400');
+      assert.notEqual(tabAppearance.outline, 'none', 'keyboard focus remains visible');
       await page.getByRole('button', { name: 'Menu', exact: true }).click();
       assert.ok((await gap(page.getByRole('menuitem'))) >= 4);
       await page.keyboard.press('Escape');
@@ -91,13 +122,11 @@ try {
       await fixed.getByRole('button', { name: 'Record 500', exact: true }).waitFor();
       await page.evaluate(() => window.listSpacing.prepend());
       await page.evaluate(() =>
-        document
-          .querySelector('.desktop-fixed-virtual-list')
-          .dispatchEvent(
-            new CustomEvent('desktop:restore-list-anchor', {
-              detail: { key: '500', offset: 0, top: 0, handled: false },
-            }),
-          ),
+        document.querySelector('.desktop-fixed-virtual-list').dispatchEvent(
+          new CustomEvent('desktop:restore-list-anchor', {
+            detail: { key: '500', offset: 0, top: 0, handled: false },
+          }),
+        ),
       );
       assert.equal(await fixed.evaluate((element) => element.scrollTop), 501 * 42 + 2);
       await page.evaluate(() => window.listSpacing.scroll(0));
@@ -115,6 +144,7 @@ try {
         scale,
         ...measured,
         tabInset: inset,
+        tabAppearance,
         scrollAnchor: 'passed',
         lastRows: 'passed',
         empty: 'passed',

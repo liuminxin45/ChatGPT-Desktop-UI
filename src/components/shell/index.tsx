@@ -1,5 +1,6 @@
 import type { Icon } from '@phosphor-icons/react';
 import { CaretRight, MagnifyingGlass, PushPin } from '@phosphor-icons/react';
+import { classes } from '../classes';
 import * as Menu from '@radix-ui/react-dropdown-menu';
 import { useEffect, useState, type ReactElement, type ReactNode } from 'react';
 import { ActionTooltip } from '../../action-tooltip';
@@ -495,10 +496,15 @@ export function SettingsPage({ title, children }: { title: ReactNode; children: 
     </InternalScrollArea>
   );
 }
-export function SettingsSection({ title, children }: { title: ReactNode; children: ReactNode }) {
+export function SettingsSection({
+  title,
+  children,
+  className,
+  ...props
+}: Omit<import('react').HTMLAttributes<HTMLElement>, 'title'> & { title?: ReactNode; children: ReactNode }) {
   return (
-    <section className="kit-settings-section">
-      <h2>{title}</h2>
+    <section className={classes('kit-settings-section', className)} {...props}>
+      {title ? <h2>{title}</h2> : null}
       <div className="kit-settings-section__rows">{children}</div>
     </section>
   );

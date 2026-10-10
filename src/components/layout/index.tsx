@@ -45,12 +45,27 @@ export function WorkbenchPage({ className, ...props }: HTMLAttributes<HTMLDivEle
 
 export const PageBar = ToolPageBar;
 
-export function PageToolbar({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={classes('desktop-page-toolbar', className)} {...props} />;
+export function PageToolbar({
+  className,
+  inline = false,
+  ...props
+}: HTMLAttributes<HTMLDivElement> & { inline?: boolean }) {
+  return (
+    <div
+      className={classes('desktop-page-toolbar', className)}
+      data-inline={inline || undefined}
+      {...props}
+    />
+  );
 }
 
 export function Surface({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
   return <div className={classes('desktop-ui-surface', className)} {...props} />;
+}
+
+/** Bounded metadata pairs, with text wrapping independent of the controls. */
+export function MetadataList({ className, ...props }: HTMLAttributes<HTMLDListElement>) {
+  return <dl className={classes('desktop-metadata-list', className)} {...props} />;
 }
 
 export function PageHeader({
