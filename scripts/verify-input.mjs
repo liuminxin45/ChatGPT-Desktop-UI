@@ -40,8 +40,9 @@ try {
       for (const init of [{isComposing:true},{keyCode:229},{repeat:true}]) await field.dispatchEvent('keydown', {key:'Enter',code:'Enter',bubbles:true,...init});
       assert.equal(await count('scope'), before, label + ' IME/repeat');
       await field.press('Shift+Enter'); await field.press('Control+Enter'); assert.equal(await count('scope'), before);
-      const focus = await field.evaluate(element => { const s=getComputedStyle(element); return {shadow:s.boxShadow,outline:s.outlineStyle}; });
-      assert.equal(focus.outline, 'none'); assert.ok(focus.shadow === 'none' || focus.shadow.includes('inset')); assert.ok(!focus.shadow.includes('56, 124, 244') && !focus.shadow.includes('67, 139, 250'));
+      const focus = await field.evaluate(element => { const s=getComputedStyle(element); return {shadow:s.boxShadow,outline:s.outlineStyle,radius:s.borderRadius}; });
+      if (label !== 'Native notes') assert.equal(focus.outline, 'none');
+      if (['Scoped name','Host name','Host notes'].includes(label)) assert.equal(focus.radius, '8px'); if (label === 'Native notes') assert.equal(focus.shadow, 'none'); assert.ok(focus.shadow === 'none' || focus.shadow.includes('inset')); assert.ok(!focus.shadow.includes('56, 124, 244') && !focus.shadow.includes('67, 139, 250'));
       await field.press('Enter'); assert.equal(await count('scope'), before + 1, label + ' confirm exactly once');
     }
     await page.getByRole('button', {name:'Toggle disabled'}).click(); const before = await count('scope');
@@ -52,6 +53,9 @@ try {
     await page.getByLabel('Read only', { exact: true }).press('Enter'); assert.equal(await page.getByLabel('Read only', { exact: true }).inputValue(), 'Read only content');
     await page.getByLabel('Portal field').press('Enter'); assert.equal(await count('portal'), 1);
     await page.getByLabel('Live filter').press('Enter'); assert.equal(await page.getByLabel('Live filter').evaluate(element => document.activeElement === element), false);
+    const unmanaged = page.getByLabel('Unmanaged native field');
+    await unmanaged.click();
+    assert.equal(await unmanaged.evaluate(element => getComputedStyle(element).boxShadow), 'none', 'shared CSS must not add a rectangular frame to unmanaged native fields');
     const groups = [];
     for (const label of ['Live filter', 'Legacy filter', 'Compound filter', 'Invalid compound', 'Read only compound']) {
       const field = page.getByLabel(label); await field.focus();

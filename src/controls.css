@@ -2,6 +2,7 @@
 @import './scroll-edge-fade.css';
 @import './primitives.css';
 @import './conversation.css';
+@import './ai.css';
 
 
 .desktop-button,.desktop-icon-control,.desktop-input,.desktop-textarea,.desktop-select{font:inherit}
@@ -44,6 +45,8 @@
 .dark .desktop-skeleton{background:var(--desktop-color-surface-hover)}
 .desktop-menu-item svg{width:16px;height:16px;flex:none}
 
+.desktop-input:disabled,.desktop-textarea:disabled{opacity:.5}
+.desktop-input::placeholder,.desktop-textarea::placeholder{color:var(--desktop-color-text-muted)}
 /* Shared boundary-free controls: application adapters and Native Tools use the same classes. */
 .desktop-button--secondary{background:transparent}
 .desktop-input:hover:not(:disabled),.desktop-textarea:hover:not(:disabled){background:var(--desktop-color-surface-hover)}
@@ -53,6 +56,9 @@
 .desktop-menu-item{position:relative;display:flex;min-height:30px;align-items:center;gap:8px;border:0;border-radius:var(--desktop-radius-control);color:var(--desktop-color-text);font-size:var(--desktop-font-size-body);outline:none;cursor:default}
 .desktop-menu .desktop-menu-item{padding:6px 9px}
 .desktop-menu-item[data-highlighted],.desktop-menu-item[data-state=open]{background:var(--desktop-color-surface-hover)}
+/* Radix focuses items on pointer movement as well as keyboard navigation.
+   Menu focus uses the shared highlight fill, never an outer outline/ring. */
+.desktop-menu-item:focus,.desktop-menu-item:focus-visible{outline:none;box-shadow:none;background:var(--desktop-color-surface-hover)}
 .desktop-menu-item[data-disabled]{pointer-events:none;opacity:.45}
 .desktop-menu-content>button[role=menuitem]{display:flex;width:100%;align-items:center;gap:8px;border:0;border-radius:var(--desktop-radius-control);padding:6px 9px;background:transparent;font:inherit;text-align:left}
 .desktop-menu-content>button[role=menuitem]:hover,.desktop-menu-content>button[role=menuitem]:focus-visible{background:var(--desktop-color-surface-hover);outline:none}
@@ -87,9 +93,9 @@ html:root,html:root body,html:root body *,html:root body *::before,html:root bod
 .desktop-composer> :first-child{border-top-left-radius:inherit;border-top-right-radius:inherit}
 .desktop-composer> :last-child{border-bottom-left-radius:inherit;border-bottom-right-radius:inherit}
 .desktop-composer textarea{background:transparent!important;border-radius:inherit}
-/* Neutral inset focus applies to shared, native and rich text editors in every Host. */
-:where(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="file"]),textarea,[contenteditable="true"]):focus{outline:none!important;border-color:var(--desktop-color-border-strong)!important;box-shadow:var(--desktop-input-focus-ring)!important}
-:where(input,textarea,[contenteditable="true"])[aria-invalid="true"]:focus{border-color:var(--desktop-color-danger)!important;box-shadow:inset 0 0 0 1px var(--desktop-color-danger)!important}
+/* Shared text controls and rich editors own their focus. Never decorate arbitrary native fields. */
+:where(.desktop-input,.desktop-textarea,[contenteditable="true"]):focus{outline:none!important;border-color:var(--desktop-color-border-strong)!important;box-shadow:var(--desktop-input-focus-ring)!important}
+:where(.desktop-input,.desktop-textarea,[contenteditable="true"])[aria-invalid="true"]:focus{border-color:var(--desktop-color-danger)!important;box-shadow:inset 0 0 0 1px var(--desktop-color-danger)!important}
 .desktop-composer :where(input,textarea,[contenteditable="true"]):focus{box-shadow:none!important}
 /* Compound text fields have one focus owner; never draw an inner input frame. */
 .desktop-input-group{display:flex;width:100%;height:36px;min-width:0;align-items:center;gap:8px;padding:0 11px;border:0;border-radius:var(--desktop-radius-control);background:var(--desktop-color-surface-muted);color:var(--desktop-color-text-muted)}
@@ -98,8 +104,8 @@ html:root,html:root body,html:root body *,html:root body *::before,html:root bod
 :is(.desktop-input-group,.desktop-toolbar-search):has(>:is(input,textarea,[contenteditable="true"]):focus){outline:none!important;border-color:var(--desktop-color-border-strong)!important;box-shadow:var(--desktop-input-focus-ring)!important}
 :is(.desktop-input-group,.desktop-toolbar-search):has(>[aria-invalid="true"]:focus){border-color:var(--desktop-color-danger)!important;box-shadow:inset 0 0 0 1px var(--desktop-color-danger)!important}
 [data-desktop-input-scope]:focus-within{border-color:var(--desktop-color-border-strong);box-shadow:none}
-.desktop-button.desktop-send-control{width:32px;height:32px;padding:0;border-radius:50%;background:var(--desktop-color-info);color:var(--desktop-color-on-send)}
-.desktop-button.desktop-send-control:hover:not(:disabled){background:var(--desktop-color-info-hover)}
+.desktop-button.desktop-send-control{width:32px;height:32px;min-width:32px;flex:none;padding:0;border:0;border-radius:50%;background:var(--desktop-color-send);color:var(--desktop-color-on-send)}
+.desktop-button.desktop-send-control:hover:not(:disabled){background:var(--desktop-color-send-hover)}
 @media(max-width:760px){:root{--desktop-space-page-inline:16px;--desktop-space-page-block:16px}.desktop-tool-page-bar{grid-template-columns:minmax(0,1fr) auto;gap:6px}.desktop-tool-page-bar__actions{gap:4px}}
 
 /* Light surfaces need a fine boundary where equal white surfaces meet. Dark
@@ -155,3 +161,8 @@ html:root,html:root body,html:root body *,html:root body *::before,html:root bod
 .desktop-button:is([aria-pressed=true],[aria-selected=true],[aria-current=true],[aria-current=page],[data-desktop-selected=true]){background:var(--desktop-color-surface-selected);color:var(--desktop-color-text)}
 
 .desktop-virtual-list__header{position:sticky;top:0;z-index:2;padding-inline:4px;background:var(--desktop-color-background)}
+.desktop-send-control .desktop-action-glyph{width:16px;height:16px;display:flex;align-items:center;justify-content:center}
+.desktop-send-control[data-composer-state="sending"],.desktop-send-control[data-composer-state="stopping"]{opacity:1}
+.desktop-composer-progress{animation:desktop-composer-spin 1s linear infinite}
+@keyframes desktop-composer-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.desktop-composer-progress{animation:none}}

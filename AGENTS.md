@@ -8,6 +8,7 @@ Read `docs/DESIGN_SYSTEM.md` and `docs/DESIGN_GUIDANCE.md` before changing UI. R
 - An explicit client recreation uses the versioned `DesktopClientSurface` profile in `docs/CLIENT_ALIGNMENT.json` (44px title bar, 52px rail, 372px sidebar and 728px Settings column). Match inspected client structures rather than inventing product screens; portable defaults and embedded Tool contracts stay independent.
 - Avoid duplicate module titles, redundant subtitles, nested card outlines and competing primary actions. Ordinary sections use color and spacing.
 - Idle buttons/selects are transparent; inputs use subtle filled surfaces. Hover, focus, checked, selected, disabled and error states must remain distinguishable in both themes.
+- Labelled navigation actions use `Button.icon` and the canonical icon column; sibling label edges and baselines must match even when visible glyph sizes differ. No Demo/Host alignment offsets or duplicated action styles. Verify rendered geometry in both themes and at supported scaling.
 - UI uses system fonts and 400 weight by default. Settings titles, category group headings, section titles and field labels use the semantic 600 emphasis weight, as requested on 2026-10-09. Body copy and controls stay regular; native Tool Hosts retain their enforced 400 policy.
 - Use outline/fill icon pairs, a 32px selected tile, 20px icon and 8px blue unread dot. Rail tooltips contain only a name; no shortcut text or arrow.
 - Preserve visible keyboard focus, labels, menu navigation, dialog focus containment and reduced-motion behavior. Arrow cursors do not replace these signals.
@@ -19,3 +20,5 @@ Read `docs/DESIGN_SYSTEM.md` and `docs/DESIGN_GUIDANCE.md` before changing UI. R
 - Do not publish packages, push remotes, replace installed applications or change consumer dependencies without an integration request.
 
 - Multi-action records use static `RecordRow` groups with independent `RecordLink`/`RecordAction`/`Button` targets. Never wrap controls in a clickable row or add whole-row hover/focus fills. Full-target feedback is reserved for an actual single navigation/selection target; tree membership alone does not authorize it. Validate blank-space clicks and keyboard access.
+
+- Message composers use the shared ComposerActionButton state contract (ready/sending/stoppable/stopping). No Host/profile-specific circle colors, glyphs or size overrides. Empty drafts disable Send only; Enter never invokes Stop. Supply cancellation only when supported, preserve draft and asynchronous outcome ownership, and run test:composer after changes.

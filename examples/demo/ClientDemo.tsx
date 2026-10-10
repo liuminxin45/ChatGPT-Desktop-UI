@@ -32,6 +32,8 @@ import {
 } from "@phosphor-icons/react";
 import {
   ClientComposer,
+  AIActivity,
+  AIResponse,
   DesktopClientSurface,
   DesktopShell,
   DesktopMenu,
@@ -106,6 +108,9 @@ export function CodexMark() {
   );
 }
 export function ClientDemo() {
+  const [generating, setGenerating] = useState('');
+  const replyTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  useEffect(() => () => { if (replyTimer.current) clearTimeout(replyTimer.current); }, []);
   const [renaming, setRenaming] = useState<DemoChat | null>(null),
     [renameTitle, setRenameTitle] = useState(""),
     [removing, setRemoving] = useState<DemoProject | null>(null);
@@ -229,7 +234,7 @@ export function ClientDemo() {
       ),
   };
   const send = () => {
-    if (!draft.trim()) return;
+    if (!draft.trim() || generating) return;
     const id = route.chat || `chat-${crypto.randomUUID()}`;
     if (!route.chat) {
       const item = {
@@ -255,12 +260,13 @@ export function ClientDemo() {
       [id]: [
         ...(old[id] || []),
         { own: true, text: draft.trim() },
-        {
-          own: false,
-          text: mode === "ChatGPT" ? "The next step is ready for review." : "The draft is ready for review. I kept the navigation compact and checked the menu and keyboard behavior.",
-        },
       ],
     }));
+    setGenerating(id);
+    replyTimer.current = setTimeout(() => {
+      setMessages(old => ({ ...old, [id]: [...(old[id] || []), { own: false, text: 'The draft is ready for review.\n\nUse `steady_clock` to measure elapsed time.\n\n- Keep the workload consistent.\n- Compare the runtime versions.\n\n```cpp\nstd::this_thread::sleep_for(400ms);\n```' }] }));
+      setGenerating('');
+    }, 600);
     setDrafts((old) => ({ ...old, [key]: "" }));
   };
   useEffect(() => {
@@ -828,19 +834,19 @@ export function ClientDemo() {
       <Button
         className="client-sidebar-link"
         actionId="client.chat.new"
+        icon={<NotePencil size={16} />}
         onClick={() => newChat("")}
       >
-        <NotePencil size={16} />
         New chat
       </Button>
       <Button
         className="client-sidebar-link"
         actionId="client.dot.open"
+        icon={<Circle size={13} weight="fill" />}
         onClick={() =>
           showInfo("Your dot", "A quiet place for your notes and ongoing work.")
         }
       >
-        <Circle size={13} weight="fill" />
         Your dot
       </Button>
       {activity ? (
@@ -863,9 +869,9 @@ export function ClientDemo() {
                   key={item.id}
                   className="client-sidebar-link"
                   actionId="client.project.open"
+                  icon={<Folder size={16} />}
                   onClick={() => newChat(item.id)}
                 >
-                  <Folder size={16} />
                   {item.name}
                 </Button>
               ))}
@@ -975,6 +981,8 @@ export function ClientDemo() {
     variant={mode === "ChatGPT" ? "chat" : "work"}
     placeholder={mode === "ChatGPT" ? "Ask ChatGPT" : chat ? "Work with Codex" : "Do anything"}
     onValueChange={value => setDrafts(old => ({ ...old, [key]: value }))} onSubmit={send}
+    busy={Boolean(generating) && generating === route.chat} onStop={() => { if (replyTimer.current) clearTimeout(replyTimer.current); setGenerating(''); }}
+    status={generating && generating === route.chat ? <AIActivity compact>Replying</AIActivity> : undefined}
     onVoice={mode === "Codex" ? () => showInfo("Voice mode", "Unavailable in this demo.") : undefined}
     context={mode === "Codex" && contextProject ? <>
       <DesktopMenu side="top" trigger={<button type="button" className="client-context-select" aria-label="Choose project"><Folder size={14} /><span>{contextProject.name}</span></button>}
@@ -1034,6 +1042,7 @@ export function ClientDemo() {
                 <Button
                   className="client-sidebar-link"
                   actionId="client.schedule.new"
+                  icon={<Plus size={16} />}
                   onClick={() =>
                     showInfo(
                       "New task",
@@ -1041,7 +1050,6 @@ export function ClientDemo() {
                     )
                   }
                 >
-                  <Plus size={16} />
                   New task
                 </Button>
                 <SidebarSection title="Upcoming">
@@ -1141,7 +1149,7 @@ export function ClientDemo() {
                           : "client-assistant-message"
                       }
                     >
-                      {item.text}
+                      {item.own ? item.text : <AIResponse responseId={`work-demo-${route.chat}-${index}`} content={item.text} animate />}
                     </div>
                   ))}
                 </div>}

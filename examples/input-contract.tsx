@@ -26,6 +26,7 @@ function Example() {
       <HostInput aria-label="Host name" />
       <HostTextarea aria-label="Host notes" />
       <textarea aria-label="Native notes" />
+      <input aria-label="Unmanaged native field" style={{ border: 0, outline: "none" }} />
       <div role="textbox" aria-label="Rich notes" contentEditable suppressContentEditableWarning style={{ minHeight: 60 }} />
       <Button confirmOnEnter actionId="example.scope.confirm" disabled={disabled} onClick={() => record('scope')}>Confirm changes</Button>
       <Button actionId="example.scope.disable" onClick={() => setDisabled(value => !value)}>Toggle disabled</Button>

@@ -30,6 +30,8 @@ Use tokens in application CSS, not the literals from this table. Main canvas, si
 
 Idle buttons and dropdown triggers have no decorative border or fill. The dropdown is text with a small down chevron. Hover introduces a compact filled target; the opened menu has a rounded surface and subtle shadow. Inputs have a light surface rather than a surrounding box. Text entry uses neutral inset focus or a subtly filled composer, without a blue outer ring. Preserve visible keyboard focus, table boundaries, actual drag targets and error state boundaries. “Boundary-free” does not mean invisible states.
 
+Menu items use the shared hover fill for pointer highlight and keyboard focus, including submenu, checkbox and radio items. They never draw an outer outline or focus ring. Radix may focus an item on pointer movement; that focus must not activate a generic control outline. Compatibility menus must not use Tailwind `outline-none` (a transparent solid outline in Tailwind 3), and global focus rules must defer to the menu's semantic state. Validate these states through the real Tailwind pipeline and Radix interactions with `npm run test:menus`; keep arrow navigation, Enter activation, disabled items and focus return intact.
+
 ## Geometry
 
 ### Versioned client profile
@@ -56,6 +58,14 @@ These values belong to the versioned client profile, not embedded Tools. Portabl
 Remove the selected rail's left stripe. Tooltips sit immediately beside the rail, have a short rounded text surface and no arrow/shortcut line. Preserve keyboard focus independently of hover. The selected tile remains dark enough for white icons in light mode.
 
 Rail hover uses the navigation tile surface and foreground rather than the generic control hover surface, which is too close to the pale shell in light mode. Idle destinations retain outline icons; the selected destination retains its filled icon. Pointer exit clears only the hover fill.
+
+### Icon and label alignment
+
+Use `Button.icon` for a leading action glyph and keep the label in `children`. Sibling navigation actions must share an icon column, label left edge and vertical baseline. The visible glyph can be smaller than its column; it remains centered and cannot move the label. Trailing status icons and counts remain separate from the leading action slot. Do not fix alignment with per-label margins, transforms or different gaps.
+
+Client sidebar actions compose `Button` with `className="client-sidebar-link"` and the `icon` prop. The shared client profile owns their 32px targets, 16px icon columns, 20px line boxes and 10px label gap. Demo and Host composition must reuse this geometry rather than maintain a second sidebar-action implementation.
+
+Changes to these rows must verify rendered label left edges and vertical baselines, centered glyph columns and hover/focus targets in both themes and at supported scaling. Check a smaller glyph beside a regular glyph, not only a set of identical icons; computed SVG dimensions alone are insufficient.
 
 ## Typography
 
@@ -143,3 +153,30 @@ Wrap only the message/body viewport in `ScrollEdgeFade`; place a `ComposerDock` 
 The bottom 24px use an alpha mask: fully opaque at the start and fully transparent at the dock edge in both themes. Native scrollbar gutters stay opaque. The mask remains enabled at the end; shared bottom padding keeps the last content above it. Focused descendant controls are scrolled into the readable region. Floating actions and portal menus belong outside the masked viewport.
 
 `ComposerDock` owns the zero top gap, 12px bottom spacing and compact/responsive horizontal insets. Do not add Host gradient, mask, background overlays or competing top padding. Disabled boundaries (`enabled={false}`) leave the underlying scroll area unchanged. This pattern applies to scrolling conversations adjoining fixed input areas, not ordinary lists, tables, menus or inline forms.
+
+Use one horizontal module navigation layer. Promote independent work destinations into that row instead of stacking Tabs. Ordinary sections use spacing, not nested outlined panels. Table cells use the exported Table family in both standalone and embedded surfaces; multi-action records remain static. Long lists compose VirtualList and RecordRow, with Host-owned column geometry. Select values and menu options remain readable, wrapping within constrained columns rather than silently showing ellipses. Use Select size="sm" for compact rows and InlineNotice for compact conditions with independent recovery actions. Each workspace has one vertical scroll owner; the page bar remains fixed and VirtualList header stays sticky within its single scroll viewport.
+
+## Composer send and stop action
+
+Message composers use `ComposerActionButton` in chat, Codex/work, threads, follow-up instructions, agent conversations, mail and comments. The supplied ChatGPT client button captures are the reference for the blue circular up-arrow and filled square. Use one 32px circle in every composer, a 16px up-arrow, a 10px filled square and the shared send foreground/background/hover tokens; the chat client profile must not override size or colors. Preserve keyboard focus and hover/focus tooltips.
+
+| Host state | Glyph | Interaction |
+| --- | --- | --- |
+| ready | Up arrow | Send, disabled when text/attachments are not ready |
+| sending | Progress ring | Disabled while the transport acknowledgement is pending |
+| stoppable | Filled square | Stop the active response when the Host supports cancellation |
+| stopping | Progress ring | Disabled until cancellation is acknowledged |
+
+State is explicit, never inferred from button text or a CSS class. `sendDisabled` only affects Send; an empty next draft cannot disable Stop. Sending must not claim cancellation is possible unless the Host provides it. Disabled/busy controls retain a localized accessible name and tooltip. Enter submits only a ready Send, Shift+Enter/IME remain text input, and Enter in an active response must not stop it. Stop is a pointer/Space command. Hosts own duplicate suppression, operation acknowledgements, failure recovery, draft preservation and correlated usage outcomes. The component owns presentation and action markers only.
+
+A labelled business operation (create, publish a report, apply, run a batch, stop a service) remains a labelled action; use its semantic icon. It is not a message composer simply because its handler submits data. Do not apply the circle to every form submit or Worker lifecycle command. The composer state gallery is `examples/composer-actions.tsx`; `npm run test:composer` covers all states, work/chat profile parity, keyboard behavior, draft preservation, reduced motion, both themes and 125% emulation.
+
+## AI activity and response presentation
+
+Use `AIActivity` for AI thinking, tool execution and generation: a quiet text-only neutral sweep, never a rotating glyph. Ordinary loading controls are independent. Reduced motion and forced colors use static readable text.
+
+AI prose uses `Markdown variant="ai"` or `AIResponse`: neutral code surfaces, baseline-aligned inline code, language/copy headers, wrapped prose and horizontally scrollable code/tables. Only AI code uses `--desktop-font-ai-code`; other Host typography retains its existing contract. No decorative backticks are rendered.
+
+Mount `AIResponseProvider` above virtualized conversation rows. Supply a stable `responseId` and set `animate` only for a newly received response. The provider retains bounded offsets/timing without response text; history is static. Streaming and complete responses share grapheme-safe batched presentation. Complete output catches up within approximately two seconds; cancellation, failure, hidden surfaces and reduced motion show all received content immediately. Host storage, copy/export/apply and diagnostics continue using canonical content, never the visible prefix.
+
+The Host remeasures dynamic rows and follows output only while the reader is at the bottom. Preserve history scroll position, drafts, selections and message state across theme/language changes. Animation timing is an adaptation requested on 2026-10-10, not a measured native-client fidelity claim. See the synthetic `/?ai-demo=1` scenario page for repeatable states.

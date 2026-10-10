@@ -3,9 +3,9 @@
   "platform": "Windows x64",
   "packageIdentity": "OpenAI.Codex",
   "packageVersion": "26.1002.7124.0",
-  "kitVersion": "0.4.4",
+  "kitVersion": "0.4.5",
   "observedOn": "2026-10-10",
-  "releaseTag": "chatgpt-desktop-26.1002.7124.0-ui-v0.4.4-rail-hover",
+  "releaseTag": "chatgpt-desktop-26.1002.7124.0-ui-v0.4.5-ai-text",
   "versionEvidence": "Installed Windows package metadata",
   "referenceMethod": "User-supplied screenshots and read-only native UI inspection",
   "geometry": {
@@ -62,5 +62,11 @@
       "Authenticated project and recent disclosures (signed-out reference has no project or chat lists); fold behavior follows the user specification and supplied desktop captures"
     ]
   },
-  "surfaceContract": "REPLICA_CONTRACT.md"
+  "surfaceContract": "REPLICA_CONTRACT.md",
+  "aiOutput": {
+    "reference": "User-supplied static captures",
+    "scope": "AI text sweep, batched reveal and Markdown",
+    "observedOn": "2026-10-10",
+    "timing": "Requested adaptation; native timing unmeasured"
+  }
 }

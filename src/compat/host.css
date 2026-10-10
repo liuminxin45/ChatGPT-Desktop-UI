@@ -21,6 +21,11 @@ html body * {
   font-family: var(--desktop-font-sans) !important;
 }
 
+/* Explicit AI Markdown exception; other Host and Tool typography is unchanged. */
+html body .desktop-ai-markdown code, html body .desktop-ai-markdown code * {
+  font-family: var(--desktop-font-ai-code) !important;
+}
+
 [data-desktop-wordmark] {
   font-weight: var(--desktop-font-weight-wordmark) !important;
 }
@@ -602,7 +607,7 @@ html body * {
 /* Shared dark-mode interaction contract.
    Keep foreground changes paired with surface changes so hover/focus states
    never collapse into low-contrast grey-on-grey combinations. */
-.dark :where(button, a, [role="button"], [role="menuitem"]):focus-visible {
+.dark :where(button, a, [role="button"], [role="menuitem"]):not(.desktop-menu-item):focus-visible {
   outline-color: var(--desktop-color-focus);
 }
 

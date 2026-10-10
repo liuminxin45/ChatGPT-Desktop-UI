@@ -30,6 +30,8 @@ Use shared semantic action exports for attachment/delete/edit/refresh/link/sourc
 
 Pass the action glyph as `icon` to either Button entry and keep its translated label in `children`. Labels remain visible by default. Menus, view/filter choices, primary workflow actions, confirmation/destructive actions and business-specific operations need visible names; an icon alone is insufficient.
 
+Sibling navigation actions follow “Icon and label alignment” in the [design system](DESIGN_SYSTEM.md). A smaller visible glyph must not shift the label. Do not place the leading SVG directly in `children` when the action supports `icon`, or add Host-only offsets to repair alignment.
+
 Opt in to `iconOnly` for familiar, compact toolbar/row controls such as close, remove, search, refresh and message hover actions. The compatibility Button's `size="icon"` also opts in. These controls show their names on hover/focus, including busy and disabled states. Existing `title` values become shared tooltips; a surrounding Tooltip suppresses duplicate hints. Preserve counts, state, record names and selected values.
 
 The compatibility DropdownMenuItem accepts `icon` and `actionId`, always displays its label and shortcut, and retains keyboard typeahead. Use stable Host-owned action identifiers. These primitives add no analytics events or diagnostic content. Shared portals close when their Tool Surface becomes hidden.
@@ -89,3 +91,11 @@ Wrap only the message/body viewport in `ScrollEdgeFade`; place a `ComposerDock` 
 The bottom 24px use an alpha mask: fully opaque at the start and fully transparent at the dock edge in both themes. Native scrollbar gutters stay opaque. The mask remains enabled at the end; shared bottom padding keeps the last content above it. Focused descendant controls are scrolled into the readable region. Floating actions and portal menus belong outside the masked viewport.
 
 `ComposerDock` owns the zero top gap, 12px bottom spacing and compact/responsive horizontal insets. Do not add Host gradient, mask, background overlays or competing top padding. Disabled boundaries (`enabled={false}`) leave the underlying scroll area unchanged. This pattern applies to scrolling conversations adjoining fixed input areas, not ordinary lists, tables, menus or inline forms.
+
+Composer integrations use ComposerActionButton with explicit ready/sending/stoppable/stopping state. Keep stable Host action IDs, localize all four labels and supply cancellation only when supported. Use sendDisabled for draft readiness so an empty next message cannot block Stop. Remove Host send/stop colors, glyphs, fixed sizes and duplicate desktop-send-control implementations. ClientComposer delegates to the same component; its existing busy/onStop props remain compatible, and actionState supports transport/cancellation acknowledgements. Upgrade all coordinated clients to the same complete revision and run the composer contract plus real Host rendering tests.
+
+## AI output integration
+
+Use `AIResponseProvider` at a retained conversation boundary and `AIResponse` with stable response IDs. Loaded history must pass `animate={false}`. For newly received output pass `animate`, plus `state="streaming"` until generation ends; whole-result APIs pass the final content with `state="complete"`. Cancellation/failure flush the received prefix. Retained Tools inherit `ToolVisibilityContext`; presentation does not own requests, persistence or telemetry.
+
+Replace only AI busy spinners with `AIActivity` (including button labels), keeping stop/retry actions and real progress. Use `Markdown variant="ai"` for AI prose; keep domain-specific Remarkup and non-AI documents on their existing rendering path. Custom link adapters remain available through `components`. Do not override shared AI typography with local prose/code CSS. Code copy labels use the Host translation bridge.

@@ -92,9 +92,11 @@ export function auditControls(directory, files) {
         const properties = [];
         rule.walkDecls((decl) => {
           if (
-            /^(?:background(?:-color)?|color|border(?:-.+)?|font(?:-.+)?|box-shadow|padding(?:-.+)?)$/.test(
+            /^(?:background(?:-color)?|color|border(?:-.+)?|font(?:-.+)?|line-height|white-space|text-overflow|box-shadow|padding(?:-.+)?)$/.test(
               decl.prop,
-            )
+            ) ||
+            (/\.desktop-select(?:[\s.:#>+~\[-]|$)/.test(rule.selector) &&
+              /^(?:height|max-height|overflow)$/.test(decl.prop))
           )
             properties.push(decl.prop);
         });

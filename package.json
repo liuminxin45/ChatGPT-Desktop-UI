@@ -1,6 +1,6 @@
 {
   "name": "chatgpt-desktop-kit",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "Reusable neutral desktop UI primitives, shell patterns, visual references and an agent skill.",
   "license": "MIT",
   "type": "module",
@@ -69,7 +69,9 @@
     "test:demo": "node scripts/verify-demo.mjs",
     "test:polish": "node scripts/verify-client-polish.mjs",
     "test": "node scripts/verify.mjs",
+    "test:composer": "node scripts/verify-composer-actions.mjs",
     "test:input": "node scripts/verify-input.mjs",
+    "test:menus": "node scripts/verify-menu-focus.mjs",
     "test:record-actions": "node scripts/verify-record-actions.mjs",
     "test:list-spacing": "node scripts/verify-list-spacing.mjs",
     "test:icons": "node scripts/verify-icon-actions.mjs",
@@ -80,7 +82,7 @@
     "prepare": "npm run build:library",
     "build:library": "node scripts/build.mjs --library-only",
     "audit:public": "node scripts/audit-public.mjs",
-    "test:integration": "node --test tests/integration-check.test.mjs",
+    "test:integration": "node --test tests/integration-check.test.mjs tests/adoption-audit.test.mjs",
     "test:public-install": "node scripts/verify-public-install.mjs",
     "docs:generate": "node scripts/component-catalog.mjs",
     "docs:check": "node scripts/component-catalog.mjs --check",
@@ -91,8 +93,9 @@
     "test:reference": "node scripts/verify-reference.mjs",
     "format:check": "prettier --check src/components examples/catalog \"scripts/{component-catalog,audit-adoption,check-library,build-catalog,build-site,verify-reference}.mjs\"",
     "check": "npm run typecheck && npm run build:library && npm run docs:check && npm run check:library && npm run format:check && npm run test:namespace && npm run test:integration",
-    "ci": "npm run check && npm run site:build && npm run test:reference && npm test && npm run test:demo && npm run test:polish && npm run test:input && npm run test:list-spacing && npm run test:tables && npm run test:record-actions && npm run test:icons && npm run skill:package && npm run skill:check && npm run audit:public",
+    "ci": "npm run check && npm run site:build && npm run test:reference && npm test && npm run test:demo && npm run test:polish && npm run test:input && npm run test:menus && npm run test:composer && npm run test:ai && npm run test:scroll-edge-fade && npm run test:list-spacing && npm run test:tables && npm run test:record-actions && npm run test:icons && npm run skill:package && npm run skill:check && npm run audit:public",
     "test:tables": "node scripts/verify-tables.mjs",
+    "test:ai": "node scripts/verify-ai.mjs",
     "test:scroll-edge-fade": "node scripts/verify-scroll-edge-fade.mjs"
   },
   "peerDependencies": {

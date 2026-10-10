@@ -37,11 +37,18 @@ The key visual relationships are a neutral window shell, quiet contextual sideba
 
 Use semantic tokens, not per-page gray literals. Respect explicit user cursor/font preferences; the packaged arrow-cursor policy is an originating desktop preference. Distinguish errors from unread states. Keep visible keyboard focus and labels. Name-only navigation tooltips must have no shortcut line or arrow.
 
+Menu pointer highlight and keyboard focus use the shared surface fill without an outer outline or ring. Radix also focuses items during pointer movement. Reuse the menu's semantic focus rules instead of adding Tailwind outline utilities or allowing generic control focus rules to recolor them. Verify submenu, checkbox/radio, disabled, arrow navigation, Enter activation and focus return through the actual consumer CSS pipeline.
+
+
+For labelled actions, pass the leading glyph through `Button.icon` instead of placing an SVG directly beside the text. Sibling navigation actions share an icon column, label start and baseline even when visible glyph sizes differ. Use the canonical sidebar action profile described in [design-system.md](references/design-system.md); fix shared geometry rather than adding page-local margins or offsets.
+
 The host owns native window actions, history, credentials, language, application state and analytics. Disable unavailable actions. A theme/language change or sidebar fold cannot remount content, discard drafts, fetch business data again or change a Tool lease. Protect unsaved changes and preserve drafts on failure.
 
 ## Verify
 
 Run the target's relevant typecheck/build and meaningful interaction checks. Inspect actual light and dark screens at 1920×1080 and 1280×800; include 125% scaling/emulation if available and say which was used. Compare reference and target at the same viewport. Check container width, toolbar height, rail geometry, text baseline, hover/selected/focus states, menus near edges, long lists, empty/loading/error states, failed avatar images and save failures.
+
+When changing icon-labelled rows, measure sibling label left edges and vertical baselines, and verify that glyph slots stay centered at every supported scale. Inspect the actual renders; a palette check or matching declared SVG sizes does not establish alignment.
 
 Review all affected routes rather than demonstrating only a new settings page. Repair differences in the shared layer where possible. Do not claim high fidelity based only on a palette or a screenshot that was never viewed.
 
@@ -49,4 +56,10 @@ Deliver the implementation, reference-linked screenshots, verified checks and re
 
 ## Workspace composition and long values
 
-Use one horizontal module navigation layer. Promote independent work destinations into that row instead of stacking Tabs. Ordinary sections use spacing, not nested outlined panels. Table cells use the exported Table family in both standalone and embedded surfaces; multi-action records remain static. Long lists compose VirtualList and RecordRow, with Host-owned column geometry. Select values and menu options remain readable, wrapping within constrained columns rather than silently showing ellipses. Use Select size="sm" for compact rows and InlineNotice for compact conditions with independent recovery actions. Each workspace has one vertical scroll owner; the page bar and list header remain outside the growing list viewport.
+Use one horizontal module navigation layer. Promote independent work destinations into that row instead of stacking Tabs. Ordinary sections use spacing, not nested outlined panels. Table cells use the exported Table family in both standalone and embedded surfaces; multi-action records remain static. Long lists compose VirtualList and RecordRow, with Host-owned column geometry. Select values and menu options remain readable, wrapping within constrained columns rather than silently showing ellipses. Use Select size="sm" for compact rows and InlineNotice for compact conditions with independent recovery actions. Each workspace has one vertical scroll owner; the page bar remains fixed and VirtualList header stays sticky within its single scroll viewport.
+
+Use ComposerActionButton for message composer send/progress/stop states. Pass explicit state and localized labels; no Host-specific button paint or icons. Preserve Send/Stop meaning, stable action IDs, cancellation acknowledgement and drafts. Enter never triggers Stop. Verify the shared composer state gallery in both themes and work/chat profiles.
+
+## AI activity and output
+
+AI thinking, tool execution and replying use `AIActivity` text sweep instead of rotating indicators. Use `AIResponse` for newly received streamed or whole-result prose, inside a retained `AIResponseProvider`; loaded history is static. Use `Markdown variant="ai"` for other AI prose. Reuse the shared inline-code, code-block, list, quote and table styling, including the scoped monospace AI code token. Keep canonical content for storage, copy, export and apply. Verify reduced motion, grapheme safety, cancellation, hidden surfaces, virtual-row remounts and bottom-follow without displacing readers. Ordinary loading and domain-specific Remarkup are separate.
