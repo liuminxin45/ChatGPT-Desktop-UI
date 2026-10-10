@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createPortal } from 'react-dom';
-import { Button, ClientComposer, DesktopRoot, Input, Textarea } from '../src';
+import { Button, ClientComposer, DesktopRoot, Input, InputGroup, Textarea } from '../src';
 import { Input as HostInput } from '../src/compat/input';
 import { Textarea as HostTextarea } from '../src/compat/textarea';
 import '../src/styles.css';
@@ -36,13 +36,17 @@ function Example() {
       <Button confirmOnEnter actionId="example.message.send" disabled={!draft.trim()} onClick={() => { record('send'); setDraft(''); }}>Send</Button>
     </div>
     <div className="desktop-toolbar-search"><Input aria-label="Live filter" /></div>
+    <InputGroup data-testid="compound"><span aria-hidden="true">⌕</span><Input aria-label="Compound filter" value={draft} onChange={event => setDraft(event.target.value)} /><Button actionId="example.compound.clear" onClick={() => setDraft('')}>Clear</Button></InputGroup>
+    <InputGroup><span aria-hidden="true">⌕</span><HostInput aria-label="Invalid compound" aria-invalid="true" /></InputGroup>
+    <InputGroup><span aria-hidden="true">⌕</span><Input aria-label="Disabled compound" disabled value="Disabled" readOnly /></InputGroup>
+    <InputGroup><span aria-hidden="true">⌕</span><Input aria-label="Read only compound" readOnly value="Retained value" /></InputGroup>
     <ClientComposer label="Shared composer" variant="chat" actionId="example.shared.message"
       value={sharedDraft} onValueChange={setSharedDraft} busy={busy}
       sendLabel="Send sample" stopLabel="Stop sample"
       onSubmit={() => { record('clientSend'); setBusy(true); }}
       onStop={() => { record('clientStop'); setBusy(false); }}
       leading={<Button aria-label="Sample attachments" disabled>+</Button>} />
-    <div className="legacy-search"><Input aria-label="Legacy filter" /></div>
+    <InputGroup className="legacy-search"><Input aria-label="Legacy filter" /></InputGroup>
     <Textarea aria-label="Read only" readOnly value="Read only content" />
     <div data-desktop-input-scope><Input aria-label="Ambiguous field" /><Button confirmOnEnter onClick={() => record('first')}>First</Button><Button confirmOnEnter onClick={() => record('second')}>Second</Button></div>
     <div data-desktop-input-scope><Input aria-label="Hidden action field" /><Button confirmOnEnter hidden onClick={() => record('hidden')}>Hidden</Button></div>

@@ -4368,6 +4368,1126 @@
       "native": true,
       "description": ""
     },
+    "c55f7f7dad8731a4": {
+      "name": "htmlFor",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "479f49685c82c1b2": {
+      "name": "onCopy",
+      "required": false,
+      "type": "ClipboardEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "24e2fc4a80c634d5": {
+      "name": "onCopyCapture",
+      "required": false,
+      "type": "ClipboardEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b149b590acb246af": {
+      "name": "onCut",
+      "required": false,
+      "type": "ClipboardEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5a4038e5c0f08258": {
+      "name": "onCutCapture",
+      "required": false,
+      "type": "ClipboardEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ecfdfdebd354b040": {
+      "name": "onPaste",
+      "required": false,
+      "type": "ClipboardEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "3154a314d9ec8f57": {
+      "name": "onPasteCapture",
+      "required": false,
+      "type": "ClipboardEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "88f218908202c0e6": {
+      "name": "onCompositionEnd",
+      "required": false,
+      "type": "CompositionEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c0be06b4120d37d5": {
+      "name": "onCompositionEndCapture",
+      "required": false,
+      "type": "CompositionEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ec4e021ca55e0ea1": {
+      "name": "onCompositionStart",
+      "required": false,
+      "type": "CompositionEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "66b7c4ef35afe9d9": {
+      "name": "onCompositionStartCapture",
+      "required": false,
+      "type": "CompositionEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e3a9ce7ebba0be12": {
+      "name": "onCompositionUpdate",
+      "required": false,
+      "type": "CompositionEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "cdbd198f72d9ab24": {
+      "name": "onCompositionUpdateCapture",
+      "required": false,
+      "type": "CompositionEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "14478b557840569c": {
+      "name": "onFocus",
+      "required": false,
+      "type": "FocusEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ea64ddd3f18c54ca": {
+      "name": "onFocusCapture",
+      "required": false,
+      "type": "FocusEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "71d91de9085014be": {
+      "name": "onBlur",
+      "required": false,
+      "type": "FocusEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "461729f5744d2957": {
+      "name": "onBlurCapture",
+      "required": false,
+      "type": "FocusEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "bc7ceea0faf7a037": {
+      "name": "onChange",
+      "required": false,
+      "type": "FormEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "400e07489b819def": {
+      "name": "onChangeCapture",
+      "required": false,
+      "type": "FormEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "4fc05b093e05fc19": {
+      "name": "onBeforeInput",
+      "required": false,
+      "type": "InputEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "efc940f729342292": {
+      "name": "onBeforeInputCapture",
+      "required": false,
+      "type": "FormEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "fba1804aebf6a879": {
+      "name": "onInput",
+      "required": false,
+      "type": "FormEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0e3d95794bd33654": {
+      "name": "onInputCapture",
+      "required": false,
+      "type": "FormEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a96bdbeb67bd00f6": {
+      "name": "onReset",
+      "required": false,
+      "type": "FormEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a8bcbfcc3cddebff": {
+      "name": "onResetCapture",
+      "required": false,
+      "type": "FormEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "2e6580723d8f02de": {
+      "name": "onSubmit",
+      "required": false,
+      "type": "FormEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "cfa24ab578a51c98": {
+      "name": "onSubmitCapture",
+      "required": false,
+      "type": "FormEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d1cc2f49e5d7ee29": {
+      "name": "onInvalid",
+      "required": false,
+      "type": "FormEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "4f3ba538ff302d09": {
+      "name": "onInvalidCapture",
+      "required": false,
+      "type": "FormEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "9001f97c89861bba": {
+      "name": "onLoad",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "669fd2ae02710fe2": {
+      "name": "onLoadCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f66b67899d3b2cd9": {
+      "name": "onError",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8448ef890f95c279": {
+      "name": "onErrorCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a013d97aea0f9977": {
+      "name": "onKeyDown",
+      "required": false,
+      "type": "KeyboardEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "9c65c4d7670c2f00": {
+      "name": "onKeyDownCapture",
+      "required": false,
+      "type": "KeyboardEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "cb1736fb1b2c361e": {
+      "name": "onKeyPress",
+      "required": false,
+      "type": "KeyboardEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0a41e6a5a228ea8b": {
+      "name": "onKeyPressCapture",
+      "required": false,
+      "type": "KeyboardEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "cba5865f7adae50a": {
+      "name": "onKeyUp",
+      "required": false,
+      "type": "KeyboardEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ae9a020e0993344a": {
+      "name": "onKeyUpCapture",
+      "required": false,
+      "type": "KeyboardEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "fdea48b3ad724e50": {
+      "name": "onAbort",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e323b8861c08a776": {
+      "name": "onAbortCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "76b85a8db284e423": {
+      "name": "onCanPlay",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "956169e7a2a3768f": {
+      "name": "onCanPlayCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e689661f003cb7c2": {
+      "name": "onCanPlayThrough",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "57e36065774136af": {
+      "name": "onCanPlayThroughCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "41c83d7bf45c2596": {
+      "name": "onDurationChange",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "2fdb4c08818c1b9e": {
+      "name": "onDurationChangeCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b42493b27256c4f5": {
+      "name": "onEmptied",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b83e9af38b161df6": {
+      "name": "onEmptiedCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "59d8633d601f3d04": {
+      "name": "onEncrypted",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "2632e8729050c1d5": {
+      "name": "onEncryptedCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "def4f442df7d33ff": {
+      "name": "onEnded",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b8386be3dd941246": {
+      "name": "onEndedCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0d026ca93342e4f0": {
+      "name": "onLoadedData",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "6ff9a637f1dede20": {
+      "name": "onLoadedDataCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "6fc759dc822120c8": {
+      "name": "onLoadedMetadata",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "87ee22c12314fd34": {
+      "name": "onLoadedMetadataCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "70ba11697582de35": {
+      "name": "onLoadStart",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "11174cfa0042cd4a": {
+      "name": "onLoadStartCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "132d330e1d74b59d": {
+      "name": "onPause",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "71f14e93be5b1e79": {
+      "name": "onPauseCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b4bf393b0f95a2e8": {
+      "name": "onPlay",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "2bf870f7ac8f4e87": {
+      "name": "onPlayCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "1ea49afbaeae5723": {
+      "name": "onPlaying",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "9be13968ac989e4b": {
+      "name": "onPlayingCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5009b4a6cfd6c36e": {
+      "name": "onProgress",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d3240957777f3169": {
+      "name": "onProgressCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5a87b69de7675f72": {
+      "name": "onRateChange",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a71ef4efb09158c6": {
+      "name": "onRateChangeCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "704a03b451e3cb5c": {
+      "name": "onSeeked",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f6042da0e5a66cc9": {
+      "name": "onSeekedCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c5f10a7ae8c97d5b": {
+      "name": "onSeeking",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "4288b3548a4afc53": {
+      "name": "onSeekingCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c3ea0ed57f783f5b": {
+      "name": "onStalled",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "286ab19ac72c56e3": {
+      "name": "onStalledCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "55a644c4fdf95539": {
+      "name": "onSuspend",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "bb50e039d032ca85": {
+      "name": "onSuspendCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "2db6d86a6ac0e5fc": {
+      "name": "onTimeUpdate",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0df2355e6782f5bb": {
+      "name": "onTimeUpdateCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "1c7dcd6cd9fa9fb5": {
+      "name": "onVolumeChange",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c8e6c6b16c88cddf": {
+      "name": "onVolumeChangeCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8bd43e5060b5dc59": {
+      "name": "onWaiting",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c3e96e38e4a8b9ef": {
+      "name": "onWaitingCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b4de2ab1b72078b8": {
+      "name": "onAuxClick",
+      "required": false,
+      "type": "MouseEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b2d789e393dc3467": {
+      "name": "onAuxClickCapture",
+      "required": false,
+      "type": "MouseEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e897753dbfc39cd0": {
+      "name": "onClick",
+      "required": false,
+      "type": "MouseEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "15451569df6de4bf": {
+      "name": "onClickCapture",
+      "required": false,
+      "type": "MouseEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e778452da5e7a10e": {
+      "name": "onContextMenu",
+      "required": false,
+      "type": "MouseEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b7c068713345a8fe": {
+      "name": "onContextMenuCapture",
+      "required": false,
+      "type": "MouseEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b500459c6e012420": {
+      "name": "onDoubleClick",
+      "required": false,
+      "type": "MouseEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "9b314cb420306cb5": {
+      "name": "onDoubleClickCapture",
+      "required": false,
+      "type": "MouseEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "84df8db151f7671e": {
+      "name": "onDrag",
+      "required": false,
+      "type": "DragEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d3d16a5db328ab1e": {
+      "name": "onDragCapture",
+      "required": false,
+      "type": "DragEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "3eff5757632fc528": {
+      "name": "onDragEnd",
+      "required": false,
+      "type": "DragEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "762a2523beb2ac90": {
+      "name": "onDragEndCapture",
+      "required": false,
+      "type": "DragEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a15370dd8bb7d235": {
+      "name": "onDragEnter",
+      "required": false,
+      "type": "DragEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "cd4e65d40852bd23": {
+      "name": "onDragEnterCapture",
+      "required": false,
+      "type": "DragEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d7fdab12735fcc83": {
+      "name": "onDragExit",
+      "required": false,
+      "type": "DragEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "fb2b16a85cfb00a6": {
+      "name": "onDragExitCapture",
+      "required": false,
+      "type": "DragEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "57be929685ab827b": {
+      "name": "onDragLeave",
+      "required": false,
+      "type": "DragEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d6f6a6779a8ce076": {
+      "name": "onDragLeaveCapture",
+      "required": false,
+      "type": "DragEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d1041fff73ae977b": {
+      "name": "onDragOver",
+      "required": false,
+      "type": "DragEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "1a5937950387400b": {
+      "name": "onDragOverCapture",
+      "required": false,
+      "type": "DragEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "3b656f09e0296efa": {
+      "name": "onDragStart",
+      "required": false,
+      "type": "DragEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "30ba6a4b73c3b5fb": {
+      "name": "onDragStartCapture",
+      "required": false,
+      "type": "DragEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c8b3883ba1769310": {
+      "name": "onDrop",
+      "required": false,
+      "type": "DragEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0be4938f18072f64": {
+      "name": "onDropCapture",
+      "required": false,
+      "type": "DragEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "156e425917ebc877": {
+      "name": "onMouseDown",
+      "required": false,
+      "type": "MouseEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "9d04ebdb9b7921c8": {
+      "name": "onMouseDownCapture",
+      "required": false,
+      "type": "MouseEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "1ba5d77ab865b5ad": {
+      "name": "onMouseEnter",
+      "required": false,
+      "type": "MouseEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e78ddbd26e939ecd": {
+      "name": "onMouseLeave",
+      "required": false,
+      "type": "MouseEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a376ce41e5205e73": {
+      "name": "onMouseMove",
+      "required": false,
+      "type": "MouseEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "4c6d1c2ae275c074": {
+      "name": "onMouseMoveCapture",
+      "required": false,
+      "type": "MouseEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "936fbf0efb5c82b0": {
+      "name": "onMouseOut",
+      "required": false,
+      "type": "MouseEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "50de41a7ee055713": {
+      "name": "onMouseOutCapture",
+      "required": false,
+      "type": "MouseEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5f798e52d144ff14": {
+      "name": "onMouseOver",
+      "required": false,
+      "type": "MouseEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "52765af4bba1c499": {
+      "name": "onMouseOverCapture",
+      "required": false,
+      "type": "MouseEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a5a975a3230bf5c4": {
+      "name": "onMouseUp",
+      "required": false,
+      "type": "MouseEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e1aae9591cb8f5bc": {
+      "name": "onMouseUpCapture",
+      "required": false,
+      "type": "MouseEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8b8ab6911bc7fdff": {
+      "name": "onSelect",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "062e8ea470c82e33": {
+      "name": "onSelectCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "6b7af37334c4bc3a": {
+      "name": "onTouchCancel",
+      "required": false,
+      "type": "TouchEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "3fb8f90c8550cddb": {
+      "name": "onTouchCancelCapture",
+      "required": false,
+      "type": "TouchEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "77de7c2e67b89280": {
+      "name": "onTouchEnd",
+      "required": false,
+      "type": "TouchEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ea34e1c31115f709": {
+      "name": "onTouchEndCapture",
+      "required": false,
+      "type": "TouchEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c5bad61936bbc08a": {
+      "name": "onTouchMove",
+      "required": false,
+      "type": "TouchEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7e20451ed86213a3": {
+      "name": "onTouchMoveCapture",
+      "required": false,
+      "type": "TouchEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c8a9320b515574ad": {
+      "name": "onTouchStart",
+      "required": false,
+      "type": "TouchEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "1ae2da206f7e2ec0": {
+      "name": "onTouchStartCapture",
+      "required": false,
+      "type": "TouchEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "cf2d41129417e786": {
+      "name": "onPointerDown",
+      "required": false,
+      "type": "PointerEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "6e2cd9c30d2198d3": {
+      "name": "onPointerDownCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e9b683c7dbb8f769": {
+      "name": "onPointerMove",
+      "required": false,
+      "type": "PointerEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5aa9dbf012b5ce4a": {
+      "name": "onPointerMoveCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "16c50a8a35586975": {
+      "name": "onPointerUp",
+      "required": false,
+      "type": "PointerEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "30286ef457433a24": {
+      "name": "onPointerUpCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "fb8852881f75e48b": {
+      "name": "onPointerCancel",
+      "required": false,
+      "type": "PointerEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0795090c487d6363": {
+      "name": "onPointerCancelCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "05d94f425db8d1da": {
+      "name": "onPointerEnter",
+      "required": false,
+      "type": "PointerEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "414a5f206816e120": {
+      "name": "onPointerLeave",
+      "required": false,
+      "type": "PointerEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "75b48ebcd44efbfc": {
+      "name": "onPointerOver",
+      "required": false,
+      "type": "PointerEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8c9441bfb4a34395": {
+      "name": "onPointerOverCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "209d9747fa2930af": {
+      "name": "onPointerOut",
+      "required": false,
+      "type": "PointerEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a442914aa0330d25": {
+      "name": "onPointerOutCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "3c3683df7a5900d7": {
+      "name": "onGotPointerCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "6273cee57d6f3d5c": {
+      "name": "onGotPointerCaptureCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d78b28eaeb3db0c0": {
+      "name": "onLostPointerCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "702c629307c56fa3": {
+      "name": "onLostPointerCaptureCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0e978998f137c3d9": {
+      "name": "onScroll",
+      "required": false,
+      "type": "UIEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "dad58f01cb83082d": {
+      "name": "onScrollCapture",
+      "required": false,
+      "type": "UIEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "31c2248c79ab176e": {
+      "name": "onWheel",
+      "required": false,
+      "type": "WheelEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ee59f3d9ebc41652": {
+      "name": "onWheelCapture",
+      "required": false,
+      "type": "WheelEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a842bad399c42e05": {
+      "name": "onAnimationStart",
+      "required": false,
+      "type": "AnimationEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7ddeb0cdcfd1d847": {
+      "name": "onAnimationStartCapture",
+      "required": false,
+      "type": "AnimationEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ba19fbe6f4e28761": {
+      "name": "onAnimationEnd",
+      "required": false,
+      "type": "AnimationEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b047028868728e19": {
+      "name": "onAnimationEndCapture",
+      "required": false,
+      "type": "AnimationEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "9e9ee3bb124070fc": {
+      "name": "onAnimationIteration",
+      "required": false,
+      "type": "AnimationEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "1521d0f3f4e1adfa": {
+      "name": "onAnimationIterationCapture",
+      "required": false,
+      "type": "AnimationEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "9fc2ac1f72aca91b": {
+      "name": "onTransitionEnd",
+      "required": false,
+      "type": "TransitionEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f6b1f84957df2096": {
+      "name": "onTransitionEndCapture",
+      "required": false,
+      "type": "TransitionEventHandler<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f28915c3ea36ce02": {
+      "name": "ref",
+      "required": false,
+      "type": "LegacyRef<HTMLLabelElement> | undefined",
+      "native": true,
+      "description": ""
+    },
     "84386890644e2815": {
       "name": "autoComplete",
       "required": false,
@@ -14511,13 +15631,6 @@
       "native": true,
       "description": ""
     },
-    "c55f7f7dad8731a4": {
-      "name": "htmlFor",
-      "required": false,
-      "type": "string | undefined",
-      "native": true,
-      "description": ""
-    },
     "42a3ea7a64e0049a": {
       "name": "ref",
       "required": false,
@@ -18555,6 +19668,285 @@
         }
       ],
       "nativeProps": []
+    },
+    {
+      "id": "chatgpt-desktop-kit:InputGroup",
+      "name": "InputGroup",
+      "importPath": "chatgpt-desktop-kit",
+      "family": "forms",
+      "implementation": "src/components/forms/index.tsx",
+      "description": "One text-entry boundary for an input with leading icons or trailing actions.",
+      "props": [],
+      "nativeProps": [
+        "2500547b788f2f25",
+        "c55f7f7dad8731a4",
+        "492c223f0955790c",
+        "15ffaab16e1011f9",
+        "eddae8e371e2f703",
+        "51f9507a65352cff",
+        "bacb3b6094d96a90",
+        "23f7a890a3938b56",
+        "9ea624e1ff6d432f",
+        "4c8a56e6e80dc7a0",
+        "4e1ed1d679212235",
+        "4626cc887c4fb12e",
+        "ee2de0c04ce0aa30",
+        "91837fe1783bec9a",
+        "02418f9589266969",
+        "873855a7abccb948",
+        "653092775be5509a",
+        "3bf9ffb031db54c9",
+        "0afa6e7c0a427328",
+        "7673eefbd3821376",
+        "6c45b2c6479a10e9",
+        "d9b870d67f4534b8",
+        "83c160b2f06ef571",
+        "57fad1b0152d5828",
+        "82fe63f8b632834d",
+        "6c2961aa2e807313",
+        "548471eea24c23d0",
+        "19d72cf8ae6d9a2d",
+        "2e993b037f3bd9c5",
+        "79c8646544870d33",
+        "787d327efce5f445",
+        "bbf7c69656fd89aa",
+        "a3c3a2bd6d8cb0cb",
+        "b63668c0dc2f4944",
+        "96dc96c1b76b47f5",
+        "3c5d1a89ebbe68e9",
+        "829c816035517fea",
+        "fae771ee4780b879",
+        "840ff5756b1d7fea",
+        "415d17b98c91d343",
+        "1af9857937727a9f",
+        "19f173b5dcb2c41a",
+        "6d4aceb7410b7f05",
+        "769fb3e0182fe328",
+        "0c7ea159d32a4722",
+        "dce16e2ae813a0f7",
+        "ea282ea73b43c323",
+        "ec107097d56b1b68",
+        "a5a3eef632b3ef4d",
+        "a255dd4bb0681ac6",
+        "1fbaf2c2f93c12bc",
+        "8d1df39442042c7e",
+        "74282ab38340e309",
+        "0d6d2895792254b5",
+        "3909957c7689e36c",
+        "ecf56850cf1605d3",
+        "2479771f46785b5a",
+        "86828207c5c51f1f",
+        "fbceb60275ace2b2",
+        "380898b5e32036c7",
+        "44d42ae77bdc214f",
+        "2abcb2017f65f9c1",
+        "4b62625346e0f5ec",
+        "402dc0a4b5546b5f",
+        "fc0fa651370547e3",
+        "679db8ef2fe3976d",
+        "85353dbd4b876e20",
+        "2c0ed5b877c15e1a",
+        "23c7ed6762ae3909",
+        "f1106f51cfbd3c9a",
+        "cccb14974af350fc",
+        "794a693b859a8340",
+        "c862ae898dff099e",
+        "3ed607153829f231",
+        "4cc9b5f5a121f197",
+        "0bcfbac3bf682576",
+        "3a6b556cf8b23fbc",
+        "e75a3f19767cf979",
+        "7515edf8d3608bf6",
+        "66f76ac880140ca7",
+        "00ac781d246b3f68",
+        "96f4908fcd16108a",
+        "08caee40fee0857e",
+        "4e44cc9c1ed6f3a5",
+        "12ae8dc4851a635e",
+        "a5ad8a7f9b5ba9bc",
+        "4e27e7acd839e4a1",
+        "cb158207746e6bb9",
+        "c49cbd91d1843f99",
+        "a2a2cd4fbba448d0",
+        "3d6aa4108f2b8c32",
+        "64a3906ab80858f3",
+        "68d7f73d9645d906",
+        "4cd166b22dc09153",
+        "565c31f2a3cee300",
+        "997fe13cf60495e5",
+        "b7787a274ef3310e",
+        "df0b03ec4973e477",
+        "1f86e2f75ac6e140",
+        "6d76a40c85b0bf1f",
+        "b0483557eb584ead",
+        "ac1ff6b3e5032100",
+        "03484b4b1d86e92f",
+        "c01934236d41c34f",
+        "57b07e0f6124ced5",
+        "3d374b8e347fe3d3",
+        "38a872e40c6c6308",
+        "7cdb8af317bd47ff",
+        "479f49685c82c1b2",
+        "24e2fc4a80c634d5",
+        "b149b590acb246af",
+        "5a4038e5c0f08258",
+        "ecfdfdebd354b040",
+        "3154a314d9ec8f57",
+        "88f218908202c0e6",
+        "c0be06b4120d37d5",
+        "ec4e021ca55e0ea1",
+        "66b7c4ef35afe9d9",
+        "e3a9ce7ebba0be12",
+        "cdbd198f72d9ab24",
+        "14478b557840569c",
+        "ea64ddd3f18c54ca",
+        "71d91de9085014be",
+        "461729f5744d2957",
+        "bc7ceea0faf7a037",
+        "400e07489b819def",
+        "4fc05b093e05fc19",
+        "efc940f729342292",
+        "fba1804aebf6a879",
+        "0e3d95794bd33654",
+        "a96bdbeb67bd00f6",
+        "a8bcbfcc3cddebff",
+        "2e6580723d8f02de",
+        "cfa24ab578a51c98",
+        "d1cc2f49e5d7ee29",
+        "4f3ba538ff302d09",
+        "9001f97c89861bba",
+        "669fd2ae02710fe2",
+        "f66b67899d3b2cd9",
+        "8448ef890f95c279",
+        "a013d97aea0f9977",
+        "9c65c4d7670c2f00",
+        "cb1736fb1b2c361e",
+        "0a41e6a5a228ea8b",
+        "cba5865f7adae50a",
+        "ae9a020e0993344a",
+        "fdea48b3ad724e50",
+        "e323b8861c08a776",
+        "76b85a8db284e423",
+        "956169e7a2a3768f",
+        "e689661f003cb7c2",
+        "57e36065774136af",
+        "41c83d7bf45c2596",
+        "2fdb4c08818c1b9e",
+        "b42493b27256c4f5",
+        "b83e9af38b161df6",
+        "59d8633d601f3d04",
+        "2632e8729050c1d5",
+        "def4f442df7d33ff",
+        "b8386be3dd941246",
+        "0d026ca93342e4f0",
+        "6ff9a637f1dede20",
+        "6fc759dc822120c8",
+        "87ee22c12314fd34",
+        "70ba11697582de35",
+        "11174cfa0042cd4a",
+        "132d330e1d74b59d",
+        "71f14e93be5b1e79",
+        "b4bf393b0f95a2e8",
+        "2bf870f7ac8f4e87",
+        "1ea49afbaeae5723",
+        "9be13968ac989e4b",
+        "5009b4a6cfd6c36e",
+        "d3240957777f3169",
+        "5a87b69de7675f72",
+        "a71ef4efb09158c6",
+        "704a03b451e3cb5c",
+        "f6042da0e5a66cc9",
+        "c5f10a7ae8c97d5b",
+        "4288b3548a4afc53",
+        "c3ea0ed57f783f5b",
+        "286ab19ac72c56e3",
+        "55a644c4fdf95539",
+        "bb50e039d032ca85",
+        "2db6d86a6ac0e5fc",
+        "0df2355e6782f5bb",
+        "1c7dcd6cd9fa9fb5",
+        "c8e6c6b16c88cddf",
+        "8bd43e5060b5dc59",
+        "c3e96e38e4a8b9ef",
+        "b4de2ab1b72078b8",
+        "b2d789e393dc3467",
+        "e897753dbfc39cd0",
+        "15451569df6de4bf",
+        "e778452da5e7a10e",
+        "b7c068713345a8fe",
+        "b500459c6e012420",
+        "9b314cb420306cb5",
+        "84df8db151f7671e",
+        "d3d16a5db328ab1e",
+        "3eff5757632fc528",
+        "762a2523beb2ac90",
+        "a15370dd8bb7d235",
+        "cd4e65d40852bd23",
+        "d7fdab12735fcc83",
+        "fb2b16a85cfb00a6",
+        "57be929685ab827b",
+        "d6f6a6779a8ce076",
+        "d1041fff73ae977b",
+        "1a5937950387400b",
+        "3b656f09e0296efa",
+        "30ba6a4b73c3b5fb",
+        "c8b3883ba1769310",
+        "0be4938f18072f64",
+        "156e425917ebc877",
+        "9d04ebdb9b7921c8",
+        "1ba5d77ab865b5ad",
+        "e78ddbd26e939ecd",
+        "a376ce41e5205e73",
+        "4c6d1c2ae275c074",
+        "936fbf0efb5c82b0",
+        "50de41a7ee055713",
+        "5f798e52d144ff14",
+        "52765af4bba1c499",
+        "a5a975a3230bf5c4",
+        "e1aae9591cb8f5bc",
+        "8b8ab6911bc7fdff",
+        "062e8ea470c82e33",
+        "6b7af37334c4bc3a",
+        "3fb8f90c8550cddb",
+        "77de7c2e67b89280",
+        "ea34e1c31115f709",
+        "c5bad61936bbc08a",
+        "7e20451ed86213a3",
+        "c8a9320b515574ad",
+        "1ae2da206f7e2ec0",
+        "cf2d41129417e786",
+        "6e2cd9c30d2198d3",
+        "e9b683c7dbb8f769",
+        "5aa9dbf012b5ce4a",
+        "16c50a8a35586975",
+        "30286ef457433a24",
+        "fb8852881f75e48b",
+        "0795090c487d6363",
+        "05d94f425db8d1da",
+        "414a5f206816e120",
+        "75b48ebcd44efbfc",
+        "8c9441bfb4a34395",
+        "209d9747fa2930af",
+        "a442914aa0330d25",
+        "3c3683df7a5900d7",
+        "6273cee57d6f3d5c",
+        "d78b28eaeb3db0c0",
+        "702c629307c56fa3",
+        "0e978998f137c3d9",
+        "dad58f01cb83082d",
+        "31c2248c79ab176e",
+        "ee59f3d9ebc41652",
+        "a842bad399c42e05",
+        "7ddeb0cdcfd1d847",
+        "ba19fbe6f4e28761",
+        "b047028868728e19",
+        "9e9ee3bb124070fc",
+        "1521d0f3f4e1adfa",
+        "9fc2ac1f72aca91b",
+        "f6b1f84957df2096",
+        "f28915c3ea36ce02",
+        "b71c25c8048699fd"
+      ]
     },
     {
       "id": "chatgpt-desktop-kit:InternalScrollArea",
@@ -43078,8 +44470,8 @@
         "aa9094b9cdc18798",
         "a03eaa74afd3855b",
         "2500547b788f2f25",
-        "7c365a3eeb18b81f",
         "c55f7f7dad8731a4",
+        "7c365a3eeb18b81f",
         "42a3ea7a64e0049a"
       ]
     },

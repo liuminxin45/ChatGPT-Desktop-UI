@@ -60,6 +60,8 @@ The gallery checks React interaction and computed geometry. Client probes verify
 
 ## Text input confirmation
 
+Use `InputGroup` for a single text input with a leading icon or trailing action. The group owns the fill, rounded boundary and neutral inset focus; its input stays transparent and has no separate frame. It preserves input refs, native label click focus and keyboard access to trailing actions. Invalid text focus uses the danger boundary on the group. Do not recreate this state with business `:focus-within` rules or suppress all focus styles on arbitrary input parents. Existing `desktop-toolbar-search` compositions share the same focus ownership.
+
 Mount `InputBehaviorRoot` once in a Tailwind Host. `DesktopRoot` includes it for standalone clients. Enter confirms the scoped action; Shift+Enter inserts a line break in multiline fields. IME composition (including key code 229), held-key repeats and modified Enter never invoke a command.
 
 Mark the existing confirmation button with `confirmOnEnter` and bound its form composition with `data-desktop-input-scope`. Composer and dialog scopes are recognized automatically; nested scopes prevent a search or attachment field from submitting an outer editor. The boundary clicks that exact visible button, preserves disabled state, and emits no additional telemetry. Native forms use their submit action; live filters and automatically applied fields confirm on blur. Ambiguous scopes never choose a button by its label or position. Read-only fields remain read-only.

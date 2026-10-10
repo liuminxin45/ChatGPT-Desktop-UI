@@ -3,6 +3,7 @@ import {
   Button,
   IconButton,
   Input,
+  InputGroup,
   Textarea,
   Checkbox,
   Switch,
@@ -95,6 +96,11 @@ export function Examples({ family }: { family: string }) {
     return (
       <div className="reference-fields">
         {field}
+        <InputGroup>
+          <span aria-hidden="true">⌕</span>
+          <Input aria-label="Search projects" placeholder="Search projects" />
+          <Button actionId="reference.search.clear">Clear</Button>
+        </InputGroup>
         <Textarea aria-label="Notes" placeholder="Add a note" />
         <EditableCombobox
           actionId="reference.project.edit"

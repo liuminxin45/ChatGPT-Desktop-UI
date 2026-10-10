@@ -90,7 +90,7 @@ Text controls use a 20px line box with descender clearance; never clip a selecte
 | Grouped client settings | `SettingsGroup`, `SettingsField`, `SettingsDisclosure` |
 | Name-only tooltip | `Tooltip` |
 | Button/icon action | `Button`, `IconButton` |
-| Inputs | `Input`, `Textarea`, `Checkbox`, `Switch`, `EditableCombobox` |
+| Inputs | `Input`, `InputGroup`, `Textarea`, `Checkbox`, `Switch`, `EditableCombobox` |
 | Selection/menu | `Select`, `MenuButton`, `Tabs` |
 | Settings | `SettingsNavigation`, `SettingsPage`, `SettingsSection`, `SettingRow` |
 | Dialog/state | `Dialog`, `EmptyState`, `ErrorState`, `LoadingSkeleton` |

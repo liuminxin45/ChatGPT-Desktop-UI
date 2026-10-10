@@ -35,6 +35,15 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | Prop | Required | Type |
 | --- | --- | --- |
 
+## InputGroup (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/forms/index.tsx)
+
+One text-entry boundary for an input with leading icons or trailing actions.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+
 ## Select (chatgpt-desktop-kit)
 
 [Implementation](../../../src/components/forms/index.tsx)

@@ -1,6 +1,6 @@
 {
   "name": "chatgpt-desktop-kit",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Reusable neutral desktop UI primitives, shell patterns, visual references and an agent skill.",
   "license": "MIT",
   "type": "module",

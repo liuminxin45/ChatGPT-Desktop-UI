@@ -49,10 +49,33 @@ try {
     await page.getByLabel('Nested filter').press('Enter'); assert.equal(await count('scope'), before);
     await page.getByLabel('Ambiguous field').press('Enter'); assert.equal(await count('first'), 0); assert.equal(await count('second'), 0);
     await page.getByLabel('Hidden action field').press('Enter'); assert.equal(await count('hidden'), 0);
-    await page.getByLabel('Read only').press('Enter'); assert.equal(await page.getByLabel('Read only').inputValue(), 'Read only content');
+    await page.getByLabel('Read only', { exact: true }).press('Enter'); assert.equal(await page.getByLabel('Read only', { exact: true }).inputValue(), 'Read only content');
     await page.getByLabel('Portal field').press('Enter'); assert.equal(await count('portal'), 1);
     await page.getByLabel('Live filter').press('Enter'); assert.equal(await page.getByLabel('Live filter').evaluate(element => document.activeElement === element), false);
-    for(const label of ['Live filter','Legacy filter']){const field=page.getByLabel(label);await field.focus();assert.equal(await field.evaluate(e=>getComputedStyle(e.parentElement).boxShadow),'none');}
+    const groups = [];
+    for (const label of ['Live filter', 'Legacy filter', 'Compound filter', 'Invalid compound', 'Read only compound']) {
+      const field = page.getByLabel(label); await field.focus();
+      const geometry = await field.evaluate(element => {
+        const parent = element.parentElement, bounds = parent.getBoundingClientRect(), input = element.getBoundingClientRect();
+        const probe = document.createElement('span'); probe.style.color = 'var(--desktop-color-danger)'; parent.append(probe);
+        const danger = getComputedStyle(probe).color; probe.remove();
+        return { danger, outer: getComputedStyle(parent).boxShadow, inner: getComputedStyle(element).boxShadow,
+          fill: getComputedStyle(element).backgroundColor, fits: input.top >= bounds.top && input.bottom <= bounds.bottom,
+          radius: getComputedStyle(parent).borderRadius, border: getComputedStyle(element).borderWidth };
+      });
+      assert.equal(geometry.inner, 'none', label + ' must not have a second focus frame');
+      assert.equal(geometry.fill, 'rgba(0, 0, 0, 0)'); assert.equal(geometry.fits, true);
+      assert.ok(geometry.outer.includes('inset')); assert.equal(geometry.border, '0px');
+      if (label === 'Invalid compound') assert.ok(geometry.outer.includes(geometry.danger), 'invalid group must retain danger focus');
+      groups.push({ label, ...geometry });
+    }
+    assert.equal(await page.getByLabel('Disabled compound').isDisabled(), true);
+    const compound = page.getByLabel('Compound filter'); await compound.fill('Retained search');
+    await page.getByRole('button', { name: 'Clear', exact: true }).click(); assert.equal(await compound.inputValue(), '');
+    await page.getByTestId('compound').locator('span').click(); assert.equal(await compound.evaluate(e => document.activeElement === e), true);
+    await compound.press('Tab'); assert.equal(await page.getByRole('button', { name: 'Clear', exact: true }).evaluate(e => document.activeElement === e), true);
+    await compound.focus();
+    await page.getByTestId('compound').screenshot({ path: path.join(evidence, `compound-${theme}-${width}.png`) });
     const message = page.getByLabel('Message', {exact:true});
     await message.fill('First'); await message.press('Shift+Enter'); await page.keyboard.type('Second');
     assert.equal(await message.inputValue(), 'First\nSecond'); assert.equal(await count('send'), 0);
@@ -76,7 +99,7 @@ try {
     assert.equal(await shared.evaluate(element => getComputedStyle(element).overflowY), 'auto');
     assert.deepEqual(errors, []);
     await page.screenshot({path:path.join(evidence,`input-${theme}-${width}.png`)});
-    results.push({theme,width,height,scale,geometry}); await context.close();
+    results.push({theme,width,height,scale,geometry,groups}); await context.close();
   }
   await fs.writeFile(path.join(evidence, 'input-results.json'), JSON.stringify({node:process.version,results},null,2));
   console.log('PASS text input confirmation, IME, repeats, scopes, portals, disabled state, neutral focus and 6 themed renders');

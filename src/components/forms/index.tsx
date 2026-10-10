@@ -9,6 +9,7 @@ import {
   useState,
   type ButtonHTMLAttributes,
   type InputHTMLAttributes,
+  type LabelHTMLAttributes,
   type ReactNode,
   type TextareaHTMLAttributes,
 } from 'react';
@@ -23,6 +24,13 @@ export const Input = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputE
 ) {
   return <input ref={ref} className={classes('desktop-input', className)} {...props} />;
 });
+
+/** One text-entry boundary for an input with leading icons or trailing actions. */
+export const InputGroup = forwardRef<HTMLLabelElement, LabelHTMLAttributes<HTMLLabelElement>>(
+  function InputGroup({ className, ...props }, ref) {
+    return <label ref={ref} className={classes('desktop-input-group', className)} {...props} />;
+  },
+);
 
 export function Checkbox({ className, type: _type, ...props }: InputHTMLAttributes<HTMLInputElement>) {
   return <input type="checkbox" className={classes('desktop-checkbox', className)} {...props} />;
