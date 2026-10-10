@@ -80,3 +80,9 @@ The supplied ChatGPT Downloads, browser-permissions and Tasks settings captures 
 Use `RecordRow` for multi-action records, `RecordLink` for navigation and `RecordAction` or `Button` for commands. Host layout owns column geometry and domain selection state; shared controls own hover and keyboard focus. Never put a row click handler, button role or tab stop around descendant actions. Clicking metadata or space between controls must do nothing. Drag affordance and selected state do not grant click ownership. Keep independent actions discoverable, with visible labels or familiar labelled icons; keyboard focus must not rely on pointer hover. Do not make the entire row brighten when one descendant is hovered or focused.
 
 Use native links for URLs and buttons for commands. Preserve disabled, loading and disclosure states and stable action IDs on the actual target, not its static parent. Validate blank-space clicks, independent outcomes, keyboard focus, long labels and both themes at the supported window sizes.
+
+## AI output integration
+
+Use `AIResponseProvider` at a retained conversation boundary and `AIResponse` with stable response IDs. Loaded history must pass `animate={false}`. For newly received output pass `animate`, plus `state="streaming"` until generation ends; whole-result APIs pass the final content with `state="complete"`. Cancellation/failure flush the received prefix. Retained Tools inherit `ToolVisibilityContext`; presentation does not own requests, persistence or telemetry.
+
+Replace only AI busy spinners with `AIActivity` (including button labels), keeping stop/retry actions and real progress. Use `Markdown variant="ai"` for AI prose; keep domain-specific Remarkup and non-AI documents on their existing rendering path. Custom link adapters remain available through `components`. Do not override shared AI typography with local prose/code CSS. Code copy labels use the Host translation bridge.

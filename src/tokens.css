@@ -1,4 +1,5 @@
 :root {
+  --desktop-font-ai-code: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
   color-scheme: light;
 
   /* Color primitives */

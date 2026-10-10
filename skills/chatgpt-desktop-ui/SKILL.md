@@ -48,3 +48,7 @@ When changing icon-labelled rows, measure sibling label left edges and vertical 
 Review all affected routes rather than demonstrating only a new settings page. Repair differences in the shared layer where possible. Do not claim high fidelity based only on a palette or a screenshot that was never viewed.
 
 Deliver the implementation, reference-linked screenshots, verified checks and remaining host-specific limitations. This Skill does not authorize publishing, installing a product, sending messages, migrating production data or pushing commits. Follow the user's actual authorization for those actions.
+
+## AI activity and output
+
+AI thinking, tool execution and replying use `AIActivity` text sweep instead of rotating indicators. Use `AIResponse` for newly received streamed or whole-result prose, inside a retained `AIResponseProvider`; loaded history is static. Use `Markdown variant="ai"` for other AI prose. Reuse the shared inline-code, code-block, list, quote and table styling, including the scoped monospace AI code token. Keep canonical content for storage, copy, export and apply. Verify reduced motion, grapheme safety, cancellation, hidden surfaces, virtual-row remounts and bottom-follow without displacing readers. Ordinary loading and domain-specific Remarkup are separate.

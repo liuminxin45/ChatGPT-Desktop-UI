@@ -1,6 +1,7 @@
 import { ArrowUp, Stop, Waveform } from '@phosphor-icons/react';
 import { forwardRef, useLayoutEffect, useRef, type ReactNode } from 'react';
 import { Button, Textarea } from '../../controls';
+export { AIResponse, AIResponseProvider, type AIResponseProps } from './ai-response';
 
 export interface ClientComposerProps {
   value: string;

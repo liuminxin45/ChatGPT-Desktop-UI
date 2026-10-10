@@ -1,0 +1,66 @@
+import assert from 'node:assert/strict';
+import { mkdir, writeFile } from 'node:fs/promises';
+import { chromium } from 'playwright';
+import { createDemoServer } from './serve-demo.mjs';
+const server = createDemoServer();
+await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+await mkdir('docs/validation/ai-output', { recursive: true });
+const browser = await chromium.launch({ channel: 'msedge', headless: true });
+const checks = [];
+const errors = [];
+try {
+  for (const theme of ['light', 'dark']) for (const [width,height,scale] of [[1920,1080,1],[1280,800,1],[1536,864,1.25],[420,700,1]]) {
+    const context = await browser.newContext({ viewport: {width,height}, deviceScaleFactor:scale, colorScheme:theme, permissions:['clipboard-read','clipboard-write'] });
+    const page = await context.newPage();
+    page.on('pageerror', error => errors.push(error.message));
+    await page.goto(`http://127.0.0.1:${server.address().port}/?ai-demo=1`);
+    const choose = value => page.locator(`[data-desktop-action="demo.ai.${value}"]`).click();
+    const response = page.locator('[data-ai-response]');
+    const responseText = () => response.evaluate(element => { const clone = element.cloneNode(true); clone.querySelectorAll('button').forEach(button => button.remove()); return clone.textContent; });
+    await page.getByRole('status').waitFor();
+    assert.equal(await page.locator('svg.animate-spin').count(),0);
+    await page.screenshot({path:`docs/validation/ai-output/${theme}-${width}-${scale}-waiting.png`});
+    await choose('history');
+    const expected = await responseText();
+    assert.ok(expected.includes('👩🏽‍💻'));
+    const font = await response.locator('p code').first().evaluate(el => getComputedStyle(el).fontFamily);
+    assert.ok(/monospace|Consolas/.test(font),font);
+    assert.equal(await response.locator('p code').first().evaluate(el => getComputedStyle(el,'::before').content),'none');
+    await choose('complete');
+    const start = Date.now();
+    await response.getAttribute('aria-busy').then(busy => assert.equal(busy,'true'));
+    await page.waitForFunction(() => document.querySelector('[data-ai-response]')?.getAttribute('aria-busy') === 'false',null,{timeout:2600});
+    assert.ok(Date.now()-start < 2400);
+    assert.equal(await responseText(),expected);
+    await choose('remount');
+    await choose('remount');
+    assert.equal(await response.getAttribute('aria-busy'),'false');
+    assert.equal(await responseText(),expected);
+    await response.getByRole('button',{name:'Copy code',exact:true}).click();
+    assert.equal((await page.evaluate(() => navigator.clipboard.readText())).replaceAll('\r\n','\n'),'std::this_thread::sleep_for(400ms);\nauto elapsed = steady_clock::now() - start;\n');
+    await page.screenshot({path:`docs/validation/ai-output/${theme}-${width}-${scale}-markdown.png`});
+    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+    for (const value of ['cancelled','failed']) { await choose('complete'); assert.equal(await response.getAttribute('aria-busy'),'true'); await choose(value); assert.equal(await response.getAttribute('aria-busy'),'false'); assert.equal(await responseText(),expected); }
+    await choose('long');
+    await page.waitForFunction(() => document.querySelector('[data-ai-response]')?.getAttribute('aria-busy') === 'false',null,{timeout:2600});
+    assert.equal(await response.locator('h3').count(),18);
+    await choose('streaming');
+    await page.waitForFunction(() => document.querySelector('[data-ai-response]')?.getAttribute('aria-busy') === 'false',null,{timeout:5500});
+    assert.equal(await responseText(),expected);
+    await choose('complete'); await choose('hide');
+    await page.waitForFunction(() => document.querySelector('[data-ai-response]')?.getAttribute('aria-busy') === 'false',null,{timeout:500});
+    assert.equal(await response.getAttribute('aria-busy'),'false');
+    await choose('hide');
+    await page.emulateMedia({ reducedMotion:'reduce' });
+    await choose('complete');
+    await page.waitForFunction(() => document.querySelector('[data-ai-response]')?.getAttribute('aria-busy') === 'false',null,{timeout:500});
+    assert.equal(await response.getAttribute('aria-busy'),'false');
+    await choose('waiting');
+    assert.equal(await page.getByRole('status').evaluate(el => getComputedStyle(el).animationName),'none');
+    checks.push({theme,width,height,scale,monospace:font,status:'passed'});
+    await context.close();
+  }
+  assert.deepEqual(errors,[]);
+  await writeFile('docs/validation/ai-output/results.json',JSON.stringify({status:'passed',checks,errors,reference:'User supplied static captures; sweep and reveal timing are requested adaptations, not native timing measurements.'},null,2)+'\n');
+  console.log(JSON.stringify({status:'passed',cases:checks.length,errors}));
+} finally { await browser.close(); await new Promise(resolve => server.close(resolve)); }

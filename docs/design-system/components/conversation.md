@@ -8,6 +8,32 @@ Runnable composition: [example](../../../examples/demo/ClientChat.tsx).
 
 Generated from TypeScript exports; edit implementation props/JSDoc, then run `npm run docs:generate`. Native React attributes remain available in the online API catalog.
 
+## AIResponse (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/ai-response.tsx)
+
+One presenter for streamed increments and complete responses. Canonical content stays Host-owned.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| content | yes | `string` |
+| responseId | yes | `string` |
+| animate | no | `boolean \| undefined` |
+| state | no | `"streaming" \| "complete" \| "cancelled" \| "failed" \| undefined` |
+| className | no | `string \| undefined` |
+| components | no | `Components \| undefined` |
+| onReveal | no | `(() => void) \| undefined` |
+
+## AIResponseProvider (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/ai-response.tsx)
+
+Mount above virtualized conversations. Only offsets and timing are retained, never response text.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| children | yes | `ReactNode` |
+
 ## ClientComposer (chatgpt-desktop-kit)
 
 [Implementation](../../../src/components/conversation/index.tsx)

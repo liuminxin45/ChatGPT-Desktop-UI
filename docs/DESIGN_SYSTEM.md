@@ -128,3 +128,13 @@ The supplied ChatGPT Downloads, browser-permissions and Tasks settings captures 
 Use `RecordRow` for multi-action records, `RecordLink` for navigation and `RecordAction` or `Button` for commands. Host layout owns column geometry and domain selection state; shared controls own hover and keyboard focus. Never put a row click handler, button role or tab stop around descendant actions. Clicking metadata or space between controls must do nothing. Drag affordance and selected state do not grant click ownership. Keep independent actions discoverable, with visible labels or familiar labelled icons; keyboard focus must not rely on pointer hover. Do not make the entire row brighten when one descendant is hovered or focused.
 
 Use native links for URLs and buttons for commands. Preserve disabled, loading and disclosure states and stable action IDs on the actual target, not its static parent. Validate blank-space clicks, independent outcomes, keyboard focus, long labels and both themes at the supported window sizes.
+
+## AI activity and response presentation
+
+Use `AIActivity` for AI thinking, tool execution and generation: a quiet text-only neutral sweep, never a rotating glyph. Ordinary loading controls are independent. Reduced motion and forced colors use static readable text.
+
+AI prose uses `Markdown variant="ai"` or `AIResponse`: neutral code surfaces, baseline-aligned inline code, language/copy headers, wrapped prose and horizontally scrollable code/tables. Only AI code uses `--desktop-font-ai-code`; other Host typography retains its existing contract. No decorative backticks are rendered.
+
+Mount `AIResponseProvider` above virtualized conversation rows. Supply a stable `responseId` and set `animate` only for a newly received response. The provider retains bounded offsets/timing without response text; history is static. Streaming and complete responses share grapheme-safe batched presentation. Complete output catches up within approximately two seconds; cancellation, failure, hidden surfaces and reduced motion show all received content immediately. Host storage, copy/export/apply and diagnostics continue using canonical content, never the visible prefix.
+
+The Host remeasures dynamic rows and follows output only while the reader is at the bottom. Preserve history scroll position, drafts, selections and message state across theme/language changes. Animation timing is an adaptation requested on 2026-10-10, not a measured native-client fidelity claim. See the synthetic `/?ai-demo=1` scenario page for repeatable states.
