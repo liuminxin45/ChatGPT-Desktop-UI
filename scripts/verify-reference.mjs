@@ -26,7 +26,7 @@ const noPointerRing = async (control) => {
   assert.equal(style.shadow, 'none', 'pointer focus return must not add a ring');
 };
 const dismissOutside = async (page) => {
-  const box = await page.locator('.reference-heading h2').boundingBox();
+  const box = await page.locator('.reference-sidebar h1').boundingBox();
   assert.ok(box);
   // Modal Radix portals disable the background's pointer events. A physical click
   // still dismisses the overlay; locator.click would wait for the blocked heading.
