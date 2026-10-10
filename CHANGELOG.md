@@ -1,12 +1,18 @@
 # Changelog
 
-## 0.4.3
+## 0.4.4
 
-- Keep shared list, menu, dropdown and tab hover targets spaced within their containers.
+- Add static RecordRow groups with independent semantic RecordLink and RecordAction targets.
+- Define interaction ownership for records, settings, navigation and selection; preserve keyboard feedback and discoverable commands.
+- Validate independent clicks and blank-space behavior in both themes and three supported viewport/scale cases.
 - Keep a single GitHub action in the reference title bar; remove repeated documentation navigation and hierarchy labels.
 - Remove demonstration labels, duplicate settings and repetitive availability text across the example site.
 - Match the supplied desktop chat toolbar, anchored Sources panel, chat action menu and browser pane; preserve drafts across full and split views.
-- Align release metadata with the current package version so deployment validation can complete.
+- Align current library release metadata with the existing observed client reference.
+
+## 0.4.3
+
+- Keep shared list, menu, dropdown and tab hover targets spaced within their containers.
 
 ## 0.4.2
 

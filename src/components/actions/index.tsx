@@ -1,4 +1,4 @@
-import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
+import { forwardRef, type AnchorHTMLAttributes, type ButtonHTMLAttributes, type ReactNode } from 'react';
 import { classes } from '../classes';
 import { ControlButton } from './control-button';
 
@@ -32,6 +32,31 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
         className,
         !!icon && iconOnly && 'desktop-button--icon',
       )}
+      {...props}
+    />
+  );
+});
+
+/** A record command with feedback confined to its actual hit target. */
+export const RecordAction = forwardRef<HTMLButtonElement, ButtonProps>(function RecordAction(
+  { className, ...props },
+  ref,
+) {
+  return (
+    <Button ref={ref} variant="ghost" className={classes('desktop-record-action', className)} {...props} />
+  );
+});
+
+/** Semantic navigation within a static record; never nests a button or claims the row. */
+export const RecordLink = forwardRef<
+  HTMLAnchorElement,
+  AnchorHTMLAttributes<HTMLAnchorElement> & { actionId: string }
+>(function RecordLink({ actionId, className, ...props }, ref) {
+  return (
+    <a
+      ref={ref}
+      data-desktop-action={actionId}
+      className={classes('desktop-record-link', className)}
       {...props}
     />
   );

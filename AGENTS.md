@@ -17,3 +17,5 @@ Read `docs/DESIGN_SYSTEM.md` and `docs/DESIGN_GUIDANCE.md` before changing UI. R
 - Use Node 24.19.0. Run typecheck, build and visual/interaction tests after functional UI changes. Inspect light/dark screenshots at 1920×1080, 1280×800 and 125% emulation. Emulation is not evidence of changing Windows scaling.
 - `dist/`, Skill assets and copied Skill references are generated. Do not hand-edit them. Update source, build and package the Skill. Keep screenshot provenance and validation limitations explicit.
 - Do not publish packages, push remotes, replace installed applications or change consumer dependencies without an integration request.
+
+- Multi-action records use static `RecordRow` groups with independent `RecordLink`/`RecordAction`/`Button` targets. Never wrap controls in a clickable row or add whole-row hover/focus fills. Full-target feedback is reserved for an actual single navigation/selection target; tree membership alone does not authorize it. Validate blank-space clicks and keyboard access.

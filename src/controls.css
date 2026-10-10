@@ -2,6 +2,7 @@
 @import './primitives.css';
 @import './conversation.css';
 
+
 .desktop-button,.desktop-icon-control,.desktop-input,.desktop-textarea,.desktop-select{font:inherit}
 .desktop-button{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;height:36px;padding:0 14px;border:0;border-radius:var(--desktop-radius-control);background:transparent;color:var(--desktop-color-text);font-size:var(--desktop-font-size-body);font-weight:var(--desktop-font-weight-regular);line-height:var(--desktop-line-height-ui);white-space:nowrap;transition:background-color var(--desktop-motion-fast),border-color var(--desktop-motion-fast),transform var(--desktop-motion-press)}
 .desktop-button:hover:not(:disabled){border-color:var(--desktop-color-border-strong);background:var(--desktop-color-surface-hover)}.desktop-button:active:not(:disabled){transform:scale(.98)}.desktop-button:disabled{cursor:default;opacity:.55}
@@ -134,3 +135,11 @@ html:root,html:root body,html:root body *,html:root body *::before,html:root bod
 .desktop-list-stack{display:flex;min-width:0;flex-direction:column;gap:4px;padding:2px 4px}
 .desktop-menu-item,.desktop-select-item{margin-block:0 4px}
 .desktop-menu-item:last-child,.desktop-select-item:last-child{margin-bottom:0}
+
+/* Records are static groups. Only the actual commands and links own feedback. */
+.desktop-record-row{min-width:0}
+.desktop-record-link,.desktop-button.desktop-record-action{display:inline-flex;max-width:100%;min-width:0;min-height:28px;height:auto;align-items:center;justify-content:flex-start;gap:6px;padding:3px 6px;border:0;border-radius:var(--desktop-radius-control);background:transparent;color:inherit;font:inherit;text-align:left;text-decoration:none;white-space:normal;cursor:pointer}
+.desktop-record-link:hover{background:var(--desktop-color-surface-hover);text-decoration:underline;text-underline-offset:3px}
+.desktop-record-link:focus-visible{outline:2px solid var(--desktop-color-focus);outline-offset:2px}
+.desktop-record-link{flex-direction:column;align-items:flex-start;vertical-align:middle}
+.desktop-record-link>span{max-width:100%;min-width:0}

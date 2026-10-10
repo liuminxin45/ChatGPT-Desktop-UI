@@ -45,3 +45,29 @@ Reusable floating surfaces; positioning and application state belong to the Host
 | Prop | Required | Type |
 | --- | --- | --- |
 | actionId | no | `string \| undefined` |
+
+## RecordAction (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/actions/index.tsx)
+
+A record command with feedback confined to its actual hit target.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| variant | no | `ButtonVariant \| undefined` |
+| size | no | `"sm" \| "md" \| undefined` |
+| actionId | no | `string \| undefined` |
+| confirmOnEnter | no | `boolean \| undefined` |
+| icon | no | `ReactNode` |
+| iconOnly | no | `boolean \| undefined` |
+| badge | no | `ReactNode` |
+
+## RecordLink (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/actions/index.tsx)
+
+Semantic navigation within a static record; never nests a button or claims the row.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| actionId | yes | `string` |

@@ -12,6 +12,17 @@ import { listRowGap, listRowInset } from '../../list-geometry';
 
 export const internalScrollAreaClassName = 'desktop-internal-scroll';
 
+/** Static record grouping. Put navigation, selection and commands on separate controls. */
+export const RecordRow = forwardRef<
+  HTMLDivElement,
+  Omit<HTMLAttributes<HTMLDivElement>, 'onClick' | 'onKeyDown' | 'tabIndex' | 'role'> & {
+    tabIndex?: -1;
+    role?: 'group' | 'listitem';
+  }
+>(function RecordRow({ className, ...props }, ref) {
+  return <div ref={ref} className={classes('desktop-record-row', className)} {...props} />;
+});
+
 /** Spaced rows for short lists; compose inside InternalScrollArea when scrolling is needed. */
 export const ListStack = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(function ListStack(
   { className, ...props },

@@ -24,6 +24,17 @@ Spaced rows for short lists; compose inside InternalScrollArea when scrolling is
 | Prop | Required | Type |
 | --- | --- | --- |
 
+## RecordRow (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/lists/index.tsx)
+
+Static record grouping. Put navigation, selection and commands on separate controls.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| tabIndex | no | `-1 \| undefined` |
+| role | no | `"group" \| "listitem" \| undefined` |
+
 ## VirtualList (chatgpt-desktop-kit)
 
 [Implementation](../../../src/components/lists/index.tsx)
