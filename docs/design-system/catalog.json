@@ -31291,6 +31291,27 @@
       "description": "",
       "props": [
         {
+          "name": "initialScrollAnchor",
+          "required": false,
+          "type": "VirtualListScrollAnchor | null | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "onScrollAnchorChange",
+          "required": false,
+          "type": "((anchor: VirtualListScrollAnchor) => void) | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "header",
+          "required": false,
+          "type": "ReactNode",
+          "native": false,
+          "description": "Sticky column headings share the viewport gutter and content inset with their records."
+        },
+        {
           "name": "items",
           "required": true,
           "type": "readonly T[]",
