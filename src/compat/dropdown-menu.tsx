@@ -28,7 +28,7 @@ const DropdownMenuSubTrigger = React.forwardRef<
   <DropdownMenuPrimitive.SubTrigger
     ref={ref}
     className={cn(
-      "flex cursor-default select-none items-center desktop-menu-item px-2 py-1.5 text-sm text-[var(--desktop-color-text-subtle)] outline-none focus:bg-[var(--desktop-color-surface-hover)] focus:text-[var(--desktop-color-text)] data-[state=open]:bg-[var(--desktop-color-surface-hover)] data-[state=open]:text-[var(--desktop-color-text)]",
+      "flex cursor-default select-none items-center desktop-menu-item px-2 py-1.5 text-sm text-[var(--desktop-color-text-subtle)] focus:bg-[var(--desktop-color-surface-hover)] focus:text-[var(--desktop-color-text)] data-[state=open]:bg-[var(--desktop-color-surface-hover)] data-[state=open]:text-[var(--desktop-color-text)]",
       inset && "pl-8",
       className,
     )}
@@ -87,7 +87,7 @@ const DropdownMenuItem = React.forwardRef<
   return <DropdownMenuPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex cursor-default select-none items-center desktop-menu-item px-2 py-1.5 text-sm outline-none transition-colors focus:bg-[var(--desktop-color-surface-hover)] focus:text-[var(--desktop-color-text)] data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "relative flex cursor-default select-none items-center desktop-menu-item px-2 py-1.5 text-sm transition-colors focus:bg-[var(--desktop-color-surface-hover)] focus:text-[var(--desktop-color-text)] data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       inset && "pl-8",
       className,
       icon && 'gap-2',
@@ -107,7 +107,7 @@ const DropdownMenuCheckboxItem = React.forwardRef<
   <DropdownMenuPrimitive.CheckboxItem
     ref={ref}
     className={cn(
-      "relative flex cursor-default select-none items-center desktop-menu-item py-1.5 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-[var(--desktop-color-surface-hover)] focus:text-[var(--desktop-color-text)] data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "relative flex cursor-default select-none items-center desktop-menu-item py-1.5 pl-8 pr-2 text-sm transition-colors focus:bg-[var(--desktop-color-surface-hover)] focus:text-[var(--desktop-color-text)] data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       className,
     )}
     checked={checked}
@@ -131,7 +131,7 @@ const DropdownMenuRadioItem = React.forwardRef<
   <DropdownMenuPrimitive.RadioItem
     ref={ref}
     className={cn(
-      "relative flex cursor-default select-none items-center desktop-menu-item py-1.5 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-[var(--desktop-color-surface-hover)] focus:text-[var(--desktop-color-text)] data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "relative flex cursor-default select-none items-center desktop-menu-item py-1.5 pl-8 pr-2 text-sm transition-colors focus:bg-[var(--desktop-color-surface-hover)] focus:text-[var(--desktop-color-text)] data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       className,
     )}
     {...props}

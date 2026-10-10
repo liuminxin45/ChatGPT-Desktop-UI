@@ -602,7 +602,7 @@ html body * {
 /* Shared dark-mode interaction contract.
    Keep foreground changes paired with surface changes so hover/focus states
    never collapse into low-contrast grey-on-grey combinations. */
-.dark :where(button, a, [role="button"], [role="menuitem"]):focus-visible {
+.dark :where(button, a, [role="button"], [role="menuitem"]):not(.desktop-menu-item):focus-visible {
   outline-color: var(--desktop-color-focus);
 }
 

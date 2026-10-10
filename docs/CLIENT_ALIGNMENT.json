@@ -5,7 +5,7 @@
   "packageVersion": "26.1002.7124.0",
   "kitVersion": "0.4.4",
   "observedOn": "2026-10-10",
-  "releaseTag": "chatgpt-desktop-26.1002.7124.0-ui-v0.4.4-rail-hover",
+  "releaseTag": "chatgpt-desktop-26.1002.7124.0-ui-v0.4.4-sidebar-align",
   "versionEvidence": "Installed Windows package metadata",
   "referenceMethod": "User-supplied screenshots and read-only native UI inspection",
   "geometry": {
