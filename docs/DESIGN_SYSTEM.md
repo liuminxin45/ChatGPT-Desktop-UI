@@ -30,6 +30,8 @@ Use tokens in application CSS, not the literals from this table. Main canvas, si
 
 Idle buttons and dropdown triggers have no decorative border or fill. The dropdown is text with a small down chevron. Hover introduces a compact filled target; the opened menu has a rounded surface and subtle shadow. Inputs have a light surface rather than a surrounding box. Text entry uses neutral inset focus or a subtly filled composer, without a blue outer ring. Preserve visible keyboard focus, table boundaries, actual drag targets and error state boundaries. “Boundary-free” does not mean invisible states.
 
+Menu items use the shared hover fill for pointer highlight and keyboard focus, including submenu, checkbox and radio items. They never draw an outer outline or focus ring. Radix may focus an item on pointer movement; that focus must not activate a generic control outline. Compatibility menus must not use Tailwind `outline-none` (a transparent solid outline in Tailwind 3), and global focus rules must defer to the menu's semantic state. Validate these states through the real Tailwind pipeline and Radix interactions with `npm run test:menus`; keep arrow navigation, Enter activation, disabled items and focus return intact.
+
 ## Geometry
 
 ### Versioned client profile

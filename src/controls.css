@@ -54,6 +54,9 @@
 .desktop-menu-item{position:relative;display:flex;min-height:30px;align-items:center;gap:8px;border:0;border-radius:var(--desktop-radius-control);color:var(--desktop-color-text);font-size:var(--desktop-font-size-body);outline:none;cursor:default}
 .desktop-menu .desktop-menu-item{padding:6px 9px}
 .desktop-menu-item[data-highlighted],.desktop-menu-item[data-state=open]{background:var(--desktop-color-surface-hover)}
+/* Radix focuses items on pointer movement as well as keyboard navigation.
+   Menu focus uses the shared highlight fill, never an outer outline/ring. */
+.desktop-menu-item:focus,.desktop-menu-item:focus-visible{outline:none;box-shadow:none;background:var(--desktop-color-surface-hover)}
 .desktop-menu-item[data-disabled]{pointer-events:none;opacity:.45}
 .desktop-menu-content>button[role=menuitem]{display:flex;width:100%;align-items:center;gap:8px;border:0;border-radius:var(--desktop-radius-control);padding:6px 9px;background:transparent;font:inherit;text-align:left}
 .desktop-menu-content>button[role=menuitem]:hover,.desktop-menu-content>button[role=menuitem]:focus-visible{background:var(--desktop-color-surface-hover);outline:none}

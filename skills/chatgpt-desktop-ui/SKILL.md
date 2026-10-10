@@ -37,6 +37,8 @@ The key visual relationships are a neutral window shell, quiet contextual sideba
 
 Use semantic tokens, not per-page gray literals. Respect explicit user cursor/font preferences; the packaged arrow-cursor policy is an originating desktop preference. Distinguish errors from unread states. Keep visible keyboard focus and labels. Name-only navigation tooltips must have no shortcut line or arrow.
 
+Menu pointer highlight and keyboard focus use the shared surface fill without an outer outline or ring. Radix also focuses items during pointer movement. Reuse the menu's semantic focus rules instead of adding Tailwind outline utilities or allowing generic control focus rules to recolor them. Verify submenu, checkbox/radio, disabled, arrow navigation, Enter activation and focus return through the actual consumer CSS pipeline.
+
 For labelled actions, pass the leading glyph through `Button.icon` instead of placing an SVG directly beside the text. Sibling navigation actions share an icon column, label start and baseline even when visible glyph sizes differ. Use the canonical sidebar action profile described in [design-system.md](references/design-system.md); fix shared geometry rather than adding page-local margins or offsets.
 
 The host owns native window actions, history, credentials, language, application state and analytics. Disable unavailable actions. A theme/language change or sidebar fold cannot remount content, discard drafts, fetch business data again or change a Tool lease. Protect unsaved changes and preserve drafts on failure.
