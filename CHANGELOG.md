@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.4 — sidebar alignment follow-up
+
+- Align sidebar action labels through the shared Button glyph slot, preserving the visual size of smaller icons.
+- Move client sidebar action geometry and feedback from the Demo into the canonical client profile; use it for New chat, Your dot, pinned projects and New task.
+- Verify matching label edges and baselines in both themes and all three viewport/scale cases.
+- Require shared icon slots and measured sibling alignment in the design system, integration guidance and companion Skill.
+
 ## 0.4.4 — rail hover follow-up
 
 - Use the navigation tile palette for icon-rail hover so the rounded target stays visible against the pale shell in light mode.

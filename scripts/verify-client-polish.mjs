@@ -18,6 +18,22 @@ try {
             page.on('pageerror', e => errors.push(e.message));
             await page.goto(process.env.DEMO_URL || `http://127.0.0.1:${server.address().port}`);
             await page.getByRole('button', { name: 'Switch mode', exact: true }).waitFor();
+            // Capture siblings in one layout frame, including during sidebar entry animation.
+            const sidebarAlignment = await page.locator('button[data-desktop-action="client.chat.new"], button[data-desktop-action="client.dot.open"]').evaluateAll(elements => elements.map(el => {
+                    const button = el.getBoundingClientRect(), glyph = el.querySelector('.desktop-action-glyph').getBoundingClientRect();
+                    const text = [...el.childNodes].find(node => node.nodeType === Node.TEXT_NODE && node.textContent.trim());
+                    const range = document.createRange(); range.selectNodeContents(text);
+                    const label = range.getBoundingClientRect();
+                    return { textX: label.x, textY: label.y - button.y, glyphX: glyph.x, glyphWidth: glyph.width,
+                        glyphOffset: glyph.y + glyph.height / 2 - button.y - button.height / 2 };
+                }));
+            assert.equal(sidebarAlignment.length, 2);
+            assert.ok(Math.abs(sidebarAlignment[0].textX - sidebarAlignment[1].textX) < 0.25, `sidebar action labels share a left edge: ${JSON.stringify({theme,width,sidebarAlignment})}`);
+            assert.ok(Math.abs(sidebarAlignment[0].textY - sidebarAlignment[1].textY) < 0.25, 'sidebar action labels share a vertical baseline');
+            for (const row of sidebarAlignment) {
+                assert.equal(row.glyphWidth, 16);
+                assert.ok(Math.abs(row.glyphOffset) < 0.25, 'sidebar glyph slots stay vertically centered');
+            }
             const rail = page.getByRole('navigation', { name: 'App navigation' });
             const home = rail.getByRole('button', { name: 'Home', exact: true });
             const plugins = rail.getByRole('button', { name: 'Plugins', exact: true });
@@ -184,7 +200,7 @@ try {
             await input.press('Control+Home');
             assert.equal(await input.evaluate(el => getComputedStyle(el).borderRadius), '0px');
             await page.screenshot({ path: new URL(`chat-input-${theme}-${width}.png`, output).pathname.replace(/^\/([A-Za-z]:)/, '$1') });
-            results.push({ theme, width, height, scale, status: 'passed', geometry });
+            results.push({ theme, width, height, scale, status: 'passed', geometry, sidebarAlignment });
             await context.close();
         }
     assert.deepEqual(errors, []);
