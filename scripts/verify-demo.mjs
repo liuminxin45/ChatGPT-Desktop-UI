@@ -86,6 +86,12 @@ try {
         if (id === "chatgpt-thread")
           await page.getByRole('button', { name: 'Refine desktop navigation', exact: true }).first().click();
         await settle(page);
+        // Theme effects and the shared surface transition may commit after the
+        // navigation tick. Measure the final palette, never an interpolated frame.
+        await page.waitForFunction(
+          (expected) => getComputedStyle(document.querySelector('.kit-shell__main')).backgroundColor === expected,
+          theme === 'dark' ? 'rgb(24, 24, 24)' : 'rgb(255, 255, 255)',
+        );
         const geometry = await page.evaluate(() => ({
           overflow: document.documentElement.scrollWidth > innerWidth,
           rail: document.querySelector(".kit-rail").getBoundingClientRect()
