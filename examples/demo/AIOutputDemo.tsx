@@ -11,24 +11,24 @@ export function AIOutputDemo() {
   const [mounted, setMounted] = useState(true);
   const [hidden, setHidden] = useState(false);
   useEffect(() => {
-    if (scenario !== 'streaming') return;
+    if (scenario !== 'streaming' && scenario !== 'unicode') return;
     setContent('');
     let offset = 0;
     const parts = Array.from(new Intl.Segmenter(undefined, { granularity: 'grapheme' }).segment(aiFixture), x => x.segment);
-    const timer = setInterval(() => { offset += 9; setContent(parts.slice(0, offset).join('')); if (offset >= parts.length) clearInterval(timer); }, 35);
+    const timer = setInterval(() => { offset += scenario === 'unicode' ? 1 : 9; setContent(scenario === 'unicode' ? aiFixture.slice(0, offset) : parts.slice(0, offset).join('')); if (offset >= (scenario === 'unicode' ? aiFixture.length : parts.length)) clearInterval(timer); }, scenario === 'unicode' ? 5 : 35);
     return () => clearInterval(timer);
   }, [scenario, run]);
-  const output = ['streaming', 'cancelled', 'failed'].includes(scenario) ? content : scenario === 'waiting' || scenario === 'processing' ? '' : scenario === 'long' ? Array(18).fill(aiFixture).join('\n\n') : aiFixture;
+  const output = ['streaming', 'unicode', 'cancelled', 'failed'].includes(scenario) ? content : scenario === 'waiting' || scenario === 'processing' ? '' : scenario === 'long' ? Array(18).fill(aiFixture).join('\n\n') : aiFixture;
   return <main style={{ height: '100%', display: 'flex', flexDirection: 'column', padding: 24, gap: 16 }}>
     <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-      {['waiting', 'processing', 'streaming', 'complete', 'long', 'cancelled', 'failed', 'history'].map(value => <Button key={value} actionId={`demo.ai.${value}`} onClick={() => { setContent(value === 'streaming' ? '' : output); setScenario(value); if (value !== 'cancelled' && value !== 'failed') setRun(v => v + 1); }}>{value}</Button>)}
+      {['waiting', 'processing', 'streaming', 'unicode', 'complete', 'long', 'cancelled', 'failed', 'history'].map(value => <Button key={value} actionId={`demo.ai.${value}`} onClick={() => { setContent(value === 'streaming' || value === 'unicode' ? '' : output); setScenario(value); if (value !== 'cancelled' && value !== 'failed') setRun(v => v + 1); }}>{value}</Button>)}
       <Button actionId="demo.ai.remount" onClick={() => setMounted(v => !v)}>Toggle mount</Button>
       <Button actionId="demo.ai.hide" onClick={() => setHidden(v => !v)}>Toggle visibility</Button>
     </div>
     <InternalScrollArea style={{ flex: 1, minHeight: 0 }}>
       {scenario === 'waiting' || scenario === 'processing' ? <AIActivity>{scenario === 'waiting' ? 'Replying' : 'Analyzing sources'}</AIActivity> : null}
       <ToolVisibilityContext.Provider value={!hidden}>
-        {mounted && <div style={{ maxWidth: 760 }}><AIResponse responseId={`demo-${run}`} content={output} animate={scenario !== 'history'} state={scenario === 'streaming' && content !== aiFixture ? 'streaming' : scenario === 'cancelled' ? 'cancelled' : scenario === 'failed' ? 'failed' : 'complete'} /></div>}
+        {mounted && <div style={{ maxWidth: 760 }}><AIResponse responseId={`demo-${run}`} content={output} animate={scenario !== 'history'} state={(scenario === 'streaming' || scenario === 'unicode') && content !== aiFixture ? 'streaming' : scenario === 'cancelled' ? 'cancelled' : scenario === 'failed' ? 'failed' : 'complete'} /></div>}
       </ToolVisibilityContext.Provider>
     </InternalScrollArea>
   </main>;

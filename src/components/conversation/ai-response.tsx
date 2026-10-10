@@ -40,12 +40,14 @@ export function AIResponse({
   const callback = useRef(onReveal);
   callback.current = onReveal;
   const previous = useRef({ id: responseId, content });
+  const lastTick = useRef(performance.now());
   const boundaries = useMemo(() => {
     const result = [0];
     for (const part of new Intl.Segmenter(undefined, { granularity: 'grapheme' }).segment(content))
       result.push(part.index + part.segment.length);
+    if (state === 'streaming' && /[\uD800-\uDBFF]$/.test(content)) result.pop();
     return result;
-  }, [content]);
+  }, [content, state]);
   const [, refresh] = useState(0);
   let record = records.get(responseId);
   if (!record) {
@@ -74,6 +76,7 @@ export function AIResponse({
     };
     const tick = () => {
       if (disposed) return;
+      lastTick.current = performance.now();
       if (
         !visible ||
         document.hidden ||
@@ -99,7 +102,7 @@ export function AIResponse({
       if (current.offset === content.length && state !== 'streaming') current.finished = true;
       refresh((v) => v + 1);
       callback.current?.();
-      if (current.offset < content.length) timer = setTimeout(tick, 32);
+      if (current.offset < boundaries[boundaries.length - 1]) timer = setTimeout(tick, 32);
     };
     const preferenceChanged = () => {
       if (document.hidden || media.matches) {
@@ -107,7 +110,7 @@ export function AIResponse({
         flush();
       }
     };
-    if (!current.finished) timer = setTimeout(tick, 32);
+    if (!current.finished) timer = setTimeout(tick, Math.max(0, 32 - (performance.now() - lastTick.current)));
     document.addEventListener('visibilitychange', preferenceChanged);
     media.addEventListener('change', preferenceChanged);
     if (!visible || document.hidden || media.matches) flush();
