@@ -47,6 +47,13 @@ try {
     await choose('streaming');
     await page.waitForFunction(() => document.querySelector('[data-ai-response]')?.getAttribute('aria-busy') === 'false',null,{timeout:5500});
     assert.equal(await responseText(),expected);
+    await choose('unicode');
+    await page.waitForTimeout(300);
+    assert.ok((await responseText()).length > 0, 'fast increments must reveal while receiving');
+    const unicodeSamples = await response.evaluate(async element => { const samples=[]; for(let i=0;i<120;i++){samples.push(element.textContent);await new Promise(resolve=>setTimeout(resolve,20));}return samples; });
+    for(const sample of unicodeSamples) assert.ok(!Array.from(sample).some(character=>/^[\uD800-\uDFFF]$/.test(character)),'never reveal an incomplete surrogate');
+    await page.waitForFunction(() => document.querySelector('[data-ai-response]')?.getAttribute('aria-busy') === 'false',null,{timeout:3500});
+    assert.equal(await responseText(),expected);
     await choose('complete'); await choose('hide');
     await page.waitForFunction(() => document.querySelector('[data-ai-response]')?.getAttribute('aria-busy') === 'false',null,{timeout:500});
     assert.equal(await response.getAttribute('aria-busy'),'false');
