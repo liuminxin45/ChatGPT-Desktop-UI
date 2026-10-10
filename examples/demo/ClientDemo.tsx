@@ -828,19 +828,19 @@ export function ClientDemo() {
       <Button
         className="client-sidebar-link"
         actionId="client.chat.new"
+        icon={<NotePencil size={16} />}
         onClick={() => newChat("")}
       >
-        <NotePencil size={16} />
         New chat
       </Button>
       <Button
         className="client-sidebar-link"
         actionId="client.dot.open"
+        icon={<Circle size={13} weight="fill" />}
         onClick={() =>
           showInfo("Your dot", "A quiet place for your notes and ongoing work.")
         }
       >
-        <Circle size={13} weight="fill" />
         Your dot
       </Button>
       {activity ? (
@@ -863,9 +863,9 @@ export function ClientDemo() {
                   key={item.id}
                   className="client-sidebar-link"
                   actionId="client.project.open"
+                  icon={<Folder size={16} />}
                   onClick={() => newChat(item.id)}
                 >
-                  <Folder size={16} />
                   {item.name}
                 </Button>
               ))}
@@ -1034,6 +1034,7 @@ export function ClientDemo() {
                 <Button
                   className="client-sidebar-link"
                   actionId="client.schedule.new"
+                  icon={<Plus size={16} />}
                   onClick={() =>
                     showInfo(
                       "New task",
@@ -1041,7 +1042,6 @@ export function ClientDemo() {
                     )
                   }
                 >
-                  <Plus size={16} />
                   New task
                 </Button>
                 <SidebarSection title="Upcoming">

@@ -30,6 +30,8 @@ Use shared semantic action exports for attachment/delete/edit/refresh/link/sourc
 
 Pass the action glyph as `icon` to either Button entry and keep its translated label in `children`. Labels remain visible by default. Menus, view/filter choices, primary workflow actions, confirmation/destructive actions and business-specific operations need visible names; an icon alone is insufficient.
 
+Sibling navigation actions follow “Icon and label alignment” in the [design system](DESIGN_SYSTEM.md). A smaller visible glyph must not shift the label. Do not place the leading SVG directly in `children` when the action supports `icon`, or add Host-only offsets to repair alignment.
+
 Opt in to `iconOnly` for familiar, compact toolbar/row controls such as close, remove, search, refresh and message hover actions. The compatibility Button's `size="icon"` also opts in. These controls show their names on hover/focus, including busy and disabled states. Existing `title` values become shared tooltips; a surrounding Tooltip suppresses duplicate hints. Preserve counts, state, record names and selected values.
 
 The compatibility DropdownMenuItem accepts `icon` and `actionId`, always displays its label and shortcut, and retains keyboard typeahead. Use stable Host-owned action identifiers. These primitives add no analytics events or diagnostic content. Shared portals close when their Tool Surface becomes hidden.
