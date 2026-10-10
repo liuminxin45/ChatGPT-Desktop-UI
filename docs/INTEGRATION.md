@@ -80,3 +80,12 @@ The supplied ChatGPT Downloads, browser-permissions and Tasks settings captures 
 Use `RecordRow` for multi-action records, `RecordLink` for navigation and `RecordAction` or `Button` for commands. Host layout owns column geometry and domain selection state; shared controls own hover and keyboard focus. Never put a row click handler, button role or tab stop around descendant actions. Clicking metadata or space between controls must do nothing. Drag affordance and selected state do not grant click ownership. Keep independent actions discoverable, with visible labels or familiar labelled icons; keyboard focus must not rely on pointer hover. Do not make the entire row brighten when one descendant is hovered or focused.
 
 Use native links for URLs and buttons for commands. Preserve disabled, loading and disclosure states and stable action IDs on the actual target, not its static parent. Validate blank-space clicks, independent outcomes, keyboard focus, long labels and both themes at the supported window sizes.
+
+
+## Composer scroll boundaries
+
+Wrap only the message/body viewport in `ScrollEdgeFade`; place a `ComposerDock` immediately after it. The boundary adds no DOM wrapper and the shared `InternalScrollArea`, `VirtualList` and `FixedVirtualList` preserve their scroll element, refs and anchor protocols. Ordinary scroll areas remain unchanged. Nested scroll areas do not inherit the outer mask.
+
+The bottom 24px use an alpha mask: fully opaque at the start and fully transparent at the dock edge in both themes. Native scrollbar gutters stay opaque. The mask remains enabled at the end; shared bottom padding keeps the last content above it. Focused descendant controls are scrolled into the readable region. Floating actions and portal menus belong outside the masked viewport.
+
+`ComposerDock` owns the zero top gap, 12px bottom spacing and compact/responsive horizontal insets. Do not add Host gradient, mask, background overlays or competing top padding. Disabled boundaries (`enabled={false}`) leave the underlying scroll area unchanged. This pattern applies to scrolling conversations adjoining fixed input areas, not ordinary lists, tables, menus or inline forms.

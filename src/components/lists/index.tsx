@@ -1,6 +1,8 @@
 import { useVirtualizer } from '@tanstack/react-virtual';
 import {
   forwardRef,
+  useCallback,
+  useContext,
   useEffect,
   useRef,
   useState,
@@ -10,6 +12,13 @@ import {
 } from 'react';
 import { classes } from '../classes';
 import { listRowGap, listRowInset } from '../../list-geometry';
+import { ScrollEdgeFadeContext } from './scroll-edge-fade';
+export {
+  ScrollEdgeFade,
+  ComposerDock,
+  type ScrollEdgeFadeProps,
+  type ComposerDockProps,
+} from './scroll-edge-fade';
 
 export const internalScrollAreaClassName = 'desktop-internal-scroll';
 
@@ -33,8 +42,76 @@ export const ListStack = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElemen
 });
 
 export const InternalScrollArea = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-  function InternalScrollArea({ className, ...props }, ref) {
-    return <div ref={ref} className={classes(internalScrollAreaClassName, className)} {...props} />;
+  function InternalScrollArea({ className, children, onFocusCapture, ...props }, ref) {
+    const fade = useContext(ScrollEdgeFadeContext);
+    const elementRef = useRef<HTMLDivElement | null>(null);
+    const attach = useCallback(
+      (element: HTMLDivElement | null) => {
+        elementRef.current = element;
+        if (typeof ref === 'function') ref(element);
+        else if (ref) ref.current = element;
+      },
+      [ref],
+    );
+    useEffect(() => {
+      const element = elementRef.current;
+      if (!fade || !element) return;
+      const measure = () => {
+        const style = getComputedStyle(element);
+        const vertical = Math.max(
+          0,
+          element.offsetWidth -
+            element.clientWidth -
+            parseFloat(style.borderLeftWidth) -
+            parseFloat(style.borderRightWidth),
+        );
+        const horizontal = Math.max(
+          0,
+          element.offsetHeight -
+            element.clientHeight -
+            parseFloat(style.borderTopWidth) -
+            parseFloat(style.borderBottomWidth),
+        );
+        element.style.setProperty('--desktop-scroll-fade-gutter', `${vertical}px`);
+        element.style.setProperty('--desktop-scroll-fade-bottom-gutter', `${horizontal}px`);
+      };
+      measure();
+      const observer = new ResizeObserver(measure);
+      observer.observe(element);
+      return () => {
+        observer.disconnect();
+        for (const property of [
+          '--desktop-scroll-fade-gutter',
+          '--desktop-scroll-fade-bottom-gutter',
+        ])
+          element.style.removeProperty(property);
+      };
+    }, [fade]);
+    return (
+      <div
+        ref={attach}
+        className={classes(internalScrollAreaClassName, className)}
+        {...props}
+        data-desktop-scroll-fade={fade ? 'bottom' : undefined}
+        onFocusCapture={(event) => {
+          onFocusCapture?.(event);
+          if (!fade || event.defaultPrevented || event.target === event.currentTarget) return;
+          const viewport = event.currentTarget;
+          const target = event.target as HTMLElement;
+          if (target.closest('.desktop-internal-scroll') !== viewport) return;
+          const bounds = viewport.getBoundingClientRect();
+          const item = target.getBoundingClientRect();
+          const fadeHeight =
+            parseFloat(getComputedStyle(viewport).getPropertyValue('--desktop-size-scroll-edge-fade')) || 24;
+          const bottom = bounds.top + viewport.clientTop + viewport.clientHeight - fadeHeight;
+          if (item.bottom > bottom) viewport.scrollTop += item.bottom - bottom;
+          else if (item.top < bounds.top + viewport.clientTop)
+            viewport.scrollTop -= bounds.top + viewport.clientTop - item.top;
+        }}
+      >
+        <ScrollEdgeFadeContext.Provider value={false}>{children}</ScrollEdgeFadeContext.Provider>
+      </div>
+    );
   },
 );
 

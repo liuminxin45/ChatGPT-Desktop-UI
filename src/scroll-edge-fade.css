@@ -1,0 +1,28 @@
+/* Alpha masking is independent of theme colors. Preserve native scrollbar tracks. */
+.desktop-internal-scroll[data-desktop-scroll-fade='bottom'] {
+  --desktop-scroll-fade-gutter: 0px;
+  --desktop-scroll-fade-bottom-gutter: 0px;
+  --desktop-scroll-fade-gutter-position: right;
+  padding-bottom: var(--desktop-size-scroll-edge-fade) !important;
+  scroll-padding-bottom: var(--desktop-size-scroll-edge-fade);
+  mask-image: linear-gradient(to bottom, #000 0, #000 calc(100% - var(--desktop-scroll-fade-bottom-gutter) - var(--desktop-size-scroll-edge-fade)), transparent calc(100% - var(--desktop-scroll-fade-bottom-gutter))), linear-gradient(#000, #000), linear-gradient(#000, #000);
+  mask-size: 100% 100%, var(--desktop-scroll-fade-gutter) 100%, 100% var(--desktop-scroll-fade-bottom-gutter);
+  mask-position: 0 0, var(--desktop-scroll-fade-gutter-position) top, left bottom;
+  mask-repeat: no-repeat;
+  mask-mode: alpha;
+}
+.desktop-composer-dock {
+  position: relative;
+  flex-shrink: 0;
+  padding: 0 var(--desktop-space-composer-dock) var(--desktop-space-composer-dock);
+}
+.desktop-internal-scroll[data-desktop-scroll-fade='bottom']:dir(rtl) {
+  --desktop-scroll-fade-gutter-position: left;
+}
+.desktop-composer-dock--none { padding: 0; }
+@media (min-width: 640px) {
+  .desktop-composer-dock--responsive { padding-inline: 16px; }
+}
+@media (min-width: 1024px) {
+  .desktop-composer-dock--responsive { padding-inline: 20px; }
+}

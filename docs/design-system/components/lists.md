@@ -8,6 +8,16 @@ Runnable composition: [example](../../../examples/gallery/App.tsx).
 
 Generated from TypeScript exports; edit implementation props/JSDoc, then run `npm run docs:generate`. Native React attributes remain available in the online API catalog.
 
+## ComposerDock (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/lists/scroll-edge-fade.tsx)
+
+Fixed input region adjoining ScrollEdgeFade. Hosts retain state and controls.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| inset | no | `"compact" \| "responsive" \| "none" \| undefined` |
+
 ## InternalScrollArea (chatgpt-desktop-kit)
 
 [Implementation](../../../src/components/lists/index.tsx)
@@ -34,6 +44,17 @@ Static record grouping. Put navigation, selection and commands on separate contr
 | --- | --- | --- |
 | tabIndex | no | `-1 \| undefined` |
 | role | no | `"group" \| "listitem" \| undefined` |
+
+## ScrollEdgeFade (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/lists/scroll-edge-fade.tsx)
+
+Bottom optical boundary above a fixed composer. Adds no layout wrapper.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| children | yes | `ReactNode` |
+| enabled | no | `boolean \| undefined` |
 
 ## VirtualList (chatgpt-desktop-kit)
 

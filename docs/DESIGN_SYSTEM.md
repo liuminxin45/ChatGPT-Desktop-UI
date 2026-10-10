@@ -134,3 +134,12 @@ Use native links for URLs and buttons for commands. Preserve disabled, loading a
 ## Workspace composition and long values
 
 Use one horizontal module navigation layer. Promote independent work destinations into that row instead of stacking Tabs. Ordinary sections use spacing, not nested outlined panels. Table cells use the exported Table family in both standalone and embedded surfaces; multi-action records remain static. Long lists compose VirtualList and RecordRow, with Host-owned column geometry. Select values and menu options remain readable, wrapping within constrained columns rather than silently showing ellipses. Use Select size="sm" for compact rows and InlineNotice for compact conditions with independent recovery actions. Each workspace has one vertical scroll owner; the page bar and list header remain outside the growing list viewport.
+
+
+## Composer scroll boundaries
+
+Wrap only the message/body viewport in `ScrollEdgeFade`; place a `ComposerDock` immediately after it. The boundary adds no DOM wrapper and the shared `InternalScrollArea`, `VirtualList` and `FixedVirtualList` preserve their scroll element, refs and anchor protocols. Ordinary scroll areas remain unchanged. Nested scroll areas do not inherit the outer mask.
+
+The bottom 24px use an alpha mask: fully opaque at the start and fully transparent at the dock edge in both themes. Native scrollbar gutters stay opaque. The mask remains enabled at the end; shared bottom padding keeps the last content above it. Focused descendant controls are scrolled into the readable region. Floating actions and portal menus belong outside the masked viewport.
+
+`ComposerDock` owns the zero top gap, 12px bottom spacing and compact/responsive horizontal insets. Do not add Host gradient, mask, background overlays or competing top padding. Disabled boundaries (`enabled={false}`) leave the underlying scroll area unchanged. This pattern applies to scrolling conversations adjoining fixed input areas, not ordinary lists, tables, menus or inline forms.
