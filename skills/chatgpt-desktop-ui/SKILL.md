@@ -46,3 +46,7 @@ Run the target's relevant typecheck/build and meaningful interaction checks. Ins
 Review all affected routes rather than demonstrating only a new settings page. Repair differences in the shared layer where possible. Do not claim high fidelity based only on a palette or a screenshot that was never viewed.
 
 Deliver the implementation, reference-linked screenshots, verified checks and remaining host-specific limitations. This Skill does not authorize publishing, installing a product, sending messages, migrating production data or pushing commits. Follow the user's actual authorization for those actions.
+
+## Workspace composition and long values
+
+Use one horizontal module navigation layer. Promote independent work destinations into that row instead of stacking Tabs. Ordinary sections use spacing, not nested outlined panels. Table cells use the exported Table family in both standalone and embedded surfaces; multi-action records remain static. Long lists compose VirtualList and RecordRow, with Host-owned column geometry. Select values and menu options remain readable, wrapping within constrained columns rather than silently showing ellipses. Use Select size="sm" for compact rows and InlineNotice for compact conditions with independent recovery actions. Each workspace has one vertical scroll owner; the page bar and list header remain outside the growing list viewport.

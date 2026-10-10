@@ -43,7 +43,8 @@
       "types": "./dist/components/*/index.d.ts",
       "import": "./dist/components/*/index.js",
       "default": "./dist/components/*/index.js"
-    }
+    },
+    "./adoption-audit": "./dist/audit-controls.mjs"
   },
   "files": [
     "dist",
@@ -90,7 +91,8 @@
     "test:reference": "node scripts/verify-reference.mjs",
     "format:check": "prettier --check src/components examples/catalog \"scripts/{component-catalog,audit-adoption,check-library,build-catalog,build-site,verify-reference}.mjs\"",
     "check": "npm run typecheck && npm run build:library && npm run docs:check && npm run check:library && npm run format:check && npm run test:namespace && npm run test:integration",
-    "ci": "npm run check && npm run site:build && npm run test:reference && npm test && npm run test:demo && npm run test:polish && npm run test:input && npm run test:list-spacing && npm run test:record-actions && npm run test:icons && npm run skill:package && npm run skill:check && npm run audit:public"
+    "ci": "npm run check && npm run site:build && npm run test:reference && npm test && npm run test:demo && npm run test:polish && npm run test:input && npm run test:list-spacing && npm run test:tables && npm run test:record-actions && npm run test:icons && npm run skill:package && npm run skill:check && npm run audit:public",
+    "test:tables": "node scripts/verify-tables.mjs"
   },
   "peerDependencies": {
     "react": "^18.3.1",
@@ -131,6 +133,7 @@
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "tailwindcss": "3.4.17",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "postcss": "8.5.29"
   }
 }
