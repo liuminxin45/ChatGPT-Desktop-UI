@@ -43,6 +43,8 @@
 .dark .desktop-skeleton{background:var(--desktop-color-surface-hover)}
 .desktop-menu-item svg{width:16px;height:16px;flex:none}
 
+.desktop-input:disabled,.desktop-textarea:disabled{opacity:.5}
+.desktop-input::placeholder,.desktop-textarea::placeholder{color:var(--desktop-color-text-muted)}
 /* Shared boundary-free controls: application adapters and Native Tools use the same classes. */
 .desktop-button--secondary{background:transparent}
 .desktop-input:hover:not(:disabled),.desktop-textarea:hover:not(:disabled){background:var(--desktop-color-surface-hover)}
