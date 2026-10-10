@@ -9,6 +9,7 @@
 .desktop-ai-markdown.desktop-ai-markdown :is(h1,h2,h3,h4,h5,h6){color:inherit;line-height:1.35;margin:1.3em 0 .55em;font-weight:var(--desktop-font-weight-emphasis,600)}
 .desktop-ai-markdown.desktop-ai-markdown h1{font-size:1.4em}.desktop-ai-markdown.desktop-ai-markdown h2{font-size:1.25em}.desktop-ai-markdown.desktop-ai-markdown h3{font-size:1.12em}.desktop-ai-markdown.desktop-ai-markdown :is(h4,h5,h6){font-size:1em}
 .desktop-ai-markdown.desktop-ai-markdown :is(ul,ol){padding-inline-start:1.7em;margin:.7em 0 1em}.desktop-ai-markdown.desktop-ai-markdown li{margin:.25em 0;padding-inline-start:.2em}.desktop-ai-markdown.desktop-ai-markdown li>p{margin:.3em 0}.desktop-ai-markdown.desktop-ai-markdown li>:is(ul,ol){margin:.3em 0}
+.desktop-ai-markdown.desktop-ai-markdown ul{list-style-type:disc}.desktop-ai-markdown.desktop-ai-markdown ol{list-style-type:decimal}.desktop-ai-markdown.desktop-ai-markdown li>ul{list-style-type:circle}.desktop-ai-markdown.desktop-ai-markdown li li>ul{list-style-type:square}
 .desktop-ai-markdown.desktop-ai-markdown blockquote{margin:1em 0;padding-inline-start:1em;border-inline-start:3px solid var(--desktop-color-border-strong);color:var(--desktop-color-text-subtle)}
 .desktop-ai-markdown.desktop-ai-markdown a{color:var(--desktop-color-text);text-decoration:underline;text-underline-offset:3px}
 .desktop-ai-markdown.desktop-ai-markdown code{font-family:var(--desktop-font-ai-code);font-size:.9em;line-height:inherit;font-weight:400}

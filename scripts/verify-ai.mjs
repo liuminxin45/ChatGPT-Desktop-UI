@@ -21,6 +21,12 @@ try {
     assert.equal(await page.locator('svg.animate-spin').count(),0);
     await page.screenshot({path:`docs/validation/ai-output/${theme}-${width}-${scale}-waiting.png`});
     await choose('history');
+    await page.addStyleTag({content:'ul,ol{list-style:none}'});
+    assert.equal(await response.locator('ul').first().evaluate(el=>getComputedStyle(el).listStyleType),'disc');
+    assert.equal(await response.locator('li>ul').first().evaluate(el=>getComputedStyle(el).listStyleType),'circle');
+    await page.evaluate(()=>{const ordered=document.createElement('ol');ordered.innerHTML='<li>Ordered example</li>';document.querySelector('[data-ai-response]').append(ordered)});
+    assert.equal(await response.locator('ol').last().evaluate(el=>getComputedStyle(el).listStyleType),'decimal');
+    await page.evaluate(()=>document.querySelector('[data-ai-response]>ol').remove());
     const expected = await responseText();
     assert.ok(expected.includes('👩🏽‍💻'));
     const font = await response.locator('p code').first().evaluate(el => getComputedStyle(el).fontFamily);
