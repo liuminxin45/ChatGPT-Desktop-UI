@@ -41,6 +41,9 @@ Static record grouping. Put navigation, selection and commands on separate contr
 
 | Prop | Required | Type |
 | --- | --- | --- |
+| initialScrollAnchor | no | `VirtualListScrollAnchor \| null \| undefined` |
+| onScrollAnchorChange | no | `((anchor: VirtualListScrollAnchor) => void) \| undefined` |
+| header | no | `ReactNode` |
 | items | yes | `readonly T[]` |
 | getItemKey | yes | `(item: T, index: number) => string \| number` |
 | renderItem | yes | `(item: T, index: number) => ReactNode` |

@@ -3,6 +3,7 @@ import {
   forwardRef,
   useEffect,
   useRef,
+  useState,
   type CSSProperties,
   type HTMLAttributes,
   type ReactNode,
@@ -37,7 +38,17 @@ export const InternalScrollArea = forwardRef<HTMLDivElement, HTMLAttributes<HTML
   },
 );
 
+export interface VirtualListScrollAnchor {
+  key: string;
+  offset: number;
+  top: number;
+}
+
 export interface VirtualListProps<T> {
+  initialScrollAnchor?: VirtualListScrollAnchor | null;
+  onScrollAnchorChange?: (anchor: VirtualListScrollAnchor) => void;
+  /** Sticky column headings share the viewport gutter and content inset with their records. */
+  header?: ReactNode;
   items: readonly T[];
   getItemKey(item: T, index: number): string | number;
   renderItem(item: T, index: number): ReactNode;
@@ -53,6 +64,9 @@ export interface VirtualListProps<T> {
 }
 
 export function VirtualList<T>({
+  initialScrollAnchor,
+  onScrollAnchorChange,
+  header,
   items,
   getItemKey,
   renderItem,
@@ -68,6 +82,23 @@ export function VirtualList<T>({
 }: VirtualListProps<T>) {
   'use no memo';
   const scrollRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const anchorRef = useRef(initialScrollAnchor);
+  const restoringRef = useRef(false);
+  const resetRef = useRef(resetKey);
+  const [headerHeight, setHeaderHeight] = useState(0);
+  useEffect(() => {
+    const element = headerRef.current;
+    if (!element) {
+      setHeaderHeight(0);
+      return;
+    }
+    const measure = () => setHeaderHeight(element.offsetHeight);
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [Boolean(header)]);
   const virtualizer = useVirtualizer({
     count: items.length,
     getScrollElement: () => scrollRef.current,
@@ -83,11 +114,38 @@ export function VirtualList<T>({
     gap: listRowGap,
     paddingStart: listRowGap / 2,
     paddingEnd: listRowGap / 2,
+    scrollMargin: headerHeight,
     getItemKey: (index) => (items[index] ? getItemKey(items[index], index) : index),
   });
   useEffect(() => {
+    if (Object.is(resetRef.current, resetKey)) return;
+    resetRef.current = resetKey;
+    anchorRef.current = null;
     scrollRef.current?.scrollTo({ top: 0 });
   }, [resetKey]);
+  useEffect(() => {
+    const anchor = anchorRef.current;
+    if (!anchor || !items.length) return;
+    const index = items.findIndex((item, i) => String(getItemKey(item, i)) === anchor.key);
+    const offset = index >= 0 ? virtualizer.getOffsetForIndex(index, 'start')?.[0] : anchor.top;
+    if (offset === undefined) return;
+    restoringRef.current = true;
+    virtualizer.scrollToOffset(Math.max(0, offset + (index >= 0 ? anchor.offset : 0)));
+    // Mount and measure the target before settling; estimates can differ from its real height.
+    let frame = 0;
+    let attempts = 0;
+    const settle = () => {
+      const row = virtualizer.getVirtualItems().find((item) => item.index === index);
+      if (row) virtualizer.scrollToOffset(Math.max(0, row.start + anchor.offset));
+      if (++attempts < 3) frame = requestAnimationFrame(settle);
+      else restoringRef.current = false;
+    };
+    frame = requestAnimationFrame(settle);
+    return () => {
+      cancelAnimationFrame(frame);
+      restoringRef.current = false;
+    };
+  }, [items, headerHeight]);
   useEffect(() => {
     const element = scrollRef.current;
     const restore = (event: Event) => {
@@ -111,7 +169,21 @@ export function VirtualList<T>({
       aria-label={ariaLabel}
       className={classes('desktop-virtual-list', className)}
       style={style}
+      onScroll={(event) => {
+        if (restoringRef.current) return;
+        const top = event.currentTarget.scrollTop;
+        const row = virtualizer.getVirtualItems().find((item) => item.end > top + headerHeight);
+        if (!row) return;
+        const anchor = { key: String(row.key), offset: top - row.start, top };
+        anchorRef.current = anchor;
+        onScrollAnchorChange?.(anchor);
+      }}
     >
+      {header ? (
+        <div ref={headerRef} className="desktop-virtual-list__header">
+          {header}
+        </div>
+      ) : null}
       <div
         className={classes('desktop-virtual-list__content', contentClassName)}
         style={{ height: virtualizer.getTotalSize() }}
@@ -130,7 +202,7 @@ export function VirtualList<T>({
                 'desktop-virtual-list__item',
                 typeof itemClassName === 'function' ? itemClassName(item, row.index) : itemClassName,
               )}
-              style={{ transform: `translateY(${row.start}px)`, paddingInline: listRowInset }}
+              style={{ transform: `translateY(${row.start - headerHeight}px)`, paddingInline: listRowInset }}
             >
               {renderItem(item, row.index)}
             </div>

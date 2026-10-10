@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
   DesktopRoot,
   Table,
@@ -15,11 +15,20 @@ import {
   VirtualList,
   RecordRow,
 } from '../src';
+import type { VirtualListScrollAnchor } from '../src/components/lists';
 import '../src/styles.css';
 
 function App() {
   const [value, setValue] = useState('long');
   const [count, setCount] = useState(0);
+  const [visible, setVisible] = useState(true);
+  const [reverse, setReverse] = useState(false);
+  const [anchor, setAnchor] = useState<VirtualListScrollAnchor | null>(null);
+  const records = useMemo(
+    () =>
+      Array.from({ length: 2000 }, (_, id) => ({ id })).sort((a, b) => (reverse ? b.id - a.id : a.id - b.id)),
+    [reverse],
+  );
   return (
     <DesktopRoot>
       <main style={{ padding: 24 }}>
@@ -67,21 +76,37 @@ function App() {
           <Radio name="review-mode" defaultChecked value="all" /> All Bugs
         </label>
         <output>{count}</output>
-        <VirtualList
-          ariaLabel="Records"
-          style={{ height: 240 }}
-          items={Array.from({ length: 2000 }, (_, id) => ({ id }))}
-          getItemKey={(item) => item.id}
-          estimateSize={48}
-          renderItem={(item) => (
-            <RecordRow>
-              <span>BUG-{item.id}</span>
-              <Button actionId="reference.record.open" onClick={() => setCount(count + 1)}>
-                Open
-              </Button>
-            </RecordRow>
-          )}
-        />
+        <Button actionId="reference.list.visibility" onClick={() => setVisible(!visible)}>
+          Toggle list
+        </Button>
+        <Button actionId="reference.list.sort" onClick={() => setReverse(!reverse)}>
+          Reverse list
+        </Button>
+        {visible && (
+          <VirtualList
+            initialScrollAnchor={anchor}
+            onScrollAnchorChange={setAnchor}
+            header={
+              <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) 100px' }}>
+                <span>Issue</span>
+                <span>Action</span>
+              </div>
+            }
+            ariaLabel="Records"
+            style={{ height: 240 }}
+            items={records}
+            getItemKey={(item) => item.id}
+            estimateSize={48}
+            renderItem={(item) => (
+              <RecordRow style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) 100px' }}>
+                <span>BUG-{item.id}</span>
+                <Button actionId="reference.record.open" onClick={() => setCount(count + 1)}>
+                  Open
+                </Button>
+              </RecordRow>
+            )}
+          />
+        )}
       </main>
     </DesktopRoot>
   );

@@ -90,9 +90,36 @@ try {
       );
       await page.keyboard.press('Escape');
       const list = page.getByRole('list', { name: 'Records' });
+      const columns = await list.evaluate((el) => ({
+        heading: el.querySelector('.desktop-virtual-list__header span').getBoundingClientRect().left,
+        record: el.querySelector('.desktop-record-row span').getBoundingClientRect().left,
+      }));
+      assert.ok(Math.abs(columns.heading - columns.record) < 1, 'header and records have different gutters');
       await list.evaluate((el) => (el.scrollTop = el.scrollHeight));
       await page.getByText('BUG-1999', { exact: true }).waitFor();
       assert.ok((await list.locator('[role=listitem]').count()) < 60);
+      const captureAnchor = () =>
+        list.evaluate((el) => {
+          const top =
+            el.getBoundingClientRect().top +
+            el.querySelector('.desktop-virtual-list__header').getBoundingClientRect().height;
+          const row = [...el.querySelectorAll('[data-desktop-item-key]')].find(
+            (row) => row.getBoundingClientRect().bottom > top,
+          );
+          return { key: row.dataset.desktopItemKey, offset: row.getBoundingClientRect().top - top };
+        });
+      await list.evaluate((el) => (el.scrollTop = el.scrollHeight / 2));
+      await page.waitForTimeout(150);
+      const anchor = await captureAnchor();
+      await page.getByRole('button', { name: 'Toggle list' }).click();
+      await page.getByRole('button', { name: 'Toggle list' }).click();
+      await page.waitForTimeout(150);
+      const restored = await captureAnchor();
+      assert.equal(restored.key, anchor.key, 'remount lost the stable record');
+      assert.ok(Math.abs(restored.offset - anchor.offset) < 2);
+      await page.getByRole('button', { name: 'Reverse list' }).click();
+      await page.waitForTimeout(150);
+      assert.equal((await captureAnchor()).key, anchor.key, 'reorder lost the stable record');
       assert.deepEqual(errors, []);
       await page.screenshot({ path: path.join(directory, `${theme}-${width}-${scale}.png`) });
       results.push({ theme, width, height, scale, metrics });
