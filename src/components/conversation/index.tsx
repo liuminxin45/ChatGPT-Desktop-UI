@@ -1,6 +1,87 @@
-import { ArrowUp, Stop, Waveform } from '@phosphor-icons/react';
+import { Waveform } from '@phosphor-icons/react';
 import { forwardRef, useLayoutEffect, useRef, type ReactNode } from 'react';
-import { Button, Textarea } from '../../controls';
+import { Button, Textarea, type ButtonProps } from '../../controls';
+import { ArrowUp, LoaderCircle } from 'lucide-react';
+import { classes } from '../classes';
+
+export type ComposerActionState = 'ready' | 'sending' | 'stoppable' | 'stopping';
+
+export interface ComposerActionButtonProps
+  extends Omit<
+    ButtonProps,
+    'children' | 'icon' | 'iconOnly' | 'variant' | 'size' | 'onClick' | 'confirmOnEnter' | 'aria-label'
+  > {
+  state: ComposerActionState;
+  actionId: string;
+  onSend: () => void | Promise<void>;
+  onStop?: () => void | Promise<void>;
+  /** Draft/attachment readiness affects Send only; it must never disable Stop. */
+  sendDisabled?: boolean;
+  sendLabel?: string;
+  sendingLabel?: string;
+  stopLabel?: string;
+  stoppingLabel?: string;
+}
+
+/** One ChatGPT-style circular action for message composers; Hosts own operation state and cancellation. */
+export const ComposerActionButton = forwardRef<HTMLButtonElement, ComposerActionButtonProps>(
+  function ComposerActionButton(
+    {
+      state,
+      actionId,
+      onSend,
+      onStop,
+      sendDisabled = false,
+      disabled = false,
+      sendLabel = 'Send message',
+      sendingLabel = 'Sending',
+      stopLabel = 'Stop generating',
+      stoppingLabel = 'Stopping',
+      className,
+      type = 'button',
+      ...props
+    },
+    ref,
+  ) {
+    const busy = state === 'sending' || state === 'stopping';
+    const stop = state === 'stoppable';
+    const label =
+      state === 'sending'
+        ? sendingLabel
+        : state === 'stopping'
+          ? stoppingLabel
+          : stop
+            ? stopLabel
+            : sendLabel;
+    return (
+      <Button
+        {...props}
+        ref={ref}
+        type={stop || busy ? 'button' : type}
+        actionId={actionId}
+        className={classes('desktop-send-control', className)}
+        data-composer-state={state}
+        aria-label={label}
+        aria-busy={busy || undefined}
+        iconOnly
+        disabled={disabled || busy || (stop ? !onStop : sendDisabled)}
+        confirmOnEnter={state === 'ready'}
+        onClick={stop ? onStop : busy ? undefined : onSend}
+        icon={
+          busy ? (
+            <LoaderCircle size={16} className="desktop-composer-progress" />
+          ) : stop ? (
+            <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
+              <rect width="10" height="10" rx="1" fill="currentColor" />
+            </svg>
+          ) : (
+            <ArrowUp size={16} strokeWidth={2} />
+          )
+        }
+      />
+    );
+  },
+);
 
 export interface ClientComposerProps {
   value: string;
@@ -15,6 +96,9 @@ export interface ClientComposerProps {
   attachments?: ReactNode;
   status?: ReactNode;
   busy?: boolean;
+  actionState?: ComposerActionState;
+  sendingLabel?: string;
+  stoppingLabel?: string;
   disabled?: boolean;
   onStop?: () => void;
   onVoice?: () => void;
@@ -39,6 +123,9 @@ export const ClientComposer = forwardRef<HTMLTextAreaElement, ClientComposerProp
     attachments,
     status,
     busy = false,
+    actionState,
+    sendingLabel,
+    stoppingLabel,
     disabled = false,
     onStop,
     onVoice,
@@ -59,18 +146,20 @@ export const ClientComposer = forwardRef<HTMLTextAreaElement, ClientComposerProp
     element.style.overflowY = element.scrollHeight > 200 ? 'auto' : 'hidden';
   }, [value, variant]);
   const hasText = Boolean(value.trim());
-  const voice = !hasText && !busy && Boolean(onVoice);
+  const state = actionState ?? (busy ? (onStop ? 'stoppable' : 'sending') : 'ready');
+  const active = state !== 'ready';
+  const voice = !hasText && !active && Boolean(onVoice);
   return (
     <div className={`client-composer-wrap client-composer-wrap--${variant}`}>
       {context ? <div className="client-composer-context">{context}</div> : null}
       <form
         className={`desktop-composer client-composer client-composer--${variant}`}
         aria-label={label}
-        aria-busy={busy}
+        aria-busy={active}
         data-desktop-surface={`${actionId}.composer`}
         onSubmit={(event) => {
           event.preventDefault();
-          if (hasText && !busy && !disabled) onSubmit();
+          if (hasText && !active && !disabled) onSubmit();
         }}
       >
         {attachments ? <div className="client-composer-attachments">{attachments}</div> : null}
@@ -92,16 +181,32 @@ export const ClientComposer = forwardRef<HTMLTextAreaElement, ClientComposerProp
           {leading}
           <div className="client-spacer" />
           {trailing}
-          <Button
-            type={!busy && !voice ? 'submit' : 'button'}
-            className="desktop-send-control"
-            aria-label={busy ? stopLabel : voice ? voiceLabel : sendLabel}
-            actionId={`${actionId}.${busy ? 'stop' : voice ? 'voice' : 'send'}`}
-            disabled={disabled || (busy ? !onStop : !hasText && !voice)}
-            onClick={busy ? onStop : voice ? onVoice : undefined}
-          >
-            {busy ? <Stop size={16} weight="fill" /> : voice ? <Waveform size={18} /> : <ArrowUp size={18} />}
-          </Button>
+          {voice ? (
+            <Button
+              type="button"
+              className="desktop-send-control"
+              aria-label={voiceLabel}
+              actionId={`${actionId}.voice`}
+              disabled={disabled}
+              onClick={onVoice}
+              iconOnly
+              icon={<Waveform size={18} />}
+            />
+          ) : (
+            <ComposerActionButton
+              state={state}
+              type="submit"
+              actionId={`${actionId}.${state === 'stoppable' || state === 'stopping' ? 'stop' : 'send'}`}
+              onSend={() => undefined}
+              onStop={onStop}
+              disabled={disabled}
+              sendDisabled={!hasText}
+              sendLabel={sendLabel}
+              sendingLabel={sendingLabel}
+              stopLabel={stopLabel}
+              stoppingLabel={stoppingLabel}
+            />
+          )}
         </div>
       </form>
       {status ? (

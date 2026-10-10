@@ -69,6 +69,7 @@
     "test:demo": "node scripts/verify-demo.mjs",
     "test:polish": "node scripts/verify-client-polish.mjs",
     "test": "node scripts/verify.mjs",
+    "test:composer": "node scripts/verify-composer-actions.mjs",
     "test:input": "node scripts/verify-input.mjs",
     "test:record-actions": "node scripts/verify-record-actions.mjs",
     "test:list-spacing": "node scripts/verify-list-spacing.mjs",
@@ -91,7 +92,7 @@
     "test:reference": "node scripts/verify-reference.mjs",
     "format:check": "prettier --check src/components examples/catalog \"scripts/{component-catalog,audit-adoption,check-library,build-catalog,build-site,verify-reference}.mjs\"",
     "check": "npm run typecheck && npm run build:library && npm run docs:check && npm run check:library && npm run format:check && npm run test:namespace && npm run test:integration",
-    "ci": "npm run check && npm run site:build && npm run test:reference && npm test && npm run test:demo && npm run test:polish && npm run test:input && npm run test:list-spacing && npm run test:tables && npm run test:record-actions && npm run test:icons && npm run skill:package && npm run skill:check && npm run audit:public",
+    "ci": "npm run check && npm run site:build && npm run test:reference && npm test && npm run test:demo && npm run test:polish && npm run test:input && npm run test:composer && npm run test:list-spacing && npm run test:tables && npm run test:record-actions && npm run test:icons && npm run skill:package && npm run skill:check && npm run audit:public",
     "test:tables": "node scripts/verify-tables.mjs"
   },
   "peerDependencies": {

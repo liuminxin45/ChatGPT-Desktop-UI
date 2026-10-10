@@ -28,6 +28,9 @@ Controlled composition; drafts, attachments and command outcomes belong to the H
 | attachments | no | `ReactNode` |
 | status | no | `ReactNode` |
 | busy | no | `boolean \| undefined` |
+| actionState | no | `ComposerActionState \| undefined` |
+| sendingLabel | no | `string \| undefined` |
+| stoppingLabel | no | `string \| undefined` |
 | disabled | no | `boolean \| undefined` |
 | onStop | no | `(() => void) \| undefined` |
 | onVoice | no | `(() => void) \| undefined` |
@@ -35,6 +38,25 @@ Controlled composition; drafts, attachments and command outcomes belong to the H
 | stopLabel | no | `string \| undefined` |
 | voiceLabel | no | `string \| undefined` |
 | actionId | yes | `string` |
+
+## ComposerActionButton (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/index.tsx)
+
+One ChatGPT-style circular action for message composers; Hosts own operation state and cancellation.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| state | yes | `ComposerActionState` |
+| actionId | yes | `string` |
+| onSend | yes | `() => void \| Promise<void>` |
+| onStop | no | `(() => void \| Promise<void>) \| undefined` |
+| sendDisabled | no | `boolean \| undefined` |
+| sendLabel | no | `string \| undefined` |
+| sendingLabel | no | `string \| undefined` |
+| stopLabel | no | `string \| undefined` |
+| stoppingLabel | no | `string \| undefined` |
+| badge | no | `ReactNode` |
 
 ## ConversationMessage (chatgpt-desktop-kit)
 
