@@ -64,6 +64,8 @@
   --desktop-color-navigation-selected: #e4e7ec;
   --desktop-color-on-navigation-selected: #202123;
   --desktop-color-unread: #387cf4;
+  --desktop-color-send: #2b6bcc;
+  --desktop-color-send-hover: #3475d4;
   --desktop-color-on-send: #ffffff;
   --desktop-radius-overlay: 12px;
   --desktop-radius-navigation: 10px;

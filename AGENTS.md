@@ -20,3 +20,5 @@ Read `docs/DESIGN_SYSTEM.md` and `docs/DESIGN_GUIDANCE.md` before changing UI. R
 - Do not publish packages, push remotes, replace installed applications or change consumer dependencies without an integration request.
 
 - Multi-action records use static `RecordRow` groups with independent `RecordLink`/`RecordAction`/`Button` targets. Never wrap controls in a clickable row or add whole-row hover/focus fills. Full-target feedback is reserved for an actual single navigation/selection target; tree membership alone does not authorize it. Validate blank-space clicks and keyboard access.
+
+- Message composers use the shared ComposerActionButton state contract (ready/sending/stoppable/stopping). No Host/profile-specific circle colors, glyphs or size overrides. Empty drafts disable Send only; Enter never invokes Stop. Supply cancellation only when supported, preserve draft and asynchronous outcome ownership, and run test:composer after changes.

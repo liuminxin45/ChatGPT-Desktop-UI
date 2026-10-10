@@ -102,8 +102,8 @@ html:root,html:root body,html:root body *,html:root body *::before,html:root bod
 :is(.desktop-input-group,.desktop-toolbar-search):has(>:is(input,textarea,[contenteditable="true"]):focus){outline:none!important;border-color:var(--desktop-color-border-strong)!important;box-shadow:var(--desktop-input-focus-ring)!important}
 :is(.desktop-input-group,.desktop-toolbar-search):has(>[aria-invalid="true"]:focus){border-color:var(--desktop-color-danger)!important;box-shadow:inset 0 0 0 1px var(--desktop-color-danger)!important}
 [data-desktop-input-scope]:focus-within{border-color:var(--desktop-color-border-strong);box-shadow:none}
-.desktop-button.desktop-send-control{width:32px;height:32px;padding:0;border-radius:50%;background:var(--desktop-color-info);color:var(--desktop-color-on-send)}
-.desktop-button.desktop-send-control:hover:not(:disabled){background:var(--desktop-color-info-hover)}
+.desktop-button.desktop-send-control{width:32px;height:32px;min-width:32px;flex:none;padding:0;border:0;border-radius:50%;background:var(--desktop-color-send);color:var(--desktop-color-on-send)}
+.desktop-button.desktop-send-control:hover:not(:disabled){background:var(--desktop-color-send-hover)}
 @media(max-width:760px){:root{--desktop-space-page-inline:16px;--desktop-space-page-block:16px}.desktop-tool-page-bar{grid-template-columns:minmax(0,1fr) auto;gap:6px}.desktop-tool-page-bar__actions{gap:4px}}
 
 /* Light surfaces need a fine boundary where equal white surfaces meet. Dark
@@ -159,3 +159,8 @@ html:root,html:root body,html:root body *,html:root body *::before,html:root bod
 .desktop-button:is([aria-pressed=true],[aria-selected=true],[aria-current=true],[aria-current=page],[data-desktop-selected=true]){background:var(--desktop-color-surface-selected);color:var(--desktop-color-text)}
 
 .desktop-virtual-list__header{position:sticky;top:0;z-index:2;padding-inline:4px;background:var(--desktop-color-background)}
+.desktop-send-control .desktop-action-glyph{width:16px;height:16px;display:flex;align-items:center;justify-content:center}
+.desktop-send-control[data-composer-state="sending"],.desktop-send-control[data-composer-state="stopping"]{opacity:1}
+.desktop-composer-progress{animation:desktop-composer-spin 1s linear infinite}
+@keyframes desktop-composer-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.desktop-composer-progress{animation:none}}

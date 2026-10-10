@@ -144,3 +144,18 @@ Use native links for URLs and buttons for commands. Preserve disabled, loading a
 ## Workspace composition and long values
 
 Use one horizontal module navigation layer. Promote independent work destinations into that row instead of stacking Tabs. Ordinary sections use spacing, not nested outlined panels. Table cells use the exported Table family in both standalone and embedded surfaces; multi-action records remain static. Long lists compose VirtualList and RecordRow, with Host-owned column geometry. Select values and menu options remain readable, wrapping within constrained columns rather than silently showing ellipses. Use Select size="sm" for compact rows and InlineNotice for compact conditions with independent recovery actions. Each workspace has one vertical scroll owner; the page bar and list header remain outside the growing list viewport.
+
+## Composer send and stop action
+
+Message composers use `ComposerActionButton` in chat, Codex/work, threads, follow-up instructions, agent conversations, mail and comments. The supplied ChatGPT client button captures are the reference for the blue circular up-arrow and filled square. Use one 32px circle in every composer, a 16px up-arrow, a 10px filled square and the shared send foreground/background/hover tokens; the chat client profile must not override size or colors. Preserve keyboard focus and hover/focus tooltips.
+
+| Host state | Glyph | Interaction |
+| --- | --- | --- |
+| ready | Up arrow | Send, disabled when text/attachments are not ready |
+| sending | Progress ring | Disabled while the transport acknowledgement is pending |
+| stoppable | Filled square | Stop the active response when the Host supports cancellation |
+| stopping | Progress ring | Disabled until cancellation is acknowledged |
+
+State is explicit, never inferred from button text or a CSS class. `sendDisabled` only affects Send; an empty next draft cannot disable Stop. Sending must not claim cancellation is possible unless the Host provides it. Disabled/busy controls retain a localized accessible name and tooltip. Enter submits only a ready Send, Shift+Enter/IME remain text input, and Enter in an active response must not stop it. Stop is a pointer/Space command. Hosts own duplicate suppression, operation acknowledgements, failure recovery, draft preservation and correlated usage outcomes. The component owns presentation and action markers only.
+
+A labelled business operation (create, publish a report, apply, run a batch, stop a service) remains a labelled action; use its semantic icon. It is not a message composer simply because its handler submits data. Do not apply the circle to every form submit or Worker lifecycle command. The composer state gallery is `examples/composer-actions.tsx`; `npm run test:composer` covers all states, work/chat profile parity, keyboard behavior, draft preservation, reduced motion, both themes and 125% emulation.
