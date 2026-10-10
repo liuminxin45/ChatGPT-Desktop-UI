@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.4 — rail hover follow-up
+
+- Use the navigation tile palette for icon-rail hover so the rounded target stays visible against the pale shell in light mode.
+- Verify hover entry/exit, tile geometry and selected-state retention in both themes and all three viewport/scale cases.
+
 ## 0.4.4
 
 - Add static RecordRow groups with independent semantic RecordLink and RecordAction targets.

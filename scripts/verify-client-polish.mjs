@@ -18,6 +18,30 @@ try {
             page.on('pageerror', e => errors.push(e.message));
             await page.goto(process.env.DEMO_URL || `http://127.0.0.1:${server.address().port}`);
             await page.getByRole('button', { name: 'Switch mode', exact: true }).waitFor();
+            const rail = page.getByRole('navigation', { name: 'App navigation' });
+            const home = rail.getByRole('button', { name: 'Home', exact: true });
+            const plugins = rail.getByRole('button', { name: 'Plugins', exact: true });
+            await page.mouse.move(width - 20, height - 20);
+            await page.waitForTimeout(200);
+            const selectedColor = await home.evaluate(el => getComputedStyle(el).backgroundColor);
+            assert.equal(await plugins.evaluate(el => getComputedStyle(el).backgroundColor), 'rgba(0, 0, 0, 0)');
+            await plugins.hover();
+            await page.waitForTimeout(200);
+            const railHover = await plugins.evaluate(el => {
+                const button = getComputedStyle(el), shell = getComputedStyle(el.closest('.kit-rail'));
+                return { background: button.backgroundColor, shell: shell.backgroundColor, radius: button.borderRadius,
+                    width: el.getBoundingClientRect().width, height: el.getBoundingClientRect().height };
+            });
+            const rgb = color => color.match(/[\d.]+/g).slice(0, 3).map(Number);
+            assert.ok(Math.max(...rgb(railHover.background).map((value, index) => Math.abs(value - rgb(railHover.shell)[index]))) >= 10,
+                'hovered rail tile visibly differs from the shell in both themes');
+            assert.deepEqual([railHover.width, railHover.height, railHover.radius], [36, 36, '10px']);
+            assert.equal(await home.evaluate(el => getComputedStyle(el).backgroundColor), selectedColor, 'hover leaves the selected tile intact');
+            assert.equal(await home.getAttribute('aria-current'), 'page');
+            await page.screenshot({ path: new URL(`rail-hover-${theme}-${width}.png`, output).pathname.replace(/^\/([A-Za-z]:)/, '$1') });
+            await page.mouse.move(width - 20, height - 20);
+            await page.waitForTimeout(200);
+            assert.equal(await plugins.evaluate(el => getComputedStyle(el).backgroundColor), 'rgba(0, 0, 0, 0)', 'hover fill clears on pointer exit');
             const componentsLink = page.locator('.client-window-actions').getByRole('link', { name: 'Components', exact: true });
             assert.equal(await componentsLink.getAttribute('href'), 'components/');
             await componentsLink.click();

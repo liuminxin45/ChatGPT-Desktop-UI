@@ -45,6 +45,8 @@ These values belong to the versioned client profile, not embedded Tools. Portabl
 
 Remove the selected rail's left stripe. Tooltips sit immediately beside the rail, have a short rounded text surface and no arrow/shortcut line. Preserve keyboard focus independently of hover. The selected tile remains dark enough for white icons in light mode.
 
+Rail hover uses the navigation tile surface and foreground rather than the generic control hover surface, which is too close to the pale shell in light mode. Idle destinations retain outline icons; the selected destination retains its filled icon. Pointer exit clears only the hover fill.
+
 ## Typography
 
 Use `system-ui, sans-serif`, normal weight 400 for body copy and controls. Settings titles, category group headings, section headings and field labels use `--desktop-font-weight-emphasis` (600), following the supplied 2026-10-09 references. Keep emphasis selective. `font-synthesis:none` prevents accidental synthetic bold. Native Tool Hosts continue to enforce their own regular-weight contract.

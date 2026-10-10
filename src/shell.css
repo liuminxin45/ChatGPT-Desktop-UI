@@ -10,6 +10,7 @@
 .kit-rail__items{display:flex;flex:1;min-height:0;flex-direction:column;align-items:center;gap:8px;overflow:auto;scrollbar-width:none}
 .kit-rail__footer{padding-top:8px}
 .kit-rail .kit-rail__item{position:relative;width:32px;height:32px;border-radius:var(--desktop-radius-navigation);color:var(--desktop-color-text-muted)}
+.kit-rail .kit-rail__item:hover:not(:disabled){background:var(--desktop-color-navigation-selected);color:var(--desktop-color-on-navigation-selected)}
 .kit-rail .kit-rail__item[aria-current=page]{background:var(--desktop-color-navigation-selected);color:var(--desktop-color-on-navigation-selected)}
 .kit-unread{position:absolute;width:8px;height:8px;border-radius:50%;top:3px;right:3px;background:var(--desktop-color-unread)}
 .kit-avatar{width:32px;height:32px;display:grid;place-items:center;padding:3px;border:0;border-radius:var(--desktop-radius-navigation);background:transparent;color:var(--desktop-color-text-muted)}
