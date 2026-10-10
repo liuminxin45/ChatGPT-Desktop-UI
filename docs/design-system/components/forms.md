@@ -44,12 +44,22 @@ One text-entry boundary for an input with leading icons or trailing actions.
 | Prop | Required | Type |
 | --- | --- | --- |
 
+## Radio (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/forms/index.tsx)
+
+Native mutually exclusive choice; the Host supplies name, value and grouping labels.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+
 ## Select (chatgpt-desktop-kit)
 
 [Implementation](../../../src/components/forms/index.tsx)
 
 | Prop | Required | Type |
 | --- | --- | --- |
+| size | no | `"sm" \| "md" \| undefined` |
 | actionId | no | `string \| undefined` |
 | featureId | no | `string \| undefined` |
 | surfaceId | no | `string \| undefined` |

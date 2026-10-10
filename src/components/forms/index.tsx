@@ -36,6 +36,14 @@ export function Checkbox({ className, type: _type, ...props }: InputHTMLAttribut
   return <input type="checkbox" className={classes('desktop-checkbox', className)} {...props} />;
 }
 
+/** Native mutually exclusive choice; the Host supplies name, value and grouping labels. */
+export const Radio = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>>(function Radio(
+  { className, type: _type, ...props },
+  ref,
+) {
+  return <input ref={ref} type="radio" className={classes('desktop-radio', className)} {...props} />;
+});
+
 export function Switch({
   className,
   checked = false,
@@ -247,6 +255,8 @@ export interface SelectOption {
 }
 
 export interface SelectProps {
+  /** Compact row controls retain full values, wrapping within their assigned column. */
+  size?: 'sm' | 'md';
   actionId?: string;
   featureId?: string;
   surfaceId?: string;
@@ -270,6 +280,7 @@ export interface SelectProps {
 const EMPTY_SELECT_VALUE = '__desktop_empty_select_value__';
 
 export function Select({
+  size = 'md',
   actionId,
   featureId,
   surfaceId,
@@ -312,7 +323,7 @@ export function Select({
         id={id}
         aria-label={ariaLabel || title}
         aria-labelledby={ariaLabelledBy}
-        className={classes('desktop-select', className)}
+        className={classes('desktop-select', size === 'sm' && 'desktop-select--sm', className)}
       >
         <SelectPrimitive.Value placeholder={placeholder} />
         <SelectPrimitive.Icon className="desktop-select__icon">

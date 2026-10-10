@@ -1,5 +1,12 @@
 import { useState } from 'react';
 import {
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableHeaderCell,
+  TableCell,
+  InlineNotice,
   Button,
   IconButton,
   Input,
@@ -71,6 +78,31 @@ export function Examples({ family }: { family: string }) {
       ]}
     />
   );
+  if (family === 'tables')
+    return (
+      <>
+        <Table density="compact">
+          <TableHead>
+            <TableRow>
+              <TableHeaderCell>Issue</TableHeaderCell>
+              <TableHeaderCell>Classification</TableHeaderCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell>BUG-1024</TableCell>
+              <TableCell>{select}</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+        <InlineNotice
+          tone="warning"
+          title="Classification needs confirmation"
+          description="Review the module before generating a report."
+          actions={<Button actionId="reference.condition.review">Review</Button>}
+        />
+      </>
+    );
   if (family === 'actions')
     return (
       <>

@@ -19,7 +19,7 @@ html,body,#root{width:100%;height:100%;margin:0;overflow:hidden;background:var(-
 .desktop-desktop-surface table{width:100%;border-collapse:collapse;table-layout:fixed}
 .desktop-desktop-surface th,.desktop-desktop-surface td{padding:12px 14px;text-align:left;overflow-wrap:anywhere;border-bottom:1px solid var(--desktop-color-border)}
 .desktop-desktop-surface th{color:var(--desktop-color-text-muted);font-size:var(--desktop-font-size-supporting)}
-.desktop-desktop-surface tbody tr:hover{background:var(--desktop-color-surface-hover)}
+
 .desktop-desktop-surface dl{display:grid;grid-template-columns:180px minmax(0,1fr);gap:12px 24px;margin:24px 0}
 .desktop-desktop-surface dt{color:var(--desktop-color-text-muted)}
 .desktop-desktop-surface dd{margin:0;overflow-wrap:anywhere}

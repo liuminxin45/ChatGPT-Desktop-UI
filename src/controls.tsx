@@ -8,3 +8,4 @@ export * from './components/navigation';
 export * from './components/layout';
 export * from './components/overlays';
 export * from './components/feedback';
+export * from './components/tables';

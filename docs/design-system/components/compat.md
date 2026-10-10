@@ -660,6 +660,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 | Prop | Required | Type |
 | --- | --- | --- |
+| align | no | `"center" \| "start" \| "end" \| undefined` |
 | asChild | no | `boolean \| undefined` |
 | onEscapeKeyDown | no | `((event: KeyboardEvent) => void) \| undefined` |
 | onPointerDownOutside | no | `((event: CustomEvent<{ originalEvent: PointerEvent; }>) => void) \| undefined` |
@@ -667,15 +668,14 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | onInteractOutside | no | `((event: CustomEvent<{ originalEvent: PointerEvent; }> \| CustomEvent<{ originalEvent: FocusEvent; }>) => void) \| undefined` |
 | onCloseAutoFocus | no | `((event: Event) => void) \| undefined` |
 | forceMount | no | `true \| undefined` |
-| align | no | `"center" \| "start" \| "end" \| undefined` |
 | loop | no | `boolean \| undefined` |
-| side | no | `"right" \| "bottom" \| "top" \| "left" \| undefined` |
+| side | no | `"left" \| "right" \| "top" \| "bottom" \| undefined` |
 | sideOffset | no | `number \| undefined` |
 | alignOffset | no | `number \| undefined` |
 | arrowPadding | no | `number \| undefined` |
 | avoidCollisions | no | `boolean \| undefined` |
 | collisionBoundary | no | `(Element \| null) \| (Element \| null)[] \| undefined` |
-| collisionPadding | no | `number \| Partial<Record<"right" \| "bottom" \| "top" \| "left", number>> \| undefined` |
+| collisionPadding | no | `number \| Partial<Record<"left" \| "right" \| "top" \| "bottom", number>> \| undefined` |
 | sticky | no | `"partial" \| "always" \| undefined` |
 | hideWhenDetached | no | `boolean \| undefined` |
 | updatePositionStrategy | no | `"always" \| "optimized" \| undefined` |
@@ -787,7 +787,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | arrowPadding | no | `number \| undefined` |
 | avoidCollisions | no | `boolean \| undefined` |
 | collisionBoundary | no | `(Element \| null) \| (Element \| null)[] \| undefined` |
-| collisionPadding | no | `number \| Partial<Record<"right" \| "bottom" \| "top" \| "left", number>> \| undefined` |
+| collisionPadding | no | `number \| Partial<Record<"left" \| "right" \| "top" \| "bottom", number>> \| undefined` |
 | sticky | no | `"partial" \| "always" \| undefined` |
 | hideWhenDetached | no | `boolean \| undefined` |
 | updatePositionStrategy | no | `"always" \| "optimized" \| undefined` |
@@ -823,7 +823,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | iconOnly | no | `boolean \| undefined` |
 | badge | no | `React.ReactNode` |
 | asChild | no | `boolean \| undefined` |
-| tone | no | `"primary" \| "neutral" \| "warning" \| null \| undefined` |
+| tone | no | `"primary" \| "warning" \| "neutral" \| null \| undefined` |
 
 ## GlassPage (chatgpt-desktop-kit/compat/glass)
 
@@ -913,6 +913,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 | Prop | Required | Type |
 | --- | --- | --- |
+| align | no | `"center" \| "start" \| "end" \| undefined` |
 | asChild | no | `boolean \| undefined` |
 | onEscapeKeyDown | no | `((event: KeyboardEvent) => void) \| undefined` |
 | onPointerDownOutside | no | `((event: CustomEvent<{ originalEvent: PointerEvent; }>) => void) \| undefined` |
@@ -921,14 +922,13 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | onOpenAutoFocus | no | `((event: Event) => void) \| undefined` |
 | onCloseAutoFocus | no | `((event: Event) => void) \| undefined` |
 | forceMount | no | `true \| undefined` |
-| align | no | `"center" \| "start" \| "end" \| undefined` |
-| side | no | `"right" \| "bottom" \| "top" \| "left" \| undefined` |
+| side | no | `"left" \| "right" \| "top" \| "bottom" \| undefined` |
 | sideOffset | no | `number \| undefined` |
 | alignOffset | no | `number \| undefined` |
 | arrowPadding | no | `number \| undefined` |
 | avoidCollisions | no | `boolean \| undefined` |
 | collisionBoundary | no | `(Element \| null) \| (Element \| null)[] \| undefined` |
-| collisionPadding | no | `number \| Partial<Record<"right" \| "bottom" \| "top" \| "left", number>> \| undefined` |
+| collisionPadding | no | `number \| Partial<Record<"left" \| "right" \| "top" \| "bottom", number>> \| undefined` |
 | sticky | no | `"partial" \| "always" \| undefined` |
 | hideWhenDetached | no | `boolean \| undefined` |
 | updatePositionStrategy | no | `"always" \| "optimized" \| undefined` |
@@ -993,18 +993,18 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 | Prop | Required | Type |
 | --- | --- | --- |
+| align | no | `"center" \| "start" \| "end" \| undefined` |
 | asChild | no | `boolean \| undefined` |
 | onEscapeKeyDown | no | `((event: KeyboardEvent) => void) \| undefined` |
 | onPointerDownOutside | no | `((event: CustomEvent<{ originalEvent: PointerEvent; }>) => void) \| undefined` |
 | onCloseAutoFocus | no | `((event: Event) => void) \| undefined` |
-| align | no | `"center" \| "start" \| "end" \| undefined` |
-| side | no | `"right" \| "bottom" \| "top" \| "left" \| undefined` |
+| side | no | `"left" \| "right" \| "top" \| "bottom" \| undefined` |
 | sideOffset | no | `number \| undefined` |
 | alignOffset | no | `number \| undefined` |
 | arrowPadding | no | `number \| undefined` |
 | avoidCollisions | no | `boolean \| undefined` |
 | collisionBoundary | no | `(Element \| null) \| (Element \| null)[] \| undefined` |
-| collisionPadding | no | `number \| Partial<Record<"right" \| "bottom" \| "top" \| "left", number>> \| undefined` |
+| collisionPadding | no | `number \| Partial<Record<"left" \| "right" \| "top" \| "bottom", number>> \| undefined` |
 | sticky | no | `"partial" \| "always" \| undefined` |
 | hideWhenDetached | no | `boolean \| undefined` |
 | updatePositionStrategy | no | `"always" \| "optimized" \| undefined` |

@@ -28,6 +28,20 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | description | yes | `ReactNode` |
 | action | no | `ReactNode` |
 
+## InlineNotice (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/feedback/index.tsx)
+
+A compact inline condition with static content and separately operable recovery actions.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| tone | no | `"danger" \| "info" \| "warning" \| undefined` |
+| title | yes | `ReactNode` |
+| description | no | `ReactNode` |
+| actions | no | `ReactNode` |
+| className | no | `string \| undefined` |
+
 ## LoadingSkeleton (chatgpt-desktop-kit)
 
 [Implementation](../../../src/components/feedback/index.tsx)

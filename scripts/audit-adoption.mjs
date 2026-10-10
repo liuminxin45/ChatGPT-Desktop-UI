@@ -4,8 +4,20 @@ import ts from 'typescript';
 import { fileURLToPath } from 'node:url';
 import { createCatalog, root } from './component-catalog.mjs';
 import { checkConsumer } from './check-consumer.mjs';
+import { auditControls } from './audit-controls.mjs';
 
-const sourceRoots = ['src', 'app', 'components', 'hooks', 'lib', 'tools', 'packages', 'examples'];
+const sourceRoots = [
+  'src',
+  'app',
+  'pages',
+  'components',
+  'hooks',
+  'lib',
+  'tools',
+  'packages',
+  'styles',
+  'examples',
+];
 const excluded = /^(?:node_modules|artifacts|build|dist|release|\.next|\.git|coverage|output|__fixtures__)$/;
 function filesIn(directory) {
   const files = [];
@@ -14,7 +26,7 @@ function filesIn(directory) {
     const file = path.join(directory, entry.name);
     if (entry.isSymbolicLink()) continue;
     if (entry.isDirectory() && !excluded.test(entry.name)) files.push(...filesIn(file));
-    else if (entry.isFile() && /\.(?:tsx?|jsx?)$/.test(entry.name) && !entry.name.endsWith('.d.ts'))
+    else if (entry.isFile() && /\.(?:tsx?|jsx?|css)$/.test(entry.name) && !entry.name.endsWith('.d.ts'))
       files.push(file);
   }
   return files;
@@ -62,6 +74,7 @@ export function auditAdoption(directories, { integration = true } = {}) {
     let importedComponents = 0;
     const inputs = sourceRoots.flatMap((folder) => filesIn(path.join(directory, folder)));
     for (const file of inputs) {
+      if (file.endsWith('.css')) continue;
       const tree = ts.createSourceFile(
         file,
         fs.readFileSync(file, 'utf8'),
@@ -100,6 +113,7 @@ export function auditAdoption(directories, { integration = true } = {}) {
       sourceFiles: inputs.length,
       componentImports: importedComponents,
       integration: integrationResult,
+      controls: directory === root ? undefined : auditControls(directory, inputs),
     });
   }
   // Alias exports share implementation and adoption evidence; do not count aliases as dead controls.
