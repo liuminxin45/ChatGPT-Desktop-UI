@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.4
+
+- Add static RecordRow groups with independent semantic RecordLink and RecordAction targets.
+- Define interaction ownership for records, settings, navigation and selection; preserve keyboard feedback and discoverable commands.
+- Validate independent clicks and blank-space behavior in both themes and three supported viewport/scale cases.
+- Align current library release metadata with the existing observed client reference.
+
 ## 0.4.1
 
 - Add a direct Components entry to the client title bar.
