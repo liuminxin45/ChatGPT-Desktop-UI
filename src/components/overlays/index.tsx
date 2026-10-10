@@ -13,12 +13,15 @@ export function MenuButton({
   surfaceId,
   toolId,
   items,
+  onOpenChange,
 }: {
   label?: string;
   actionId: string;
   featureId?: string;
   surfaceId?: string;
   toolId?: string;
+  /** Host observes user opening/dismissal without moving action ownership. */
+  onOpenChange?(open: boolean): void;
   items: Array<{ label: ReactNode; actionId: string; disabled?: boolean; onSelect(): void }>;
 }) {
   const translate = useTranslation();
@@ -28,7 +31,13 @@ export function MenuButton({
     if (!visible) setOpen(false);
   }, [visible]);
   return (
-    <DropdownMenuPrimitive.Root open={open && visible} onOpenChange={setOpen}>
+    <DropdownMenuPrimitive.Root
+      open={open && visible}
+      onOpenChange={(next) => {
+        setOpen(next);
+        onOpenChange?.(next);
+      }}
+    >
       <DropdownMenuPrimitive.Trigger
         asChild
         onPointerDown={(event) => event.preventDefault()}
@@ -38,7 +47,10 @@ export function MenuButton({
             event.currentTarget.click();
           }
         }}
-        onClick={() => setOpen((value) => !value)}
+        onClick={() => {
+          setOpen(!open);
+          onOpenChange?.(!open);
+        }}
       >
         <Button size="sm" variant="ghost" actionId={actionId}>
           {label ?? translate('更多')}

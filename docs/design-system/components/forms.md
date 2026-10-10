@@ -84,3 +84,4 @@ One text-entry boundary for an input with leading icons or trailing actions.
 
 | Prop | Required | Type |
 | --- | --- | --- |
+| autoSize | no | `boolean \| undefined` |

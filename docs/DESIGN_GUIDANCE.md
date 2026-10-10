@@ -1,5 +1,9 @@
 # Design guidance for a faithful adaptation
 
+Audit the work sequence and action meaning before changing glyphs. Inventory every route, dialog, menu and nested detail across coordinated clients. For each, record primary/secondary actions, scrolling, icon semantics, useful text, fixes and observed states. Distinguish source review from rendered acceptance; inaccessible states remain open. A passing source audit cannot establish visual quality.
+
+Prefer a familiar icon for contextual auxiliary actions, a short caption for workflow/confirmation actions, and both only when the glyph adds meaning or status. Remove repeated titles and instructions, not necessary names or consequences. Start with shared components and document the same rules in the maintained Skill before migrating consumers.
+
 Start with the existing product. Inventory each visible route, toolbar, form, dialog, menu, empty/error/loading state and long list. Mark repeated basic controls and inconsistent container widths before coding. A token change alone cannot remove a duplicate header or repair a fixed-height list.
 
 Read the reference images as relationships: the window is a lighter shell around a darker canvas; contextual lists form a quiet side surface; controls gain edges on hover; floating menus are compact and rounded; the selected rail icon changes shape as well as color. The calm comes from consistent geometry and restrained text, not from deleting everything.

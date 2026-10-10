@@ -26,6 +26,8 @@ Embedded Tools inherit Host styles and typography. They must not mount another t
 
 ## Icon actions
 
+Use shared semantic action exports for attachment/delete/edit/refresh/link/source/save/complete. Auxiliary contextual actions may be icon-only; save, complete, apply, recording and confirmations keep short visible labels. Do not add redundant icons to all text actions. `Textarea.autoSize` is opt-in and shares measurement across portable and compatibility controls; its surrounding body owns scrolling. Existing inputs remain unchanged.
+
 Pass the action glyph as `icon` to either Button entry and keep its translated label in `children`. Labels remain visible by default. Menus, view/filter choices, primary workflow actions, confirmation/destructive actions and business-specific operations need visible names; an icon alone is insufficient.
 
 Opt in to `iconOnly` for familiar, compact toolbar/row controls such as close, remove, search, refresh and message hover actions. The compatibility Button's `size="icon"` also opts in. These controls show their names on hover/focus, including busy and disabled states. Existing `title` values become shared tooltips; a surrounding Tooltip suppresses duplicate hints. Preserve counts, state, record names and selected values.

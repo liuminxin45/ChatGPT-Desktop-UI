@@ -46,6 +46,7 @@
 /* Shared boundary-free controls: application adapters and Native Tools use the same classes. */
 .desktop-button--secondary{background:transparent}
 .desktop-input:hover:not(:disabled),.desktop-textarea:hover:not(:disabled){background:var(--desktop-color-surface-hover)}
+.desktop-textarea--auto{overflow-y:hidden;resize:none}
 .desktop-input:focus,.desktop-textarea:focus{box-shadow:var(--desktop-input-focus-ring)}
 .desktop-menu-content,.desktop-menu{z-index:1200;min-width:160px;max-height:var(--radix-dropdown-menu-content-available-height,80vh);overflow:auto;border:0;border-radius:var(--desktop-radius-overlay);background:var(--desktop-color-surface-overlay);padding:6px;color:var(--desktop-color-text);font-family:var(--desktop-font-sans);font-size:var(--desktop-font-size-body);font-weight:var(--desktop-font-weight-regular);box-shadow:var(--desktop-shadow-overlay)}
 .desktop-menu-item{position:relative;display:flex;min-height:30px;align-items:center;gap:8px;border:0;border-radius:var(--desktop-radius-control);color:var(--desktop-color-text);font-size:var(--desktop-font-size-body);outline:none;cursor:default}

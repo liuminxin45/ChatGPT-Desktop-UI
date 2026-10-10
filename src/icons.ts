@@ -1,4 +1,12 @@
 export {
+  Paperclip as AttachmentIcon,
+  Trash2 as DeleteIcon,
+  Pencil as EditIcon,
+  RefreshCw as RefreshIcon,
+  Link as LinkIcon,
+  ExternalLink as SourceIcon,
+  Save as SaveIcon,
+  CircleCheck as CompleteIcon,
   TerminalSquare as AssistantIcon,
   ArrowUp as SendIcon,
   Bug as BugIcon,

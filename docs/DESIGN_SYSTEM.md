@@ -1,5 +1,15 @@
 # Desktop design system
 
+## Action meaning and reading order
+
+Organize around the current work: understand the object, perform its actions, record progress, then adjust secondary properties. Use one primary action at a time. Keep the title once, actions beside their objects, and dangerous actions apart from routine completion. A detail editor has one main scroll owner; long summaries and action text wrap instead of disappearing inside short fields. Use `Textarea autoSize` when the surrounding document should scroll.
+
+Use icon-only controls for familiar contextual actions: attachment, edit, delete entry, refresh and source. Keep short visible labels for save, complete, apply, process recording, menu items and destructive confirmations. Add both glyph and caption only when the glyph contributes meaning or live state, such as an assistant handoff or busy indicator. Do not decorate every label.
+
+Use the exported `AttachmentIcon` (paperclip), `DeleteIcon` (trash), `EditIcon` (pencil), `RefreshIcon`, `LinkIcon`, `SourceIcon` (external link), `SaveIcon` (disk) and `CompleteIcon` (circle check). Plus means creation; never use it for attachments. X means close/cancel/remove from an unsaved selection, not permanent deletion. A check means completion, not saving. Navigation has its existing outline/fill vocabulary.
+
+Icon-only actions require a localized accessible name and hover/focus tooltip, including disabled and busy states. Preserve field labels, selected values, user content and useful errors. Common actions stay visible; low-frequency actions may enter a labelled menu. Never infer icon meaning or presentation from label text at runtime.
+
 This specification combines measured screenshot patterns with an existing desktop implementation. Values below are implementation targets, not a claim that every ChatGPT version has the same pixels. Use the synthetic gallery examples and inspect the target viewport before tuning.
 
 ## Color is the boundary

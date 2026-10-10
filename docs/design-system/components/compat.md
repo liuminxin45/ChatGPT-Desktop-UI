@@ -1137,6 +1137,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 | Prop | Required | Type |
 | --- | --- | --- |
+| autoSize | no | `boolean \| undefined` |
 
 ## Tooltip (chatgpt-desktop-kit/compat/tooltip)
 

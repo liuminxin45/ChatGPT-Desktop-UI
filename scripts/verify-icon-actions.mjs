@@ -28,6 +28,21 @@ try {
     const page = await context.newPage(), errors=[];
     page.on('pageerror',e=>errors.push(e.message));
     await page.goto(`http://127.0.0.1:${server.address().port}`);
+    const note = page.getByRole('textbox', { name: 'Growing note' });
+    const initialHeight = (await note.boundingBox()).height;
+    await note.fill(Array.from({length:20}, () => 'A long action with readable wrapping.').join('\n'));
+    assert.ok((await note.boundingBox()).height > initialHeight * 3);
+    assert.ok(await note.evaluate(e => e.scrollHeight <= e.clientHeight + 1));
+    await note.fill('Short');
+    assert.ok((await note.boundingBox()).height <= initialHeight + 1);
+    await page.getByRole('button', {name:'Attach file',exact:true}).focus();
+    await page.getByRole('tooltip', {name:'Attach file',exact:true}).waitFor();
+    await page.getByRole('button', {name:'Mark complete',exact:true}).waitFor();
+    await page.getByRole('button', {name:'Collection actions',exact:true}).click();
+    assert.equal(await page.locator('body').getAttribute('data-collection-open'), 'true');
+    await page.getByRole('menuitem', {name:'Full collection',exact:true}).waitFor();
+    await page.keyboard.press('Escape');
+    assert.equal(await page.locator('body').getAttribute('data-collection-open'), 'false');
     for (const name of ['Confirm and submit', 'AI review', '3 replies', 'Tasks', 'Forward']) {
       const button = page.getByRole('button', {name, exact:true});
       assert.equal(await button.textContent(), name);

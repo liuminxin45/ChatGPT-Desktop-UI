@@ -21765,6 +21765,13 @@
           "description": ""
         },
         {
+          "name": "onOpenChange",
+          "required": false,
+          "type": "((open: boolean) => void) | undefined",
+          "native": false,
+          "description": "Host observes user opening/dismissal without moving action ownership."
+        },
+        {
           "name": "items",
           "required": true,
           "type": "{ label: ReactNode; actionId: string; disabled?: boolean; onSelect(): void; }[]",
@@ -24169,7 +24176,15 @@
       "family": "forms",
       "implementation": "src/components/forms/index.tsx",
       "description": "",
-      "props": [],
+      "props": [
+        {
+          "name": "autoSize",
+          "required": false,
+          "type": "boolean | undefined",
+          "native": false,
+          "description": "Grow with content and width changes; the surrounding document owns scrolling."
+        }
+      ],
       "nativeProps": [
         "84386890644e2815",
         "c28ee4dba18bde5c",
@@ -52140,7 +52155,15 @@
       "family": "compat",
       "implementation": "src/compat/textarea.tsx",
       "description": "",
-      "props": [],
+      "props": [
+        {
+          "name": "autoSize",
+          "required": false,
+          "type": "boolean | undefined",
+          "native": false,
+          "description": "Grow with content and width changes; the surrounding document owns scrolling."
+        }
+      ],
       "nativeProps": [
         "f9972e9877703c72",
         "e778995f821af16a",

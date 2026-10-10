@@ -5,7 +5,7 @@ import { Textarea as NativeTextarea } from '../components/forms';
 
 const Textarea = React.forwardRef<
   HTMLTextAreaElement,
-  React.ComponentProps<"textarea">
+  React.ComponentProps<typeof NativeTextarea>
 >(({ className, ...props }, ref) => (
   <NativeTextarea
     ref={ref}

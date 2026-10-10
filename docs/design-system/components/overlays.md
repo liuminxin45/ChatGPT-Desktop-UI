@@ -34,4 +34,5 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | featureId | no | `string \| undefined` |
 | surfaceId | no | `string \| undefined` |
 | toolId | no | `string \| undefined` |
+| onOpenChange | no | `((open: boolean) => void) \| undefined` |
 | items | yes | `{ label: ReactNode; actionId: string; disabled?: boolean; onSelect(): void; }[]` |

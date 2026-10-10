@@ -192,11 +192,53 @@ export function EditableCombobox({
   );
 }
 
-export const Textarea = forwardRef<HTMLTextAreaElement, TextareaHTMLAttributes<HTMLTextAreaElement>>(
-  function Textarea({ className, ...props }, ref) {
-    return <textarea ref={ref} className={classes('desktop-textarea', className)} {...props} />;
-  },
-);
+export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  /** Grow with content and width changes; the surrounding document owns scrolling. */
+  autoSize?: boolean;
+}
+
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function Textarea(
+  { className, autoSize = false, onInput, ...props },
+  ref,
+) {
+  const element = useRef<HTMLTextAreaElement | null>(null);
+  const resize = () => {
+    const node = element.current;
+    if (!autoSize || !node || !node.clientWidth) return;
+    node.style.height = 'auto';
+    const border = node.offsetHeight - node.clientHeight;
+    node.style.height = `${node.scrollHeight + border}px`;
+  };
+  useEffect(() => {
+    resize();
+    if (!autoSize || !element.current) return;
+    let width = element.current.clientWidth;
+    const observer = new ResizeObserver(() => {
+      if (element.current?.clientWidth !== width) {
+        width = element.current?.clientWidth ?? 0;
+        resize();
+      }
+    });
+    observer.observe(element.current);
+    return () => observer.disconnect();
+  }, [autoSize]);
+  useEffect(resize, [autoSize, props.value, props.defaultValue, props.rows]);
+  return (
+    <textarea
+      ref={(node) => {
+        element.current = node;
+        if (typeof ref === 'function') ref(node);
+        else if (ref) ref.current = node;
+      }}
+      className={classes('desktop-textarea', autoSize && 'desktop-textarea--auto', className)}
+      {...props}
+      onInput={(event) => {
+        resize();
+        onInput?.(event);
+      }}
+    />
+  );
+});
 
 export interface SelectOption {
   value: string;
