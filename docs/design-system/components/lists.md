@@ -15,6 +15,15 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | Prop | Required | Type |
 | --- | --- | --- |
 
+## ListStack (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/lists/index.tsx)
+
+Spaced rows for short lists; compose inside InternalScrollArea when scrolling is needed.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+
 ## VirtualList (chatgpt-desktop-kit)
 
 [Implementation](../../../src/components/lists/index.tsx)

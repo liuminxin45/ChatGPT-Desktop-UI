@@ -95,6 +95,7 @@ Text controls use a 20px line box with descender clearance; never clip a selecte
 | Settings | `SettingsNavigation`, `SettingsPage`, `SettingsSection`, `SettingRow` |
 | Dialog/state | `Dialog`, `EmptyState`, `ErrorState`, `LoadingSkeleton` |
 | Internal scroll/list | `InternalScrollArea`, `VirtualList`, `FixedVirtualList` |
+| Short list flow | `ListStack` |
 | Plain workspace | `WorkbenchPage`, `PageBar`, `PageToolbar` |
 
 Select/Menu portals inherit tokens and close predictably. Pointer dismissal or selection returns DOM focus without adding an outer trigger ring. `InputBehaviorRoot` tracks input modality at the document boundary so portal controls follow the same rule; keyboard navigation retains a visible focus indicator, including the first Tab from the document body. Do not blur restored triggers or remove keyboard indicators to imitate pointer behavior. Dialog supports Escape, backdrop close, focus containment and return to trigger; the consumer intercepts `onClose` to protect drafts. Default `Button` is secondary and `type=button`; explicitly opt into primary and form submit.

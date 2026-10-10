@@ -126,3 +126,11 @@ html:root,html:root body,html:root body *,html:root body *::before,html:root bod
 .desktop-menu-item{transition:background-color var(--desktop-motion-fast),color var(--desktop-motion-fast)}
 .desktop-select-item,.desktop-tabs button{transition:background-color var(--desktop-motion-fast),color var(--desktop-motion-fast),border-color var(--desktop-motion-fast)}
 .desktop-tool-page-bar__navigation{display:flex;align-items:center}.desktop-tool-page-bar__navigation>.desktop-tabs{align-self:stretch}
+.desktop-tabs{gap:4px;padding-block:4px}.desktop-tabs button{border-radius:var(--desktop-radius-control)}
+.desktop-tool-page-bar__navigation :is(.desktop-tabs,.desktop-tabs button){height:auto;min-height:0}
+.desktop-tool-page-bar__navigation .desktop-tabs{min-height:var(--desktop-size-page-bar);box-sizing:border-box}
+.desktop-tool-page-bar__navigation .desktop-tabs button{min-height:calc(var(--desktop-size-page-bar) - 8px);padding-block:6px}
+.desktop-fixed-virtual-list{min-height:0;flex:1}
+.desktop-list-stack{display:flex;min-width:0;flex-direction:column;gap:4px;padding:2px 4px}
+.desktop-menu-item,.desktop-select-item{margin-block:0 4px}
+.desktop-menu-item:last-child,.desktop-select-item:last-child{margin-bottom:0}

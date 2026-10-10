@@ -53,5 +53,6 @@
 .kit-settings-group{font-size:var(--desktop-font-size-supporting);font-weight:var(--desktop-font-weight-emphasis);color:var(--desktop-color-text-muted);margin:22px 6px 8px}.kit-settings-group:first-child{margin-top:8px}
 .kit-settings-section__rows{background:var(--desktop-color-surface)}.kit-setting-row+.kit-setting-row{border-top-color:var(--desktop-color-border)}
 .kit-titlebar__menu,.kit-avatar,.kit-category{transition:background-color var(--desktop-motion-fast),color var(--desktop-motion-fast)}
+.kit-category{margin-block:0 4px}
 .kit-shell__navigation:not([hidden]),.kit-sidebar:not([hidden]){animation:kit-surface-in var(--desktop-motion-fast) ease-out}.kit-shell__main{transition:background-color var(--desktop-motion-fast)}
 @keyframes kit-surface-in{from{opacity:0;transform:translateX(-4px)}to{opacity:1;transform:translateX(0)}}

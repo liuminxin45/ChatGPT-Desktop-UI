@@ -1,6 +1,6 @@
 {
   "name": "chatgpt-desktop-kit",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Reusable neutral desktop UI primitives, shell patterns, visual references and an agent skill.",
   "license": "MIT",
   "type": "module",
@@ -69,6 +69,7 @@
     "test:polish": "node scripts/verify-client-polish.mjs",
     "test": "node scripts/verify.mjs",
     "test:input": "node scripts/verify-input.mjs",
+    "test:list-spacing": "node scripts/verify-list-spacing.mjs",
     "test:icons": "node scripts/verify-icon-actions.mjs",
     "test:namespace": "node scripts/verify-namespace.mjs",
     "skill:package": "node scripts/package-skill.mjs",
@@ -88,7 +89,7 @@
     "test:reference": "node scripts/verify-reference.mjs",
     "format:check": "prettier --check src/components examples/catalog \"scripts/{component-catalog,audit-adoption,check-library,build-catalog,build-site,verify-reference}.mjs\"",
     "check": "npm run typecheck && npm run build:library && npm run docs:check && npm run check:library && npm run format:check && npm run test:namespace && npm run test:integration",
-    "ci": "npm run check && npm run site:build && npm run test:reference && npm test && npm run test:demo && npm run test:polish && npm run test:input && npm run test:icons && npm run skill:package && npm run skill:check && npm run audit:public"
+    "ci": "npm run check && npm run site:build && npm run test:reference && npm test && npm run test:demo && npm run test:polish && npm run test:input && npm run test:list-spacing && npm run test:icons && npm run skill:package && npm run skill:check && npm run audit:public"
   },
   "peerDependencies": {
     "react": "^18.3.1",

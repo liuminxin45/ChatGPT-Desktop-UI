@@ -1,4 +1,10 @@
-import { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode, type UIEvent } from "react";
+import { useEffect, useImperativeHandle, useMemo, useRef, useState, type CSSProperties, type ReactNode, type Ref, type UIEvent } from "react";
+import { listRowGap, listRowInset } from './list-geometry';
+
+export interface FixedVirtualListHandle {
+  /** Scroll using the managed content height and row gap, including offscreen rows. */
+  scrollToIndex(index: number): void;
+}
 
 export interface FixedVirtualListProps<T> {
   items: readonly T[];
@@ -10,6 +16,7 @@ export interface FixedVirtualListProps<T> {
   overscan?: number;
   resetKey?: unknown;
   style?: CSSProperties;
+  apiRef?: Ref<FixedVirtualListHandle>;
 }
 
 /** Dependency-free virtual list for isolated Tool UIs with fixed-height rows. */
@@ -23,10 +30,20 @@ export function FixedVirtualList<T>({
   overscan = 6,
   resetKey,
   style,
+  apiRef,
 }: FixedVirtualListProps<T>) {
   const viewportRef = useRef<HTMLDivElement>(null);
   const [scrollTop, setScrollTop] = useState(0);
   const [viewportHeight, setViewportHeight] = useState(0);
+  const stride = rowHeight + listRowGap;
+  useImperativeHandle(apiRef, () => ({
+    scrollToIndex(index) {
+      if (!Number.isFinite(index) || !items.length) return;
+      const top = Math.max(0, Math.min(items.length - 1, Math.trunc(index))) * stride + listRowGap / 2;
+      viewportRef.current?.scrollTo({ top });
+      setScrollTop(viewportRef.current?.scrollTop || 0);
+    },
+  }), [items.length, stride]);
 
   useEffect(() => {
     const viewport = viewportRef.current;
@@ -44,10 +61,10 @@ export function FixedVirtualList<T>({
   }, [resetKey]);
 
   const range = useMemo(() => {
-    const start = Math.max(0, Math.floor(scrollTop / rowHeight) - overscan);
-    const visibleCount = Math.ceil(viewportHeight / rowHeight) + overscan * 2;
+    const start = Math.max(0, Math.floor(scrollTop / stride) - overscan);
+    const visibleCount = Math.ceil(viewportHeight / stride) + overscan * 2;
     return { start, end: Math.min(items.length, start + visibleCount) };
-  }, [items.length, overscan, rowHeight, scrollTop, viewportHeight]);
+  }, [items.length, overscan, stride, scrollTop, viewportHeight]);
 
   useEffect(() => {
     const element = viewportRef.current;
@@ -55,26 +72,26 @@ export function FixedVirtualList<T>({
       const detail = (event as CustomEvent<{ key: string; offset: number; top: number; handled: boolean }>).detail;
       if (!element || !items.length) return;
       const index = items.findIndex((item, i) => String(getItemKey(item, i)) === detail.key);
-      const top = Math.max(0, index >= 0 ? index * rowHeight + detail.offset : detail.top);
+      const top = Math.max(0, index >= 0 ? index * stride + listRowGap / 2 + detail.offset : detail.top);
       element.scrollTop = top; setScrollTop(element.scrollTop); detail.handled = true;
     };
     element?.addEventListener('desktop:restore-list-anchor', restore);
     return () => element?.removeEventListener('desktop:restore-list-anchor', restore);
-  }, [items, getItemKey, rowHeight]);
+  }, [items, getItemKey, stride]);
 
   const handleScroll = (event: UIEvent<HTMLDivElement>) => setScrollTop(event.currentTarget.scrollTop);
 
   return (
     <div
       ref={viewportRef}
-      className={className}
-      style={{ overflowY: "auto", scrollbarGutter: "stable", ...style }}
+      className={['desktop-internal-scroll', 'desktop-fixed-virtual-list', className].filter(Boolean).join(' ')}
+      style={style}
       role="list"
       tabIndex={0}
       aria-label={ariaLabel}
       onScroll={handleScroll}
     >
-      <div style={{ height: items.length * rowHeight, position: "relative" }}>
+      <div style={{ height: items.length * stride, position: "relative" }}>
         {items.slice(range.start, range.end).map((item, offset) => {
           const index = range.start + offset;
           return (
@@ -82,7 +99,7 @@ export function FixedVirtualList<T>({
               key={getItemKey(item, index)}
               data-desktop-item-key={String(getItemKey(item, index))}
               role="listitem"
-              style={{ height: rowHeight, left: 0, position: "absolute", right: 0, top: index * rowHeight }}
+              style={{ height: rowHeight, left: listRowInset, position: "absolute", right: listRowInset, top: index * stride + listRowGap / 2 }}
             >
               {renderItem(item, index)}
             </div>

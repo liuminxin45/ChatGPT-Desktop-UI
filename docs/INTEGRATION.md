@@ -56,6 +56,10 @@ Log bounded diagnostic metadata, stages and correlation IDs only. Exclude inputs
 
 ## Verification scope
 
+VirtualList and FixedVirtualList provide a 4px gap and side inset by default. Fixed rowHeight is the content height; the library includes the gap in total height, visible ranges and restored anchors. Do not add business item margins or duplicate wrapper padding. Use ListStack for short flow lists inside InternalScrollArea. Tabs and menu/select options retain visible space between fills and their container edges; do not force tab targets to the full page-bar height.
+
+FixedVirtualList accepts an apiRef with scrollToIndex(index). Keyboard navigation must use that method instead of multiplying an index by rowHeight in the Host; the managed stride also includes spacing. Existing stable item keys and anchor restoration remain authoritative across prepend/reorder operations.
+
 The gallery checks React interaction and computed geometry. Client probes verify real consumer imports, retained state and Electron adapters with isolated data. Browser `deviceScaleFactor` cases simulate scaling; native Windows controls and production service authentication require separate Host validation.
 
 ## Text input confirmation

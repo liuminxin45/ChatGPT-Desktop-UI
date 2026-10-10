@@ -8,8 +8,17 @@ import {
   type ReactNode,
 } from 'react';
 import { classes } from '../classes';
+import { listRowGap, listRowInset } from '../../list-geometry';
 
 export const internalScrollAreaClassName = 'desktop-internal-scroll';
+
+/** Spaced rows for short lists; compose inside InternalScrollArea when scrolling is needed. */
+export const ListStack = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(function ListStack(
+  { className, ...props },
+  ref,
+) {
+  return <div ref={ref} className={classes('desktop-list-stack', className)} {...props} />;
+});
 
 export const InternalScrollArea = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   function InternalScrollArea({ className, ...props }, ref) {
@@ -60,6 +69,9 @@ export function VirtualList<T>({
           : 48;
     },
     overscan,
+    gap: listRowGap,
+    paddingStart: listRowGap / 2,
+    paddingEnd: listRowGap / 2,
     getItemKey: (index) => (items[index] ? getItemKey(items[index], index) : index),
   });
   useEffect(() => {
@@ -107,7 +119,7 @@ export function VirtualList<T>({
                 'desktop-virtual-list__item',
                 typeof itemClassName === 'function' ? itemClassName(item, row.index) : itemClassName,
               )}
-              style={{ transform: `translateY(${row.start}px)` }}
+              style={{ transform: `translateY(${row.start}px)`, paddingInline: listRowInset }}
             >
               {renderItem(item, row.index)}
             </div>

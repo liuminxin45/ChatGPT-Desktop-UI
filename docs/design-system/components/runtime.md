@@ -58,6 +58,7 @@ Dependency-free virtual list for isolated Tool UIs with fixed-height rows.
 | overscan | no | `number \| undefined` |
 | resetKey | no | `unknown` |
 | style | no | `CSSProperties \| undefined` |
+| apiRef | no | `Ref<FixedVirtualListHandle> \| undefined` |
 
 ## InputBehaviorRoot (chatgpt-desktop-kit)
 
