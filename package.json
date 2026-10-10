@@ -82,7 +82,7 @@
     "prepare": "npm run build:library",
     "build:library": "node scripts/build.mjs --library-only",
     "audit:public": "node scripts/audit-public.mjs",
-    "test:integration": "node --test tests/integration-check.test.mjs",
+    "test:integration": "node --test tests/integration-check.test.mjs tests/adoption-audit.test.mjs",
     "test:public-install": "node scripts/verify-public-install.mjs",
     "docs:generate": "node scripts/component-catalog.mjs",
     "docs:check": "node scripts/component-catalog.mjs --check",

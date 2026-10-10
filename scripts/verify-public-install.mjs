@@ -19,7 +19,7 @@ try {
     'chatgpt-desktop-kit': `git+https://github.com/liuminxin45/ChatGPT-Desktop-UI.git#${revision}`, react: '18.3.1', 'react-dom': '18.3.1',
   } }, null, 2));
   await new Promise((resolve, reject) => {
-    const child = spawn(process.execPath, [npmCli, 'install', '--no-audit', '--no-fund'], { cwd: fixture, stdio: 'inherit' });
+    const child = spawn(process.execPath, [npmCli, 'install', '--no-audit', '--no-fund', '--registry=https://registry.npmjs.org/'], { cwd: fixture, stdio: 'inherit' });
     child.on('error', reject); child.on('exit', code => code === 0 ? resolve() : reject(Error(`Public installation exited ${code}`)));
   });
   const result = checkConsumer(fixture, { revision, version: manifest.version });
