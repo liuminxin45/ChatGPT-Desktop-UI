@@ -37,7 +37,7 @@ await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
 let browser;
 const results = [];
 try {
-  browser = await chromium.launch({ channel: 'msedge', headless: true });
+  browser = await chromium.launch({ channel: process.env.UI_BROWSER_CHANNEL || 'msedge', headless: true });
   for (const theme of ['light', 'dark'])
     for (const [width, height, scale] of [
       [1920, 1080, 1],

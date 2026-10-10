@@ -5,7 +5,7 @@ import { createDemoServer } from './serve-demo.mjs';
 const server = createDemoServer();
 await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
 await mkdir('docs/validation/ai-output', { recursive: true });
-const browser = await chromium.launch({ channel: 'msedge', headless: true });
+const browser = await chromium.launch({ channel: process.env.UI_BROWSER_CHANNEL || 'msedge', headless: true });
 const checks = [];
 const errors = [];
 try {

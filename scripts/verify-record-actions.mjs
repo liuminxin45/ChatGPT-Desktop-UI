@@ -32,7 +32,7 @@ let browser;
 const results = [];
 const background = (element) => getComputedStyle(element).backgroundColor;
 try {
-  browser = await chromium.launch({ channel: 'msedge', headless: true });
+  browser = await chromium.launch({ channel: process.env.UI_BROWSER_CHANNEL || 'msedge', headless: true });
   for (const theme of ['light', 'dark'])
     for (const [width, height, scale] of [
       [1920, 1080, 1],
