@@ -40,8 +40,9 @@ try {
       for (const init of [{isComposing:true},{keyCode:229},{repeat:true}]) await field.dispatchEvent('keydown', {key:'Enter',code:'Enter',bubbles:true,...init});
       assert.equal(await count('scope'), before, label + ' IME/repeat');
       await field.press('Shift+Enter'); await field.press('Control+Enter'); assert.equal(await count('scope'), before);
-      const focus = await field.evaluate(element => { const s=getComputedStyle(element); return {shadow:s.boxShadow,outline:s.outlineStyle}; });
-      if (label !== 'Native notes') assert.equal(focus.outline, 'none'); else assert.equal(focus.shadow, 'none'); assert.ok(focus.shadow === 'none' || focus.shadow.includes('inset')); assert.ok(!focus.shadow.includes('56, 124, 244') && !focus.shadow.includes('67, 139, 250'));
+      const focus = await field.evaluate(element => { const s=getComputedStyle(element); return {shadow:s.boxShadow,outline:s.outlineStyle,radius:s.borderRadius}; });
+      if (label !== 'Native notes') assert.equal(focus.outline, 'none');
+      if (['Scoped name','Host name','Host notes'].includes(label)) assert.equal(focus.radius, '8px'); if (label === 'Native notes') assert.equal(focus.shadow, 'none'); assert.ok(focus.shadow === 'none' || focus.shadow.includes('inset')); assert.ok(!focus.shadow.includes('56, 124, 244') && !focus.shadow.includes('67, 139, 250'));
       await field.press('Enter'); assert.equal(await count('scope'), before + 1, label + ' confirm exactly once');
     }
     await page.getByRole('button', {name:'Toggle disabled'}).click(); const before = await count('scope');
