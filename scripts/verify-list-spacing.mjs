@@ -134,6 +134,21 @@ try {
       await fixed.getByRole('button', { name: 'Record 999', exact: true }).waitFor();
       await dynamic.evaluate((element) => (element.scrollTop = element.scrollHeight));
       await dynamic.getByRole('button', { name: 'Record 999', exact: true }).waitFor();
+      assert.equal(
+        await dynamic.evaluate((element) => window.listSpacing.viewport() === element),
+        true,
+        'Host gets the shared scroll viewport',
+      );
+      assert.ok(
+        (await page.evaluate(() => window.listSpacing.scrollEvents())) > 0,
+        'Host observes scroll for paging',
+      );
+      const footer = await dynamic.locator('[data-list-footer]').boundingBox(),
+        viewport = await dynamic.boundingBox();
+      assert.ok(
+        footer.y + footer.height <= viewport.y + viewport.height + 1,
+        'Loading footer remains reachable in the list viewport',
+      );
       await page.evaluate(() => window.listSpacing.empty());
       assert.equal(await fixed.getByRole('button').count(), 0);
       assert.deepEqual(errors, []);

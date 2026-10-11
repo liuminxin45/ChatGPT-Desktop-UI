@@ -63,6 +63,9 @@ Bottom optical boundary above a fixed composer. Adds no layout wrapper.
 
 | Prop | Required | Type |
 | --- | --- | --- |
+| viewportRef | no | `Ref<HTMLDivElement> \| undefined` |
+| onScroll | no | `UIEventHandler<HTMLDivElement> \| undefined` |
+| footer | no | `ReactNode` |
 | initialScrollAnchor | no | `VirtualListScrollAnchor \| null \| undefined` |
 | onScrollAnchorChange | no | `((anchor: VirtualListScrollAnchor) => void) \| undefined` |
 | header | no | `ReactNode` |

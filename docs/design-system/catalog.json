@@ -39102,6 +39102,27 @@
       "description": "",
       "props": [
         {
+          "name": "viewportRef",
+          "required": false,
+          "type": "Ref<HTMLDivElement> | undefined",
+          "native": false,
+          "description": "Preserve Host-owned pagination and pixel scroll restoration without a second virtualizer."
+        },
+        {
+          "name": "onScroll",
+          "required": false,
+          "type": "UIEventHandler<HTMLDivElement> | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "footer",
+          "required": false,
+          "type": "ReactNode",
+          "native": false,
+          "description": ""
+        },
+        {
           "name": "initialScrollAnchor",
           "required": false,
           "type": "VirtualListScrollAnchor | null | undefined",

@@ -19,7 +19,11 @@ function App() {
     [value, setValue] = useState('a');
   const [items, setItems] = useState(Array.from({ length: 1000 }, (_, id) => id));
   const fixed = useRef<FixedVirtualListHandle>(null);
+  const dynamic = useRef<HTMLDivElement>(null);
+  const scrollEvents = useRef(0);
   (window as any).listSpacing = {
+    viewport: () => dynamic.current,
+    scrollEvents: () => scrollEvents.current,
     scroll: (index: number) => fixed.current?.scrollToIndex(index),
     prepend: () => setItems((rows) => [-1, ...rows]),
     empty: () => setItems([]),
@@ -95,6 +99,15 @@ function App() {
         <section>
           <h2>Dynamic</h2>
           <VirtualList
+            viewportRef={dynamic}
+            onScroll={() => {
+              scrollEvents.current++;
+            }}
+            footer={
+              <div data-list-footer style={{ height: 40 }}>
+                More records are loading
+              </div>
+            }
             items={items}
             estimateSize={46}
             getItemKey={(id) => id}

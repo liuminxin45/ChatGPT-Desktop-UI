@@ -4,11 +4,14 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useImperativeHandle,
   useRef,
   useState,
   type CSSProperties,
   type HTMLAttributes,
   type ReactNode,
+  type Ref,
+  type UIEventHandler,
 } from 'react';
 import { classes } from '../classes';
 import { listRowGap, listRowInset } from '../../list-geometry';
@@ -121,6 +124,10 @@ export interface VirtualListScrollAnchor {
 }
 
 export interface VirtualListProps<T> {
+  /** Preserve Host-owned pagination and pixel scroll restoration without a second virtualizer. */
+  viewportRef?: Ref<HTMLDivElement>;
+  onScroll?: UIEventHandler<HTMLDivElement>;
+  footer?: ReactNode;
   initialScrollAnchor?: VirtualListScrollAnchor | null;
   onScrollAnchorChange?: (anchor: VirtualListScrollAnchor) => void;
   /** Sticky column headings share the viewport gutter and content inset with their records. */
@@ -140,6 +147,9 @@ export interface VirtualListProps<T> {
 }
 
 export function VirtualList<T>({
+  viewportRef,
+  onScroll,
+  footer,
   initialScrollAnchor,
   onScrollAnchorChange,
   header,
@@ -164,6 +174,7 @@ export function VirtualList<T>({
   const restoringRef = useRef(false);
   const resetRef = useRef(resetKey);
   const [headerHeight, setHeaderHeight] = useState(0);
+  useImperativeHandle(viewportRef, () => scrollRef.current!, []);
   useEffect(() => {
     const element = headerRef.current;
     if (!element) {
@@ -249,6 +260,7 @@ export function VirtualList<T>({
         className={classes('desktop-virtual-list', className)}
         style={style}
         onScroll={(event) => {
+          onScroll?.(event);
           if (restoringRef.current) return;
           const top = event.currentTarget.scrollTop;
           const row = virtualizer.getVirtualItems().find((item) => item.end > top + headerHeight);
@@ -291,6 +303,7 @@ export function VirtualList<T>({
             );
           })}
         </div>
+        {footer}
       </InternalScrollArea>
     </ScrollEdgeFadeContext.Provider>
   );
