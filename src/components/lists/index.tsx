@@ -32,9 +32,11 @@ export const RecordRow = forwardRef<
   Omit<HTMLAttributes<HTMLDivElement>, 'onClick' | 'onKeyDown' | 'tabIndex' | 'role'> & {
     tabIndex?: -1;
     role?: 'group' | 'listitem';
+    density?: 'default' | 'compact';
+    separator?: boolean;
   }
->(function RecordRow({ className, ...props }, ref) {
-  return <div ref={ref} className={classes('desktop-record-row', className)} {...props} />;
+>(function RecordRow({ className, density = 'default', separator = false, ...props }, ref) {
+  return <div ref={ref} className={classes('desktop-record-row', className)} data-density={density} data-separator={separator || undefined} {...props} />;
 });
 
 /** Spaced rows for short lists; compose inside InternalScrollArea when scrolling is needed. */

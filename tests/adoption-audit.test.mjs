@@ -5,6 +5,19 @@ import os from 'node:os';
 import path from 'node:path';
 import { auditControls } from '../scripts/audit-controls.mjs';
 
+test('record ownership follows aliases, roles and returned class properties', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-record-audit-'));
+  try {
+    const source=path.join(root,'view.tsx'), styles=path.join(root,'view.css');
+    fs.writeFileSync(source,'import {RecordRow as Row} from "chatgpt-desktop-kit";const styles=()=>({row:"bg-red-500 px-3"});const appearance=styles();export const view=<Row role="listitem" className={appearance.row}/>;');
+    fs.writeFileSync(styles,'.records > [role = "listitem"]:nth-child(even){background:red;padding:16px}.records [role=listitem] small{color:gray}');
+    assert.deepEqual(auditControls(root,[source,styles]).controlOverrides.map(row=>row.selector),['Row className','.records > [role = "listitem"]:nth-child(even)']);
+    fs.writeFileSync(source,'import {RecordRow as Row} from "chatgpt-desktop-kit";export const view=<Row role="listitem" density="compact" separator className="grid gap-3"/>;');
+    fs.writeFileSync(styles,'.records > [role = "listitem"]{display:grid;gap:16px}.records [role=listitem] small{color:gray}');
+    assert.equal(auditControls(root,[source,styles]).controlOverrides.length,0);
+  } finally { fs.rmSync(root,{recursive:true,force:true}); }
+});
+
 test('compatibility names and browser modals cannot bypass shared UI ownership', () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-audit-alias-'));
   try {

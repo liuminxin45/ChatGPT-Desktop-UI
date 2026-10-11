@@ -35002,6 +35002,20 @@
           "type": "\"group\" | \"listitem\" | undefined",
           "native": false,
           "description": ""
+        },
+        {
+          "name": "density",
+          "required": false,
+          "type": "\"default\" | \"compact\" | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "separator",
+          "required": false,
+          "type": "boolean | undefined",
+          "native": false,
+          "description": ""
         }
       ],
       "nativeProps": [

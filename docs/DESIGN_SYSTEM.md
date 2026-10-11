@@ -208,3 +208,5 @@ Semantic confirmations and menu commands use `AlertDialogAction variant="destruc
 ### Host-owned list paging and restoration
 
 Dynamic `VirtualList` exposes `viewportRef`, `onScroll` and `footer` for existing pagination and pixel-scroll restoration. The Host retains its data cursor and saved scroll position; the shared list owns measurement, stable keys, row gap, viewport inset and the loading footer's scroll surface. Do not add a second business virtualizer or duplicate row padding to preserve old scrolling.
+
+RecordRow owns record padding. Use density="compact" for dense groups and separator for a shared dividing line. Host CSS owns columns, flex/grid alignment and domain opacity; do not paint, round or pad records through classes, role selectors or returned class properties. Multi-action records stay transparent when descendants are hovered or focused. Mount the Host language bridge at the client root; shared confirmation labels follow UIStringsProvider and may be explicitly supplied for a business action.

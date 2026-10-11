@@ -9,20 +9,23 @@ import {
   Button,
   SettingsGroup,
   SettingsField,
+  AppConfirmDialog,
+  UIStringsProvider,
 } from '../src';
 import '../src/styles.css';
 
 function App() {
   const [runs, setRuns] = useState(0),
     [expanded, setExpanded] = useState(false),
-    [selected, setSelected] = useState(false);
+    [selected, setSelected] = useState(false),
+    [confirmOpen, setConfirmOpen] = useState(false);
   return (
     <DesktopRoot>
-      <style>{`.record-demo{max-width:900px;margin:48px auto;padding:24px}.record-demo h2{font-size:18px;font-weight:400}.demo-record{display:flex;align-items:center;gap:16px;padding:16px 8px;border-bottom:1px solid var(--desktop-color-border)}.demo-record>div{min-width:0;flex:1}.demo-record p{margin:4px 6px;color:var(--desktop-color-text-muted)}.demo-record nav{display:flex;align-items:center;gap:8px}.demo-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.demo-select{display:block;padding:12px;text-align:left;border:0;border-radius:8px;background:transparent;color:inherit;font:inherit}.demo-select:hover,.demo-select[aria-pressed=true]{background:var(--desktop-color-surface-hover)}.demo-selection{width:280px}`}</style>
+      <style>{`.record-demo{max-width:900px;margin:48px auto;padding:24px}.record-demo h2{font-size:18px;font-weight:400}.demo-record{display:flex;align-items:center;gap:16px}.demo-record>div{min-width:0;flex:1}.demo-record p{margin:4px 6px;color:var(--desktop-color-text-muted)}.demo-record nav{display:flex;align-items:center;gap:8px}.demo-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.demo-select{display:block;padding:12px;text-align:left;border:0;border-radius:8px;background:transparent;color:inherit;font:inherit}.demo-select:hover,.demo-select[aria-pressed=true]{background:var(--desktop-color-surface-hover)}.demo-selection{width:280px}`}</style>
       <main className="record-demo" data-desktop-feature="record-demo" data-desktop-surface="record-demo">
         <h2>Review records</h2>
         <ListStack>
-          <RecordRow className="demo-record" data-testid="record">
+          <RecordRow separator className="demo-record" data-testid="record">
             <div>
               <RecordLink actionId="demo.review.source" href="#source">
                 <span className="demo-title">
@@ -47,9 +50,14 @@ function App() {
               </Button>
             </nav>
           </RecordRow>
+          <RecordRow density="compact" className="demo-record" data-testid="compact-record">Compact record</RecordRow>
         </ListStack>
         {expanded && <p role="status">Review plan is available.</p>}
         <output aria-label="Initiations">{runs}</output>
+        <Button actionId="demo.confirm.open" onClick={() => setConfirmOpen(true)}>Open confirmation</Button>
+        <UIStringsProvider locale="zh-CN" translate={key => key}>
+          <AppConfirmDialog title="确认操作" open={confirmOpen} onOpenChange={setConfirmOpen} onConfirm={() => {}} />
+        </UIStringsProvider>
         <h2>Settings fields remain static</h2>
         <SettingsGroup title="Downloads">
           <SettingsField label="Location" description="System Downloads folder">

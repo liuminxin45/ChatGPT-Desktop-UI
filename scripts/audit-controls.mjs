@@ -9,6 +9,7 @@ export function auditControls(directory, files) {
     exceptions = [],
     controlOverrides = [];
   const sharedClasses = new Map();
+  const sharedRoles = new Map();
   const feedbackClasses = new Map();
   const scope = (file) =>
     path
@@ -19,6 +20,8 @@ export function auditControls(directory, files) {
   for (const { file, source } of sources.filter((item) => /\.[jt]sx?$/.test(item.file))) {
     const classes = sharedClasses.get(scope(file)) || new Set();
     sharedClasses.set(scope(file), classes);
+    const roles = sharedRoles.get(scope(file)) || new Set();
+    sharedRoles.set(scope(file), roles);
     const feedback = feedbackClasses.get(scope(file)) || new Set();
     feedbackClasses.set(scope(file), feedback);
     const tree = ts.createSourceFile(
@@ -33,6 +36,7 @@ export function auditControls(directory, files) {
     function index(node) {
       if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name) && node.initializer)
         definitions.set(node.name.text, node.initializer);
+      if (ts.isFunctionDeclaration(node) && node.name) definitions.set(node.name.text, node);
       ts.forEachChild(node, index);
     }
     index(tree);
@@ -56,7 +60,7 @@ export function auditControls(directory, files) {
       if (!bindings || !ts.isNamedImports(bindings)) return;
       for (const binding of bindings.elements)
         if (
-          /^(?:Button|IconButton|Input|InputGroup|SecretInput|Textarea|Select|SelectControl|SelectTrigger|SelectContent|SelectItem|Checkbox|Radio|RadioGroupItem|Switch|Tabs|TabsList|TabsTrigger|SegmentedControl|DatePicker|EditableCombobox|Badge|Avatar|AvatarFallback|Progress|Table|TableHeaderCell|TableCell|ToastNotice|Toaster|DropOverlay|PopoverContent|DropdownMenuContent|DropdownMenuItem|DropdownMenuCheckboxItem|DropdownMenuRadioItem|TooltipContent|DialogContent|DialogHeader|DialogTitle|DialogDescription|DialogFooter|DialogBody|DialogAction|AlertDialogContent|AlertDialogHeader|AlertDialogTitle|AlertDialogDescription|AlertDialogFooter|AlertDialogAction|AlertDialogCancel|InlineNotice|ErrorState|EmptyState|FloatingPanel|FloatingLauncher|ComposerActionButton)$/.test(
+          /^(?:Button|IconButton|Input|InputGroup|SecretInput|Textarea|Select|SelectControl|SelectTrigger|SelectContent|SelectItem|Checkbox|Radio|RadioGroupItem|Switch|Tabs|TabsList|TabsTrigger|SegmentedControl|DatePicker|EditableCombobox|Badge|Avatar|AvatarFallback|Progress|Table|TableRow|TableHeaderCell|TableCell|RecordRow|RecordLink|RecordAction|ToastNotice|Toaster|DropOverlay|PopoverContent|DropdownMenuContent|DropdownMenuItem|DropdownMenuCheckboxItem|DropdownMenuRadioItem|TooltipContent|DialogContent|DialogHeader|DialogTitle|DialogDescription|DialogFooter|DialogBody|DialogAction|AlertDialogContent|AlertDialogHeader|AlertDialogTitle|AlertDialogDescription|AlertDialogFooter|AlertDialogAction|AlertDialogCancel|InlineNotice|ErrorState|EmptyState|FloatingPanel|FloatingLauncher|ComposerActionButton)$/.test(
             (binding.propertyName || binding.name).text,
           )
         )
@@ -141,12 +145,31 @@ export function auditControls(directory, files) {
         (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) &&
         controls.has(node.tagName.getText(tree))
       ) {
+        const role = node.attributes.properties.find(item => ts.isJsxAttribute(item) && item.name.getText(tree) === 'role');
+        if (role?.initializer && ts.isStringLiteral(role.initializer)) roles.add(role.initializer.text);
         const attribute = node.attributes.properties.find(
           (item) => ts.isJsxAttribute(item) && item.name.getText(tree) === 'className',
         );
         const utilities = new Set();
         const visited = new Set();
+        const visitedProperties = new Set();
+        function propertyStrings(value, name) {
+          const key = `${value.pos}:${name}`;
+          if (visitedProperties.has(key)) return;
+          visitedProperties.add(key);
+          if (ts.isParenthesizedExpression(value) || ts.isAsExpression(value) || ts.isTypeAssertionExpression(value) || ts.isNonNullExpression(value)) propertyStrings(value.expression, name);
+          else if (ts.isIdentifier(value) && definitions.has(value.text)) propertyStrings(definitions.get(value.text), name);
+          else if (ts.isCallExpression(value) && ts.isIdentifier(value.expression) && definitions.has(value.expression.text)) propertyStrings(definitions.get(value.expression.text), name);
+          else if (ts.isObjectLiteralExpression(value)) {
+            for (const field of value.properties) if (ts.isPropertyAssignment(field) && field.name.getText(tree).replace(/^['"]|['"]$/g, '') === name) strings(field.initializer);
+          } else if (ts.isArrowFunction(value) || ts.isFunctionExpression(value) || ts.isFunctionDeclaration(value)) {
+            const returned = node => { if (ts.isReturnStatement(node) && node.expression) propertyStrings(node.expression, name); else ts.forEachChild(node, returned); };
+            if (value.body && ts.isBlock(value.body)) returned(value.body);
+            else if (value.body) propertyStrings(value.body, name);
+          }
+        }
         function strings(value) {
+          if (ts.isPropertyAccessExpression(value)) propertyStrings(value.expression, value.name.text);
           if (
             ts.isStringLiteral(value) ||
             ts.isNoSubstitutionTemplateLiteral(value) ||
@@ -207,6 +230,10 @@ export function auditControls(directory, files) {
               .matchAll(/\.([\w-]+)/g),
           ].some((match) => classes.has(match[1])),
         );
+        const privateControlRole = rule.selectors.some(selector => {
+          const target = selector.replace(/\[\s*role\s*=\s*(['"]?)([\w-]+)\1\s*\]/g, '[role=$2]').split(/[\s>+~]+/).at(-1);
+          return [...target.matchAll(/\[role=([\w-]+)\]/g)].some(match => sharedRoles.get(scope(file))?.has(match[1]));
+        });
         const privateOverlay =
           /\.(?:[\w-]*toast[\w-]*|[\w-]*popover[\w-]*)(?=[\s.:#>+~\[]|$)/.test(rule.selector) &&
           rule.nodes.some(
@@ -230,7 +257,8 @@ export function auditControls(directory, files) {
           !privateOverlay &&
           !privateFeedback &&
           !privateControlClass &&
-          !/(?:\.desktop-(?:button|input|textarea|select|table|toast|popover|menu-content|menu-item|dialog|app-dialog|tabs|badge|avatar|progress|tooltip|floating-panel|send-control)(?=[\s.:#>+~\[]|$)|\b(?:button|input|textarea|select)\b|(?:^|[\s>+~])(?:table|th|td)(?=[\s.:#>+~\[)]|$))/.test(
+          !privateControlRole &&
+          !/(?:\.desktop-(?:button|input|textarea|select|table|record-row|record-link|record-action|toast|popover|menu-content|menu-item|dialog|app-dialog|tabs|badge|avatar|progress|tooltip|floating-panel|send-control)(?=[\s.:#>+~\[]|$)|\b(?:button|input|textarea|select)\b|(?:^|[\s>+~])(?:table|th|td)(?=[\s.:#>+~\[)]|$))/.test(
             rule.selector,
           )
         )

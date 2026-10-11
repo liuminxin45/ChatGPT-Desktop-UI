@@ -145,7 +145,9 @@ html:root,html:root body,html:root body *,html:root body *::before,html:root bod
 .desktop-menu-item:last-child,.desktop-select-item:last-child{margin-bottom:0}
 
 /* Records are static groups. Only the actual commands and links own feedback. */
-.desktop-record-row{min-width:0}
+.desktop-record-row{min-width:0;padding:var(--desktop-space-record-block) var(--desktop-space-record-inline)}
+.desktop-record-row[data-density=compact]{padding-block:var(--desktop-space-record-compact-block)}
+.desktop-record-row[data-separator=true]{border-bottom:1px solid var(--desktop-color-border)}
 .desktop-record-link,.desktop-button.desktop-record-action{display:inline-flex;max-width:100%;min-width:0;min-height:28px;height:auto;align-items:center;justify-content:flex-start;gap:6px;padding:3px 6px;border:0;border-radius:var(--desktop-radius-control);background:transparent;color:inherit;font:inherit;text-align:left;text-decoration:none;white-space:normal;cursor:pointer}
 .desktop-record-link:hover{background:var(--desktop-color-surface-hover);text-decoration:underline;text-underline-offset:3px}
 .desktop-record-link:focus-visible{outline:2px solid var(--desktop-color-focus);outline-offset:2px}

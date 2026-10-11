@@ -44,6 +44,8 @@ Static record grouping. Put navigation, selection and commands on separate contr
 | --- | --- | --- |
 | tabIndex | no | `-1 \| undefined` |
 | role | no | `"group" \| "listitem" \| undefined` |
+| density | no | `"default" \| "compact" \| undefined` |
+| separator | no | `boolean \| undefined` |
 
 ## ScrollEdgeFade (chatgpt-desktop-kit)
 

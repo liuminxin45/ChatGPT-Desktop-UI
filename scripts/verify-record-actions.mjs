@@ -53,6 +53,8 @@ try {
         initiate = page.getByRole('button', { name: 'Initiate', exact: true }),
         details = page.getByRole('button', { name: 'Details', exact: true });
       await row.waitFor();
+      assert.deepEqual(await row.evaluate(element => {const style=getComputedStyle(element);return [style.paddingTop,style.paddingLeft,style.borderBottomWidth]}), ['8px','12px','1px']);
+      assert.equal(await page.getByTestId('compact-record').evaluate(element => getComputedStyle(element).paddingTop), '4px');
       const initial = await row.evaluate(background);
       await row.hover({ position: { x: 8, y: 8 } });
       assert.equal(await row.evaluate(background), initial);
@@ -87,6 +89,11 @@ try {
       assert.notEqual(await select.evaluate(background), selectBg);
       await select.click();
       assert.equal(await select.getAttribute('aria-pressed'), 'true');
+      await page.getByRole('button', {name:'Open confirmation',exact:true}).click();
+      const confirm=page.getByRole('alertdialog');
+      await confirm.getByRole('button',{name:'确定',exact:true}).waitFor();
+      await confirm.getByRole('button',{name:'取消',exact:true}).click();
+      await confirm.waitFor({state:'hidden'});
       await initiate.hover();
       await page.screenshot({ path: path.join(output, `${theme}-${width}.png`) });
       assert.deepEqual(errors, []);

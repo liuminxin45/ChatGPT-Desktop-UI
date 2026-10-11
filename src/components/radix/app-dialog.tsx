@@ -256,8 +256,8 @@ export function AppConfirmDialog({
   onOpenChange,
   title,
   description,
-  confirmLabel = translate('确定'),
-  cancelLabel = translate('取消'),
+  confirmLabel,
+  cancelLabel,
   destructive = false,
   busy = false,
   confirmActionId = 'dialog.confirm',
@@ -321,7 +321,7 @@ export function AppConfirmDialog({
           <div className={appDialogFooterClassName}>
             <AlertDialogPrimitive.Cancel asChild>
               <Button variant="ghost" actionId={cancelActionId} disabled={pending}>
-                {cancelLabel}
+                {cancelLabel ?? translate('取消')}
               </Button>
             </AlertDialogPrimitive.Cancel>
             <Button
@@ -331,7 +331,7 @@ export function AppConfirmDialog({
               aria-busy={pending}
               onClick={() => void confirm()}
             >
-              {confirmLabel}
+              {confirmLabel ?? translate('确定')}
             </Button>
           </div>
         </AlertDialogPrimitive.Content>

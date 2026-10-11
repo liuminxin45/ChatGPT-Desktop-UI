@@ -64,6 +64,9 @@
   --desktop-radius-navigation: 10px;
   --desktop-space-page-inline: 24px;
   --desktop-space-page-block: 20px;
+  --desktop-space-record-inline: 12px;
+  --desktop-space-record-block: 8px;
+  --desktop-space-record-compact-block: 4px;
   --desktop-size-page-bar: 48px;
   --desktop-size-scroll-edge-fade: 24px;
   --desktop-space-composer-dock: 12px;

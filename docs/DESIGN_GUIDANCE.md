@@ -46,3 +46,5 @@ Module Tabs use one quiet ChatGPT-style selected surface with a fully rounded ta
 ## Compatibility is an API boundary
 
 Preserve an old import path only as an export to the canonical renderer. Never retain legacy visual variants, Glass names, ornamental orbs, arbitrary palettes or product CSS in the UI library. ChatGPT controls use semantic tokens, explicit layout primitives and a single visible selection treatment. Review the actual rendered fonts, Tab states, focus and scroll geometry after removing old styles.
+
+RecordRow owns record padding. Use density="compact" and separator rather than local padding, borders, rounded backgrounds or alternating fills. Audit imported aliases, role selectors and returned class properties. Keep business column geometry and domain opacity in the Host. Configure shared control labels once at the client root, including confirmation and accessibility labels; validate provider translations in the actual modal.
