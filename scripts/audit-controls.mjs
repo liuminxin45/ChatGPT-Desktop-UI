@@ -56,7 +56,7 @@ export function auditControls(directory, files) {
       if (!bindings || !ts.isNamedImports(bindings)) return;
       for (const binding of bindings.elements)
         if (
-          /^(?:Button|IconButton|Input|Textarea|Select|SelectTrigger|Checkbox|Radio|Switch|Table|TableHeaderCell|TableCell|ToastNotice|Toaster|DropOverlay|PopoverContent|DropdownMenuContent|TooltipContent|DialogContent|DialogHeader|DialogTitle|DialogDescription|DialogFooter|DialogBody|AlertDialogContent|AlertDialogHeader|AlertDialogTitle|AlertDialogDescription|AlertDialogFooter|InlineNotice|ErrorState|EmptyState)$/.test(
+          /^(?:Button|IconButton|Input|InputGroup|SecretInput|Textarea|Select|SelectTrigger|SelectContent|SelectItem|Checkbox|Radio|Switch|Tabs|Badge|Avatar|AvatarFallback|Progress|Table|TableHeaderCell|TableCell|ToastNotice|Toaster|DropOverlay|PopoverContent|DropdownMenuContent|DropdownMenuItem|DropdownMenuCheckboxItem|DropdownMenuRadioItem|TooltipContent|DialogContent|DialogHeader|DialogTitle|DialogDescription|DialogFooter|DialogBody|DialogAction|AlertDialogContent|AlertDialogHeader|AlertDialogTitle|AlertDialogDescription|AlertDialogFooter|AlertDialogAction|AlertDialogCancel|InlineNotice|ErrorState|EmptyState|FloatingPanel|FloatingLauncher|ComposerActionButton)$/.test(
             (binding.propertyName || binding.name).text,
           )
         )
@@ -67,6 +67,35 @@ export function auditControls(directory, files) {
         (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) &&
         /^(?:div|p|section|aside)$/.test(node.tagName.getText(tree))
       ) {
+        const classNameAttribute = node.attributes.properties.find(
+          (item) => ts.isJsxAttribute(item) && item.name.getText(tree) === 'className',
+        );
+        const rawClasses = [];
+        function rawStrings(value) {
+          if (
+            ts.isStringLiteral(value) ||
+            ts.isNoSubstitutionTemplateLiteral(value) ||
+            ts.isTemplateHead(value) ||
+            ts.isTemplateTail(value) ||
+            ts.isTemplateMiddle(value)
+          )
+            rawClasses.push(value.text);
+          ts.forEachChild(value, rawStrings);
+        }
+        if (classNameAttribute?.initializer) rawStrings(classNameAttribute.initializer);
+        const rawTokens = rawClasses.join(' ').split(/\s+/);
+        if (
+          rawTokens.some((token) => /^(?:absolute|fixed)$/.test(token)) &&
+          rawTokens.some((token) => /^rounded/.test(token)) &&
+          rawTokens.some((token) => /^shadow/.test(token)) &&
+          rawTokens.some((token) => /^bg-/.test(token))
+        )
+          controlOverrides.push({
+            file: path.relative(directory, file).replaceAll('\\', '/'),
+            line: tree.getLineAndCharacterOfPosition(node.getStart(tree)).line + 1,
+            selector: 'custom floating surface',
+            properties: rawTokens.filter((token) => /^(?:rounded|shadow|bg-|border)/.test(token)),
+          });
         const role = node.attributes.properties.find(
           (item) => ts.isJsxAttribute(item) && item.name.getText(tree) === 'role',
         );
@@ -186,7 +215,7 @@ export function auditControls(directory, files) {
           !privateOverlay &&
           !privateFeedback &&
           !privateControlClass &&
-          !/(?:\.desktop-(?:button|input|textarea|select|table|toast|popover|menu-content|dialog)(?=[\s.:#>+~\[]|$)|\b(?:button|input|textarea|select)\b|(?:^|[\s>+~])(?:table|th|td)(?=[\s.:#>+~\[)]|$))/.test(
+          !/(?:\.desktop-(?:button|input|textarea|select|table|toast|popover|menu-content|menu-item|dialog|app-dialog|tabs|badge|avatar|progress|tooltip|floating-panel|send-control)(?=[\s.:#>+~\[]|$)|\b(?:button|input|textarea|select)\b|(?:^|[\s>+~])(?:table|th|td)(?=[\s.:#>+~\[)]|$))/.test(
             rule.selector,
           )
         )

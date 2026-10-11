@@ -50,7 +50,7 @@
 .kit-settings-content h1{font-size:var(--desktop-font-size-emphasis);line-height:var(--desktop-line-height-emphasis);margin:0 0 40px;font-weight:var(--desktop-font-weight-regular)}
 .kit-settings-section{margin-bottom:40px}
 .kit-settings-section h2{font-size:var(--desktop-font-size-body);margin:0 0 12px}
-.kit-settings-section__rows{background:var(--desktop-color-surface);border-radius:var(--desktop-radius-overlay);padding-inline:16px}
+.kit-settings-section__rows{border-radius:var(--desktop-radius-overlay);padding-inline:16px}
 .kit-setting-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;min-height:62px;padding-block:14px}
 .kit-setting-row p{font-size:var(--desktop-font-size-supporting);line-height:var(--desktop-line-height-supporting);margin:3px 0 0;max-width:55ch}
 .kit-setting-row__control{max-width:280px;min-width:0}
@@ -61,7 +61,7 @@
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 
 .kit-sidebar{border-right:1px solid var(--desktop-color-panel-boundary)}
-.kit-settings-section__rows{border:1px solid var(--desktop-color-panel-boundary);background:var(--desktop-color-background)}
+.kit-settings-section__rows{border:1px solid var(--desktop-color-panel-boundary)}
 .kit-setting-row+.kit-setting-row{border-top:1px solid var(--desktop-color-panel-boundary)}
 .kit-avatar img{box-shadow:0 0 0 1px var(--desktop-color-avatar-boundary)}
 .kit-settings-nav h2,.desktop-desktop-surface .kit-settings-nav h2,.kit-settings-content h1,.desktop-desktop-surface .kit-settings-section h2,.kit-settings-section h2,.kit-setting-row>div:first-child>span{font-weight:var(--desktop-font-weight-emphasis)}

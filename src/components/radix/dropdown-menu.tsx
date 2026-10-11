@@ -64,14 +64,21 @@ const DropdownMenuItem = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Item> & {
     inset?: boolean;
     icon?: React.ReactNode;
+    /** Semantic danger styling for irreversible commands. */
+    variant?: 'default' | 'destructive';
     actionId?: string;
   }
->(({ className, inset, icon, actionId, children, ...props }, ref) => {
+>(({ className, inset, icon, variant = 'default', actionId, children, ...props }, ref) => {
   const label = actionLabel(children) || props['aria-label'] || '';
   return (
     <DropdownMenuPrimitive.Item
       ref={ref}
-      className={cn('desktop-menu-item', inset && 'desktop-menu-item--inset', className)}
+      className={cn(
+        'desktop-menu-item',
+        inset && 'desktop-menu-item--inset',
+        variant === 'destructive' && 'desktop-menu-item--danger',
+        className,
+      )}
       {...props}
       data-desktop-action={
         actionId || (props['data-desktop-action' as keyof typeof props] as string | undefined)

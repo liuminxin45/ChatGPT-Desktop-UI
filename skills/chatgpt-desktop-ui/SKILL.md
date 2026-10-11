@@ -75,3 +75,5 @@ Module Tabs use one quiet ChatGPT-style selected surface with a fully rounded ta
 ## Legacy visual cleanup
 
 Compatibility paths only forward APIs to canonical components. Do not retain or restore Glass styles, migrated Host global sheets, product selectors, shadcn appearance utilities or a second underline Tab mode. `controls.css` owns shared appearance; `shell.css` owns portable shell geometry. A Host may retain its documented platform font/window policy. Use explicit SettingsForm, FieldRow and MetadataList rather than CSS that implicitly restyles arbitrary forms, labels or tables. Validate actual computed typography and selected/hover/focus states, not only the package import.
+
+Semantic confirmations and menu commands use `AlertDialogAction variant="destructive"` and `DropdownMenuItem variant="destructive"`. Do not paint danger actions in Hosts. Audit navigation, metadata, avatars, menu items, floating actions and raw positioned overlays alongside form controls. Radio groups retain the same shared option insets as direct menu children.

@@ -30,10 +30,10 @@
 
 .desktop-client{--desktop-color-client-message:var(--desktop-color-info-soft);--desktop-color-client-permissions:var(--desktop-color-warning)}.dark .desktop-client{--desktop-color-client-message:#1c4274;--desktop-color-client-permissions:#ee9845}
 
-.desktop-client .kit-settings-nav{padding:16px 8px 0;gap:16px}
+.desktop-client .kit-settings-nav{padding:16px 8px 0}
 .desktop-client .kit-settings-nav h2{font-size:18px;margin-left:2px}
 .desktop-client .kit-settings-search>.desktop-input{height:36px;border-radius:22px;background:var(--desktop-color-client-input);padding-left:30px}
-.desktop-client .kit-category{height:31px;font-size:14px;gap:9px;padding:5px 8px}
+.desktop-client .kit-category{font-size:14px;gap:9px;padding:5px 8px}
 .desktop-client .kit-settings-group{margin:4px 8px 8px;font-size:14px}
 .desktop-client .kit-settings-nav__list nav>div:has(>.kit-settings-group):not(:first-child){margin-top:28px}
 .desktop-client .kit-settings-scroll{padding:76px 24px 40px}

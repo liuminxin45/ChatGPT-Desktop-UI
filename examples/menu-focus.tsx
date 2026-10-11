@@ -73,6 +73,9 @@ function MenuFixture() {
                 Second option
               </DropdownMenuRadioItem>
             </DropdownMenuRadioGroup>
+            <DropdownMenuItem variant="destructive" actionId="fixture.delete" onSelect={invoke}>
+              Delete record
+            </DropdownMenuItem>
             <DropdownMenuItem disabled actionId="fixture.disabled">
               Unavailable action
             </DropdownMenuItem>

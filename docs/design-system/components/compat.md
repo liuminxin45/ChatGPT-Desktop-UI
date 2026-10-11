@@ -72,6 +72,8 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | Prop | Required | Type |
 | --- | --- | --- |
 | asChild | no | `boolean \| undefined` |
+| size | no | `"default" \| "icon" \| "sm" \| "lg" \| null \| undefined` |
+| variant | no | `"link" \| "default" \| "primary" \| "secondary" \| "ghost" \| "destructive" \| "outline" \| null \| undefined` |
 
 ## AlertDialogCancel (chatgpt-desktop-kit/compat/alert-dialog)
 
@@ -747,6 +749,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | textValue | no | `string \| undefined` |
 | inset | no | `boolean \| undefined` |
 | icon | no | `React.ReactNode` |
+| variant | no | `"default" \| "destructive" \| undefined` |
 | actionId | no | `string \| undefined` |
 
 ## DropdownMenuLabel (chatgpt-desktop-kit/compat/dropdown-menu)

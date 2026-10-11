@@ -116,3 +116,26 @@ test('adoption scans pages and resolves private shared-control classes without m
     fs.rmSync(root, { recursive: true, force: true });
   }
 });
+
+test('navigation, metadata and semantic actions cannot bypass control ownership', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-audit-expanded-'));
+  try {
+    const source = path.join(root, 'view.tsx'),
+      styles = path.join(root, 'view.css');
+    fs.writeFileSync(
+      source,
+      'import {Badge as Count,AlertDialogAction,DropdownMenuItem} from "@phd/ui";export const view=<><Count className="text-xs"/><AlertDialogAction className="bg-destructive"/><DropdownMenuItem className="py-2"/><div className="absolute rounded-xl shadow-lg bg-white">Popup</div></>',
+    );
+    fs.writeFileSync(styles, '.trend .desktop-tabs{background:red;padding:3px;border-radius:12px}');
+    const result = auditControls(root, [source, styles]);
+    assert.equal(result.controlOverrides.length, 5);
+    fs.writeFileSync(
+      source,
+      'import {AlertDialogAction,DropdownMenuItem,FloatingPanel} from "@phd/ui";export const view=<><AlertDialogAction variant="destructive"/><DropdownMenuItem variant="destructive"/><FloatingPanel className="absolute"/></>',
+    );
+    fs.writeFileSync(styles, '.trend{display:flex;gap:8px}');
+    assert.equal(auditControls(root, [source, styles]).controlOverrides.length, 0);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});

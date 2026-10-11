@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { type VariantProps } from 'class-variance-authority';
 import { buttonVariants } from './button';
 import { cn } from './utils';
 import {
@@ -17,9 +18,9 @@ import {
 
 const AlertDialogAction = React.forwardRef<
   React.ElementRef<typeof AppAlertDialogAction>,
-  React.ComponentPropsWithoutRef<typeof AppAlertDialogAction>
->(({ className, ...props }, ref) => (
-  <AppAlertDialogAction ref={ref} className={cn(buttonVariants(), className)} {...props} />
+  React.ComponentPropsWithoutRef<typeof AppAlertDialogAction> & VariantProps<typeof buttonVariants>
+>(({ className, variant, size, ...props }, ref) => (
+  <AppAlertDialogAction ref={ref} className={cn(buttonVariants({ variant, size }), className)} {...props} />
 ));
 AlertDialogAction.displayName = 'AlertDialogAction';
 

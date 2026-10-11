@@ -41,12 +41,9 @@ const tw = spawnSync(
 );
 assert.equal(tw.status, 0, tw.stderr);
 const css = await Promise.all(
-  [
-    'dist/tokens.css',
-    'dist/controls.css',
-    'dist/compound.css',
-    'tests/output/menu-focus/utilities.css',
-  ].map((file) => fs.readFile(path.join(root, file), 'utf8')),
+  ['dist/tokens.css', 'dist/controls.css', 'dist/compound.css', 'tests/output/menu-focus/utilities.css'].map(
+    (file) => fs.readFile(path.join(root, file), 'utf8'),
+  ),
 );
 await fs.writeFile(
   path.join(output, 'app.css'),
@@ -144,6 +141,22 @@ try {
         await item(name, role).hover();
         await check(item(name, role), role);
       }
+      const danger = await item('Delete record').evaluate((element) => {
+        const probe = document.createElement('span');
+        probe.style.color = 'var(--desktop-color-danger)';
+        document.body.append(probe);
+        const expected = getComputedStyle(probe).color;
+        probe.remove();
+        return { actual: getComputedStyle(element).color, expected };
+      });
+      assert.equal(danger.actual, danger.expected, 'Semantic destructive menu uses shared danger token');
+      for (const name of ['First option', 'Second option'])
+        assert.ok(
+          await item(name, 'menuitemradio').evaluate(
+            (element) => parseFloat(getComputedStyle(element).paddingRight) >= 9,
+          ),
+          'Grouped radio options keep shared inset',
+        );
       await item('Unavailable action').hover({ force: true });
       assert.equal(await item('Unavailable action').getAttribute('aria-disabled'), 'true');
       assert.equal((await state(item('Unavailable action'))).focused, false);
