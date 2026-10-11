@@ -74,6 +74,12 @@ Input and Textarea own the semantic Body size, regular weight and UI line height
 Module Tabs use one quiet ChatGPT-style selected surface with a fully rounded target, regular text and preserved gaps. Do not combine a filled selected target with a bottom indicator or tab-shaped corners. Hover and keyboard focus remain independently visible. Compatibility APIs reuse the same canonical rendering; the library does not offer a separate legacy or generic visual system. Audit the maintained components against reference relationships rather than accepting them because they are already exported.
 ## Legacy visual cleanup
 
+Keep the Host's CSP intact. The prepared library supplies notification and Select
+CSS as external assets; desktop modal locks preserve wheel/touch isolation without
+injecting global scrollbar styles. Validate the installed distribution under
+`script-src 'self'; style-src 'self'`, including menus, dialogs, notification
+actions, modal scrolling, blocked background scrolling and Escape/focus return.
+
 Compatibility paths only forward APIs to canonical components. Do not retain or restore Glass styles, migrated Host global sheets, product selectors, shadcn appearance utilities or a second underline Tab mode. `controls.css` owns shared appearance; `shell.css` owns portable shell geometry. A Host may retain its documented platform font/window policy. Use explicit SettingsForm, FieldRow and MetadataList rather than CSS that implicitly restyles arbitrary forms, labels or tables. Validate actual computed typography and selected/hover/focus states, not only the package import.
 
 Semantic confirmations and menu commands use `AlertDialogAction variant="destructive"` and `DropdownMenuItem variant="destructive"`. Do not paint danger actions in Hosts. Audit navigation, metadata, avatars, menu items, floating actions and raw positioned overlays alongside form controls. Radio groups retain the same shared option insets as direct menu children.

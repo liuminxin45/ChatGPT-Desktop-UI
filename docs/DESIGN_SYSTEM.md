@@ -1,5 +1,12 @@
 # Desktop design system
 
+Prepared desktop controls support `style-src 'self'`: notification and Select
+viewport CSS is part of the shared external stylesheet. The canvas owns body
+overflow; modal overlays keep wheel/touch isolation without a second global
+scrollbar stylesheet. Verify notification queueing, menus, Select, Dialog,
+internal modal scrolling, background isolation and Escape through the prepared
+consumer package. Do not relax Host CSP to repair a component import.
+
 ## Action meaning and reading order
 
 Notifications and popup surfaces belong to the shared library. Use `Toaster`/`toast` for a global queue and `ToastNotice` for Host-owned transient state; preserve Host timing, command outcomes and localized labels. Notifications use the neutral overlay surface without success-colored left borders. Use `Popover` for anchored popup content and `InlineNotice` for persistent conditions. Hosts must not import a third-party notification renderer, hand-paint toast/popover containers, or override shared backgrounds, corners, shadows and control insets. Domain content may own its internal layout. Review temporary and failure surfaces as well as default pages.

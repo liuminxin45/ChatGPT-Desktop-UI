@@ -1,5 +1,12 @@
 # Integration
 
+Desktop consumers may retain `script-src 'self'; style-src 'self'`. The prepared
+package ships notification and Select viewport rules in its external stylesheet.
+Sonner keeps queue behavior without injecting CSS. Modal wheel/touch isolation is
+retained; the shared canvas owns body overflow, so overlays do not inject a second
+global scrollbar sheet or compensate an absent body gutter. Import the shared
+stylesheet once. Do not relax CSP or restore Host scrollbar/control paint.
+
 ## Dependency ownership
 
 Use `chatgpt-desktop-kit` as the sole control, icon, token and base-style implementation. Pin an immutable commit or package version in the consumer lockfile. Update consumers together and validate them against that exact revision. Do not copy source into each client or synchronize implementations bidirectionally.

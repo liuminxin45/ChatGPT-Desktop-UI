@@ -21,6 +21,7 @@ await build({
   define: { 'process.env.NODE_ENV': '"production"' },
 });
 const server = http.createServer(async (req, res) => {
+  res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:");
   const asset = ['/notifications.js', '/notifications.css'].includes(req.url);
   res.setHeader(
     'Content-Type',
@@ -51,9 +52,16 @@ try {
         }),
         page = await context.newPage(),
         errors = [];
-      page.on('pageerror', (e) => errors.push(e.message));
+      page.on('pageerror', (e) => { errors.push(e.message); console.error('PREPARED_FIXTURE_ERROR',e.stack); });
+      await page.addInitScript(()=>document.addEventListener('securitypolicyviolation',event=>{(window.__cspViolations ||= []).push(event.violatedDirective);}));
       await page.goto(`http://127.0.0.1:${server.address().port}`);
       await page.getByRole('button', { name: 'Host notice', exact: true }).click();
+      await page.getByRole('button',{name:'Commands',exact:true}).click();await page.getByRole('menu').waitFor();await page.getByRole('menuitem',{name:'Inspect',exact:true}).focus();await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));await page.keyboard.press('Escape');await page.getByRole('menu').waitFor({state:'detached'});
+      await page.getByRole('combobox',{name:'Long value',exact:true}).click();await page.getByRole('listbox').waitFor();await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));await page.keyboard.press('Escape');await page.getByRole('listbox').waitFor({state:'detached'});
+      await page.getByRole('button',{name:'Open dialog',exact:true}).click();await page.getByRole('dialog').waitFor();await page.getByRole('textbox',{name:'Dialog draft'}).focus();await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+      await page.locator('#modal-scroll').hover();await page.mouse.wheel(0,300);await page.waitForFunction(()=>document.querySelector('#modal-scroll').scrollTop>0);
+      await page.mouse.move(5,5);await page.mouse.wheel(0,300);await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));assert.equal(await page.locator('#background-scroll').evaluate(node=>node.scrollTop),0);
+      await page.keyboard.press('Escape');await page.getByRole('dialog').waitFor({state:'detached'});
       const notice = page.locator('.desktop-toast-notice');
       await notice.waitFor();
       const paint = await notice.evaluate((e) => {
@@ -150,6 +158,7 @@ try {
       await page.waitForTimeout(500);
       await page.screenshot({ path: path.join(output, `${theme}-${width}-${scale}.png`) });
       assert.deepEqual(errors, []);
+      assert.deepEqual(await page.evaluate(()=>window.__cspViolations||[]),[],'prepared consumer must work without inline style permission');
       results.push({
         theme,
         width,

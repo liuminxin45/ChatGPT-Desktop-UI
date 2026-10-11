@@ -1,3 +1,4 @@
+@import 'sonner/dist/styles.css';
 @import './compound.css';
 @import './notifications.css';
 @import './tokens.css';
@@ -5,6 +6,8 @@
 @import './primitives.css';
 @import './conversation.css';
 @import './ai.css';
+[data-radix-select-viewport]{scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch}
+[data-radix-select-viewport]::-webkit-scrollbar{display:none}
 .desktop-page-toolbar[data-inline=true]{padding-inline:0;border-bottom:0}
 .desktop-field-row[data-inline=true]{display:flex;gap:12px}
 .desktop-settings-form{width:100%;max-width:var(--desktop-size-settings-column);margin-inline:auto}.desktop-settings-form+.desktop-settings-form{margin-top:32px}
