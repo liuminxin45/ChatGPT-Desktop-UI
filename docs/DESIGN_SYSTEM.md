@@ -1,5 +1,7 @@
 # Desktop design system
 
+`SelectControl` forwards to canonical `Select`, including compact density, empty values and long-value behavior. Compatibility aliases do not permit Host padding, type or paint overrides. Browser `confirm/alert/prompt` dialogs must use shared `AppConfirmDialog` or `Dialog`; keep drafts until the user confirms. Source audits require the actual clean shared source at the consumer's pinned revision, never an empty `node_modules/src` scan.
+
 Prepared desktop controls support `style-src 'self'`: notification and Select
 viewport CSS is part of the shared external stylesheet. The canvas owns body
 overflow; modal overlays keep wheel/touch isolation without a second global

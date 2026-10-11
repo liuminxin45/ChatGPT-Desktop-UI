@@ -56,13 +56,28 @@ export function auditControls(directory, files) {
       if (!bindings || !ts.isNamedImports(bindings)) return;
       for (const binding of bindings.elements)
         if (
-          /^(?:Button|IconButton|Input|InputGroup|SecretInput|Textarea|Select|SelectTrigger|SelectContent|SelectItem|Checkbox|Radio|Switch|Tabs|Badge|Avatar|AvatarFallback|Progress|Table|TableHeaderCell|TableCell|ToastNotice|Toaster|DropOverlay|PopoverContent|DropdownMenuContent|DropdownMenuItem|DropdownMenuCheckboxItem|DropdownMenuRadioItem|TooltipContent|DialogContent|DialogHeader|DialogTitle|DialogDescription|DialogFooter|DialogBody|DialogAction|AlertDialogContent|AlertDialogHeader|AlertDialogTitle|AlertDialogDescription|AlertDialogFooter|AlertDialogAction|AlertDialogCancel|InlineNotice|ErrorState|EmptyState|FloatingPanel|FloatingLauncher|ComposerActionButton)$/.test(
+          /^(?:Button|IconButton|Input|InputGroup|SecretInput|Textarea|Select|SelectControl|SelectTrigger|SelectContent|SelectItem|Checkbox|Radio|RadioGroupItem|Switch|Tabs|TabsList|TabsTrigger|SegmentedControl|DatePicker|EditableCombobox|Badge|Avatar|AvatarFallback|Progress|Table|TableHeaderCell|TableCell|ToastNotice|Toaster|DropOverlay|PopoverContent|DropdownMenuContent|DropdownMenuItem|DropdownMenuCheckboxItem|DropdownMenuRadioItem|TooltipContent|DialogContent|DialogHeader|DialogTitle|DialogDescription|DialogFooter|DialogBody|DialogAction|AlertDialogContent|AlertDialogHeader|AlertDialogTitle|AlertDialogDescription|AlertDialogFooter|AlertDialogAction|AlertDialogCancel|InlineNotice|ErrorState|EmptyState|FloatingPanel|FloatingLauncher|ComposerActionButton)$/.test(
             (binding.propertyName || binding.name).text,
           )
         )
           controls.add(binding.name.text);
     });
     function visit(node) {
+      if (ts.isCallExpression(node)) {
+        const target = node.expression;
+        const owner = (ts.isPropertyAccessExpression(target) || ts.isElementAccessExpression(target))
+          ? target.expression.getText(tree) : '';
+        const method = ts.isPropertyAccessExpression(target) ? target.name.text
+          : ts.isElementAccessExpression(target) && target.argumentExpression && ts.isStringLiteral(target.argumentExpression)
+            ? target.argumentExpression.text : '';
+        if (/^(?:window|globalThis|self)$/.test(owner) && /^(?:confirm|alert|prompt)$/.test(method))
+          controlOverrides.push({
+            file: path.relative(directory, file).replaceAll('\\', '/'),
+            line: tree.getLineAndCharacterOfPosition(node.getStart(tree)).line + 1,
+            selector: `${owner}.${method}`,
+            properties: ['Use a shared Dialog or AppConfirmDialog; Host retains drafts and decisions.'],
+          });
+      }
       if (
         (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) &&
         /^(?:div|p|section|aside)$/.test(node.tagName.getText(tree))

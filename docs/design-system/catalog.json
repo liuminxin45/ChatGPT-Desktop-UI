@@ -27326,6 +27326,94 @@
       "nativeProps": []
     },
     {
+      "id": "chatgpt-desktop-kit:AppConfirmDialog",
+      "name": "AppConfirmDialog",
+      "importPath": "chatgpt-desktop-kit",
+      "family": "compat",
+      "implementation": "src/components/radix/app-dialog.tsx",
+      "description": "",
+      "props": [
+        {
+          "name": "open",
+          "required": true,
+          "type": "boolean",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "onOpenChange",
+          "required": true,
+          "type": "(open: boolean) => void",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "title",
+          "required": true,
+          "type": "React.ReactNode",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "description",
+          "required": false,
+          "type": "React.ReactNode",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "confirmLabel",
+          "required": false,
+          "type": "React.ReactNode",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "cancelLabel",
+          "required": false,
+          "type": "React.ReactNode",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "destructive",
+          "required": false,
+          "type": "boolean | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "busy",
+          "required": false,
+          "type": "boolean | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "confirmActionId",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "cancelActionId",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "onConfirm",
+          "required": true,
+          "type": "() => void | boolean | Promise<void | boolean>",
+          "native": false,
+          "description": ""
+        }
+      ],
+      "nativeProps": []
+    },
+    {
       "id": "chatgpt-desktop-kit:AvatarMenu",
       "name": "AvatarMenu",
       "importPath": "chatgpt-desktop-kit",
@@ -61851,14 +61939,50 @@
       "id": "chatgpt-desktop-kit/compat/select:SelectControl",
       "name": "SelectControl",
       "importPath": "chatgpt-desktop-kit/compat/select",
+      "aliasOf": "chatgpt-desktop-kit/compat/select:DesktopSelect",
       "family": "compat",
       "implementation": "src/components/radix/select.tsx",
       "description": "",
       "props": [
         {
+          "name": "size",
+          "required": false,
+          "type": "\"sm\" | \"md\" | undefined",
+          "native": false,
+          "description": "Compact row controls retain full values, wrapping within their assigned column."
+        },
+        {
+          "name": "actionId",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "featureId",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "surfaceId",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "toolId",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
           "name": "options",
           "required": true,
-          "type": "readonly SelectControlOption[]",
+          "type": "readonly SelectOption[]",
           "native": false,
           "description": ""
         },
@@ -61948,27 +62072,6 @@
         },
         {
           "name": "aria-labelledby",
-          "required": false,
-          "type": "string | undefined",
-          "native": false,
-          "description": ""
-        },
-        {
-          "name": "actionId",
-          "required": false,
-          "type": "string | undefined",
-          "native": false,
-          "description": ""
-        },
-        {
-          "name": "featureId",
-          "required": false,
-          "type": "string | undefined",
-          "native": false,
-          "description": ""
-        },
-        {
-          "name": "surfaceId",
           "required": false,
           "type": "string | undefined",
           "native": false,

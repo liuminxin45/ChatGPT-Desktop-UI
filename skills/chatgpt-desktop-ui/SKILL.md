@@ -5,6 +5,8 @@ description: Build or refactor a desktop-style app to match the supplied ChatGPT
 
 # ChatGPT-style desktop UI
 
+Audit compatibility aliases such as `SelectControl`, not only canonical names. Use the shared `size="sm"` API rather than Host height, padding, font or color overrides. Use `AppConfirmDialog` or `Dialog` for draft-discard and destructive confirmation, preserving drafts on cancellation. Verify the actual clean shared source at the pinned revision; an installed package without source cannot establish a clean source audit.
+
 The versioned reference is Windows ChatGPT **26.1002.7124.0**, observed on 2026-10-09. For an explicit client replica, reuse `DesktopClientSurface`, `ClientSidebar`, `SidebarSection`, `DesktopMenu` and grouped `SettingsGroup`/`SettingsField`; match the observed layouts instead of designing a new dashboard. This profile uses 44px title bar, 52px rail, 36px selected tile, 372px contextual sidebar, 728px settings body, 28px bold settings heading and 14px body. Portable defaults below apply to adaptations that do not opt into the profile. Embedded Tool typography and Host ownership remain authoritative.
 
 Inspect missing reference surfaces only within the user's authorization. Confirm the installed package version and retain measurements without publishing private captures or chat titles. Record alignment in `CLIENT_ALIGNMENT.json` and tag a published replica with the observed client version. Do not claim exact fidelity for unobserved screens, proprietary glyphs or disconnected native services.

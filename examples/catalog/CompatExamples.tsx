@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { AppConfirmDialog } from '../../src';
 import { Button } from '../../src/compat/button';
 import { Input } from '../../src/compat/input';
 import { Textarea } from '../../src/compat/textarea';
@@ -35,11 +36,27 @@ import { InternalScrollArea } from '../../src/compat/internal-scroll-area';
 
 export function CompatExamples() {
   const [open, setOpen] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
   const [value, setValue] = useState('design');
   const [checked, setChecked] = useState(true);
   const [date, setDate] = useState<Date>();
   return (
     <div className="reference-fields">
+      <Button actionId="reference.confirm.open" onClick={() => setConfirmOpen(true)}>
+        Discard changes
+      </Button>
+      <AppConfirmDialog
+        open={confirmOpen}
+        onOpenChange={setConfirmOpen}
+        title="Discard changes?"
+        description="Your unsaved draft will be lost."
+        confirmLabel="Discard"
+        cancelLabel="Keep editing"
+        destructive
+        confirmActionId="reference.confirm.discard"
+        cancelActionId="reference.confirm.keep"
+        onConfirm={() => setValue('')}
+      />
       <div className="reference-row">
         <Button actionId="reference.compat.dialog" onClick={() => setOpen(true)}>
           Edit project

@@ -8,6 +8,24 @@ Runnable composition: [example](../../../examples/catalog/CompatExamples.tsx).
 
 Generated from TypeScript exports; edit implementation props/JSDoc, then run `npm run docs:generate`. Native React attributes remain available in the online API catalog.
 
+## AppConfirmDialog (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/radix/app-dialog.tsx)
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| open | yes | `boolean` |
+| onOpenChange | yes | `(open: boolean) => void` |
+| title | yes | `React.ReactNode` |
+| description | no | `React.ReactNode` |
+| confirmLabel | no | `React.ReactNode` |
+| cancelLabel | no | `React.ReactNode` |
+| destructive | no | `boolean \| undefined` |
+| busy | no | `boolean \| undefined` |
+| confirmActionId | no | `string \| undefined` |
+| cancelActionId | no | `string \| undefined` |
+| onConfirm | yes | `() => void \| boolean \| Promise<void \| boolean>` |
+
 ## Popover (chatgpt-desktop-kit)
 
 [Implementation](../../../src/components/radix/popover.tsx)
@@ -1022,7 +1040,12 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 | Prop | Required | Type |
 | --- | --- | --- |
-| options | yes | `readonly SelectControlOption[]` |
+| size | no | `"sm" \| "md" \| undefined` |
+| actionId | no | `string \| undefined` |
+| featureId | no | `string \| undefined` |
+| surfaceId | no | `string \| undefined` |
+| toolId | no | `string \| undefined` |
+| options | yes | `readonly SelectOption[]` |
 | value | no | `string \| undefined` |
 | defaultValue | no | `string \| undefined` |
 | onValueChange | no | `((value: string) => void) \| undefined` |
@@ -1036,9 +1059,6 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | title | no | `string \| undefined` |
 | aria-label | no | `string \| undefined` |
 | aria-labelledby | no | `string \| undefined` |
-| actionId | no | `string \| undefined` |
-| featureId | no | `string \| undefined` |
-| surfaceId | no | `string \| undefined` |
 
 ## SelectGroup (chatgpt-desktop-kit/compat/select)
 

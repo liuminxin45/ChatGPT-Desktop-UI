@@ -4,6 +4,17 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { auditControls } from '../scripts/audit-controls.mjs';
+
+test('compatibility names and browser modals cannot bypass shared UI ownership', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-audit-alias-'));
+  try {
+    const source = path.join(root, 'view.tsx');
+    fs.writeFileSync(source, 'import {SelectControl as Choice, TabsTrigger} from "chatgpt-desktop-kit/compat/select"; export const view=<><Choice className="px-2 text-xs"/><TabsTrigger className="p-0"/></>; window.confirm("discard"); globalThis["alert"]("failed");');
+    assert.deepEqual(auditControls(root, [source]).controlOverrides.map(item=>item.selector), ['Choice className','TabsTrigger className','window.confirm','globalThis.alert']);
+    fs.writeFileSync(source, 'import {SelectControl} from "chatgpt-desktop-kit/compat/select"; export const view=<SelectControl size="sm" className="min-w-0 flex-1"/>;');
+    assert.equal(auditControls(root, [source]).controlOverrides.length, 0);
+  } finally { fs.rmSync(root, {recursive:true,force:true}); }
+});
 test('painted feedback cannot hide behind an arbitrary business class', () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-audit-feedback-'));
   try {

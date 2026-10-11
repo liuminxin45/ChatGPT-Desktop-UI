@@ -2,11 +2,11 @@ import * as React from 'react';
 import * as SelectPrimitive from '@radix-ui/react-select';
 import { Check, ChevronDown, ChevronUp } from 'lucide-react';
 import { cn } from './utils';
+import { Select as DesktopSelect, type SelectOption, type SelectProps } from '../forms';
 
 const Select = SelectPrimitive.Root;
 const SelectGroup = SelectPrimitive.Group;
 const SelectValue = SelectPrimitive.Value;
-const EMPTY_SELECT_VALUE = '__desktop_empty_select_value__';
 
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
@@ -91,90 +91,11 @@ const SelectSeparator = React.forwardRef<
 ));
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
 
-interface SelectControlOption {
-  value: string;
-  label: React.ReactNode;
-  disabled?: boolean;
-}
-
-interface SelectControlProps {
-  options: readonly SelectControlOption[];
-  value?: string;
-  defaultValue?: string;
-  onValueChange?: (value: string) => void;
-  placeholder?: React.ReactNode;
-  className?: string;
-  contentClassName?: string;
-  disabled?: boolean;
-  name?: string;
-  required?: boolean;
-  id?: string;
-  title?: string;
-  'aria-label'?: string;
-  'aria-labelledby'?: string;
-  actionId?: string;
-  featureId?: string;
-  surfaceId?: string;
-}
-
-function SelectControl({
-  options,
-  value,
-  defaultValue,
-  onValueChange,
-  placeholder,
-  className,
-  contentClassName,
-  disabled,
-  name,
-  required,
-  id,
-  title,
-  actionId,
-  featureId,
-  surfaceId,
-  'aria-label': ariaLabel,
-  'aria-labelledby': ariaLabelledBy,
-}: SelectControlProps) {
-  const encode = (next: string | undefined) => (next === '' ? EMPTY_SELECT_VALUE : next);
-  const decode = (next: string) => (next === EMPTY_SELECT_VALUE ? '' : next);
-  return (
-    <Select
-      value={encode(value)}
-      defaultValue={encode(defaultValue)}
-      onValueChange={(next) => onValueChange?.(decode(next))}
-      disabled={disabled}
-      name={name}
-      required={required}
-    >
-      <SelectTrigger
-        id={id}
-        aria-label={ariaLabel || title}
-        aria-labelledby={ariaLabelledBy}
-        data-desktop-action={actionId ? `${actionId}.open` : undefined}
-        className={className}
-      >
-        <SelectValue placeholder={placeholder} />
-      </SelectTrigger>
-      <SelectContent
-        className={contentClassName}
-        data-desktop-feature={featureId}
-        data-desktop-surface={surfaceId}
-      >
-        {options.map((option) => (
-          <SelectItem
-            data-desktop-action={actionId}
-            key={option.value}
-            value={encode(option.value)!}
-            disabled={option.disabled}
-          >
-            {option.label}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
-  );
-}
+// Compatibility names forward to the canonical control, including compact
+// density, long values, empty values and feature instrumentation.
+const SelectControl = DesktopSelect;
+type SelectControlOption = SelectOption;
+type SelectControlProps = SelectProps;
 
 export {
   Select,
