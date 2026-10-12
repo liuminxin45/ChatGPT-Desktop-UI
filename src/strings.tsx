@@ -8,7 +8,7 @@ const defaults: Record<string, string> = {
 };
 type Translator = (key: string) => string;
 let runtime: { translate?: Translator; getLocale?: () => string } = {};
-const StringsContext = createContext<{labels: Record<string, string>; locale: string; translate?: Translator}>({labels:defaults,locale:'en'});
+const StringsContext = createContext<{labels: Record<string, string>; locale: string; translate?: Translator} | null>(null);
 /** Optional host bridge for defaults evaluated outside React; no persistence or subscription is owned here. */
 export function configureUIRuntime(options: typeof runtime) { runtime = options; }
 /** Override the small set of primitive accessibility/default labels without a global locale service. */
@@ -16,6 +16,6 @@ export function UIStringsProvider({ labels = {}, locale = 'en', translate, child
   return <StringsContext.Provider value={{labels:{ ...defaults, ...labels },locale,translate}}>{children}</StringsContext.Provider>;
 }
 export function t(key: string) { return runtime.translate?.(key) ?? defaults[key] ?? key; }
-export function useTranslation() { const context = useContext(StringsContext); return (key: string) => context.translate?.(key) ?? runtime.translate?.(key) ?? context.labels[key] ?? key; }
-export function useLocale() { return useContext(StringsContext).locale; }
+export function useTranslation() { const context = useContext(StringsContext); return (key: string) => context ? context.translate?.(key) ?? context.labels[key] ?? key : t(key); }
+export function useLocale() { return useContext(StringsContext)?.locale ?? currentLocale(); }
 export function currentLocale() { return runtime.getLocale?.() ?? 'en'; }

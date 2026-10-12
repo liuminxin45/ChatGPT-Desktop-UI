@@ -2,6 +2,7 @@ export * from './controls';
 export * from './input-behavior';
 export * from './fixed-virtual-list';
 export * from './theme';
+export { DesktopProvider, DesktopDocumentAdapter, type DesktopProviderProps, type DesktopTokenStyle } from './scoped-surface';
 export { UIStringsProvider, configureUIRuntime } from './strings';
 export * from './shell';
 export * from './icons';

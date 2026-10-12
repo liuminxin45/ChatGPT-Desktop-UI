@@ -3,6 +3,8 @@ import * as SelectPrimitive from '@radix-ui/react-select';
 import { Check, ChevronDown, ChevronUp } from 'lucide-react';
 import { cn } from './utils';
 import { Select as DesktopSelect, type SelectOption, type SelectProps } from '../forms';
+import { createDesktopPortal } from '../../scoped-surface';
+const SelectPortal = createDesktopPortal(SelectPrimitive.Portal);
 
 const Select = SelectPrimitive.Root;
 const SelectGroup = SelectPrimitive.Group;
@@ -45,18 +47,22 @@ const SelectContent = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
 >(({ className = '', children, position = 'popper', ...props }, ref) => (
-  <SelectPrimitive.Portal>
+  <SelectPortal>
     <SelectPrimitive.Content
       ref={ref}
       className={cn('desktop-select-content', className)}
       position={position}
       {...props}
+      onPointerDownOutside={(event) => {
+        props.onPointerDownOutside?.(event);
+        event.detail.originalEvent.preventDefault();
+      }}
     >
       <SelectScrollUpButton />
       <SelectPrimitive.Viewport className="desktop-select-viewport">{children}</SelectPrimitive.Viewport>
       <SelectScrollDownButton />
     </SelectPrimitive.Content>
-  </SelectPrimitive.Portal>
+  </SelectPortal>
 ));
 SelectContent.displayName = SelectPrimitive.Content.displayName;
 

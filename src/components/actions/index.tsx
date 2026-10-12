@@ -62,15 +62,13 @@ export const RecordLink = forwardRef<
   );
 });
 
-export function IconButton({
-  className,
-  type = 'button',
-  actionId,
-  title,
-  ...props
-}: ButtonHTMLAttributes<HTMLButtonElement> & { actionId?: string }) {
+export const IconButton = forwardRef<
+  HTMLButtonElement,
+  ButtonHTMLAttributes<HTMLButtonElement> & { actionId?: string }
+>(function IconButton({ className, type = 'button', actionId, title, ...props }, ref) {
   return (
     <ControlButton
+      ref={ref}
       type={type}
       actionId={actionId}
       title={title}
@@ -78,7 +76,7 @@ export function IconButton({
       {...props}
     />
   );
-}
+});
 
 /** Reusable floating surfaces; positioning and application state belong to the Host. */
 export const FloatingLauncher = forwardRef<HTMLButtonElement, ButtonProps>(function FloatingLauncher(

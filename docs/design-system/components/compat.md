@@ -559,67 +559,84 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 | Prop | Required | Type |
 | --- | --- | --- |
-| mode | no | `"multiple" \| "default" \| "range" \| "single" \| undefined` |
+| mode | no | `"multiple" \| "range" \| "single" \| undefined` |
+| required | no | `boolean \| undefined` |
 | className | no | `string \| undefined` |
-| classNames | no | `Partial<StyledElement<string>> \| undefined` |
+| classNames | no | `(Partial<ClassNames> & Partial<DeprecatedUI<string>>) \| undefined` |
 | modifiersClassNames | no | `ModifiersClassNames \| undefined` |
 | style | no | `React.CSSProperties \| undefined` |
-| styles | no | `Partial<Omit<StyledElement<React.CSSProperties>, InternalModifiersElement>> \| undefined` |
+| styles | no | `(Partial<Styles> & Partial<DeprecatedUI<React.CSSProperties>>) \| undefined` |
 | modifiersStyles | no | `ModifiersStyles \| undefined` |
 | id | no | `string \| undefined` |
 | defaultMonth | no | `Date \| undefined` |
 | month | no | `Date \| undefined` |
-| onMonthChange | no | `MonthChangeEventHandler \| undefined` |
 | numberOfMonths | no | `number \| undefined` |
+| startMonth | no | `Date \| undefined` |
 | fromDate | no | `Date \| undefined` |
-| toDate | no | `Date \| undefined` |
 | fromMonth | no | `Date \| undefined` |
-| toMonth | no | `Date \| undefined` |
 | fromYear | no | `number \| undefined` |
+| endMonth | no | `Date \| undefined` |
+| toDate | no | `Date \| undefined` |
+| toMonth | no | `Date \| undefined` |
 | toYear | no | `number \| undefined` |
-| disableNavigation | no | `boolean \| undefined` |
 | pagedNavigation | no | `boolean \| undefined` |
 | reverseMonths | no | `boolean \| undefined` |
-| captionLayout | no | `CaptionLayout \| undefined` |
+| hideNavigation | no | `boolean \| undefined` |
+| disableNavigation | no | `boolean \| undefined` |
+| captionLayout | no | `"label" \| "dropdown" \| "dropdown-months" \| "dropdown-years" \| undefined` |
+| reverseYears | no | `boolean \| undefined` |
+| navLayout | no | `"around" \| "after" \| undefined` |
 | fixedWeeks | no | `boolean \| undefined` |
-| hideHead | no | `boolean \| undefined` |
+| hideWeekdays | no | `boolean \| undefined` |
 | showOutsideDays | no | `boolean \| undefined` |
 | showWeekNumber | no | `boolean \| undefined` |
-| weekStartsOn | no | `0 \| 3 \| 4 \| 1 \| 2 \| 5 \| 6 \| undefined` |
-| firstWeekContainsDate | no | `4 \| 1 \| undefined` |
+| animate | no | `boolean \| undefined` |
+| broadcastCalendar | no | `boolean \| undefined` |
 | ISOWeek | no | `boolean \| undefined` |
-| components | no | `CustomComponents \| undefined` |
+| timeZone | no | `string \| undefined` |
+| noonSafe | no | `boolean \| undefined` |
+| components | no | `(Partial<CustomComponents> & { IconLeft?: React.ComponentType<React.SVGProps<SVGSVGElement>>; IconRight?: React.ComponentType<React.SVGProps<SVGSVGElement>>; }) \| undefined` |
 | footer | no | `React.ReactNode` |
+| autoFocus | no | `boolean \| undefined` |
 | initialFocus | no | `boolean \| undefined` |
 | disabled | no | `Matcher \| Matcher[] \| undefined` |
 | hidden | no | `Matcher \| Matcher[] \| undefined` |
-| selected | no | `Matcher \| Matcher[] \| undefined` |
 | today | no | `Date \| undefined` |
-| modifiers | no | `DayModifiers \| undefined` |
-| locale | no | `Locale \| undefined` |
+| modifiers | no | `Record<string, Matcher \| Matcher[] \| undefined> \| undefined` |
 | labels | no | `Partial<Labels> \| undefined` |
 | formatters | no | `Partial<Formatters> \| undefined` |
 | dir | no | `string \| undefined` |
+| aria-label | no | `string \| undefined` |
+| aria-labelledby | no | `string \| undefined` |
+| role | no | `"application" \| "dialog" \| undefined` |
 | nonce | no | `string \| undefined` |
 | title | no | `string \| undefined` |
 | lang | no | `string \| undefined` |
+| locale | no | `Partial<DayPickerLocale> \| undefined` |
+| numerals | no | `Numerals \| undefined` |
+| weekStartsOn | no | `0 \| 3 \| 4 \| 1 \| 2 \| 5 \| 6 \| undefined` |
+| firstWeekContainsDate | no | `4 \| 1 \| undefined` |
+| useAdditionalWeekYearTokens | no | `boolean \| undefined` |
+| useAdditionalDayOfYearTokens | no | `boolean \| undefined` |
+| onMonthChange | no | `MonthChangeEventHandler \| undefined` |
 | onNextClick | no | `MonthChangeEventHandler \| undefined` |
 | onPrevClick | no | `MonthChangeEventHandler \| undefined` |
-| onWeekNumberClick | no | `WeekNumberClickEventHandler \| undefined` |
-| onDayClick | no | `DayClickEventHandler \| undefined` |
-| onDayFocus | no | `DayFocusEventHandler \| undefined` |
-| onDayBlur | no | `DayFocusEventHandler \| undefined` |
-| onDayMouseEnter | no | `DayMouseEventHandler \| undefined` |
-| onDayMouseLeave | no | `DayMouseEventHandler \| undefined` |
-| onDayKeyDown | no | `DayKeyboardEventHandler \| undefined` |
-| onDayKeyUp | no | `DayKeyboardEventHandler \| undefined` |
-| onDayKeyPress | no | `DayKeyboardEventHandler \| undefined` |
-| onDayPointerEnter | no | `DayPointerEventHandler \| undefined` |
-| onDayPointerLeave | no | `DayPointerEventHandler \| undefined` |
-| onDayTouchCancel | no | `DayTouchEventHandler \| undefined` |
-| onDayTouchEnd | no | `DayTouchEventHandler \| undefined` |
-| onDayTouchMove | no | `DayTouchEventHandler \| undefined` |
-| onDayTouchStart | no | `DayTouchEventHandler \| undefined` |
+| onWeekNumberClick | no | `any` |
+| onDayClick | no | `DayEventHandler<React.MouseEvent<Element, MouseEvent>> \| undefined` |
+| onDayFocus | no | `DayEventHandler<React.FocusEvent<Element, Element>> \| undefined` |
+| onDayBlur | no | `DayEventHandler<React.FocusEvent<Element, Element>> \| undefined` |
+| onDayKeyDown | no | `DayEventHandler<React.KeyboardEvent<Element>> \| undefined` |
+| onDayMouseEnter | no | `DayEventHandler<React.MouseEvent<Element, MouseEvent>> \| undefined` |
+| onDayMouseLeave | no | `DayEventHandler<React.MouseEvent<Element, MouseEvent>> \| undefined` |
+| dateLib | no | `Partial<DateLib> \| undefined` |
+| onDayKeyUp | no | `DayEventHandler<React.KeyboardEvent<Element>> \| undefined` |
+| onDayKeyPress | no | `DayEventHandler<React.KeyboardEvent<Element>> \| undefined` |
+| onDayPointerEnter | no | `DayEventHandler<React.PointerEvent<Element>> \| undefined` |
+| onDayPointerLeave | no | `DayEventHandler<React.PointerEvent<Element>> \| undefined` |
+| onDayTouchCancel | no | `DayEventHandler<React.TouchEvent<Element>> \| undefined` |
+| onDayTouchEnd | no | `DayEventHandler<React.TouchEvent<Element>> \| undefined` |
+| onDayTouchMove | no | `DayEventHandler<React.TouchEvent<Element>> \| undefined` |
+| onDayTouchStart | no | `DayEventHandler<React.TouchEvent<Element>> \| undefined` |
 
 ## Card (chatgpt-desktop-kit/compat/card)
 
@@ -718,8 +735,8 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | onSelect | no | `((event: Event) => void) \| undefined` |
 | asChild | no | `boolean \| undefined` |
 | checked | no | `(boolean \| "indeterminate") \| undefined` |
-| textValue | no | `string \| undefined` |
 | onCheckedChange | no | `((checked: boolean) => void) \| undefined` |
+| textValue | no | `string \| undefined` |
 
 ## DropdownMenuContent (chatgpt-desktop-kit/compat/dropdown-menu)
 
@@ -728,8 +745,8 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | Prop | Required | Type |
 | --- | --- | --- |
 | asChild | no | `boolean \| undefined` |
-| loop | no | `boolean \| undefined` |
 | align | no | `"center" \| "end" \| "start" \| undefined` |
+| loop | no | `boolean \| undefined` |
 | side | no | `"top" \| "right" \| "bottom" \| "left" \| undefined` |
 | sideOffset | no | `number \| undefined` |
 | alignOffset | no | `number \| undefined` |

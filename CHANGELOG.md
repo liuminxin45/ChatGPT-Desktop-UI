@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.6.0
+
+- Add scoped component CSS, controlled/local themes and origin-aware Radix portals without host reset/cursor/theme pollution. Retain document entries and add an explicit document adapter.
+- Unify portable Dialog on Radix modality; repair topmost Escape, body autofocus and focus return. Repair combobox Tab/IME/blur and single-commit behavior.
+- Keep local language providers independent of the legacy host bridge; align virtual record headings with record content.
+- Forward Checkbox/IconButton/Switch refs; add compatible controlled/uncontrolled Switch callbacks. Upgrade the calendar foundation for React 19 and retain common legacy wrapper aliases.
+- Add PR gates, Hooks lint, component tests, prepared-package isolation/accessibility tests, independent tarball install/type/SSR matrix and reviewed Windows/Edge visual baselines.
+- Add standard npm metadata, publishing checks, React 18/19 and Node 22/24 consumer support, migration guidance and regenerated API/Skill documentation. Source builds remain on Node 24.19.0.
+
+## 0.5.1
+
+- Centralize notification, Select and confirmation styling, including prepared CSS and desktop CSP behavior.
+- Expand record/list spacing, localized confirmations, semantic actions and actual source-adoption checks across coordinated consumers.
+
+## 0.5.0
+
+- Add shared AI activity/response presentation and composer scroll-edge boundaries.
+- Extend retained list/Tool surface composition while preserving shared theme and typography ownership.
+
 ## 0.4.4 — sidebar alignment follow-up
 
 - Align sidebar action labels through the shared Button glyph slot, preserving the visual size of smaller icons.

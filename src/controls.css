@@ -75,7 +75,7 @@
 .desktop-tooltip{z-index:1300;max-width:240px;border:0;border-radius:var(--desktop-radius-overlay);background:var(--desktop-color-surface-overlay);padding:4px 10px;color:var(--desktop-color-text);font-family:var(--desktop-font-sans);font-size:var(--desktop-font-size-supporting);font-weight:var(--desktop-font-weight-regular);line-height:var(--desktop-line-height-supporting);box-shadow:var(--desktop-shadow-subtle)}
 
 /* Host policy also covers portals, inline styles, legacy utilities and Native Tool CSS. */
-html:root,html:root body,html:root body *,html:root body *::before,html:root body *::after{cursor:default!important}
+
 
 /* One workspace geometry for application pages and host-mounted Tool surfaces. */
 .desktop-workbench{display:flex;width:100%;height:100%;min-width:0;min-height:0;flex-direction:column;background:var(--desktop-color-background);color:var(--desktop-color-text)}
@@ -162,7 +162,7 @@ html:root,html:root body,html:root body *,html:root body *::before,html:root bod
 
 .desktop-button:is([aria-pressed=true],[aria-selected=true],[aria-current=true],[aria-current=page],[data-desktop-selected=true]){background:var(--desktop-color-surface-selected);color:var(--desktop-color-text)}
 
-.desktop-virtual-list__header{position:sticky;top:0;z-index:2;padding-inline:4px;background:var(--desktop-color-background)}
+.desktop-virtual-list__header{position:sticky;top:0;z-index:2;padding-inline:calc(4px + var(--desktop-space-record-inline));background:var(--desktop-color-background)}
 .desktop-send-control .desktop-action-glyph{width:16px;height:16px;display:flex;align-items:center;justify-content:center}
 .desktop-send-control[data-composer-state="sending"],.desktop-send-control[data-composer-state="stopping"]{opacity:1}
 .desktop-composer-progress{animation:desktop-composer-spin 1s linear infinite}
@@ -174,3 +174,4 @@ html:root,html:root body,html:root body *,html:root body *::before,html:root bod
 .desktop-drop-overlay{position:absolute;inset:0;z-index:40;display:flex;align-items:center;justify-content:center;gap:8px;pointer-events:none;border:1px dashed var(--desktop-color-border-strong);border-radius:var(--desktop-radius-control);background:color-mix(in srgb,var(--desktop-color-surface-overlay) 90%,transparent);color:var(--desktop-color-text);font:400 var(--desktop-font-size-body)/var(--desktop-line-height-ui) var(--desktop-font-sans)}
 
 .desktop-menu-item--danger{color:var(--desktop-color-danger)}
+.desktop-dialog{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1000}

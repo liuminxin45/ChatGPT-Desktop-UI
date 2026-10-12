@@ -1,0 +1,4 @@
+html[data-desktop-document],html[data-desktop-document] body,html[data-desktop-document] #root,html[data-desktop-document] #__next{width:100%;height:100%;margin:0;overflow:hidden;background:var(--desktop-color-background);color:var(--desktop-color-text)}
+html[data-desktop-document] *,html[data-desktop-document] *::before,html[data-desktop-document] *::after{box-sizing:border-box;cursor:default!important}
+.desktop-desktop-surface{height:100%;width:100%;font:400 var(--desktop-font-size-body)/var(--desktop-line-height-ui) var(--desktop-font-sans);font-synthesis:none}
+.desktop-desktop-theme{width:110px;font-size:var(--desktop-font-size-supporting)}

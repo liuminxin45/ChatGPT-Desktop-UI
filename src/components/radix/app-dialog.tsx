@@ -9,6 +9,10 @@ import { X } from 'lucide-react';
 import { Button } from './button';
 import { InternalScrollArea } from './internal-scroll-area';
 import { cn } from './utils';
+import { protectModalEscape } from '../../runtime/modal-keyboard';
+import { createDesktopPortal } from '../../scoped-surface';
+const DialogPortal = createDesktopPortal(DialogPrimitive.Portal);
+const AlertPortal = createDesktopPortal(AlertDialogPrimitive.Portal);
 
 export type AppDialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'wide' | 'full';
 
@@ -21,7 +25,7 @@ export const appDialogFooterClassName = 'desktop-app-dialog-footer';
 export const AppDialog = DialogPrimitive.Root;
 export const AppDialogTrigger = DialogPrimitive.Trigger;
 export const AppDialogClose = DialogPrimitive.Close;
-export const AppDialogPortal = DialogPrimitive.Portal;
+export const AppDialogPortal = DialogPortal;
 export const AppDialogOverlay = DialogPrimitive.Overlay;
 
 export const AppDialogContent = React.forwardRef<
@@ -76,7 +80,7 @@ export const AppDialogContent = React.forwardRef<
       </>
     );
   return (
-    <DialogPrimitive.Portal>
+    <DialogPortal>
       <DialogPrimitive.Overlay className={appDialogOverlayClassName} />
       <DialogPrimitive.Content
         ref={ref}
@@ -85,6 +89,10 @@ export const AppDialogContent = React.forwardRef<
         onPointerDownOutside={onPointerDownOutside}
         onInteractOutside={onInteractOutside}
         {...props}
+        onEscapeKeyDown={(event) => {
+          props.onEscapeKeyDown?.(event);
+          protectModalEscape(event);
+        }}
       >
         {arrangedChildren}
         {showCloseButton && (
@@ -102,7 +110,7 @@ export const AppDialogContent = React.forwardRef<
           </DialogPrimitive.Close>
         )}
       </DialogPrimitive.Content>
-    </DialogPrimitive.Portal>
+    </DialogPortal>
   );
 });
 
@@ -187,17 +195,21 @@ export const AppAlertDialogContent = React.forwardRef<
     </>
   );
   return (
-    <AlertDialogPrimitive.Portal>
+    <AlertPortal>
       <AlertDialogPrimitive.Overlay className={appDialogOverlayClassName} />
       <AlertDialogPrimitive.Content
         ref={ref}
         data-size={size}
         className={cn(appDialogContentClassName, className)}
         {...props}
+        onEscapeKeyDown={(event) => {
+          props.onEscapeKeyDown?.(event);
+          protectModalEscape(event);
+        }}
       >
         {arrangedChildren}
       </AlertDialogPrimitive.Content>
-    </AlertDialogPrimitive.Portal>
+    </AlertPortal>
   );
 });
 
@@ -298,9 +310,13 @@ export function AppConfirmDialog({
 
   return (
     <AlertDialogPrimitive.Root open={open} onOpenChange={changeOpen}>
-      <AlertDialogPrimitive.Portal>
+      <AlertPortal>
         <AlertDialogPrimitive.Overlay className={appDialogOverlayClassName} />
-        <AlertDialogPrimitive.Content className={appDialogContentClassName} data-size="sm">
+        <AlertDialogPrimitive.Content
+          className={appDialogContentClassName}
+          data-size="sm"
+          onEscapeKeyDown={protectModalEscape}
+        >
           <div className={appDialogHeaderClassName}>
             <div className="desktop-app-dialog-copy">
               <AlertDialogPrimitive.Title className="desktop-app-dialog-title">
@@ -335,7 +351,7 @@ export function AppConfirmDialog({
             </Button>
           </div>
         </AlertDialogPrimitive.Content>
-      </AlertDialogPrimitive.Portal>
+      </AlertPortal>
     </AlertDialogPrimitive.Root>
   );
 }

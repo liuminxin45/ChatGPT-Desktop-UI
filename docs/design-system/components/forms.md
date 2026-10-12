@@ -103,6 +103,8 @@ Explicit responsive form layout; never repaint arbitrary Host forms or labels.
 | Prop | Required | Type |
 | --- | --- | --- |
 | checked | no | `boolean \| undefined` |
+| defaultChecked | no | `boolean \| undefined` |
+| onCheckedChange | no | `((checked: boolean) => void) \| undefined` |
 | actionId | no | `string \| undefined` |
 
 ## Textarea (chatgpt-desktop-kit)
