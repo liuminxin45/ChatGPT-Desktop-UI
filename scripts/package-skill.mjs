@@ -29,6 +29,7 @@ await cp(path.join(root,'docs/CLIENT_ALIGNMENT.json'),path.join(skill,'reference
 await cp(path.join(root,'docs/demo'),path.join(skill,'references/demo'),{recursive:true});
 for(const [from,to] of [['DESIGN_SYSTEM.md','design-system.md'],['DESIGN_GUIDANCE.md','design-guidance.md'],['INTEGRATION.md','integration.md'],['VISUAL_REFERENCES.md','visual-references.md'],['REPLICA_CONTRACT.md','REPLICA_CONTRACT.md'],['COMPONENTS.md','COMPONENTS.md'],['DESIGN_SYSTEM.md','DESIGN_SYSTEM.md'],['CLIENT_ALIGNMENT.json','CLIENT_ALIGNMENT.json']]) await cp(path.join(root,'docs',from),path.join(skill,'references',to));
 await cp(path.join(root,'docs/design-system/catalog.json'),path.join(skill,'references/catalog.json'));
+await cp(path.join(root,'docs/MIGRATION_0_6.md'),path.join(skill,'references/MIGRATION_0_6.md'));
 await cp(path.join(root,'docs/design-system/components'),path.join(skill,'references/api'),{recursive:true});
 // Generated API references point at public source/example locations, not a second maintained copy.
 for(const file of await readdir(path.join(skill,'references/api'))) {
