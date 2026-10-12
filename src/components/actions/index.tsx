@@ -5,6 +5,8 @@ import { ControlButton } from './control-button';
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  /** Commands are compact; rows and media own distinct, shared geometry. Surface is reserved for domain graphics such as schedule grids. */
+  layout?: 'command' | 'row' | 'tile' | 'surface';
   variant?: ButtonVariant;
   size?: 'sm' | 'md';
   actionId?: string;
@@ -17,7 +19,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
-  { className, variant = 'secondary', size = 'md', icon, iconOnly = false, ...props },
+  { className, layout = 'command', variant = 'secondary', size = 'md', icon, iconOnly = false, ...props },
   ref,
 ) {
   return (
@@ -26,9 +28,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       icon={icon}
       iconOnly={iconOnly}
       className={classes(
-        'desktop-button',
-        `desktop-button--${variant}`,
-        `desktop-button--${size}`,
+        layout === 'surface' ? 'desktop-surface-action' : 'desktop-button',
+        layout !== 'surface' && `desktop-button--${variant}`,
+        layout !== 'surface' && `desktop-button--${size}`,
+        layout !== 'command' && `desktop-button--${layout}`,
         className,
         !!icon && iconOnly && 'desktop-button--icon',
       )}

@@ -14,6 +14,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 | Prop | Required | Type |
 | --- | --- | --- |
+| layout | no | `"row" \| "command" \| "tile" \| "surface" \| undefined` |
 | variant | no | `ButtonVariant \| undefined` |
 | size | no | `"sm" \| "md" \| undefined` |
 | actionId | no | `string \| undefined` |
@@ -30,6 +31,7 @@ Reusable floating surfaces; positioning and application state belong to the Host
 
 | Prop | Required | Type |
 | --- | --- | --- |
+| layout | no | `"row" \| "command" \| "tile" \| "surface" \| undefined` |
 | variant | no | `ButtonVariant \| undefined` |
 | size | no | `"sm" \| "md" \| undefined` |
 | actionId | no | `string \| undefined` |
@@ -54,6 +56,7 @@ A record command with feedback confined to its actual hit target.
 
 | Prop | Required | Type |
 | --- | --- | --- |
+| layout | no | `"row" \| "command" \| "tile" \| "surface" \| undefined` |
 | variant | no | `ButtonVariant \| undefined` |
 | size | no | `"sm" \| "md" \| undefined` |
 | actionId | no | `string \| undefined` |

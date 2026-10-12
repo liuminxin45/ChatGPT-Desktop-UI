@@ -270,6 +270,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | --- | --- | --- |
 | asChild | no | `boolean \| undefined` |
 | size | no | `"default" \| "icon" \| "sm" \| "lg" \| null \| undefined` |
+| layout | no | `"row" \| "command" \| "tile" \| "surface" \| undefined` |
 | variant | no | `"link" \| "default" \| "primary" \| "secondary" \| "ghost" \| "destructive" \| "outline" \| null \| undefined` |
 | actionId | no | `string \| undefined` |
 | confirmOnEnter | no | `boolean \| undefined` |
@@ -292,6 +293,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | --- | --- | --- |
 | asChild | no | `boolean \| undefined` |
 | size | no | `"default" \| "icon" \| "sm" \| "lg" \| null \| undefined` |
+| layout | no | `"row" \| "command" \| "tile" \| "surface" \| undefined` |
 | variant | no | `"link" \| "default" \| "primary" \| "secondary" \| "ghost" \| "destructive" \| "outline" \| null \| undefined` |
 | actionId | no | `string \| undefined` |
 | confirmOnEnter | no | `boolean \| undefined` |
@@ -411,6 +413,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | --- | --- | --- |
 | asChild | no | `boolean \| undefined` |
 | size | no | `"default" \| "icon" \| "sm" \| "lg" \| null \| undefined` |
+| layout | no | `"row" \| "command" \| "tile" \| "surface" \| undefined` |
 | variant | no | `"link" \| "default" \| "primary" \| "secondary" \| "ghost" \| "destructive" \| "outline" \| null \| undefined` |
 | actionId | no | `string \| undefined` |
 | confirmOnEnter | no | `boolean \| undefined` |
@@ -552,6 +555,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | icon | no | `React.ReactNode` |
 | iconOnly | no | `boolean \| undefined` |
 | badge | no | `React.ReactNode` |
+| layout | no | `"row" \| "command" \| "tile" \| "surface" \| undefined` |
 
 ## Calendar (chatgpt-desktop-kit/compat/calendar)
 

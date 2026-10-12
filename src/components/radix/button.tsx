@@ -42,6 +42,7 @@ const Button = React.forwardRef<
       iconOnly?: boolean;
       /** A real count/state badge, separate from the hidden action caption. */
       badge?: React.ReactNode;
+      layout?: 'command' | 'row' | 'tile' | 'surface';
     }
 >(
   (
@@ -55,6 +56,7 @@ const Button = React.forwardRef<
       icon,
       iconOnly,
       badge,
+      layout = 'command',
       children,
       ...props
     },
@@ -72,7 +74,10 @@ const Button = React.forwardRef<
         iconOnly={compact}
         badge={badge}
         className={cn(
-          buttonVariants({ variant, size, className }),
+          layout === 'surface'
+            ? cn('desktop-surface-action', className)
+            : buttonVariants({ variant, size, className }),
+          layout !== 'command' && `desktop-button--${layout}`,
           icon && compact && 'desktop-button--icon',
         )}
         {...props}

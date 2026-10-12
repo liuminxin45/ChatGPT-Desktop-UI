@@ -5,6 +5,8 @@ description: Build or refactor a desktop-style app to match the supplied ChatGPT
 
 # ChatGPT-style desktop UI
 
+Choose shared Button geometry explicitly: command for compact centered actions, row for left-aligned single-target records with shared insets, tile for square contained image previews. Group stacked title and metadata as one content block. Do not apply ordinary command geometry to lists or media. Surface layout is reserved for documented domain graphics such as schedule cells, with native action/accessibility behavior but domain-owned geometry. Multi-action records remain static RecordRow groups.
+
 Verify nested overlay keyboard ownership: Escape closes only the active Select, menu, Popover or child Dialog, preserving its parent editor and draft. Respect consumed keys and IME composition. Only the top visible Dialog contains Tab, and dismissal restores focus to its trigger; test this in the actual consumer portal/CSS pipeline.
 
 Audit compatibility aliases such as `SelectControl`, not only canonical names. Use the shared `size="sm"` API rather than Host height, padding, font or color overrides. Use `AppConfirmDialog` or `Dialog` for draft-discard and destructive confirmation, preserving drafts on cancellation. Verify the actual clean shared source at the pinned revision; an installed package without source cannot establish a clean source audit.
