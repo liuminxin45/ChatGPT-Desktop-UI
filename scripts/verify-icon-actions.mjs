@@ -41,6 +41,12 @@ try {
     await page.getByRole('button', {name:'Collection actions',exact:true}).click();
     assert.equal(await page.locator('body').getAttribute('data-collection-open'), 'true');
     await page.getByRole('menuitem', {name:'Full collection',exact:true}).waitFor();
+    await page.waitForFunction(() => {
+      const menu = document.querySelector('[role=menu]');
+      return menu && menu.contains(document.activeElement) && menu.style.pointerEvents === 'auto';
+    });
+    // Autofocus precedes Radix's committed layer callback on fast runners.
+    await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
     await page.keyboard.press('Escape');
     await page.waitForFunction(() => document.body.dataset.collectionOpen === 'false');
     assert.equal(await page.locator('body').getAttribute('data-collection-open'), 'false');
