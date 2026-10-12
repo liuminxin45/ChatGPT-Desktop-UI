@@ -7,8 +7,15 @@ import { fileURLToPath } from 'node:url';
 import { build } from 'esbuild';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const npmCli =
-  process.env.npm_execpath || path.resolve(path.dirname(process.execPath), 'node_modules/npm/bin/npm-cli.js');
+let npmCli;
+for (const candidate of [
+  process.env.npm_execpath,
+  path.resolve(path.dirname(process.execPath), 'node_modules/npm/bin/npm-cli.js'),
+  path.resolve(path.dirname(process.execPath), '../lib/node_modules/npm/bin/npm-cli.js'),
+].filter(Boolean)) {
+  if (await fs.access(candidate).then(() => true, () => false)) { npmCli = candidate; break; }
+}
+assert.ok(npmCli, 'Run through npm or use a Node installation containing the npm CLI.');
 const temp = await fs.mkdtemp(path.join(os.tmpdir(), 'desktop-kit-tarball-'));
 const evidence = path.join(root, 'tests/output/tarball');
 await fs.mkdir(evidence, { recursive: true });
