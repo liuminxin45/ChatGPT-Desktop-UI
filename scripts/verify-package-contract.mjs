@@ -146,6 +146,39 @@ try {
       );
       assert.equal(await list.evaluate((el) => getComputedStyle(el).borderRadius), '19px');
       await page.keyboard.press('Escape');
+      await page.waitForFunction(() => !document.querySelector('[role=listbox]'));
+      await page.waitForFunction(
+        (id) => document.activeElement?.getAttribute('aria-label') === `${id} select`,
+        id,
+      );
+      await page.getByLabel(`${id} select`, { exact: true }).click();
+      await page.getByRole('listbox').waitFor();
+      await page.waitForFunction(() => document.activeElement?.closest('[role=listbox]'));
+
+      await page.waitForFunction(() => {
+        const el = document.querySelector('[role=listbox]');
+        if (!el) return false;
+        const b = el.getBoundingClientRect();
+        return b.top >= 0 && b.left >= 0 && b.bottom <= innerHeight && b.right <= innerWidth;
+      });
+      await page.mouse.click(1, 1);
+
+      await page.waitForFunction(() => !document.querySelector('[role=listbox]'));
+      await page.waitForFunction(
+        (id) => document.activeElement?.getAttribute('aria-label') === `${id} select`,
+        id,
+      );
+      await page.waitForFunction(
+        (id) => getComputedStyle(document.querySelector(`[aria-label="${id} select"]`)).boxShadow === 'none',
+        id,
+      );
+      assert.equal(
+        await page
+          .getByLabel(`${id} select`, { exact: true })
+          .evaluate((el) => getComputedStyle(el).boxShadow),
+        'none',
+        'Pointer dismissal preserves focus without a ring',
+      );
       await page.getByRole('button', { name: `${id} popover`, exact: true }).click();
       const draft = page.getByLabel(`${id} popup draft`);
       await draft.waitFor();
@@ -181,6 +214,22 @@ try {
         ),
       );
       assert.equal(await count(`${id}.outer.close`), 0, 'IME Escape must retain the editor');
+      await page
+        .getByRole('button', { name: `${id} compound`, exact: true, includeHidden: true })
+        .evaluate((el) => el.click());
+      const compound = page.getByRole('dialog', { name: `${id} compound title`, exact: true });
+      await compound.waitFor();
+      assert.equal(
+        await compound.evaluate((el) => {
+          const b = el.getBoundingClientRect();
+          return el.contains(document.elementFromPoint(b.x + b.width / 2, b.y + b.height / 2));
+        }),
+        true,
+        'Mixed API modal is above its parent',
+      );
+      await page.keyboard.press('Escape');
+      await compound.waitFor({ state: 'detached' });
+      assert.equal(await count(`${id}.outer.close`), 0, 'Mixed API dismissal retains parent');
       await page.getByRole('button', { name: `Open ${id} nested`, exact: true }).click();
       await page.getByLabel(`${id} inner draft`).waitFor();
       await page.waitForFunction(
@@ -227,6 +276,13 @@ try {
       await page.getByRole('button', { name: `${id} compound`, exact: true }).click();
       await page.getByRole('dialog', { name: `${id} compound title`, exact: true }).waitFor();
       await page.keyboard.press('Escape');
+      await page
+        .getByRole('dialog', { name: `${id} compound title`, exact: true })
+        .waitFor({ state: 'detached' });
+      await page.waitForFunction(
+        (id) => document.activeElement?.getAttribute('data-desktop-action') === `${id}.compound`,
+        id,
+      );
     }
     await page.locator('#unmount').click();
     await page.waitForFunction(() => document.querySelectorAll('.desktop-ui-portal').length === 0);

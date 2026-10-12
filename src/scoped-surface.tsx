@@ -84,6 +84,16 @@ const ScopedPortalContent = forwardRef<
         'desktop-native-tool-surface',
         !!source.closest('.desktop-native-tool-surface'),
       );
+      for (const attribute of [
+        'data-desktop-input-modality',
+        'data-desktop-feature',
+        'data-desktop-surface',
+        'data-desktop-tool-surface',
+      ]) {
+        const value = source.closest(`[${attribute}]`)?.getAttribute(attribute);
+        if (value === null || value === undefined) portal.removeAttribute(attribute);
+        else portal.setAttribute(attribute, value);
+      }
       for (const property of computed) {
         if (!property.startsWith('--desktop-') && !property.startsWith('--kit-')) continue;
         const value = computed.getPropertyValue(property);
@@ -94,7 +104,18 @@ const ScopedPortalContent = forwardRef<
     sync();
     const observer = new MutationObserver(sync);
     for (let ancestor: Element | null = source; ancestor; ancestor = ancestor.parentElement)
-      observer.observe(ancestor, { attributes: true, attributeFilter: ['class', 'style', 'data-theme'] });
+      observer.observe(ancestor, {
+        attributes: true,
+        attributeFilter: [
+          'class',
+          'style',
+          'data-theme',
+          'data-desktop-input-modality',
+          'data-desktop-feature',
+          'data-desktop-surface',
+          'data-desktop-tool-surface',
+        ],
+      });
     return () => observer.disconnect();
   }, [origin, theme]);
   return (

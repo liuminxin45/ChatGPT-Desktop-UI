@@ -4,7 +4,6 @@ import {
   useCallback,
   useContext,
   useEffect,
-  useLayoutEffect,
   useImperativeHandle,
   useRef,
   useState,
@@ -226,7 +225,7 @@ export function VirtualList<T>({
   }, [resetKey]);
   const keyReader = useRef(getItemKey);
   const anchorVirtualizer = useRef(virtualizer);
-  useLayoutEffect(() => {
+  useEffect(() => {
     keyReader.current = getItemKey;
     anchorVirtualizer.current = virtualizer;
   }, [getItemKey, virtualizer]);

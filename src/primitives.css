@@ -32,3 +32,4 @@
 :where(.desktop-muted-text) {
   color: var(--desktop-color-text-muted);
 }
+@media(prefers-reduced-motion:reduce){.desktop-ui-root *,.desktop-ui-root *::before,.desktop-ui-root *::after,.desktop-ui-portal *,.desktop-ui-portal *::before,.desktop-ui-portal *::after,.desktop-desktop-surface *,.desktop-desktop-surface *::before,.desktop-desktop-surface *::after,.desktop-native-tool-surface *,.desktop-native-tool-surface *::before,.desktop-native-tool-surface *::after,[data-desktop-document] *,[data-desktop-document] *::before,[data-desktop-document] *::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}

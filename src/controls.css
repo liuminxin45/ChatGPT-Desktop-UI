@@ -174,4 +174,4 @@
 .desktop-drop-overlay{position:absolute;inset:0;z-index:40;display:flex;align-items:center;justify-content:center;gap:8px;pointer-events:none;border:1px dashed var(--desktop-color-border-strong);border-radius:var(--desktop-radius-control);background:color-mix(in srgb,var(--desktop-color-surface-overlay) 90%,transparent);color:var(--desktop-color-text);font:400 var(--desktop-font-size-body)/var(--desktop-line-height-ui) var(--desktop-font-sans)}
 
 .desktop-menu-item--danger{color:var(--desktop-color-danger)}
-.desktop-dialog{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1001}
+.desktop-dialog{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1000}

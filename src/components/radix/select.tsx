@@ -53,6 +53,10 @@ const SelectContent = React.forwardRef<
       className={cn('desktop-select-content', className)}
       position={position}
       {...props}
+      onPointerDownOutside={(event) => {
+        props.onPointerDownOutside?.(event);
+        event.detail.originalEvent.preventDefault();
+      }}
     >
       <SelectScrollUpButton />
       <SelectPrimitive.Viewport className="desktop-select-viewport">{children}</SelectPrimitive.Viewport>

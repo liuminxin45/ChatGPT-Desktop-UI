@@ -408,6 +408,7 @@ export function Select({
           onCloseAutoFocus={(event) => {
             if (!visible) event.preventDefault();
           }}
+          onPointerDownOutside={(event) => event.detail.originalEvent.preventDefault()}
           position="popper"
           sideOffset={4}
           className={classes('desktop-select-content', contentClassName)}
