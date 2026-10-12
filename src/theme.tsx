@@ -1,9 +1,9 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Select } from './controls';
 import { InputBehaviorRoot } from './input-behavior';
 
-export type Theme = 'light' | 'dark' | 'system';
-const ThemeContext = createContext<{ theme: Theme; setTheme(value: Theme): void }>({ theme: 'system', setTheme() {} });
+import { DesktopThemeContext as ThemeContext, useDesktopThemeContext, type Theme } from './theme-context';
+export type { Theme } from './theme-context';
 /** One root per standalone document. Embedded surfaces inherit their host instead. */
 export function DesktopRoot({ children, storageKey, defaultTheme = 'system' }: { children: ReactNode; storageKey?: string; defaultTheme?: Theme }) {
   const [theme, setTheme] = useState<Theme>(() => {
@@ -22,7 +22,7 @@ export function DesktopRoot({ children, storageKey, defaultTheme = 'system' }: {
   }, [theme, storageKey]);
   return <ThemeContext.Provider value={{ theme, setTheme }}><InputBehaviorRoot><div className="desktop-desktop-surface">{children}</div></InputBehaviorRoot></ThemeContext.Provider>;
 }
-export function useDesktopTheme() { return useContext(ThemeContext); }
+export function useDesktopTheme() { return useDesktopThemeContext(); }
 
 /** Backward-compatible name; the root and its context have one implementation. */
 export const DesktopSurface = DesktopRoot;
@@ -31,7 +31,8 @@ export function DesktopThemeSelect({ onAction, labels = {appearance:'Appearance'
   labels?: {appearance:string;system:string;light:string;dark:string};
 }) {
   const {theme,setTheme}=useDesktopTheme();
-  useEffect(()=>{onAction?.('exposed');},[]);
+  const initialAction = useRef(onAction);
+  useEffect(()=>{initialAction.current?.('exposed');},[]);
   return <Select actionId="appearance.theme" aria-label={labels.appearance} className="desktop-desktop-theme" value={theme}
     options={(['system','light','dark'] as const).map(value=>({value,label:labels[value]}))}
     onValueChange={value=>{setTheme(value as Theme);onAction?.('invoked');}}/>;

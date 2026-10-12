@@ -8,6 +8,29 @@ Runnable composition: [example](../../../examples/catalog/Examples.tsx).
 
 Generated from TypeScript exports; edit implementation props/JSDoc, then run `npm run docs:generate`. Native React attributes remain available in the online API catalog.
 
+## DesktopDocumentAdapter (chatgpt-desktop-kit)
+
+[Implementation](../../../src/scoped-surface.tsx)
+
+Explicit document styling ownership for desktop applications using desktop.css.
+The Host continues to own theme, persistence and native window behavior.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| children | no | `ReactNode` |
+
+## DesktopProvider (chatgpt-desktop-kit)
+
+[Implementation](../../../src/scoped-surface.tsx)
+
+Scoped controls and theme. Never changes document classes, scrolling or storage.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| theme | no | `Theme \| undefined` |
+| defaultTheme | no | `Theme \| undefined` |
+| onThemeChange | no | `((theme: Theme) => void) \| undefined` |
+
 ## DesktopRoot (chatgpt-desktop-kit)
 
 [Implementation](../../../src/theme.tsx)

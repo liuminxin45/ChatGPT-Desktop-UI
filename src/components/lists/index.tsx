@@ -4,6 +4,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useLayoutEffect,
   useImperativeHandle,
   useRef,
   useState,
@@ -36,7 +37,15 @@ export const RecordRow = forwardRef<
     separator?: boolean;
   }
 >(function RecordRow({ className, density = 'default', separator = false, ...props }, ref) {
-  return <div ref={ref} className={classes('desktop-record-row', className)} data-density={density} data-separator={separator || undefined} {...props} />;
+  return (
+    <div
+      ref={ref}
+      className={classes('desktop-record-row', className)}
+      data-density={density}
+      data-separator={separator || undefined}
+      {...props}
+    />
+  );
 });
 
 /** Spaced rows for short lists; compose inside InternalScrollArea when scrolling is needed. */
@@ -176,6 +185,7 @@ export function VirtualList<T>({
   const restoringRef = useRef(false);
   const resetRef = useRef(resetKey);
   const [headerHeight, setHeaderHeight] = useState(0);
+  const hasHeader = Boolean(header);
   useImperativeHandle(viewportRef, () => scrollRef.current!, []);
   useEffect(() => {
     const element = headerRef.current;
@@ -188,7 +198,7 @@ export function VirtualList<T>({
     const observer = new ResizeObserver(measure);
     observer.observe(element);
     return () => observer.disconnect();
-  }, [Boolean(header)]);
+  }, [hasHeader]);
   const virtualizer = useVirtualizer({
     count: items.length,
     getScrollElement: () => scrollRef.current,
@@ -214,10 +224,17 @@ export function VirtualList<T>({
     anchorRef.current = null;
     scrollRef.current?.scrollTo({ top: 0 });
   }, [resetKey]);
+  const keyReader = useRef(getItemKey);
+  const anchorVirtualizer = useRef(virtualizer);
+  useLayoutEffect(() => {
+    keyReader.current = getItemKey;
+    anchorVirtualizer.current = virtualizer;
+  }, [getItemKey, virtualizer]);
   useEffect(() => {
     const anchor = anchorRef.current;
+    const virtualizer = anchorVirtualizer.current;
     if (!anchor || !items.length) return;
-    const index = items.findIndex((item, i) => String(getItemKey(item, i)) === anchor.key);
+    const index = items.findIndex((item, i) => String(keyReader.current(item, i)) === anchor.key);
     const offset = index >= 0 ? virtualizer.getOffsetForIndex(index, 'start')?.[0] : anchor.top;
     if (offset === undefined) return;
     restoringRef.current = true;

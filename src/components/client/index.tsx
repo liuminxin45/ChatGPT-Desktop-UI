@@ -2,6 +2,9 @@ import { CaretRight, Check } from '@phosphor-icons/react';
 import * as Menu from '@radix-ui/react-dropdown-menu';
 import { cloneElement, type ReactElement, type ReactNode, useId, useState } from 'react';
 import { InternalScrollArea } from '../lists';
+import { createDesktopPortal } from '../../scoped-surface';
+const MenuPortal = createDesktopPortal(Menu.Portal);
+
 export interface DesktopMenuItem {
   id: string;
   label: string;
@@ -34,11 +37,11 @@ function MenuItems({ items }: { items: DesktopMenuItem[] }) {
                 <span>{item.label}</span>
                 <CaretRight size={16} />
               </Menu.SubTrigger>
-              <Menu.Portal>
+              <MenuPortal>
                 <Menu.SubContent className="desktop-menu client-menu" sideOffset={6} collisionPadding={8}>
                   <MenuItems items={item.children} />
                 </Menu.SubContent>
-              </Menu.Portal>
+              </MenuPortal>
             </Menu.Sub>
           ) : (
             <Menu.Item
@@ -87,7 +90,7 @@ export function DesktopMenu({
             trigger.props['data-desktop-action'] || `${items[0]?.id || 'client.menu'}.open`,
         })}
       </Menu.Trigger>
-      <Menu.Portal>
+      <MenuPortal>
         <Menu.Content
           className={`desktop-menu client-menu ${className}`}
           side={side}
@@ -99,7 +102,7 @@ export function DesktopMenu({
           {heading ? <Menu.Label className="client-menu-heading">{heading}</Menu.Label> : null}
           <MenuItems items={items} />
         </Menu.Content>
-      </Menu.Portal>
+      </MenuPortal>
     </Menu.Root>
   );
 }

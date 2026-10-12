@@ -1,6 +1,6 @@
 {
   "name": "chatgpt-desktop-kit",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "ChatGPT desktop UI controls, semantic tokens, measured reference profiles and an agent skill.",
   "license": "MIT",
   "type": "module",
@@ -43,20 +43,23 @@
       "default": "./dist/components/*/index.js"
     },
     "./adoption-audit": "./dist/audit-controls.mjs",
-    "./shell.css": "./dist/shell.css"
+    "./shell.css": "./dist/shell.css",
+    "./components.css": "./dist/components.css",
+    "./desktop.css": "./dist/desktop.css"
   },
   "files": [
     "dist",
     "src",
     "LICENSE",
     "NOTICE.md",
-    "licenses"
+    "licenses",
+    "!src/**/*.test.tsx"
   ],
   "sideEffects": [
     "**/*.css"
   ],
   "engines": {
-    "node": "24.19.0"
+    "node": "^22.23.3 || ^24.19.0"
   },
   "scripts": {
     "typecheck": "tsc --noEmit && tsc -p tsconfig.gallery.json --noEmit",
@@ -91,16 +94,23 @@
     "site:build": "node scripts/build-site.mjs",
     "test:reference": "node scripts/verify-reference.mjs",
     "format:check": "prettier --check src/components examples/catalog \"scripts/{component-catalog,audit-adoption,check-library,build-catalog,build-site,verify-reference}.mjs\"",
-    "check": "npm run typecheck && npm run build:library && npm run docs:check && npm run check:library && npm run format:check && npm run test:namespace && npm run test:integration",
-    "ci": "npm run check && npm run site:build && npm run test:reference && npm test && npm run test:demo && npm run test:polish && npm run test:input && npm run test:menus && npm run test:composer && npm run test:ai && npm run test:scroll-edge-fade && npm run test:list-spacing && npm run test:tables && npm run test:record-actions && npm run test:icons && npm run test:notifications && npm run skill:package && npm run skill:check && npm run audit:public",
+    "check": "npm run lint && npm run test:unit && npm run typecheck && npm run build:library && npm run docs:check && npm run check:library && npm run format:check && npm run test:namespace && npm run test:integration",
+    "ci": "npm run check && npm run test:package-contract && npm run test:package && npm run site:build && npm run test:reference && npm test && npm run test:demo && npm run test:polish && npm run test:input && npm run test:menus && npm run test:composer && npm run test:ai && npm run test:scroll-edge-fade && npm run test:list-spacing && npm run test:tables && npm run test:record-actions && npm run test:icons && npm run test:notifications && npm run skill:package && npm run skill:check && npm run audit:public",
     "test:tables": "node scripts/verify-tables.mjs",
     "test:ai": "node scripts/verify-ai.mjs",
     "test:scroll-edge-fade": "node scripts/verify-scroll-edge-fade.mjs",
-    "test:notifications": "node scripts/verify-notifications.mjs"
+    "test:notifications": "node scripts/verify-notifications.mjs",
+    "lint": "eslint src --max-warnings=0",
+    "test:package-contract": "node scripts/verify-package-contract.mjs",
+    "test:package": "node scripts/verify-tarball.mjs",
+    "prepublishOnly": "npm run check && npm run test:package",
+    "test:unit": "vitest run src/components --maxWorkers=1",
+    "test:visual": "node scripts/verify-visual.mjs",
+    "test:visual:update": "node scripts/verify-visual.mjs --update"
   },
   "peerDependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react": "^18.3.1 || ^19.0.0",
+    "react-dom": "^18.3.1 || ^19.0.0"
   },
   "dependencies": {
     "@phosphor-icons/react": "2.1.10",
@@ -122,7 +132,7 @@
     "clsx": "2.1.1",
     "date-fns": "3.6.0",
     "lucide-react": "0.487.0",
-    "react-day-picker": "8.10.1",
+    "react-day-picker": "9.14.0",
     "react-markdown": "10.1.0",
     "react-remove-scroll": "2.7.2",
     "remark-gfm": "4.0.1",
@@ -131,15 +141,45 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "4.10.2",
+    "@testing-library/react": "16.3.0",
+    "@testing-library/user-event": "14.6.1",
     "@types/react": "18.3.28",
     "@types/react-dom": "18.3.7",
+    "@typescript-eslint/parser": "8.71.1",
     "esbuild": "0.25.12",
+    "eslint": "10.12.0",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "jsdom": "26.1.0",
+    "pixelmatch": "7.1.0",
     "playwright": "1.62.1",
+    "pngjs": "7.0.0",
     "postcss": "8.5.29",
     "prettier": "3.6.2",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "tailwindcss": "3.4.17",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "vite": "7.3.1",
+    "vitest": "4.0.18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liuminxin45/ChatGPT-Desktop-UI.git"
+  },
+  "homepage": "https://liuminxin45.github.io/ChatGPT-Desktop-UI/",
+  "bugs": {
+    "url": "https://github.com/liuminxin45/ChatGPT-Desktop-UI/issues"
+  },
+  "keywords": [
+    "react",
+    "desktop",
+    "ui",
+    "components",
+    "chatgpt",
+    "accessibility"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   }
 }

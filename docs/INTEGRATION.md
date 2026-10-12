@@ -25,6 +25,10 @@ Version 0.3 changes the package identity to `chatgpt-desktop-kit` and uses `--de
 
 ## Styles and surfaces
 
+For new embedded React integrations use `components.css` with `DesktopProvider`. Its controlled `theme`/`onThemeChange` and uncontrolled `defaultTheme` support light/dark/system without document mutation or storage ownership. Scoped Radix portal wrappers inherit the actual origin's semantic overrides, native Tool typography and localization. See [0.6 migration](MIGRATION_0_6.md).
+
+Whole desktop documents use `desktop.css` with exactly one `DesktopDocumentAdapter`; document theme/persistence remains Host-owned. The following legacy entries remain compatible during migration and are explicitly document-wide.
+
 Standalone React documents import `styles.css` once and mount `DesktopRoot` (also exported as `DesktopSurface`). An optional application-specific storage key controls theme persistence; native storage stays in the Host's managed profile. The root tracks system preference and restores document state on unmount.
 
 Hosts import `controls.css` and, when using the portable shell, `shell.css` once. The package owns control appearance through semantic CSS. `compat/*` only forwards compound APIs to canonical renderers in `src/components/radix`; it contains no JSX, styles or second visual variants. The removed `host.css`, `host-shell.css` and Glass exports must not be copied into a Host. A Host may keep a thin platform font/window policy and business compositions, without repainting shared controls. Tailwind hosts still scan the package sources for layout utilities.

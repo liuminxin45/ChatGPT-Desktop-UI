@@ -6,6 +6,8 @@ import { Check, ChevronRight, Circle } from 'lucide-react';
 
 import { cn } from './utils';
 import { actionLabel } from '../../action-tooltip';
+import { createDesktopPortal } from '../../scoped-surface';
+const MenuPortal = createDesktopPortal(DropdownMenuPrimitive.Portal);
 
 const DropdownMenu = DropdownMenuPrimitive.Root;
 
@@ -13,7 +15,7 @@ const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;
 
 const DropdownMenuGroup = DropdownMenuPrimitive.Group;
 
-const DropdownMenuPortal = DropdownMenuPrimitive.Portal;
+const DropdownMenuPortal = MenuPortal;
 
 const DropdownMenuSub = DropdownMenuPrimitive.Sub;
 
@@ -48,14 +50,14 @@ const DropdownMenuContent = React.forwardRef<
   React.ElementRef<typeof DropdownMenuPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Content>
 >(({ className, sideOffset = 4, ...props }, ref) => (
-  <DropdownMenuPrimitive.Portal>
+  <MenuPortal>
     <DropdownMenuPrimitive.Content
       ref={ref}
       sideOffset={sideOffset}
       className={cn('desktop-menu-content', className)}
       {...props}
     />
-  </DropdownMenuPrimitive.Portal>
+  </MenuPortal>
 ));
 DropdownMenuContent.displayName = DropdownMenuPrimitive.Content.displayName;
 

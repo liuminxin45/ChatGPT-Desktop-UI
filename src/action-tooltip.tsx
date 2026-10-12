@@ -1,6 +1,9 @@
 import { Children, createContext, isValidElement, useContext, useEffect, useState, type ReactElement, type ReactNode } from 'react';
 import * as Primitive from '@radix-ui/react-tooltip';
 import { ToolVisibilityContext } from './surface-visibility';
+import { createDesktopPortal } from './scoped-surface';
+const TooltipPortal = createDesktopPortal(Primitive.Portal);
+
 
 const TooltipBoundary = createContext(false);
 
@@ -30,7 +33,7 @@ export function ActionTooltip({ label, children, side = 'bottom', disabled = fal
         <Primitive.Trigger asChild>
           <span className="desktop-action-tooltip" tabIndex={disabled ? 0 : undefined}>{children}</span>
         </Primitive.Trigger>
-        <Primitive.Portal><Primitive.Content side={side} sideOffset={5} collisionPadding={8} className="desktop-tooltip">{label}</Primitive.Content></Primitive.Portal>
+        <TooltipPortal><Primitive.Content side={side} sideOffset={5} collisionPadding={8} className="desktop-tooltip">{label}</Primitive.Content></TooltipPortal>
       </Primitive.Root>
     </Primitive.Provider>
   </TooltipBoundary.Provider>;

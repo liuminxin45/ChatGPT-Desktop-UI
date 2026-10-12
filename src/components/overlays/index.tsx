@@ -1,11 +1,17 @@
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
-import { useContext, useEffect, useId, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
+import { useContext, useEffect, useRef, useState, type ReactNode } from 'react';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
+import { protectModalEscape } from '../../runtime/modal-keyboard';
 import { AttachmentIcon, ChevronDownIcon, CloseIcon } from '../../icons';
 import { useTranslation } from '../../strings';
 import { ToolVisibilityContext } from '../../surface-visibility';
 import { Button, IconButton } from '../actions';
 import { classes } from '../classes';
 import { InternalScrollArea } from '../lists';
+import { createDesktopPortal } from '../../scoped-surface';
+const MenuPortal = createDesktopPortal(DropdownMenuPrimitive.Portal);
+const DialogPortal = createDesktopPortal(DialogPrimitive.Portal);
+
 /** Non-interactive file drop feedback; the Host owns drag events and attachment scope. */
 export function DropOverlay({ label, surfaceId }: { label: string; surfaceId?: string }) {
   return (
@@ -66,7 +72,7 @@ export function MenuButton({
           <ChevronDownIcon size={14} aria-hidden="true" />
         </Button>
       </DropdownMenuPrimitive.Trigger>
-      <DropdownMenuPrimitive.Portal>
+      <MenuPortal>
         <DropdownMenuPrimitive.Content
           className="desktop-menu"
           align="end"
@@ -90,7 +96,7 @@ export function MenuButton({
             </DropdownMenuPrimitive.Item>
           ))}
         </DropdownMenuPrimitive.Content>
-      </DropdownMenuPrimitive.Portal>
+      </MenuPortal>
     </DropdownMenuPrimitive.Root>
   );
 }
@@ -116,88 +122,66 @@ export function Dialog({
 }) {
   const translate = useTranslation();
   const visible = useContext(ToolVisibilityContext);
-  const titleId = useId();
-  const dialogRef = useRef<HTMLElement>(null);
-  const onCloseRef = useRef(onClose);
-  useLayoutEffect(() => {
-    onCloseRef.current = onClose;
-  }, [onClose]);
-  useEffect(() => {
-    if (!open || !visible) return undefined;
-    const previouslyFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    const dialog = dialogRef.current;
-    const focusable = () => [
-      ...(dialog?.querySelectorAll<HTMLElement>(
-        'button:not(:disabled), input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [href], [tabindex]:not([tabindex="-1"])',
-      ) || []),
-    ];
-    (focusable()[0] || dialog)?.focus();
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        event.preventDefault();
-        onCloseRef.current();
-        return;
-      }
-      if (event.key !== 'Tab') return;
-      const items = focusable();
-      if (!items.length) {
-        event.preventDefault();
-        dialog?.focus();
-        return;
-      }
-      const first = items[0];
-      const last = items.at(-1)!;
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    };
-    window.addEventListener('keydown', onKeyDown);
-    return () => {
-      window.removeEventListener('keydown', onKeyDown);
-      if (
-        previouslyFocused &&
-        !previouslyFocused.closest('[aria-hidden="true"]') &&
-        (document.activeElement === document.body || dialog?.contains(document.activeElement))
-      )
-        previouslyFocused.focus();
-    };
-  }, [open, visible]);
-  if (!open) return null;
+  const previousFocus = useRef<HTMLElement | null>(null);
+  const dialogContent = useRef<HTMLDivElement>(null);
   return (
-    <div
-      className="desktop-dialog-backdrop"
-      onMouseDown={(event) => {
-        if (event.target === event.currentTarget) onClose();
+    <DialogPrimitive.Root
+      open={open && visible}
+      onOpenChange={(next) => {
+        if (!next && visible) onClose();
       }}
     >
-      <section
-        ref={dialogRef}
-        className={classes('desktop-dialog', className)}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={titleId}
-        tabIndex={-1}
-      >
-        <header>
-          <div>
-            <h2 id={titleId}>{title}</h2>
-            {description ? <p>{description}</p> : null}
-          </div>
-          <IconButton
-            actionId={actionId ? `${actionId}.close` : undefined}
-            aria-label={translate('关闭')}
-            onClick={onClose}
-          >
-            <CloseIcon size={15} aria-hidden="true" />
-          </IconButton>
-        </header>
-        <InternalScrollArea className="desktop-dialog__body">{children}</InternalScrollArea>
-        {footer ? <footer>{footer}</footer> : null}
-      </section>
-    </div>
+      <DialogPortal>
+        <DialogPrimitive.Overlay className="desktop-dialog-backdrop" />
+        <DialogPrimitive.Content
+          onEscapeKeyDown={protectModalEscape}
+          ref={dialogContent}
+          className={classes('desktop-dialog', className)}
+          {...(!description ? { 'aria-describedby': undefined } : {})}
+          onOpenAutoFocus={(event) => {
+            previousFocus.current =
+              document.activeElement instanceof HTMLElement ? document.activeElement : null;
+            event.preventDefault();
+            // Initial focus belongs to the editable body, not the close button's tooltip.
+            const first = dialogContent.current?.querySelector<HTMLElement>(
+              '.desktop-dialog__body :is(input,textarea,select,button,a[href],[tabindex]):not(:disabled):not([tabindex="-1"])',
+            );
+            (first ?? dialogContent.current)?.focus();
+          }}
+          onCloseAutoFocus={(event) => {
+            event.preventDefault();
+            if (
+              visible &&
+              previousFocus.current?.isConnected &&
+              !previousFocus.current.closest('[aria-hidden="true"],[inert]')
+            )
+              previousFocus.current.focus();
+          }}
+        >
+          <header>
+            <div>
+              <DialogPrimitive.Title asChild>
+                <h2>{title}</h2>
+              </DialogPrimitive.Title>
+              {description ? (
+                <DialogPrimitive.Description asChild>
+                  <p>{description}</p>
+                </DialogPrimitive.Description>
+              ) : null}
+            </div>
+            <DialogPrimitive.Close asChild>
+              <IconButton
+                actionId={actionId ? `${actionId}.close` : undefined}
+                aria-label={translate('关闭')}
+              >
+                <CloseIcon size={15} aria-hidden="true" />
+              </IconButton>
+            </DialogPrimitive.Close>
+          </header>
+          <InternalScrollArea className="desktop-dialog__body">{children}</InternalScrollArea>
+          {footer ? <footer>{footer}</footer> : null}
+        </DialogPrimitive.Content>
+      </DialogPortal>
+    </DialogPrimitive.Root>
   );
 }

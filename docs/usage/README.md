@@ -1,20 +1,20 @@
 # Usage
 
-Install a released immutable Git revision using the [integration contract](../INTEGRATION.md). Use React 18.3.1 and import CSS once:
+Install the prebuilt npm package, or a released immutable Git revision using the [integration contract](../INTEGRATION.md). Use React 18.3.1/19 and import CSS once:
 
 ```tsx
-import { DesktopRoot, Button, Input } from 'chatgpt-desktop-kit';
-import 'chatgpt-desktop-kit/styles.css';
+import { DesktopProvider, Button, Input } from 'chatgpt-desktop-kit';
+import 'chatgpt-desktop-kit/components.css';
 
-<DesktopRoot>
+<DesktopProvider defaultTheme="system">
   <Input aria-label="Project name" />
   <Button actionId="project.create" onClick={createProject}>Create project</Button>
-</DesktopRoot>
+</DesktopProvider>
 ```
 
 For a narrower JavaScript entry, import `chatgpt-desktop-kit/components/actions` or `/components/forms`. CSS remains explicit and authoritative; React stays external. Root imports remain supported.
 
-Tailwind Hosts keep `compat/*` imports and scan `node_modules/chatgpt-desktop-kit/src/**/*.{ts,tsx}`. Import `controls.css`, `host.css` and `host-shell.css` once. Compatibility entry points are shared implementations, not a license to copy the controls into a Host. Embedded Tools inherit the Host root/styles and typography.
+Tailwind Hosts keep `compat/*` imports and scan `node_modules/chatgpt-desktop-kit/src/**/*.{ts,tsx}`. Whole desktop documents import `desktop.css` and mount one `DesktopDocumentAdapter`; existing controls/token/shell forwarding paths remain compatible. Compatibility entry points are shared implementations, not a license to copy controls into a Host. Embedded Tools inherit the Host root/styles and typography. Removed host.css/host-shell.css entries must not be restored. See [0.6 migration](../MIGRATION_0_6.md).
 
 ## 0.3 → 0.4 migration
 

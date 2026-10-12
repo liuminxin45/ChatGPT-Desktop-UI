@@ -49,6 +49,8 @@ npm run skill:check
 
 ## Integration
 
+Install the prebuilt package with `npm install chatgpt-desktop-kit`. React 18.3.1 and React 19 are supported; package consumers may use Node 22.23.3+ or 24.19.0+ within those majors. Source development and coordinated Git builds use Node 24.19.0. See [0.6 migration](docs/MIGRATION_0_6.md) for the verified matrix and legacy entries.
+
 Related clients consume this repository at the same immutable Git revision. Existing application imports may remain as compatibility exports and Host adapters. Consumers must not maintain copied control implementations or generated vendor snapshots.
 
 Install from a Git URL pinned to a full commit hash, or an explicitly versioned package archive. Git installation runs `prepare` to produce the distribution. A local `file:` dependency is suitable for development, not a release pin. See [Integration](docs/INTEGRATION.md) for stylesheet and Host ownership.
@@ -56,22 +58,24 @@ Install from a Git URL pinned to a full commit hash, or an explicitly versioned 
 Release consumers use `git+https://github.com/liuminxin45/ChatGPT-Desktop-UI.git#<full-commit>` and run normal installation with scripts enabled. `node node_modules/chatgpt-desktop-kit/dist/check-consumer.mjs` verifies the public source, lockfiles, actual installed revision, prepared distribution and declared forwarding adapters. One immutable revision is shared by all clients; no local Git path or vendor snapshot is required.
 
 ```tsx
-import { DesktopRoot, Button, Select, WorkbenchPage } from 'chatgpt-desktop-kit';
-import 'chatgpt-desktop-kit/styles.css';
+import { DesktopProvider, Button, Select, WorkbenchPage } from 'chatgpt-desktop-kit';
+import 'chatgpt-desktop-kit/components.css';
 
 export function App({ sort, setSort, createProject }) {
-  return <DesktopRoot storageKey="example.theme">
+  return <DesktopProvider defaultTheme="system">
     <WorkbenchPage>
       <Button actionId="project.create" onClick={createProject}>New project</Button>
       <Select aria-label="Sort" actionId="project.sort" value={sort}
         options={[{ value: 'recent', label: 'Recent' }, { value: 'name', label: 'Name' }]}
         onValueChange={setSort} />
     </WorkbenchPage>
-  </DesktopRoot>;
+  </DesktopProvider>;
 }
 ```
 
 Buttons default to `type="button"`; form submission requires `type="submit"`. Embedded surfaces inherit their Host's stylesheet, theme and window controls.
+
+`components.css` and `DesktopProvider` isolate controls and theme to their root, including shared portals. Whole desktop documents opt into `desktop.css` with one `DesktopDocumentAdapter`; the Host owns document theme. `styles.css`/`DesktopRoot` retain their legacy whole-document behavior and must not be used for multi-instance embedding. `source/*` is retained for development/debugging; application code should use compiled exports.
 
 ## Documentation
 

@@ -56,7 +56,6 @@ export function VirtualList<T>({
   const fade = useContext(ScrollEdgeFadeContext);
 
   const scrollRef = useRef<HTMLDivElement>(null);
-  // eslint-disable-next-line react-hooks/incompatible-library -- TanStack Virtual owns row measurement; this leaf is excluded from compiler memoization.
   const virtualizer = useVirtualizer({
     count: items.length,
     getScrollElement: () => scrollRef.current,

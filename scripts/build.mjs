@@ -5,6 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { staticNotificationStyles } from './static-notification-styles.mjs';
 import { desktopScrollLock } from './desktop-scroll-lock.mjs';
+import { scopeStyles } from './scoped-styles.mjs';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 if (process.version !== 'v24.19.0') throw Error('Use the repository Node 24.19.0 runtime.');
 const output = path.resolve(root, 'dist');
@@ -29,7 +30,9 @@ for(const modulePath of modules) {
   }
 }
 await writeFile(path.join(root,'dist/THIRD_PARTY_NOTICES.txt'),notices.replace(/\r\n/g,'\n').trimEnd()+'\n');
-await build({ absWorkingDir: root, entryPoints: ['src/styles.css','src/controls.css','src/tokens.css','src/primitives.css','src/shell.css','src/compound.css'], outdir: 'dist', outbase:'src', bundle: true, minify: true });
+await build({ absWorkingDir: root, entryPoints: ['src/styles.css','src/controls.css','src/tokens.css','src/primitives.css','src/shell.css','src/compound.css','src/desktop.css'], outdir: 'dist', outbase:'src', bundle: true, minify: true });
+const scoped = await build({ absWorkingDir: root, entryPoints: ['src/controls.css'], bundle: true, write: false });
+await writeFile(path.join(output, 'components.css'), scopeStyles(scoped.outputFiles[0].text));
 await copyFile(path.join(root,'LICENSE'),path.join(root,'dist/LICENSE'));
 await copyFile(path.join(root,'scripts/check-consumer.mjs'),path.join(root,'dist/check-consumer.mjs'));
 await copyFile(path.join(root,'scripts/check-consumer.d.mts'),path.join(root,'dist/check-consumer.d.mts'));

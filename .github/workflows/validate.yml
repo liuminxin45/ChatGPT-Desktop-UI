@@ -1,0 +1,74 @@
+name: Pull request quality
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: quality-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  quality:
+    name: Library quality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.19.0'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npx playwright install --with-deps chromium
+      - run: npm run ci
+        env:
+          UI_BROWSER_CHANNEL: chromium
+      - uses: actions/upload-artifact@v4
+        with:
+          name: validated-package
+          path: tests/output/tarball/*.tgz
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: quality-evidence
+          path: tests/output
+  consumers:
+    name: Consumer (${{ matrix.node }}, React ${{ matrix.react }})
+    needs: quality
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['22.23.3', '24.19.0']
+        react: ['18.3.1', '19.0.0', '19.3.0']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - uses: actions/download-artifact@v4
+        with:
+          name: validated-package
+          path: validated-package
+      - run: node scripts/verify-tarball.mjs --archive=validated-package/chatgpt-desktop-kit-0.6.0.tgz
+        env:
+          DESKTOP_UI_REACT_MATRIX: ${{ matrix.react }}
+  windows-visual:
+    name: Windows visual regression
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.19.0'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run build:library
+      - run: npm run test:package-contract
+      - run: npm run test:visual
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: visual-evidence
+          path: tests/output/package-contract
