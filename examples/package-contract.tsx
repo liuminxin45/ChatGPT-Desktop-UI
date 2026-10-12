@@ -123,6 +123,16 @@ function Surface({ id, initialTheme }: { id: string; initialTheme: Theme }) {
           }}
         >
           <Input aria-label={`${id} outer draft`} defaultValue="Outer draft" />
+          <AppDialog>
+            <AppDialogTrigger asChild>
+              <Button actionId={`${id}.mixed`}>Open {id} compound nested</Button>
+            </AppDialogTrigger>
+            <AppDialogContent>
+              <AppDialogTitle>{id} mixed title</AppDialogTitle>
+              <AppDialogDescription>Accessible description</AppDialogDescription>
+              <Input aria-label={`${id} mixed draft`} />
+            </AppDialogContent>
+          </AppDialog>
           <Button actionId={`${id}.inner`} onClick={() => setInner(true)}>
             Open {id} nested
           </Button>

@@ -238,11 +238,13 @@ try {
         ),
       );
       assert.equal(await count(`${id}.outer.close`), 0, 'IME Escape must retain the editor');
-      await page
-        .getByRole('button', { name: `${id} compound`, exact: true, includeHidden: true })
-        .evaluate((el) => el.click());
-      const compound = page.getByRole('dialog', { name: `${id} compound title`, exact: true });
+      await page.getByRole('button', { name: `Open ${id} compound nested`, exact: true }).click();
+      const compound = page.getByRole('dialog', { name: `${id} mixed title`, exact: true });
       await compound.waitFor();
+      await page.waitForFunction(
+        (id) => document.activeElement?.getAttribute('aria-label') === `${id} mixed draft`,
+        id,
+      );
       assert.equal(
         await compound.evaluate((el) => {
           const b = el.getBoundingClientRect();
@@ -251,8 +253,14 @@ try {
         true,
         'Mixed API modal is above its parent',
       );
-      await dismissDialog(`${id} compound title`);
+      await dismissDialog(`${id} mixed title`);
       assert.equal(await count(`${id}.outer.close`), 0, 'Mixed API dismissal retains parent');
+      // Radix restores the closed scope asynchronously; wait for its parent to resume
+      // before opening another scope, which otherwise races the prior focus return.
+      await page.waitForFunction(
+        (id) => document.activeElement?.getAttribute('data-desktop-action') === `${id}.mixed`,
+        id,
+      );
       await page.getByRole('button', { name: `Open ${id} nested`, exact: true }).click();
       await page.getByLabel(`${id} inner draft`).waitFor();
       await page.waitForFunction(
@@ -296,6 +304,10 @@ try {
       );
       await page.getByRole('button', { name: `${id} compound`, exact: true }).click();
       await page.getByRole('dialog', { name: `${id} compound title`, exact: true }).waitFor();
+      await page.waitForFunction(
+        (id) => document.activeElement?.getAttribute('aria-label') === `${id} compound draft`,
+        id,
+      );
       await dismissDialog(`${id} compound title`);
       await page.waitForFunction(
         (id) => document.activeElement?.getAttribute('data-desktop-action') === `${id}.compound`,
