@@ -113,7 +113,7 @@ try {
         heading: el.querySelector('.desktop-virtual-list__header span').getBoundingClientRect().left,
         record: el.querySelector('.desktop-record-row span').getBoundingClientRect().left,
       }));
-      assert.ok(Math.abs(columns.heading - columns.record) < 1, 'header and records have different gutters');
+      assert.ok(Math.abs(columns.heading - columns.record) < 1, `header and records have different gutters: ${JSON.stringify(columns)}`);
       await list.evaluate((el) => (el.scrollTop = el.scrollHeight));
       await page.getByText('BUG-1999', { exact: true }).waitFor();
       assert.ok((await list.locator('[role=listitem]').count()) < 60);

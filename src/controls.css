@@ -162,7 +162,7 @@
 
 .desktop-button:is([aria-pressed=true],[aria-selected=true],[aria-current=true],[aria-current=page],[data-desktop-selected=true]){background:var(--desktop-color-surface-selected);color:var(--desktop-color-text)}
 
-.desktop-virtual-list__header{position:sticky;top:0;z-index:2;padding-inline:4px;background:var(--desktop-color-background)}
+.desktop-virtual-list__header{position:sticky;top:0;z-index:2;padding-inline:calc(4px + var(--desktop-space-record-inline));background:var(--desktop-color-background)}
 .desktop-send-control .desktop-action-glyph{width:16px;height:16px;display:flex;align-items:center;justify-content:center}
 .desktop-send-control[data-composer-state="sending"],.desktop-send-control[data-composer-state="stopping"]{opacity:1}
 .desktop-composer-progress{animation:desktop-composer-spin 1s linear infinite}

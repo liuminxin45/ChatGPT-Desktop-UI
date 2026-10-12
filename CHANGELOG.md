@@ -4,6 +4,7 @@
 
 - Add scoped component CSS, controlled/local themes and origin-aware Radix portals without host reset/cursor/theme pollution. Retain document entries and add an explicit document adapter.
 - Unify portable Dialog on Radix modality; repair topmost Escape, body autofocus and focus return. Repair combobox Tab/IME/blur and single-commit behavior.
+- Keep local language providers independent of the legacy host bridge; align virtual record headings with record content.
 - Forward Checkbox/IconButton/Switch refs; add compatible controlled/uncontrolled Switch callbacks. Upgrade the calendar foundation for React 19 and retain common legacy wrapper aliases.
 - Add PR gates, Hooks lint, component tests, prepared-package isolation/accessibility tests, independent tarball install/type/SSR matrix and reviewed Windows/Edge visual baselines.
 - Add standard npm metadata, publishing checks, React 18/19 and Node 22/24 consumer support, migration guidance and regenerated API/Skill documentation. Source builds remain on Node 24.19.0.

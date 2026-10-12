@@ -5,10 +5,39 @@ import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Checkbox, EditableCombobox, Switch } from './index';
 import { IconButton } from '../actions';
+import { configureUIRuntime, UIStringsProvider, useLocale, useTranslation } from '../../strings';
 
-afterEach(cleanup);
+afterEach(() => {
+  cleanup();
+  configureUIRuntime({});
+});
 
 describe('public form contracts', () => {
+  it('keeps local labels and locales independent of the legacy host bridge', () => {
+    configureUIRuntime({ translate: () => 'Host label', getLocale: () => 'zh-CN' });
+    function Label() {
+      const translate = useTranslation();
+      return (
+        <span>
+          {useLocale()}: {translate('关闭')}
+        </span>
+      );
+    }
+    render(
+      <>
+        <Label />
+        <UIStringsProvider labels={{ 关闭: 'Local close' }} locale="en-GB">
+          <Label />
+        </UIStringsProvider>
+        <UIStringsProvider locale="fr" translate={() => 'Fermer'}>
+          <Label />
+        </UIStringsProvider>
+      </>,
+    );
+    expect(screen.getByText('zh-CN: Host label')).toBeTruthy();
+    expect(screen.getByText('en-GB: Local close')).toBeTruthy();
+    expect(screen.getByText('fr: Fermer')).toBeTruthy();
+  });
   it('forwards refs to the native focus targets', () => {
     const check = createRef<HTMLInputElement>();
     const icon = createRef<HTMLButtonElement>();
