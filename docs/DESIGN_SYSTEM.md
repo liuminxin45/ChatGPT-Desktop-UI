@@ -15,6 +15,8 @@ consumer package. Do not relax Host CSP to repair a component import.
 
 ## Action meaning and reading order
 
+Row, tile and surface actions keep the actual button as the tooltip trigger. A tooltip wrapper must never replace a positioned grid item or constrain full-width media. Disabled compact command buttons retain their focusable tooltip wrapper; other layouts keep native disabled semantics and accessible labels.
+
 Notifications and popup surfaces belong to the shared library. Use `Toaster`/`toast` for a global queue and `ToastNotice` for Host-owned transient state; preserve Host timing, command outcomes and localized labels. Notifications use the neutral overlay surface without success-colored left borders. Use `Popover` for anchored popup content and `InlineNotice` for persistent conditions. Hosts must not import a third-party notification renderer, hand-paint toast/popover containers, or override shared backgrounds, corners, shadows and control insets. Domain content may own its internal layout. Review temporary and failure surfaces as well as default pages.
 
 Organize around the current work: understand the object, perform its actions, record progress, then adjust secondary properties. Use one primary action at a time. Keep the title once, actions beside their objects, and dangerous actions apart from routine completion. A detail editor has one main scroll owner; long summaries and action text wrap instead of disappearing inside short fields. Use `Textarea autoSize` when the surrounding document should scroll.

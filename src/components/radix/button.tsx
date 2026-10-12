@@ -66,6 +66,7 @@ const Button = React.forwardRef<
     return (
       <ControlButton
         ref={ref}
+        directTooltip={layout !== 'command'}
         data-slot="button"
         asChild={asChild}
         actionId={actionId}

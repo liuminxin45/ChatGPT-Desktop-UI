@@ -25,6 +25,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
   return (
     <ControlButton
       ref={ref}
+      directTooltip={layout !== 'command'}
       icon={icon}
       iconOnly={iconOnly}
       className={classes(

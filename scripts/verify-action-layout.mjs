@@ -47,6 +47,13 @@ try {
         .evaluateAll((nodes) => nodes.map((n) => n.getBoundingClientRect().toJSON()));
       assert.equal(boxes[0].x, boxes[1].x, 'names cannot shift row alignment');
       assert.equal(
+        await page
+          .locator('[data-testid=surface]')
+          .evaluate((n) => n.parentElement.classList.contains('desktop-action-tooltip')),
+        false,
+        'tooltip must not introduce a grid item',
+      );
+      assert.equal(
         await page.locator('[data-testid=command]').evaluate((n) => getComputedStyle(n).justifyContent),
         'center',
       );

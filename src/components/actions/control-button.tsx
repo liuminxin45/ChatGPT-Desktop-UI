@@ -9,17 +9,34 @@ export interface ControlButtonProps extends ButtonHTMLAttributes<HTMLButtonEleme
   icon?: ReactNode;
   iconOnly?: boolean;
   badge?: ReactNode;
+  directTooltip?: boolean;
 }
 
 /** One native/Slot renderer for portable and compound button contracts. */
 export const ControlButton = forwardRef<HTMLButtonElement, ControlButtonProps>(function ControlButton(
-  { asChild, actionId, confirmOnEnter, title, type, icon, iconOnly = false, badge, children, ...props },
+  {
+    asChild,
+    actionId,
+    confirmOnEnter,
+    title,
+    type,
+    icon,
+    iconOnly = false,
+    badge,
+    children,
+    directTooltip,
+    ...props
+  },
   ref,
 ) {
   const Component = asChild ? Slot : 'button';
   const label = (icon ? actionLabel(children) : '') || props['aria-label'] || title || '';
   return (
-    <ActionTooltip label={iconOnly || title || props['aria-label'] ? label : ''} disabled={!!props.disabled}>
+    <ActionTooltip
+      label={iconOnly || title || props['aria-label'] ? label : ''}
+      disabled={!!props.disabled}
+      direct={directTooltip}
+    >
       <Component
         ref={ref}
         type={asChild ? type : (type ?? 'button')}
