@@ -191,6 +191,56 @@ try {
         await check(item(label), trigger);
         await page.keyboard.press('Escape');
       }
+      const editor = page.getByRole('dialog', { name: 'Editor', exact: true });
+      await page.getByRole('button', { name: 'Open editor', exact: true }).click();
+      await editor.waitFor();
+      await editor.getByRole('combobox').click();
+      await page.getByRole('listbox').waitFor();
+      await page.waitForTimeout(150); // Radix registers dismissal after mounting.
+      await page.keyboard.press('Escape');
+      await page.getByRole('listbox').waitFor({state:'hidden'});
+      assert.equal(await editor.count(), 1, 'Select Escape retains its editor');
+      await page.waitForFunction(() => document.activeElement?.getAttribute('role') === 'combobox');
+      await editor.getByRole('button', {name:'Editor menu',exact:true}).click();
+      await item('Editor command').waitFor();
+      await item('Editor command').focus();
+      await page.waitForTimeout(150);
+      await page.keyboard.press('Escape');
+      await item('Editor command').waitFor({state:'hidden'});
+      assert.equal(await editor.count(), 1, 'Menu Escape retains its editor');
+      await editor.getByRole('button', {name:'Editor popup',exact:true}).click();
+      await page.getByRole('textbox', {name:'Popup draft'}).waitFor();
+      await page.getByRole('textbox', {name:'Popup draft'}).focus();
+      await page.waitForTimeout(150);
+      await page.keyboard.press('Escape');
+      await page.getByRole('textbox', {name:'Popup draft'}).waitFor({state:'hidden'});
+      assert.equal(await editor.count(), 1, 'Popover Escape retains its editor');
+      await editor.getByRole('button', {name:'Open child editor',exact:true}).click();
+      const childEditor = page.getByRole('dialog', {name:'Child editor',exact:true});
+      await childEditor.waitFor();
+      await page.waitForFunction(() => [...document.querySelectorAll('[role="dialog"]')].at(-1)?.contains(document.activeElement));
+      await childEditor.getByRole('textbox', {name:'Child draft'}).focus();
+      await page.waitForTimeout(150);
+      await page.screenshot({path:path.join(output, `${theme}-${width}-${scale}-nested-dialog.png`)});
+      await page.keyboard.press('Escape');
+      await childEditor.waitFor({state:'hidden'});
+      assert.equal(await editor.count(), 1, 'Child Dialog Escape retains its parent');
+      await editor.getByRole('textbox', {name:'Draft',exact:true}).focus();
+      await editor.getByRole('textbox', {name:'Draft',exact:true}).evaluate(element =>
+        element.dispatchEvent(new KeyboardEvent('keydown', {key:'Escape',bubbles:true,cancelable:true,isComposing:true})));
+      assert.equal(await editor.count(), 1, 'IME Escape retains the draft editor');
+      assert.equal(await editor.getByRole('textbox', {name:'Draft',exact:true}).inputValue(), 'Retained draft');
+      const close = editor.locator('header button');
+      await close.focus();
+      await page.keyboard.press('Shift+Tab');
+      assert.equal(await editor.getByRole('button', {name:'Open child editor',exact:true})
+        .evaluate(element => document.activeElement === element), true, 'Backward Tab wraps inside the editor');
+      await page.keyboard.press('Tab');
+      assert.equal(await close.evaluate(element => document.activeElement === element), true, 'Forward Tab wraps inside the editor');
+      await editor.getByRole('textbox', {name:'Draft',exact:true}).focus();
+      await page.keyboard.press('Escape');
+      await editor.waitFor({state:'hidden'});
+      await page.waitForFunction(() => document.activeElement?.getAttribute('data-desktop-action') === 'fixture.dialog.open');
       assert.deepEqual(errors, []);
       results.push({ theme, width, height, scale, pointer, passed: true });
       await context.close();

@@ -1,5 +1,7 @@
 # Design guidance for a faithful adaptation
 
+Test nested overlays explicitly. One Escape closes the open Select, menu, Popover or child Dialog while retaining the parent editor and draft; the next Escape may close the editor and return focus. Consumed keys and IME composition belong to the active control. Only the top visible Dialog traps Tab.
+
 Compatibility names such as `SelectControl` use the canonical control and its `size="sm"` density. Audit compatibility aliases and direct browser `confirm/alert/prompt` calls as well as canonical imports. Use the shared `AppConfirmDialog` for discard and destructive decisions; the Host owns draft retention and confirmed actions. A packaged dependency without source is insufficient for a source style audit: inspect a clean source checkout matching the pinned commit.
 
 Review transient notifications, undo actions, popup search, menus and failure conditions explicitly. An import audit that ignores hand-written containers misses incompatible UI. Shared library renderers own popup/notification paint; business layout must not restyle the surrounding Dialog or Popover. Verify close tooltips, Escape, focus return, long descriptions, narrow viewports and successful/failed commands through the actual consumer CSS pipeline.

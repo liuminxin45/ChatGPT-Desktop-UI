@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { InputBehaviorRoot } from '../src/input-behavior';
-import { MenuButton } from '../src/components/overlays';
+import { Dialog, MenuButton } from '../src/components/overlays';
+import { Button } from '../src/components/actions';
+import { Input, Select } from '../src/components/forms';
+import { Popover, PopoverTrigger, PopoverContent } from '../src/compat/popover';
 import { DesktopMenu } from '../src/components/client';
 import {
   DropdownMenu,
@@ -33,6 +36,8 @@ document.documentElement.classList.toggle(
 function MenuFixture() {
   const [checked, setChecked] = useState(false);
   const [choice, setChoice] = useState('first');
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [childOpen, setChildOpen] = useState(false);
   return (
     <InputBehaviorRoot>
       <main>
@@ -90,6 +95,40 @@ function MenuFixture() {
           trigger={<button className="desktop-button">Client menu</button>}
           items={[{ id: 'fixture.client.action', label: 'Client action', onSelect: invoke }]}
         />
+        <Button actionId="fixture.dialog.open" onClick={() => setDialogOpen(true)}>
+          Open editor
+        </Button>
+        <Dialog open={dialogOpen} title="Editor" onClose={() => setDialogOpen(false)}>
+          <Input aria-label="Draft" defaultValue="Retained draft" />
+          <Select
+            aria-label="Editor choice"
+            value={choice}
+            onValueChange={setChoice}
+            options={[
+              { value: 'first', label: 'First option' },
+              { value: 'second', label: 'Second option' },
+            ]}
+          />
+          <MenuButton
+            label="Editor menu"
+            actionId="fixture.editor.menu"
+            items={[{ label: 'Editor command', actionId: 'fixture.editor.command', onSelect: invoke }]}
+          />
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button actionId="fixture.editor.popup">Editor popup</Button>
+            </PopoverTrigger>
+            <PopoverContent>
+              <Input aria-label="Popup draft" defaultValue="Popup retained" />
+            </PopoverContent>
+          </Popover>
+          <Button actionId="fixture.child.open" onClick={() => setChildOpen(true)}>
+            Open child editor
+          </Button>
+          <Dialog open={childOpen} title="Child editor" onClose={() => setChildOpen(false)}>
+            <Input aria-label="Child draft" defaultValue="Child retained" />
+          </Dialog>
+        </Dialog>
       </main>
     </InputBehaviorRoot>
   );

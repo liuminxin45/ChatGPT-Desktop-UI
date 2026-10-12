@@ -133,6 +133,18 @@ export function Dialog({
     ];
     (focusable()[0] || dialog)?.focus();
     const onKeyDown = (event: KeyboardEvent) => {
+      // Nested Select/Menu/Popover layers consume Escape and Tab first. A
+      // composing input must retain Escape for its IME rather than dismissing
+      // the editor. Only the last visible generic Dialog owns the remaining key.
+      if (event.defaultPrevented || event.isComposing || !['Escape', 'Tab'].includes(event.key)) return;
+      // Portalled non-modal layers can dismiss without preventing the native
+      // event. Their original target still belongs to that layer, not this
+      // editor, even when dismissal has already detached it from the document.
+      if (event.target instanceof Node && !dialog?.contains(event.target)) return;
+      const topDialog = [...document.querySelectorAll<HTMLElement>('.desktop-dialog')]
+        .filter((element) => element.getClientRects().length && !element.closest('[aria-hidden="true"]'))
+        .at(-1);
+      if (topDialog !== dialog) return;
       if (event.key === 'Escape') {
         event.preventDefault();
         onCloseRef.current();
