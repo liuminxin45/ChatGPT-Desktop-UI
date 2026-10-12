@@ -76,7 +76,31 @@ try {
     page.setDefaultTimeout(10000);
     await page.goto(`http://127.0.0.1:${server.address().port}`);
     const count = (id) => page.evaluate((id) => window.packageContract[id] ?? 0, id);
+    const dismissDialog = async (name) => {
+      const snapshot = () => page.evaluate(() => ({
+        focus: document.activeElement?.outerHTML.slice(0, 400),
+        tooltips: [...document.querySelectorAll('.desktop-tooltip')].map(el => ({state: el.getAttribute('data-state'), text: el.textContent})),
+        dialogs: [...document.querySelectorAll('[role=dialog]')].map(el => ({title: el.getAttribute('aria-labelledby'), state: el.getAttribute('data-state')})),
+      }));
+      await page.keyboard.press('Escape');
+      try {
+        await page.getByRole('dialog', { name, exact: true }).waitFor({ state: 'detached' });
+      } catch (error) {
+        console.log(JSON.stringify({ stage: 'dialog-dismissal', name, keyboard: await page.evaluate(() => window.escapeTrace), after: await snapshot() }));
+        await page.screenshot({path: path.join(evidence, 'dismissal-failure.png')});
+        throw error;
+      }
+    };
     await page.waitForFunction(() => window.packageContract?.['light.refs'] === 1);
+    await page.evaluate(() => {
+      window.escapeTrace = [];
+      document.addEventListener('keydown', event => {
+        if (event.key !== 'Escape') return;
+        const entry = {composing: event.isComposing, focus: document.activeElement?.outerHTML.slice(0, 400), tooltips: [...document.querySelectorAll('.desktop-tooltip')].map(el => ({state: el.getAttribute('data-state'), text: el.textContent}))};
+        window.escapeTrace.push(entry);
+        queueMicrotask(() => entry.prevented = event.defaultPrevented);
+      }, true);
+    });
     const host = await page.evaluate(() => ({
       htmlOverflow: getComputedStyle(document.documentElement).overflow,
       bodyOverflow: getComputedStyle(document.body).overflow,
@@ -227,8 +251,7 @@ try {
         true,
         'Mixed API modal is above its parent',
       );
-      await page.keyboard.press('Escape');
-      await compound.waitFor({ state: 'detached' });
+      await dismissDialog(`${id} compound title`);
       assert.equal(await count(`${id}.outer.close`), 0, 'Mixed API dismissal retains parent');
       await page.getByRole('button', { name: `Open ${id} nested`, exact: true }).click();
       await page.getByLabel(`${id} inner draft`).waitFor();
@@ -236,8 +259,7 @@ try {
         (id) => document.activeElement?.getAttribute('aria-label') === `${id} inner draft`,
         id,
       );
-      await page.keyboard.press('Escape');
-      await page.getByRole('dialog', { name: `${id} inner`, exact: true }).waitFor({ state: 'detached' });
+      await dismissDialog(`${id} inner`);
       assert.equal(
         await count(`${id}.inner.close`),
         1,
@@ -261,8 +283,7 @@ try {
       );
       const axe = await new AxeBuilder({ page }).include('[role=dialog]').analyze();
       assert.deepEqual(axe.violations, []);
-      await page.keyboard.press('Escape');
-      await outer.waitFor({ state: 'detached' });
+      await dismissDialog(`${id} outer`);
       await page.waitForFunction(
         (id) => document.activeElement?.getAttribute('data-desktop-action') === `${id}.outer`,
         id,
@@ -275,10 +296,7 @@ try {
       );
       await page.getByRole('button', { name: `${id} compound`, exact: true }).click();
       await page.getByRole('dialog', { name: `${id} compound title`, exact: true }).waitFor();
-      await page.keyboard.press('Escape');
-      await page
-        .getByRole('dialog', { name: `${id} compound title`, exact: true })
-        .waitFor({ state: 'detached' });
+      await dismissDialog(`${id} compound title`);
       await page.waitForFunction(
         (id) => document.activeElement?.getAttribute('data-desktop-action') === `${id}.compound`,
         id,
