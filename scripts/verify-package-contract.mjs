@@ -76,6 +76,15 @@ try {
     page.setDefaultTimeout(10000);
     await page.goto(`http://127.0.0.1:${server.address().port}`);
     const count = (id) => page.evaluate((id) => window.packageContract[id] ?? 0, id);
+    const modalReady = async (label) => {
+      await page.waitForFunction((label) => {
+        const focus = document.activeElement;
+        return focus?.getAttribute('aria-label') === label && focus.closest('[role=dialog]')?.style.pointerEvents === 'auto';
+      }, label);
+      // Layer registration triggers a render and passive callback refresh after autofocus.
+      // Observe that committed layer through a paint cycle before sending the native key.
+      await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+    };
     const dismissDialog = async (name) => {
       const snapshot = () => page.evaluate(() => ({
         focus: document.activeElement?.outerHTML.slice(0, 400),
@@ -218,6 +227,7 @@ try {
       assert.equal(await page.getByLabel(`${id} draft`).inputValue(), 'Retained draft');
       await page.getByRole('button', { name: `Open ${id} dialog`, exact: true }).click();
       await page.getByLabel(`${id} outer draft`).waitFor();
+      await modalReady(`${id} outer draft`);
       const outer = page.getByRole('dialog', { name: `${id} outer`, exact: true });
       const bounds = await outer.boundingBox();
       assert.ok(
@@ -241,10 +251,7 @@ try {
       await page.getByRole('button', { name: `Open ${id} compound nested`, exact: true }).click();
       const compound = page.getByRole('dialog', { name: `${id} mixed title`, exact: true });
       await compound.waitFor();
-      await page.waitForFunction(
-        (id) => document.activeElement?.getAttribute('aria-label') === `${id} mixed draft`,
-        id,
-      );
+      await modalReady(`${id} mixed draft`);
       assert.equal(
         await compound.evaluate((el) => {
           const b = el.getBoundingClientRect();
@@ -263,10 +270,7 @@ try {
       );
       await page.getByRole('button', { name: `Open ${id} nested`, exact: true }).click();
       await page.getByLabel(`${id} inner draft`).waitFor();
-      await page.waitForFunction(
-        (id) => document.activeElement?.getAttribute('aria-label') === `${id} inner draft`,
-        id,
-      );
+      await modalReady(`${id} inner draft`);
       await dismissDialog(`${id} inner`);
       assert.equal(
         await count(`${id}.inner.close`),
@@ -304,10 +308,7 @@ try {
       );
       await page.getByRole('button', { name: `${id} compound`, exact: true }).click();
       await page.getByRole('dialog', { name: `${id} compound title`, exact: true }).waitFor();
-      await page.waitForFunction(
-        (id) => document.activeElement?.getAttribute('aria-label') === `${id} compound draft`,
-        id,
-      );
+      await modalReady(`${id} compound draft`);
       await dismissDialog(`${id} compound title`);
       await page.waitForFunction(
         (id) => document.activeElement?.getAttribute('data-desktop-action') === `${id}.compound`,
