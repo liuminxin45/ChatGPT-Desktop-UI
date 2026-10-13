@@ -75,6 +75,7 @@ Shared settings shell; the Host owns category state and contextual sidebar visib
 | sidebarVisible | no | `boolean \| undefined` |
 | sidebarId | no | `string \| undefined` |
 | sidebarLabel | no | `string \| undefined` |
+| sidebarResize | no | `SidebarResizeOptions \| undefined` |
 
 ## SettingsNavigation (chatgpt-desktop-kit)
 
@@ -105,6 +106,16 @@ Shared settings shell; the Host owns category state and contextual sidebar visib
 | Prop | Required | Type |
 | --- | --- | --- |
 | title | no | `ReactNode` |
+
+## SidebarPanel (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/shell/sidebar-panel.tsx)
+
+Shared sidebar geometry and resize target; the Host owns width, folding and persistence.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| resize | no | `SidebarResizeOptions \| undefined` |
 
 ## TitleBar (chatgpt-desktop-kit)
 

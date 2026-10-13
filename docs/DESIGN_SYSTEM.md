@@ -78,6 +78,15 @@ Rail hover uses the navigation tile surface and foreground rather than the gener
 
 ### Icon and label alignment
 
+Resizable contextual sidebars compose `SidebarPanel`, or `SettingsLayout.sidebarResize`.
+The shared panel owns the edge target, pointer capture, keyboard focus and bounded
+geometry; the Host owns width, visibility, persistence and gesture outcomes.
+PHD uses a 240–460px range: reaching 240px folds immediately, and reopening uses
+the remembered 240px width. Escape or pointer cancellation restores the gesture's
+initial width. Home folds, End selects the maximum, and arrow keys adjust 10px.
+Scaling must convert pointer movement to CSS pixels. Folding retains mounted
+children, drafts, selection and Tool leases.
+
 Use `Button.icon` for a leading action glyph and keep the label in `children`. Sibling navigation actions must share an icon column, label left edge and vertical baseline. The visible glyph can be smaller than its column; it remains centered and cannot move the label. Trailing status icons and counts remain separate from the leading action slot. Do not fix alignment with per-label margins, transforms or different gaps.
 
 Client sidebar actions compose `ClientSidebarItem` for labelled navigation and counts, or `Button` with `className="client-sidebar-link"` and the `icon` prop. Navigation rows keep a 32px minimum target and grow for wrapped long labels; counts retain their own trailing space. Selected counts inherit the navigation foreground so they preserve readable contrast against the selected surface in both themes. The shared client profile owns their 32px targets, 16px icon columns, 20px line boxes and 10px label gap. Demo and Host composition must reuse this geometry rather than maintain a second sidebar-action implementation.

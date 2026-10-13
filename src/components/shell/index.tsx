@@ -1,6 +1,8 @@
 import type { Icon } from '@phosphor-icons/react';
 import { CaretRight, MagnifyingGlass, PushPin } from '@phosphor-icons/react';
 import { classes } from '../classes';
+import { SidebarPanel, type SidebarResizeOptions } from './sidebar-panel';
+export { SidebarPanel, type SidebarResizeOptions } from './sidebar-panel';
 import * as Menu from '@radix-ui/react-dropdown-menu';
 import { forwardRef, useEffect, useState, type ReactElement, type ReactNode } from 'react';
 import { ActionTooltip } from '../../action-tooltip';
@@ -402,7 +404,7 @@ export function DesktopShell({
         <div className="kit-shell__navigation" hidden={!navigationVisible}>
           {navigation}
         </div>
-        <aside className="kit-sidebar" hidden={!sidebarVisible || !sidebar}>
+        <aside className="kit-sidebar" hidden={!sidebarVisible || !sidebar} {...(!sidebarVisible || !sidebar ? { inert: '' } : {})}>
           {sidebar}
         </aside>
         <main className="kit-shell__main">{children}</main>
@@ -424,6 +426,7 @@ export function SettingsLayout({
   sidebarVisible = true,
   sidebarId,
   sidebarLabel,
+  sidebarResize,
   children,
   className,
   ...props
@@ -432,12 +435,13 @@ export function SettingsLayout({
   sidebarVisible?: boolean;
   sidebarId?: string;
   sidebarLabel?: string;
+  sidebarResize?: SidebarResizeOptions;
 }) {
   return (
     <div className={classes('kit-settings-layout', className)} {...props}>
-      <aside id={sidebarId} aria-label={sidebarLabel} className="kit-sidebar" hidden={!sidebarVisible}>
+      <SidebarPanel id={sidebarId} aria-label={sidebarLabel} hidden={!sidebarVisible} resize={sidebarResize}>
         {sidebar}
-      </aside>
+      </SidebarPanel>
       {children}
     </div>
   );
