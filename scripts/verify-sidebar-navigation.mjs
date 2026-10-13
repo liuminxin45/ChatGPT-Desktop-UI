@@ -1,3 +1,4 @@
+import { browserOptions } from './browser-options.mjs';
 import assert from 'node:assert/strict';
 import { mkdtemp, readFile, writeFile, mkdir, rm } from 'node:fs/promises';
 import os from 'node:os';
@@ -42,7 +43,7 @@ await new Promise((r) => server.listen(0, '127.0.0.1', r));
 let browser;
 const results = [];
 try {
-  browser = await chromium.launch({ channel: 'msedge', headless: true });
+  browser = await chromium.launch(browserOptions());
   for (const theme of ['light', 'dark'])
     for (const width of [1920, 1280, 760])
       for (const zoom of [1, 1.25]) {

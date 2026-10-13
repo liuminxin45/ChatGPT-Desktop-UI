@@ -1,3 +1,4 @@
+import { browserOptions } from './browser-options.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -67,8 +68,8 @@ const server = http.createServer(async (req, res) => {
   res.end(await fs.readFile(path.join(output, name)));
 });
 await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
-const channel = process.env.UI_BROWSER_CHANNEL || 'msedge';
-const browser = await chromium.launch({ headless: true, ...(channel === 'chromium' ? {} : { channel }) });
+
+const browser = await chromium.launch(browserOptions());
 const results = [];
 try {
   for (const theme of ['light', 'dark'])

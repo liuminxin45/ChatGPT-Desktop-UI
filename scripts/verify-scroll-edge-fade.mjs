@@ -1,3 +1,4 @@
+import { browserOptions } from './browser-options.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -46,7 +47,7 @@ const server = http.createServer(async (req, res) => {
 await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
 let browser; const cases = [];
 try {
-  browser = await chromium.launch({ headless: true, channel: process.env.UI_BROWSER_CHANNEL || 'msedge' });
+  browser = await chromium.launch(browserOptions());
   for (const theme of ['light', 'dark']) for (const [width, height, scale] of [[1920,1080,1],[1280,800,1],[1536,864,1.25]]) {
     const context = await browser.newContext({ viewport: { width, height }, deviceScaleFactor: scale, colorScheme: theme });
     const page = await context.newPage(), errors = [];

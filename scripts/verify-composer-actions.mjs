@@ -1,3 +1,4 @@
+import { browserOptions } from './browser-options.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -32,7 +33,7 @@ await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
 let browser;
 const cases = [];
 try {
-  browser = await chromium.launch({ channel: process.env.UI_BROWSER_CHANNEL || 'msedge', headless: true });
+  browser = await chromium.launch(browserOptions());
   for (const theme of ['light', 'dark'])
     for (const [width, height, scale] of [
       [1920, 1080, 1],
@@ -93,11 +94,12 @@ try {
       await field.press('Enter');
       assert.equal((await page.evaluate(() => window.composerEvents)).send, 2);
       await page.emulateMedia({ reducedMotion: 'reduce' });
-      assert.equal(
-        await page
-          .locator('[data-composer-state="sending"] .desktop-composer-progress')
-          .evaluate((node) => getComputedStyle(node).animationName),
-        'none',
+      assert.ok(
+        (
+          await page
+            .locator('[data-composer-state="sending"] .desktop-composer-progress')
+            .evaluateAll((nodes) => nodes.map((node) => getComputedStyle(node).animationName))
+        ).every((animation) => animation === 'none'),
       );
       assert.deepEqual(errors, []);
       cases.push({ theme, width, height, scale, geometry });
