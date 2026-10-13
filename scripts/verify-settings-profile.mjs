@@ -63,6 +63,8 @@ try {
         const style = (s) => getComputedStyle(document.querySelector(s)),
           rect = (s) => document.querySelector(s).getBoundingClientRect();
         return {
+          fontFamily: style('.desktop-client').fontFamily,
+          expectedFontFamily: style('.desktop-client').getPropertyValue('--desktop-font-sans').trim(),
           heading: style('.kit-settings-content>h1').fontSize,
           headingWeight: style('.kit-settings-content>h1').fontWeight,
           fieldWeight: style('.client-settings-field h3').fontWeight,
@@ -73,6 +75,7 @@ try {
             document.querySelector('.kit-settings-content').scrollWidth > rect('.kit-settings-content').width,
         };
       });
+      assert.equal(metrics.fontFamily, metrics.expectedFontFamily);
       assert.equal(metrics.heading, '28px');
       assert.equal(metrics.headingWeight, '600');
       assert.equal(metrics.fieldWeight, '600');
