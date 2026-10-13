@@ -27482,6 +27482,13 @@
       "description": "",
       "props": [
         {
+          "name": "layout",
+          "required": false,
+          "type": "\"row\" | \"command\" | \"tile\" | \"surface\" | undefined",
+          "native": false,
+          "description": "Commands are compact; rows and media own distinct, shared geometry. Surface is reserved for domain graphics such as schedule grids."
+        },
+        {
           "name": "variant",
           "required": false,
           "type": "ButtonVariant | undefined",
@@ -28380,6 +28387,13 @@
           "type": "string | undefined",
           "native": false,
           "description": ""
+        },
+        {
+          "name": "layout",
+          "required": false,
+          "type": "\"row\" | \"command\" | \"tile\" | \"surface\" | undefined",
+          "native": false,
+          "description": "Commands are compact; rows and media own distinct, shared geometry. Surface is reserved for domain graphics such as schedule grids."
         },
         {
           "name": "badge",
@@ -30400,6 +30414,13 @@
       "implementation": "src/components/actions/index.tsx",
       "description": "Reusable floating surfaces; positioning and application state belong to the Host.",
       "props": [
+        {
+          "name": "layout",
+          "required": false,
+          "type": "\"row\" | \"command\" | \"tile\" | \"surface\" | undefined",
+          "native": false,
+          "description": "Commands are compact; rows and media own distinct, shared geometry. Surface is reserved for domain graphics such as schedule grids."
+        },
         {
           "name": "variant",
           "required": false,
@@ -34678,6 +34699,13 @@
       "implementation": "src/components/actions/index.tsx",
       "description": "A record command with feedback confined to its actual hit target.",
       "props": [
+        {
+          "name": "layout",
+          "required": false,
+          "type": "\"row\" | \"command\" | \"tile\" | \"surface\" | undefined",
+          "native": false,
+          "description": "Commands are compact; rows and media own distinct, shared geometry. Surface is reserved for domain graphics such as schedule grids."
+        },
         {
           "name": "variant",
           "required": false,
@@ -45695,6 +45723,13 @@
           "description": ""
         },
         {
+          "name": "layout",
+          "required": false,
+          "type": "\"row\" | \"command\" | \"tile\" | \"surface\" | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
           "name": "variant",
           "required": false,
           "type": "\"link\" | \"default\" | \"primary\" | \"secondary\" | \"ghost\" | \"destructive\" | \"outline\" | null | undefined",
@@ -46311,6 +46346,13 @@
           "name": "size",
           "required": false,
           "type": "\"default\" | \"icon\" | \"sm\" | \"lg\" | null | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "layout",
+          "required": false,
+          "type": "\"row\" | \"command\" | \"tile\" | \"surface\" | undefined",
           "native": false,
           "description": ""
         },
@@ -49384,6 +49426,13 @@
           "name": "size",
           "required": false,
           "type": "\"default\" | \"icon\" | \"sm\" | \"lg\" | null | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "layout",
+          "required": false,
+          "type": "\"row\" | \"command\" | \"tile\" | \"surface\" | undefined",
           "native": false,
           "description": ""
         },
@@ -53356,6 +53405,13 @@
           "type": "React.ReactNode",
           "native": false,
           "description": "A real count/state badge, separate from the hidden action caption."
+        },
+        {
+          "name": "layout",
+          "required": false,
+          "type": "\"row\" | \"command\" | \"tile\" | \"surface\" | undefined",
+          "native": false,
+          "description": ""
         }
       ],
       "nativeProps": [

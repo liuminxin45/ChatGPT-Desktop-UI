@@ -1,5 +1,7 @@
 # Desktop design system
 
+Button geometry is explicit: `layout="command"` is the compact centered command default. Single-target navigation/selection records use `layout="row"`, with left alignment, natural height and shared insets; place stacked title/metadata in one content group. Image pickers use `layout="tile"`, a square with contained media that fills the available preview rather than retaining tiny intrinsic dimensions. Do not override command height/padding to imitate records. `layout="surface"` carries native action, accessibility and instrumentation behavior without command geometry; reserve it for documented domain graphics such as schedule cells. Hosts own those graphics' grid boundaries, not ordinary control styles. Multi-action records still use static `RecordRow` and independent commands.
+
 Escape dismisses only the active overlay: an open Select, menu, Popover or nested Dialog closes before its parent editor. Respect consumed keyboard events and IME composition; never discard a draft because Escape cancelled composition. Dialog focus containment applies only to the top visible Dialog, and dismissal returns focus to its own trigger. Verify nested layers through the consumer's real CSS and portal pipeline.
 
 `SelectControl` forwards to canonical `Select`, including compact density, empty values and long-value behavior. Compatibility aliases do not permit Host padding, type or paint overrides. Browser `confirm/alert/prompt` dialogs must use shared `AppConfirmDialog` or `Dialog`; keep drafts until the user confirms. Source audits require the actual clean shared source at the consumer's pinned revision, never an empty `node_modules/src` scan.
@@ -12,6 +14,8 @@ internal modal scrolling, background isolation and Escape through the prepared
 consumer package. Do not relax Host CSP to repair a component import.
 
 ## Action meaning and reading order
+
+Row, tile and surface actions keep the actual button as the tooltip trigger. A tooltip wrapper must never replace a positioned grid item or constrain full-width media. Disabled compact command buttons retain their focusable tooltip wrapper; other layouts keep native disabled semantics and accessible labels.
 
 Notifications and popup surfaces belong to the shared library. Use `Toaster`/`toast` for a global queue and `ToastNotice` for Host-owned transient state; preserve Host timing, command outcomes and localized labels. Notifications use the neutral overlay surface without success-colored left borders. Use `Popover` for anchored popup content and `InlineNotice` for persistent conditions. Hosts must not import a third-party notification renderer, hand-paint toast/popover containers, or override shared backgrounds, corners, shadows and control insets. Domain content may own its internal layout. Review temporary and failure surfaces as well as default pages.
 
