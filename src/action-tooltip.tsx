@@ -16,22 +16,24 @@ export function actionLabel(children: ReactNode): string {
   }).join('').replace(/\s+/g, ' ').trim();
 }
 
-export function ActionTooltip({ label, children, side = 'bottom', disabled = false, direct = false }: {
+export function ActionTooltip({ label, children, side = 'bottom', disabled = false, direct = false, suppressed = false }: {
   label: string;
   children: ReactElement;
   side?: 'right' | 'bottom' | 'top' | 'left';
   disabled?: boolean;
+  /** An expanded menu or Popover owns Escape; its trigger tooltip stays closed. */
+  suppressed?: boolean;
   /** Keep rows, media and domain grids as direct layout children. */
   direct?: boolean;
 }) {
   const nested = useContext(TooltipBoundary);
   const visible = useContext(ToolVisibilityContext);
   const [open, setOpen] = useState(false);
-  useEffect(() => { if (!visible) setOpen(false); }, [visible]);
+  useEffect(() => { if (!visible || suppressed) setOpen(false); }, [visible, suppressed]);
   if (!label || nested) return children;
   return <TooltipBoundary.Provider value={true}>
     <Primitive.Provider delayDuration={300} skipDelayDuration={100}>
-      <Primitive.Root open={visible && open} onOpenChange={setOpen} disableHoverableContent>
+      <Primitive.Root open={visible && !suppressed && open} onOpenChange={next => setOpen(!suppressed && next)} disableHoverableContent>
         <Primitive.Trigger asChild>
           {direct ? children : <span className="desktop-action-tooltip" tabIndex={disabled ? 0 : undefined}>{children}</span>}
         </Primitive.Trigger>

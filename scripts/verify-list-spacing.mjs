@@ -116,6 +116,13 @@ try {
       await page.getByRole('combobox', { name: 'Choice' }).click();
       assert.ok((await gap(page.getByRole('option'))) >= 4);
       await page.getByRole('option', { name: 'Beta' }).click();
+      const filter = page.getByRole('button', { name: 'Filter records', exact: true });
+      await filter.click();
+      await page.getByRole('textbox', { name: 'Filter keyword' }).fill('draft');
+      await page.waitForTimeout(400); // Pointer remains on the tooltip-enabled trigger.
+      await page.keyboard.press('Escape');
+      await page.getByRole('textbox', { name: 'Filter keyword' }).waitFor({ state: 'hidden' });
+      assert.equal(await filter.evaluate(element => document.activeElement === element), true);
       await fixed.getByRole('button').nth(1).hover();
       await page.screenshot({ path: path.join(output, `${theme}-${width}.png`) });
       await page.evaluate(() => window.listSpacing.scroll(500));
@@ -143,12 +150,43 @@ try {
         (await page.evaluate(() => window.listSpacing.scrollEvents())) > 0,
         'Host observes scroll for paging',
       );
+      await dynamic.evaluate(element => { element.scrollTop = element.scrollHeight; });
+      await page.waitForFunction(() => {
+        const list = document.querySelector('[aria-label="Dynamic records"]');
+        list.scrollTop = list.scrollHeight;
+        return list.querySelector('[data-list-footer]').getBoundingClientRect().bottom <= list.getBoundingClientRect().bottom + 1;
+      });
       const footer = await dynamic.locator('[data-list-footer]').boundingBox(),
         viewport = await dynamic.boundingBox();
       assert.ok(
         footer.y + footer.height <= viewport.y + viewport.height + 1,
         'Loading footer remains reachable in the list viewport',
       );
+      await dynamic.evaluate(element => { element.scrollTop = 5000; });
+      const settle = async () => {
+        let previous = '', stable = 0;
+        for (let attempt = 0; attempt < 50; attempt++) {
+          await page.waitForTimeout(100);
+          const current = await dynamic.evaluate(element => JSON.stringify([element.scrollTop, ...[...element.querySelectorAll('[data-desktop-item-key]')].map(row => [row.dataset.desktopItemKey, row.getBoundingClientRect().top, row.getBoundingClientRect().height])]));
+          stable = current === previous ? stable + 1 : 0; previous = current;
+          if (stable >= 3) return;
+        }
+        throw new Error('Dynamic row measurements did not settle');
+      };
+      const anchor = () => dynamic.evaluate(element => {
+        const top = element.getBoundingClientRect().top;
+        const row = [...element.querySelectorAll('[data-desktop-item-key]')].find(row => row.getBoundingClientRect().bottom > top);
+        return { key: row.dataset.desktopItemKey, offset: row.getBoundingClientRect().top - top };
+      });
+      await settle(); const beforeResize = await anchor();
+      await page.setViewportSize({ width: 760, height }); await settle();
+      const narrowed = await anchor();
+      assert.equal(narrowed.key, beforeResize.key, 'Reflow keeps the current record');
+      assert.ok(Math.abs(narrowed.offset - beforeResize.offset) <= 1, 'Reflow keeps its pixel offset');
+      await page.setViewportSize({ width, height }); await settle();
+      const widened = await anchor();
+      assert.equal(widened.key, beforeResize.key, 'Restored width keeps the current record');
+      assert.ok(Math.abs(widened.offset - beforeResize.offset) <= 1);
       await page.evaluate(() => window.listSpacing.empty());
       assert.equal(await fixed.getByRole('button').count(), 0);
       assert.deepEqual(errors, []);
@@ -161,6 +199,7 @@ try {
         tabInset: inset,
         tabAppearance,
         scrollAnchor: 'passed',
+        resizeAnchor: { beforeResize, narrowed, widened },
         lastRows: 'passed',
         empty: 'passed',
       });

@@ -36,6 +36,7 @@ export const ControlButton = forwardRef<HTMLButtonElement, ControlButtonProps>(f
       label={iconOnly || title || props['aria-label'] ? label : ''}
       disabled={!!props.disabled}
       direct={directTooltip}
+      suppressed={props['aria-expanded'] === true || props['aria-expanded'] === 'true'}
     >
       <Component
         ref={ref}
