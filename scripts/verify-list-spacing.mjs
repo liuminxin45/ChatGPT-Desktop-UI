@@ -114,6 +114,8 @@ try {
       await page.getByRole('button', { name: 'Menu', exact: true }).click();
       assert.ok((await gap(page.getByRole('menuitem'))) >= 4);
       await page.waitForFunction(() => document.activeElement?.closest('[role="menu"]'));
+      // Radix registers its dismissal layer after the focus effect; wait for its enabled layer style.
+      await page.waitForFunction(() => document.querySelector('[role=menu]')?.style.pointerEvents === 'auto');
       await page.keyboard.press('Escape');
       await page.getByRole('menu').waitFor({ state: 'hidden' });
       await page.getByRole('combobox', { name: 'Choice' }).click();
@@ -246,16 +248,14 @@ try {
         {
           message: error.message,
           body: await lastPage.locator('body').innerText(),
-          buttons: await lastPage
-            .locator('button')
-            .evaluateAll((nodes) =>
-              nodes.map((node) => ({
-                role: node.getAttribute('role'),
-                name: node.getAttribute('aria-label'),
-                expanded: node.getAttribute('aria-expanded'),
-                hidden: node.closest('[aria-hidden=true]') !== null,
-              })),
-            ),
+          buttons: await lastPage.locator('button').evaluateAll((nodes) =>
+            nodes.map((node) => ({
+              role: node.getAttribute('role'),
+              name: node.getAttribute('aria-label'),
+              expanded: node.getAttribute('aria-expanded'),
+              hidden: node.closest('[aria-hidden=true]') !== null,
+            })),
+          ),
         },
         null,
         2,
