@@ -80,7 +80,7 @@ Rail hover uses the navigation tile surface and foreground rather than the gener
 
 Use `Button.icon` for a leading action glyph and keep the label in `children`. Sibling navigation actions must share an icon column, label left edge and vertical baseline. The visible glyph can be smaller than its column; it remains centered and cannot move the label. Trailing status icons and counts remain separate from the leading action slot. Do not fix alignment with per-label margins, transforms or different gaps.
 
-Client sidebar actions compose `Button` with `className="client-sidebar-link"` and the `icon` prop. The shared client profile owns their 32px targets, 16px icon columns, 20px line boxes and 10px label gap. Demo and Host composition must reuse this geometry rather than maintain a second sidebar-action implementation.
+Client sidebar actions compose `ClientSidebarItem` for labelled navigation and counts, or `Button` with `className="client-sidebar-link"` and the `icon` prop. Navigation rows keep a 32px minimum target and grow for wrapped long labels; counts retain their own trailing space. The shared client profile owns their 32px targets, 16px icon columns, 20px line boxes and 10px label gap. Demo and Host composition must reuse this geometry rather than maintain a second sidebar-action implementation.
 
 Changes to these rows must verify rendered label left edges and vertical baselines, centered glyph columns and hover/focus targets in both themes and at supported scaling. Check a smaller glyph beside a regular glyph, not only a set of identical icons; computed SVG dimensions alone are insufficient.
 

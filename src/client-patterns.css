@@ -15,7 +15,8 @@
 .desktop-client .kit-sidebar{width:var(--desktop-size-client-sidebar);border-inline-end:1px solid var(--desktop-color-border);border-top-left-radius:14px;overflow:hidden}
 .desktop-client .kit-shell__main{border-top-left-radius:0}.desktop-client .kit-shell__body{padding-right:4px;padding-bottom:4px}
 .client-sidebar{height:100%;display:flex;flex-direction:column}.client-sidebar>header{display:flex;align-items:center;justify-content:space-between;height:48px;padding:8px 12px;flex:none}.client-sidebar-scroll{flex:1;min-height:0;padding:0 8px 20px}
-.client-sidebar-link.desktop-button{display:flex;width:100%;justify-content:flex-start;height:32px;padding:0 8px;gap:10px;border-radius:10px;font-size:14px;line-height:20px;font-weight:500}
+.client-sidebar-link.desktop-button{display:flex;width:100%;justify-content:flex-start;min-height:32px;height:auto;padding:6px 8px;gap:10px;border-radius:10px;font-size:14px;line-height:20px;font-weight:500;white-space:normal}
+.client-sidebar-label{flex:1;min-width:0;overflow-wrap:anywhere;white-space:normal;text-align:start}.client-sidebar-count{flex:none;color:var(--desktop-color-text-muted)}
 .client-sidebar-link.desktop-button>.desktop-action-glyph{width:16px;height:20px;flex:none}
 .client-sidebar .client-sidebar-link.desktop-button:hover:not(:disabled){background:var(--desktop-color-client-pill,var(--desktop-color-surface-hover))}
 .client-sidebar-link.desktop-button:active{transform:none}
