@@ -1,7 +1,8 @@
 import { CaretRight, Check } from '@phosphor-icons/react';
 import * as Menu from '@radix-ui/react-dropdown-menu';
-import { cloneElement, type ReactElement, type ReactNode, useId, useState } from 'react';
+import { cloneElement, type HTMLAttributes, type ReactElement, type ReactNode, useId, useState } from 'react';
 import { InternalScrollArea } from '../lists';
+import { Button, type ButtonProps } from '../actions';
 import { classes } from '../classes';
 import { ClientProfileContext, createDesktopPortal } from '../../scoped-surface';
 const MenuPortal = createDesktopPortal(Menu.Portal);
@@ -115,12 +116,44 @@ export function DesktopClientSurface({ children }: { children: ReactNode }) {
     </ClientProfileContext.Provider>
   );
 }
-export function ClientSidebar({ header, children }: { header: ReactNode; children: ReactNode }) {
+export function ClientSidebar({
+  header,
+  children,
+  className,
+  ...props
+}: HTMLAttributes<HTMLDivElement> & { header?: ReactNode; children: ReactNode }) {
   return (
-    <div className="client-sidebar">
-      <header>{header}</header>
+    <div {...props} className={classes('client-sidebar', className)}>
+      {header ? <header>{header}</header> : null}
       <InternalScrollArea className="client-sidebar-scroll">{children}</InternalScrollArea>
     </div>
+  );
+}
+
+/** A retained navigation target with a readable label and an independent trailing count. */
+export function ClientSidebarItem({
+  label,
+  count,
+  selected = false,
+  className,
+  icon,
+  ...props
+}: Omit<ButtonProps, 'children' | 'variant' | 'iconOnly'> & {
+  label: ReactNode;
+  count?: number;
+  selected?: boolean;
+}) {
+  return (
+    <Button
+      {...props}
+      icon={icon || <span aria-hidden="true" />}
+      variant="ghost"
+      className={classes('client-sidebar-link', className)}
+      aria-current={selected ? 'page' : undefined}
+    >
+      <span className="client-sidebar-label">{label}</span>
+      {count !== undefined && <span className="client-sidebar-count">{count}</span>}
+    </Button>
   );
 }
 export function SidebarSection({

@@ -9,6 +9,7 @@ import {
   Tabs,
   ToolPageBar,
   VirtualList,
+  Button, Input, Popover, PopoverTrigger, PopoverContent,
   type FixedVirtualListHandle,
 } from '../src';
 import '../src/styles.css';
@@ -31,7 +32,8 @@ function App() {
   const row = (id: number, dynamic = false) => (
     <button
       className="spacing-row"
-      style={{ height: dynamic ? 38 + (id % 3) * 8 : 38 }}
+      style={dynamic ? { minHeight: 38 + (id % 3) * 8, paddingBlock: 8 } : { height: 38 }}
+      aria-label={`Record ${id}`}
       aria-pressed={selected === id}
       onClick={() => setSelected(id)}
       onKeyDown={(event) => {
@@ -41,7 +43,7 @@ function App() {
         }
       }}
     >
-      Record {id}
+      Record {id}{dynamic ? ' with a long description that wraps when the contextual sidebar changes the available width' : ''}
     </button>
   );
   return (
@@ -63,6 +65,9 @@ function App() {
         }
         actions={
           <>
+            <Popover><PopoverTrigger asChild><Button iconOnly aria-label="Filter records" icon={<span aria-hidden="true">⌕</span>}>Filter records</Button></PopoverTrigger>
+              <PopoverContent><Input autoFocus aria-label="Filter keyword" /></PopoverContent>
+            </Popover>
             <MenuButton
               actionId="spacing.menu"
               label="Menu"

@@ -182,10 +182,31 @@ export function VirtualList<T>({
   const headerRef = useRef<HTMLDivElement>(null);
   const anchorRef = useRef(initialScrollAnchor);
   const restoringRef = useRef(false);
+  const captureFrame = useRef(0);
   const resetRef = useRef(resetKey);
   const [headerHeight, setHeaderHeight] = useState(0);
+  const [viewportWidth, setViewportWidth] = useState(0);
+  const viewportWidthRef = useRef(0);
   const hasHeader = Boolean(header);
+  useEffect(() => () => cancelAnimationFrame(captureFrame.current), []);
   useImperativeHandle(viewportRef, () => scrollRef.current!, []);
+  useEffect(() => {
+    const element = scrollRef.current;
+    if (!element) return;
+    const measure = () => {
+      const width = element.clientWidth;
+      if (!width || width === viewportWidthRef.current) return;
+      // A width change reflows measured rows. Keep the reader's previous key
+      // while the virtualizer settles, rather than adopting its resize scrolls.
+      if (viewportWidthRef.current && anchorRef.current) restoringRef.current = true;
+      viewportWidthRef.current = width;
+      setViewportWidth(width);
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
   useEffect(() => {
     const element = headerRef.current;
     if (!element) {
@@ -252,7 +273,7 @@ export function VirtualList<T>({
       cancelAnimationFrame(frame);
       restoringRef.current = false;
     };
-  }, [items, headerHeight]);
+  }, [items, headerHeight, viewportWidth]);
   useEffect(() => {
     const element = scrollRef.current;
     const restore = (event: Event) => {
@@ -279,13 +300,25 @@ export function VirtualList<T>({
         style={style}
         onScroll={(event) => {
           onScroll?.(event);
-          if (restoringRef.current) return;
-          const top = event.currentTarget.scrollTop;
-          const row = virtualizer.getVirtualItems().find((item) => item.end > top + headerHeight);
-          if (!row) return;
-          const anchor = { key: String(row.key), offset: top - row.start, top };
-          anchorRef.current = anchor;
-          onScrollAnchorChange?.(anchor);
+          const element = event.currentTarget;
+          cancelAnimationFrame(captureFrame.current);
+          // Measure the committed row position. A native scroll event can arrive
+          // before React applies the virtualizer's updated row transforms.
+          captureFrame.current = requestAnimationFrame(() => {
+            if (restoringRef.current || element.clientWidth !== viewportWidthRef.current) return;
+            const edge = element.getBoundingClientRect().top + element.clientTop;
+            const row = [...element.querySelectorAll<HTMLElement>('[data-desktop-item-key]')].find(
+              (item) => item.getBoundingClientRect().bottom > edge + headerHeight,
+            );
+            if (!row) return;
+            const anchor = {
+              key: row.dataset.desktopItemKey!,
+              offset: edge - row.getBoundingClientRect().top,
+              top: element.scrollTop,
+            };
+            anchorRef.current = anchor;
+            onScrollAnchorChange?.(anchor);
+          });
         }}
       >
         {header ? (

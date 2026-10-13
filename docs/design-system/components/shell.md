@@ -88,6 +88,7 @@ Shared settings shell; the Host owns category state and contextual sidebar visib
 | title | no | `string \| undefined` |
 | searchLabel | no | `string \| undefined` |
 | noMatchesLabel | no | `string \| undefined` |
+| actionId | no | `string \| undefined` |
 
 ## SettingsPage (chatgpt-desktop-kit)
 

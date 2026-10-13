@@ -14,8 +14,25 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 | Prop | Required | Type |
 | --- | --- | --- |
-| header | yes | `ReactNode` |
-| children | yes | `ReactNode` |
+| header | no | `ReactNode` |
+
+## ClientSidebarItem (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/client/index.tsx)
+
+A retained navigation target with a readable label and an independent trailing count.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| size | no | `"sm" \| "md" \| undefined` |
+| layout | no | `"row" \| "command" \| "tile" \| "surface" \| undefined` |
+| actionId | no | `string \| undefined` |
+| confirmOnEnter | no | `boolean \| undefined` |
+| icon | no | `ReactNode` |
+| badge | no | `ReactNode` |
+| label | yes | `ReactNode` |
+| count | no | `number \| undefined` |
+| selected | no | `boolean \| undefined` |
 
 ## DesktopClientSurface (chatgpt-desktop-kit)
 

@@ -54,6 +54,7 @@ import {
   SettingRow,
   DesktopClientSurface,
   ClientSidebar,
+  ClientSidebarItem,
   SidebarSection,
   DesktopMenu,
   SettingsGroup,
@@ -356,7 +357,14 @@ export function Examples({ family }: { family: string }) {
               onOpenChange={setSection}
               actionId="reference.projects.toggle"
             >
-              <Button actionId="reference.project.open">Design system</Button>
+              <ClientSidebarItem
+                actionId="reference.project.open"
+                label="Design system"
+                selected
+                icon={<House />}
+                count={12}
+                onClick={() => setSubmitted('Project opened')}
+              />
             </SidebarSection>
           </ClientSidebar>
           <SettingsGroup title="General">
