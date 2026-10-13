@@ -307,10 +307,15 @@ export function VirtualList<T>({
           captureFrame.current = requestAnimationFrame(() => {
             if (restoringRef.current || element.clientWidth !== viewportWidthRef.current) return;
             const edge = element.getBoundingClientRect().top + element.clientTop;
-            const row = [...element.querySelectorAll<HTMLElement>('[data-desktop-item-key]')]
-              .find(item => item.getBoundingClientRect().bottom > edge + headerHeight);
+            const row = [...element.querySelectorAll<HTMLElement>('[data-desktop-item-key]')].find(
+              (item) => item.getBoundingClientRect().bottom > edge + headerHeight,
+            );
             if (!row) return;
-            const anchor = { key: row.dataset.desktopItemKey!, offset: edge - row.getBoundingClientRect().top, top: element.scrollTop };
+            const anchor = {
+              key: row.dataset.desktopItemKey!,
+              offset: edge - row.getBoundingClientRect().top,
+              top: element.scrollTop,
+            };
             anchorRef.current = anchor;
             onScrollAnchorChange?.(anchor);
           });
