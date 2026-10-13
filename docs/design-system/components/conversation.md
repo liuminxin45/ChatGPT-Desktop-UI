@@ -82,6 +82,7 @@ One ChatGPT-style circular action for message composers; Hosts own operation sta
 | sendingLabel | no | `string \| undefined` |
 | stopLabel | no | `string \| undefined` |
 | stoppingLabel | no | `string \| undefined` |
+| layout | no | `"row" \| "command" \| "tile" \| "surface" \| undefined` |
 | badge | no | `ReactNode` |
 
 ## ConversationMessage (chatgpt-desktop-kit)

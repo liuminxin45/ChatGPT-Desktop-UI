@@ -63,6 +63,19 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | description | no | `ReactNode` |
 | children | yes | `ReactNode` |
 
+## SettingsLayout (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/shell/index.tsx)
+
+Shared settings shell; the Host owns category state and contextual sidebar visibility.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| sidebar | yes | `ReactNode` |
+| sidebarVisible | no | `boolean \| undefined` |
+| sidebarId | no | `string \| undefined` |
+| sidebarLabel | no | `string \| undefined` |
+
 ## SettingsNavigation (chatgpt-desktop-kit)
 
 [Implementation](../../../src/components/shell/index.tsx)
@@ -83,7 +96,6 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | Prop | Required | Type |
 | --- | --- | --- |
 | title | yes | `ReactNode` |
-| children | yes | `ReactNode` |
 
 ## SettingsSection (chatgpt-desktop-kit)
 

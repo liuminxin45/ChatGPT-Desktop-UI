@@ -16,11 +16,13 @@ export function actionLabel(children: ReactNode): string {
   }).join('').replace(/\s+/g, ' ').trim();
 }
 
-export function ActionTooltip({ label, children, side = 'bottom', disabled = false }: {
+export function ActionTooltip({ label, children, side = 'bottom', disabled = false, direct = false }: {
   label: string;
   children: ReactElement;
   side?: 'right' | 'bottom' | 'top' | 'left';
   disabled?: boolean;
+  /** Keep rows, media and domain grids as direct layout children. */
+  direct?: boolean;
 }) {
   const nested = useContext(TooltipBoundary);
   const visible = useContext(ToolVisibilityContext);
@@ -31,7 +33,7 @@ export function ActionTooltip({ label, children, side = 'bottom', disabled = fal
     <Primitive.Provider delayDuration={300} skipDelayDuration={100}>
       <Primitive.Root open={visible && open} onOpenChange={setOpen} disableHoverableContent>
         <Primitive.Trigger asChild>
-          <span className="desktop-action-tooltip" tabIndex={disabled ? 0 : undefined}>{children}</span>
+          {direct ? children : <span className="desktop-action-tooltip" tabIndex={disabled ? 0 : undefined}>{children}</span>}
         </Primitive.Trigger>
         <TooltipPortal><Primitive.Content side={side} sideOffset={5} collisionPadding={8} className="desktop-tooltip">{label}</Primitive.Content></TooltipPortal>
       </Primitive.Root>

@@ -2,7 +2,7 @@ import type { Icon } from '@phosphor-icons/react';
 import { CaretRight, MagnifyingGlass, PushPin } from '@phosphor-icons/react';
 import { classes } from '../classes';
 import * as Menu from '@radix-ui/react-dropdown-menu';
-import { useEffect, useState, type ReactElement, type ReactNode } from 'react';
+import { forwardRef, useEffect, useState, type ReactElement, type ReactNode } from 'react';
 import { ActionTooltip } from '../../action-tooltip';
 import { IconButton, Input, InternalScrollArea } from '../../controls';
 import {
@@ -418,6 +418,30 @@ export interface SettingsCategory {
   keywords?: string[];
   icon?: Icon;
 }
+/** Shared settings shell; the Host owns category state and contextual sidebar visibility. */
+export function SettingsLayout({
+  sidebar,
+  sidebarVisible = true,
+  sidebarId,
+  sidebarLabel,
+  children,
+  className,
+  ...props
+}: import('react').HTMLAttributes<HTMLDivElement> & {
+  sidebar: ReactNode;
+  sidebarVisible?: boolean;
+  sidebarId?: string;
+  sidebarLabel?: string;
+}) {
+  return (
+    <div className={classes('kit-settings-layout', className)} {...props}>
+      <aside id={sidebarId} aria-label={sidebarLabel} className="kit-sidebar" hidden={!sidebarVisible}>
+        {sidebar}
+      </aside>
+      {children}
+    </div>
+  );
+}
 export function SettingsNavigation({
   categories,
   selected,
@@ -486,16 +510,19 @@ export function SettingsNavigation({
   );
 }
 
-export function SettingsPage({ title, children }: { title: ReactNode; children: ReactNode }) {
+export const SettingsPage = forwardRef<
+  HTMLDivElement,
+  Omit<import('react').HTMLAttributes<HTMLDivElement>, 'title'> & { title: ReactNode }
+>(function SettingsPage({ title, children, className, ...props }, ref) {
   return (
-    <InternalScrollArea className="kit-settings-scroll">
+    <InternalScrollArea ref={ref} className={classes('kit-settings-scroll', className)} {...props}>
       <div className="kit-settings-content">
         <h1>{title}</h1>
         {children}
       </div>
     </InternalScrollArea>
   );
-}
+});
 export function SettingsSection({
   title,
   children,

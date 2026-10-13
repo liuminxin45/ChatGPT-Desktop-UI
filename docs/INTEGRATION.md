@@ -55,7 +55,7 @@ The compatibility DropdownMenuItem accepts `icon` and `actionId`, always display
 
 `DesktopShell.navigationVisible` also retains the global rail when hidden. `NavigationRail` optionally accepts controlled `pinnedIds` and `onPinnedChange`; More remains reachable when every destination is unpinned. Hosts own persistence and pin policy. Defaults preserve existing integrations without a More menu. Supply `moreLabel`, `pinLabel` and `unpinLabel` for localization.
 
-`SettingsCategory.group` is optional and participates in category search. Settings headings and field labels use the semantic emphasis weight; body text and controls remain regular. Native Tool Host typography overrides remain authoritative.
+`SettingsCategory.group` is optional and participates in category search. Settings headings and field labels use the semantic emphasis weight; body text and controls remain regular. Portable Native Tool typography stays regular; client-profile Tools and portals inherit the measured client typography.
 
 ## Localization and drafts
 

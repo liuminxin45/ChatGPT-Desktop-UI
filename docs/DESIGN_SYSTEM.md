@@ -1,5 +1,7 @@
 # Desktop design system
 
+Button geometry is explicit: `layout="command"` is the compact centered command default. Single-target navigation/selection records use `layout="row"`, with left alignment, natural height and shared insets; place stacked title/metadata in one content group. Image pickers use `layout="tile"`, a square with contained media that fills the available preview rather than retaining tiny intrinsic dimensions. Do not override command height/padding to imitate records. `layout="surface"` carries native action, accessibility and instrumentation behavior without command geometry; reserve it for documented domain graphics such as schedule cells. Hosts own those graphics' grid boundaries, not ordinary control styles. Multi-action records still use static `RecordRow` and independent commands.
+
 Escape dismisses only the active overlay: an open Select, menu, Popover or nested Dialog closes before its parent editor. Respect consumed keyboard events and IME composition; never discard a draft because Escape cancelled composition. Dialog focus containment applies only to the top visible Dialog, and dismissal returns focus to its own trigger. Verify nested layers through the consumer's real CSS and portal pipeline.
 
 `SelectControl` forwards to canonical `Select`, including compact density, empty values and long-value behavior. Compatibility aliases do not permit Host padding, type or paint overrides. Browser `confirm/alert/prompt` dialogs must use shared `AppConfirmDialog` or `Dialog`; keep drafts until the user confirms. Source audits require the actual clean shared source at the consumer's pinned revision, never an empty `node_modules/src` scan.
@@ -12,6 +14,8 @@ internal modal scrolling, background isolation and Escape through the prepared
 consumer package. Do not relax Host CSP to repair a component import.
 
 ## Action meaning and reading order
+
+Row, tile and surface actions keep the actual button as the tooltip trigger. A tooltip wrapper must never replace a positioned grid item or constrain full-width media. Disabled compact command buttons retain their focusable tooltip wrapper; other layouts keep native disabled semantics and accessible labels.
 
 Notifications and popup surfaces belong to the shared library. Use `Toaster`/`toast` for a global queue and `ToastNotice` for Host-owned transient state; preserve Host timing, command outcomes and localized labels. Notifications use the neutral overlay surface without success-colored left borders. Use `Popover` for anchored popup content and `InlineNotice` for persistent conditions. Hosts must not import a third-party notification renderer, hand-paint toast/popover containers, or override shared backgrounds, corners, shadows and control insets. Domain content may own its internal layout. Review temporary and failure surfaces as well as default pages.
 
@@ -51,7 +55,7 @@ Menu items use the shared hover fill for pointer highlight and keyboard focus, i
 
 The Demo recreates Windows ChatGPT **26.1002.7124.0**, inspected on 2026-10-09. `DesktopClientSurface` opts into the measured 44px title bar, 52px rail, 36px tile, 372px sidebar, 728px Settings column and 28/36px bold Settings heading. Its body is 14/20px; compact setting labels are 13/20px bold and descriptions 12/16px regular. Sidebar chat rows are 31px. Settings groups use a 16px rounded surface, internal dividers and 52px between groups. Menus use a 16px radius, 29px rows and 16px submenu arrows; the native application menu uses a smaller corner radius.
 
-These values belong to the versioned client profile, not embedded Tools. Portable defaults below remain available for existing products. A browser recreation must follow the observed client structure; do not invent dashboard cards, explanatory badges or alternate workflows. Keep private content synthetic. Record an observed package version and an annotated tag for every alignment release; never infer it from a publication date. See [CLIENT_ALIGNMENT.json](CLIENT_ALIGNMENT.json).
+These values belong to the versioned client profile. Embedded Tools inside that profile inherit it; portable Tool Hosts keep their separate regular typography. Portable defaults below remain available for existing products. A browser recreation must follow the observed client structure; do not invent dashboard cards, explanatory badges or alternate workflows. Keep private content synthetic. Record an observed package version and an annotated tag for every alignment release; never infer it from a publication date. See [CLIENT_ALIGNMENT.json](CLIENT_ALIGNMENT.json).
 
 | Element | Target |
 | --- | --- |
@@ -212,3 +216,11 @@ Semantic confirmations and menu commands use `AlertDialogAction variant="destruc
 Dynamic `VirtualList` exposes `viewportRef`, `onScroll` and `footer` for existing pagination and pixel-scroll restoration. The Host retains its data cursor and saved scroll position; the shared list owns measurement, stable keys, row gap, viewport inset and the loading footer's scroll surface. Do not add a second business virtualizer or duplicate row padding to preserve old scrolling.
 
 RecordRow owns record padding. Use density="compact" for dense groups and separator for a shared dividing line. Host CSS owns columns, flex/grid alignment and domain opacity; do not paint, round or pad records through classes, role selectors or returned class properties. Multi-action records stay transparent when descendants are hovered or focused. Mount the Host language bridge at the client root; shared confirmation labels follow UIStringsProvider and may be explicitly supplied for a business action.
+
+## Shared client settings and portal ownership
+
+All client routes opt into `DesktopClientSurface`. Its overlays inherit the client profile after entering a portal. Native Tools inside that profile retain semantic setting-label emphasis; portable Tool Hosts keep their regular typography policy. Hosts must not flatten shared weights with document-wide overrides.
+
+Settings compose `SettingsLayout`, `SettingsNavigation`, `SettingsPage`, `SettingsGroup`, `SettingsField` and `SettingsDisclosure`. The reference settings category sidebar is 336px (260px at compact widths), independently of the 372px general contextual sidebar. The body remains 728px, its page title 28/36px at 600 weight, and its groups use one 16px inset and 60px field rows. The setting sidebar measurement follows the supplied desktop Settings reference; it is not a measurement of unobserved destinations.
+
+`SettingsPage` forwards the real scroll-owner ref for navigation and deep links. `SettingsGroup` accepts Host identity and instrumentation attributes. `SettingsDisclosure` can preserve an initially expanded section with `defaultOpen` and a stable Host `actionId`. Long field labels wrap, and text/secret inputs share the same control-column baseline. Keep Host styles component-scoped; import the library styles once without a parallel Host design system.

@@ -48,6 +48,7 @@ import {
   TitleBar,
   NavigationRail,
   SettingsNavigation,
+  SettingsLayout,
   SettingsPage,
   SettingsSection,
   SettingRow,
@@ -391,23 +392,27 @@ export function Examples({ family }: { family: string }) {
             onSelect={setSelected}
           />
         }
-        sidebar={
-          <SettingsNavigation
-            title="Settings"
-            categories={[
-              { id: 'design', label: 'Appearance' },
-              { id: 'release', label: 'Preferences' },
-            ]}
-            selected={selected}
-            onSelect={setSelected}
-          />
-        }
+        sidebar={null}
       >
-        <SettingsPage title="Appearance">
-          <SettingsSection title="Display">
-            <SettingRow label="Project">{select}</SettingRow>
-          </SettingsSection>
-        </SettingsPage>
+        <SettingsLayout
+          sidebar={
+            <SettingsNavigation
+              title="Settings"
+              categories={[
+                { id: 'design', label: 'Appearance' },
+                { id: 'release', label: 'Preferences' },
+              ]}
+              selected={selected}
+              onSelect={setSelected}
+            />
+          }
+        >
+          <SettingsPage title="Appearance">
+            <SettingsSection title="Display">
+              <SettingRow label="Project">{select}</SettingRow>
+            </SettingsSection>
+          </SettingsPage>
+        </SettingsLayout>
       </DesktopShell>
     </div>
   );
