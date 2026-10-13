@@ -51,6 +51,8 @@ A host-owned action tree; no native commands or external transmission are inferr
 | --- | --- | --- |
 | title | yes | `string` |
 | children | yes | `ReactNode` |
+| defaultOpen | no | `boolean \| undefined` |
+| actionId | no | `string \| undefined` |
 
 ## SettingsField (chatgpt-desktop-kit)
 
@@ -58,7 +60,7 @@ A host-owned action tree; no native commands or external transmission are inferr
 
 | Prop | Required | Type |
 | --- | --- | --- |
-| label | yes | `string` |
+| label | yes | `ReactNode` |
 | description | no | `ReactNode` |
 | children | yes | `ReactNode` |
 
@@ -68,8 +70,7 @@ A host-owned action tree; no native commands or external transmission are inferr
 
 | Prop | Required | Type |
 | --- | --- | --- |
-| title | no | `string \| undefined` |
-| children | yes | `ReactNode` |
+| title | no | `ReactNode` |
 
 ## SidebarSection (chatgpt-desktop-kit)
 

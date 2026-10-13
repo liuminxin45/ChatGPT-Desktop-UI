@@ -51,7 +51,7 @@ Menu items use the shared hover fill for pointer highlight and keyboard focus, i
 
 The Demo recreates Windows ChatGPT **26.1002.7124.0**, inspected on 2026-10-09. `DesktopClientSurface` opts into the measured 44px title bar, 52px rail, 36px tile, 372px sidebar, 728px Settings column and 28/36px bold Settings heading. Its body is 14/20px; compact setting labels are 13/20px bold and descriptions 12/16px regular. Sidebar chat rows are 31px. Settings groups use a 16px rounded surface, internal dividers and 52px between groups. Menus use a 16px radius, 29px rows and 16px submenu arrows; the native application menu uses a smaller corner radius.
 
-These values belong to the versioned client profile, not embedded Tools. Portable defaults below remain available for existing products. A browser recreation must follow the observed client structure; do not invent dashboard cards, explanatory badges or alternate workflows. Keep private content synthetic. Record an observed package version and an annotated tag for every alignment release; never infer it from a publication date. See [CLIENT_ALIGNMENT.json](CLIENT_ALIGNMENT.json).
+These values belong to the versioned client profile. Embedded Tools inside that profile inherit it; portable Tool Hosts keep their separate regular typography. Portable defaults below remain available for existing products. A browser recreation must follow the observed client structure; do not invent dashboard cards, explanatory badges or alternate workflows. Keep private content synthetic. Record an observed package version and an annotated tag for every alignment release; never infer it from a publication date. See [CLIENT_ALIGNMENT.json](CLIENT_ALIGNMENT.json).
 
 | Element | Target |
 | --- | --- |
@@ -212,3 +212,11 @@ Semantic confirmations and menu commands use `AlertDialogAction variant="destruc
 Dynamic `VirtualList` exposes `viewportRef`, `onScroll` and `footer` for existing pagination and pixel-scroll restoration. The Host retains its data cursor and saved scroll position; the shared list owns measurement, stable keys, row gap, viewport inset and the loading footer's scroll surface. Do not add a second business virtualizer or duplicate row padding to preserve old scrolling.
 
 RecordRow owns record padding. Use density="compact" for dense groups and separator for a shared dividing line. Host CSS owns columns, flex/grid alignment and domain opacity; do not paint, round or pad records through classes, role selectors or returned class properties. Multi-action records stay transparent when descendants are hovered or focused. Mount the Host language bridge at the client root; shared confirmation labels follow UIStringsProvider and may be explicitly supplied for a business action.
+
+## Shared client settings and portal ownership
+
+All client routes opt into `DesktopClientSurface`. Its overlays inherit the client profile after entering a portal. Native Tools inside that profile retain semantic setting-label emphasis; portable Tool Hosts keep their regular typography policy. Hosts must not flatten shared weights with document-wide overrides.
+
+Settings compose `SettingsLayout`, `SettingsNavigation`, `SettingsPage`, `SettingsGroup`, `SettingsField` and `SettingsDisclosure`. The reference settings category sidebar is 336px (260px at compact widths), independently of the 372px general contextual sidebar. The body remains 728px, its page title 28/36px at 600 weight, and its groups use one 16px inset and 60px field rows. The setting sidebar measurement follows the supplied desktop Settings reference; it is not a measurement of unobserved destinations.
+
+`SettingsPage` forwards the real scroll-owner ref for navigation and deep links. `SettingsGroup` accepts Host identity and instrumentation attributes. `SettingsDisclosure` can preserve an initially expanded section with `defaultOpen` and a stable Host `actionId`. Long field labels wrap, and text/secret inputs share the same control-column baseline. Keep Host styles component-scoped; import the library styles once without a parallel Host design system.

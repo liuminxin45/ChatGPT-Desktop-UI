@@ -2,7 +2,8 @@ import { CaretRight, Check } from '@phosphor-icons/react';
 import * as Menu from '@radix-ui/react-dropdown-menu';
 import { cloneElement, type ReactElement, type ReactNode, useId, useState } from 'react';
 import { InternalScrollArea } from '../lists';
-import { createDesktopPortal } from '../../scoped-surface';
+import { classes } from '../classes';
+import { ClientProfileContext, createDesktopPortal } from '../../scoped-surface';
 const MenuPortal = createDesktopPortal(Menu.Portal);
 
 export interface DesktopMenuItem {
@@ -108,7 +109,11 @@ export function DesktopMenu({
 }
 /** Explicitly opt into the measured Windows reference profile without changing embedded Tool typography. */
 export function DesktopClientSurface({ children }: { children: ReactNode }) {
-  return <div className="desktop-client">{children}</div>;
+  return (
+    <ClientProfileContext.Provider value={true}>
+      <div className="desktop-client">{children}</div>
+    </ClientProfileContext.Provider>
+  );
 }
 export function ClientSidebar({ header, children }: { header: ReactNode; children: ReactNode }) {
   return (
@@ -166,9 +171,14 @@ export function SidebarSection({
     </section>
   );
 }
-export function SettingsGroup({ title, children }: { title?: string; children: ReactNode }) {
+export function SettingsGroup({
+  title,
+  children,
+  className,
+  ...props
+}: Omit<import('react').HTMLAttributes<HTMLElement>, 'title'> & { title?: ReactNode; children: ReactNode }) {
   return (
-    <section className="client-settings-group">
+    <section className={classes('client-settings-group', className)} {...props}>
       {title ? <h2>{title}</h2> : null}
       <div className="client-settings-card">{children}</div>
     </section>
@@ -179,7 +189,7 @@ export function SettingsField({
   description,
   children,
 }: {
-  label: string;
+  label: ReactNode;
   description?: ReactNode;
   children: ReactNode;
 }) {
@@ -193,14 +203,24 @@ export function SettingsField({
     </div>
   );
 }
-export function SettingsDisclosure({ title, children }: { title: string; children: ReactNode }) {
-  const [open, setOpen] = useState(false);
+export function SettingsDisclosure({
+  title,
+  children,
+  defaultOpen = false,
+  actionId = 'settings.advanced.toggle',
+}: {
+  title: string;
+  children: ReactNode;
+  defaultOpen?: boolean;
+  actionId?: string;
+}) {
+  const [open, setOpen] = useState(defaultOpen);
   return (
     <section className="client-settings-disclosure">
       <button
         type="button"
         aria-expanded={open}
-        data-desktop-action="settings.advanced.toggle"
+        data-desktop-action={actionId}
         onClick={() => setOpen(!open)}
       >
         {title}

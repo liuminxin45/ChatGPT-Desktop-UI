@@ -16,6 +16,8 @@ import { InputBehaviorRoot } from './input-behavior';
 import { type Theme, useDesktopThemeContext, DesktopThemeContext } from './theme-context';
 
 const SurfaceContext = createContext(false);
+/** Internal profile marker for portals that leave the client's DOM subtree. */
+export const ClientProfileContext = createContext(false);
 const useClientLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
 
 export interface DesktopProviderProps extends HTMLAttributes<HTMLDivElement> {
@@ -84,6 +86,7 @@ const ScopedPortalContent = forwardRef<
         'desktop-native-tool-surface',
         !!source.closest('.desktop-native-tool-surface'),
       );
+      portal.classList.toggle('desktop-client', !!source.closest('.desktop-client'));
       for (const attribute of [
         'data-desktop-input-modality',
         'data-desktop-feature',
@@ -138,8 +141,9 @@ const ScopedPortalContent = forwardRef<
 export function createDesktopPortal(Primitive: ComponentType<PortalProps>) {
   return function DesktopPortal({ children, ...props }: PortalProps) {
     const scoped = useContext(SurfaceContext);
+    const client = useContext(ClientProfileContext);
     const origin = useRef<HTMLSpanElement>(null);
-    if (!scoped) return <Primitive {...props}>{children}</Primitive>;
+    if (!scoped && !client) return <Primitive {...props}>{children}</Primitive>;
     return (
       <>
         <span hidden ref={origin} data-desktop-portal-origin="" />
