@@ -33,8 +33,9 @@
 .kit-account-menu__identity small{display:block;color:var(--desktop-color-text-muted);font-size:var(--desktop-font-size-supporting)}
 .kit-menu-chevron{margin-left:auto;color:var(--desktop-color-text-muted)}
 .kit-menu-chevron svg,svg.kit-menu-chevron{width:16px;height:16px;flex:none}
-.kit-sidebar{width:248px;flex:none;min-height:0;overflow:hidden;background:var(--desktop-color-sidebar);border-radius:var(--desktop-radius-window) 0 0 0}
-.kit-sidebar[hidden]{display:none}
+.kit-sidebar{display:block;width:var(--desktop-sidebar-width,248px);flex:none;min-width:var(--desktop-sidebar-min-width,0px);max-width:var(--desktop-sidebar-max-width,none);min-height:0;overflow:hidden;background:var(--desktop-color-sidebar);border-radius:var(--desktop-radius-window) 0 0 0;opacity:1;visibility:visible;transition:width var(--desktop-motion-fast) ease,min-width var(--desktop-motion-fast) ease,opacity var(--desktop-motion-fast) ease,border-inline-end-width var(--desktop-motion-fast) ease,visibility var(--desktop-motion-fast)}
+.kit-sidebar[hidden]{display:block;width:0;min-width:0;opacity:0;visibility:hidden;border-inline-end-width:0;pointer-events:none}
+.kit-sidebar[data-resizing=true]{transition:none}
 .kit-shell__main{flex:1;min-width:0;min-height:0;overflow:hidden;background:var(--desktop-color-background);border-radius:var(--desktop-radius-window) 0 0 0}
 .kit-settings-nav{height:100%;display:flex;flex-direction:column;gap:12px;padding:16px 8px}
 .kit-settings-nav h2{padding-inline:6px;margin:0;font-size:var(--desktop-font-size-toolbar)}
@@ -57,7 +58,7 @@
 .kit-setting-row__control>.desktop-select{width:auto;min-width:112px}
 .kit-muted{color:var(--desktop-color-text-muted)}
 .kit-avatar:focus-visible,.kit-category:focus-visible,.kit-titlebar__menu:focus-visible{outline:2px solid var(--desktop-color-focus);outline-offset:-2px}
-@media(max-width:760px){.kit-sidebar{width:200px}.kit-settings-scroll{padding:32px 16px}.kit-setting-row{gap:12px}.kit-setting-row__control{max-width:160px}}
+@media(max-width:760px){.kit-sidebar{--desktop-sidebar-width:200px}.kit-settings-scroll{padding:32px 16px}.kit-setting-row{gap:12px}.kit-setting-row__control{max-width:160px}}
 
 .kit-sidebar{border-right:1px solid var(--desktop-color-panel-boundary)}
 .kit-settings-section__rows{border:1px solid var(--desktop-color-panel-boundary)}
@@ -68,7 +69,7 @@
 .kit-settings-section__rows{background:var(--desktop-color-surface)}.kit-setting-row+.kit-setting-row{border-top-color:var(--desktop-color-border)}
 .kit-titlebar__menu,.kit-avatar,.kit-category{transition:background-color var(--desktop-motion-fast),color var(--desktop-motion-fast)}
 .kit-category{margin-block:0 4px}
-.kit-shell__navigation:not([hidden]),.kit-sidebar:not([hidden]){animation:kit-surface-in var(--desktop-motion-fast) ease-out}.kit-shell__main{transition:background-color var(--desktop-motion-fast)}
+.kit-shell__navigation:not([hidden]){animation:kit-surface-in var(--desktop-motion-fast) ease-out}.kit-shell__main{transition:background-color var(--desktop-motion-fast)}
 @keyframes kit-surface-in{from{opacity:0;transform:translateX(-4px)}to{opacity:1;transform:translateX(0)}}
 .kit-sidebar--resizable{position:relative}
 .kit-sidebar-resizer{position:absolute;inset-block:0;inset-inline-end:0;width:8px;touch-action:none;user-select:none;z-index:1}

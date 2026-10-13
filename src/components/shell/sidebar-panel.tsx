@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type HTMLAttributes } from 'react';
+import { useEffect, useRef, useState, type CSSProperties, type HTMLAttributes } from 'react';
 import { classes } from '../classes';
 
 export interface SidebarResizeOptions {
@@ -27,6 +27,7 @@ export function SidebarPanel({ resize, hidden, className, children, style, ...pr
     const current = drag.current;
     if (!current) return;
     drag.current = undefined;
+    panel.current?.removeAttribute('data-resizing');
     if (handle.current?.hasPointerCapture(current.pointerId)) handle.current.releasePointerCapture(current.pointerId);
     if (cancelled) current.resize.onChange(current.width, false);
     current.resize.onEnd?.(cancelled);
@@ -50,7 +51,7 @@ export function SidebarPanel({ resize, hidden, className, children, style, ...pr
     if (collapsed) finish(false);
     resize.onChange(Math.max(resize.minWidth, Math.min(resize.maxWidth, requested)), collapsed);
   };
-  return <aside {...props} ref={panel} hidden={hidden} {...(hidden ? { inert: '' } : {})} className={classes('kit-sidebar', resize && 'kit-sidebar--resizable', className)} style={{ ...style, ...(resize ? { minWidth: resize.minWidth, maxWidth: resize.maxWidth } : {}), ...(width === undefined ? {} : { width }) }}>
+  return <aside {...props} ref={panel} hidden={hidden} {...(hidden ? { inert: '' } : {})} className={classes('kit-sidebar', resize && 'kit-sidebar--resizable', className)} style={{ ...style, ...(resize ? { '--desktop-sidebar-min-width': `${resize.minWidth}px`, '--desktop-sidebar-max-width': `${resize.maxWidth}px` } : {}), ...(width === undefined ? {} : { '--desktop-sidebar-width': `${width}px` }) } as CSSProperties}>
     {children}
     {resize && <div ref={handle} className="kit-sidebar-resizer" role="separator" tabIndex={hidden ? -1 : 0}
       aria-label={resize.label} aria-orientation="vertical" aria-controls={props.id}
@@ -65,6 +66,7 @@ export function SidebarPanel({ resize, hidden, className, children, style, ...pr
         const rect = panel.current.getBoundingClientRect();
         const scale = rect.width / panel.current.offsetWidth || 1;
         drag.current = { pointerId: event.pointerId, x: event.clientX, width: rect.width / scale, scale, resize };
+        panel.current.setAttribute('data-resizing', 'true');
         event.currentTarget.setPointerCapture(event.pointerId);
         resize.onStart?.();
       }}
