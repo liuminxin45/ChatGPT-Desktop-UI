@@ -63,6 +63,16 @@ try {
         const style = (s) => getComputedStyle(document.querySelector(s)),
           rect = (s) => document.querySelector(s).getBoundingClientRect();
         return {
+          searchGap: (() => {
+            const group = document.querySelector('.kit-settings-search'),
+              input = group.querySelector('input'),
+              icon = group.querySelector('svg');
+            return (
+              input.getBoundingClientRect().left +
+              parseFloat(getComputedStyle(input).paddingLeft) -
+              icon.getBoundingClientRect().right
+            );
+          })(),
           fontFamily: style('.desktop-client').fontFamily,
           expectedFontFamily: style('.desktop-client').getPropertyValue('--desktop-font-sans').trim(),
           heading: style('.kit-settings-content>h1').fontSize,
@@ -75,6 +85,7 @@ try {
             document.querySelector('.kit-settings-content').scrollWidth > rect('.kit-settings-content').width,
         };
       });
+      assert.ok(metrics.searchGap >= 7.9, JSON.stringify(metrics));
       assert.equal(metrics.fontFamily, metrics.expectedFontFamily);
       assert.equal(metrics.heading, '28px');
       assert.equal(metrics.headingWeight, '600');

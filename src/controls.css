@@ -175,3 +175,5 @@
 
 .desktop-menu-item--danger{color:var(--desktop-color-danger)}
 .desktop-dialog{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1000}
+
+.desktop-chat-message__sender{font-weight:600}
