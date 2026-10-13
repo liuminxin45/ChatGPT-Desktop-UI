@@ -6,6 +6,7 @@ Use Node 24.19.0 and run:
 npm run typecheck
 npm run lint
 npm run test:unit
+npm run test:sidebar
 npm run build
 npm test
 npm run test:input
@@ -28,6 +29,8 @@ The shared composer cases also verify empty Send, IME confirmation, repeated Ent
 The public audit checks current tracked/unignored files, reachable Git history, package metadata, internal paths/domains and recognizable credential formats. It reports file names and finding categories without exposing matched content. It complements source review and does not establish provenance for arbitrary future contributions.
 
 Consumers run their own typechecks, builds, navigation/theme/usage contracts and isolated Electron probes against the pinned package. Native window actions, tray lifecycle, production authentication and actual display scaling remain Host-specific validation responsibilities.
+
+`test:sidebar` runs `examples/sidebar-panel-contract.tsx` and checks actual sidebar geometry in portable SidebarPanel and client SettingsLayout compositions, both themes and three viewport/scale cases. It verifies keyboard steps (including rapid steps during a transition), scaled dragging, width bounds, cancellation, Host-controlled folding, retained drafts/scroll/child identity, completed and reversed animations, inert collapsed content and reduced motion. Synthetic captures and measured results go to `tests/output/sidebar-panel`; `npm run ci` includes this gate. Component tests check the CSS width token and callback/state contracts; jsdom does not prove rendered CSS widths.
 
 The package contract uses the actual prepared distribution under strict script/style CSP and checks host scroll/cursor/animation ownership, independent themes and origin-token portals, drafts, refs, switches, combobox Tab/IME/commit behavior, nested Dialog Escape/focus return and modal accessibility. Three viewport/scale configurations cover both themes. Component unit tests additionally check native ref targets and controlled/uncontrolled/cancelled/disabled callback semantics.
 

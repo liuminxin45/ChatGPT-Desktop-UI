@@ -404,7 +404,11 @@ export function DesktopShell({
         <div className="kit-shell__navigation" hidden={!navigationVisible}>
           {navigation}
         </div>
-        <aside className="kit-sidebar" hidden={!sidebarVisible || !sidebar} {...(!sidebarVisible || !sidebar ? { inert: '' } : {})}>
+        <aside
+          className="kit-sidebar"
+          hidden={!sidebarVisible || !sidebar}
+          {...(!sidebarVisible || !sidebar ? { inert: '' } : {})}
+        >
           {sidebar}
         </aside>
         <main className="kit-shell__main">{children}</main>
