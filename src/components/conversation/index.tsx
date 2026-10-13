@@ -9,7 +9,15 @@ export type ComposerActionState = 'ready' | 'sending' | 'stoppable' | 'stopping'
 export interface ComposerActionButtonProps
   extends Omit<
     ButtonProps,
-    'children' | 'icon' | 'iconOnly' | 'variant' | 'size' | 'onClick' | 'confirmOnEnter' | 'aria-label'
+    | 'children'
+    | 'icon'
+    | 'iconOnly'
+    | 'variant'
+    | 'size'
+    | 'layout'
+    | 'onClick'
+    | 'confirmOnEnter'
+    | 'aria-label'
   > {
   state: ComposerActionState;
   actionId: string;
@@ -56,6 +64,7 @@ export const ComposerActionButton = forwardRef<HTMLButtonElement, ComposerAction
     return (
       <Button
         {...props}
+        layout="command"
         ref={ref}
         type={stop || busy ? 'button' : type}
         actionId={actionId}

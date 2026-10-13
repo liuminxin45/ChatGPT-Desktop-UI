@@ -1,3 +1,4 @@
+import { browserOptions } from './browser-options.mjs';
 import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
@@ -17,11 +18,8 @@ const settle = (page) => page.waitForTimeout(180);
 const screenshot = (page, name) =>
   page.screenshot({ path: path.join(root, "docs/demo", name + ".png") });
 try {
-  const channel = process.env.UI_BROWSER_CHANNEL || "msedge";
-  browser = await chromium.launch({
-    headless: true,
-    ...(channel === "chromium" ? {} : { channel }),
-  });
+
+  browser = await chromium.launch(browserOptions());
   const url =
     process.env.DEMO_URL || `http://127.0.0.1:${server.address().port}`;
   for (const theme of ["light", "dark"])
@@ -112,7 +110,7 @@ try {
         assert.equal(geometry.overflow, false);
         assert.equal(geometry.rail, 52);
         assert.equal(geometry.titlebar, 44);
-        assert.equal(geometry.sidebar, 372);
+        assert.equal(geometry.sidebar, ["settings", "appearance", "notifications", "usage", "analytics"].includes(id) ? 336 : 372);
         assert.ok(geometry.settings <= 728);
         assert.equal(
           geometry.background,

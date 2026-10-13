@@ -1011,6 +1011,7 @@ export function ClientDemo() {
       <DesktopShell
         titlebar={topbar}
         navigation={rail}
+        sidebarLayout={route.page === "settings" ? "settings" : "default"}
         sidebar={
           <>
             <div

@@ -16,6 +16,8 @@ import {
   UserCircle,
 } from '../../icons';
 import { useDesktopTheme, type Theme } from '../../theme';
+import { createDesktopPortal } from '../../scoped-surface';
+const MenuPortal = createDesktopPortal(Menu.Portal);
 
 export function Tooltip({
   label,
@@ -107,7 +109,7 @@ export function TitleBar({
             <Menu.Trigger data-desktop-action={`menu.${menu.id}.open`} className="kit-titlebar__menu">
               {menu.label}
             </Menu.Trigger>
-            <Menu.Portal>
+            <MenuPortal>
               <Menu.Content className="desktop-menu" sideOffset={5} collisionPadding={8}>
                 {menu.actions.map((action) => (
                   <Menu.Item
@@ -121,7 +123,7 @@ export function TitleBar({
                   </Menu.Item>
                 ))}
               </Menu.Content>
-            </Menu.Portal>
+            </MenuPortal>
           </Menu.Root>
         ))}
       </div>
@@ -208,7 +210,7 @@ export function NavigationRail({
                 </button>
               </Menu.Trigger>
             </Tooltip>
-            <Menu.Portal>
+            <MenuPortal>
               <Menu.Content
                 className="desktop-menu kit-navigation-menu"
                 side="right"
@@ -255,7 +257,7 @@ export function NavigationRail({
                   );
                 })}
               </Menu.Content>
-            </Menu.Portal>
+            </MenuPortal>
           </Menu.Root>
         ) : null}
       </div>
@@ -309,7 +311,7 @@ export function AvatarMenu({
           <UserCircle size={26} weight="regular" aria-hidden="true" />
         )}
       </Menu.Trigger>
-      <Menu.Portal>
+      <MenuPortal>
         <Menu.Content
           className="desktop-menu kit-account-menu"
           side="right"
@@ -329,7 +331,7 @@ export function AvatarMenu({
               {labels.appearance}
               <CaretRight className="kit-menu-chevron" size={16} aria-hidden="true" />
             </Menu.SubTrigger>
-            <Menu.Portal>
+            <MenuPortal>
               <Menu.SubContent className="desktop-menu" sideOffset={6} collisionPadding={8}>
                 <Menu.RadioGroup value={theme} onValueChange={(value) => setTheme(value as Theme)}>
                   {(['system', 'light', 'dark'] as const).map((value) => (
@@ -345,7 +347,7 @@ export function AvatarMenu({
                   ))}
                 </Menu.RadioGroup>
               </Menu.SubContent>
-            </Menu.Portal>
+            </MenuPortal>
           </Menu.Sub>
           <Menu.Item
             className="desktop-menu-item"
@@ -375,7 +377,7 @@ export function AvatarMenu({
             {labels.exit}
           </Menu.Item>
         </Menu.Content>
-      </Menu.Portal>
+      </MenuPortal>
     </Menu.Root>
   );
 }
@@ -386,6 +388,7 @@ export function DesktopShell({
   navigationVisible = true,
   sidebar,
   sidebarVisible = true,
+  sidebarLayout = 'default',
   children,
 }: {
   titlebar?: ReactNode;
@@ -393,6 +396,8 @@ export function DesktopShell({
   navigationVisible?: boolean;
   sidebar?: ReactNode;
   sidebarVisible?: boolean;
+  /** Settings category navigation uses the shared settings width without remounting its contents. */
+  sidebarLayout?: 'default' | 'settings';
   children: ReactNode;
 }) {
   return (
@@ -402,7 +407,11 @@ export function DesktopShell({
         <div className="kit-shell__navigation" hidden={!navigationVisible}>
           {navigation}
         </div>
-        <aside className="kit-sidebar" hidden={!sidebarVisible || !sidebar}>
+        <aside
+          className="kit-sidebar"
+          data-desktop-sidebar-layout={sidebarLayout}
+          hidden={!sidebarVisible || !sidebar}
+        >
           {sidebar}
         </aside>
         <main className="kit-shell__main">{children}</main>

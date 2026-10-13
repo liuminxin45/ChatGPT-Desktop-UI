@@ -41,7 +41,10 @@
 .desktop-tool-page-bar{display:grid;min-width:0;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:12px;border-bottom:0}.desktop-tool-page-bar__navigation{min-width:0;height:100%;overflow-x:auto;overflow-y:hidden;scrollbar-width:none}.desktop-tool-page-bar__navigation::-webkit-scrollbar{display:none}.desktop-state{display:flex;min-height:140px;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;color:var(--desktop-color-text)}.desktop-state p{max-width:48ch;margin:6px 0 16px;color:var(--desktop-color-text-muted);font-size:var(--desktop-font-size-body)}.desktop-state--error{color:var(--desktop-color-danger)}
 .desktop-skeleton{display:block;border-radius:var(--desktop-radius-control);background:var(--desktop-color-surface-hover);animation:desktop-skeleton-pulse 1.4s ease-in-out infinite}@keyframes desktop-skeleton-pulse{50%{opacity:.55}}
 .desktop-internal-scroll{overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;scrollbar-width:thin;scrollbar-color:var(--desktop-color-border-strong) transparent}.desktop-internal-scroll::-webkit-scrollbar{width:10px;height:10px}.desktop-internal-scroll::-webkit-scrollbar-thumb{border:3px solid transparent;border-radius:8px;background:var(--desktop-color-border-strong);background-clip:padding-box}.desktop-virtual-list{overflow-y:auto}.desktop-virtual-list__content{position:relative;width:100%}.desktop-virtual-list__item{position:absolute;inset:0 0 auto;width:100%}
-.desktop-native-tool-surface{width:100%;height:100%;min-width:0;min-height:0;color:var(--desktop-color-text);font-family:var(--desktop-font-sans);font-size:var(--desktop-font-size-body);line-height:var(--desktop-line-height-ui);font-weight:var(--desktop-font-weight-regular);font-synthesis:none}.desktop-native-tool-surface:not(:where(.desktop-client,.desktop-client *)),.desktop-native-tool-surface:not(:where(.desktop-client,.desktop-client *)) *{font-weight:var(--desktop-font-weight-regular)!important;font-family:var(--desktop-font-sans)!important}.desktop-native-tool-surface button,.desktop-native-tool-surface input,.desktop-native-tool-surface select,.desktop-native-tool-surface textarea{font-family:inherit}
+.desktop-native-tool-surface{width:100%;height:100%;min-width:0;min-height:0;color:var(--desktop-color-text);font-family:var(--desktop-font-sans);font-size:var(--desktop-font-size-body);line-height:var(--desktop-line-height-ui);font-weight:var(--desktop-font-weight-regular);font-synthesis:none}.desktop-native-tool-surface,.desktop-native-tool-surface *{font-weight:var(--desktop-font-weight-regular)!important;font-family:var(--desktop-font-sans)!important}
+/* Client Tools permit only the shared settings emphasis, including composed labels. */
+.desktop-native-tool-surface:is(.desktop-client,.desktop-client *) :is(.kit-settings-nav h2,.kit-settings-group,.kit-settings-content>h1,.kit-settings-section h2,.kit-setting-row>div:first-child>span,.client-settings-group>h2,.client-settings-field h3,.client-settings-disclosure>button){font-weight:var(--desktop-font-weight-emphasis)!important}
+.desktop-native-tool-surface:is(.desktop-client,.desktop-client *) :is(.kit-settings-nav h2,.kit-settings-group,.kit-settings-content>h1,.kit-settings-section h2,.kit-setting-row>div:first-child>span,.client-settings-group>h2,.client-settings-field h3,.client-settings-disclosure>button) *{font-weight:inherit!important}.desktop-native-tool-surface button,.desktop-native-tool-surface input,.desktop-native-tool-surface select,.desktop-native-tool-surface textarea{font-family:inherit}
 .dark .desktop-button:hover:not(:disabled){border-color:var(--desktop-color-border-strong);background:var(--desktop-color-surface-hover)}
 .dark .desktop-button--primary{border-color:var(--desktop-color-primary);background:var(--desktop-color-primary);color:var(--desktop-color-on-primary)}
 .dark .desktop-button--primary:hover:not(:disabled){border-color:var(--desktop-color-primary-hover);background:var(--desktop-color-primary-hover)}
@@ -65,6 +68,7 @@
 .desktop-button--tile>img,.desktop-button--tile>span>img{display:block;width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain}
 .desktop-button--tile>span:has(>img){display:block;width:100%;height:100%}
 .desktop-surface-action{font:inherit;color:inherit;cursor:pointer}
+.desktop-surface-action:disabled{cursor:default;opacity:.55}
 .desktop-surface-action:focus-visible{outline:2px solid var(--desktop-color-focus);outline-offset:-2px}
 .desktop-input:hover:not(:disabled),.desktop-textarea:hover:not(:disabled){background:var(--desktop-color-surface-hover)}
 .desktop-textarea--auto{overflow-y:hidden;resize:none}
@@ -183,4 +187,4 @@
 .desktop-menu-item--danger{color:var(--desktop-color-danger)}
 .desktop-dialog{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1000}
 
-.desktop-chat-message__sender{font-weight:600}
+.desktop-chat-message__sender{font-weight:var(--desktop-font-weight-regular)}

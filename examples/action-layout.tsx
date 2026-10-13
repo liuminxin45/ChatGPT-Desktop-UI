@@ -30,10 +30,46 @@ createRoot(document.getElementById('root')!).render(
         layout="surface"
         data-testid="surface"
         aria-label="Schedule cell"
-        style={{ width: 100, height: 88 }}
+        style={{ width: 100, height: 88, border: 0, background: 'var(--desktop-color-surface-muted)' }}
       >
         Schedule
       </Button>
     </div>
+    <section
+      aria-label="Button state matrix"
+      style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 88px)', gap: 8, padding: 24 }}
+    >
+      {(['command', 'row', 'tile', 'surface'] as const).flatMap((layout) =>
+        (['primary', 'secondary', 'ghost', 'danger'] as const).flatMap((variant) =>
+          (['sm', 'md'] as const).flatMap((size) =>
+            [false, true].map((disabled) => (
+              <Button
+                key={`${layout}-${variant}-${size}-${disabled}`}
+                layout={layout}
+                variant={variant}
+                size={size}
+                disabled={disabled}
+                actionId={`fixture.matrix.${layout}.${variant}.${size}.${disabled}`}
+                data-testid="matrix"
+                data-layout={layout}
+                data-variant={variant}
+                data-size={size}
+                aria-label={`${layout} ${variant} ${size} ${disabled ? 'disabled' : 'enabled'}`}
+                style={
+                  layout === 'surface'
+                    ? { width: 88, height: 44, border: 0, background: 'var(--desktop-color-surface-muted)' }
+                    : undefined
+                }
+                onClick={(event) => {
+                  event.currentTarget.dataset.invoked = 'true';
+                }}
+              >
+                {layout}
+              </Button>
+            )),
+          ),
+        ),
+      )}
+    </section>
   </DesktopRoot>,
 );

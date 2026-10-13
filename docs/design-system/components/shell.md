@@ -33,6 +33,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | navigationVisible | no | `boolean \| undefined` |
 | sidebar | no | `ReactNode` |
 | sidebarVisible | no | `boolean \| undefined` |
+| sidebarLayout | no | `"default" \| "settings" \| undefined` |
 | children | yes | `ReactNode` |
 
 ## NavigationRail (chatgpt-desktop-kit)
