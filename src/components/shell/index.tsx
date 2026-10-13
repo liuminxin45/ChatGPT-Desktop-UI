@@ -449,6 +449,7 @@ export function SettingsNavigation({
   title = 'Settings',
   searchLabel = 'Search settings',
   noMatchesLabel = 'No matching categories',
+  actionId = 'settings.category',
 }: {
   categories: SettingsCategory[];
   selected: string;
@@ -456,6 +457,7 @@ export function SettingsNavigation({
   title?: string;
   searchLabel?: string;
   noMatchesLabel?: string;
+  actionId?: string;
 }) {
   const [search, setSearch] = useState('');
   const query = search.trim().toLocaleLowerCase();
@@ -470,7 +472,7 @@ export function SettingsNavigation({
       <div className="kit-settings-search">
         <MagnifyingGlass size={16} />
         <Input
-          data-desktop-action="settings.category.search"
+          data-desktop-action={`${actionId}.search`}
           aria-label={searchLabel}
           placeholder={searchLabel}
           value={search}
@@ -489,7 +491,7 @@ export function SettingsNavigation({
                 <button
                   type="button"
                   className="kit-category"
-                  data-desktop-action={`settings.category.${category.id}`}
+                  data-desktop-action={`${actionId}.${category.id}`}
                   aria-current={category.id === selected ? 'page' : undefined}
                   onClick={() => onSelect(category.id)}
                 >
