@@ -5,6 +5,7 @@ import path from 'node:path';
 import http from 'node:http';
 import { build } from 'esbuild';
 import { chromium } from 'playwright';
+import AxeBuilder from '@axe-core/playwright';
 const root = path.resolve(new URL('..', import.meta.url).pathname.replace(/^\/(?:([A-Z]:))/i, '$1'));
 const temp = await mkdtemp(path.join(os.tmpdir(), 'desktop-sidebar-'));
 const output = path.join(root, 'tests/output/sidebar-navigation');
@@ -45,7 +46,8 @@ try {
   for (const theme of ['light', 'dark'])
     for (const width of [1920, 1280, 760])
       for (const zoom of [1, 1.25]) {
-        const page = await browser.newPage({ viewport: { width, height: 800 } });
+        const context = await browser.newContext({ viewport: { width, height: 800 } });
+        const page = await context.newPage();
         const errors = [];
         page.on('pageerror', (e) => errors.push(e.message));
         await page.goto(`http://127.0.0.1:${server.address().port}`);
@@ -87,6 +89,12 @@ try {
           'page',
         );
         assert.equal(await page.getByRole('button', { name: 'Disabled destination' }).isDisabled(), true);
+        const contrast = await new AxeBuilder({ page }).withRules(['color-contrast']).analyze();
+        assert.deepEqual(
+          contrast.violations.map(({ id, nodes }) => ({ id, targets: nodes.map((node) => node.target) })),
+          [],
+          `${theme}/${width}/${zoom}: sidebar count contrast`,
+        );
         for (const row of page.locator('.client-sidebar-link').all
           ? await page.locator('.client-sidebar-link').all()
           : []) {
@@ -98,7 +106,7 @@ try {
         assert.deepEqual(errors, []);
         await page.screenshot({ path: path.join(output, `${theme}-${width}-${zoom}.png`) });
         results.push({ theme, width, zoom, geometry });
-        await page.close();
+        await context.close();
       }
   await writeFile(path.join(output, 'renderer.json'), JSON.stringify({ results }, null, 2));
   console.log('PASS shared sidebar label wrapping, counts, alignment and focus: 12 renders');
