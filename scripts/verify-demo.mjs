@@ -220,6 +220,7 @@ try {
   await page
     .getByRole("button", { name: "Toggle sidebar", exact: true })
     .click();
+  await page.locator(".kit-sidebar").waitFor({ state: "visible" });
   await page
     .getByRole("button", { name: "Refine desktop navigation", exact: true })
     .first()

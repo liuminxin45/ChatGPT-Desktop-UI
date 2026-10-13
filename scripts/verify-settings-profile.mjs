@@ -41,7 +41,8 @@ try {
     res.end(await readFile(path.join(temp, file)));
   });
   await new Promise((r) => server.listen(0, '127.0.0.1', r));
-  browser = await chromium.launch({ channel: 'msedge', headless: true });
+  const channel = process.env.UI_BROWSER_CHANNEL || 'msedge';
+  browser = await chromium.launch({ headless: true, ...(channel === 'chromium' ? {} : { channel }) });
   const cases = [];
   for (const theme of ['light', 'dark'])
     for (const [width, height, scale] of [

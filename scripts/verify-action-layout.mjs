@@ -32,7 +32,8 @@ try {
     format: 'esm',
   });
   await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
-  browser = await chromium.launch({ channel: 'msedge', headless: true });
+  const channel = process.env.UI_BROWSER_CHANNEL || 'msedge';
+  browser = await chromium.launch({ headless: true, ...(channel === 'chromium' ? {} : { channel }) });
   for (const theme of ['light', 'dark'])
     for (const width of [1920, 1280, 480]) {
       const page = await browser.newPage({ viewport: { width, height: 800 } });
