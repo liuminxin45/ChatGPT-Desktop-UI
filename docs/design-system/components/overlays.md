@@ -15,13 +15,13 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | Prop | Required | Type |
 | --- | --- | --- |
 | actionId | no | `string \| undefined` |
-| className | no | `string \| undefined` |
 | open | yes | `boolean` |
 | title | yes | `ReactNode` |
 | description | no | `ReactNode` |
 | children | no | `ReactNode` |
 | footer | no | `ReactNode` |
 | onClose | yes | `() => void` |
+| onCloseAutoFocus | no | `((event: Event) => void) \| undefined` |
 
 ## DropOverlay (chatgpt-desktop-kit)
 

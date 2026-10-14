@@ -8,6 +8,19 @@ Runnable composition: [example](../../../examples/demo/ClientDemo.tsx).
 
 Generated from TypeScript exports; edit implementation props/JSDoc, then run `npm run docs:generate`. Native React attributes remain available in the online API catalog.
 
+## ClientModeSwitcher (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/client/index.tsx)
+
+Prominent client destination selector; menu commands remain Host-owned.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| label | yes | `string` |
+| actionId | yes | `string` |
+| ariaLabel | yes | `string` |
+| items | yes | `DesktopMenuItem[]` |
+
 ## ClientSidebar (chatgpt-desktop-kit)
 
 [Implementation](../../../src/components/client/index.tsx)
@@ -15,6 +28,16 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | Prop | Required | Type |
 | --- | --- | --- |
 | header | no | `ReactNode` |
+
+## ClientSidebarHeading (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/client/sidebar-heading.tsx)
+
+Shared contextual-sidebar title, including titles inside navigation controls.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| as | no | `"h2" \| "span" \| undefined` |
 
 ## ClientSidebarItem (chatgpt-desktop-kit)
 
@@ -33,6 +56,18 @@ A retained navigation target with a readable label and an independent trailing c
 | label | yes | `ReactNode` |
 | count | no | `number \| undefined` |
 | selected | no | `boolean \| undefined` |
+| actions | no | `ReactNode` |
+
+## ClientSidebarToolbar (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/client/index.tsx)
+
+Title/actions stay in place while optional search content expands below them.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| title | yes | `ReactNode` |
+| actions | no | `ReactNode` |
 
 ## DesktopClientSurface (chatgpt-desktop-kit)
 

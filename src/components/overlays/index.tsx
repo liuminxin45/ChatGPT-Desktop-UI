@@ -1,5 +1,5 @@
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
-import { useContext, useEffect, useRef, useState, type ReactNode } from 'react';
+import { useContext, useEffect, useRef, useState, type HTMLAttributes, type ReactNode } from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { protectModalEscape } from '../../runtime/modal-keyboard';
 import { AttachmentIcon, ChevronDownIcon, CloseIcon } from '../../icons';
@@ -110,7 +110,9 @@ export function Dialog({
   children,
   footer,
   onClose,
-}: {
+  onCloseAutoFocus,
+  ...props
+}: Omit<HTMLAttributes<HTMLDivElement>, 'title' | 'children'> & {
   actionId?: string;
   className?: string;
   open: boolean;
@@ -119,6 +121,8 @@ export function Dialog({
   children?: ReactNode;
   footer?: ReactNode;
   onClose(): void;
+  /** Let a successful navigation transfer focus instead of restoring its former trigger. */
+  onCloseAutoFocus?(event: Event): void;
 }) {
   const translate = useTranslation();
   const visible = useContext(ToolVisibilityContext);
@@ -134,6 +138,7 @@ export function Dialog({
       <DialogPortal>
         <DialogPrimitive.Overlay className="desktop-dialog-backdrop" />
         <DialogPrimitive.Content
+          {...props}
           onEscapeKeyDown={protectModalEscape}
           ref={dialogContent}
           className={classes('desktop-dialog', className)}
@@ -149,6 +154,8 @@ export function Dialog({
             (first ?? dialogContent.current)?.focus();
           }}
           onCloseAutoFocus={(event) => {
+            onCloseAutoFocus?.(event);
+            if (event.defaultPrevented) return;
             event.preventDefault();
             if (
               visible &&

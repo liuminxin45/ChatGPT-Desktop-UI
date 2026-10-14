@@ -1,5 +1,13 @@
 # Desktop design system
 
+Contextual navigation titles use `ClientSidebarHeading`, including titles nested
+inside mode selectors. It shares Settings sidebar emphasis and the client title
+size. A navigation-owned category appears once, in its sidebar; content toolbars
+retain commands, status and actual object names. `SettingsPage showTitle={false}`
+omits the visible category heading without changing the default Settings demo.
+Hosts supply an accessible content name when hiding that heading. Chat search
+expands below the retained title/action row using the shared sidebar toolbar slots.
+
 Buttons, icon actions, Tabs, navigation and Select/menu/Popover triggers never draw a focus outline or outer ring in either theme. Keyboard focus uses a neutral fill inside the existing target; primary/send actions retain their semantic foreground and use their hover fill. Pointer dismissal restores DOM focus without a residual trigger highlight. Escape is dismissal, not a switch to keyboard navigation. Keep native focus, Tab/arrow navigation, Enter/Space activation and disabled semantics; never blur controls to hide a visual state. Text entry retains neutral inset focus and invalid fields retain their error boundary. Tooltips are descriptive: the same Escape removes a visible tooltip and dismisses the active interactive overlay; a tooltip must never require a preliminary Escape. Open Select/menu/Popover and child Dialog still dismiss before their parent, and IME Escape never closes them.
 
 Chat media uses `MediaImage` for an unmasked image with layered soft shadows instead of a thin outline. `AppDialogContent variant="media"` supplies a transparent full-window stage, a dim media backdrop, shared close control and reserved toolbar area. Image pixels, including screenshot text and transparent assets, remain intact. Hosts own fit/zoom/pan geometry and image loading; use shared buttons and MediaToolbar for the toolbar. Background dismissal requires a click without a preceding pan; Escape and focus return follow the shared dialog contract.
@@ -158,8 +166,6 @@ The controlled `ClientComposer` separates work and chat input layouts. Work inpu
 
 Arrow cursors across the standalone desktop document are an explicit originating user preference. Hover/focus/disabled states still signal affordance. Respect a different target user's cursor preference rather than secretly imposing it on unrelated applications.
 
-The sidebar resize divider uses the horizontal `ew-resize` cursor on hover. During an active pointer resize the document retains that cursor, including outside the divider; release, cancellation, folding or unmount restores the ordinary cursor policy. The shared shell owns this exception; consumers must not override the document cursor rules.
-
 ## Light-theme boundaries and conversation geometry
 
 Light mode uses a cool pale window shell, near-white sidebar and white content. Selected navigation tiles stay pale gray with dark filled icons; dark mode retains white filled icons. Fine neutral outlines separate white overlays, grouped settings and composers. Avatar images have a subtle outline in light mode. Avoid decorative nested frames.
@@ -247,3 +253,7 @@ Settings compose `SettingsLayout`, `SettingsNavigation`, `SettingsPage`, `Settin
 `TemporalPicker` is the popup-only date, month and local date-time control. Its filled trigger follows Input geometry and uses the direct button as the tooltip/Popover target. Calendar captions use shared compact month/year Select controls; month selection uses a four-column, three-row grid with independent selected/current/focus states. Neutral selection and shared overlay tokens apply in both themes. Popup width is 280px, bounded to the viewport with 12px collision padding; business Hosts must not repaint these controls.
 
 Date/month selection commits immediately. Date-time selection owns a temporary draft, 24-hour hour/minute Select controls, and explicit Cancel/Confirm actions. Dismissal preserves the committed value. Today/current-month and clear actions honor bounds and whether the business field allows an empty value. Keyboard selection never submits a parent editor; Escape dismisses only the active child layer and restores its trigger focus.
+
+## Work destination selection and auxiliary row commands
+
+ClientModeSwitcher uses an 18/24px, 600-weight trigger and 16/24px, 600-weight choices. Other menus retain their existing density. ClientSidebarItem actions render beside the navigation button in a static RecordRow; auxiliary commands appear on hover, focus and while their menu is open. Blank record space never navigates. Dynamic VirtualList exposes apiRef.scrollToIndex for measured, gap-aware navigation without Host row-height arithmetic. Dialog forwards surface identity to its real portal content.
