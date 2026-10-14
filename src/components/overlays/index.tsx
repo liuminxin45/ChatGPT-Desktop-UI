@@ -13,13 +13,21 @@ const MenuPortal = createDesktopPortal(DropdownMenuPrimitive.Portal);
 const DialogPortal = createDesktopPortal(DialogPrimitive.Portal);
 
 /** Non-interactive file drop feedback; the Host owns drag events and attachment scope. */
-export function DropOverlay({ label, surfaceId }: { label: string; surfaceId?: string }) {
+export function DropOverlay({ label, surfaceId, variant = 'overlay', active = false }: { label: string; surfaceId?: string; variant?: 'overlay' | 'boundary'; active?: boolean }) {
   return (
-    <div className="desktop-drop-overlay" role="status" data-desktop-surface={surfaceId}>
-      <AttachmentIcon size={20} aria-hidden="true" />
-      <span>{label}</span>
+    <div className={`desktop-drop-overlay desktop-drop-overlay--${variant}`} role="status" aria-label={label} data-active={active || undefined} data-desktop-surface={surfaceId}>
+      {variant === 'boundary' ? <svg className="desktop-drop-boundary" aria-hidden="true" width="100%" height="100%"><rect x="2" y="2" width="100%" height="100%" rx="12" pathLength="100" /></svg> : <><AttachmentIcon size={20} aria-hidden="true" /><span>{label}</span></>}
     </div>
   );
+}
+
+/** Removable draft context; the attachment owns the complete action hit area. */
+export function ContextAttachment({ label, icon, removeLabel, removeActionId, onRemove }: { label: string; icon?: ReactNode; removeLabel: string; removeActionId: string; onRemove(): void }) {
+  return <span className="desktop-context-attachment">
+    {icon && <span className="desktop-context-attachment__icon" aria-hidden="true">{icon}</span>}
+    <span className="desktop-context-attachment__label" title={label}>{label}</span>
+    <Button size="sm" variant="ghost" iconOnly icon={<CloseIcon size={14} />} aria-label={removeLabel} actionId={removeActionId} onClick={onRemove}>{removeLabel}</Button>
+  </span>;
 }
 export function MenuButton({
   label,

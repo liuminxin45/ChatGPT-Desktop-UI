@@ -12,6 +12,10 @@ Buttons, icon actions, Tabs, navigation and Select/menu/Popover triggers never d
 
 Chat media uses `MediaImage` for an unmasked image with layered soft shadows instead of a thin outline. `AppDialogContent variant="media"` supplies a transparent full-window stage, a dim media backdrop, shared close control and reserved toolbar area. Image pixels, including screenshot text and transparent assets, remain intact. Hosts own fit/zoom/pan geometry and image loading; use shared buttons and MediaToolbar for the toolbar. Background dismissal requires a click without a preceding pan; Escape and focus return follow the shared dialog contract.
 
+`VirtualList scrollSession` changes a Host-owned dataset and restores its saved
+anchor while retaining the viewport. Hosts must not key the list by the selected
+navigation mode merely to restore scroll position.
+
 Button geometry is explicit: `layout="command"` is the compact centered command default. Single-target navigation/selection records use `layout="row"`, with left alignment, natural height and shared insets; place stacked title/metadata in one content group. Image pickers use `layout="tile"`, a square with contained media that fills the available preview rather than retaining tiny intrinsic dimensions. Do not override command height/padding to imitate records. `layout="surface"` carries native action, accessibility and instrumentation behavior without command geometry; reserve it for documented domain graphics such as schedule cells. Hosts own those graphics' grid boundaries, not ordinary control styles. Multi-action records still use static `RecordRow` and independent commands.
 
 Escape dismisses only the active overlay: an open Select, menu, Popover or nested Dialog closes before its parent editor. Respect consumed keyboard events and IME composition; never discard a draft because Escape cancelled composition. Dialog focus containment applies only to the top visible Dialog, and dismissal returns focus to its own trigger. Verify nested layers through the consumer's real CSS and portal pipeline.
@@ -257,3 +261,7 @@ Date/month selection commits immediately. Date-time selection owns a temporary d
 ## Work destination selection and auxiliary row commands
 
 ClientModeSwitcher uses an 18/24px, 600-weight trigger and 16/24px, 600-weight choices. Other menus retain their existing density. ClientSidebarItem actions render beside the navigation button in a static RecordRow; auxiliary commands appear on hover, focus and while their menu is open. Blank record space never navigates. Dynamic VirtualList exposes apiRef.scrollToIndex for measured, gap-aware navigation without Host row-height arithmetic. Dialog forwards surface identity to its real portal content.
+
+## Draft context and drop boundaries
+
+ContextAttachment contains its removal button and tooltip trigger within the attachment geometry. Hosts supply labels, action identity and removal state; do not constrain its height or override the action size. DropOverlay variant="boundary" marks the visible Host drop surface with a moving dashed perimeter. active strengthens the boundary; reduced motion is static. The decoration never owns pointer input or expands acceptance beyond the Host target.
