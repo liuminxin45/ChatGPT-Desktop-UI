@@ -16,7 +16,7 @@ const DialogPortal = createDesktopPortal(DialogPrimitive.Portal);
 export function DropOverlay({ label, surfaceId, variant = 'overlay', active = false }: { label: string; surfaceId?: string; variant?: 'overlay' | 'boundary'; active?: boolean }) {
   return (
     <div className={`desktop-drop-overlay desktop-drop-overlay--${variant}`} role="status" aria-label={label} data-active={active || undefined} data-desktop-surface={surfaceId}>
-      {variant === 'boundary' ? <svg className="desktop-drop-boundary" aria-hidden="true" width="100%" height="100%"><rect x="2" y="2" width="100%" height="100%" rx="12" pathLength="100" /></svg> : <><AttachmentIcon size={20} aria-hidden="true" /><span>{label}</span></>}
+      {variant === 'boundary' ? <svg className="desktop-drop-boundary" aria-hidden="true" width="100%" height="100%"><rect x="2" y="2" width="100%" height="100%" rx="12" /></svg> : <><AttachmentIcon size={20} aria-hidden="true" /><span>{label}</span></>}
     </div>
   );
 }

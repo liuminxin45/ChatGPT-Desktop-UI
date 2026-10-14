@@ -18,6 +18,8 @@ try {
     const geometry=await button.evaluate(el=>{const a=el.getBoundingClientRect(),b=el.closest('.desktop-context-attachment').getBoundingClientRect();return{inside:a.left>=b.left&&a.right<=b.right&&a.top>=b.top&&a.bottom<=b.bottom}});assert.equal(geometry.inside,true);
     await button.focus();await button.press('Enter');assert.equal(await page.evaluate(()=>window.removed),true);
     assert.equal(await page.locator('.desktop-drop-boundary rect').evaluate(el=>getComputedStyle(el).animationName),'desktop-drop-march');
+    assert.equal(await page.locator('.desktop-drop-boundary rect').getAttribute('pathLength'),null,'Dashes stay in screen pixels rather than expanding with the perimeter');
+    assert.equal(await page.locator('.desktop-drop-boundary rect').evaluate(el=>getComputedStyle(el).strokeDasharray),'6px, 5px');
     await page.emulateMedia({reducedMotion:'reduce'});assert.equal(await page.locator('.desktop-drop-boundary rect').evaluate(el=>getComputedStyle(el).animationName),'none');
     await context.close();
   }
