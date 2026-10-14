@@ -248,3 +248,7 @@ All client routes opt into `DesktopClientSurface`. Its overlays inherit the clie
 Settings compose `SettingsLayout`, `SettingsNavigation`, `SettingsPage`, `SettingsGroup`, `SettingsField` and `SettingsDisclosure`. The reference settings category sidebar is 336px (260px at compact widths), independently of the 372px general contextual sidebar. The body remains 728px, its page title 28/36px at 600 weight, and its groups use one 16px inset and 60px field rows. The setting sidebar measurement follows the supplied desktop Settings reference; it is not a measurement of unobserved destinations.
 
 `SettingsPage` forwards the real scroll-owner ref for navigation and deep links. `SettingsGroup` accepts Host identity and instrumentation attributes. `SettingsDisclosure` can preserve an initially expanded section with `defaultOpen` and a stable Host `actionId`. Long field labels wrap, and text/secret inputs share the same control-column baseline. Keep Host styles component-scoped; import the library styles once without a parallel Host design system.
+
+## Draft context and drop boundaries
+
+ContextAttachment contains its removal button and tooltip trigger within the attachment geometry. Hosts supply labels, action identity and removal state; do not constrain its height or override the action size. DropOverlay variant="boundary" marks the visible Host drop surface with a moving dashed perimeter. active strengthens the boundary; reduced motion is static. The decoration never owns pointer input or expands acceptance beyond the Host target.
