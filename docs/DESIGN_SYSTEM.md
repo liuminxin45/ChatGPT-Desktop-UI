@@ -7,6 +7,9 @@ retain commands, status and actual object names. `SettingsPage showTitle={false}
 omits the visible category heading without changing the default Settings demo.
 Hosts supply an accessible content name when hiding that heading. Chat search
 expands below the retained title/action row using the shared sidebar toolbar slots.
+`VirtualList scrollSession` changes a Host-owned dataset and restores its saved
+anchor while retaining the viewport. Hosts must not key the list by the selected
+navigation mode merely to restore scroll position.
 
 Button geometry is explicit: `layout="command"` is the compact centered command default. Single-target navigation/selection records use `layout="row"`, with left alignment, natural height and shared insets; place stacked title/metadata in one content group. Image pickers use `layout="tile"`, a square with contained media that fills the available preview rather than retaining tiny intrinsic dimensions. Do not override command height/padding to imitate records. `layout="surface"` carries native action, accessibility and instrumentation behavior without command geometry; reserve it for documented domain graphics such as schedule cells. Hosts own those graphics' grid boundaries, not ordinary control styles. Multi-action records still use static `RecordRow` and independent commands.
 

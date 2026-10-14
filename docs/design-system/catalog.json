@@ -43016,6 +43016,13 @@
           "description": ""
         },
         {
+          "name": "scrollSession",
+          "required": false,
+          "type": "{ key: string; anchor?: VirtualListScrollAnchor | null; } | undefined",
+          "native": false,
+          "description": "Switch Host-owned scroll sessions while retaining this list's viewport."
+        },
+        {
           "name": "onScrollAnchorChange",
           "required": false,
           "type": "((anchor: VirtualListScrollAnchor) => void) | undefined",
