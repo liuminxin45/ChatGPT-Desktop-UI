@@ -1,5 +1,11 @@
 # Integration
 
+## Local calendar values
+
+Use `TemporalPicker` for popup-only `date`, `month` and `datetime-local` selection. `value`/`onValueChange` use local strings (`YYYY-MM-DD`, `YYYY-MM`, `YYYY-MM-DDTHH:mm`); an empty string clears an optional field. Set `min`, `max`, `clearable`, `disabled`, `readOnly`, `size`, accessible field labels and the Host's stable `actionId`. The DatePicker compatibility export retains its existing Date/undefined callback and historical open/clear IDs. Ordinary Input does not automatically replace native temporal types. A hidden `name` value supports native form serialization; `required` prevents clearing and supplies accessibility semantics, while the Host retains business/form validation.
+
+Migrate native date fields explicitly. Popup actions only update Host state, and date-time callbacks run once after confirmation. The Host still owns requests, persistence, usage events and outcome diagnostics; the shared picker records no date values. Standalone time inputs are unchanged. Run `npm run test:temporal` and verify actual consumer portals, scoped Tool styling, nested dialogs, light/dark, localization, narrow windows and CSS zoom.
+
 Desktop consumers may retain `script-src 'self'; style-src 'self'`. The prepared
 package ships notification and Select viewport rules in its external stylesheet.
 Sonner keeps queue behavior without injecting CSS. Modal wheel/touch isolation is

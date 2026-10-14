@@ -56,3 +56,33 @@
 .desktop-calendar{width:fit-content}
 
 .desktop-calendar-today{box-shadow:none}.desktop-calendar-today .desktop-calendar-day{box-shadow:inset 0 0 0 1px var(--desktop-color-border-strong)}.desktop-calendar-range-middle .desktop-calendar-day{border-radius:0}
+
+/* Shared local-calendar selection; Hosts only position these controls. */
+.desktop-temporal-picker{display:flex;min-width:0;max-width:100%;width:100%}
+.desktop-temporal-trigger.desktop-button{width:100%;min-width:0;justify-content:flex-start;background:var(--desktop-color-surface-muted)}
+.desktop-temporal-trigger.desktop-button--row{padding:8px 11px}
+.desktop-temporal-trigger.desktop-button--sm{min-height:30px;padding:5px 11px}
+.desktop-temporal-trigger.desktop-button:hover{background:var(--desktop-color-surface-hover)}
+.desktop-temporal-value{min-width:0;white-space:normal;text-align:left;overflow-wrap:anywhere}
+.desktop-temporal-popover.desktop-popover{width:280px;max-width:calc(100vw - 24px);max-height:var(--radix-popover-content-available-height);overflow-y:auto;padding:12px}
+.desktop-temporal-popover .desktop-calendar{padding:0;width:100%}
+.desktop-temporal-popover .desktop-calendar-nav{left:0;right:0;top:0;pointer-events:none}
+.desktop-calendar-nav .desktop-button{pointer-events:auto}
+.desktop-calendar-nav{pointer-events:none}
+.desktop-calendar-caption{gap:4px;padding-inline:36px}
+.desktop-calendar-caption>.desktop-select{min-width:0}
+.desktop-calendar-caption>.desktop-select{padding-inline:6px;gap:4px}
+.desktop-calendar-caption>.desktop-calendar-month-select{flex:1;width:auto}
+.desktop-calendar-caption>.desktop-calendar-year-select{width:76px;flex:none}
+.desktop-temporal-heading{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.desktop-temporal-heading>.desktop-select{flex:1;min-width:0}
+.desktop-temporal-months{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.desktop-temporal-months>.desktop-button{min-width:0;min-height:36px;padding-inline:4px}
+.desktop-temporal-months>.desktop-button[aria-pressed=true]{background:var(--desktop-color-surface-selected);color:var(--desktop-color-text)}
+.desktop-temporal-months>.desktop-button[data-current]{box-shadow:inset 0 0 0 1px var(--desktop-color-border-strong)}
+.desktop-temporal-time{display:flex;align-items:flex-end;gap:8px;padding-top:12px}
+.desktop-temporal-time>label{display:flex;flex:1;min-width:0;flex-direction:column;gap:4px}
+.desktop-temporal-time>label>span{color:var(--desktop-color-text-muted);font-size:var(--desktop-font-size-supporting)}
+.desktop-temporal-time>span{line-height:30px}
+.desktop-temporal-footer{display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin-top:12px;padding-top:8px;border-top:1px solid var(--desktop-color-border)}
+.desktop-temporal-confirm{display:flex;gap:4px;margin-left:auto}
