@@ -73,6 +73,7 @@
     "test": "node scripts/verify.mjs",
     "test:composer": "node scripts/verify-composer-actions.mjs",
     "test:input": "node scripts/verify-input.mjs",
+    "test:temporal": "node scripts/verify-temporal.mjs",
     "test:menus": "node scripts/verify-menu-focus.mjs",
     "test:record-actions": "node scripts/verify-record-actions.mjs",
     "test:list-spacing": "node scripts/verify-list-spacing.mjs",
