@@ -1,7 +1,7 @@
 import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
 import { useTranslation } from '../../strings';
 import { classes } from '../classes';
-export { MediaImage } from './media-image';
+export { MediaImage, MediaToolbar } from './media-image';
 
 /** Compact first row for independent Tools: page navigation on the left, contextual actions on the right. */
 export function ToolPageBar({
