@@ -15,6 +15,16 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | Prop | Required | Type |
 | --- | --- | --- |
 
+## MediaImage (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/layout/media-image.tsx)
+
+Complete, unmasked image pixels with a soft edge shadow. Host owns sizing and loading.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| variant | no | `"thumbnail" \| "viewer" \| "artwork" \| undefined` |
+
 ## MetadataList (chatgpt-desktop-kit)
 
 [Implementation](../../../src/components/layout/index.tsx)

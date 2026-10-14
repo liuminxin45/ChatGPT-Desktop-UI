@@ -1,7 +1,7 @@
 /* Windows client reference profile, measured against the version in docs/CLIENT_ALIGNMENT.json. */
 .client-section-toggle{display:flex;align-items:center;gap:4px;height:24px;margin:-2px -4px;padding:2px 4px;border:0;border-radius:6px;background:transparent;color:inherit;font:inherit;text-align:left}
 .client-section-toggle:hover{color:var(--desktop-color-text)}
-.client-section-toggle:focus-visible{outline:2px solid var(--desktop-color-focus);outline-offset:1px}
+:root:not(:has([data-desktop-input-modality="pointer"])) .client-section-toggle:focus-visible{outline:none;background:var(--desktop-color-surface-hover)}
 .client-section-toggle>svg{opacity:0;transform:rotate(90deg);transition:opacity var(--desktop-motion-fast),transform var(--desktop-motion-fast)}
 .client-section-toggle:is(:hover,:focus-visible)>svg,.client-section-toggle[aria-expanded=false]>svg{opacity:1}
 .client-section-toggle[aria-expanded=false]>svg{transform:rotate(0deg)}

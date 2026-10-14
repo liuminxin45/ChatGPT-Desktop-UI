@@ -12318,6 +12318,1168 @@
       "native": true,
       "description": ""
     },
+    "4fe1678e5e7367c9": {
+      "name": "crossOrigin",
+      "required": false,
+      "type": "\"\" | \"anonymous\" | \"use-credentials\" | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f8a29316e98b3cdc": {
+      "name": "decoding",
+      "required": false,
+      "type": "\"async\" | \"auto\" | \"sync\" | undefined",
+      "native": true,
+      "description": ""
+    },
+    "14201835aac49597": {
+      "name": "fetchPriority",
+      "required": false,
+      "type": "\"high\" | \"low\" | \"auto\" | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d1b57bf47e9f8c6b": {
+      "name": "loading",
+      "required": false,
+      "type": "\"eager\" | \"lazy\" | undefined",
+      "native": true,
+      "description": ""
+    },
+    "dfc06a0185a18b4b": {
+      "name": "sizes",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b500673e2c3ed13f": {
+      "name": "srcSet",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d8c8dd0711f5e994": {
+      "name": "useMap",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c947991a2fafc924": {
+      "name": "onCopy",
+      "required": false,
+      "type": "ClipboardEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b1688b57caee9f69": {
+      "name": "onCopyCapture",
+      "required": false,
+      "type": "ClipboardEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "6e0ea33d03a65949": {
+      "name": "onCut",
+      "required": false,
+      "type": "ClipboardEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7edd67361171c0c3": {
+      "name": "onCutCapture",
+      "required": false,
+      "type": "ClipboardEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "85ad597ff37f55b2": {
+      "name": "onPaste",
+      "required": false,
+      "type": "ClipboardEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "2b74975a1f9938c9": {
+      "name": "onPasteCapture",
+      "required": false,
+      "type": "ClipboardEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "fe9e9297a2e6fcf9": {
+      "name": "onCompositionEnd",
+      "required": false,
+      "type": "CompositionEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "59bbb6546cd317c1": {
+      "name": "onCompositionEndCapture",
+      "required": false,
+      "type": "CompositionEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ac666c5ec2a3c047": {
+      "name": "onCompositionStart",
+      "required": false,
+      "type": "CompositionEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "38673e607fd768e1": {
+      "name": "onCompositionStartCapture",
+      "required": false,
+      "type": "CompositionEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "70106f544a0548ea": {
+      "name": "onCompositionUpdate",
+      "required": false,
+      "type": "CompositionEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "183f99fe047dff24": {
+      "name": "onCompositionUpdateCapture",
+      "required": false,
+      "type": "CompositionEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5e02c15d8d5f4979": {
+      "name": "onFocus",
+      "required": false,
+      "type": "FocusEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "696a22d90b26240c": {
+      "name": "onFocusCapture",
+      "required": false,
+      "type": "FocusEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "df72577aabec9791": {
+      "name": "onBlur",
+      "required": false,
+      "type": "FocusEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "18aed0d493bafa4d": {
+      "name": "onBlurCapture",
+      "required": false,
+      "type": "FocusEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7411f69819feca93": {
+      "name": "onChange",
+      "required": false,
+      "type": "FormEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e3e405ae4eba41d2": {
+      "name": "onChangeCapture",
+      "required": false,
+      "type": "FormEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8281632a4f7a0d26": {
+      "name": "onBeforeInput",
+      "required": false,
+      "type": "InputEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "3e1a2b14991ddeaa": {
+      "name": "onBeforeInputCapture",
+      "required": false,
+      "type": "FormEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "6d2201e5ed768bbc": {
+      "name": "onInput",
+      "required": false,
+      "type": "FormEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ccdcff3821aed9f4": {
+      "name": "onInputCapture",
+      "required": false,
+      "type": "FormEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "2b755742e75077c6": {
+      "name": "onReset",
+      "required": false,
+      "type": "FormEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "05164789d53c09bc": {
+      "name": "onResetCapture",
+      "required": false,
+      "type": "FormEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5299cea9714acffb": {
+      "name": "onSubmit",
+      "required": false,
+      "type": "FormEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "db775f4cf17aa2f9": {
+      "name": "onSubmitCapture",
+      "required": false,
+      "type": "FormEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "359161ffc085b8ad": {
+      "name": "onInvalid",
+      "required": false,
+      "type": "FormEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8b192c55e7b8ab87": {
+      "name": "onInvalidCapture",
+      "required": false,
+      "type": "FormEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f46b74a045a4edc5": {
+      "name": "onLoad",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "3f8315384332d524": {
+      "name": "onLoadCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b67b530205b9dfd2": {
+      "name": "onError",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "324d812e33a4b4e3": {
+      "name": "onErrorCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "64595e26472d310c": {
+      "name": "onKeyDown",
+      "required": false,
+      "type": "KeyboardEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "9bd285ffb486fab9": {
+      "name": "onKeyDownCapture",
+      "required": false,
+      "type": "KeyboardEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "667b6789a729a774": {
+      "name": "onKeyPress",
+      "required": false,
+      "type": "KeyboardEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d5165a0f1edf4023": {
+      "name": "onKeyPressCapture",
+      "required": false,
+      "type": "KeyboardEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a54523114b9c20a0": {
+      "name": "onKeyUp",
+      "required": false,
+      "type": "KeyboardEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "1f78c2d37d97eed5": {
+      "name": "onKeyUpCapture",
+      "required": false,
+      "type": "KeyboardEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7656ffe0ef50b179": {
+      "name": "onAbort",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "60e4e4b1db27b21d": {
+      "name": "onAbortCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "58d12853868f5700": {
+      "name": "onCanPlay",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7f9c339da7593318": {
+      "name": "onCanPlayCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a233682f7f69cbcf": {
+      "name": "onCanPlayThrough",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "06c9b9d617dea4a2": {
+      "name": "onCanPlayThroughCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "6f776a341ed6eb1b": {
+      "name": "onDurationChange",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e52683903a2a6f7e": {
+      "name": "onDurationChangeCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "99fa24a69c0c1fd4": {
+      "name": "onEmptied",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "46d299a82c1d8b1d": {
+      "name": "onEmptiedCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e037d4ea979ad113": {
+      "name": "onEncrypted",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "23724e890d5e6b6c": {
+      "name": "onEncryptedCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "36dad6ea7c7a8e53": {
+      "name": "onEnded",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "9a2f7ecac6687160": {
+      "name": "onEndedCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "fa9141204dcbae64": {
+      "name": "onLoadedData",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a60152c19e6f6b31": {
+      "name": "onLoadedDataCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0d57c6f627ef3fb8": {
+      "name": "onLoadedMetadata",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "1386dc2d9ddb619a": {
+      "name": "onLoadedMetadataCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b0376efc8c8cdc4b": {
+      "name": "onLoadStart",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f1ce0326d76f5a42": {
+      "name": "onLoadStartCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8ab69f255d968696": {
+      "name": "onPause",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e3f0246a804ab8ee": {
+      "name": "onPauseCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "4a25c82c88d6adf6": {
+      "name": "onPlay",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "2c9d198dfc8200c3": {
+      "name": "onPlayCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "6f3a1874fb117d01": {
+      "name": "onPlaying",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "af37cee95564a580": {
+      "name": "onPlayingCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ae890e0b1db7817f": {
+      "name": "onProgress",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c9b3377df463f7c2": {
+      "name": "onProgressCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "54760ec20b725bdd": {
+      "name": "onRateChange",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "733bcd6a1ce526c5": {
+      "name": "onRateChangeCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "6640288335304ac3": {
+      "name": "onSeeked",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "cde0d2d589068a78": {
+      "name": "onSeekedCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "83880ea7034c1b1b": {
+      "name": "onSeeking",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e732a914b4eb7958": {
+      "name": "onSeekingCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "cf45f296868dc33f": {
+      "name": "onStalled",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "1baad3c07886af68": {
+      "name": "onStalledCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7ea56173c1d536bd": {
+      "name": "onSuspend",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "38dcba7feae1b37d": {
+      "name": "onSuspendCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ea61c951bb3f0cfa": {
+      "name": "onTimeUpdate",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "3379a0fba8351f2a": {
+      "name": "onTimeUpdateCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e854b768494fb37b": {
+      "name": "onVolumeChange",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "65ccc5a0f9196d01": {
+      "name": "onVolumeChangeCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "687473f41322dd2e": {
+      "name": "onWaiting",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "6086d46078bbbbb8": {
+      "name": "onWaitingCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "eb172143223eb7f2": {
+      "name": "onAuxClick",
+      "required": false,
+      "type": "MouseEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "599f6eef2fb8b5c5": {
+      "name": "onAuxClickCapture",
+      "required": false,
+      "type": "MouseEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "cb5e03b4a0bf92b8": {
+      "name": "onClick",
+      "required": false,
+      "type": "MouseEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8d0b3011e842a296": {
+      "name": "onClickCapture",
+      "required": false,
+      "type": "MouseEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a013aff82797d391": {
+      "name": "onContextMenu",
+      "required": false,
+      "type": "MouseEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ebedd9480afbb3fd": {
+      "name": "onContextMenuCapture",
+      "required": false,
+      "type": "MouseEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "31abd51711f27ccb": {
+      "name": "onDoubleClick",
+      "required": false,
+      "type": "MouseEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "6da9c71933471781": {
+      "name": "onDoubleClickCapture",
+      "required": false,
+      "type": "MouseEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "34436eb190da149a": {
+      "name": "onDrag",
+      "required": false,
+      "type": "DragEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "bc0ec6f75aa7db96": {
+      "name": "onDragCapture",
+      "required": false,
+      "type": "DragEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "2b6dfe8ea7f618fc": {
+      "name": "onDragEnd",
+      "required": false,
+      "type": "DragEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "09953b30794bc8ec": {
+      "name": "onDragEndCapture",
+      "required": false,
+      "type": "DragEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "1ad00896cdc7dec5": {
+      "name": "onDragEnter",
+      "required": false,
+      "type": "DragEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5d5329344cd86e7b": {
+      "name": "onDragEnterCapture",
+      "required": false,
+      "type": "DragEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "25f9874cf0e78886": {
+      "name": "onDragExit",
+      "required": false,
+      "type": "DragEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "99100c5af89737e4": {
+      "name": "onDragExitCapture",
+      "required": false,
+      "type": "DragEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0acaa5a532845041": {
+      "name": "onDragLeave",
+      "required": false,
+      "type": "DragEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "75d548a971de95ff": {
+      "name": "onDragLeaveCapture",
+      "required": false,
+      "type": "DragEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "660873e0ec93a014": {
+      "name": "onDragOver",
+      "required": false,
+      "type": "DragEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8f3e8843485d6e22": {
+      "name": "onDragOverCapture",
+      "required": false,
+      "type": "DragEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8dad9940301a5eed": {
+      "name": "onDragStart",
+      "required": false,
+      "type": "DragEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0292787ab650aa59": {
+      "name": "onDragStartCapture",
+      "required": false,
+      "type": "DragEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f012329bd3ba14a3": {
+      "name": "onDrop",
+      "required": false,
+      "type": "DragEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f18b2604f3675015": {
+      "name": "onDropCapture",
+      "required": false,
+      "type": "DragEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "dfc1d83c3a02c250": {
+      "name": "onMouseDown",
+      "required": false,
+      "type": "MouseEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "662581fd416997c3": {
+      "name": "onMouseDownCapture",
+      "required": false,
+      "type": "MouseEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "35e2717e280cab54": {
+      "name": "onMouseEnter",
+      "required": false,
+      "type": "MouseEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d7d4268c99aa30a4": {
+      "name": "onMouseLeave",
+      "required": false,
+      "type": "MouseEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "86a108ccc70f1041": {
+      "name": "onMouseMove",
+      "required": false,
+      "type": "MouseEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "de52393fb050afd2": {
+      "name": "onMouseMoveCapture",
+      "required": false,
+      "type": "MouseEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "fba75b686b74b662": {
+      "name": "onMouseOut",
+      "required": false,
+      "type": "MouseEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "9ed151a7db2da202": {
+      "name": "onMouseOutCapture",
+      "required": false,
+      "type": "MouseEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a6f736fc9179f1b8": {
+      "name": "onMouseOver",
+      "required": false,
+      "type": "MouseEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "6eae084ad0905cd0": {
+      "name": "onMouseOverCapture",
+      "required": false,
+      "type": "MouseEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8d344d129d38e93c": {
+      "name": "onMouseUp",
+      "required": false,
+      "type": "MouseEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "1a93074b8bc59514": {
+      "name": "onMouseUpCapture",
+      "required": false,
+      "type": "MouseEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "436b34bd930466ef": {
+      "name": "onSelect",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8411f73437f7ea87": {
+      "name": "onSelectCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8ada88f5e776e0e5": {
+      "name": "onTouchCancel",
+      "required": false,
+      "type": "TouchEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "61de450c4a93d303": {
+      "name": "onTouchCancelCapture",
+      "required": false,
+      "type": "TouchEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5270955c26f412b4": {
+      "name": "onTouchEnd",
+      "required": false,
+      "type": "TouchEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "64c49b99c6e06822": {
+      "name": "onTouchEndCapture",
+      "required": false,
+      "type": "TouchEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "3dab223205fe37ea": {
+      "name": "onTouchMove",
+      "required": false,
+      "type": "TouchEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7db7d64f8b86fa10": {
+      "name": "onTouchMoveCapture",
+      "required": false,
+      "type": "TouchEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "fe1ca1c23f342739": {
+      "name": "onTouchStart",
+      "required": false,
+      "type": "TouchEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "878eab66489b5d89": {
+      "name": "onTouchStartCapture",
+      "required": false,
+      "type": "TouchEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0c9b92e6c0032074": {
+      "name": "onPointerDown",
+      "required": false,
+      "type": "PointerEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b788d1e565760e29": {
+      "name": "onPointerDownCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "16b963e24704ab67": {
+      "name": "onPointerMove",
+      "required": false,
+      "type": "PointerEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "657d1acce1a6a3ed": {
+      "name": "onPointerMoveCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b42504f2771fca04": {
+      "name": "onPointerUp",
+      "required": false,
+      "type": "PointerEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "94c13a46b1fe3f35": {
+      "name": "onPointerUpCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "346b4b1d5c255a06": {
+      "name": "onPointerCancel",
+      "required": false,
+      "type": "PointerEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "1c3396312dddc159": {
+      "name": "onPointerCancelCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e9ab74fc8b4a7959": {
+      "name": "onPointerEnter",
+      "required": false,
+      "type": "PointerEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0a3832a310ae582f": {
+      "name": "onPointerLeave",
+      "required": false,
+      "type": "PointerEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "03f992d106dc9787": {
+      "name": "onPointerOver",
+      "required": false,
+      "type": "PointerEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d072ad668c60e739": {
+      "name": "onPointerOverCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d7cf323d1d61a607": {
+      "name": "onPointerOut",
+      "required": false,
+      "type": "PointerEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d33c43d18d0eb891": {
+      "name": "onPointerOutCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "adb0492f1679c294": {
+      "name": "onGotPointerCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "567d4f052264d322": {
+      "name": "onGotPointerCaptureCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "43cb16ec48464db4": {
+      "name": "onLostPointerCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "64451e2c9a9038bc": {
+      "name": "onLostPointerCaptureCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "1354621ccd9a03da": {
+      "name": "onScroll",
+      "required": false,
+      "type": "UIEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "1949557b8cc5d158": {
+      "name": "onScrollCapture",
+      "required": false,
+      "type": "UIEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "99604da4cd0cfd60": {
+      "name": "onWheel",
+      "required": false,
+      "type": "WheelEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f5fb4a030da987a1": {
+      "name": "onWheelCapture",
+      "required": false,
+      "type": "WheelEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "2a3f337c732ae210": {
+      "name": "onAnimationStart",
+      "required": false,
+      "type": "AnimationEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c2ac19d3077bd5ae": {
+      "name": "onAnimationStartCapture",
+      "required": false,
+      "type": "AnimationEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "97dc187502dedce0": {
+      "name": "onAnimationEnd",
+      "required": false,
+      "type": "AnimationEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "389b19e6196bd6bf": {
+      "name": "onAnimationEndCapture",
+      "required": false,
+      "type": "AnimationEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7aa1e12e26a74e56": {
+      "name": "onAnimationIteration",
+      "required": false,
+      "type": "AnimationEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "162472863dff29b6": {
+      "name": "onAnimationIterationCapture",
+      "required": false,
+      "type": "AnimationEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "fb41afe1ca9aea39": {
+      "name": "onTransitionEnd",
+      "required": false,
+      "type": "TransitionEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "14e0c5f4f1afe965": {
+      "name": "onTransitionEndCapture",
+      "required": false,
+      "type": "TransitionEventHandler<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a0657f225719ecc5": {
+      "name": "ref",
+      "required": false,
+      "type": "LegacyRef<HTMLImageElement> | undefined",
+      "native": true,
+      "description": ""
+    },
     "1c2c1957dd8983b3": {
       "name": "onCopy",
       "required": false,
@@ -24645,59 +25807,10 @@
       "native": true,
       "description": ""
     },
-    "4fe1678e5e7367c9": {
-      "name": "crossOrigin",
-      "required": false,
-      "type": "\"\" | \"anonymous\" | \"use-credentials\" | undefined",
-      "native": true,
-      "description": ""
-    },
-    "d8c8dd0711f5e994": {
-      "name": "useMap",
-      "required": false,
-      "type": "string | undefined",
-      "native": true,
-      "description": ""
-    },
-    "f8a29316e98b3cdc": {
-      "name": "decoding",
-      "required": false,
-      "type": "\"async\" | \"auto\" | \"sync\" | undefined",
-      "native": true,
-      "description": ""
-    },
-    "14201835aac49597": {
-      "name": "fetchPriority",
-      "required": false,
-      "type": "\"high\" | \"low\" | \"auto\" | undefined",
-      "native": true,
-      "description": ""
-    },
-    "d1b57bf47e9f8c6b": {
-      "name": "loading",
-      "required": false,
-      "type": "\"eager\" | \"lazy\" | undefined",
-      "native": true,
-      "description": ""
-    },
     "1655dab9f853e956": {
       "name": "referrerPolicy",
       "required": false,
       "type": "React.HTMLAttributeReferrerPolicy | undefined",
-      "native": true,
-      "description": ""
-    },
-    "dfc06a0185a18b4b": {
-      "name": "sizes",
-      "required": false,
-      "type": "string | undefined",
-      "native": true,
-      "description": ""
-    },
-    "b500673e2c3ed13f": {
-      "name": "srcSet",
-      "required": false,
-      "type": "string | undefined",
       "native": true,
       "description": ""
     },
@@ -35438,6 +36551,303 @@
         "c83b47c5ef2903fc",
         "3b729fce59f02c4c",
         "416315b665707faa"
+      ]
+    },
+    {
+      "id": "chatgpt-desktop-kit:MediaImage",
+      "name": "MediaImage",
+      "importPath": "chatgpt-desktop-kit",
+      "family": "layout",
+      "implementation": "src/components/layout/media-image.tsx",
+      "description": "Complete, unmasked image pixels with a soft edge shadow. Host owns sizing and loading.",
+      "props": [
+        {
+          "name": "variant",
+          "required": false,
+          "type": "\"thumbnail\" | \"viewer\" | \"artwork\" | undefined",
+          "native": false,
+          "description": ""
+        }
+      ],
+      "nativeProps": [
+        "4e027e6667c97df2",
+        "4fe1678e5e7367c9",
+        "f8a29316e98b3cdc",
+        "14201835aac49597",
+        "f807dacbb7c785e4",
+        "d1b57bf47e9f8c6b",
+        "b573f749274d0594",
+        "dfc06a0185a18b4b",
+        "b6a6d08813a3b561",
+        "b500673e2c3ed13f",
+        "d8c8dd0711f5e994",
+        "9c337a9455021dbf",
+        "492c223f0955790c",
+        "15ffaab16e1011f9",
+        "eddae8e371e2f703",
+        "51f9507a65352cff",
+        "bacb3b6094d96a90",
+        "23f7a890a3938b56",
+        "9ea624e1ff6d432f",
+        "4c8a56e6e80dc7a0",
+        "4e1ed1d679212235",
+        "4626cc887c4fb12e",
+        "ee2de0c04ce0aa30",
+        "91837fe1783bec9a",
+        "02418f9589266969",
+        "873855a7abccb948",
+        "653092775be5509a",
+        "3bf9ffb031db54c9",
+        "0afa6e7c0a427328",
+        "7673eefbd3821376",
+        "6c45b2c6479a10e9",
+        "d9b870d67f4534b8",
+        "83c160b2f06ef571",
+        "57fad1b0152d5828",
+        "82fe63f8b632834d",
+        "6c2961aa2e807313",
+        "548471eea24c23d0",
+        "19d72cf8ae6d9a2d",
+        "2e993b037f3bd9c5",
+        "79c8646544870d33",
+        "787d327efce5f445",
+        "bbf7c69656fd89aa",
+        "a3c3a2bd6d8cb0cb",
+        "b63668c0dc2f4944",
+        "96dc96c1b76b47f5",
+        "3c5d1a89ebbe68e9",
+        "829c816035517fea",
+        "fae771ee4780b879",
+        "840ff5756b1d7fea",
+        "415d17b98c91d343",
+        "1af9857937727a9f",
+        "19f173b5dcb2c41a",
+        "6d4aceb7410b7f05",
+        "769fb3e0182fe328",
+        "0c7ea159d32a4722",
+        "dce16e2ae813a0f7",
+        "ea282ea73b43c323",
+        "ec107097d56b1b68",
+        "a5a3eef632b3ef4d",
+        "a255dd4bb0681ac6",
+        "1fbaf2c2f93c12bc",
+        "8d1df39442042c7e",
+        "74282ab38340e309",
+        "0d6d2895792254b5",
+        "3909957c7689e36c",
+        "3a9552f26f63bd42",
+        "2479771f46785b5a",
+        "86828207c5c51f1f",
+        "fbceb60275ace2b2",
+        "380898b5e32036c7",
+        "44d42ae77bdc214f",
+        "2abcb2017f65f9c1",
+        "4b62625346e0f5ec",
+        "402dc0a4b5546b5f",
+        "fc0fa651370547e3",
+        "679db8ef2fe3976d",
+        "85353dbd4b876e20",
+        "2c0ed5b877c15e1a",
+        "23c7ed6762ae3909",
+        "f1106f51cfbd3c9a",
+        "cccb14974af350fc",
+        "794a693b859a8340",
+        "c862ae898dff099e",
+        "3ed607153829f231",
+        "4cc9b5f5a121f197",
+        "ad17bf90e765f22e",
+        "3a6b556cf8b23fbc",
+        "e75a3f19767cf979",
+        "7515edf8d3608bf6",
+        "66f76ac880140ca7",
+        "00ac781d246b3f68",
+        "96f4908fcd16108a",
+        "08caee40fee0857e",
+        "4e44cc9c1ed6f3a5",
+        "12ae8dc4851a635e",
+        "a5ad8a7f9b5ba9bc",
+        "4e27e7acd839e4a1",
+        "cb158207746e6bb9",
+        "c49cbd91d1843f99",
+        "a2a2cd4fbba448d0",
+        "3d6aa4108f2b8c32",
+        "64a3906ab80858f3",
+        "68d7f73d9645d906",
+        "4cd166b22dc09153",
+        "565c31f2a3cee300",
+        "997fe13cf60495e5",
+        "b7787a274ef3310e",
+        "df0b03ec4973e477",
+        "1f86e2f75ac6e140",
+        "6d76a40c85b0bf1f",
+        "b0483557eb584ead",
+        "ac1ff6b3e5032100",
+        "03484b4b1d86e92f",
+        "c01934236d41c34f",
+        "57b07e0f6124ced5",
+        "3d374b8e347fe3d3",
+        "38a872e40c6c6308",
+        "7cdb8af317bd47ff",
+        "c947991a2fafc924",
+        "b1688b57caee9f69",
+        "6e0ea33d03a65949",
+        "7edd67361171c0c3",
+        "85ad597ff37f55b2",
+        "2b74975a1f9938c9",
+        "fe9e9297a2e6fcf9",
+        "59bbb6546cd317c1",
+        "ac666c5ec2a3c047",
+        "38673e607fd768e1",
+        "70106f544a0548ea",
+        "183f99fe047dff24",
+        "5e02c15d8d5f4979",
+        "696a22d90b26240c",
+        "df72577aabec9791",
+        "18aed0d493bafa4d",
+        "7411f69819feca93",
+        "e3e405ae4eba41d2",
+        "8281632a4f7a0d26",
+        "3e1a2b14991ddeaa",
+        "6d2201e5ed768bbc",
+        "ccdcff3821aed9f4",
+        "2b755742e75077c6",
+        "05164789d53c09bc",
+        "5299cea9714acffb",
+        "db775f4cf17aa2f9",
+        "359161ffc085b8ad",
+        "8b192c55e7b8ab87",
+        "f46b74a045a4edc5",
+        "3f8315384332d524",
+        "b67b530205b9dfd2",
+        "324d812e33a4b4e3",
+        "64595e26472d310c",
+        "9bd285ffb486fab9",
+        "667b6789a729a774",
+        "d5165a0f1edf4023",
+        "a54523114b9c20a0",
+        "1f78c2d37d97eed5",
+        "7656ffe0ef50b179",
+        "60e4e4b1db27b21d",
+        "58d12853868f5700",
+        "7f9c339da7593318",
+        "a233682f7f69cbcf",
+        "06c9b9d617dea4a2",
+        "6f776a341ed6eb1b",
+        "e52683903a2a6f7e",
+        "99fa24a69c0c1fd4",
+        "46d299a82c1d8b1d",
+        "e037d4ea979ad113",
+        "23724e890d5e6b6c",
+        "36dad6ea7c7a8e53",
+        "9a2f7ecac6687160",
+        "fa9141204dcbae64",
+        "a60152c19e6f6b31",
+        "0d57c6f627ef3fb8",
+        "1386dc2d9ddb619a",
+        "b0376efc8c8cdc4b",
+        "f1ce0326d76f5a42",
+        "8ab69f255d968696",
+        "e3f0246a804ab8ee",
+        "4a25c82c88d6adf6",
+        "2c9d198dfc8200c3",
+        "6f3a1874fb117d01",
+        "af37cee95564a580",
+        "ae890e0b1db7817f",
+        "c9b3377df463f7c2",
+        "54760ec20b725bdd",
+        "733bcd6a1ce526c5",
+        "6640288335304ac3",
+        "cde0d2d589068a78",
+        "83880ea7034c1b1b",
+        "e732a914b4eb7958",
+        "cf45f296868dc33f",
+        "1baad3c07886af68",
+        "7ea56173c1d536bd",
+        "38dcba7feae1b37d",
+        "ea61c951bb3f0cfa",
+        "3379a0fba8351f2a",
+        "e854b768494fb37b",
+        "65ccc5a0f9196d01",
+        "687473f41322dd2e",
+        "6086d46078bbbbb8",
+        "eb172143223eb7f2",
+        "599f6eef2fb8b5c5",
+        "cb5e03b4a0bf92b8",
+        "8d0b3011e842a296",
+        "a013aff82797d391",
+        "ebedd9480afbb3fd",
+        "31abd51711f27ccb",
+        "6da9c71933471781",
+        "34436eb190da149a",
+        "bc0ec6f75aa7db96",
+        "2b6dfe8ea7f618fc",
+        "09953b30794bc8ec",
+        "1ad00896cdc7dec5",
+        "5d5329344cd86e7b",
+        "25f9874cf0e78886",
+        "99100c5af89737e4",
+        "0acaa5a532845041",
+        "75d548a971de95ff",
+        "660873e0ec93a014",
+        "8f3e8843485d6e22",
+        "8dad9940301a5eed",
+        "0292787ab650aa59",
+        "f012329bd3ba14a3",
+        "f18b2604f3675015",
+        "dfc1d83c3a02c250",
+        "662581fd416997c3",
+        "35e2717e280cab54",
+        "d7d4268c99aa30a4",
+        "86a108ccc70f1041",
+        "de52393fb050afd2",
+        "fba75b686b74b662",
+        "9ed151a7db2da202",
+        "a6f736fc9179f1b8",
+        "6eae084ad0905cd0",
+        "8d344d129d38e93c",
+        "1a93074b8bc59514",
+        "436b34bd930466ef",
+        "8411f73437f7ea87",
+        "8ada88f5e776e0e5",
+        "61de450c4a93d303",
+        "5270955c26f412b4",
+        "64c49b99c6e06822",
+        "3dab223205fe37ea",
+        "7db7d64f8b86fa10",
+        "fe1ca1c23f342739",
+        "878eab66489b5d89",
+        "0c9b92e6c0032074",
+        "b788d1e565760e29",
+        "16b963e24704ab67",
+        "657d1acce1a6a3ed",
+        "b42504f2771fca04",
+        "94c13a46b1fe3f35",
+        "346b4b1d5c255a06",
+        "1c3396312dddc159",
+        "e9ab74fc8b4a7959",
+        "0a3832a310ae582f",
+        "03f992d106dc9787",
+        "d072ad668c60e739",
+        "d7cf323d1d61a607",
+        "d33c43d18d0eb891",
+        "adb0492f1679c294",
+        "567d4f052264d322",
+        "43cb16ec48464db4",
+        "64451e2c9a9038bc",
+        "1354621ccd9a03da",
+        "1949557b8cc5d158",
+        "99604da4cd0cfd60",
+        "f5fb4a030da987a1",
+        "2a3f337c732ae210",
+        "c2ac19d3077bd5ae",
+        "97dc187502dedce0",
+        "389b19e6196bd6bf",
+        "7aa1e12e26a74e56",
+        "162472863dff29b6",
+        "fb41afe1ca9aea39",
+        "14e0c5f4f1afe965",
+        "a0657f225719ecc5",
+        "b71c25c8048699fd"
       ]
     },
     {
@@ -49955,6 +51365,13 @@
           "description": ""
         },
         {
+          "name": "variant",
+          "required": false,
+          "type": "\"media\" | \"default\" | undefined",
+          "native": false,
+          "description": "Media uses a transparent full-window stage over a dim backdrop."
+        },
+        {
           "name": "showCloseButton",
           "required": false,
           "type": "boolean | undefined",
@@ -53035,6 +54452,13 @@
           "type": "AppDialogSize | undefined",
           "native": false,
           "description": ""
+        },
+        {
+          "name": "variant",
+          "required": false,
+          "type": "\"media\" | \"default\" | undefined",
+          "native": false,
+          "description": "Media uses a transparent full-window stage over a dim backdrop."
         },
         {
           "name": "showCloseButton",
