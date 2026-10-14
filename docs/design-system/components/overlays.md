@@ -8,6 +8,20 @@ Runnable composition: [example](../../../examples/catalog/Examples.tsx).
 
 Generated from TypeScript exports; edit implementation props/JSDoc, then run `npm run docs:generate`. Native React attributes remain available in the online API catalog.
 
+## ContextAttachment (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/overlays/index.tsx)
+
+Removable draft context; the attachment owns the complete action hit area.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| label | yes | `string` |
+| icon | no | `ReactNode` |
+| removeLabel | yes | `string` |
+| removeActionId | yes | `string` |
+| onRemove | yes | `() => void` |
+
 ## Dialog (chatgpt-desktop-kit)
 
 [Implementation](../../../src/components/overlays/index.tsx)
@@ -33,6 +47,8 @@ Non-interactive file drop feedback; the Host owns drag events and attachment sco
 | --- | --- | --- |
 | label | yes | `string` |
 | surfaceId | no | `string \| undefined` |
+| variant | no | `"overlay" \| "boundary" \| undefined` |
+| active | no | `boolean \| undefined` |
 
 ## MenuButton (chatgpt-desktop-kit)
 

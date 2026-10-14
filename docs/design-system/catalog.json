@@ -31249,6 +31249,52 @@
       ]
     },
     {
+      "id": "chatgpt-desktop-kit:ContextAttachment",
+      "name": "ContextAttachment",
+      "importPath": "chatgpt-desktop-kit",
+      "family": "overlays",
+      "implementation": "src/components/overlays/index.tsx",
+      "description": "Removable draft context; the attachment owns the complete action hit area.",
+      "props": [
+        {
+          "name": "label",
+          "required": true,
+          "type": "string",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "icon",
+          "required": false,
+          "type": "ReactNode",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "removeLabel",
+          "required": true,
+          "type": "string",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "removeActionId",
+          "required": true,
+          "type": "string",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "onRemove",
+          "required": true,
+          "type": "() => void",
+          "native": false,
+          "description": ""
+        }
+      ],
+      "nativeProps": []
+    },
+    {
       "id": "chatgpt-desktop-kit:ConversationMessage",
       "name": "ConversationMessage",
       "importPath": "chatgpt-desktop-kit",
@@ -31909,6 +31955,20 @@
           "name": "surfaceId",
           "required": false,
           "type": "string | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "variant",
+          "required": false,
+          "type": "\"overlay\" | \"boundary\" | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "active",
+          "required": false,
+          "type": "boolean | undefined",
           "native": false,
           "description": ""
         }
