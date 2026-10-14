@@ -88,3 +88,5 @@
 .desktop-temporal-confirm{display:flex;gap:4px;margin-left:auto}
 
 .desktop-media-toolbar{display:flex;align-items:center;gap:2px;padding:4px;border-radius:var(--desktop-radius-overlay);background:var(--desktop-color-media-surface-translucent);color:var(--desktop-color-on-media);--desktop-color-text:var(--desktop-color-on-media);--desktop-color-text-muted:var(--desktop-color-media-text);--desktop-color-surface-hover:var(--desktop-color-media-hover);--desktop-color-surface-overlay:var(--desktop-color-media-surface);--desktop-color-panel-boundary:var(--desktop-color-media-border);box-shadow:var(--desktop-shadow-subtle)}
+
+:root:not(:has([data-desktop-input-modality="pointer"])) .desktop-app-dialog[data-variant=media] .desktop-app-dialog-close.desktop-button:focus-visible{background:var(--desktop-color-media-hover)}
