@@ -53,6 +53,7 @@ export const AppDialogContent = React.forwardRef<
   ref,
 ) {
   const translate = useTranslation();
+  const previousFocus = React.useRef<HTMLElement | null>(null);
   const childNodes = React.Children.toArray(children);
   const hasExplicitBody = childNodes.some(
     (child) => React.isValidElement(child) && child.type === AppDialogBody,
@@ -89,6 +90,23 @@ export const AppDialogContent = React.forwardRef<
         onPointerDownOutside={onPointerDownOutside}
         onInteractOutside={onInteractOutside}
         {...props}
+        onOpenAutoFocus={(event) => {
+          previousFocus.current =
+            document.activeElement instanceof HTMLElement ? document.activeElement : null;
+          props.onOpenAutoFocus?.(event);
+        }}
+        onCloseAutoFocus={(event) => {
+          props.onCloseAutoFocus?.(event);
+          const target = previousFocus.current;
+          if (
+            !event.defaultPrevented &&
+            target?.isConnected &&
+            !target.closest('[inert],[aria-hidden="true"]')
+          ) {
+            event.preventDefault();
+            target.focus();
+          }
+        }}
         onEscapeKeyDown={(event) => {
           props.onEscapeKeyDown?.(event);
           protectModalEscape(event);

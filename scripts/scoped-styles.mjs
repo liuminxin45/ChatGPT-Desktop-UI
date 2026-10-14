@@ -14,6 +14,11 @@ export function scopeStyles(css) {
     rule.selectors = rule.selectors.flatMap((selector) => {
       if (selector === ':root') return boundary;
       const pointerRoot = /^:root:has\(\[data-desktop-input-modality=["']?pointer["']?\]\)/;
+      const keyboardRoot = /^:root:not\(:has\(\[data-desktop-input-modality=["']?pointer["']?\]\)\)/;
+      if (keyboardRoot.test(selector))
+        return [
+          selector.replace(keyboardRoot, `${boundary}:not(:has([data-desktop-input-modality="pointer"])):not([data-desktop-input-modality="pointer"])`),
+        ];
       if (pointerRoot.test(selector))
         return [
           selector.replace(':root', boundary),

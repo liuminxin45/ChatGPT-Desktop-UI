@@ -1,5 +1,6 @@
 import { Children, createContext, isValidElement, useContext, useEffect, useState, type ReactElement, type ReactNode } from 'react';
 import * as Primitive from '@radix-ui/react-tooltip';
+import { flushSync } from 'react-dom';
 import { ToolVisibilityContext } from './surface-visibility';
 import { createDesktopPortal } from './scoped-surface';
 const TooltipPortal = createDesktopPortal(Primitive.Portal);
@@ -30,6 +31,19 @@ export function ActionTooltip({ label, children, side = 'bottom', disabled = fal
   const visible = useContext(ToolVisibilityContext);
   const [open, setOpen] = useState(false);
   useEffect(() => { if (!visible || suppressed) setOpen(false); }, [visible, suppressed]);
+  useEffect(() => {
+    if (!open || !visible || suppressed) return;
+    // Tooltip is descriptive, not an interaction layer. Remove its Radix layer
+    // before the original Escape reaches document-level overlay handlers.
+    // No redispatched key or forced parent close: Select/menu/child Dialog still
+    // owns dismissal, and standalone tooltips simply disappear.
+    const dismiss = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape' || event.defaultPrevented || event.isComposing || event.keyCode === 229) return;
+      flushSync(() => setOpen(false));
+    };
+    window.addEventListener('keydown', dismiss, true);
+    return () => window.removeEventListener('keydown', dismiss, true);
+  }, [open, visible, suppressed]);
   if (!label || nested) return children;
   return <TooltipBoundary.Provider value={true}>
     <Primitive.Provider delayDuration={300} skipDelayDuration={100}>
@@ -37,7 +51,9 @@ export function ActionTooltip({ label, children, side = 'bottom', disabled = fal
         <Primitive.Trigger asChild>
           {direct ? children : <span className="desktop-action-tooltip" tabIndex={disabled ? 0 : undefined}>{children}</span>}
         </Primitive.Trigger>
-        <TooltipPortal><Primitive.Content side={side} sideOffset={5} collisionPadding={8} className="desktop-tooltip">{label}</Primitive.Content></TooltipPortal>
+        <TooltipPortal><Primitive.Content onEscapeKeyDown={event => {
+          if (event.isComposing || event.keyCode === 229) event.preventDefault();
+        }} side={side} sideOffset={5} collisionPadding={8} className="desktop-tooltip">{label}</Primitive.Content></TooltipPortal>
       </Primitive.Root>
     </Primitive.Provider>
   </TooltipBoundary.Provider>;

@@ -20,7 +20,7 @@
 .kit-rail__footer{padding-top:8px}
 .kit-rail .kit-rail__item{position:relative;width:32px;height:32px;border-radius:var(--desktop-radius-navigation);color:var(--desktop-color-text-muted)}
 .kit-rail .kit-rail__item{display:inline-flex;align-items:center;justify-content:center;border:0;padding:0;background:transparent;text-decoration:none}
-.kit-rail .kit-rail__item:focus-visible{outline:2px solid var(--desktop-color-focus);outline-offset:2px}
+:root:not(:has([data-desktop-input-modality="pointer"])) .kit-rail .kit-rail__item:focus-visible{outline:none;background:var(--desktop-color-surface-hover)}
 .kit-rail>.desktop-internal-scroll{width:100%;scrollbar-gutter:auto;scrollbar-width:none}.kit-rail>.desktop-internal-scroll::-webkit-scrollbar{width:0}
 .kit-rail .kit-rail__item:hover:not(:disabled){background:var(--desktop-color-navigation-selected);color:var(--desktop-color-on-navigation-selected)}
 .kit-rail .kit-rail__item[aria-current=page]{background:var(--desktop-color-navigation-selected);color:var(--desktop-color-on-navigation-selected)}
@@ -57,7 +57,7 @@
 .kit-setting-row__control{max-width:280px;min-width:0}
 .kit-setting-row__control>.desktop-select{width:auto;min-width:112px}
 .kit-muted{color:var(--desktop-color-text-muted)}
-.kit-avatar:focus-visible,.kit-category:focus-visible,.kit-titlebar__menu:focus-visible{outline:2px solid var(--desktop-color-focus);outline-offset:-2px}
+:root:not(:has([data-desktop-input-modality="pointer"])) .kit-avatar:focus-visible,:root:not(:has([data-desktop-input-modality="pointer"])) .kit-category:focus-visible,:root:not(:has([data-desktop-input-modality="pointer"])) .kit-titlebar__menu:focus-visible{outline:none;background:var(--desktop-color-surface-hover)}
 @media(max-width:760px){.kit-sidebar{--desktop-sidebar-width:200px}.kit-settings-scroll{padding:32px 16px}.kit-setting-row{gap:12px}.kit-setting-row__control{max-width:160px}}
 
 .kit-sidebar{border-right:1px solid var(--desktop-color-panel-boundary)}
@@ -77,4 +77,4 @@
 html:root body .kit-sidebar-resizer{cursor:ew-resize!important}
 html:root:has(.kit-sidebar[data-resizing=true]) body,html:root:has(.kit-sidebar[data-resizing=true]) body *,html:root:has(.kit-sidebar[data-resizing=true]) body *::before,html:root:has(.kit-sidebar[data-resizing=true]) body *::after{cursor:ew-resize!important}
 .kit-sidebar-resizer:hover{background:var(--desktop-color-surface-hover)}
-.kit-sidebar-resizer:focus-visible{outline:2px solid var(--desktop-color-focus);outline-offset:-2px}
+:root:not(:has([data-desktop-input-modality="pointer"])) .kit-sidebar-resizer:focus-visible{outline:none;background:var(--desktop-color-surface-hover)}
