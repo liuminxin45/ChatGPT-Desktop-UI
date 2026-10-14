@@ -54,7 +54,11 @@ import {
   SettingRow,
   DesktopClientSurface,
   ClientSidebar,
+  ClientSidebarHeading,
+  ClientModeSwitcher,
+  ClientSidebarToolbar,
   ClientSidebarItem,
+  SidebarPanel,
   SidebarSection,
   DesktopMenu,
   SettingsGroup,
@@ -68,6 +72,7 @@ import {
 } from '../../src';
 
 export function Examples({ family }: { family: string }) {
+  const [workMode, setWorkMode] = useState('Projects');
   const [value, setValue] = useState('Release notes');
   const [selected, setSelected] = useState('design');
   const [checked, setChecked] = useState(true);
@@ -350,24 +355,58 @@ export function Examples({ family }: { family: string }) {
     return (
       <DesktopClientSurface>
         <div className="reference-client">
-          <ClientSidebar header={<span>Codex</span>}>
-            <SidebarSection
-              title="Projects"
-              open={section}
-              onOpenChange={setSection}
-              actionId="reference.projects.toggle"
+          <SidebarPanel>
+            <ClientSidebar
+              header={
+                <ClientModeSwitcher
+                  label={workMode}
+                  ariaLabel="Work destination"
+                  actionId="reference.work-mode.open"
+                  items={[
+                    {
+                      id: 'reference.work-mode.projects',
+                      label: 'Projects',
+                      checked: workMode === 'Projects',
+                      onSelect: () => setWorkMode('Projects'),
+                    },
+                    {
+                      id: 'reference.work-mode.tasks',
+                      label: 'Tasks',
+                      checked: workMode === 'Tasks',
+                      onSelect: () => setWorkMode('Tasks'),
+                    },
+                  ]}
+                />
+              }
             >
-              <ClientSidebarItem
-                actionId="reference.project.open"
-                label="Design system"
-                selected
-                icon={<House />}
-                count={12}
-                onClick={() => setSubmitted('Project opened')}
-              />
-            </SidebarSection>
-          </ClientSidebar>
+              <SidebarSection
+                title="Projects"
+                open={section}
+                onOpenChange={setSection}
+                actionId="reference.projects.toggle"
+              >
+                <ClientSidebarItem
+                  actionId="reference.project.open"
+                  label="Design system"
+                  selected
+                  icon={<House />}
+                  count={12}
+                  onClick={() => setSubmitted('Project opened')}
+                />
+              </SidebarSection>
+            </ClientSidebar>
+          </SidebarPanel>
           <SettingsGroup title="General">
+            <ClientSidebarToolbar
+              title={<ClientSidebarHeading as="span">Project actions</ClientSidebarHeading>}
+              actions={
+                <Button actionId="reference.sidebar.search" onClick={() => setSection((value) => !value)}>
+                  Search
+                </Button>
+              }
+            >
+              {section ? field : null}
+            </ClientSidebarToolbar>
             <SettingsField label="Project name">{field}</SettingsField>
             <SettingsDisclosure title="Advanced">
               <SettingsField label="Project">{select}</SettingsField>

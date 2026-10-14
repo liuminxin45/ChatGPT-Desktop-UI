@@ -1,5 +1,13 @@
 # Desktop design system
 
+Contextual navigation titles use `ClientSidebarHeading`, including titles nested
+inside mode selectors. It shares Settings sidebar emphasis and the client title
+size. A navigation-owned category appears once, in its sidebar; content toolbars
+retain commands, status and actual object names. `SettingsPage showTitle={false}`
+omits the visible category heading without changing the default Settings demo.
+Hosts supply an accessible content name when hiding that heading. Chat search
+expands below the retained title/action row using the shared sidebar toolbar slots.
+
 Button geometry is explicit: `layout="command"` is the compact centered command default. Single-target navigation/selection records use `layout="row"`, with left alignment, natural height and shared insets; place stacked title/metadata in one content group. Image pickers use `layout="tile"`, a square with contained media that fills the available preview rather than retaining tiny intrinsic dimensions. Do not override command height/padding to imitate records. `layout="surface"` carries native action, accessibility and instrumentation behavior without command geometry; reserve it for documented domain graphics such as schedule cells. Hosts own those graphics' grid boundaries, not ordinary control styles. Multi-action records still use static `RecordRow` and independent commands.
 
 Escape dismisses only the active overlay: an open Select, menu, Popover or nested Dialog closes before its parent editor. Respect consumed keyboard events and IME composition; never discard a draft because Escape cancelled composition. Dialog focus containment applies only to the top visible Dialog, and dismissal returns focus to its own trigger. Verify nested layers through the consumer's real CSS and portal pipeline.
@@ -154,8 +162,6 @@ The controlled `ClientComposer` separates work and chat input layouts. Work inpu
 
 Arrow cursors across the standalone desktop document are an explicit originating user preference. Hover/focus/disabled states still signal affordance. Respect a different target user's cursor preference rather than secretly imposing it on unrelated applications.
 
-The sidebar resize divider uses the horizontal `ew-resize` cursor on hover. During an active pointer resize the document retains that cursor, including outside the divider; release, cancellation, folding or unmount restores the ordinary cursor policy. The shared shell owns this exception; consumers must not override the document cursor rules.
-
 ## Light-theme boundaries and conversation geometry
 
 Light mode uses a cool pale window shell, near-white sidebar and white content. Selected navigation tiles stay pale gray with dark filled icons; dark mode retains white filled icons. Fine neutral outlines separate white overlays, grouped settings and composers. Avatar images have a subtle outline in light mode. Avoid decorative nested frames.
@@ -237,3 +243,7 @@ All client routes opt into `DesktopClientSurface`. Its overlays inherit the clie
 Settings compose `SettingsLayout`, `SettingsNavigation`, `SettingsPage`, `SettingsGroup`, `SettingsField` and `SettingsDisclosure`. The reference settings category sidebar is 336px (260px at compact widths), independently of the 372px general contextual sidebar. The body remains 728px, its page title 28/36px at 600 weight, and its groups use one 16px inset and 60px field rows. The setting sidebar measurement follows the supplied desktop Settings reference; it is not a measurement of unobserved destinations.
 
 `SettingsPage` forwards the real scroll-owner ref for navigation and deep links. `SettingsGroup` accepts Host identity and instrumentation attributes. `SettingsDisclosure` can preserve an initially expanded section with `defaultOpen` and a stable Host `actionId`. Long field labels wrap, and text/secret inputs share the same control-column baseline. Keep Host styles component-scoped; import the library styles once without a parallel Host design system.
+
+## Work destination selection and auxiliary row commands
+
+ClientModeSwitcher uses an 18/24px, 600-weight trigger and 16/24px, 600-weight choices. Other menus retain their existing density. ClientSidebarItem actions render beside the navigation button in a static RecordRow; auxiliary commands appear on hover, focus and while their menu is open. Blank record space never navigates. Dynamic VirtualList exposes apiRef.scrollToIndex for measured, gap-aware navigation without Host row-height arithmetic. Dialog forwards surface identity to its real portal content.
