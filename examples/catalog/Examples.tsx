@@ -54,7 +54,10 @@ import {
   SettingRow,
   DesktopClientSurface,
   ClientSidebar,
+  ClientSidebarHeading,
+  ClientSidebarToolbar,
   ClientSidebarItem,
+  SidebarPanel,
   SidebarSection,
   DesktopMenu,
   SettingsGroup,
@@ -350,24 +353,36 @@ export function Examples({ family }: { family: string }) {
     return (
       <DesktopClientSurface>
         <div className="reference-client">
-          <ClientSidebar header={<span>Codex</span>}>
-            <SidebarSection
-              title="Projects"
-              open={section}
-              onOpenChange={setSection}
-              actionId="reference.projects.toggle"
-            >
-              <ClientSidebarItem
-                actionId="reference.project.open"
-                label="Design system"
-                selected
-                icon={<House />}
-                count={12}
-                onClick={() => setSubmitted('Project opened')}
-              />
-            </SidebarSection>
-          </ClientSidebar>
+          <SidebarPanel>
+            <ClientSidebar header={<ClientSidebarHeading>Codex</ClientSidebarHeading>}>
+              <SidebarSection
+                title="Projects"
+                open={section}
+                onOpenChange={setSection}
+                actionId="reference.projects.toggle"
+              >
+                <ClientSidebarItem
+                  actionId="reference.project.open"
+                  label="Design system"
+                  selected
+                  icon={<House />}
+                  count={12}
+                  onClick={() => setSubmitted('Project opened')}
+                />
+              </SidebarSection>
+            </ClientSidebar>
+          </SidebarPanel>
           <SettingsGroup title="General">
+            <ClientSidebarToolbar
+              title="Project actions"
+              actions={
+                <Button actionId="reference.sidebar.search" onClick={() => setSection((value) => !value)}>
+                  Search
+                </Button>
+              }
+            >
+              {section ? field : null}
+            </ClientSidebarToolbar>
             <SettingsField label="Project name">{field}</SettingsField>
             <SettingsDisclosure title="Advanced">
               <SettingsField label="Project">{select}</SettingsField>

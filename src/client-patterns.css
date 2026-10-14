@@ -14,7 +14,12 @@
 .desktop-client .kit-rail__items{gap:8px}.desktop-client .kit-rail .kit-rail__item{width:36px;height:36px}
 .desktop-client .kit-sidebar{--desktop-sidebar-width:var(--desktop-size-client-sidebar);border-inline-end:1px solid var(--desktop-color-border);border-top-left-radius:14px;overflow:hidden}
 .desktop-client .kit-sidebar[hidden]{border-inline-end-width:0}
-.client-sidebar>header>h2{margin:0;font-size:var(--desktop-font-size-page-title);line-height:var(--desktop-line-height-heading);font-weight:var(--desktop-font-weight-emphasis)}
+.client-sidebar-heading{margin:0;min-width:0;padding-inline:4px;font-size:var(--desktop-font-size-toolbar);line-height:var(--desktop-line-height-heading);font-weight:var(--desktop-font-weight-emphasis);text-align:start;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.desktop-client .client-sidebar-heading{font-size:18px}
+.client-sidebar>header .desktop-button:has(.client-sidebar-heading){padding-inline:0;height:auto}
+.client-sidebar-toolbar{display:flex;flex-direction:column;flex:none;padding:8px 12px;gap:8px}
+.client-sidebar-toolbar__row{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:32px}
+.client-sidebar-toolbar__actions{display:flex;align-items:center;gap:2px;flex:none}
 .desktop-settings-form>.client-settings-group{margin-bottom:0}
 .desktop-client .kit-shell__main{border-top-left-radius:0}.desktop-client .kit-shell__body{padding-right:4px;padding-bottom:4px}
 .client-sidebar{height:100%;display:flex;flex-direction:column}.client-sidebar>header{display:flex;align-items:center;justify-content:space-between;height:48px;padding:8px 12px;flex:none}.client-sidebar-scroll{flex:1;min-height:0;padding:0 8px 20px}

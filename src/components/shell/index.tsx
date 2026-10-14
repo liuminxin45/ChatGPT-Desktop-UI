@@ -1,6 +1,7 @@
 import type { Icon } from '@phosphor-icons/react';
 import { CaretRight, MagnifyingGlass, PushPin } from '@phosphor-icons/react';
 import { classes } from '../classes';
+import { ClientSidebarHeading } from '../client/sidebar-heading';
 import { SidebarPanel, type SidebarResizeOptions } from './sidebar-panel';
 export { SidebarPanel, type SidebarResizeOptions } from './sidebar-panel';
 import * as Menu from '@radix-ui/react-dropdown-menu';
@@ -404,7 +405,11 @@ export function DesktopShell({
         <div className="kit-shell__navigation" hidden={!navigationVisible}>
           {navigation}
         </div>
-        <aside className="kit-sidebar" hidden={!sidebarVisible || !sidebar} {...(!sidebarVisible || !sidebar ? { inert: '' } : {})}>
+        <aside
+          className="kit-sidebar"
+          hidden={!sidebarVisible || !sidebar}
+          {...(!sidebarVisible || !sidebar ? { inert: '' } : {})}
+        >
           {sidebar}
         </aside>
         <main className="kit-shell__main">{children}</main>
@@ -472,7 +477,7 @@ export function SettingsNavigation({
   );
   return (
     <div className="kit-settings-nav">
-      <h2>{title}</h2>
+      <ClientSidebarHeading>{title}</ClientSidebarHeading>
       <div className="kit-settings-search">
         <MagnifyingGlass size={16} />
         <Input
@@ -518,12 +523,12 @@ export function SettingsNavigation({
 
 export const SettingsPage = forwardRef<
   HTMLDivElement,
-  Omit<import('react').HTMLAttributes<HTMLDivElement>, 'title'> & { title: ReactNode }
->(function SettingsPage({ title, children, className, ...props }, ref) {
+  Omit<import('react').HTMLAttributes<HTMLDivElement>, 'title'> & { title: ReactNode; showTitle?: boolean }
+>(function SettingsPage({ title, showTitle = true, children, className, ...props }, ref) {
   return (
     <InternalScrollArea ref={ref} className={classes('kit-settings-scroll', className)} {...props}>
       <div className="kit-settings-content">
-        <h1>{title}</h1>
+        {showTitle ? <h1>{title}</h1> : null}
         {children}
       </div>
     </InternalScrollArea>

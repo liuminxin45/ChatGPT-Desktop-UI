@@ -5,6 +5,8 @@ import { InternalScrollArea } from '../lists';
 import { Button, type ButtonProps } from '../actions';
 import { classes } from '../classes';
 import { ClientProfileContext, createDesktopPortal } from '../../scoped-surface';
+import { ClientSidebarHeading } from './sidebar-heading';
+export { ClientSidebarHeading } from './sidebar-heading';
 const MenuPortal = createDesktopPortal(Menu.Portal);
 
 export interface DesktopMenuItem {
@@ -116,6 +118,25 @@ export function DesktopClientSurface({ children }: { children: ReactNode }) {
     </ClientProfileContext.Provider>
   );
 }
+/** Title/actions stay in place while optional search content expands below them. */
+export function ClientSidebarToolbar({
+  title,
+  actions,
+  children,
+  className,
+  ...props
+}: Omit<HTMLAttributes<HTMLDivElement>, 'title'> & { title: ReactNode; actions?: ReactNode }) {
+  return (
+    <div {...props} className={classes('client-sidebar-toolbar', className)}>
+      <div className="client-sidebar-toolbar__row">
+        <ClientSidebarHeading>{title}</ClientSidebarHeading>
+        <div className="client-sidebar-toolbar__actions">{actions}</div>
+      </div>
+      {children}
+    </div>
+  );
+}
+
 export function ClientSidebar({
   header,
   children,
