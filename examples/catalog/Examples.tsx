@@ -23,6 +23,7 @@ import {
   MenuButton,
   Dialog,
   DropOverlay,
+  ContextAttachment,
   EmptyState,
   ErrorState,
   ToastNotice,
@@ -82,6 +83,7 @@ export function Examples({ family }: { family: string }) {
   const [section, setSection] = useState(true);
   const [submitted, setSubmitted] = useState('');
   const [dragPreview, setDragPreview] = useState(false);
+  const [contextAttached, setContextAttached] = useState(true);
   const field = (
     <Input aria-label="Project name" value={value} onChange={(event) => setValue(event.target.value)} />
   );
@@ -286,6 +288,18 @@ export function Examples({ family }: { family: string }) {
   if (family === 'layout')
     return (
       <Surface>
+        {contextAttached ? (
+          <ContextAttachment
+            label="Release reference"
+            removeLabel="Remove reference"
+            removeActionId="reference.context.remove"
+            onRemove={() => setContextAttached(false)}
+          />
+        ) : (
+          <Button actionId="reference.context.restore" onClick={() => setContextAttached(true)}>
+            Attach reference
+          </Button>
+        )}
         <MediaToolbar>
           <Button actionId="reference.media.reset" onClick={() => setSubmitted('Image view reset')}>
             Reset image view

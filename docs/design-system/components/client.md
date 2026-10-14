@@ -69,17 +69,6 @@ Title/actions stay in place while optional search content expands below them.
 | title | yes | `ReactNode` |
 | actions | no | `ReactNode` |
 
-## ClientSidebarToolbar (chatgpt-desktop-kit)
-
-[Implementation](../../../src/components/client/index.tsx)
-
-Title/actions stay in place while optional search content expands below them.
-
-| Prop | Required | Type |
-| --- | --- | --- |
-| title | yes | `ReactNode` |
-| actions | no | `ReactNode` |
-
 ## DesktopClientSurface (chatgpt-desktop-kit)
 
 [Implementation](../../../src/components/client/index.tsx)
