@@ -14,11 +14,11 @@
 .desktop-alert-dialog-header{flex-direction:column}
 /* Media overlay appearance is shared; the Host owns image geometry and commands. */
 .desktop-app-dialog-backdrop[data-variant=media]{background:color-mix(in srgb,var(--desktop-color-media-surface) 82%,transparent)}
-.desktop-app-dialog[data-variant=media]{inset:0;transform:none;width:100vw;max-width:none;height:100dvh;max-height:100dvh;border:0;border-radius:0;background:transparent;box-shadow:none;color:var(--desktop-color-on-media)}
+.desktop-app-dialog[data-variant=media]{inset:0;transform:none;width:auto;max-width:none;height:auto;max-height:none;border:0;border-radius:0;background:transparent;box-shadow:none;color:var(--desktop-color-on-media)}
 .desktop-app-dialog[data-variant=media]>.desktop-app-dialog-header{align-items:center;padding:12px 64px 12px 20px;min-height:64px;color:var(--desktop-color-media-text)}
 .desktop-app-dialog[data-variant=media]>.desktop-app-dialog-body{padding:24px;scrollbar-gutter:stable both-edges;overscroll-behavior:contain}
-.desktop-app-dialog[data-variant=media]>.desktop-app-dialog-close{color:var(--desktop-color-on-media);background:var(--desktop-color-media-surface-translucent);border-radius:var(--desktop-radius-control)}
-.desktop-app-dialog[data-variant=media]>.desktop-app-dialog-close:hover{background:var(--desktop-color-media-hover)}
+.desktop-app-dialog[data-variant=media] .desktop-app-dialog-close.desktop-button{color:var(--desktop-color-on-media);background:var(--desktop-color-media-surface-translucent);border-radius:var(--desktop-radius-control)}
+.desktop-app-dialog[data-variant=media] .desktop-app-dialog-close.desktop-button:hover{background:var(--desktop-color-media-hover)}
 .desktop-media-image{border:0;box-shadow:var(--desktop-shadow-subtle),var(--desktop-shadow-overlay)}
 .desktop-media-image[data-variant=thumbnail]{border-radius:var(--desktop-radius-control)}
 .desktop-media-image[data-variant=viewer]{border-radius:2px;box-shadow:0 8px 40px var(--desktop-color-media-surface-translucent)}
@@ -86,3 +86,5 @@
 .desktop-temporal-time>span{line-height:30px}
 .desktop-temporal-footer{display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin-top:12px;padding-top:8px;border-top:1px solid var(--desktop-color-border)}
 .desktop-temporal-confirm{display:flex;gap:4px;margin-left:auto}
+
+.desktop-media-toolbar{display:flex;align-items:center;gap:2px;padding:4px;border-radius:var(--desktop-radius-overlay);background:var(--desktop-color-media-surface-translucent);color:var(--desktop-color-on-media);--desktop-color-text:var(--desktop-color-on-media);--desktop-color-text-muted:var(--desktop-color-media-text);--desktop-color-surface-hover:var(--desktop-color-media-hover);--desktop-color-surface-overlay:var(--desktop-color-media-surface);--desktop-color-panel-boundary:var(--desktop-color-media-border);box-shadow:var(--desktop-shadow-subtle)}

@@ -40,6 +40,8 @@ import {
   WorkbenchPage,
   FloatingLauncher,
   FloatingPanel,
+  MediaImage,
+  MediaToolbar,
   InternalScrollArea,
   FixedVirtualList,
   UIStringsProvider,
@@ -279,6 +281,15 @@ export function Examples({ family }: { family: string }) {
   if (family === 'layout')
     return (
       <Surface>
+        <MediaToolbar>
+          <Button actionId="reference.media.reset" onClick={() => setSubmitted('Image view reset')}>
+            Reset image view
+          </Button>
+        </MediaToolbar>
+        <MediaImage
+          alt="Screenshot preview"
+          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='120'%3E%3Crect width='240' height='120' fill='white'/%3E%3Ctext x='20' y='66' fill='black'%3EScreenshot preview%3C/text%3E%3C/svg%3E"
+        />
         <Button actionId="reference.drop.preview" onClick={() => setDragPreview((v) => !v)}>
           Preview file drop
         </Button>

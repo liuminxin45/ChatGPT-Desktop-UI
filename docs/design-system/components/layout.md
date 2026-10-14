@@ -25,6 +25,15 @@ Complete, unmasked image pixels with a soft edge shadow. Host owns sizing and lo
 | --- | --- | --- |
 | variant | no | `"thumbnail" \| "viewer" \| "artwork" \| undefined` |
 
+## MediaToolbar (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/layout/media-image.tsx)
+
+Compact controls on a translucent media surface with readable media colors.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+
 ## MetadataList (chatgpt-desktop-kit)
 
 [Implementation](../../../src/components/layout/index.tsx)
