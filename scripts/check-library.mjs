@@ -28,7 +28,7 @@ const manifest = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'ut
 for (const file of fs.readdirSync(path.join(root, 'src/compat'))) {
   assert.ok(/\.tsx?$/.test(file), `Styles are forbidden in compatibility facades: ${file}`);
   const source = fs.readFileSync(path.join(root, 'src/compat', file), 'utf8');
-  assert.match(source, /export \* from '\.\.\/components\/radix\//);
+  assert.match(source, /export \* from '\.\.\/components\/(?:radix\/|temporal')/);
   assert.doesNotMatch(
     source,
     /className|style=|cva\(|function\s|forwardRef\s*\(/,

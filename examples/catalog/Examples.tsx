@@ -13,6 +13,7 @@ import {
   FieldRow,
   SettingsForm,
   MetadataList,
+  MediaImage,
   InputGroup,
   Textarea,
   Checkbox,
@@ -289,6 +290,12 @@ export function Examples({ family }: { family: string }) {
         </Button>
         {dragPreview ? (
           <div style={{ position: 'relative', height: 72 }}>
+            <MediaImage
+              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='80'%3E%3Crect width='120' height='80' rx='8' fill='%23aaa'/%3E%3C/svg%3E"
+              alt="Synthetic media preview"
+              width={120}
+              height={80}
+            />
             <DropOverlay label="Drop files to attach" surfaceId="reference.attachments.drop" />
           </div>
         ) : null}

@@ -21,12 +21,7 @@ export type CalendarProps = React.ComponentProps<typeof DayPicker> & {
 
 const CalendarActionContext = React.createContext('calendar');
 
-function CalendarCaption({
-  calendarMonth,
-  displayIndex,
-  children: _children,
-  ...props
-}: MonthCaptionProps) {
+function CalendarCaption({ calendarMonth, displayIndex, children: _children, ...props }: MonthCaptionProps) {
   const { goToMonth, dayPickerProps } = useDayPicker();
   const locale = useLocale();
   const t = useTranslation();
