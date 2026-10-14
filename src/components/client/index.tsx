@@ -281,13 +281,15 @@ export function SettingsField({
   label,
   description,
   children,
-}: {
+  className,
+  ...props
+}: Omit<HTMLAttributes<HTMLDivElement>, 'children'> & {
   label: ReactNode;
   description?: ReactNode;
   children: ReactNode;
 }) {
   return (
-    <div className="client-settings-field">
+    <div {...props} className={classes('client-settings-field', className)}>
       <div>
         <h3>{label}</h3>
         {description ? <p>{description}</p> : null}
@@ -300,26 +302,39 @@ export function SettingsDisclosure({
   title,
   children,
   defaultOpen = false,
+  open: controlledOpen,
+  onOpenChange,
   actionId = 'settings.advanced.toggle',
 }: {
   title: string;
   children: ReactNode;
   defaultOpen?: boolean;
+  /** Controlled expansion preserves retained content and supports deep links. */
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
   actionId?: string;
 }) {
-  const [open, setOpen] = useState(defaultOpen);
+  const [localOpen, setLocalOpen] = useState(defaultOpen);
+  const open = controlledOpen ?? localOpen;
+  const contentId = useId();
   return (
     <section className="client-settings-disclosure">
       <button
         type="button"
         aria-expanded={open}
+        aria-controls={contentId}
         data-desktop-action={actionId}
-        onClick={() => setOpen(!open)}
+        onClick={() => {
+          setLocalOpen(!open);
+          onOpenChange?.(!open);
+        }}
       >
         {title}
         <CaretRight size={14} />
       </button>
-      <div hidden={!open}>{children}</div>
+      <div id={contentId} hidden={!open}>
+        {children}
+      </div>
     </section>
   );
 }

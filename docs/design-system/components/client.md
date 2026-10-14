@@ -104,6 +104,8 @@ A host-owned action tree; no native commands or external transmission are inferr
 | title | yes | `string` |
 | children | yes | `ReactNode` |
 | defaultOpen | no | `boolean \| undefined` |
+| open | no | `boolean \| undefined` |
+| onOpenChange | no | `((open: boolean) => void) \| undefined` |
 | actionId | no | `string \| undefined` |
 
 ## SettingsField (chatgpt-desktop-kit)

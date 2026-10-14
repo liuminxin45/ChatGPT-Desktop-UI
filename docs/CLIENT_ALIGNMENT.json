@@ -68,5 +68,14 @@
     "scope": "AI text sweep, batched reveal and Markdown",
     "observedOn": "2026-10-10",
     "timing": "Requested adaptation; native timing unmeasured"
+  },
+  "settingsRefinement": {
+    "observedOn": "2026-10-14",
+    "reference": "User-supplied Appearance screenshot; private capture not redistributed",
+    "ordinaryRowMinimum": 44,
+    "cardInlineInset": 16,
+    "lightCardBackground": "main canvas",
+    "longRows": "natural content height",
+    "acceptance": "shared settings profile passed in both themes, 1920/1280/760 widths and 125% browser emulation; consumer acceptance recorded separately"
   }
 }

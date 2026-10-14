@@ -52,14 +52,14 @@ This specification combines measured screenshot patterns with an existing deskto
 | Window shell | #f0f3f9 | #202123 | `--desktop-color-shell` |
 | Contextual sidebar | #fafbfd | #1c1d1e | `--desktop-color-sidebar` |
 | Main canvas | #ffffff | #181818 | `--desktop-color-background` |
-| Grouped settings | #fafbfd | #232323 | `--desktop-color-surface` |
+| Grouped settings | Same as main canvas | #232323 | `--desktop-color-background` in light; `--desktop-color-surface` in dark |
 | Input | #ededed | #2a2a2a | `--desktop-color-surface-muted` |
 | Composer | #ffffff | #2a2a2a | `--desktop-color-composer` |
 | Floating menu | #ffffff | #2b2b2b | `--desktop-color-surface-overlay` |
 | Hover | #f0f1f3 | #333333 | `--desktop-color-surface-hover` |
 | Selected rail | #e4e7ec | #303134 | `--desktop-color-navigation-selected` |
 
-Use tokens in application CSS, not the literals from this table. Main canvas, sidebar, groups and floats have distinct surfaces. Neutral grays carry hierarchy; blue carries unread/send states; danger remains available for business errors. Do not recolor errors blue merely to match unread dots.
+Use tokens in application CSS, not the literals from this table. In light mode, grouped settings share the main canvas color and use fine borders and dividers. Sidebar and floating surfaces retain their own roles. Neutral grays carry hierarchy; blue carries unread/send states; danger remains available for business errors. Do not recolor errors blue merely to match unread dots.
 
 Idle buttons and dropdown triggers have no decorative border or fill. The dropdown is text with a small down chevron. Hover introduces a compact filled target; the opened menu has a rounded surface and subtle shadow. Inputs have a light surface rather than a surrounding box. Text entry uses neutral inset focus or a subtly filled composer, without a blue outer ring. Preserve visible keyboard focus, table boundaries, actual drag targets and error state boundaries. “Boundary-free” does not mean invisible states.
 
@@ -69,7 +69,7 @@ Menu items use the shared hover fill for pointer highlight and keyboard focus, i
 
 ### Versioned client profile
 
-The Demo recreates Windows ChatGPT **26.1002.7124.0**, inspected on 2026-10-09. `DesktopClientSurface` opts into the measured 44px title bar, 52px rail, 36px tile, 372px sidebar, 728px Settings column and 28/36px bold Settings heading. Its body is 14/20px; compact setting labels are 13/20px bold and descriptions 12/16px regular. Sidebar chat rows are 31px. Settings groups use a 16px rounded surface, internal dividers and 52px between groups. Menus use a 16px radius, 29px rows and 16px submenu arrows; the native application menu uses a smaller corner radius.
+The Demo recreates Windows ChatGPT **26.1002.7124.0**, inspected on 2026-10-09. `DesktopClientSurface` opts into the measured 44px title bar, 52px rail, 36px tile, 372px sidebar, 728px Settings column and 28/36px bold Settings heading. Its body is 14/20px; compact setting labels are 13/20px bold and descriptions 12/16px regular. Sidebar chat rows are 31px. Settings groups use a 16px rounded boundary, 16px horizontal inset, ordinary 44px minimum rows with 8px vertical padding, internal dividers and 52px between groups. Long descriptions and wrapped controls increase row height naturally. Compact dropdowns use a transparent pill with a fine neutral border. Menus use a 16px radius, 29px rows and 16px submenu arrows; the native application menu uses a smaller corner radius.
 
 These values belong to the versioned client profile. Embedded Tools inside that profile inherit it; portable Tool Hosts keep their separate regular typography. Portable defaults below remain available for existing products. A browser recreation must follow the observed client structure; do not invent dashboard cards, explanatory badges or alternate workflows. Keep private content synthetic. Record an observed package version and an annotated tag for every alignment release; never infer it from a publication date. See [CLIENT_ALIGNMENT.json](CLIENT_ALIGNMENT.json).
 
@@ -132,7 +132,7 @@ Text controls use a 20px line box with descender clearance; never clip a selecte
 
 Contextual sidebars transition width and opacity on both expansion and collapse, retaining their content throughout. Collapsed panels become inert immediately and leave layout after the shared motion interval; reduced motion disables the transition. Resize gestures update geometry immediately. Persisted widths use shared sidebar width tokens so folding still reaches zero width. Contextual sidebar headings use the same semantic emphasis and 18px title size as Settings navigation.
 
-`SettingsCategory.group` provides optional named category sections. Settings sections use a distinct semantic surface and neutral internal row dividers in both themes. Menus use real 16px chevrons rather than a tiny text arrow.
+`SettingsCategory.group` provides optional named category sections. Settings sections share the page background in light mode and retain their semantic surface in dark mode, with neutral borders and internal row dividers. Menus use real 16px chevrons rather than a tiny text arrow.
 
 ## Layout choice
 
@@ -248,7 +248,7 @@ RecordRow owns record padding. Use density="compact" for dense groups and separa
 
 All client routes opt into `DesktopClientSurface`. Its overlays inherit the client profile after entering a portal. Native Tools inside that profile retain semantic setting-label emphasis; portable Tool Hosts keep their regular typography policy. Hosts must not flatten shared weights with document-wide overrides.
 
-Settings compose `SettingsLayout`, `SettingsNavigation`, `SettingsPage`, `SettingsGroup`, `SettingsField` and `SettingsDisclosure`. The reference settings category sidebar is 336px (260px at compact widths), independently of the 372px general contextual sidebar. The body remains 728px, its page title 28/36px at 600 weight, and its groups use one 16px inset and 60px field rows. The setting sidebar measurement follows the supplied desktop Settings reference; it is not a measurement of unobserved destinations.
+Settings compose `SettingsLayout`, `SettingsNavigation`, `SettingsPage`, `SettingsGroup`, `SettingsField` and `SettingsDisclosure`. The reference settings category sidebar is 336px (260px at compact widths), independently of the 372px general contextual sidebar. The body remains 728px, its page title 28/36px at 600 weight, and its groups use one 16px inset and 44px minimum ordinary field rows; long content grows naturally. The setting sidebar measurement follows the supplied desktop Settings reference; it is not a measurement of unobserved destinations.
 
 `SettingsPage` forwards the real scroll-owner ref for navigation and deep links. `SettingsGroup` accepts Host identity and instrumentation attributes. `SettingsDisclosure` can preserve an initially expanded section with `defaultOpen` and a stable Host `actionId`. Long field labels wrap, and text/secret inputs share the same control-column baseline. Keep Host styles component-scoped; import the library styles once without a parallel Host design system.
 
@@ -265,3 +265,7 @@ ClientModeSwitcher uses an 18/24px, 600-weight trigger and 16/24px, 600-weight c
 ## Draft context and drop boundaries
 
 ContextAttachment contains its removal button and tooltip trigger within the attachment geometry. Hosts supply labels, action identity and removal state; do not constrain its height or override the action size. DropOverlay variant="boundary" marks the visible Host drop surface with a moving dashed perimeter. active strengthens the boundary; reduced motion is static. The decoration never owns pointer input or expands acceptance beyond the Host target.
+
+## Settings reference refinement, 2026-10-14
+
+The user-supplied Appearance capture establishes same-color card/page backgrounds in light mode and approximately 44px ordinary rows. Keep the 728px column, shared section spacing and user-controlled sidebar widths. Hosts compose vertical SettingsGroup sections, without nested decorative frames or section-switching tabs. Controlled SettingsDisclosure supports deep links while retaining mounted drafts and list state. Reference captures are private and are not redistributed.
