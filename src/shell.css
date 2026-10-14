@@ -1,9 +1,9 @@
-.kit-shell{display:flex;flex-direction:column;width:100%;height:100%;background:var(--desktop-color-shell)}
+.kit-shell{display:flex;flex-direction:column;width:100%;height:100%;min-height:0;overflow:hidden;background:var(--desktop-background-shell,var(--desktop-color-shell))}
 .kit-titlebar{height:40px;flex:none;display:flex;align-items:center;justify-content:space-between;padding-inline:6px;background:var(--desktop-color-shell);-webkit-app-region:drag}
 .kit-titlebar__actions,.kit-titlebar__trailing{display:flex;align-items:center;gap:2px;-webkit-app-region:no-drag}
 .kit-titlebar__actions{min-width:0}.kit-titlebar__trailing{margin-left:auto}
 .kit-titlebar:has(.kit-window-controls){padding-right:0}
-.kit-titlebar .kit-titlebar__icon.desktop-button{width:28px;height:28px;padding:0}
+.kit-titlebar .kit-titlebar__icon.desktop-button{width:28px;min-width:28px;max-width:28px;height:28px;padding:0}
 .kit-titlebar .kit-titlebar__menu.desktop-button{height:28px}
 .kit-window-controls{display:flex;align-items:stretch;margin-left:8px;-webkit-app-region:no-drag}.kit-window-controls>.desktop-action-tooltip>.desktop-button,.kit-window-controls>.desktop-button{width:46px;min-width:46px;height:40px;padding:0;border-radius:0;color:var(--desktop-color-text-subtle)}
 .kit-window-controls .kit-window-close:hover:not(:disabled){background:var(--desktop-color-danger);color:var(--desktop-color-on-danger)}
@@ -14,15 +14,21 @@
 .kit-titlebar__menu{border:0;border-radius:var(--desktop-radius-control);padding:5px 10px;background:transparent;color:var(--desktop-color-text-muted);font:inherit;font-size:var(--desktop-font-size-supporting)}
 .kit-titlebar__menu:hover,.kit-titlebar__menu[data-state=open]{background:var(--desktop-color-surface-hover);color:var(--desktop-color-text)}
 .kit-shell__body{display:flex;flex:1;min-height:0;min-width:0}
+.kit-shell__workspace{display:flex;flex:1;min-width:0;min-height:0;overflow:hidden;background:var(--desktop-color-background)}
 .kit-shell__navigation{display:flex;flex:none}.kit-shell__navigation[hidden]{display:none}.kit-navigation-menu{min-width:210px}.kit-navigation-menu__row{display:flex;align-items:center;gap:4px}.kit-navigation-menu__destination{flex:1}.kit-navigation-menu__pin{flex:none;width:30px;height:30px;justify-content:center;padding:0!important}.kit-navigation-menu__pin[data-state=unchecked]{color:var(--desktop-color-text-muted)}
 .kit-rail{width:48px;flex:none;display:flex;flex-direction:column;align-items:center;padding-block:8px;background:var(--desktop-color-shell)}
 .kit-rail__items{display:flex;flex:1;min-height:0;flex-direction:column;align-items:center;gap:8px;overflow:auto;scrollbar-width:none}
 .kit-rail__footer{padding-top:8px}
 .kit-rail .kit-rail__item{position:relative;width:32px;height:32px;border-radius:var(--desktop-radius-navigation);color:var(--desktop-color-text-muted)}
 .kit-rail .kit-rail__item{display:inline-flex;align-items:center;justify-content:center;border:0;padding:0;background:transparent;text-decoration:none}
+.kit-rail .kit-rail__item>svg{width:20px;height:20px;flex:none}
+.kit-rail .kit-rail__item:is(:disabled,[aria-disabled=true]){opacity:.55;cursor:default}
+.kit-rail__items>.desktop-action-tooltip{flex:none}
+.kit-window-controls>.desktop-action-tooltip>.desktop-icon-control,.kit-window-controls>.desktop-icon-control{width:46px;min-width:46px;height:40px;padding:0;border-radius:0;color:var(--desktop-color-text-subtle)}
+.kit-window-controls .desktop-icon-control>svg{width:12px;height:12px}
 :root:not(:has([data-desktop-input-modality="pointer"])) .kit-rail .kit-rail__item:focus-visible{outline:none;background:var(--desktop-color-surface-hover)}
 .kit-rail>.desktop-internal-scroll{width:100%;scrollbar-gutter:auto;scrollbar-width:none}.kit-rail>.desktop-internal-scroll::-webkit-scrollbar{width:0}
-.kit-rail .kit-rail__item:hover:not(:disabled){background:var(--desktop-color-navigation-selected);color:var(--desktop-color-on-navigation-selected)}
+.kit-rail .kit-rail__item:hover:not(:disabled):not([aria-disabled=true]){background:var(--desktop-color-navigation-selected);color:var(--desktop-color-on-navigation-selected)}
 .kit-rail .kit-rail__item[aria-current=page]{background:var(--desktop-color-navigation-selected);color:var(--desktop-color-on-navigation-selected)}
 .kit-unread{position:absolute;width:8px;height:8px;border-radius:50%;top:3px;right:3px;background:var(--desktop-color-unread)}
 .kit-avatar{width:32px;height:32px;display:grid;place-items:center;padding:3px;border:0;border-radius:var(--desktop-radius-navigation);background:transparent;color:var(--desktop-color-text-muted)}

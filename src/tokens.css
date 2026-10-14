@@ -52,8 +52,8 @@
 
 
   /* Desktop shell hierarchy; all consumers inherit these semantic surfaces. */
-  --desktop-color-shell: #f9f9f9;
-  --desktop-color-sidebar: #f9f9f9;
+  --desktop-color-shell: #f0f3f9;
+  --desktop-color-sidebar: #ffffff;
   --desktop-color-navigation-selected: #e9e9e9;
   --desktop-color-on-navigation-selected: #202123;
   --desktop-color-unread: #387cf4;

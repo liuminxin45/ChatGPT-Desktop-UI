@@ -50,7 +50,7 @@ This specification combines measured screenshot patterns with an existing deskto
 | Role | Light | Dark | Token |
 | --- | --- | --- | --- |
 | Window shell | #f0f3f9 | #202123 | `--desktop-color-shell` |
-| Contextual sidebar | #fafbfd | #1c1d1e | `--desktop-color-sidebar` |
+| Contextual sidebar | #ffffff | #1c1d1e | `--desktop-color-sidebar` |
 | Main canvas | #ffffff | #181818 | `--desktop-color-background` |
 | Grouped settings | Same as main canvas | #232323 | `--desktop-color-background` in light; `--desktop-color-surface` in dark |
 | Input | #ededed | #2a2a2a | `--desktop-color-surface-muted` |
@@ -68,6 +68,10 @@ Menu items use the shared hover fill for pointer highlight and keyboard focus, i
 ## Geometry
 
 ### Versioned client profile
+
+The window-shell correction measured on 2026-10-14 uses one continuous shell behind the title bar and rail. The light shell is #f0f3f9; the dark client profile uses a reproducible blue-gray gradient (top-left #1b202d, mid-rail #1a2033, far-right #1e2023). It is a CSS adaptation of the supplied capture, not an assertion about native material behavior or cross-monitor color differences. Title bar and rail are transparent within the shell. The contextual sidebar is white in light mode and #1a1b1d in this dark profile; the main canvas stays white/#181818.
+
+`DesktopShell` owns one workspace clipping surface around both contextual sidebar and content: 14px corners, a subtle outside boundary and 4px shell insets at the right and bottom. The profile keeps a 44px title bar, with its actions in the upper 36px, a 52px rail and 36px navigation targets starting 8px below the work area top. Collapsing a sidebar or hiding the rail retains the workspace corners and mounted content. Hosts compose `TitleBar.actions`, `NavigationRail.children`, `NavigationRailItem` (including `asChild` router links) and `WindowControls`; they do not reconstruct the shell or add a second rail inset. Window callbacks, stable action IDs, native drag regions and menu editing stay Host-owned.
 
 The Demo recreates Windows ChatGPT **26.1002.7124.0**, inspected on 2026-10-09. `DesktopClientSurface` opts into the measured 44px title bar, 52px rail, 36px tile, 372px sidebar, 728px Settings column and 28/36px bold Settings heading. Its body is 14/20px; compact setting labels are 13/20px bold and descriptions 12/16px regular. Sidebar chat rows are 31px. Settings groups use a 16px rounded boundary, 16px horizontal inset, ordinary 44px minimum rows with 8px vertical padding, internal dividers and 52px between groups. Long descriptions and wrapped controls increase row height naturally. Compact dropdowns use a transparent pill with a fine neutral border. Menus use a 16px radius, 29px rows and 16px submenu arrows; the native application menu uses a smaller corner radius.
 

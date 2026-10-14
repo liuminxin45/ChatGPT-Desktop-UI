@@ -33,7 +33,6 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | navigationVisible | no | `boolean \| undefined` |
 | sidebar | no | `ReactNode` |
 | sidebarVisible | no | `boolean \| undefined` |
-| children | yes | `ReactNode` |
 
 ## NavigationRail (chatgpt-desktop-kit)
 
@@ -41,9 +40,9 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 | Prop | Required | Type |
 | --- | --- | --- |
-| items | yes | `NavigationItem[]` |
-| selected | yes | `string` |
-| onSelect | yes | `(id: string) => void` |
+| items | no | `NavigationItem[] \| undefined` |
+| selected | no | `string \| undefined` |
+| onSelect | no | `((id: string) => void) \| undefined` |
 | footer | no | `ReactNode` |
 | pinnedIds | no | `readonly string[] \| undefined` |
 | onPinnedChange | no | `((ids: string[]) => void) \| undefined` |
@@ -52,6 +51,21 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | moreLabel | no | `string \| undefined` |
 | pinLabel | no | `string \| undefined` |
 | unpinLabel | no | `string \| undefined` |
+
+## NavigationRailItem (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/shell/navigation-rail-item.tsx)
+
+One semantic link or command, with a name-only tooltip and shared navigation feedback.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| asChild | no | `boolean \| undefined` |
+| label | yes | `string` |
+| actionId | no | `string \| undefined` |
+| selected | no | `boolean \| undefined` |
+| unread | no | `boolean \| undefined` |
+| children | yes | `ReactNode` |
 
 ## SettingRow (chatgpt-desktop-kit)
 
@@ -126,6 +140,7 @@ The host provides native/history actions. No native window IPC or persistence is
 
 | Prop | Required | Type |
 | --- | --- | --- |
+| actions | no | `ReactNode` |
 | onBack | no | `(() => void) \| undefined` |
 | onForward | no | `(() => void) \| undefined` |
 | onToggleSidebar | no | `(() => void) \| undefined` |
@@ -146,3 +161,18 @@ The host provides native/history actions. No native window IPC or persistence is
 | label | yes | `string` |
 | children | yes | `ReactNode` |
 | side | no | `"top" \| "right" \| "bottom" \| "left" \| undefined` |
+
+## WindowControls (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/shell/window-controls.tsx)
+
+The shared glyphs and targets; native operations and their outcomes stay in the Host.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| maximized | no | `boolean \| undefined` |
+| onMinimize | no | `(() => void) \| undefined` |
+| onMaximize | no | `(() => void) \| undefined` |
+| onClose | no | `(() => void) \| undefined` |
+| actionIds | no | `{ minimize: string; maximize: string; close: string; } \| undefined` |
+| labels | no | `{ minimize: string; maximize: string; restore: string; close: string; } \| undefined` |

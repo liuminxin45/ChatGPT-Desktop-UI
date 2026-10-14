@@ -107,6 +107,7 @@
     "prepublishOnly": "npm run check && npm run test:package",
     "test:unit": "vitest run --dir src/components --maxWorkers=1",
     "test:visual": "node scripts/verify-visual.mjs",
+    "test:window-shell": "node scripts/verify-window-shell.mjs",
     "test:visual:update": "node scripts/verify-visual.mjs --update",
     "test:settings-profile": "node scripts/verify-settings-profile.mjs",
     "test:action-layout": "node scripts/verify-action-layout.mjs",

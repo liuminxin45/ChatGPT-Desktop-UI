@@ -55,6 +55,8 @@ The compatibility DropdownMenuItem accepts `icon` and `actionId`, always display
 
 ## Host behavior
 
+Use `DesktopShell` for the retained native document frame. Its workspace wraps either its optional sidebar or a Host's nested `SettingsLayout`; a second workspace radius or rail padding in the Host is unnecessary. `TitleBar.actions` accepts a Host action tree while retaining shared placement; standard header attributes preserve native drag/double-click and feature markers. `NavigationRail.children` accepts `NavigationRailItem` commands and `asChild` links. The actual target retains the Host's action/feature/surface markers, accessible name, modified-click semantics and selected/unread feedback. `WindowControls` takes native callbacks, localized labels and Host action IDs; missing callbacks disable the corresponding commands. These changes add no persistence, telemetry or IPC.
+
 `TitleBar` presents callbacks and capability flags. The Host owns history boundaries, sidebar availability, native editing, tray behavior, maximize and exit saving. Reuse one action definition for custom and native menus; disable unavailable actions.
 
 `DesktopShell` hides contextual sidebars with CSS and preserves their React subtree. Hosts retain selections, drafts and module-specific sidebar preferences. Avatar images come from validated Host identity; absent or failed images use a neutral fallback. Saving configuration does not establish authentication.
