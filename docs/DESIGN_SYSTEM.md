@@ -1,5 +1,13 @@
 # Desktop design system
 
+Contextual navigation titles use `ClientSidebarHeading`, including titles nested
+inside mode selectors. It shares Settings sidebar emphasis and the client title
+size. A navigation-owned category appears once, in its sidebar; content toolbars
+retain commands, status and actual object names. `SettingsPage showTitle={false}`
+omits the visible category heading without changing the default Settings demo.
+Hosts supply an accessible content name when hiding that heading. Chat search
+expands below the retained title/action row using the shared sidebar toolbar slots.
+
 Button geometry is explicit: `layout="command"` is the compact centered command default. Single-target navigation/selection records use `layout="row"`, with left alignment, natural height and shared insets; place stacked title/metadata in one content group. Image pickers use `layout="tile"`, a square with contained media that fills the available preview rather than retaining tiny intrinsic dimensions. Do not override command height/padding to imitate records. `layout="surface"` carries native action, accessibility and instrumentation behavior without command geometry; reserve it for documented domain graphics such as schedule cells. Hosts own those graphics' grid boundaries, not ordinary control styles. Multi-action records still use static `RecordRow` and independent commands.
 
 Escape dismisses only the active overlay: an open Select, menu, Popover or nested Dialog closes before its parent editor. Respect consumed keyboard events and IME composition; never discard a draft because Escape cancelled composition. Dialog focus containment applies only to the top visible Dialog, and dismissal returns focus to its own trigger. Verify nested layers through the consumer's real CSS and portal pipeline.
