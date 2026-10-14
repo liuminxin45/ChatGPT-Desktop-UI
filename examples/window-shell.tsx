@@ -10,7 +10,7 @@ import {
   NavigationRail,
   NavigationRailItem,
   ClientSidebar,
-  ClientSidebarHeading,
+  ClientModeSwitcher,
   ClientSidebarItem,
   SettingsLayout,
   Button,
@@ -34,7 +34,16 @@ function Fixture() {
     [calls, setCalls] = useState(0);
   Object.assign(window, { shellFixture: { setSidebar, setNavigation, setNested } });
   const side = (
-    <ClientSidebar header={<ClientSidebarHeading>Projects</ClientSidebarHeading>}>
+    <ClientSidebar
+      header={
+        <ClientModeSwitcher
+          label="Projects"
+          ariaLabel="Project destinations"
+          actionId="fixture.project.mode"
+          items={[{ id: 'projects', label: 'Projects', onSelect: () => {} }]}
+        />
+      }
+    >
       <Input aria-label="Sidebar draft" defaultValue="Retained sidebar query" />
       <ClientSidebarItem
         label="Project with a long descriptive name"
@@ -113,7 +122,7 @@ function Fixture() {
           }
         >
           <NavigationRailItem label="Home" actionId="fixture.home.open" selected unread>
-            <House />
+            <House weight="fill" />
           </NavigationRailItem>
           <NavigationRailItem label="Projects" actionId="fixture.projects.open" asChild>
             <a href="#projects">

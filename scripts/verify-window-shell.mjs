@@ -96,6 +96,9 @@ try {
               canvas: style('.kit-shell__main').backgroundColor,
               font: style('[aria-label="Editor draft"]').fontSize,
               weight: style('[aria-label="Editor draft"]').fontWeight,
+              selectedForeground: style('.kit-rail__item[aria-current=page]').color,
+              unreadFill: style('.kit-unread').backgroundColor,
+              closeForeground: style('.kit-window-close').color,
               overflow: document.documentElement.scrollWidth > innerWidth,
             };
           });
@@ -114,6 +117,28 @@ try {
           assert.equal(metrics.font, '14px');
           assert.equal(metrics.weight, '400');
           assert.equal(metrics.overflow, false);
+          assert.equal(
+            metrics.selectedForeground,
+            theme === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(26, 28, 31)',
+          );
+          if (theme === 'dark') {
+            assert.equal(metrics.unreadFill, 'rgb(58, 131, 247)');
+            assert.equal(metrics.closeForeground, 'rgb(255, 255, 255)');
+          }
+          if (visible) {
+            const heading = await page.locator('.client-sidebar-heading').evaluate((el) => ({
+              start:
+                el.getBoundingClientRect().left +
+                parseFloat(getComputedStyle(el).paddingLeft) *
+                  parseFloat(document.documentElement.style.zoom || '1') -
+                el.closest('.client-sidebar').getBoundingClientRect().left,
+              size: getComputedStyle(el).fontSize,
+              weight: getComputedStyle(el).fontWeight,
+            }));
+            near(heading.start, 16 * zoom, 'mode heading text inset');
+            assert.equal(heading.size, '18px');
+            assert.equal(heading.weight, '600');
+          }
           assert.equal(
             await page.evaluate(
               () => window.editorBefore === document.querySelector('[aria-label="Editor draft"]'),

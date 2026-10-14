@@ -26,7 +26,7 @@ export function ClientModeSwitcher({
       className="client-mode-menu"
       trigger={
         <Button actionId={actionId} aria-label={ariaLabel} className="client-mode-switcher">
-          {label}
+          <ClientSidebarHeading as="span">{label}</ClientSidebarHeading>
           <CaretDown size={14} aria-hidden="true" />
         </Button>
       }
