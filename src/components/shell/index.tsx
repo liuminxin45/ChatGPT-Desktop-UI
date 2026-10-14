@@ -1,8 +1,21 @@
 import type { Icon } from '@phosphor-icons/react';
 import { CaretRight, MagnifyingGlass, PushPin } from '@phosphor-icons/react';
 import { classes } from '../classes';
+import { ClientSidebarHeading } from '../client/sidebar-heading';
+import { SidebarPanel, type SidebarResizeOptions } from './sidebar-panel';
+export { SidebarPanel, type SidebarResizeOptions } from './sidebar-panel';
 import * as Menu from '@radix-ui/react-dropdown-menu';
-import { forwardRef, useEffect, useState, type ReactElement, type ReactNode } from 'react';
+import {
+  forwardRef,
+  useEffect,
+  useState,
+  type HTMLAttributes,
+  type ReactElement,
+  type ReactNode,
+} from 'react';
+import { NavigationRailItem } from './navigation-rail-item';
+export { NavigationRailItem, type NavigationRailItemProps } from './navigation-rail-item';
+export { WindowControls, type WindowControlsProps } from './window-controls';
 import { ActionTooltip } from '../../action-tooltip';
 import { IconButton, Input, InternalScrollArea } from '../../controls';
 import {
@@ -44,7 +57,9 @@ export interface ShellMenu {
   label: string;
   actions: ShellAction[];
 }
-export interface TitleBarProps {
+export interface TitleBarProps extends HTMLAttributes<HTMLElement> {
+  /** Host action trees retain their commands, stable IDs and edit-target ownership. */
+  actions?: ReactNode;
   onBack?: () => void;
   onForward?: () => void;
   onToggleSidebar?: () => void;
@@ -65,65 +80,79 @@ export function TitleBar({
   canForward = false,
   canToggleSidebar = false,
   menus = [],
+  actions,
   trailing,
   windowControls,
+  className,
   labels = { back: 'Back', forward: 'Forward', sidebar: 'Toggle page sidebar' },
+  ...props
 }: TitleBarProps) {
   return (
-    <header className="kit-titlebar" data-desktop-feature="shell" data-desktop-surface="titlebar">
+    <header
+      data-desktop-feature="shell"
+      data-desktop-surface="titlebar"
+      {...props}
+      className={classes('kit-titlebar', className)}
+    >
       <div className="kit-titlebar__actions">
-        <Tooltip label={labels.back} side="bottom">
-          <IconButton
-            actionId="navigation.back"
-            aria-label={labels.back}
-            disabled={!canBack || !onBack}
-            onClick={onBack}
-          >
-            <ArrowLeft size={16} />
-          </IconButton>
-        </Tooltip>
-        <Tooltip label={labels.forward} side="bottom">
-          <IconButton
-            actionId="navigation.forward"
-            aria-label={labels.forward}
-            disabled={!canForward || !onForward}
-            onClick={onForward}
-          >
-            <ArrowRight size={16} />
-          </IconButton>
-        </Tooltip>
-        <Tooltip label={labels.sidebar} side="bottom">
-          <IconButton
-            actionId="navigation.sidebar.toggle"
-            aria-label={labels.sidebar}
-            disabled={!canToggleSidebar || !onToggleSidebar}
-            onClick={onToggleSidebar}
-          >
-            <SidebarSimple size={16} />
-          </IconButton>
-        </Tooltip>
-        {menus.map((menu) => (
-          <Menu.Root key={menu.id}>
-            <Menu.Trigger data-desktop-action={`menu.${menu.id}.open`} className="kit-titlebar__menu">
-              {menu.label}
-            </Menu.Trigger>
-            <Menu.Portal>
-              <Menu.Content className="desktop-menu" sideOffset={5} collisionPadding={8}>
-                {menu.actions.map((action) => (
-                  <Menu.Item
-                    key={action.id}
-                    className="desktop-menu-item"
-                    data-desktop-action={action.id}
-                    disabled={action.disabled || !action.onSelect}
-                    onSelect={action.onSelect}
-                  >
-                    {action.label}
-                  </Menu.Item>
-                ))}
-              </Menu.Content>
-            </Menu.Portal>
-          </Menu.Root>
-        ))}
+        {actions !== undefined ? (
+          actions
+        ) : (
+          <>
+            <Tooltip label={labels.back} side="bottom">
+              <IconButton
+                actionId="navigation.back"
+                aria-label={labels.back}
+                disabled={!canBack || !onBack}
+                onClick={onBack}
+              >
+                <ArrowLeft size={16} />
+              </IconButton>
+            </Tooltip>
+            <Tooltip label={labels.forward} side="bottom">
+              <IconButton
+                actionId="navigation.forward"
+                aria-label={labels.forward}
+                disabled={!canForward || !onForward}
+                onClick={onForward}
+              >
+                <ArrowRight size={16} />
+              </IconButton>
+            </Tooltip>
+            <Tooltip label={labels.sidebar} side="bottom">
+              <IconButton
+                actionId="navigation.sidebar.toggle"
+                aria-label={labels.sidebar}
+                disabled={!canToggleSidebar || !onToggleSidebar}
+                onClick={onToggleSidebar}
+              >
+                <SidebarSimple size={16} />
+              </IconButton>
+            </Tooltip>
+            {menus.map((menu) => (
+              <Menu.Root key={menu.id}>
+                <Menu.Trigger data-desktop-action={`menu.${menu.id}.open`} className="kit-titlebar__menu">
+                  {menu.label}
+                </Menu.Trigger>
+                <Menu.Portal>
+                  <Menu.Content className="desktop-menu" sideOffset={5} collisionPadding={8}>
+                    {menu.actions.map((action) => (
+                      <Menu.Item
+                        key={action.id}
+                        className="desktop-menu-item"
+                        data-desktop-action={action.id}
+                        disabled={action.disabled || !action.onSelect}
+                        onSelect={action.onSelect}
+                      >
+                        {action.label}
+                      </Menu.Item>
+                    ))}
+                  </Menu.Content>
+                </Menu.Portal>
+              </Menu.Root>
+            ))}
+          </>
+        )}
       </div>
       <div className="kit-titlebar__trailing">
         {trailing}
@@ -141,9 +170,10 @@ export interface NavigationItem {
   disabled?: boolean;
 }
 export function NavigationRail({
-  items,
-  selected,
+  items = [],
+  selected = '',
   onSelect,
+  children,
   footer,
   pinnedIds,
   onPinnedChange,
@@ -152,10 +182,12 @@ export function NavigationRail({
   moreLabel = 'More',
   pinLabel = 'Pin',
   unpinLabel = 'Unpin',
-}: {
-  items: NavigationItem[];
-  selected: string;
-  onSelect(id: string): void;
+  className,
+  ...props
+}: Omit<HTMLAttributes<HTMLElement>, 'onSelect'> & {
+  items?: NavigationItem[];
+  selected?: string;
+  onSelect?(id: string): void;
   footer?: ReactNode;
   pinnedIds?: readonly string[];
   onPinnedChange?(ids: string[]): void;
@@ -168,29 +200,30 @@ export function NavigationRail({
   const shown = pinnedIds ? items.filter((item) => pinnedIds.includes(item.id)) : items;
   return (
     <nav
-      className="kit-rail"
+      className={classes('kit-rail', className)}
       aria-label={ariaLabel}
       data-desktop-feature="shell"
       data-desktop-surface="navigation"
+      {...props}
     >
       <div className="kit-rail__items">
+        {children}
         {shown.map((item) => {
           const ItemIcon = item.icon;
           const active = item.id === selected;
           return (
-            <Tooltip label={item.label} key={item.id}>
-              <IconButton
-                className="kit-rail__item"
-                aria-label={item.label}
-                aria-current={active ? 'page' : undefined}
-                actionId={`navigation.${item.id}`}
-                disabled={item.disabled}
-                onClick={() => onSelect(item.id)}
-              >
-                <ItemIcon size={20} weight={active ? 'fill' : 'regular'} aria-hidden="true" />
-                {item.unread ? <span className="kit-unread" aria-label={unreadLabel} /> : null}
-              </IconButton>
-            </Tooltip>
+            <NavigationRailItem
+              key={item.id}
+              label={item.label}
+              aria-label={item.unread ? `${item.label}, ${unreadLabel}` : item.label}
+              selected={active}
+              unread={item.unread}
+              actionId={`navigation.${item.id}`}
+              disabled={item.disabled || !onSelect}
+              onClick={() => onSelect?.(item.id)}
+            >
+              <ItemIcon size={20} weight={active ? 'fill' : 'regular'} aria-hidden="true" />
+            </NavigationRailItem>
           );
         })}
         {pinnedIds ? (
@@ -227,7 +260,7 @@ export function NavigationRail({
                         className="desktop-menu-item kit-navigation-menu__destination"
                         disabled={item.disabled}
                         data-desktop-action={`navigation.${item.id}`}
-                        onSelect={() => onSelect(item.id)}
+                        onSelect={() => onSelect?.(item.id)}
                       >
                         <ItemIcon
                           size={16}
@@ -387,7 +420,9 @@ export function DesktopShell({
   sidebar,
   sidebarVisible = true,
   children,
-}: {
+  className,
+  ...props
+}: HTMLAttributes<HTMLDivElement> & {
   titlebar?: ReactNode;
   navigation: ReactNode;
   navigationVisible?: boolean;
@@ -396,16 +431,22 @@ export function DesktopShell({
   children: ReactNode;
 }) {
   return (
-    <div className="kit-shell">
+    <div {...props} className={classes('kit-shell', className)}>
       {titlebar}
       <div className="kit-shell__body">
         <div className="kit-shell__navigation" hidden={!navigationVisible}>
           {navigation}
         </div>
-        <aside className="kit-sidebar" hidden={!sidebarVisible || !sidebar}>
-          {sidebar}
-        </aside>
-        <main className="kit-shell__main">{children}</main>
+        <div className="kit-shell__workspace">
+          <aside
+            className="kit-sidebar"
+            hidden={!sidebarVisible || !sidebar}
+            {...(!sidebarVisible || !sidebar ? { inert: '' } : {})}
+          >
+            {sidebar}
+          </aside>
+          <main className="kit-shell__main">{children}</main>
+        </div>
       </div>
     </div>
   );
@@ -424,6 +465,7 @@ export function SettingsLayout({
   sidebarVisible = true,
   sidebarId,
   sidebarLabel,
+  sidebarResize,
   children,
   className,
   ...props
@@ -432,12 +474,13 @@ export function SettingsLayout({
   sidebarVisible?: boolean;
   sidebarId?: string;
   sidebarLabel?: string;
+  sidebarResize?: SidebarResizeOptions;
 }) {
   return (
     <div className={classes('kit-settings-layout', className)} {...props}>
-      <aside id={sidebarId} aria-label={sidebarLabel} className="kit-sidebar" hidden={!sidebarVisible}>
+      <SidebarPanel id={sidebarId} aria-label={sidebarLabel} hidden={!sidebarVisible} resize={sidebarResize}>
         {sidebar}
-      </aside>
+      </SidebarPanel>
       {children}
     </div>
   );
@@ -468,7 +511,7 @@ export function SettingsNavigation({
   );
   return (
     <div className="kit-settings-nav">
-      <h2>{title}</h2>
+      <ClientSidebarHeading>{title}</ClientSidebarHeading>
       <div className="kit-settings-search">
         <MagnifyingGlass size={16} />
         <Input
@@ -514,12 +557,12 @@ export function SettingsNavigation({
 
 export const SettingsPage = forwardRef<
   HTMLDivElement,
-  Omit<import('react').HTMLAttributes<HTMLDivElement>, 'title'> & { title: ReactNode }
->(function SettingsPage({ title, children, className, ...props }, ref) {
+  Omit<import('react').HTMLAttributes<HTMLDivElement>, 'title'> & { title: ReactNode; showTitle?: boolean }
+>(function SettingsPage({ title, showTitle = true, children, className, ...props }, ref) {
   return (
     <InternalScrollArea ref={ref} className={classes('kit-settings-scroll', className)} {...props}>
       <div className="kit-settings-content">
-        <h1>{title}</h1>
+        {showTitle ? <h1>{title}</h1> : null}
         {children}
       </div>
     </InternalScrollArea>

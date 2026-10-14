@@ -133,12 +133,18 @@ export interface VirtualListScrollAnchor {
   top: number;
 }
 
+export interface VirtualListHandle {
+  scrollToIndex(index: number): void;
+}
 export interface VirtualListProps<T> {
+  apiRef?: Ref<VirtualListHandle>;
   /** Preserve Host-owned pagination and pixel scroll restoration without a second virtualizer. */
   viewportRef?: Ref<HTMLDivElement>;
   onScroll?: UIEventHandler<HTMLDivElement>;
   footer?: ReactNode;
   initialScrollAnchor?: VirtualListScrollAnchor | null;
+  /** Switch Host-owned scroll sessions while retaining this list's viewport. */
+  scrollSession?: { key: string; anchor?: VirtualListScrollAnchor | null };
   onScrollAnchorChange?: (anchor: VirtualListScrollAnchor) => void;
   /** Sticky column headings share the viewport gutter and content inset with their records. */
   header?: ReactNode;
@@ -157,10 +163,12 @@ export interface VirtualListProps<T> {
 }
 
 export function VirtualList<T>({
+  apiRef,
   viewportRef,
   onScroll,
   footer,
   initialScrollAnchor,
+  scrollSession,
   onScrollAnchorChange,
   header,
   items,
@@ -180,7 +188,11 @@ export function VirtualList<T>({
   const fade = useContext(ScrollEdgeFadeContext);
   const scrollRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
-  const anchorRef = useRef(initialScrollAnchor);
+  const anchorRef = useRef(scrollSession?.anchor ?? initialScrollAnchor);
+  const sessionRef = useRef(scrollSession?.key);
+  const requestedSession = useRef(scrollSession);
+  requestedSession.current = scrollSession;
+  const [sessionRevision, setSessionRevision] = useState(0);
   const restoringRef = useRef(false);
   const captureFrame = useRef(0);
   const resetRef = useRef(resetKey);
@@ -238,12 +250,32 @@ export function VirtualList<T>({
     scrollMargin: headerHeight,
     getItemKey: (index) => (items[index] ? getItemKey(items[index], index) : index),
   });
+  useImperativeHandle(
+    apiRef,
+    () => ({
+      scrollToIndex(index) {
+        if (!Number.isInteger(index) || index < 0 || index >= items.length) return;
+        anchorRef.current = null;
+        restoringRef.current = false;
+        virtualizer.scrollToIndex(index, { align: 'auto' });
+      },
+    }),
+    [virtualizer, items.length],
+  );
   useEffect(() => {
     if (Object.is(resetRef.current, resetKey)) return;
     resetRef.current = resetKey;
     anchorRef.current = null;
     scrollRef.current?.scrollTo({ top: 0 });
   }, [resetKey]);
+  useEffect(() => {
+    if (sessionRef.current === scrollSession?.key) return;
+    sessionRef.current = scrollSession?.key;
+    anchorRef.current = requestedSession.current?.anchor ?? null;
+    restoringRef.current = Boolean(anchorRef.current);
+    if (!anchorRef.current) scrollRef.current?.scrollTo({ top: 0 });
+    setSessionRevision((value) => value + 1);
+  }, [scrollSession?.key]);
   const keyReader = useRef(getItemKey);
   const anchorVirtualizer = useRef(virtualizer);
   useEffect(() => {
@@ -273,7 +305,7 @@ export function VirtualList<T>({
       cancelAnimationFrame(frame);
       restoringRef.current = false;
     };
-  }, [items, headerHeight, viewportWidth]);
+  }, [items, headerHeight, viewportWidth, sessionRevision]);
   useEffect(() => {
     const element = scrollRef.current;
     const restore = (event: Event) => {

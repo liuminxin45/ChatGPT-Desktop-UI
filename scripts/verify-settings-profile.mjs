@@ -11,8 +11,8 @@ let browser, server;
 try {
   await writeFile(
     path.join(temp, 'fixture.tsx'),
-    `import React from 'react';import {createRoot} from 'react-dom/client';import {DesktopClientSurface,DesktopDocumentAdapter,SettingsLayout,SettingsNavigation,SettingsPage,SettingsGroup,SettingsField,Select,Switch,Input} from '${path.join(root, 'src/index.ts').replaceAll('\\', '/')}';
- function Fixture(){return <DesktopDocumentAdapter><DesktopClientSurface><SettingsLayout sidebar={<SettingsNavigation categories={[{id:'general',label:'General'}]} selected="general" onSelect={()=>{}}/>}><SettingsPage title="General" data-test-page><section className="desktop-native-tool-surface"><SettingsGroup title="Permissions"><SettingsField label="Default permissions" description="Long readable descriptions preserve the label and right control alignment."><Switch checked onCheckedChange={()=>{}} aria-label="Permissions"/></SettingsField><SettingsField label="Model"><Select value="model" options={[{value:'model',label:'A long model name with explanatory information and a current default preference'}]} onValueChange={()=>{}} aria-label="Model"/></SettingsField><SettingsField label={'LongPath/'.repeat(12)}><Input aria-label="Path" defaultValue="Long value"/></SettingsField></SettingsGroup></section></SettingsPage></SettingsLayout></DesktopClientSurface><section className="desktop-native-tool-surface" id="portable"><h3>Portable Host typography</h3></section></DesktopDocumentAdapter>};createRoot(document.getElementById('root')).render(<Fixture/>);`,
+    `import React from 'react';import {createRoot} from 'react-dom/client';import {DesktopClientSurface,DesktopDocumentAdapter,SettingsLayout,SettingsNavigation,SettingsPage,SettingsGroup,SettingsField,SettingsDisclosure,Select,Switch,Input} from '${path.join(root, 'src/index.ts').replaceAll('\\', '/')}';
+ function Fixture(){const [expanded,setExpanded]=React.useState(false);return <DesktopDocumentAdapter><DesktopClientSurface><SettingsLayout sidebar={<SettingsNavigation categories={[{id:'general',label:'General'}]} selected="general" onSelect={()=>{}}/>}><SettingsPage title="General" data-test-page><section className="desktop-native-tool-surface"><SettingsGroup title="Permissions"><SettingsField label="Ordinary row"><Switch checked onCheckedChange={()=>{}} aria-label="Ordinary row"/></SettingsField><SettingsField label="Default permissions" description="Long readable descriptions preserve the label and right control alignment."><Switch checked onCheckedChange={()=>{}} aria-label="Permissions"/></SettingsField><SettingsField label="Model"><Select value="model" options={[{value:'model',label:'A long model name with explanatory information and a current default preference'}]} onValueChange={()=>{}} aria-label="Model"/></SettingsField><SettingsField label={'LongPath/'.repeat(12)}><Input aria-label="Path" defaultValue="Long value"/></SettingsField></SettingsGroup><SettingsDisclosure title="Details" open={expanded} onOpenChange={setExpanded}><Input aria-label="Retained draft" defaultValue="draft"/></SettingsDisclosure><button onClick={()=>setExpanded(true)}>Deep link</button></section></SettingsPage></SettingsLayout></DesktopClientSurface><section className="desktop-native-tool-surface" id="portable"><h3>Portable Host typography</h3></section></DesktopDocumentAdapter>};createRoot(document.getElementById('root')).render(<Fixture/>);`,
   );
   await build({
     entryPoints: [path.join(temp, 'fixture.tsx')],
@@ -76,6 +76,9 @@ try {
           fontFamily: style('.desktop-client').fontFamily,
           expectedFontFamily: style('.desktop-client').getPropertyValue('--desktop-font-sans').trim(),
           heading: style('.kit-settings-content>h1').fontSize,
+          cardBackground: style('.client-settings-card').backgroundColor,
+          canvasBackground: style('.kit-settings-layout').backgroundColor,
+          rowHeight: rect('.client-settings-field').height,
           headingWeight: style('.kit-settings-content>h1').fontWeight,
           fieldWeight: style('.client-settings-field h3').fontWeight,
           portableWeight: style('#portable h3').fontWeight,
@@ -94,6 +97,15 @@ try {
       assert.equal(metrics.sidebar, width <= 1000 ? 260 : 336);
       assert.ok(metrics.column <= 728);
       assert.equal(metrics.overflow, false);
+      assert.equal(metrics.rowHeight, 44);
+      if (theme === 'light') assert.equal(metrics.cardBackground, metrics.canvasBackground);
+      const retained = page.getByRole('textbox', { name: 'Retained draft' });
+      await page.getByRole('button', { name: 'Deep link', exact: true }).click();
+      await retained.fill('retained edit');
+      await page.getByRole('button', { name: 'Details', exact: true }).click();
+      await retained.waitFor({ state: 'hidden' });
+      await page.getByRole('button', { name: 'Details', exact: true }).click();
+      assert.equal(await retained.inputValue(), 'retained edit');
       await page.getByRole('combobox', { name: 'Model' }).click();
       await page.locator('.desktop-ui-portal.desktop-client').waitFor({ state: 'attached' });
       assert.equal(

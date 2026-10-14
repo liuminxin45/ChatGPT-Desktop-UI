@@ -17,7 +17,8 @@
 .desktop-ai-markdown.desktop-ai-markdown code::before,.desktop-ai-markdown.desktop-ai-markdown code::after{content:none}
 .desktop-ai-markdown.desktop-ai-markdown .desktop-markdown-codeblock{margin:1em 0;overflow:hidden;border-radius:10px;background:var(--desktop-color-surface-muted)}
 .desktop-ai-markdown.desktop-ai-markdown .desktop-markdown-codebar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 14px;background:var(--desktop-color-surface-hover);color:var(--desktop-color-text-muted);font-size:var(--desktop-font-size-supporting)}
-.desktop-markdown-copy{border:0;border-radius:4px;background:transparent;color:inherit;padding:2px 4px;font:inherit}.desktop-markdown-copy:hover{color:var(--desktop-color-text)}.desktop-markdown-copy:focus-visible{outline:2px solid var(--desktop-color-focus);outline-offset:2px}.desktop-markdown-copy:disabled{opacity:.5}
+.desktop-markdown-copy{border:0;border-radius:4px;background:transparent;color:inherit;padding:2px 4px;font:inherit}.desktop-markdown-copy:hover{color:var(--desktop-color-text)}
+:root:not(:has([data-desktop-input-modality="pointer"])) .desktop-markdown-copy:focus-visible{outline:none;background:var(--desktop-color-surface-hover)}.desktop-markdown-copy:disabled{opacity:.5}
 .desktop-ai-markdown.desktop-ai-markdown pre{margin:0;padding:14px 16px;overflow-x:auto;max-width:100%;white-space:pre;line-height:1.6;color:var(--desktop-color-text);border:0;max-height:none}
 .desktop-ai-markdown.desktop-ai-markdown pre code{padding:0;background:transparent;white-space:inherit;overflow-wrap:normal}
 .desktop-ai-markdown.desktop-ai-markdown table{display:block;width:max-content;max-width:100%;overflow-x:auto;border-collapse:collapse;table-layout:auto;margin:1em 0}

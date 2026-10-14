@@ -51,12 +51,7 @@
       "width": 1280,
       "height": 720
     },
-    "surfaces": [
-      "chat landing",
-      "compact composer",
-      "sidebar navigation",
-      "general settings dialog"
-    ],
+    "surfaces": ["chat landing", "compact composer", "sidebar navigation", "general settings dialog"],
     "authority": "Supplementary shared chat UI; does not establish authenticated desktop geometry",
     "unobservedSurfaces": [
       "Authenticated project and recent disclosures (signed-out reference has no project or chat lists); fold behavior follows the user specification and supplied desktop captures"
@@ -68,5 +63,47 @@
     "scope": "AI text sweep, batched reveal and Markdown",
     "observedOn": "2026-10-10",
     "timing": "Requested adaptation; native timing unmeasured"
+  },
+  "settingsRefinement": {
+    "observedOn": "2026-10-14",
+    "reference": "User-supplied Appearance screenshot; private capture not redistributed",
+    "ordinaryRowMinimum": 44,
+    "cardInlineInset": 16,
+    "lightCardBackground": "main canvas",
+    "longRows": "natural content height",
+    "acceptance": "shared settings profile passed in both themes, 1920/1280/760 widths and 125% browser emulation; consumer acceptance recorded separately"
+  },
+  "windowShellAlignment": {
+    "observedOn": "2026-10-14",
+    "nativePackageObserved": "26.1007.2314.0",
+    "reference": "User-supplied dark side-by-side and light desktop captures; source pixels retained privately",
+    "geometry": {
+      "titlebar": 44,
+      "titlebarActions": 36,
+      "rail": 52,
+      "railTile": 36,
+      "railTopInset": 8,
+      "workspaceRadius": 14,
+      "workspaceRightInset": 4,
+      "workspaceBottomInset": 4
+    },
+    "palette": {
+      "lightShell": "#f0f3f9",
+      "lightSidebar": "#ffffff",
+      "darkShellTopLeft": "#1b202d",
+      "darkShellRailMiddle": "#1a2033",
+      "darkShellRight": "#1e2023",
+      "darkSidebar": "#1a1b1d",
+      "darkCanvas": "#181818",
+      "lightSelectedNavigationForeground": "#1a1c1f",
+      "darkUnread": "#3a83f7",
+      "darkWindowControlsForeground": "#ffffff"
+    },
+    "limits": [
+      "Reproducible CSS gradient; native material and cross-monitor color behavior are not inferred",
+      "Supplied captures are not redistributed",
+      "Installed package metadata was observed separately from the captures"
+    ],
+    "verification": "scripts/verify-window-shell.mjs; Windows Edge and CSS zoom"
   }
 }

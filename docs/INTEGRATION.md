@@ -1,5 +1,11 @@
 # Integration
 
+## Local calendar values
+
+Use `TemporalPicker` for popup-only `date`, `month` and `datetime-local` selection. `value`/`onValueChange` use local strings (`YYYY-MM-DD`, `YYYY-MM`, `YYYY-MM-DDTHH:mm`); an empty string clears an optional field. Set `min`, `max`, `clearable`, `disabled`, `readOnly`, `size`, accessible field labels and the Host's stable `actionId`. The DatePicker compatibility export retains its existing Date/undefined callback and historical open/clear IDs. Ordinary Input does not automatically replace native temporal types. A hidden `name` value supports native form serialization; `required` prevents clearing and supplies accessibility semantics, while the Host retains business/form validation.
+
+Migrate native date fields explicitly. Popup actions only update Host state, and date-time callbacks run once after confirmation. The Host still owns requests, persistence, usage events and outcome diagnostics; the shared picker records no date values. Standalone time inputs are unchanged. Run `npm run test:temporal` and verify actual consumer portals, scoped Tool styling, nested dialogs, light/dark, localization, narrow windows and CSS zoom.
+
 Desktop consumers may retain `script-src 'self'; style-src 'self'`. The prepared
 package ships notification and Select viewport rules in its external stylesheet.
 Sonner keeps queue behavior without injecting CSS. Modal wheel/touch isolation is
@@ -48,6 +54,8 @@ Opt in to `iconOnly` for familiar, compact toolbar/row controls such as close, r
 The compatibility DropdownMenuItem accepts `icon` and `actionId`, always displays its label and shortcut, and retains keyboard typeahead. Use stable Host-owned action identifiers. These primitives add no analytics events or diagnostic content. Shared portals close when their Tool Surface becomes hidden.
 
 ## Host behavior
+
+Use `DesktopShell` for the retained native document frame. Its workspace wraps either its optional sidebar or a Host's nested `SettingsLayout`; a second workspace radius or rail padding in the Host is unnecessary. `TitleBar.actions` accepts a Host action tree while retaining shared placement; standard header attributes preserve native drag/double-click and feature markers. `NavigationRail.children` accepts `NavigationRailItem` commands and `asChild` links. The actual target retains the Host's action/feature/surface markers, accessible name, modified-click semantics and selected/unread feedback. `WindowControls` takes native callbacks, localized labels and Host action IDs; missing callbacks disable the corresponding commands. These changes add no persistence, telemetry or IPC.
 
 `TitleBar` presents callbacks and capability flags. The Host owns history boundaries, sidebar availability, native editing, tray behavior, maximize and exit saving. Reuse one action definition for custom and native menus; disable unavailable actions.
 

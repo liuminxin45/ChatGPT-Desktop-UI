@@ -7,6 +7,11 @@ import { fileURLToPath } from 'node:url';
 export const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const slash = (value) => value.replaceAll('\\', '/');
 export const families = {
+  temporal: {
+    description: 'Local date, month and date-time selection with shared popup geometry.',
+    states: 'empty, selected, bounded, disabled, read-only, draft, confirmed, cancelled',
+    example: 'examples/temporal-contract.tsx',
+  },
   tables: {
     description: 'Semantic tables with shared cell insets and static record ownership.',
     states: 'compact, comfortable, long values, independent actions',

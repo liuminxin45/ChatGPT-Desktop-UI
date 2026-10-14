@@ -1,6 +1,6 @@
-:where(.desktop-focus-ring):focus-visible {
-  outline: 2px solid var(--desktop-color-focus);
-  outline-offset: 1px;
+:root:not(:has([data-desktop-input-modality="pointer"])) :where(.desktop-focus-ring):focus-visible{
+  outline: none;
+  background: var(--desktop-color-surface-hover);
 }
 
 :where(.desktop-pressable) {

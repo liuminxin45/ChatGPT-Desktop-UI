@@ -4,6 +4,7 @@ export { ToolVisibilityContext } from './surface-visibility';
 export * from './components/lists';
 export * from './components/actions';
 export * from './components/forms';
+export * from './components/temporal';
 export * from './components/navigation';
 export * from './components/layout';
 export * from './components/overlays';

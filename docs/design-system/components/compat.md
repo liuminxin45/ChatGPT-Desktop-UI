@@ -324,6 +324,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | onCloseAutoFocus | no | `((event: Event) => void) \| undefined` |
 | forceMount | no | `true \| undefined` |
 | size | no | `AppDialogSize \| undefined` |
+| variant | no | `"media" \| "default" \| undefined` |
 | showCloseButton | no | `boolean \| undefined` |
 | closeActionId | no | `string \| undefined` |
 | closeDisabled | no | `boolean \| undefined` |
@@ -444,6 +445,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | onCloseAutoFocus | no | `((event: Event) => void) \| undefined` |
 | forceMount | no | `true \| undefined` |
 | size | no | `AppDialogSize \| undefined` |
+| variant | no | `"media" \| "default" \| undefined` |
 | showCloseButton | no | `boolean \| undefined` |
 | closeActionId | no | `string \| undefined` |
 | closeDisabled | no | `boolean \| undefined` |
@@ -641,6 +643,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | onDayTouchEnd | no | `DayEventHandler<React.TouchEvent<Element>> \| undefined` |
 | onDayTouchMove | no | `DayEventHandler<React.TouchEvent<Element>> \| undefined` |
 | onDayTouchStart | no | `DayEventHandler<React.TouchEvent<Element>> \| undefined` |
+| actionId | no | `string \| undefined` |
 
 ## Card (chatgpt-desktop-kit/compat/card)
 
@@ -707,6 +710,8 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 [Implementation](../../../src/components/radix/date-picker.tsx)
 
+Compatibility preserves the Date API; rendering belongs to the shared picker.
+
 | Prop | Required | Type |
 | --- | --- | --- |
 | value | yes | `Date \| undefined` |
@@ -715,6 +720,10 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | className | no | `string \| undefined` |
 | triggerClassName | no | `string \| undefined` |
 | actionId | no | `string \| undefined` |
+| disabled | no | `boolean \| undefined` |
+| readOnly | no | `boolean \| undefined` |
+| clearable | no | `boolean \| undefined` |
+| aria-label | no | `string \| undefined` |
 
 ## DropdownMenu (chatgpt-desktop-kit/compat/dropdown-menu)
 
@@ -1177,6 +1186,28 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | checked | no | `boolean \| undefined` |
 | required | no | `boolean \| undefined` |
 | onCheckedChange | no | `((checked: boolean) => void) \| undefined` |
+
+## TemporalPicker (chatgpt-desktop-kit/compat/temporal-picker)
+
+[Implementation](../../../src/components/temporal/index.tsx)
+
+Shared popup-only selection. Datetime edits commit only on explicit confirmation.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| value | yes | `string` |
+| onValueChange | yes | `(value: string) => void` |
+| mode | no | `TemporalMode \| undefined` |
+| min | no | `string \| undefined` |
+| max | no | `string \| undefined` |
+| readOnly | no | `boolean \| undefined` |
+| clearable | no | `boolean \| undefined` |
+| required | no | `boolean \| undefined` |
+| name | no | `string \| undefined` |
+| placeholder | no | `string \| undefined` |
+| size | no | `"sm" \| "md" \| undefined` |
+| actionId | yes | `string` |
+| triggerActionId | no | `string \| undefined` |
 
 ## Textarea (chatgpt-desktop-kit/compat/textarea)
 

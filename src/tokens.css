@@ -52,8 +52,8 @@
 
 
   /* Desktop shell hierarchy; all consumers inherit these semantic surfaces. */
-  --desktop-color-shell: #f9f9f9;
-  --desktop-color-sidebar: #f9f9f9;
+  --desktop-color-shell: #f0f3f9;
+  --desktop-color-sidebar: #ffffff;
   --desktop-color-navigation-selected: #e9e9e9;
   --desktop-color-on-navigation-selected: #202123;
   --desktop-color-unread: #387cf4;
@@ -108,7 +108,7 @@
   --desktop-radius-window: 12px;
   --desktop-motion-press: 120ms;
   --desktop-motion-fast: 150ms;
-  --desktop-focus-ring: 0 0 0 2px rgb(56 124 244 / 0.35);
+  --desktop-focus-ring: inset 0 0 0 1px var(--desktop-color-border-strong);
 }
 
 .dark {
@@ -167,5 +167,5 @@
   --desktop-shadow-overlay: 0 12px 40px rgb(0 0 0 / 0.42);
   --desktop-shadow-floating: 0 20px 70px rgb(0 0 0 / 0.48);
   --desktop-shadow-side-panel: -12px 0 32px rgb(0 0 0 / 0.36);
-  --desktop-focus-ring: 0 0 0 2px rgb(67 139 250 / 0.35);
+  --desktop-focus-ring: inset 0 0 0 1px var(--desktop-color-border-strong);
 }
