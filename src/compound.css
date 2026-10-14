@@ -12,6 +12,17 @@
 .desktop-app-dialog-description{margin:4px 0 0;font-size:var(--desktop-font-size-supporting);line-height:var(--desktop-line-height-supporting);font-weight:400;color:var(--desktop-color-text-muted)}
 .desktop-app-dialog-close.desktop-button{position:absolute;right:12px;top:12px;z-index:1;width:32px;height:32px;padding:0}
 .desktop-alert-dialog-header{flex-direction:column}
+/* Media overlay appearance is shared; the Host owns image geometry and commands. */
+.desktop-app-dialog-backdrop[data-variant=media]{background:color-mix(in srgb,var(--desktop-color-media-surface) 82%,transparent)}
+.desktop-app-dialog[data-variant=media]{inset:0;transform:none;width:100vw;max-width:none;height:100dvh;max-height:100dvh;border:0;border-radius:0;background:transparent;box-shadow:none;color:var(--desktop-color-on-media)}
+.desktop-app-dialog[data-variant=media]>.desktop-app-dialog-header{align-items:center;padding:12px 64px 12px 20px;min-height:64px;color:var(--desktop-color-media-text)}
+.desktop-app-dialog[data-variant=media]>.desktop-app-dialog-body{padding:24px;scrollbar-gutter:stable both-edges;overscroll-behavior:contain}
+.desktop-app-dialog[data-variant=media]>.desktop-app-dialog-close{color:var(--desktop-color-on-media);background:var(--desktop-color-media-surface-translucent);border-radius:var(--desktop-radius-control)}
+.desktop-app-dialog[data-variant=media]>.desktop-app-dialog-close:hover{background:var(--desktop-color-media-hover)}
+.desktop-media-image{border:0;box-shadow:var(--desktop-shadow-subtle),var(--desktop-shadow-overlay)}
+.desktop-media-image[data-variant=thumbnail]{border-radius:var(--desktop-radius-control)}
+.desktop-media-image[data-variant=viewer]{border-radius:2px;box-shadow:0 8px 40px var(--desktop-color-media-surface-translucent)}
+.desktop-media-image[data-variant=artwork]{border-radius:0;box-shadow:none}
 .desktop-card{display:flex;flex-direction:column;border:1px solid var(--desktop-color-panel-boundary);border-radius:var(--desktop-radius-surface);background:var(--desktop-color-surface);color:var(--desktop-color-text)}
 .desktop-card-header{display:flex;flex-direction:column;gap:6px;padding:20px}.desktop-card-title{margin:0;font:400 var(--desktop-font-size-section)/var(--desktop-line-height-heading) var(--desktop-font-sans)}
 .desktop-card-description{margin:0;font-size:var(--desktop-font-size-supporting);line-height:var(--desktop-line-height-supporting);color:var(--desktop-color-text-muted)}

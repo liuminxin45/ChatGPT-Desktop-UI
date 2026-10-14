@@ -324,6 +324,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | onCloseAutoFocus | no | `((event: Event) => void) \| undefined` |
 | forceMount | no | `true \| undefined` |
 | size | no | `AppDialogSize \| undefined` |
+| variant | no | `"media" \| "default" \| undefined` |
 | showCloseButton | no | `boolean \| undefined` |
 | closeActionId | no | `string \| undefined` |
 | closeDisabled | no | `boolean \| undefined` |
@@ -444,6 +445,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | onCloseAutoFocus | no | `((event: Event) => void) \| undefined` |
 | forceMount | no | `true \| undefined` |
 | size | no | `AppDialogSize \| undefined` |
+| variant | no | `"media" \| "default" \| undefined` |
 | showCloseButton | no | `boolean \| undefined` |
 | closeActionId | no | `string \| undefined` |
 | closeDisabled | no | `boolean \| undefined` |
