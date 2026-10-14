@@ -154,6 +154,8 @@ The controlled `ClientComposer` separates work and chat input layouts. Work inpu
 
 Arrow cursors across the standalone desktop document are an explicit originating user preference. Hover/focus/disabled states still signal affordance. Respect a different target user's cursor preference rather than secretly imposing it on unrelated applications.
 
+The sidebar resize divider uses the horizontal `ew-resize` cursor on hover. During an active pointer resize the document retains that cursor, including outside the divider; release, cancellation, folding or unmount restores the ordinary cursor policy. The shared shell owns this exception; consumers must not override the document cursor rules.
+
 ## Light-theme boundaries and conversation geometry
 
 Light mode uses a cool pale window shell, near-white sidebar and white content. Selected navigation tiles stay pale gray with dark filled icons; dark mode retains white filled icons. Fine neutral outlines separate white overlays, grouped settings and composers. Avatar images have a subtle outline in light mode. Avoid decorative nested frames.

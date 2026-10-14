@@ -72,6 +72,9 @@
 .kit-shell__navigation:not([hidden]){animation:kit-surface-in var(--desktop-motion-fast) ease-out}.kit-shell__main{transition:background-color var(--desktop-motion-fast)}
 @keyframes kit-surface-in{from{opacity:0;transform:translateX(-4px)}to{opacity:1;transform:translateX(0)}}
 .kit-sidebar--resizable{position:relative}
-.kit-sidebar-resizer{position:absolute;inset-block:0;inset-inline-end:0;width:8px;touch-action:none;user-select:none;z-index:1}
+.kit-sidebar-resizer{position:absolute;inset-block:0;inset-inline-end:0;width:8px;touch-action:none;user-select:none;z-index:1;cursor:ew-resize}
+/* Resizing is the explicit exception to the desktop document's arrow cursor policy. */
+html:root body .kit-sidebar-resizer{cursor:ew-resize!important}
+html:root:has(.kit-sidebar[data-resizing=true]) body,html:root:has(.kit-sidebar[data-resizing=true]) body *,html:root:has(.kit-sidebar[data-resizing=true]) body *::before,html:root:has(.kit-sidebar[data-resizing=true]) body *::after{cursor:ew-resize!important}
 .kit-sidebar-resizer:hover{background:var(--desktop-color-surface-hover)}
 .kit-sidebar-resizer:focus-visible{outline:2px solid var(--desktop-color-focus);outline-offset:-2px}
