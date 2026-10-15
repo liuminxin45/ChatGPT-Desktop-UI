@@ -128,7 +128,7 @@
 .desktop-workbench__bar,.desktop-page-toolbar,.desktop-tool-page-bar{border-bottom:1px solid var(--desktop-color-panel-boundary)}
 .desktop-floating-launcher.desktop-button{width:40px;height:40px;padding:0;border:1px solid var(--desktop-color-panel-boundary);border-radius:var(--desktop-radius-overlay);background:var(--desktop-color-surface-overlay);color:var(--desktop-color-text-subtle);box-shadow:var(--desktop-shadow-overlay)}
 .desktop-floating-launcher.desktop-button:hover{background:var(--desktop-color-surface-hover);color:var(--desktop-color-text)}
-.desktop-floating-launcher svg{width:20px;height:20px}
+.desktop-floating-launcher > svg,.desktop-floating-launcher > .desktop-action-glyph > svg{width:20px;height:20px}
 .desktop-floating-panel{border:1px solid var(--desktop-color-panel-boundary);border-radius:var(--desktop-radius-overlay);background:var(--desktop-color-background);box-shadow:var(--desktop-shadow-floating)}
 .desktop-floating-panel>header{border-bottom:1px solid var(--desktop-color-panel-boundary)}
 .desktop-chat-column{width:100%;max-width:var(--desktop-size-reading-column);margin-inline:auto;min-width:0}
