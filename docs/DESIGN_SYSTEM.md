@@ -61,8 +61,8 @@ This specification combines measured screenshot patterns with an existing deskto
 
 | Role | Light | Dark | Token |
 | --- | --- | --- | --- |
-| Window shell | #f0f3f9 | #202123 | `--desktop-color-shell` |
-| Contextual sidebar | #ffffff | #1c1d1e | `--desktop-color-sidebar` |
+| Window shell | #f1f3f9 → #eef0f6 client gradient | blue-gray client gradient | `--desktop-background-shell`, `--desktop-color-shell` fallback |
+| Contextual sidebar | #fafbfd | approximately #191b21 client gradient | `--desktop-background-sidebar`, `--desktop-color-sidebar` fallback |
 | Main canvas | #ffffff | #181818 | `--desktop-color-background` |
 | Grouped settings | Same as main canvas | #232323 | `--desktop-color-background` in light; `--desktop-color-surface` in dark |
 | Input | #ededed | #2a2a2a | `--desktop-color-surface-muted` |
@@ -81,7 +81,7 @@ Menu items use the shared hover fill for pointer highlight and keyboard focus, i
 
 ### Versioned client profile
 
-The window-shell correction measured on 2026-10-14 uses one continuous shell behind the title bar and rail. The light shell is #f0f3f9; the dark client profile uses a reproducible blue-gray gradient (top-left #1b202d, mid-rail #1a2033, far-right #1e2023). It is a CSS adaptation of the supplied capture, not an assertion about native material behavior or cross-monitor color differences. Title bar and rail are transparent within the shell. The contextual sidebar is white in light mode and #1a1b1d in this dark profile; the main canvas stays white/#181818.
+The background correction measured on 2026-10-15 uses one continuous shell behind the transparent title bar and rail. The light client shell fades from #f1f3f9 at the top to #eef0f6 at 100px. The dark client retains its blue-gray gradient (top-left #1b202d, mid-rail #1a2033, far-right #1e2023). The contextual sidebar is #fafbfd in light mode. Its dark background layers 60% #181818 over the same window gradient, producing the observed blue-gray #191b21 range. `SidebarPanel` consumes `--desktop-background-sidebar`, with the semantic sidebar color as fallback. Client sidebar backgrounds attach to the viewport, so panel width, internal scrolling and collapse do not restart their gradient. These reproducible CSS backgrounds adapt supplied captures; they do not enable native material or infer cross-monitor behavior. The main canvas stays white/#181818. Inside `DesktopClientSurface`, `--desktop-color-canvas` aliases the main background so Native Tool roots and loading/error states inherit it; portable embedded defaults remain independent.
 
 `DesktopShell` owns one workspace clipping surface around both contextual sidebar and content: 14px corners, a subtle outside boundary and 4px shell insets at the right and bottom. The profile keeps a 44px title bar, with its actions in the upper 36px, a 52px rail and 36px navigation targets starting 8px below the work area top. Collapsing a sidebar or hiding the rail retains the workspace corners and mounted content. Hosts compose `TitleBar.actions`, `NavigationRail.children`, `NavigationRailItem` (including `asChild` router links) and `WindowControls`; they do not reconstruct the shell or add a second rail inset. Window callbacks, stable action IDs, native drag regions and menu editing stay Host-owned.
 

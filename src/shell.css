@@ -39,7 +39,7 @@
 .kit-account-menu__identity small{display:block;color:var(--desktop-color-text-muted);font-size:var(--desktop-font-size-supporting)}
 .kit-menu-chevron{margin-left:auto;color:var(--desktop-color-text-muted)}
 .kit-menu-chevron svg,svg.kit-menu-chevron{width:16px;height:16px;flex:none}
-.kit-sidebar{display:block;width:var(--desktop-sidebar-width,248px);flex:none;min-width:var(--desktop-sidebar-min-width,0px);max-width:var(--desktop-sidebar-max-width,none);min-height:0;overflow:hidden;background:var(--desktop-color-sidebar);border-radius:var(--desktop-radius-window) 0 0 0;opacity:1;visibility:visible;transition:width var(--desktop-motion-fast) ease,min-width var(--desktop-motion-fast) ease,opacity var(--desktop-motion-fast) ease,border-inline-end-width var(--desktop-motion-fast) ease,visibility var(--desktop-motion-fast)}
+.kit-sidebar{display:block;width:var(--desktop-sidebar-width,248px);flex:none;min-width:var(--desktop-sidebar-min-width,0px);max-width:var(--desktop-sidebar-max-width,none);min-height:0;overflow:hidden;background:var(--desktop-background-sidebar,var(--desktop-color-sidebar));border-radius:var(--desktop-radius-window) 0 0 0;opacity:1;visibility:visible;transition:width var(--desktop-motion-fast) ease,min-width var(--desktop-motion-fast) ease,opacity var(--desktop-motion-fast) ease,border-inline-end-width var(--desktop-motion-fast) ease,visibility var(--desktop-motion-fast)}
 .kit-sidebar[hidden]{display:block;width:0;min-width:0;opacity:0;visibility:hidden;border-inline-end-width:0;pointer-events:none}
 .kit-sidebar[data-resizing=true]{transition:none}
 .kit-shell__main{flex:1;min-width:0;min-height:0;overflow:hidden;background:var(--desktop-color-background);border-radius:var(--desktop-radius-window) 0 0 0}
