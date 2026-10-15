@@ -11,7 +11,21 @@ describe('ClientSidebarItem', () => {
     expect(button.style.getPropertyValue('--desktop-sidebar-depth')).toBe('1');
   });
   it('allows a retained virtual viewport and a single title control', () => {
-    const { container } = render(<ClientSidebar scrollable={false} header={<ClientSidebarToolbar title="Projects" titleControl={<ClientModeSwitcher label="Projects" actionId="mode" ariaLabel="Switch mode" items={[]} />} />}><div>Viewport</div></ClientSidebar>);
+    const { container } = render(
+      <ClientSidebar
+        scrollable={false}
+        header={
+          <ClientSidebarToolbar
+            title="Projects"
+            titleControl={
+              <ClientModeSwitcher label="Projects" actionId="mode" ariaLabel="Switch mode" items={[]} />
+            }
+          />
+        }
+      >
+        <div>Viewport</div>
+      </ClientSidebar>,
+    );
     expect(screen.getAllByText('Projects')).toHaveLength(1);
     expect(container.querySelector('.client-sidebar-content')).not.toBeNull();
     expect(container.querySelector('.client-sidebar-scroll')).toBeNull();

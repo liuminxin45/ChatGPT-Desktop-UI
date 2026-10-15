@@ -13,7 +13,7 @@ it('retains default and caller supplied stable action IDs', () => {
   rerender(<SettingsNavigation {...props} actionId="mail.settings.section" />);
   const button = screen.getByRole('button', { name: 'General' });
   expect(button.getAttribute('data-desktop-action')).toBe('mail.settings.section.general');
-  expect(screen.getByRole('textbox').getAttribute('data-desktop-action')).toBe(
+  expect(screen.getByRole('searchbox').getAttribute('data-desktop-action')).toBe(
     'mail.settings.section.search',
   );
   button.click();

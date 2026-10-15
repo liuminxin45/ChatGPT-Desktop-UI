@@ -164,7 +164,11 @@ export function ClientSidebarToolbar({
   children,
   className,
   ...props
-}: Omit<HTMLAttributes<HTMLDivElement>, 'title'> & { title: ReactNode; titleControl?: ReactNode; actions?: ReactNode }) {
+}: Omit<HTMLAttributes<HTMLDivElement>, 'title'> & {
+  title: ReactNode;
+  titleControl?: ReactNode;
+  actions?: ReactNode;
+}) {
   return (
     <div {...props} className={classes('client-sidebar-toolbar', className)}>
       <div className="client-sidebar-toolbar__row">
@@ -186,7 +190,11 @@ export function ClientSidebar({
   return (
     <div {...props} className={classes('client-sidebar', className)}>
       {header ? <header>{header}</header> : null}
-      {scrollable ? <InternalScrollArea className="client-sidebar-scroll">{children}</InternalScrollArea> : <div className="client-sidebar-content">{children}</div>}
+      {scrollable ? (
+        <InternalScrollArea className="client-sidebar-scroll">{children}</InternalScrollArea>
+      ) : (
+        <div className="client-sidebar-content">{children}</div>
+      )}
     </div>
   );
 }
