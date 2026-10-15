@@ -40,16 +40,19 @@ const server = http.createServer(async (req, res) => {
   res.end(await fs.readFile(path.join(temp, name)));
 });
 await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
-const results = [],
+const results = [], paletteResults = [],
   errors = [];
 let browser;
 const near = (actual, expected, label) =>
   assert.ok(Math.abs(actual - expected) <= 1, `${label}: ${actual} != ${expected}`);
+const rgbAt = (png, x, y) => Array.from(png.data.subarray((Math.floor(y) * png.width + Math.floor(x)) * 4, (Math.floor(y) * png.width + Math.floor(x)) * 4 + 3));
+const colorNear = (actual, expected, label, tolerance = 2) => expected.forEach((channel, i) => assert.ok(Math.abs(actual[i] - channel) <= tolerance, `${label}: ${actual} vs ${expected}`));
 try {
   browser = await chromium.launch({ channel: 'msedge', headless: true });
   for (const theme of ['light', 'dark'])
     for (const [width, height, zoom] of [
       [1920, 1080, 1],
+      [960, 1080, 1],
       [1280, 800, 1],
       [800, 800, 1],
       [1280, 800, 1.25],
@@ -126,6 +129,25 @@ try {
             assert.equal(metrics.closeForeground, 'rgb(255, 255, 255)');
           }
           if (visible) {
+            const sidebar = page.locator('.kit-sidebar').filter({ visible: true }).first();
+            const rect = await sidebar.boundingBox();
+            const capture = PNG.sync.read(await page.screenshot({ animations: 'disabled' }));
+            const samples = [100, Math.floor(height / 2), height - 30].map(y => rgbAt(capture, rect.x + 4 * zoom, y));
+            if (theme === 'light') samples.forEach(rgb => colorNear(rgb, [250, 251, 253], 'light sidebar', 0));
+            else if (height === 1080 && zoom === 1) {
+              samples.forEach((rgb, i) => colorNear(rgb, [[25, 27, 33], [25, 27, 34], [25, 27, 33]][i], 'reference sidebar'));
+            }
+            const scroll = sidebar.locator('.client-sidebar-scroll');
+            const before = rgbAt(capture, rect.x + 4 * zoom, height - 30);
+            await scroll.evaluate(el => { el.scrollTop = el.scrollHeight; });
+            await sidebar.evaluate(el => { el.style.width = '280px'; });
+            await page.waitForTimeout(220);
+            const after = PNG.sync.read(await page.screenshot({ animations: 'disabled' }));
+            colorNear(rgbAt(after, rect.x + 4 * zoom, height - 30), before, 'sidebar background anchor after scroll and resize', 0);
+            paletteResults.push({ theme, width, height, zoom, nested, samples, afterScrollAndResize: rgbAt(after, rect.x + 4 * zoom, height - 30) });
+            await sidebar.evaluate(el => el.style.removeProperty('width'));
+            await scroll.evaluate(el => { el.scrollTop = 0; });
+            await page.waitForTimeout(220);
             const heading = await page.locator('.client-sidebar-heading').evaluate((el) => ({
               start:
                 el.getBoundingClientRect().left +
@@ -152,6 +174,14 @@ try {
           results.push({ theme, width, height, zoom, nested, sidebar: visible, metrics });
         }
       }
+      await page.evaluate(theme => window.shellFixture.setTheme(theme === 'dark' ? 'light' : 'dark'), theme);
+      await page.waitForFunction(dark => document.documentElement.classList.contains('dark') === dark, theme !== 'dark');
+      assert.equal(await page.getByRole('textbox', { name: 'Editor draft' }).inputValue(), 'Unsaved draft');
+      assert.equal(await page.evaluate(() => window.editorBefore === document.querySelector('[aria-label="Editor draft"]')), true);
+      await page.evaluate(theme => window.shellFixture.setTheme(theme), theme);
+      await page.waitForFunction(dark => document.documentElement.classList.contains('dark') === dark, theme === 'dark');
+      assert.equal(await page.locator('[data-palette-native-tool]').evaluate(el => getComputedStyle(el).backgroundColor), theme === 'dark' ? 'rgb(24, 24, 24)' : 'rgb(255, 255, 255)');
+      await page.screenshot({ path: path.join(output, `${theme}-${width}-zoom${zoom}-sidebar.png`), animations: 'disabled' });
       await page.evaluate(() => window.shellFixture.setNavigation(false));
       await page.waitForTimeout(220);
       const hiddenX = await page
@@ -193,7 +223,7 @@ try {
           ),
         );
       const shell = pixel(25 * zoom, 500 * zoom);
-      const expected = theme === 'dark' ? [26, 32, 51] : [240, 243, 249];
+      const expected = theme === 'dark' ? [26, 32, 51] : [238, 240, 246];
       if (height === 1080 && zoom === 1)
         expected.forEach((v, index) =>
           assert.ok(Math.abs(shell[index] - v) <= 2, `shell pixel ${shell} vs ${expected}`),
@@ -219,11 +249,12 @@ try {
   assert.deepEqual(errors, []);
   await fs.writeFile(
     path.join(output, 'report.json'),
-    JSON.stringify({ status: 'passed', renderer: 'Windows Edge; CSS zoom', results }, null, 2),
+    JSON.stringify({ status: 'passed', renderer: 'Windows Edge; CSS zoom', results, paletteResults }, null, 2),
   );
   console.log(JSON.stringify({ status: 'passed', cases: results.length, output }));
 } finally {
   await browser?.close();
+  server.closeAllConnections();
   await new Promise((resolve) => server.close(resolve));
   const absolute = path.resolve(temp);
   if (
