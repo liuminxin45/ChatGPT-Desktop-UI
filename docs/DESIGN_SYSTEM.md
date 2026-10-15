@@ -8,6 +8,11 @@ omits the visible category heading without changing the default Settings demo.
 Hosts supply an accessible content name when hiding that heading. Chat search
 expands below the retained title/action row using the shared sidebar toolbar slots.
 
+`ClientSidebarItem` keeps names on one line with ellipsis. Independent trailing
+commands overlay the navigation target and reserve no label space while hidden.
+Hover, keyboard focus and open menus reveal the commands and shorten the label
+by their measured width, without changing row height or navigation bounds.
+
 Buttons, icon actions, Tabs, navigation and Select/menu/Popover triggers never draw a focus outline or outer ring in either theme. Keyboard focus uses a neutral fill inside the existing target; primary/send actions retain their semantic foreground and use their hover fill. Pointer dismissal restores DOM focus without a residual trigger highlight. Escape is dismissal, not a switch to keyboard navigation. Keep native focus, Tab/arrow navigation, Enter/Space activation and disabled semantics; never blur controls to hide a visual state. Text entry retains neutral inset focus and invalid fields retain their error boundary. Tooltips are descriptive: the same Escape removes a visible tooltip and dismisses the active interactive overlay; a tooltip must never require a preliminary Escape. Open Select/menu/Popover and child Dialog still dismiss before their parent, and IME Escape never closes them.
 
 Chat media uses `MediaImage` for an unmasked image with layered soft shadows instead of a thin outline. `AppDialogContent variant="media"` supplies a transparent full-window stage, a dim media backdrop, shared close control and reserved toolbar area. Image pixels, including screenshot text and transparent assets, remain intact. Hosts own fit/zoom/pan geometry and image loading; use shared buttons and MediaToolbar for the toolbar. Background dismissal requires a click without a preceding pan; Escape and focus return follow the shared dialog contract.

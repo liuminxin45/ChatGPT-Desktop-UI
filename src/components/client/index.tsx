@@ -1,6 +1,16 @@
 import { CaretDown, CaretRight, Check } from '@phosphor-icons/react';
 import * as Menu from '@radix-ui/react-dropdown-menu';
-import { cloneElement, type HTMLAttributes, type ReactElement, type ReactNode, useId, useState } from 'react';
+import {
+  cloneElement,
+  type CSSProperties,
+  type HTMLAttributes,
+  type ReactElement,
+  type ReactNode,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from 'react';
 import { InternalScrollArea, RecordRow } from '../lists';
 import { Button, type ButtonProps } from '../actions';
 import { classes } from '../classes';
@@ -192,9 +202,22 @@ export function ClientSidebarItem({
   label: ReactNode;
   count?: number;
   selected?: boolean;
-  /** Independent commands; revealed on hover, focus or an open descendant menu. */
+  /** Independent overlaid commands; revealed on hover, focus or an open descendant menu. */
   actions?: ReactNode;
 }) {
+  const actionsRef = useRef<HTMLDivElement>(null);
+  const [actionsWidth, setActionsWidth] = useState(0);
+  const hasActions = Boolean(actions);
+  useEffect(() => {
+    const element = actionsRef.current;
+    if (!element) return;
+    const measure = () => setActionsWidth(element.offsetWidth);
+    measure();
+    if (typeof ResizeObserver === 'undefined') return;
+    const observer = new ResizeObserver(measure);
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [hasActions]);
   const navigation = (
     <Button
       {...props}
@@ -208,9 +231,15 @@ export function ClientSidebarItem({
     </Button>
   );
   return actions ? (
-    <RecordRow density="compact" className="client-sidebar-record">
+    <RecordRow
+      density="compact"
+      className="client-sidebar-record"
+      style={{ '--desktop-sidebar-actions-width': `${actionsWidth}px` } as CSSProperties}
+    >
       {navigation}
-      <div className="client-sidebar-record-actions">{actions}</div>
+      <div ref={actionsRef} className="client-sidebar-record-actions">
+        {actions}
+      </div>
     </RecordRow>
   ) : (
     navigation

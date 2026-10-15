@@ -31204,7 +31204,7 @@
           "required": false,
           "type": "ReactNode",
           "native": false,
-          "description": "Independent commands; revealed on hover, focus or an open descendant menu."
+          "description": "Independent overlaid commands; revealed on hover, focus or an open descendant menu."
         }
       ],
       "nativeProps": [
