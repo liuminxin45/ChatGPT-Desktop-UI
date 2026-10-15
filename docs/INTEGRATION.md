@@ -31,6 +31,8 @@ Version 0.3 changes the package identity to `chatgpt-desktop-kit` and uses `--de
 
 ## Styles and surfaces
 
+`DesktopClientSurface` supplies three background roles: the continuous titlebar/rail shell, the contextual sidebar and the main content canvas. Compose contextual navigation with `SidebarPanel`/`SettingsLayout`; they consume `--desktop-background-sidebar` with `--desktop-color-sidebar` as the solid fallback. Client sidebar image layers use a viewport attachment and must not be repainted in a consumer. The client profile maps `--desktop-color-canvas` to `--desktop-color-background`, including Native Tool roots. Embedded surfaces outside the client profile retain their portable canvas defaults. Use the canonical sidebar color for subordinate business panes; `--desktop-color-page-sidebar` is not a supported token.
+
 For new embedded React integrations use `components.css` with `DesktopProvider`. Its controlled `theme`/`onThemeChange` and uncontrolled `defaultTheme` support light/dark/system without document mutation or storage ownership. Scoped Radix portal wrappers inherit the actual origin's semantic overrides, native Tool typography and localization. See [0.6 migration](MIGRATION_0_6.md).
 
 Whole desktop documents use `desktop.css` with exactly one `DesktopDocumentAdapter`; document theme/persistence remains Host-owned. The following legacy entries remain compatible during migration and are explicitly document-wide.

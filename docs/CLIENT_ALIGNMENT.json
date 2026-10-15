@@ -51,7 +51,12 @@
       "width": 1280,
       "height": 720
     },
-    "surfaces": ["chat landing", "compact composer", "sidebar navigation", "general settings dialog"],
+    "surfaces": [
+      "chat landing",
+      "compact composer",
+      "sidebar navigation",
+      "general settings dialog"
+    ],
     "authority": "Supplementary shared chat UI; does not establish authenticated desktop geometry",
     "unobservedSurfaces": [
       "Authenticated project and recent disclosures (signed-out reference has no project or chat lists); fold behavior follows the user specification and supplied desktop captures"
@@ -105,5 +110,33 @@
       "Installed package metadata was observed separately from the captures"
     ],
     "verification": "scripts/verify-window-shell.mjs; Windows Edge and CSS zoom"
+  },
+  "backgroundSurfaces": {
+    "observedOn": "2026-10-15",
+    "nativePackageObservedSeparately": "26.1007.9446.0",
+    "reference": "User-supplied light/dark side-by-side captures, retained privately",
+    "light": {
+      "shellTop": "#f1f3f9",
+      "shellRail": "#eef0f6",
+      "sidebar": "#fafbfd",
+      "canvas": "#ffffff"
+    },
+    "dark": {
+      "shell": "Existing continuous blue-gray window gradient",
+      "sidebarFallback": "#191b21",
+      "sidebar": "60% #181818 over the window gradient; viewport-anchored",
+      "canvas": "#181818"
+    },
+    "nativeToolCanvas": "Aliases main canvas only inside DesktopClientSurface",
+    "verification": "scripts/verify-window-shell.mjs: actual pixels, direct/nested sidebars, scroll/resize, live theme changes and retained drafts",
+    "tolerance": {
+      "flat": 0,
+      "gradientPerChannel": 2
+    },
+    "limits": [
+      "CSS zoom is browser emulation, not native Windows scaling",
+      "No native wallpaper material or private captures are shipped",
+      "Consumer and installed application acceptance is recorded separately"
+    ]
   }
 }

@@ -19,6 +19,7 @@ import {
   VirtualList,
   Dialog,
   DesktopMenu,
+  useDesktopTheme,
   House,
   FolderSimple,
   Gear,
@@ -26,13 +27,14 @@ import {
 } from 'chatgpt-desktop-kit';
 
 function Fixture() {
+  const { setTheme } = useDesktopTheme();
   const [sidebar, setSidebar] = useState(true),
     [navigation, setNavigation] = useState(true);
   const [nested, setNested] = useState(false),
     [dialog, setDialog] = useState(false);
   const [maximized, setMaximized] = useState(false),
     [calls, setCalls] = useState(0);
-  Object.assign(window, { shellFixture: { setSidebar, setNavigation, setNested } });
+  Object.assign(window, { shellFixture: { setSidebar, setNavigation, setNested, setTheme } });
   const side = (
     <ClientSidebar
       header={
@@ -50,6 +52,9 @@ function Fixture() {
         actionId="fixture.project.open"
         selected
       />
+      {Array.from({ length: 80 }, (_, id) => (
+        <ClientSidebarItem key={id} label={`Sidebar record ${id + 1}`} actionId="fixture.sidebar.record.open" />
+      ))}
     </ClientSidebar>
   );
   const editor = (
@@ -60,6 +65,7 @@ function Fixture() {
           Open dialog
         </Button>
         <span data-fixture-calls={calls} />
+        <div data-palette-native-tool className="desktop-native-tool-surface" style={{ height: 24, background: 'var(--desktop-color-canvas)' }} />
       </div>
       <VirtualList
         ariaLabel="Long records"
