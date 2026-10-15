@@ -30576,6 +30576,13 @@
           "type": "ReactNode",
           "native": false,
           "description": ""
+        },
+        {
+          "name": "scrollable",
+          "required": false,
+          "type": "boolean | undefined",
+          "native": false,
+          "description": ""
         }
       ],
       "nativeProps": [
@@ -31200,6 +31207,13 @@
           "description": ""
         },
         {
+          "name": "depth",
+          "required": false,
+          "type": "number | undefined",
+          "native": false,
+          "description": "One shared indentation step per tree level; no empty icon column is implied."
+        },
+        {
           "name": "actions",
           "required": false,
           "type": "ReactNode",
@@ -31494,6 +31508,13 @@
         {
           "name": "title",
           "required": true,
+          "type": "ReactNode",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "titleControl",
+          "required": false,
           "type": "ReactNode",
           "native": false,
           "description": ""

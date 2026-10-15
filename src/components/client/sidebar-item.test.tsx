@@ -1,9 +1,21 @@
 // @vitest-environment jsdom
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import { ClientSidebarItem } from './index';
+import { ClientSidebar, ClientSidebarToolbar, ClientModeSwitcher, ClientSidebarItem } from './index';
 
 describe('ClientSidebarItem', () => {
+  it('does not manufacture an icon column and keeps indentation explicit', () => {
+    render(<ClientSidebarItem label="Task without icon" depth={1} />);
+    const button = screen.getByRole('button', { name: 'Task without icon' });
+    expect(button.querySelector('.desktop-action-glyph')).toBeNull();
+    expect(button.style.getPropertyValue('--desktop-sidebar-depth')).toBe('1');
+  });
+  it('allows a retained virtual viewport and a single title control', () => {
+    const { container } = render(<ClientSidebar scrollable={false} header={<ClientSidebarToolbar title="Projects" titleControl={<ClientModeSwitcher label="Projects" actionId="mode" ariaLabel="Switch mode" items={[]} />} />}><div>Viewport</div></ClientSidebar>);
+    expect(screen.getAllByText('Projects')).toHaveLength(1);
+    expect(container.querySelector('.client-sidebar-content')).not.toBeNull();
+    expect(container.querySelector('.client-sidebar-scroll')).toBeNull();
+  });
   it('exposes one navigation target with its label, count and current state', () => {
     const select = vi.fn();
     render(

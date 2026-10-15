@@ -159,15 +159,16 @@ export function DesktopClientSurface({ children }: { children: ReactNode }) {
 /** Title/actions stay in place while optional search content expands below them. */
 export function ClientSidebarToolbar({
   title,
+  titleControl,
   actions,
   children,
   className,
   ...props
-}: Omit<HTMLAttributes<HTMLDivElement>, 'title'> & { title: ReactNode; actions?: ReactNode }) {
+}: Omit<HTMLAttributes<HTMLDivElement>, 'title'> & { title: ReactNode; titleControl?: ReactNode; actions?: ReactNode }) {
   return (
     <div {...props} className={classes('client-sidebar-toolbar', className)}>
       <div className="client-sidebar-toolbar__row">
-        <ClientSidebarHeading>{title}</ClientSidebarHeading>
+        {titleControl ?? <ClientSidebarHeading>{title}</ClientSidebarHeading>}
         <div className="client-sidebar-toolbar__actions">{actions}</div>
       </div>
       {children}
@@ -177,14 +178,15 @@ export function ClientSidebarToolbar({
 
 export function ClientSidebar({
   header,
+  scrollable = true,
   children,
   className,
   ...props
-}: HTMLAttributes<HTMLDivElement> & { header?: ReactNode; children: ReactNode }) {
+}: HTMLAttributes<HTMLDivElement> & { header?: ReactNode; children: ReactNode; scrollable?: boolean }) {
   return (
     <div {...props} className={classes('client-sidebar', className)}>
       {header ? <header>{header}</header> : null}
-      <InternalScrollArea className="client-sidebar-scroll">{children}</InternalScrollArea>
+      {scrollable ? <InternalScrollArea className="client-sidebar-scroll">{children}</InternalScrollArea> : <div className="client-sidebar-content">{children}</div>}
     </div>
   );
 }
@@ -196,12 +198,15 @@ export function ClientSidebarItem({
   selected = false,
   className,
   icon,
+  depth = 0,
   actions,
   ...props
 }: Omit<ButtonProps, 'children' | 'variant' | 'iconOnly'> & {
   label: ReactNode;
   count?: number;
   selected?: boolean;
+  /** One shared indentation step per tree level; no empty icon column is implied. */
+  depth?: number;
   /** Independent overlaid commands; revealed on hover, focus or an open descendant menu. */
   actions?: ReactNode;
 }) {
@@ -221,7 +226,8 @@ export function ClientSidebarItem({
   const navigation = (
     <Button
       {...props}
-      icon={icon || <span aria-hidden="true" />}
+      icon={icon}
+      style={{ ...props.style, '--desktop-sidebar-depth': Math.max(0, depth) } as CSSProperties}
       variant="ghost"
       className={classes('client-sidebar-link', className)}
       aria-current={selected ? 'page' : undefined}
