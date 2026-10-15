@@ -43,8 +43,10 @@
 .kit-sidebar[hidden]{display:block;width:0;min-width:0;opacity:0;visibility:hidden;border-inline-end-width:0;pointer-events:none}
 .kit-sidebar[data-resizing=true]{transition:none}
 .kit-shell__main{flex:1;min-width:0;min-height:0;overflow:hidden;background:var(--desktop-color-background);border-radius:var(--desktop-radius-window) 0 0 0}
-.kit-settings-nav{height:100%;display:flex;flex-direction:column;gap:12px;padding:16px 8px}
-.kit-settings-nav h2{padding-inline:6px;margin:0;font-size:var(--desktop-font-size-toolbar)}
+.kit-settings-nav{height:100%;display:flex;flex-direction:column;gap:12px;padding:0}
+.kit-settings-nav>.client-sidebar-toolbar{margin-bottom:-12px}
+.kit-settings-nav>.kit-settings-search{margin-inline:12px}
+.kit-settings-nav>.kit-settings-nav__list{padding-inline:8px}
 .kit-settings-nav>.desktop-input{height:32px;border-radius:16px}
 .kit-settings-nav__list{flex:1;min-height:0}
 .kit-settings-search{position:relative;flex:none}.kit-settings-search>svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--desktop-color-text-muted);pointer-events:none}.kit-settings-search>.desktop-input{padding-left:34px}

@@ -28,6 +28,7 @@ Prominent client destination selector; menu commands remain Host-owned.
 | Prop | Required | Type |
 | --- | --- | --- |
 | header | no | `ReactNode` |
+| scrollable | no | `boolean \| undefined` |
 
 ## ClientSidebarHeading (chatgpt-desktop-kit)
 
@@ -56,6 +57,7 @@ A retained navigation target with a readable label and an independent trailing c
 | label | yes | `ReactNode` |
 | count | no | `number \| undefined` |
 | selected | no | `boolean \| undefined` |
+| depth | no | `number \| undefined` |
 | actions | no | `ReactNode` |
 
 ## ClientSidebarToolbar (chatgpt-desktop-kit)
@@ -67,6 +69,7 @@ Title/actions stay in place while optional search content expands below them.
 | Prop | Required | Type |
 | --- | --- | --- |
 | title | yes | `ReactNode` |
+| titleControl | no | `ReactNode` |
 | actions | no | `ReactNode` |
 
 ## DesktopClientSurface (chatgpt-desktop-kit)

@@ -1,7 +1,7 @@
 import type { Icon } from '@phosphor-icons/react';
 import { CaretRight, MagnifyingGlass, PushPin } from '@phosphor-icons/react';
 import { classes } from '../classes';
-import { ClientSidebarHeading } from '../client/sidebar-heading';
+import { ClientSidebarToolbar } from '../client';
 import { SidebarPanel, type SidebarResizeOptions } from './sidebar-panel';
 export { SidebarPanel, type SidebarResizeOptions } from './sidebar-panel';
 import * as Menu from '@radix-ui/react-dropdown-menu';
@@ -511,7 +511,7 @@ export function SettingsNavigation({
   );
   return (
     <div className="kit-settings-nav">
-      <ClientSidebarHeading>{title}</ClientSidebarHeading>
+      <ClientSidebarToolbar title={title} />
       <div className="kit-settings-search">
         <MagnifyingGlass size={16} />
         <Input

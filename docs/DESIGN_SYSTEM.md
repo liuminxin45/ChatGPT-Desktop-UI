@@ -1,5 +1,12 @@
 # Desktop design system
 
+Contextual sidebars use `ClientSidebarToolbar` as the single owner of title-row
+insets and height, including Settings navigation. `titleControl` substitutes a
+`ClientModeSwitcher` without nesting headings or adding a second inset.
+`ClientSidebar scrollable={false}` delegates scrolling to a retained virtual list.
+Sidebar records omit the glyph column when no icon is supplied; `depth` adds
+one shared 16px tree step per level without creating a placeholder icon.
+
 Contextual navigation titles use `ClientSidebarHeading`, including titles nested
 inside mode selectors. It shares Settings sidebar emphasis and the client title
 size. A navigation-owned category appears once, in its sidebar; content toolbars
