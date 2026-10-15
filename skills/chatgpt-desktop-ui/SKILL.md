@@ -5,6 +5,8 @@ description: Build or refactor a desktop-style app to match the supplied ChatGPT
 
 # ChatGPT-style desktop UI
 
+Search fields use `Input type="search"` for the shared borderless, filled pill. Compose leading icons and trailing commands with `InputGroup`; it owns one rounded search boundary and neutral inset focus. Keep ordinary text/secret fields on their existing control geometry. Hosts supply search semantics, labels, stable action IDs and behavior, never local corner, fill or border overrides. Verify standalone, grouped, settings and picker search through the actual consumer CSS in both themes.
+
 Buttons, icon actions, Tabs, navigation and Select/menu/Popover triggers never draw a focus outline or outer ring in either theme. Keyboard focus uses a neutral fill inside the existing target; primary/send actions retain their semantic foreground and use their hover fill. Pointer dismissal restores DOM focus without a residual trigger highlight. Escape is dismissal, not a switch to keyboard navigation. Keep native focus, Tab/arrow navigation, Enter/Space activation and disabled semantics; never blur controls to hide a visual state. Text entry retains neutral inset focus and invalid fields retain their error boundary. Tooltips are descriptive: the same Escape removes a visible tooltip and dismisses the active interactive overlay; a tooltip must never require a preliminary Escape. Open Select/menu/Popover and child Dialog still dismiss before their parent, and IME Escape never closes them.
 
 Tooltips must preserve layout ownership: row, tile and surface actions use the real button as their trigger, including explicit grid placement. Test with accessible labels and disabled states; an unlabeled fixture cannot detect wrapper-induced sizing defects.

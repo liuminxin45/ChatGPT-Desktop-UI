@@ -72,6 +72,8 @@ Menu items use the shared hover fill for pointer highlight and keyboard focus, i
 
 ## Geometry
 
+Search fields use `Input type="search"`: a borderless, filled 36px pill, matching the supplied Settings search reference. `InputGroup` detects its direct search input and owns the same pill boundary around icons and trailing actions. Standalone and grouped search use the shared input surface in both themes; keyboard focus remains a neutral inset and invalid focus retains the danger boundary. Hosts declare search semantics and retain handlers, drafts, labels and action IDs; they do not paint field borders, fills or corners. Ordinary text and secret fields retain their control geometry.
+
 ### Versioned client profile
 
 The window-shell correction measured on 2026-10-14 uses one continuous shell behind the title bar and rail. The light shell is #f0f3f9; the dark client profile uses a reproducible blue-gray gradient (top-left #1b202d, mid-rail #1a2033, far-right #1e2023). It is a CSS adaptation of the supplied capture, not an assertion about native material behavior or cross-monitor color differences. Title bar and rail are transparent within the shell. The contextual sidebar is white in light mode and #1a1b1d in this dark profile; the main canvas stays white/#181818.

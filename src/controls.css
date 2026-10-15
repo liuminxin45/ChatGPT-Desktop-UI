@@ -112,7 +112,11 @@
 :where(.desktop-input,.desktop-textarea,[contenteditable="true"])[aria-invalid="true"]:focus{border-color:var(--desktop-color-danger)!important;box-shadow:inset 0 0 0 1px var(--desktop-color-danger)!important}
 .desktop-composer :where(input,textarea,[contenteditable="true"]):focus{box-shadow:none!important}
 /* Compound text fields have one focus owner; never draw an inner input frame. */
+/* Search has one filled pill boundary, including icon/action compositions. */
+.desktop-input[type="search"]{appearance:none;border-radius:999px;background:var(--desktop-color-client-input,var(--desktop-color-surface-muted))}
+.desktop-input[type="search"]::-webkit-search-decoration,.desktop-input[type="search"]::-webkit-search-cancel-button{appearance:none}
 .desktop-input-group{display:flex;width:100%;height:36px;min-width:0;align-items:center;gap:8px;padding:0 11px;border:0;border-radius:var(--desktop-radius-control);background:var(--desktop-color-surface-muted);color:var(--desktop-color-text-muted)}
+.desktop-input-group:has(>input[type="search"]){border-radius:999px;background:var(--desktop-color-client-input,var(--desktop-color-surface-muted))}
 .desktop-input-group>svg,.desktop-input-group>button,.desktop-input-group>.desktop-action-tooltip{flex:none}
 .desktop-input-group>:is(input,textarea,[contenteditable="true"]){min-width:0;flex:1;height:100%;padding:0;border:0!important;border-radius:0;background:transparent!important;outline:none!important;box-shadow:none!important;color:var(--desktop-color-text)}
 .desktop-input-group:has(>:is(input,textarea,[contenteditable="true"]):focus){outline:none!important;border-color:var(--desktop-color-border-strong)!important;box-shadow:var(--desktop-input-focus-ring)!important}

@@ -64,6 +64,16 @@ try {
     await unmanaged.click();
     assert.equal(await unmanaged.evaluate(element => getComputedStyle(element).boxShadow), 'none', 'shared CSS must not add a rectangular frame to unmanaged native fields');
     const groups = [];
+    const standalone = page.getByRole('searchbox', { name: 'Standalone search' });
+    await standalone.fill('Retained search draft');
+    const searchGeometry = await standalone.evaluate(element => {
+      const style = getComputedStyle(element);
+      return { radius: parseFloat(style.borderRadius), height: element.getBoundingClientRect().height,
+        border: style.borderWidth, fill: style.backgroundColor };
+    });
+    assert.ok(searchGeometry.radius >= searchGeometry.height / 2);
+    assert.equal(searchGeometry.border, '0px');
+    assert.notEqual(searchGeometry.fill, 'rgba(0, 0, 0, 0)');
     for (const label of ['Live filter', 'Legacy filter', 'Compound filter', 'Invalid compound', 'Read only compound']) {
       const field = page.getByLabel(label); await field.focus();
       const geometry = await field.evaluate(element => {
@@ -77,6 +87,8 @@ try {
       assert.equal(geometry.inner, 'none', label + ' must not have a second focus frame');
       assert.equal(geometry.fill, 'rgba(0, 0, 0, 0)'); assert.equal(geometry.fits, true);
       assert.ok(geometry.outer.includes('inset')); assert.equal(geometry.border, '0px');
+      if (['Live filter', 'Compound filter'].includes(label)) assert.ok(parseFloat(geometry.radius) >= 18, label + ' must retain a pill boundary');
+      else assert.equal(geometry.radius, '8px', 'ordinary and secret compositions retain control corners');
       if (label === 'Invalid compound') assert.ok(geometry.outer.includes(geometry.danger), 'invalid group must retain danger focus');
       groups.push({ label, ...geometry });
     }

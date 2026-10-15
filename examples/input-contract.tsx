@@ -37,8 +37,9 @@ function Example() {
       <Textarea aria-label="Message" value={draft} onChange={event => setDraft(event.target.value)} />
       <Button confirmOnEnter actionId="example.message.send" disabled={!draft.trim()} onClick={() => { record('send'); setDraft(''); }}>Send</Button>
     </div>
-    <InputGroup><Input aria-label="Live filter" /></InputGroup>
-    <InputGroup data-testid="compound"><span aria-hidden="true">⌕</span><Input aria-label="Compound filter" value={draft} onChange={event => setDraft(event.target.value)} /><Button actionId="example.compound.clear" onClick={() => setDraft('')}>Clear</Button></InputGroup>
+    <Input type="search" aria-label="Standalone search" placeholder="Search" />
+    <InputGroup><Input type="search" aria-label="Live filter" /></InputGroup>
+    <InputGroup data-testid="compound"><span aria-hidden="true">⌕</span><Input type="search" aria-label="Compound filter" value={draft} onChange={event => setDraft(event.target.value)} /><Button actionId="example.compound.clear" onClick={() => setDraft('')}>Clear</Button></InputGroup>
     <InputGroup><span aria-hidden="true">⌕</span><HostInput aria-label="Invalid compound" aria-invalid="true" /></InputGroup>
     <InputGroup><span aria-hidden="true">⌕</span><Input aria-label="Disabled compound" disabled value="Disabled" readOnly /></InputGroup>
     <InputGroup><span aria-hidden="true">⌕</span><Input aria-label="Read only compound" readOnly value="Retained value" /></InputGroup>

@@ -515,6 +515,7 @@ export function SettingsNavigation({
       <div className="kit-settings-search">
         <MagnifyingGlass size={16} />
         <Input
+          type="search"
           data-desktop-action={`${actionId}.search`}
           aria-label={searchLabel}
           placeholder={searchLabel}
