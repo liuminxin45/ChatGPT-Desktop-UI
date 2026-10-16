@@ -138,7 +138,6 @@ export function Examples({ family }: { family: string }) {
         />
         {open && <FloatingPanel>Assistant panel</FloatingPanel>}
         <span role="status">{submitted}</span>
-
       </>
     );
   if (family === 'forms')
