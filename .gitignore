@@ -7,6 +7,8 @@ examples/catalog/build/
 *.tgz
 tests/output/
 artifacts/
+evidence/chat-workspace/
+.library-*.log
 
 skills/chatgpt-desktop-ui/assets/
 skills/chatgpt-desktop-ui/references/

@@ -313,6 +313,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
       }}
       className={classes('desktop-textarea', autoSize && 'desktop-textarea--auto', className)}
       {...props}
+      rows={props.rows ?? (autoSize ? 1 : undefined)}
       onInput={(event) => {
         resize();
         onInput?.(event);

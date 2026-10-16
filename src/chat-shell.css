@@ -1,0 +1,46 @@
+/* Public web/iOS references dated in docs/CHAT_APP_ALIGNMENT.json. This opt-in
+   profile supplements the versioned native client; portable controls stay intact. */
+.desktop-chat-app{height:100%;min-height:0;--desktop-font-size-body:14px;--desktop-line-height-ui:22px;--desktop-size-chat-sidebar:320px;--desktop-size-chat-reading:800px;--desktop-size-chat-message:16px;--desktop-radius-chat-header:24px;--desktop-size-chat-header:64px;font:400 var(--desktop-font-size-body)/var(--desktop-line-height-ui) var(--desktop-font-sans);color:var(--desktop-color-text);background:var(--desktop-color-background)}
+.desktop-chat-workspace{display:flex;position:relative;isolation:isolate;width:100%;height:100%;min-width:0;min-height:0;overflow:hidden}
+.desktop-chat-workspace__sidebar{outline:0;display:flex;flex-direction:column;position:relative;flex:none;width:var(--desktop-size-chat-sidebar,320px);min-width:0;min-height:0;overflow:hidden;background:var(--desktop-color-sidebar);transition:width 220ms cubic-bezier(.2,.8,.2,1),opacity 160ms ease}
+.desktop-chat-workspace[data-sidebar-open=false]>.desktop-chat-workspace__sidebar{width:0;opacity:0;pointer-events:none}
+.desktop-chat-workspace__content{position:relative;display:flex;flex-direction:column;flex:1;min-width:0;min-height:0;overflow:hidden;background:var(--desktop-color-background)}
+.desktop-chat-workspace__backdrop{display:none}
+.desktop-chat-header{position:relative;z-index:5;display:flex;flex:none;align-items:center;gap:8px;min-width:0;min-height:var(--desktop-size-chat-header,64px);padding:10px 20px;background:var(--desktop-color-background)}
+.desktop-chat-header__leading,.desktop-chat-header__actions{display:flex;flex:none;align-items:center;gap:4px}
+.desktop-chat-header__copy{flex:1;min-width:0}
+.desktop-chat-header__title{display:flex;min-width:0;align-items:center;font-size:18px;font-weight:500;line-height:24px}
+.desktop-chat-header__title :is(h1,h2){margin:0;font:inherit;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.desktop-chat-header__subtitle{margin-top:2px;color:var(--desktop-color-text-muted);font-size:var(--desktop-font-size-supporting);line-height:18px}
+.desktop-chat-header__mobile-title{display:none}
+.desktop-chat-app .desktop-conversation-message{font-size:var(--desktop-size-chat-message,16px);line-height:1.75}
+.desktop-chat-app .desktop-conversation-message--user>div:first-child{border-radius:22px;padding:10px 18px;background:var(--desktop-color-surface-muted)}
+.desktop-chat-app .desktop-conversation-message--assistant{margin-bottom:32px}
+.desktop-chat-app .desktop-composer-surface{border-radius:26px;background:var(--desktop-color-composer);box-shadow:var(--desktop-shadow-subtle);border-color:var(--desktop-color-border);padding:10px 12px}
+.desktop-chat-app .desktop-composer-surface textarea{font-size:16px;line-height:24px;min-height:44px;max-height:200px}
+.desktop-chat-app .desktop-composer-surface-controls{gap:0}
+.desktop-chat-app .desktop-composer-surface--chat{padding:6px 8px;border-radius:28px}
+.desktop-chat-app .desktop-composer-surface--chat textarea{min-height:36px}
+@media(max-width:1199px) and (min-width:768px){.desktop-chat-app{--desktop-size-chat-sidebar:280px}}
+@media(max-width:767px){
+ .desktop-chat-app{--desktop-font-size-body:16px;--desktop-line-height-ui:24px;--desktop-size-chat-sidebar:min(340px,calc(100vw - 48px));--desktop-size-chat-header:68px}
+ .desktop-chat-workspace__sidebar{position:absolute;inset:0 auto 0 0;z-index:32;width:var(--desktop-size-chat-sidebar);transform:translateX(0);opacity:1;transition:transform 240ms cubic-bezier(.2,.8,.2,1);padding-top:env(safe-area-inset-top)}
+ .desktop-chat-workspace[data-sidebar-open=false]>.desktop-chat-workspace__sidebar{width:var(--desktop-size-chat-sidebar);opacity:1;transform:translateX(-100%)}
+ .desktop-chat-workspace__backdrop{position:absolute;inset:0;z-index:31;display:block;appearance:none;border:0;border-radius:0;padding:0;background:var(--desktop-color-backdrop);opacity:0;visibility:hidden;pointer-events:none;transition:opacity 240ms ease,visibility 240ms}
+ .desktop-chat-workspace[data-sidebar-open=true]>.desktop-chat-workspace__backdrop{visibility:visible;opacity:1;pointer-events:auto}
+ .desktop-chat-header{gap:8px;padding:10px 12px;background:transparent;min-height:var(--desktop-size-chat-header)}
+ .desktop-chat-header__copy{flex:0 1 auto;min-width:0;padding-inline:12px;align-content:center;min-height:44px;border-radius:var(--desktop-radius-chat-header);background:var(--desktop-color-surface-overlay);box-shadow:var(--desktop-shadow-subtle)}
+ .desktop-chat-header__actions{margin-inline-start:auto}
+ .desktop-chat-header__title{font-size:17px;line-height:24px}
+ .desktop-chat-header__subtitle{display:none}
+ .desktop-chat-header--compact .desktop-chat-header__copy,.desktop-chat-header--compact .desktop-chat-header__mobile-title{display:none}
+ .desktop-chat-header__leading,.desktop-chat-header__actions{gap:0;border-radius:var(--desktop-radius-chat-header);background:var(--desktop-color-surface-overlay);box-shadow:var(--desktop-shadow-subtle)}
+ .desktop-chat-header :is(.desktop-chat-header__leading,.desktop-chat-header__actions) .desktop-button{width:44px;min-width:44px;height:44px;border-radius:50%;padding:0}
+ .desktop-chat-header :is(.desktop-chat-header__leading,.desktop-chat-header__actions) .desktop-button svg{width:22px;height:22px}
+ .desktop-chat-header:has(.desktop-chat-header__mobile-title) .desktop-chat-header__copy{display:none}
+ .desktop-chat-header__mobile-title{display:flex;align-items:center;min-width:0;flex:1}
+ .desktop-chat-header__mobile-title>.desktop-button{height:44px;max-width:100%;border-radius:var(--desktop-radius-chat-header);background:var(--desktop-color-surface-overlay);box-shadow:var(--desktop-shadow-subtle);font-size:17px;padding-inline:14px}
+ .desktop-chat-app .desktop-composer-surface{border-radius:26px;padding:10px}
+ .desktop-chat-app .desktop-conversation-message-actions{opacity:1}
+}
+@media(prefers-reduced-motion:reduce){.desktop-chat-workspace__sidebar,.desktop-chat-workspace__backdrop{transition:none}}

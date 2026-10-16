@@ -22,6 +22,7 @@ One presenter for streamed increments and complete responses. Canonical content 
 | state | no | `"streaming" \| "complete" \| "cancelled" \| "failed" \| undefined` |
 | className | no | `string \| undefined` |
 | components | no | `Components \| undefined` |
+| onCopyCode | no | `((text: string) => void \| Promise<void>) \| undefined` |
 | onReveal | no | `(() => void) \| undefined` |
 
 ## AIResponseProvider (chatgpt-desktop-kit)
@@ -33,6 +34,47 @@ Mount above virtualized conversations. Only offsets and timing are retained, nev
 | Prop | Required | Type |
 | --- | --- | --- |
 | children | yes | `ReactNode` |
+
+## ChatAppSurface (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/index.tsx)
+
+Responsive chat profile. Hosts retain routing, persistence, services and all business state.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+
+## ChatHeader (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/index.tsx)
+
+One quiet object header; mobile controls use the reference's separate floating surfaces.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| title | yes | `ReactNode` |
+| subtitle | no | `ReactNode` |
+| leading | no | `ReactNode` |
+| actions | no | `ReactNode` |
+| mobileTitle | no | `ReactNode` |
+| hideMobileTitle | no | `boolean \| undefined` |
+
+## ChatWorkspace (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/index.tsx)
+
+Retained desktop sidebar/mobile drawer. Opening, folding and resizing never remount either subtree.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| sidebar | yes | `ReactNode` |
+| sidebarOpen | yes | `boolean` |
+| onSidebarOpenChange | yes | `(open: boolean) => void` |
+| sidebarLabel | yes | `string` |
+| closeSidebarLabel | yes | `string` |
+| sidebarId | no | `string \| undefined` |
+| contentId | no | `string \| undefined` |
+| header | no | `ReactNode` |
 
 ## ClientComposer (chatgpt-desktop-kit)
 
@@ -91,6 +133,7 @@ One ChatGPT-style circular action for message composers; Hosts own operation sta
 
 | Prop | Required | Type |
 | --- | --- | --- |
+| layout | no | `"work" \| "chat" \| undefined` |
 | input | no | `ReactNode` |
 | attachments | no | `ReactNode` |
 | leading | no | `ReactNode` |

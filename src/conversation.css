@@ -34,6 +34,12 @@
 .desktop-composer-surface-controls{display:flex;flex:1;flex-wrap:wrap;align-items:center;min-width:0;gap:2px}
 .desktop-composer-surface-controls .desktop-select{width:auto;flex:0 1 auto;min-width:0;max-width:100%}
 .desktop-composer-surface-attachments{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+.desktop-composer-surface.desktop-composer-surface--chat{display:flex;flex-direction:column;align-items:stretch;gap:2px;padding:6px 8px;border-radius:28px}
+.desktop-composer-surface-chat-row{display:flex;align-items:flex-end;gap:4px;min-width:0}
+.desktop-composer-surface-chat-row>.desktop-composer-surface-editor{flex:1}
+.desktop-composer-surface-chat-row>:not(.desktop-composer-surface-editor){flex-shrink:0}
+.desktop-composer-surface--chat .desktop-composer-surface-editor>.desktop-textarea{min-height:36px;max-height:200px;padding:6px 4px}
+.desktop-composer-surface--chat>.desktop-composer-surface-controls{padding-inline:4px}
 .desktop-conversation-message{margin:0 0 24px;line-height:1.65;overflow-wrap:anywhere}
 .desktop-conversation-message--user{width:fit-content;max-width:82%;margin-inline-start:auto}
 .desktop-conversation-message--user>div:first-child{padding:10px 18px;border-radius:24px;background:var(--desktop-color-surface-muted)}

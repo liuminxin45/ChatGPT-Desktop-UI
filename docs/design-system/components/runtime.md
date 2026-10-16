@@ -8,6 +8,16 @@ Runnable composition: [example](../../../examples/catalog/Examples.tsx).
 
 Generated from TypeScript exports; edit implementation props/JSDoc, then run `npm run docs:generate`. Native React attributes remain available in the online API catalog.
 
+## ChatMenuIcon (chatgpt-desktop-kit)
+
+[Implementation](../../../src/chat-menu-icon.tsx)
+
+Two-line navigation target used by the public mobile chat profile.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| size | no | `number \| undefined` |
+
 ## DesktopDocumentAdapter (chatgpt-desktop-kit)
 
 [Implementation](../../../src/scoped-surface.tsx)

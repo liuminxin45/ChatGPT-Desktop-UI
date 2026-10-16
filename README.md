@@ -19,7 +19,7 @@ All people, projects and conversations are fictional. Edits stay in memory and r
 To run it locally with Node **24.19.0**:
 
 ```sh
-npm ci --ignore-scripts
+npm ci
 npm run demo
 ```
 
@@ -34,7 +34,7 @@ See [Demo verification](docs/demo/README.md) for screenshots and test scope.
 Use Node **24.19.0**.
 
 ```sh
-npm ci --ignore-scripts
+npm ci
 npm run typecheck
 npm run build
 npm test
@@ -46,6 +46,10 @@ npm run skill:check
 ```
 
 `npm run gallery` serves the synthetic examples on loopback. Visual tests use installed Microsoft Edge; set `UI_BROWSER_CHANNEL=chrome` for Chrome or `chromium` for an installed Playwright browser. Tests do not use business accounts or production data.
+
+## Responsive chat applications
+
+`ChatAppSurface`, `ChatHeader` and `ChatWorkspace` provide a retained desktop sidebar and mobile drawer, floating mobile actions and shared reading/composer geometry. See [reference provenance and limits](docs/CHAT_APP_ALIGNMENT.json) and the [independent example](examples/chat-workspace.tsx). Hosts retain routes, drafts, native capabilities and service outcomes.
 
 ## Integration
 
