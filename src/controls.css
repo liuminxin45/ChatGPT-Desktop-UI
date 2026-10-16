@@ -139,7 +139,7 @@
 /* Text metrics must leave room for ascenders/descenders at fractional scaling. */
 .desktop-select{line-height:var(--desktop-line-height-ui);transition:background-color var(--desktop-motion-fast),color var(--desktop-motion-fast),box-shadow var(--desktop-motion-fast)}
 .desktop-select>span:first-child{line-height:var(--desktop-line-height-ui);padding-block:1px}
-.desktop-select__icon{transition:transform var(--desktop-motion-fast)}.desktop-select[data-state=open] .desktop-select__icon{transform:rotate(180deg)}
+.desktop-select__icon{transition:color var(--desktop-motion-fast)}
 .desktop-menu-item{transition:background-color var(--desktop-motion-fast),color var(--desktop-motion-fast)}
 .desktop-select-item,.desktop-tabs button{transition:background-color var(--desktop-motion-fast),color var(--desktop-motion-fast),border-color var(--desktop-motion-fast)}
 .desktop-tool-page-bar__navigation{display:flex;align-items:center}.desktop-tabs{gap:4px;padding-block:4px}.desktop-tabs button{border-radius:var(--desktop-radius-control)}

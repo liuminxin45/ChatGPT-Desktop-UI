@@ -95,7 +95,22 @@ try {
       await field.evaluate((e) => (e.scrollTop = 0));
       await field.evaluate((e) => (e.scrollTop = e.scrollHeight));
       assert.ok((await field.evaluate((e) => e.scrollTop)) > 0);
-      await page.getByRole('combobox', { name: '模型', exact: true }).click();
+      const modelTrigger = page.getByRole('combobox', { name: '模型', exact: true });
+      const chevron = await modelTrigger.locator('svg').elementHandle();
+      const beforeChevron = await chevron.boundingBox();
+      await modelTrigger.hover();
+      await page.mouse.down();
+      for (const delay of [0, 60, 180]) {
+        if (delay) await page.waitForTimeout(delay);
+        const afterChevron = await chevron.boundingBox();
+        for (const key of ['x', 'y', 'width', 'height']) {
+          assert.ok(
+            Math.abs(beforeChevron[key] - afterChevron[key]) < 0.1,
+            `Select chevron ${key} moved while opening`,
+          );
+        }
+      }
+      await page.mouse.up();
       await page.getByRole('option', { name: '模型 B', exact: true }).click();
       assert.equal(await field.inputValue(), draft);
       assert.equal(await page.locator('[role=status]').last().innerText(), '发送次数：0');
