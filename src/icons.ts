@@ -12,6 +12,7 @@ export {
   Bug as BugIcon,
   CircleHelp as HelpIcon,
   ClipboardCheck as ReviewIcon,
+  Copy as CopyIcon,
   Database as DatabaseIcon,
   X as CloseIcon,
   FileText as DocumentIcon,

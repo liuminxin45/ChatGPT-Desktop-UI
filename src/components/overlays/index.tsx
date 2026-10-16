@@ -1,5 +1,5 @@
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
-import { useContext, useEffect, useRef, useState, type ReactNode } from 'react';
+import { useContext, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { protectModalEscape } from '../../runtime/modal-keyboard';
 import { AttachmentIcon, ChevronDownIcon, CloseIcon } from '../../icons';
@@ -124,6 +124,28 @@ export function Dialog({
   const visible = useContext(ToolVisibilityContext);
   const previousFocus = useRef<HTMLElement | null>(null);
   const dialogContent = useRef<HTMLDivElement>(null);
+  useLayoutEffect(() => {
+    if (!open || !visible) return;
+    const viewport = window.visualViewport;
+    const update = () => {
+      const element = dialogContent.current;
+      if (!element) return;
+      element.style.setProperty(
+        '--desktop-dialog-viewport-height',
+        `${viewport?.height ?? window.innerHeight}px`,
+      );
+      element.style.setProperty('--desktop-dialog-viewport-top', `${viewport?.offsetTop ?? 0}px`);
+    };
+    update();
+    viewport?.addEventListener('resize', update);
+    viewport?.addEventListener('scroll', update);
+    window.addEventListener('resize', update);
+    return () => {
+      viewport?.removeEventListener('resize', update);
+      viewport?.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
+    };
+  }, [open, visible]);
   return (
     <DialogPrimitive.Root
       open={open && visible}

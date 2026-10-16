@@ -85,6 +85,15 @@ One ChatGPT-style circular action for message composers; Hosts own operation sta
 | layout | no | `"row" \| "command" \| "tile" \| "surface" \| undefined` |
 | badge | no | `ReactNode` |
 
+## ComposerSurface (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/index.tsx)
+
+Shared input boundary for Hosts with their own attachment, draft and keyboard lifecycle.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+
 ## ConversationMessage (chatgpt-desktop-kit)
 
 [Implementation](../../../src/components/conversation/index.tsx)

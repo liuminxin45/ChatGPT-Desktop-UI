@@ -107,7 +107,15 @@ function textContent(value: ReactNode): string {
     .join('');
 }
 
-function CodeBlock({ children, disabled }: { children?: ReactNode; disabled?: boolean }) {
+function CodeBlock({
+  children,
+  disabled,
+  onCopy,
+}: {
+  children?: ReactNode;
+  disabled?: boolean;
+  onCopy?: (text: string) => void | Promise<void>;
+}) {
   const translate = useTranslation();
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState(false);
@@ -125,7 +133,9 @@ function CodeBlock({ children, disabled }: { children?: ReactNode; disabled?: bo
           disabled={disabled}
           onClick={async () => {
             try {
-              await navigator.clipboard.writeText(textContent(children));
+              const text = textContent(children);
+              if (onCopy) await onCopy(text);
+              else await navigator.clipboard.writeText(text);
               setCopied(true);
               setError(false);
             } catch {
@@ -137,7 +147,9 @@ function CodeBlock({ children, disabled }: { children?: ReactNode; disabled?: bo
           {translate(copied ? 'Copied' : error ? 'Copy unavailable' : 'Copy code')}
         </button>
       </div>
-      <pre>{children}</pre>
+      <pre tabIndex={0} aria-label={translate('Code')}>
+        {children}
+      </pre>
     </div>
   );
 }
@@ -148,6 +160,7 @@ export function Markdown({
   components,
   variant = 'default',
   copyDisabled = false,
+  onCopyCode,
   className,
   ...props
 }: Omit<HTMLAttributes<HTMLDivElement>, 'children'> & {
@@ -155,18 +168,22 @@ export function Markdown({
   components?: Components;
   variant?: 'default' | 'ai';
   copyDisabled?: boolean;
+  /** Host-owned native clipboard adapter; receives canonical source, never rendered text. */
+  onCopyCode?: (text: string) => void | Promise<void>;
 }) {
   const renderers = useMemo(
     () =>
       variant === 'ai'
         ? {
             pre: ({ children }: { children?: ReactNode }) => (
-              <CodeBlock disabled={copyDisabled}>{children}</CodeBlock>
+              <CodeBlock disabled={copyDisabled} onCopy={onCopyCode}>
+                {children}
+              </CodeBlock>
             ),
             ...components,
           }
         : components,
-    [variant, copyDisabled, components],
+    [variant, copyDisabled, onCopyCode, components],
   );
   const content = (
     <ReactMarkdown remarkPlugins={[remarkGfm]} components={renderers}>

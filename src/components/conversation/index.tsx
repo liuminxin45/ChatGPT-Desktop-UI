@@ -1,5 +1,5 @@
 import { Waveform } from '@phosphor-icons/react';
-import { forwardRef, useLayoutEffect, useRef, type ReactNode } from 'react';
+import { forwardRef, useLayoutEffect, useRef, type HTMLAttributes, type ReactNode } from 'react';
 import { Button, Textarea, type ButtonProps } from '../../controls';
 import { ArrowUp, LoaderCircle } from 'lucide-react';
 import { classes } from '../classes';
@@ -83,6 +83,15 @@ export const ComposerActionButton = forwardRef<HTMLButtonElement, ComposerAction
   },
 );
 export { AIResponse, AIResponseProvider, type AIResponseProps } from './ai-response';
+
+/** Shared input boundary for Hosts with their own attachment, draft and keyboard lifecycle. */
+export const ComposerSurface = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+  function ComposerSurface({ className, ...props }, ref) {
+    return (
+      <div {...props} ref={ref} className={classes('desktop-composer desktop-composer-surface', className)} />
+    );
+  },
+);
 
 export interface ClientComposerProps {
   value: string;

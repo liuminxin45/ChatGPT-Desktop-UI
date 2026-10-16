@@ -1,5 +1,5 @@
 import { Toaster as SonnerToaster, toast } from 'sonner';
-import { useLayoutEffect, useRef, type ReactNode } from 'react';
+import { useLayoutEffect, useRef, type ReactNode, type CSSProperties } from 'react';
 import { CloseIcon } from '../../icons';
 import { useTranslation } from '../../strings';
 import { Button } from '../actions';
@@ -14,6 +14,7 @@ export function ToastNotice({
   onClose,
   closeLabel,
   actionId,
+  mobileBottomInset = 12,
 }: {
   title: ReactNode;
   description?: ReactNode;
@@ -21,9 +22,14 @@ export function ToastNotice({
   onClose(): void;
   closeLabel: string;
   actionId: string;
+  /** Space reserved for a Host's mobile navigation; desktop placement stays canonical. */
+  mobileBottomInset?: number;
 }) {
   return (
-    <div className="desktop-toast-placement">
+    <div
+      className="desktop-toast-placement"
+      style={{ '--desktop-toast-mobile-bottom': `${mobileBottomInset}px` } as CSSProperties}
+    >
       <div
         className="desktop-toast desktop-toast-notice"
         data-tone={tone}
@@ -46,12 +52,14 @@ export function Toaster({
   label,
   actionId = 'notification',
   surfaceId = 'notifications',
+  mobileBottomInset = 12,
 }: {
   position?: 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right';
   duration?: number;
   label?: string;
   actionId?: string;
   surfaceId?: string;
+  mobileBottomInset?: number;
 }) {
   const translate = useTranslation();
   const root = useRef<HTMLDivElement>(null);
@@ -78,6 +86,11 @@ export function Toaster({
     <div ref={root} data-desktop-surface={surfaceId}>
       <SonnerToaster
         position={position}
+        mobileOffset={{
+          bottom: `max(${mobileBottomInset}px, env(safe-area-inset-bottom))`,
+          left: 12,
+          right: 12,
+        }}
         duration={duration}
         containerAriaLabel={label ?? translate('通知')}
         closeButton

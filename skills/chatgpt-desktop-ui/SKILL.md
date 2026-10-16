@@ -93,3 +93,13 @@ Compatibility paths only forward APIs to canonical components. Do not retain or 
 Semantic confirmations and menu commands use `AlertDialogAction variant="destructive"` and `DropdownMenuItem variant="destructive"`. Do not paint danger actions in Hosts. Audit navigation, metadata, avatars, menu items, floating actions and raw positioned overlays alongside form controls. Radio groups retain the same shared option insets as direct menu children.
 
 RecordRow owns record padding. Use density="compact" and separator rather than local padding, borders, rounded backgrounds or alternating fills. Audit imported aliases, role selectors and returned class properties. Keep business column geometry and domain opacity in the Host. Configure shared control labels once at the client root, including confirmation and accessibility labels; validate provider translations in the actual modal.
+
+## Host adapters without local control CSS
+
+Buttons keep their text/icon geometry stable on hover and press; feedback changes color and keyboard focus. Hosts must not restore pressed scaling or counteract it with local overrides.
+
+Use `ComposerSurface` when Host attachment, keyboard or native draft contracts require a custom composition. It supplies the shared input boundary, insets and textarea sizing; Host children retain all state and event ownership. `ClientComposer` remains the ready-made composition. `Tabs stretch` supports equal-width mobile navigation without Host rules targeting shared tab buttons.
+
+`Dialog` follows the visual viewport, including keyboard resize and viewport offset, and owns its responsive margins. Do not reposition the shared dialog with Host CSS. `ToastNotice` and `Toaster` accept `mobileBottomInset` (pixels, default 12) to reserve Host navigation space without repainting notifications.
+
+`Markdown variant="ai"` accepts `onCopyCode(text)` for a native clipboard bridge. The shared renderer retains code surfaces, language headers, failure feedback and keyboard access; the callback receives exact canonical source. Hosts can normalize transport trailing newlines deliberately in that callback. Use the semantic `CopyIcon` export for copy commands.
