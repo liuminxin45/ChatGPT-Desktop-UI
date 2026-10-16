@@ -61,6 +61,8 @@ import {
   SettingsField,
   SettingsDisclosure,
   ClientComposer,
+  ComposerSurface,
+  ComposerActionButton,
   ConversationMessage,
   Plus,
   House,
@@ -75,6 +77,7 @@ export function Examples({ family }: { family: string }) {
   const [section, setSection] = useState(true);
   const [submitted, setSubmitted] = useState('');
   const [dragPreview, setDragPreview] = useState(false);
+  const [hostDraft, setHostDraft] = useState('Host-owned attachment and keyboard behavior');
   const field = (
     <Input aria-label="Project name" value={value} onChange={(event) => setValue(event.target.value)} />
   );
@@ -135,6 +138,7 @@ export function Examples({ family }: { family: string }) {
         />
         {open && <FloatingPanel>Assistant panel</FloatingPanel>}
         <span role="status">{submitted}</span>
+
       </>
     );
   if (family === 'forms')
@@ -344,6 +348,24 @@ export function Examples({ family }: { family: string }) {
           context={<span>This computer</span>}
         />
         <span role="status">{submitted}</span>
+        <ComposerSurface aria-label="Host-composed message">
+          <Textarea
+            aria-label="Host draft"
+            rows={1}
+            autoSize
+            value={hostDraft}
+            onChange={(event) => setHostDraft(event.target.value)}
+          />
+          <ComposerActionButton
+            state="ready"
+            actionId="reference.host.send"
+            sendDisabled={!hostDraft.trim()}
+            onSend={() => {
+              setSubmitted(hostDraft);
+              setHostDraft('');
+            }}
+          />
+        </ComposerSurface>
       </div>
     );
   if (family === 'client')
