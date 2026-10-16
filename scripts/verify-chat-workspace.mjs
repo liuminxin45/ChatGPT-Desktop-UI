@@ -125,6 +125,7 @@ try {
       await page.screenshot({ path: path.join(out, `${width}-${theme}-sidebar.png`) });
       if (width < 768) {
         assert.equal(await side.getAttribute('aria-modal'), 'true');
+        assert.equal(await side.evaluate((e) => getComputedStyle(e).outlineStyle), 'none');
         await page.keyboard.press('Shift+Tab');
         assert.ok(await side.evaluate((e) => e.contains(document.activeElement)));
         const bounds = await side.boundingBox();
