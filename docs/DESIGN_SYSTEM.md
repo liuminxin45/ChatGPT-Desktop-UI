@@ -1,5 +1,22 @@
 # Desktop design system
 
+## Responsive chat application profile
+
+`ChatAppSurface` opts a browser/mobile application into the public ChatGPT chat
+reference relationships documented in `CHAT_APP_ALIGNMENT.json`. `ChatHeader`
+provides one compact desktop object heading and separate 44px floating mobile
+targets. `ChatWorkspace` composes a retained sidebar and content subtree: the
+sidebar folds on desktop and becomes a bounded modal drawer on phones. Hosts
+control visibility, selection, routing and business state. Escape respects nested
+controls and IME; focus is contained only while the mobile drawer is open, and
+closing restores its trigger. The backdrop and right-edge swipe dismiss it.
+
+This profile does not replace the measured Windows `DesktopClientSurface`.
+Portable controls keep their API, send/stop semantics and stable hover geometry.
+Motion uses transform and opacity on phones and honors reduced motion. The 240ms
+drawer duration is an adaptation, not a measured native timing claim. See the
+independent `examples/chat-workspace.tsx` fixture for actual rendered adoption.
+
 Button geometry is explicit: `layout="command"` is the compact centered command default. Single-target navigation/selection records use `layout="row"`, with left alignment, natural height and shared insets; place stacked title/metadata in one content group. Image pickers use `layout="tile"`, a square with contained media that fills the available preview rather than retaining tiny intrinsic dimensions. Do not override command height/padding to imitate records. `layout="surface"` carries native action, accessibility and instrumentation behavior without command geometry; reserve it for documented domain graphics such as schedule cells. Hosts own those graphics' grid boundaries, not ordinary control styles. Multi-action records still use static `RecordRow` and independent commands.
 
 Escape dismisses only the active overlay: an open Select, menu, Popover or nested Dialog closes before its parent editor. Respect consumed keyboard events and IME composition; never discard a draft because Escape cancelled composition. Dialog focus containment applies only to the top visible Dialog, and dismissal returns focus to its own trigger. Verify nested layers through the consumer's real CSS and portal pipeline.

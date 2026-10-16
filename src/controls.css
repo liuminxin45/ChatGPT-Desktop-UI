@@ -6,6 +6,8 @@
 @import './primitives.css';
 @import './conversation.css';
 @import './ai.css';
+@import './chat-shell.css';
+.desktop-input,.desktop-textarea{box-sizing:border-box}
 [data-radix-select-viewport]{scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch}
 [data-radix-select-viewport]::-webkit-scrollbar{display:none}
 .desktop-page-toolbar[data-inline=true]{padding-inline:0;border-bottom:0}

@@ -1,5 +1,23 @@
 # Integration
 
+For chat-focused browser/mobile products, compose `ChatAppSurface`, `ChatHeader`
+and `ChatWorkspace`. Supply `sidebarOpen`, `onSidebarOpenChange`, localized
+`sidebarLabel`/`closeSidebarLabel`, and optional `sidebarId`/`contentId` for existing
+Host anchors. Both subtrees remain mounted while visibility changes. A mobile
+drawer owns focus containment, Escape, backdrop and edge swipe; the Host owns
+route changes, browser back layers and desired initial visibility. Header slots
+accept existing shared controls. Never repaint them in consumer CSS.
+
+Use `ChatHeader.hideMobileTitle` for the icon-only phone header when its title is
+already present in the document. `ComposerSurface layout="chat"` puts attachment,
+editable draft and the canonical Send/Stop action in one compact row. Optional
+`controls` remain a visible second row for model, effort and permission selectors;
+Hosts must preserve confirmation gates and cannot silently hide required settings.
+
+Text inputs and Textarea use border-box sizing in the canonical control sheet.
+Auto-sized drafts therefore respect the declared maximum outer height even in a
+Host without a document-wide box-sizing reset; overflow stays internally editable.
+
 Desktop consumers may retain `script-src 'self'; style-src 'self'`. The prepared
 package ships notification and Select viewport rules in its external stylesheet.
 Sonner keeps queue behavior without injecting CSS. Modal wheel/touch isolation is

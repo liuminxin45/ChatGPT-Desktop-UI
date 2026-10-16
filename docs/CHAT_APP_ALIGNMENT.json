@@ -1,0 +1,33 @@
+{
+  "profile": "ChatAppSurface / ChatHeader / ChatWorkspace",
+  "reference_sources": [
+    {
+      "url": "https://openai.com/index/gpt-6-for-everyone/",
+      "published_on": "2026-10-07",
+      "platform": "desktop web",
+      "evidence": "Public 1600x900 opening frame: quiet icon navigation, bounded reading area and compact composer"
+    },
+    {
+      "url": "https://chatgpt.com/download/",
+      "platform": "iOS",
+      "evidence": "Public marketing capture: independent floating round header targets and a pill title",
+      "capture_date": "unverified"
+    },
+    {
+      "url": "https://itunes.apple.com/lookup?id=6448311069&country=us",
+      "platform": "iPhone and iPad",
+      "store_version": "1.2026.272",
+      "store_release_date": "2026-10-06",
+      "capture_date": "unverified",
+      "evidence": "Current public store marketing screenshots: staggered two-line menu, square-pencil action and compact single-row composer. Optional work selectors are a documented adaptation."
+    }
+  ],
+  "ownership": "Reusable geometry, control presentation and drawer interaction belong to the kit; routes, data, drafts and permissions remain controlled by the Host.",
+  "acceptance": "in progress",
+  "limitations": [
+    "Store screenshots do not establish their capture date, drawer appearance, dark theme or transition timings",
+    "Panel duration is a documented adaptation until native timing can be measured",
+    "No claim of full native ChatGPT client equivalence from these partial references",
+    "Existing DesktopClientSurface keeps its independently measured Windows package profile"
+  ]
+}

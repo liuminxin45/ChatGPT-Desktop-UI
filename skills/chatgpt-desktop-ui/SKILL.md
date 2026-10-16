@@ -5,6 +5,14 @@ description: Build or refactor a desktop-style app to match the supplied ChatGPT
 
 # ChatGPT-style desktop UI
 
+For browser/mobile chat products, use `ChatAppSurface`, `ChatHeader` and controlled
+`ChatWorkspace`. The mobile header has independent floating targets; the retained
+sidebar becomes a modal drawer without remounting its content or draft. Keep
+browser back layers in the Host, respect nested Escape and IME, and test both themes
+and real composer bounds. This supplements the native Windows profile rather than
+claiming its title bar, geometry or unobserved mobile timing. Read
+`docs/CHAT_APP_ALIGNMENT.json` in the source repository for provenance and limits.
+
 Tooltips must preserve layout ownership: row, tile and surface actions use the real button as their trigger, including explicit grid placement. Test with accessible labels and disabled states; an unlabeled fixture cannot detect wrapper-induced sizing defects.
 
 Choose shared Button geometry explicitly: command for compact centered actions, row for left-aligned single-target records with shared insets, tile for square contained image previews. Group stacked title and metadata as one content block. Do not apply ordinary command geometry to lists or media. Surface layout is reserved for documented domain graphics such as schedule cells, with native action/accessibility behavior but domain-owned geometry. Multi-action records remain static RecordRow groups.

@@ -2,6 +2,7 @@ export {
   Paperclip as AttachmentIcon,
   Trash2 as DeleteIcon,
   Pencil as EditIcon,
+  SquarePen as NewConversationIcon,
   RefreshCw as RefreshIcon,
   Link as LinkIcon,
   ExternalLink as SourceIcon,
@@ -35,3 +36,4 @@ export type { LucideProps as DesktopIconProps } from 'lucide-react';
 export { House, ChatCircle, Clock, FolderSimple, Gear, MagnifyingGlass, ArrowLeft, ArrowRight, SidebarSimple, UserCircle, Plus, ArrowUp, Bell, Sliders, DotsThree, Moon, Sun, SignOut } from '@phosphor-icons/react';
 
 export { NavigationIcon } from './navigation';
+export { ChatMenuIcon } from './chat-menu-icon';
