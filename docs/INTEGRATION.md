@@ -1,5 +1,11 @@
 # Integration
 
+`TaskStateIcon` accepts semantic `state` (`not-started`, `in-progress`, `paused`,
+`completed`, `cancelled`, `unknown`) and optional `excludedFromStats`. It renders a
+16px decorative glyph; the Host's independent icon Button provides a localized
+state name and command. The minus marker means excluded from statistics, never
+archived. Keep mutation ownership and status-code mapping in the Host.
+
 ## Local calendar values
 
 Use `TemporalPicker` for popup-only `date`, `month` and `datetime-local` selection. `value`/`onValueChange` use local strings (`YYYY-MM-DD`, `YYYY-MM`, `YYYY-MM-DDTHH:mm`); an empty string clears an optional field. Set `min`, `max`, `clearable`, `disabled`, `readOnly`, `size`, accessible field labels and the Host's stable `actionId`. The DatePicker compatibility export retains its existing Date/undefined callback and historical open/clear IDs. Ordinary Input does not automatically replace native temporal types. A hidden `name` value supports native form serialization; `required` prevents clearing and supplies accessibility semantics, while the Host retains business/form validation.

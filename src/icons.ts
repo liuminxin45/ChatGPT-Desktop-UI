@@ -33,3 +33,4 @@ export type { LucideProps as DesktopIconProps } from 'lucide-react';
 export { House, ChatCircle, Clock, FolderSimple, Gear, MagnifyingGlass, ArrowLeft, ArrowRight, SidebarSimple, UserCircle, Plus, ArrowUp, Bell, Sliders, DotsThree, Moon, Sun, SignOut } from '@phosphor-icons/react';
 
 export { NavigationIcon } from './navigation';
+export { TaskStateIcon, type TaskState } from './task-state-icon';

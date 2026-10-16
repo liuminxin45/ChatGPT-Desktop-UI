@@ -1,5 +1,19 @@
 # Desktop design system
 
+## Compact contextual navigation
+
+Contextual sidebar navigation uses 13px regular text, 20px line height and 32px
+single-line targets. Module headings use 16px and group headings use 12px. This
+profile applies to Settings and embedded Tool navigation as well as client lists;
+content typography and intentional two-line message previews retain their hierarchy.
+Independent commands use ClientSidebarItem.actions and a fixed status slot (20px
+for passive glyphs, 28px for an independent button). Commands
+appear on hover, focus, an open child menu, or coarse pointers. Records have no
+separator. TaskStateIcon uses shape as well as semantic color; excluded work adds
+a minus marker without changing the underlying state. Hosts map domain status codes
+and provide localized button labels and tooltips. Never use a spinning state glyph
+for an ordinary in-progress task.
+
 Contextual sidebars use `ClientSidebarToolbar` as the single owner of title-row
 insets and height, including Settings navigation. `titleControl` substitutes a
 `ClientModeSwitcher` without nesting headings or adding a second inset.
