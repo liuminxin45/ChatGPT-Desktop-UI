@@ -12,7 +12,10 @@
 .desktop-client .kit-titlebar__menu{font-size:14px}.desktop-client .kit-titlebar__actions{gap:6px}
 .desktop-client .kit-shell__navigation{width:52px}.desktop-client .kit-rail{width:52px;padding-top:8px}
 .desktop-client .kit-rail__items{gap:8px}.desktop-client .kit-rail .kit-rail__item{width:36px;height:36px}
-.desktop-client .kit-sidebar{width:var(--desktop-size-client-sidebar);border-inline-end:1px solid var(--desktop-color-border);border-top-left-radius:14px;overflow:hidden}
+.desktop-client .kit-sidebar{--desktop-sidebar-width:var(--desktop-size-client-sidebar);border-inline-end:1px solid var(--desktop-color-border);border-top-left-radius:14px;overflow:hidden}
+.desktop-client .kit-sidebar[hidden]{border-inline-end-width:0}
+.client-sidebar>header>h2{margin:0;font-size:var(--desktop-font-size-page-title);line-height:var(--desktop-line-height-heading);font-weight:var(--desktop-font-weight-emphasis)}
+.desktop-settings-form>.client-settings-group{margin-bottom:0}
 .desktop-client .kit-shell__main{border-top-left-radius:0}.desktop-client .kit-shell__body{padding-right:4px;padding-bottom:4px}
 .client-sidebar{height:100%;display:flex;flex-direction:column}.client-sidebar>header{display:flex;align-items:center;justify-content:space-between;height:48px;padding:8px 12px;flex:none}.client-sidebar-scroll{flex:1;min-height:0;padding:0 8px 20px}
 .client-sidebar-link.desktop-button{display:flex;width:100%;justify-content:flex-start;min-height:32px;height:auto;padding:6px 8px;gap:10px;border-radius:10px;font-size:14px;line-height:20px;font-weight:500;white-space:normal}
@@ -49,7 +52,7 @@
 /* Client settings use one row contract, including long values and nested Tools. */
 .client-settings-field>div:last-child>:is(.desktop-select,.desktop-input,.desktop-input-group){max-width:100%;min-width:0}
 .client-settings-field>div:last-child:has(>.desktop-input,>.desktop-input-group){width:50%}
-.desktop-client .kit-settings-layout>.kit-sidebar{width:336px}
-@media(max-width:1000px){.desktop-client .kit-settings-layout>.kit-sidebar{width:260px}}
+.desktop-client .kit-settings-layout>.kit-sidebar{--desktop-sidebar-width:336px}
+@media(max-width:1000px){.desktop-client .kit-settings-layout>.kit-sidebar{--desktop-sidebar-width:260px}}
 
 .desktop-ui-portal.desktop-client{height:auto}

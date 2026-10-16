@@ -114,6 +114,8 @@ Text controls use a 20px line box with descender clearance; never clip a selecte
 
 `NavigationRail` can receive controlled `pinnedIds` and `onPinnedChange` props. Its More menu lists every available destination and exposes a separate pin toggle. The Host owns the pinned set; opening and closing this menu cannot remount page content. `DesktopShell.navigationVisible` retains the navigation subtree when collapsed.
 
+Contextual sidebars transition width and opacity on both expansion and collapse, retaining their content throughout. Collapsed panels become inert immediately and leave layout after the shared motion interval; reduced motion disables the transition. Resize gestures update geometry immediately. Persisted widths use shared sidebar width tokens so folding still reaches zero width. Contextual sidebar headings use the same semantic emphasis and 18px title size as Settings navigation.
+
 `SettingsCategory.group` provides optional named category sections. Settings sections use a distinct semantic surface and neutral internal row dividers in both themes. Menus use real 16px chevrons rather than a tiny text arrow.
 
 ## Layout choice
