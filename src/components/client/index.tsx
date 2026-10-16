@@ -208,6 +208,8 @@ export function ClientSidebarItem({
   icon,
   depth = 0,
   actions,
+  description,
+  status,
   ...props
 }: Omit<ButtonProps, 'children' | 'variant' | 'iconOnly'> & {
   label: ReactNode;
@@ -217,6 +219,10 @@ export function ClientSidebarItem({
   depth?: number;
   /** Independent overlaid commands; revealed on hover, focus or an open descendant menu. */
   actions?: ReactNode;
+  /** Optional second line; uses the shared 56px two-line record profile. */
+  description?: ReactNode;
+  /** Outside the navigation target. Null reserves the shared 20px status column. */
+  status?: ReactNode;
 }) {
   const actionsRef = useRef<HTMLDivElement>(null);
   const [actionsWidth, setActionsWidth] = useState(0);
@@ -235,25 +241,37 @@ export function ClientSidebarItem({
     <Button
       {...props}
       icon={icon}
+      layout={props.layout || 'row'}
       style={{ ...props.style, '--desktop-sidebar-depth': Math.max(0, depth) } as CSSProperties}
       variant="ghost"
       className={classes('client-sidebar-link', className)}
+      data-description={description !== undefined || undefined}
       aria-current={selected ? 'page' : undefined}
     >
-      <span className="client-sidebar-label">{label}</span>
+      <span className="client-sidebar-item-content">
+        <span className="client-sidebar-label">{label}</span>
+        {description !== undefined && <span className="client-sidebar-description">{description}</span>}
+      </span>
       {count !== undefined && <span className="client-sidebar-count">{count}</span>}
     </Button>
   );
-  return actions ? (
+  return actions || status !== undefined ? (
     <RecordRow
       density="compact"
       className="client-sidebar-record"
+      data-description={description !== undefined || undefined}
+      data-status-slot={status !== undefined || undefined}
       style={{ '--desktop-sidebar-actions-width': `${actionsWidth}px` } as CSSProperties}
     >
-      {navigation}
-      <div ref={actionsRef} className="client-sidebar-record-actions">
-        {actions}
+      <div className="client-sidebar-record-target">
+        {navigation}
+        {actions && (
+          <div ref={actionsRef} className="client-sidebar-record-actions">
+            {actions}
+          </div>
+        )}
       </div>
+      {status !== undefined && <span className="client-sidebar-status">{status}</span>}
     </RecordRow>
   ) : (
     navigation

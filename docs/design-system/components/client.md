@@ -59,6 +59,8 @@ A retained navigation target with a readable label and an independent trailing c
 | selected | no | `boolean \| undefined` |
 | depth | no | `number \| undefined` |
 | actions | no | `ReactNode` |
+| description | no | `ReactNode` |
+| status | no | `ReactNode` |
 
 ## ClientSidebarToolbar (chatgpt-desktop-kit)
 

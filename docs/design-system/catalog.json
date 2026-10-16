@@ -31219,6 +31219,20 @@
           "type": "ReactNode",
           "native": false,
           "description": "Independent overlaid commands; revealed on hover, focus or an open descendant menu."
+        },
+        {
+          "name": "description",
+          "required": false,
+          "type": "ReactNode",
+          "native": false,
+          "description": "Optional second line; uses the shared 56px two-line record profile."
+        },
+        {
+          "name": "status",
+          "required": false,
+          "type": "ReactNode",
+          "native": false,
+          "description": "Outside the navigation target. Null reserves the shared 20px status column."
         }
       ],
       "nativeProps": [

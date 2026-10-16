@@ -81,6 +81,34 @@ try {
       await page.keyboard.press('ArrowRight');
       assert.equal(await tab.getAttribute('aria-selected'), 'true');
       await page.waitForFunction(() => {
+        const element = document.activeElement;
+        if (!element || element.getAttribute('role') !== 'tab') return false;
+        const probe = document.createElement('span');
+        probe.style.background = 'var(--desktop-color-surface-hover)';
+        element.append(probe);
+        const ready = getComputedStyle(element).backgroundColor === getComputedStyle(probe).backgroundColor;
+        probe.remove();
+        return ready;
+      });
+      const keyboardFocus = await tab.evaluate((element) => {
+        const probe = document.createElement('span');
+        probe.style.background = 'var(--desktop-color-surface-hover)';
+        element.append(probe);
+        const css = getComputedStyle(element);
+        const result = {
+          fill: css.backgroundColor,
+          expected: getComputedStyle(probe).backgroundColor,
+          outline: css.outlineStyle,
+        };
+        probe.remove();
+        return result;
+      });
+      assert.equal(keyboardFocus.fill, keyboardFocus.expected, 'keyboard focus uses the shared neutral fill');
+      assert.equal(keyboardFocus.outline, 'none');
+      // Selection fill is measured independently of the keyboard-focus fill.
+      await page.mouse.move(1, 1);
+      await page.getByRole('button', { name: 'Filter records' }).focus();
+      await page.waitForFunction(() => {
         const element = document.querySelector('[role="tab"][aria-selected="true"]');
         const probe = document.createElement('span');
         probe.style.background = 'var(--desktop-color-surface-selected)';
@@ -110,7 +138,7 @@ try {
       assert.equal(tabAppearance.fill, tabAppearance.selected);
       assert.equal(tabAppearance.bottomRadius, tabAppearance.radius);
       assert.equal(tabAppearance.fontWeight, '400');
-      assert.notEqual(tabAppearance.outline, 'none', 'keyboard focus remains visible');
+      assert.equal(tabAppearance.outline, 'none', 'selection uses no outer focus ring');
       await page.getByRole('button', { name: 'Menu', exact: true }).click();
       assert.ok((await gap(page.getByRole('menuitem'))) >= 4);
       await page.waitForFunction(() => document.activeElement?.closest('[role="menu"]'));

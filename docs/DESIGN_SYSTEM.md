@@ -15,7 +15,11 @@ omits the visible category heading without changing the default Settings demo.
 Hosts supply an accessible content name when hiding that heading. Chat search
 expands below the retained title/action row using the shared sidebar toolbar slots.
 
-`ClientSidebarItem` keeps names on one line with ellipsis. Independent trailing
+`ClientSidebarItem` keeps names on one line with ellipsis. Optional `description`
+uses a shared 56px two-line record; optional `status` is a separate 20px column
+outside its navigation target. Pass `null` to reserve that column without a mark,
+or omit it for the ordinary sidebar profile. Status and record whitespace are
+non-interactive. Independent trailing
 commands overlay the navigation target and reserve no label space while hidden.
 Hover, keyboard focus and open menus reveal the commands and shorten the label
 by their measured width, without changing row height or navigation bounds.

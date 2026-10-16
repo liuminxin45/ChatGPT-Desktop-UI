@@ -4,6 +4,33 @@ import { describe, expect, it, vi } from 'vitest';
 import { ClientSidebar, ClientSidebarToolbar, ClientModeSwitcher, ClientSidebarItem } from './index';
 
 describe('ClientSidebarItem', () => {
+  it('keeps summaries and external status separate from navigation and commands', () => {
+    const select = vi.fn();
+    const command = vi.fn();
+    const { container, rerender } = render(
+      <ClientSidebarItem
+        label="Execution"
+        description="Waiting for input"
+        status={<span>Unread</span>}
+        onClick={select}
+        actions={<button onClick={command}>Archive execution</button>}
+      />,
+    );
+    const navigation = screen.getByRole('button', { name: 'Execution Waiting for input' });
+    expect(navigation.getAttribute('data-description')).toBe('true');
+    expect(navigation.parentElement?.className).toBe('client-sidebar-record-target');
+    expect(navigation.contains(screen.getByText('Unread'))).toBe(false);
+    screen.getByText('Unread').click();
+    container.querySelector<HTMLElement>('.client-sidebar-record')!.click();
+    expect(select).not.toHaveBeenCalled();
+    screen.getByRole('button', { name: 'Archive execution' }).click();
+    expect(command).toHaveBeenCalledOnce();
+    expect(select).not.toHaveBeenCalled();
+    rerender(<ClientSidebarItem label="Execution" status={null} />);
+    expect(container.querySelector('.client-sidebar-status')).not.toBeNull();
+    rerender(<ClientSidebarItem label="Execution" />);
+    expect(container.querySelector('.client-sidebar-status')).toBeNull();
+  });
   it('does not manufacture an icon column and keeps indentation explicit', () => {
     render(<ClientSidebarItem label="Task without icon" depth={1} />);
     const button = screen.getByRole('button', { name: 'Task without icon' });
