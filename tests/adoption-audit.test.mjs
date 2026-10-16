@@ -5,6 +5,18 @@ import os from 'node:os';
 import path from 'node:path';
 import { auditControls } from '../scripts/audit-controls.mjs';
 
+test('JSX consumers are parsed and nonvisual form transport fields remain explicit exceptions', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-jsx-audit-'));
+  try {
+    const source = path.join(root, 'view.jsx');
+    fs.writeFileSync(source, 'import {Button} from "chatgpt-desktop-kit";export const view=<><Button className="p-4"/><input type="hidden" name="csrf"/><button>Copied control</button></>;');
+    const result = auditControls(root, [source]);
+    assert.equal(result.controlOverrides.length, 1);
+    assert.equal(result.nativeControls.length, 1);
+    assert.equal(result.exceptions.length, 1);
+  } finally { fs.rmSync(root, {recursive:true,force:true}); }
+});
+
 test('record ownership follows aliases, roles and returned class properties', () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-record-audit-'));
   try {

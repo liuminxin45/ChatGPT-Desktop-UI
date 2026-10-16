@@ -1,8 +1,10 @@
 import { Waveform } from '@phosphor-icons/react';
-import { forwardRef, useLayoutEffect, useRef, type ReactNode } from 'react';
+import { forwardRef, useLayoutEffect, useRef, type HTMLAttributes, type ReactNode } from 'react';
 import { Button, Textarea, type ButtonProps } from '../../controls';
 import { ArrowUp, LoaderCircle } from 'lucide-react';
 import { classes } from '../classes';
+import { ScrollToBottomIcon } from '../../icons';
+import { useTranslation } from '../../strings';
 
 export type ComposerActionState = 'ready' | 'sending' | 'stoppable' | 'stopping';
 
@@ -83,6 +85,75 @@ export const ComposerActionButton = forwardRef<HTMLButtonElement, ComposerAction
   },
 );
 export { AIResponse, AIResponseProvider, type AIResponseProps } from './ai-response';
+
+/** Shared input boundary for Hosts with their own attachment, draft and keyboard lifecycle. */
+export interface ComposerSurfaceProps extends HTMLAttributes<HTMLDivElement> {
+  /** Structured work input. Omit to retain the inline children composition. */
+  input?: ReactNode;
+  attachments?: ReactNode;
+  leading?: ReactNode;
+  controls?: ReactNode;
+  action?: ReactNode;
+}
+export const ComposerSurface = forwardRef<HTMLDivElement, ComposerSurfaceProps>(function ComposerSurface(
+  { className, input, attachments, leading, controls, action, children, ...props },
+  ref,
+) {
+  return (
+    <div
+      {...props}
+      ref={ref}
+      className={classes(
+        'desktop-composer desktop-composer-surface',
+        !!input && 'desktop-composer-surface--work',
+        className,
+      )}
+    >
+      {input ? (
+        <>
+          {attachments ? <div className="desktop-composer-surface-attachments">{attachments}</div> : null}
+          <div className="desktop-composer-surface-editor">{input}</div>
+          <div className="desktop-composer-surface-toolbar">
+            {leading}
+            <div className="desktop-composer-surface-controls">{controls}</div>
+            {action}
+          </div>
+          {children}
+        </>
+      ) : (
+        children
+      )}
+    </div>
+  );
+});
+
+/** Relative scroll viewport; floating commands stay outside ScrollEdgeFade. */
+export const ConversationViewport = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+  function ConversationViewport({ className, ...props }, ref) {
+    return <div {...props} ref={ref} className={classes('desktop-conversation-viewport', className)} />;
+  },
+);
+
+/** Hosts own follow-bottom state and scrolling; the kit owns the floating action. */
+export function ScrollToBottomButton({
+  visible = true,
+  label,
+  actionId = 'conversation.bottom',
+  ...props
+}: Omit<ButtonProps, 'children' | 'icon' | 'iconOnly'> & { visible?: boolean; label?: string }) {
+  const translate = useTranslation();
+  if (!visible) return null;
+  return (
+    <Button
+      {...props}
+      actionId={actionId}
+      className={classes('desktop-scroll-to-bottom', props.className)}
+      aria-label={label ?? translate('Scroll to bottom')}
+      iconOnly
+      icon={<ScrollToBottomIcon size={18} />}
+    />
+  );
+}
 
 export interface ClientComposerProps {
   value: string;

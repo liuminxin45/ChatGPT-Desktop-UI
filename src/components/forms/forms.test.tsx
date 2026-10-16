@@ -3,7 +3,7 @@ import { afterEach, describe, expect, it } from 'vitest';
 import { createRef } from 'react';
 import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Checkbox, EditableCombobox, Switch } from './index';
+import { Checkbox, EditableCombobox, Switch, Select } from './index';
 import { IconButton } from '../actions';
 import { configureUIRuntime, UIStringsProvider, useLocale, useTranslation } from '../../strings';
 
@@ -13,6 +13,10 @@ afterEach(() => {
 });
 
 describe('public form contracts', () => {
+  it('shows a pending placeholder when no empty-value option exists', () => {
+    render(<Select value="" options={[]} placeholder="同步设置…" aria-label="模型" disabled />);
+    expect(screen.getByRole('combobox', { name: '模型' }).textContent).toContain('同步设置…');
+  });
   it('keeps local labels and locales independent of the legacy host bridge', () => {
     configureUIRuntime({ translate: () => 'Host label', getLocale: () => 'zh-CN' });
     function Label() {

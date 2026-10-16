@@ -271,7 +271,7 @@ export function EditableCombobox({
 }
 
 export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
-  /** Grow with content and width changes; the surrounding document owns scrolling. */
+  /** Grow with content and width changes; at a CSS max-height the field scrolls internally. */
   autoSize?: boolean;
 }
 
@@ -286,6 +286,9 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
     node.style.height = 'auto';
     const border = node.offsetHeight - node.clientHeight;
     node.style.height = `${node.scrollHeight + border}px`;
+    // CSS max-height may clamp the measured height. Keep the rest of the draft
+    // reachable instead of leaving auto-sized fields permanently overflow:hidden.
+    node.style.overflowY = node.scrollHeight > node.clientHeight + 1 ? 'auto' : 'hidden';
   }, [autoSize]);
   useEffect(() => {
     resize();
@@ -375,7 +378,8 @@ export function Select({
   useEffect(() => {
     if (!visible) setOpen(false);
   }, [visible]);
-  const encode = (next: string | undefined) => (next === '' ? EMPTY_SELECT_VALUE : next);
+  const hasEmptyOption = options.some((option) => option.value === '');
+  const encode = (next: string | undefined) => (next === '' && hasEmptyOption ? EMPTY_SELECT_VALUE : next);
   const decode = (next: string) => (next === EMPTY_SELECT_VALUE ? '' : next);
   return (
     <SelectPrimitive.Root
