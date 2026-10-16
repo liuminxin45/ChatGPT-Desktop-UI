@@ -7,13 +7,9 @@
   transition:
     background-color var(--desktop-motion-fast) ease,
     border-color var(--desktop-motion-fast) ease,
-    color var(--desktop-motion-fast) ease,
-    transform var(--desktop-motion-press) ease;
+    color var(--desktop-motion-fast) ease;
 }
 
-:where(.desktop-pressable):active:not(:disabled) {
-  transform: scale(0.98);
-}
 
 :where(.desktop-surface) {
   border: 0;

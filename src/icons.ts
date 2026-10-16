@@ -9,6 +9,7 @@ export {
   CircleCheck as CompleteIcon,
   TerminalSquare as AssistantIcon,
   ArrowUp as SendIcon,
+  ArrowDown as ScrollToBottomIcon,
   Bug as BugIcon,
   CircleHelp as HelpIcon,
   ClipboardCheck as ReviewIcon,

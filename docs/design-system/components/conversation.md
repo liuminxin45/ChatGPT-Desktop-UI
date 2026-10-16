@@ -89,10 +89,13 @@ One ChatGPT-style circular action for message composers; Hosts own operation sta
 
 [Implementation](../../../src/components/conversation/index.tsx)
 
-Shared input boundary for Hosts with their own attachment, draft and keyboard lifecycle.
-
 | Prop | Required | Type |
 | --- | --- | --- |
+| input | no | `ReactNode` |
+| attachments | no | `ReactNode` |
+| leading | no | `ReactNode` |
+| controls | no | `ReactNode` |
+| action | no | `ReactNode` |
 
 ## ConversationMessage (chatgpt-desktop-kit)
 
@@ -106,3 +109,29 @@ Shared message geometry; message content and contextual action definitions stay 
 | children | yes | `ReactNode` |
 | actions | no | `ReactNode` |
 | label | yes | `string` |
+
+## ConversationViewport (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/index.tsx)
+
+Relative scroll viewport; floating commands stay outside ScrollEdgeFade.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+
+## ScrollToBottomButton (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/index.tsx)
+
+Hosts own follow-bottom state and scrolling; the kit owns the floating action.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| size | no | `"sm" \| "md" \| undefined` |
+| layout | no | `"row" \| "command" \| "tile" \| "surface" \| undefined` |
+| variant | no | `ButtonVariant \| undefined` |
+| actionId | no | `string \| undefined` |
+| confirmOnEnter | no | `boolean \| undefined` |
+| badge | no | `ReactNode` |
+| visible | no | `boolean \| undefined` |
+| label | no | `string \| undefined` |

@@ -514,12 +514,24 @@ export function SettingsNavigation({
 
 export const SettingsPage = forwardRef<
   HTMLDivElement,
-  Omit<import('react').HTMLAttributes<HTMLDivElement>, 'title'> & { title: ReactNode }
->(function SettingsPage({ title, children, className, ...props }, ref) {
+  Omit<import('react').HTMLAttributes<HTMLDivElement>, 'title'> & {
+    title: ReactNode;
+    leading?: ReactNode;
+    actions?: ReactNode;
+  }
+>(function SettingsPage({ title, children, className, leading, actions, ...props }, ref) {
   return (
     <InternalScrollArea ref={ref} className={classes('kit-settings-scroll', className)} {...props}>
       <div className="kit-settings-content">
-        <h1>{title}</h1>
+        {leading || actions ? (
+          <header className="kit-settings-heading">
+            {leading}
+            <h1>{title}</h1>
+            {actions}
+          </header>
+        ) : (
+          <h1>{title}</h1>
+        )}
         {children}
       </div>
     </InternalScrollArea>

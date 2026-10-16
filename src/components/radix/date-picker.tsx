@@ -8,14 +8,20 @@ import { cn } from './utils';
 import { Button } from './button';
 import { Calendar } from './calendar';
 import { Popover, PopoverContent, PopoverTrigger } from './popover';
+import { ToolVisibilityContext } from '../../surface-visibility';
 
-interface DatePickerProps {
+export interface DatePickerProps {
   value: Date | undefined;
   onChange: (date: Date | undefined) => void;
   placeholder?: string;
   className?: string;
   triggerClassName?: string;
   actionId?: string;
+  id?: string;
+  'aria-label'?: string;
+  disabled?: boolean;
+  /** Required day navigation can omit the clear command without a Host CSS override. */
+  clearable?: boolean;
 }
 
 export function DatePicker({
@@ -25,16 +31,27 @@ export function DatePicker({
   className = '',
   triggerClassName = '',
   actionId = 'date-picker',
+  id,
+  'aria-label': ariaLabel,
+  disabled = false,
+  clearable = true,
 }: DatePickerProps) {
   const translate = useTranslation();
   const locale = useLocale();
   const [isOpen, setIsOpen] = React.useState(false);
+  const visible = React.useContext(ToolVisibilityContext);
+  React.useEffect(() => {
+    if (!visible || disabled) setIsOpen(false);
+  }, [visible, disabled]);
 
   return (
     <div className={cn('desktop-date-picker', className)}>
-      <Popover open={isOpen} onOpenChange={setIsOpen}>
+      <Popover open={isOpen && visible && !disabled} onOpenChange={setIsOpen}>
         <PopoverTrigger asChild>
           <Button
+            id={id}
+            aria-label={ariaLabel ?? translate('选择日期')}
+            disabled={disabled}
             actionId={`${actionId}.open`}
             variant="outline"
             size="sm"
@@ -48,10 +65,15 @@ export function DatePicker({
             </span>
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="desktop-date-picker-popover" align="start">
+        <PopoverContent
+          aria-label={ariaLabel ?? translate('选择日期')}
+          className="desktop-date-picker-popover"
+          align="start"
+        >
           <Calendar
             mode="single"
             selected={value}
+            defaultMonth={value}
             onSelect={(date) => {
               onChange(date);
               setIsOpen(false);
@@ -60,12 +82,13 @@ export function DatePicker({
           />
         </PopoverContent>
       </Popover>
-      {value && (
+      {value && clearable && (
         <Button
           variant="ghost"
           size="icon"
           className="desktop-date-picker-clear"
           actionId={`${actionId}.clear`}
+          disabled={disabled}
           onClick={(e) => {
             e.stopPropagation();
             onChange(undefined);
