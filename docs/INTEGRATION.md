@@ -1,4 +1,6 @@
 # Integration
+Tooltips are opt-in supplemental information. `aria-label`, `iconOnly` and a visible caption never generate a tooltip automatically. Use `Button.tooltip` for otherwise hidden state, identity, a concrete disabled/error reason or an unfamiliar operation; do not repeat obvious click actions. The legacy `title` prop aliases explicit tooltip content. Use `tooltipWhenTruncated` or `Tooltip overflowOnly` only for actually clipped values. Preserve accessible names, keyboard focus and interaction feedback. Icon-only navigation destinations may retain their name for identification.
+
 
 `TaskStateIcon` accepts semantic `state` (`not-started`, `in-progress`, `paused`,
 `completed`, `cancelled`, `unknown`) and optional `excludedFromStats`. It renders a

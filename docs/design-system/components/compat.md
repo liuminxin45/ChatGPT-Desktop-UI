@@ -268,6 +268,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 | Prop | Required | Type |
 | --- | --- | --- |
+| tooltip | no | `string \| undefined` |
 | asChild | no | `boolean \| undefined` |
 | size | no | `"default" \| "icon" \| "sm" \| "lg" \| null \| undefined` |
 | layout | no | `"row" \| "command" \| "tile" \| "surface" \| undefined` |
@@ -277,6 +278,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | icon | no | `React.ReactNode` |
 | iconOnly | no | `boolean \| undefined` |
 | badge | no | `React.ReactNode` |
+| tooltipWhenTruncated | no | `boolean \| undefined` |
 
 ## AppDialogBody (chatgpt-desktop-kit/compat/app-dialog)
 
@@ -291,6 +293,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 | Prop | Required | Type |
 | --- | --- | --- |
+| tooltip | no | `string \| undefined` |
 | asChild | no | `boolean \| undefined` |
 | size | no | `"default" \| "icon" \| "sm" \| "lg" \| null \| undefined` |
 | layout | no | `"row" \| "command" \| "tile" \| "surface" \| undefined` |
@@ -300,6 +303,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | icon | no | `React.ReactNode` |
 | iconOnly | no | `boolean \| undefined` |
 | badge | no | `React.ReactNode` |
+| tooltipWhenTruncated | no | `boolean \| undefined` |
 
 ## AppDialogClose (chatgpt-desktop-kit/compat/app-dialog)
 
@@ -412,6 +416,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 | Prop | Required | Type |
 | --- | --- | --- |
+| tooltip | no | `string \| undefined` |
 | asChild | no | `boolean \| undefined` |
 | size | no | `"default" \| "icon" \| "sm" \| "lg" \| null \| undefined` |
 | layout | no | `"row" \| "command" \| "tile" \| "surface" \| undefined` |
@@ -421,6 +426,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | icon | no | `React.ReactNode` |
 | iconOnly | no | `boolean \| undefined` |
 | badge | no | `React.ReactNode` |
+| tooltipWhenTruncated | no | `boolean \| undefined` |
 
 ## DialogClose (chatgpt-desktop-kit/compat/app-dialog)
 
@@ -557,6 +563,8 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | icon | no | `React.ReactNode` |
 | iconOnly | no | `boolean \| undefined` |
 | badge | no | `React.ReactNode` |
+| tooltip | no | `string \| undefined` |
+| tooltipWhenTruncated | no | `boolean \| undefined` |
 | layout | no | `"row" \| "command" \| "tile" \| "surface" \| undefined` |
 
 ## Calendar (chatgpt-desktop-kit/compat/calendar)
@@ -1225,6 +1233,7 @@ Shared popup-only selection. Datetime edits commit only on explicit confirmation
 | --- | --- | --- |
 | label | yes | `string` |
 | children | yes | `ReactElement<any, string \| JSXElementConstructor<any>>` |
+| overflowOnly | no | `boolean \| undefined` |
 
 ## VirtualList (chatgpt-desktop-kit/compat/virtual-list)
 

@@ -161,6 +161,7 @@ The host provides native/history actions. No native window IPC or persistence is
 | label | yes | `string` |
 | children | yes | `ReactNode` |
 | side | no | `"top" \| "right" \| "bottom" \| "left" \| undefined` |
+| overflowOnly | no | `boolean \| undefined` |
 
 ## WindowControls (chatgpt-desktop-kit)
 

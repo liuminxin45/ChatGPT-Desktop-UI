@@ -17,7 +17,7 @@ function Fixture() {
     <div style={{display:'flex',gap:8,alignItems:'center'}}>
       <HostButton actionId="fixture.fields.toggle" iconOnly icon={<Settings size={16}/>} aria-pressed={false}>{chinese ? '显示字段' : 'Show fields'}</HostButton>
       <HostButton actionId="fixture.node.create" iconOnly badge={3} icon={<Plus size={16}/>} onClick={() => setCount(n => n + 1)}>{chinese ? '新建节点' : 'Create new node'}</HostButton>
-      <Button actionId="fixture.save" iconOnly icon={busy ? <Loader2 size={16} className="spin"/> : <SaveIcon size={16}/>} disabled={busy} onClick={() => setBusy(true)}>{save}</Button>
+      <Button actionId="fixture.save" tooltip={busy ? save : undefined} iconOnly icon={busy ? <Loader2 size={16} className="spin"/> : <SaveIcon size={16}/>} disabled={busy} onClick={() => setBusy(true)}>{save}</Button>
       <Tooltip label="Outer label"><HostButton actionId="fixture.nested" size="icon" aria-label="Inner label"><Plus size={16}/></HostButton></Tooltip>
       <DropdownMenu><DropdownMenuTrigger asChild><HostButton size="icon" aria-label="Menu" actionId="fixture.menu"><Settings size={16}/></HostButton></DropdownMenuTrigger>
         <DropdownMenuContent>
@@ -27,7 +27,7 @@ function Fixture() {
           <DropdownMenuItem actionId="fixture.menu.delete" icon={<DeleteIcon size={16}/>} onSelect={() => setCount(n => n + 1)}>Delete</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <ToolVisibilityContext.Provider value={visible}><Button iconOnly icon={<Plus size={16}/>} actionId="fixture.surface">Surface action</Button></ToolVisibilityContext.Provider>
+      <ToolVisibilityContext.Provider value={visible}><Button iconOnly icon={<Plus size={16}/>} actionId="fixture.surface" tooltip="Supplemental surface state">Surface action</Button></ToolVisibilityContext.Provider>
       <Button actionId="fixture.aria-only" aria-label="Send"><Plus size={16}/></Button>
     </div>
     <p role="status">{count}</p>
@@ -46,7 +46,7 @@ function Fixture() {
     <Button actionId="fixture.locale" onClick={() => setChinese(v=>!v)}>Language</Button>
     <Button actionId="fixture.retry" onClick={() => setBusy(false)}>Reset</Button>
     <Button actionId="fixture.visibility" onClick={() => setVisible(v=>!v)}>Hide surface</Button>
-    <HostButton asChild size="icon" title="Download" actionId="fixture.download"><a href="#download"><Plus size={16}/></a></HostButton>
+    <HostButton asChild size="icon" aria-label="Download" actionId="fixture.download"><a href="#download"><Plus size={16}/></a></HostButton>
   </main></DesktopRoot>;
 }
 createRoot(document.getElementById('root')!).render(<Fixture/>);

@@ -48,12 +48,14 @@ A retained navigation target with a readable label and an independent trailing c
 
 | Prop | Required | Type |
 | --- | --- | --- |
+| tooltip | no | `string \| undefined` |
 | size | no | `"sm" \| "md" \| undefined` |
 | layout | no | `"row" \| "command" \| "tile" \| "surface" \| undefined` |
 | actionId | no | `string \| undefined` |
 | confirmOnEnter | no | `boolean \| undefined` |
 | icon | no | `ReactNode` |
 | badge | no | `ReactNode` |
+| tooltipWhenTruncated | no | `boolean \| undefined` |
 | label | yes | `ReactNode` |
 | count | no | `number \| undefined` |
 | selected | no | `boolean \| undefined` |

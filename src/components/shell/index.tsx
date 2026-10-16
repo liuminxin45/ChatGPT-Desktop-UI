@@ -34,13 +34,16 @@ export function Tooltip({
   label,
   children,
   side = 'right',
+  overflowOnly = false,
 }: {
   label: string;
   children: ReactNode;
   side?: 'right' | 'bottom' | 'top' | 'left';
+  /** Show full text only when it is visibly clipped. */
+  overflowOnly?: boolean;
 }) {
   return (
-    <ActionTooltip label={label} side={side}>
+    <ActionTooltip label={label} side={side} overflowOnly={overflowOnly} direct={overflowOnly}>
       {children as ReactElement}
     </ActionTooltip>
   );
@@ -99,36 +102,30 @@ export function TitleBar({
           actions
         ) : (
           <>
-            <Tooltip label={labels.back} side="bottom">
-              <IconButton
-                actionId="navigation.back"
-                aria-label={labels.back}
-                disabled={!canBack || !onBack}
-                onClick={onBack}
-              >
-                <ArrowLeft size={16} />
-              </IconButton>
-            </Tooltip>
-            <Tooltip label={labels.forward} side="bottom">
-              <IconButton
-                actionId="navigation.forward"
-                aria-label={labels.forward}
-                disabled={!canForward || !onForward}
-                onClick={onForward}
-              >
-                <ArrowRight size={16} />
-              </IconButton>
-            </Tooltip>
-            <Tooltip label={labels.sidebar} side="bottom">
-              <IconButton
-                actionId="navigation.sidebar.toggle"
-                aria-label={labels.sidebar}
-                disabled={!canToggleSidebar || !onToggleSidebar}
-                onClick={onToggleSidebar}
-              >
-                <SidebarSimple size={16} />
-              </IconButton>
-            </Tooltip>
+            <IconButton
+              actionId="navigation.back"
+              aria-label={labels.back}
+              disabled={!canBack || !onBack}
+              onClick={onBack}
+            >
+              <ArrowLeft size={16} />
+            </IconButton>
+            <IconButton
+              actionId="navigation.forward"
+              aria-label={labels.forward}
+              disabled={!canForward || !onForward}
+              onClick={onForward}
+            >
+              <ArrowRight size={16} />
+            </IconButton>
+            <IconButton
+              actionId="navigation.sidebar.toggle"
+              aria-label={labels.sidebar}
+              disabled={!canToggleSidebar || !onToggleSidebar}
+              onClick={onToggleSidebar}
+            >
+              <SidebarSimple size={16} />
+            </IconButton>
             {menus.map((menu) => (
               <Menu.Root key={menu.id}>
                 <Menu.Trigger data-desktop-action={`menu.${menu.id}.open`} className="kit-titlebar__menu">
@@ -228,19 +225,17 @@ export function NavigationRail({
         })}
         {pinnedIds ? (
           <Menu.Root>
-            <Tooltip label={moreLabel}>
-              <Menu.Trigger asChild>
-                <button
-                  type="button"
-                  className="desktop-icon-control kit-rail__item"
-                  aria-label={moreLabel}
-                  aria-current={!pinnedIds.includes(selected) ? 'page' : undefined}
-                  data-desktop-action="navigation.more.open"
-                >
-                  <DotsThree size={20} aria-hidden="true" />
-                </button>
-              </Menu.Trigger>
-            </Tooltip>
+            <Menu.Trigger asChild>
+              <button
+                type="button"
+                className="desktop-icon-control kit-rail__item"
+                aria-label={moreLabel}
+                aria-current={!pinnedIds.includes(selected) ? 'page' : undefined}
+                data-desktop-action="navigation.more.open"
+              >
+                <DotsThree size={20} aria-hidden="true" />
+              </button>
+            </Menu.Trigger>
             <Menu.Portal>
               <Menu.Content
                 className="desktop-menu kit-navigation-menu"

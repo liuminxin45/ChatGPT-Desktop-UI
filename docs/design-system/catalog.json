@@ -20268,6 +20268,2813 @@
       "native": true,
       "description": ""
     },
+    "849e58621502196e": {
+      "name": "accentHeight",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "54eea79818e165df": {
+      "name": "accumulate",
+      "required": false,
+      "type": "\"none\" | \"sum\" | undefined",
+      "native": true,
+      "description": ""
+    },
+    "42238265aef0bec1": {
+      "name": "additive",
+      "required": false,
+      "type": "\"replace\" | \"sum\" | undefined",
+      "native": true,
+      "description": ""
+    },
+    "75f0b86b4bd46326": {
+      "name": "alignmentBaseline",
+      "required": false,
+      "type": "\"inherit\" | \"alphabetic\" | \"hanging\" | \"ideographic\" | \"mathematical\" | \"auto\" | \"middle\" | \"baseline\" | \"before-edge\" | \"text-before-edge\" | \"central\" | \"after-edge\" | \"text-after-edge\" | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a871b16220f2b80b": {
+      "name": "allowReorder",
+      "required": false,
+      "type": "\"yes\" | \"no\" | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7d84ee230833caaf": {
+      "name": "alphabetic",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ad353911b04a4486": {
+      "name": "amplitude",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8045cbebc2adeac1": {
+      "name": "arabicForm",
+      "required": false,
+      "type": "\"initial\" | \"medial\" | \"terminal\" | \"isolated\" | undefined",
+      "native": true,
+      "description": ""
+    },
+    "2823f9cc1469c21e": {
+      "name": "ascent",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c3c9e3103a780b90": {
+      "name": "attributeName",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "83d2d185ecfa8093": {
+      "name": "attributeType",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d9ada4dfaabd6ade": {
+      "name": "autoReverse",
+      "required": false,
+      "type": "(boolean | \"true\" | \"false\") | undefined",
+      "native": true,
+      "description": ""
+    },
+    "038bbf0410fccd40": {
+      "name": "azimuth",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "9f2c0059cf108e2b": {
+      "name": "baseFrequency",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c08e1478900ff64d": {
+      "name": "baselineShift",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e472b9f5738b0776": {
+      "name": "baseProfile",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "bb0c046c8b5a4663": {
+      "name": "bbox",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b374fb604fceb1b8": {
+      "name": "begin",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "2b562cef5ab09194": {
+      "name": "bias",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e9d655b775a1ea62": {
+      "name": "by",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "16281433065af75a": {
+      "name": "calcMode",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "29770eac82cfcf50": {
+      "name": "capHeight",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8341dc1118cbe32f": {
+      "name": "clip",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "bc16941d8b842e65": {
+      "name": "clipPath",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "50b2cee5d5a72e80": {
+      "name": "clipPathUnits",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f6570b2dea42861e": {
+      "name": "clipRule",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "16b13fbbd987d40b": {
+      "name": "colorInterpolation",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f778f5832711a2ac": {
+      "name": "colorInterpolationFilters",
+      "required": false,
+      "type": "\"inherit\" | \"auto\" | \"sRGB\" | \"linearRGB\" | undefined",
+      "native": true,
+      "description": ""
+    },
+    "bd45faadfec7e2ff": {
+      "name": "colorProfile",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "29596e8773fb3b98": {
+      "name": "colorRendering",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "3e31d261331e61c0": {
+      "name": "contentScriptType",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0b734c1fb617772f": {
+      "name": "contentStyleType",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "4dcdb903c776af20": {
+      "name": "cursor",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5266431a83b5f3b5": {
+      "name": "cx",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "2642b00c0fb1697c": {
+      "name": "cy",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "bf158443b42ce757": {
+      "name": "d",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "811c793aa38cc806": {
+      "name": "decelerate",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e0fcca6324c5d7ae": {
+      "name": "descent",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "1742a756f127b4d0": {
+      "name": "diffuseConstant",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "2428759248f50399": {
+      "name": "direction",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "14b956e02c52e052": {
+      "name": "display",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "330da44902b9d5fa": {
+      "name": "divisor",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5a59dc99b8d1ea71": {
+      "name": "dominantBaseline",
+      "required": false,
+      "type": "\"inherit\" | \"alphabetic\" | \"hanging\" | \"ideographic\" | \"mathematical\" | \"auto\" | \"middle\" | \"text-before-edge\" | \"central\" | \"text-after-edge\" | \"use-script\" | \"no-change\" | \"reset-size\" | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a05990ebb6493522": {
+      "name": "dur",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5185f5a2c0091147": {
+      "name": "dx",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "4cf051caa3e03a0b": {
+      "name": "dy",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "60448d278d26baa1": {
+      "name": "edgeMode",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "87fc33611df982c7": {
+      "name": "elevation",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f6bd1f3ce0e8def5": {
+      "name": "enableBackground",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "adc3fe6a60ffaaa7": {
+      "name": "end",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "6e74e2c25cd4cb1e": {
+      "name": "exponent",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "da97eebf84be37d9": {
+      "name": "externalResourcesRequired",
+      "required": false,
+      "type": "(boolean | \"true\" | \"false\") | undefined",
+      "native": true,
+      "description": ""
+    },
+    "db2a44653707360e": {
+      "name": "fill",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "29013a3a865f395e": {
+      "name": "fillOpacity",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ad671a713f053cc4": {
+      "name": "fillRule",
+      "required": false,
+      "type": "\"inherit\" | \"nonzero\" | \"evenodd\" | undefined",
+      "native": true,
+      "description": ""
+    },
+    "901dad4b9a95afbc": {
+      "name": "filter",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "2de6ee0230637892": {
+      "name": "filterRes",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7a0873bda590b243": {
+      "name": "filterUnits",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "44300c05c38829bd": {
+      "name": "floodColor",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d0a73b9eda7057ba": {
+      "name": "floodOpacity",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f2864f10e8cf0a08": {
+      "name": "focusable",
+      "required": false,
+      "type": "(boolean | \"true\" | \"false\") | \"auto\" | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5533381594ed3501": {
+      "name": "fontFamily",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f4018309437db60a": {
+      "name": "fontSize",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "42aa0db3c5458b54": {
+      "name": "fontSizeAdjust",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8f2712433916fa75": {
+      "name": "fontStretch",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0389df4f2244aede": {
+      "name": "fontStyle",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "59db3e2006fa938c": {
+      "name": "fontVariant",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b0b4ae332b01995b": {
+      "name": "fontWeight",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "3ac0de139a6e2361": {
+      "name": "format",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "802227a8387cadfd": {
+      "name": "fr",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c4c9f62d148b7a10": {
+      "name": "from",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a732c98a98c0c6ae": {
+      "name": "fx",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "09b8acdf9f76887f": {
+      "name": "fy",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "25e09d63f5286a2a": {
+      "name": "g1",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5bb72a4deacc97bd": {
+      "name": "g2",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ad8f33c7c45bc7f7": {
+      "name": "glyphName",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "9ab8bdd507ca5d1a": {
+      "name": "glyphOrientationHorizontal",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f3524b437ae691b5": {
+      "name": "glyphOrientationVertical",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7710a95aad3fdc80": {
+      "name": "glyphRef",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "4635a56e1e27bbdb": {
+      "name": "gradientTransform",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "057f727cbcc88d8d": {
+      "name": "gradientUnits",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "00d3b4812e8946aa": {
+      "name": "hanging",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e12fec50d61006b6": {
+      "name": "horizAdvX",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "bce85b8f89c0c8da": {
+      "name": "horizOriginX",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "bba5b083c1a6904a": {
+      "name": "ideographic",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5ad36475032df62b": {
+      "name": "imageRendering",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c85b5e0a2580a82d": {
+      "name": "in2",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "94d91b5b7cda6037": {
+      "name": "in",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "35003ad317b20d0f": {
+      "name": "intercept",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5487cfc62de1dd18": {
+      "name": "k1",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "891b1324b632ef1f": {
+      "name": "k2",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "137905b7149acf1d": {
+      "name": "k3",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "fbd1deeb2c3e38ed": {
+      "name": "k4",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "2294de022c243930": {
+      "name": "k",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a5026083fa664fa1": {
+      "name": "kernelMatrix",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "6058d6e700c9ea34": {
+      "name": "kernelUnitLength",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "82cfb99e06a3c4cf": {
+      "name": "kerning",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5f4bd291539606b9": {
+      "name": "keyPoints",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "11f74bb21bdf2a7d": {
+      "name": "keySplines",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "4645021632140011": {
+      "name": "keyTimes",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8214cb89eb75f56f": {
+      "name": "lengthAdjust",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "2966094cc12ed48a": {
+      "name": "letterSpacing",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "1db2962d70cbdeb2": {
+      "name": "lightingColor",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "34f56bead975568d": {
+      "name": "limitingConeAngle",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "41a886d894885155": {
+      "name": "local",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "2faf0ee4cd183136": {
+      "name": "markerEnd",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "737cf917f9264214": {
+      "name": "markerHeight",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "05945a4514495f60": {
+      "name": "markerMid",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ceec2dbf096508eb": {
+      "name": "markerStart",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "74293dec94932a38": {
+      "name": "markerUnits",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c0eea72ea9763faa": {
+      "name": "markerWidth",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "aaef55d8aaf10212": {
+      "name": "mask",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "af6b32db5cb61877": {
+      "name": "maskContentUnits",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "2224b7cb76b04827": {
+      "name": "maskUnits",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c385de2a737ab140": {
+      "name": "mathematical",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b2620aa0ad4be897": {
+      "name": "mode",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "61a673f1bdcbbdf0": {
+      "name": "numOctaves",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "19a9c7736f3681d9": {
+      "name": "offset",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "6b59d9ba477165d6": {
+      "name": "opacity",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "553b4d4191e27a3e": {
+      "name": "operator",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "abbac120939176da": {
+      "name": "order",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a3ac11681cef374a": {
+      "name": "orient",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "6e5bc96885285af6": {
+      "name": "orientation",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "1fc69e7717f81af1": {
+      "name": "origin",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0a6b158f45581b64": {
+      "name": "overflow",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "bb782c773bd99980": {
+      "name": "overlinePosition",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "899b8d3578781f5c": {
+      "name": "overlineThickness",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "401153c8d1a708cc": {
+      "name": "paintOrder",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0cc7e649aa08b0e8": {
+      "name": "panose1",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "fc49b5b32df09a17": {
+      "name": "path",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7198d013bc320a06": {
+      "name": "pathLength",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "da2979865f8be773": {
+      "name": "patternContentUnits",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "80e6247f0798feb9": {
+      "name": "patternTransform",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "78bdd1dc58ef5f4f": {
+      "name": "patternUnits",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d713d8e606dfc235": {
+      "name": "pointerEvents",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "fdb05e19a4a4ae3d": {
+      "name": "points",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c3e56b8500a0befd": {
+      "name": "pointsAtX",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "105fa747716c0bc0": {
+      "name": "pointsAtY",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d56f0080685eda29": {
+      "name": "pointsAtZ",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "dd0f16993b1a6562": {
+      "name": "preserveAlpha",
+      "required": false,
+      "type": "(boolean | \"true\" | \"false\") | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d3a4d32ddd0ac13c": {
+      "name": "preserveAspectRatio",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "9fb82d1f13885e95": {
+      "name": "primitiveUnits",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "56021a71e270013f": {
+      "name": "r",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "798a7721a907f9ae": {
+      "name": "radius",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7bea605cff738888": {
+      "name": "refX",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "397e2e2926844e48": {
+      "name": "refY",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "945aa3c974beb0ce": {
+      "name": "renderingIntent",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8022b938a305585a": {
+      "name": "repeatCount",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d4a85fc0cac0311a": {
+      "name": "repeatDur",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "1c30633340f21a22": {
+      "name": "requiredExtensions",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "9cf9827a215ddb71": {
+      "name": "requiredFeatures",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "6609fd30c0f5a27c": {
+      "name": "restart",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "be67bdc5d520ec49": {
+      "name": "result",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "362a8a175c45a452": {
+      "name": "rotate",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0369c5e6f3a3ae51": {
+      "name": "rx",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "43dd6f6289046d33": {
+      "name": "ry",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "eef8764e5719c18d": {
+      "name": "scale",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b5e50ff19540fc04": {
+      "name": "seed",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "96551e4cd6b48e7a": {
+      "name": "shapeRendering",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "bec2c4b73c05f28e": {
+      "name": "slope",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "213403f189a6e94c": {
+      "name": "spacing",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f52aef74bffa604d": {
+      "name": "specularConstant",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8b37cbeebfe2e61a": {
+      "name": "specularExponent",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "3e0aa1e6457fb4f5": {
+      "name": "speed",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8db7193b8f884ed8": {
+      "name": "spreadMethod",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "22e770d60f98d363": {
+      "name": "startOffset",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b239001942014f3c": {
+      "name": "stdDeviation",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e69ea6cc0351c708": {
+      "name": "stemh",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ffa8d0c4bde0f109": {
+      "name": "stemv",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "174107d70a915154": {
+      "name": "stitchTiles",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "2e10190654ffa9d3": {
+      "name": "stopColor",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "816be91c95f513db": {
+      "name": "stopOpacity",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "37e56b477bc9c94e": {
+      "name": "strikethroughPosition",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "fdb5682ff6d918a1": {
+      "name": "strikethroughThickness",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "9d826ab8db373fa2": {
+      "name": "string",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "902bf3f4e67a0487": {
+      "name": "stroke",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7c6ad578fc394c7d": {
+      "name": "strokeDasharray",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e3d53ab2e72cbaa4": {
+      "name": "strokeDashoffset",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f78c3e934e5da363": {
+      "name": "strokeLinecap",
+      "required": false,
+      "type": "\"inherit\" | \"butt\" | \"round\" | \"square\" | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a7f08ee300caab14": {
+      "name": "strokeLinejoin",
+      "required": false,
+      "type": "\"inherit\" | \"round\" | \"miter\" | \"bevel\" | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8c1fd0b9f5ca1680": {
+      "name": "strokeMiterlimit",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "dc88d562ae6294a6": {
+      "name": "strokeOpacity",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "eaad08813bbc0f5d": {
+      "name": "strokeWidth",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "3e6f84c777f8234a": {
+      "name": "surfaceScale",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "3d7de8b0ed1f0aee": {
+      "name": "systemLanguage",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ef6c6a914409cb3f": {
+      "name": "tableValues",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "3ccf902d30aff268": {
+      "name": "targetX",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "fa74d5fe5ee1433e": {
+      "name": "targetY",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8664a1c710d8d1a9": {
+      "name": "textAnchor",
+      "required": false,
+      "type": "\"inherit\" | \"end\" | \"start\" | \"middle\" | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7e3405c17c24b072": {
+      "name": "textDecoration",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d75408504dd8c2f7": {
+      "name": "textLength",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ab140ae5d011cb84": {
+      "name": "textRendering",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f4495fb2ffa160ac": {
+      "name": "to",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7d8517440c2dbb10": {
+      "name": "transform",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "9bc4be6834b3a259": {
+      "name": "transformOrigin",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "da014fcc59bb24d8": {
+      "name": "u1",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "224365d9a71c3f48": {
+      "name": "u2",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "12a6db65d133b44d": {
+      "name": "underlinePosition",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a68eaae9fa92aa92": {
+      "name": "underlineThickness",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "6da9151943567714": {
+      "name": "unicode",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "243e222707f52d30": {
+      "name": "unicodeBidi",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "225a04907b121dfb": {
+      "name": "unicodeRange",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "2fc2b4ead55a246e": {
+      "name": "unitsPerEm",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "2d57d216f284fb9e": {
+      "name": "vAlphabetic",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "710a2414322a9a61": {
+      "name": "values",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d96d8c4becc39d16": {
+      "name": "vectorEffect",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a46deda9574ca223": {
+      "name": "version",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "27f4c0ed9aa7fa28": {
+      "name": "vertAdvY",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c36f96f7b0b7fba8": {
+      "name": "vertOriginX",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a3e8c13de2f5863b": {
+      "name": "vertOriginY",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "47611377639cc164": {
+      "name": "vHanging",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ef8609b38efc8c1d": {
+      "name": "vIdeographic",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b59f4d7ddcd2167c": {
+      "name": "viewBox",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d05f1f6727e395b9": {
+      "name": "viewTarget",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "73f82059b347917f": {
+      "name": "visibility",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "390c1a251d3ea6e0": {
+      "name": "vMathematical",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "af8880b422f6584c": {
+      "name": "widths",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e03d6857464181d0": {
+      "name": "wordSpacing",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f7e453bb174c18bb": {
+      "name": "writingMode",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5006ff96cb557f0e": {
+      "name": "x1",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "9bc7f31e0d357ebc": {
+      "name": "x2",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "1ce582bd887eb1e0": {
+      "name": "x",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "9d5d9f38feca198b": {
+      "name": "xChannelSelector",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "45f890cb79291956": {
+      "name": "xHeight",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8fb91df6266bd785": {
+      "name": "xlinkActuate",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "49bf04f4840d5313": {
+      "name": "xlinkArcrole",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "525129f34392dbff": {
+      "name": "xlinkHref",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "222acd2f3ac012af": {
+      "name": "xlinkRole",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c4f5ec64a9f56019": {
+      "name": "xlinkShow",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "12aef07e55bbff76": {
+      "name": "xlinkTitle",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8a8888d5ed60416d": {
+      "name": "xlinkType",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "baef75e3c4d7725d": {
+      "name": "xmlBase",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "66718fdb96cd9b60": {
+      "name": "xmlLang",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "3fd107d92404dd2a": {
+      "name": "xmlns",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c99dbdb5abd3cd26": {
+      "name": "xmlnsXlink",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "dad3b994ad54c63d": {
+      "name": "xmlSpace",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7d057943a0854096": {
+      "name": "y1",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d0b8c353b29d4853": {
+      "name": "y2",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "973ac9f342833b47": {
+      "name": "y",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b6ef184ae1670082": {
+      "name": "yChannelSelector",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d5c96073055de137": {
+      "name": "z",
+      "required": false,
+      "type": "string | number | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c4064fc426aa2d73": {
+      "name": "zoomAndPan",
+      "required": false,
+      "type": "string | undefined",
+      "native": true,
+      "description": ""
+    },
+    "008485c5e2615e2f": {
+      "name": "onCopy",
+      "required": false,
+      "type": "ClipboardEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d2cd0af7c004744a": {
+      "name": "onCopyCapture",
+      "required": false,
+      "type": "ClipboardEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "462cd1f8efbedccc": {
+      "name": "onCut",
+      "required": false,
+      "type": "ClipboardEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "675211230a354255": {
+      "name": "onCutCapture",
+      "required": false,
+      "type": "ClipboardEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b97f99a7e14fbf12": {
+      "name": "onPaste",
+      "required": false,
+      "type": "ClipboardEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "48a7bdd82b4fe94d": {
+      "name": "onPasteCapture",
+      "required": false,
+      "type": "ClipboardEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "22a196fcd7b46c77": {
+      "name": "onCompositionEnd",
+      "required": false,
+      "type": "CompositionEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "2cc2ca42d82e7a40": {
+      "name": "onCompositionEndCapture",
+      "required": false,
+      "type": "CompositionEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c2cbe87dbe64201b": {
+      "name": "onCompositionStart",
+      "required": false,
+      "type": "CompositionEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "be7ff9e18831ca67": {
+      "name": "onCompositionStartCapture",
+      "required": false,
+      "type": "CompositionEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "384c324fc90c9e5a": {
+      "name": "onCompositionUpdate",
+      "required": false,
+      "type": "CompositionEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "edaf9342b7bc6942": {
+      "name": "onCompositionUpdateCapture",
+      "required": false,
+      "type": "CompositionEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0f966f7ab2759f22": {
+      "name": "onFocus",
+      "required": false,
+      "type": "FocusEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "086daf50d5128c3b": {
+      "name": "onFocusCapture",
+      "required": false,
+      "type": "FocusEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e09bb528302e72bb": {
+      "name": "onBlur",
+      "required": false,
+      "type": "FocusEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "29ff203c475c05b3": {
+      "name": "onBlurCapture",
+      "required": false,
+      "type": "FocusEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "59e73166891dfab1": {
+      "name": "onChange",
+      "required": false,
+      "type": "FormEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "2cee522e660e9be4": {
+      "name": "onChangeCapture",
+      "required": false,
+      "type": "FormEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "41c9371d9a47f1dc": {
+      "name": "onBeforeInput",
+      "required": false,
+      "type": "InputEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "1d600ed15786b717": {
+      "name": "onBeforeInputCapture",
+      "required": false,
+      "type": "FormEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "cb6f2842ae0d73c8": {
+      "name": "onInput",
+      "required": false,
+      "type": "FormEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0acb2aa83937fd62": {
+      "name": "onInputCapture",
+      "required": false,
+      "type": "FormEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c7fb56a9ff6d3026": {
+      "name": "onReset",
+      "required": false,
+      "type": "FormEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "4ea33c4f2bf2ab71": {
+      "name": "onResetCapture",
+      "required": false,
+      "type": "FormEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8267e7866b52f951": {
+      "name": "onSubmit",
+      "required": false,
+      "type": "FormEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "4bf164f44c7e3d62": {
+      "name": "onSubmitCapture",
+      "required": false,
+      "type": "FormEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f0524ec2be20b7ee": {
+      "name": "onInvalid",
+      "required": false,
+      "type": "FormEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "cac17293b6fa6d67": {
+      "name": "onInvalidCapture",
+      "required": false,
+      "type": "FormEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "52cd3f9a0f58202e": {
+      "name": "onLoad",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "70a08255f785aceb": {
+      "name": "onLoadCapture",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b1a043281d107713": {
+      "name": "onError",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "26b14f62e3c64f17": {
+      "name": "onErrorCapture",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f3d1afed52cec717": {
+      "name": "onKeyDown",
+      "required": false,
+      "type": "KeyboardEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f395452b5400156c": {
+      "name": "onKeyDownCapture",
+      "required": false,
+      "type": "KeyboardEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8e016ca95489990c": {
+      "name": "onKeyPress",
+      "required": false,
+      "type": "KeyboardEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e62cf3060f23c938": {
+      "name": "onKeyPressCapture",
+      "required": false,
+      "type": "KeyboardEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8ff7d02e2184ca83": {
+      "name": "onKeyUp",
+      "required": false,
+      "type": "KeyboardEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "84d54b2f8eaa2e8d": {
+      "name": "onKeyUpCapture",
+      "required": false,
+      "type": "KeyboardEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "bc78d51a175ec720": {
+      "name": "onAbort",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "cf427346150ab685": {
+      "name": "onAbortCapture",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "36230b43073b08cc": {
+      "name": "onCanPlay",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f11bc86bf5ed2bef": {
+      "name": "onCanPlayCapture",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5f836d81bc70b7d1": {
+      "name": "onCanPlayThrough",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ce2bf4793243fab2": {
+      "name": "onCanPlayThroughCapture",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "fe517b926c823ef8": {
+      "name": "onDurationChange",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "53557af6ac03cb1c": {
+      "name": "onDurationChangeCapture",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "2f48d93accea79fe": {
+      "name": "onEmptied",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "738898a2bfd69a2a": {
+      "name": "onEmptiedCapture",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "33473a4da3ea59d5": {
+      "name": "onEncrypted",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0836b1bc88726180": {
+      "name": "onEncryptedCapture",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d4c324671dd9425f": {
+      "name": "onEnded",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e591730ae1e4eda2": {
+      "name": "onEndedCapture",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7deeec7f55502c5b": {
+      "name": "onLoadedData",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "faf0f26f264113c9": {
+      "name": "onLoadedDataCapture",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "6c2d563de006ae5a": {
+      "name": "onLoadedMetadata",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "091cf7bfecbe17ae": {
+      "name": "onLoadedMetadataCapture",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "424d73ca4007bde8": {
+      "name": "onLoadStart",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "bd09acbec99d5fa9": {
+      "name": "onLoadStartCapture",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "9fe13337a063434e": {
+      "name": "onPause",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "acb2e8eaad9443eb": {
+      "name": "onPauseCapture",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d1481f8432e28385": {
+      "name": "onPlay",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "cf2e130112a9519a": {
+      "name": "onPlayCapture",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "80fea2b0a0b975ff": {
+      "name": "onPlaying",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "1a0c061968f6aa65": {
+      "name": "onPlayingCapture",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f5dbf30c28a7a73f": {
+      "name": "onProgress",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "076a634c773fae83": {
+      "name": "onProgressCapture",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "6b472506571ea082": {
+      "name": "onRateChange",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e63ab5e2b00c390a": {
+      "name": "onRateChangeCapture",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "555044d166a8a0de": {
+      "name": "onSeeked",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "023412fa50c41595": {
+      "name": "onSeekedCapture",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "bbc96e084d764422": {
+      "name": "onSeeking",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b245270e81e614d1": {
+      "name": "onSeekingCapture",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "2a6fef936d6a1061": {
+      "name": "onStalled",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "9aa5dba9f7268553": {
+      "name": "onStalledCapture",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7b00214f54e2393a": {
+      "name": "onSuspend",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "90c9b6794786e0ca": {
+      "name": "onSuspendCapture",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b6bb871c270fc0bd": {
+      "name": "onTimeUpdate",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "57db897bd5daa4f8": {
+      "name": "onTimeUpdateCapture",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5ef5a974e39d5b3c": {
+      "name": "onVolumeChange",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "49d842e56e891ce5": {
+      "name": "onVolumeChangeCapture",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7273642b55859f1a": {
+      "name": "onWaiting",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "94e05de7adcffba5": {
+      "name": "onWaitingCapture",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "67efc3682541cacd": {
+      "name": "onAuxClick",
+      "required": false,
+      "type": "MouseEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "712577a9e850ad7e": {
+      "name": "onAuxClickCapture",
+      "required": false,
+      "type": "MouseEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ffb511c285d457fa": {
+      "name": "onClick",
+      "required": false,
+      "type": "MouseEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "66cec59f154b55f0": {
+      "name": "onClickCapture",
+      "required": false,
+      "type": "MouseEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a176e8534a54a4f3": {
+      "name": "onContextMenu",
+      "required": false,
+      "type": "MouseEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d7b0d4424a46e932": {
+      "name": "onContextMenuCapture",
+      "required": false,
+      "type": "MouseEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ce1cae953809e201": {
+      "name": "onDoubleClick",
+      "required": false,
+      "type": "MouseEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0885ccfb83d0dc87": {
+      "name": "onDoubleClickCapture",
+      "required": false,
+      "type": "MouseEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "feb503de8ddf581d": {
+      "name": "onDrag",
+      "required": false,
+      "type": "DragEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "698483f626db6a3d": {
+      "name": "onDragCapture",
+      "required": false,
+      "type": "DragEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7bb13f08f681f0bb": {
+      "name": "onDragEnd",
+      "required": false,
+      "type": "DragEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8d049076cb569190": {
+      "name": "onDragEndCapture",
+      "required": false,
+      "type": "DragEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f5b35dac923d6b02": {
+      "name": "onDragEnter",
+      "required": false,
+      "type": "DragEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e55908d5cfdb1f79": {
+      "name": "onDragEnterCapture",
+      "required": false,
+      "type": "DragEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d892c38eddadd587": {
+      "name": "onDragExit",
+      "required": false,
+      "type": "DragEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "555d133751d6314f": {
+      "name": "onDragExitCapture",
+      "required": false,
+      "type": "DragEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0aabf997010c5e1b": {
+      "name": "onDragLeave",
+      "required": false,
+      "type": "DragEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d673608b99aa6e9e": {
+      "name": "onDragLeaveCapture",
+      "required": false,
+      "type": "DragEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "66c742cf149da49e": {
+      "name": "onDragOver",
+      "required": false,
+      "type": "DragEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "49dabf32226d9454": {
+      "name": "onDragOverCapture",
+      "required": false,
+      "type": "DragEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "269550da3efee21e": {
+      "name": "onDragStart",
+      "required": false,
+      "type": "DragEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c06c95387fd2f57d": {
+      "name": "onDragStartCapture",
+      "required": false,
+      "type": "DragEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "605acbf138339c2b": {
+      "name": "onDrop",
+      "required": false,
+      "type": "DragEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c683ba4913f52e4f": {
+      "name": "onDropCapture",
+      "required": false,
+      "type": "DragEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "350cec6bc7fac63c": {
+      "name": "onMouseDown",
+      "required": false,
+      "type": "MouseEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f4babf0cc07b525b": {
+      "name": "onMouseDownCapture",
+      "required": false,
+      "type": "MouseEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f20f7285f741cefe": {
+      "name": "onMouseEnter",
+      "required": false,
+      "type": "MouseEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "417ad96c1d2b2f39": {
+      "name": "onMouseLeave",
+      "required": false,
+      "type": "MouseEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "22c35b3992fcb827": {
+      "name": "onMouseMove",
+      "required": false,
+      "type": "MouseEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "30d98149f6e93e71": {
+      "name": "onMouseMoveCapture",
+      "required": false,
+      "type": "MouseEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "44aa13a8a612adbb": {
+      "name": "onMouseOut",
+      "required": false,
+      "type": "MouseEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ddcb92bba6026dfb": {
+      "name": "onMouseOutCapture",
+      "required": false,
+      "type": "MouseEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ea8effce3d4291eb": {
+      "name": "onMouseOver",
+      "required": false,
+      "type": "MouseEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "9ac388cd1d9eb93e": {
+      "name": "onMouseOverCapture",
+      "required": false,
+      "type": "MouseEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0fbfc5f80faa7039": {
+      "name": "onMouseUp",
+      "required": false,
+      "type": "MouseEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ec3967ea45b1f0bc": {
+      "name": "onMouseUpCapture",
+      "required": false,
+      "type": "MouseEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "22f6ea1abf6e438f": {
+      "name": "onSelect",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a231e91b09c26fa8": {
+      "name": "onSelectCapture",
+      "required": false,
+      "type": "ReactEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0a19d4f155d8db27": {
+      "name": "onTouchCancel",
+      "required": false,
+      "type": "TouchEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a6dd3e6e967ff2d9": {
+      "name": "onTouchCancelCapture",
+      "required": false,
+      "type": "TouchEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "eb6eafdf55126045": {
+      "name": "onTouchEnd",
+      "required": false,
+      "type": "TouchEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "545cd7276bf451de": {
+      "name": "onTouchEndCapture",
+      "required": false,
+      "type": "TouchEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f85341bb304a1ab9": {
+      "name": "onTouchMove",
+      "required": false,
+      "type": "TouchEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "28c587912eef9661": {
+      "name": "onTouchMoveCapture",
+      "required": false,
+      "type": "TouchEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e923f7007ee8514b": {
+      "name": "onTouchStart",
+      "required": false,
+      "type": "TouchEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "fa064217690ab8ff": {
+      "name": "onTouchStartCapture",
+      "required": false,
+      "type": "TouchEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "499d0128a84edb87": {
+      "name": "onPointerDown",
+      "required": false,
+      "type": "PointerEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a2bcc95e5cc6b3e4": {
+      "name": "onPointerDownCapture",
+      "required": false,
+      "type": "PointerEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "547e904e1500a2e2": {
+      "name": "onPointerMove",
+      "required": false,
+      "type": "PointerEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "4b7db6f50bf58f01": {
+      "name": "onPointerMoveCapture",
+      "required": false,
+      "type": "PointerEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "cc2c4c0c7101b546": {
+      "name": "onPointerUp",
+      "required": false,
+      "type": "PointerEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "79d2e7bcc2210731": {
+      "name": "onPointerUpCapture",
+      "required": false,
+      "type": "PointerEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b00f54585f2ce649": {
+      "name": "onPointerCancel",
+      "required": false,
+      "type": "PointerEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f852feb0c6803428": {
+      "name": "onPointerCancelCapture",
+      "required": false,
+      "type": "PointerEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "00318491c38aa2e4": {
+      "name": "onPointerEnter",
+      "required": false,
+      "type": "PointerEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "be87752b3760407f": {
+      "name": "onPointerLeave",
+      "required": false,
+      "type": "PointerEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "33a2d27fdc11ca19": {
+      "name": "onPointerOver",
+      "required": false,
+      "type": "PointerEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "67348f00933c23d7": {
+      "name": "onPointerOverCapture",
+      "required": false,
+      "type": "PointerEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "498fded3e7f78ef1": {
+      "name": "onPointerOut",
+      "required": false,
+      "type": "PointerEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7e7b726a80d4d77b": {
+      "name": "onPointerOutCapture",
+      "required": false,
+      "type": "PointerEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0ca6f1b2cdb00431": {
+      "name": "onGotPointerCapture",
+      "required": false,
+      "type": "PointerEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "4be28e4e1d11dc4d": {
+      "name": "onGotPointerCaptureCapture",
+      "required": false,
+      "type": "PointerEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5a8e14bd2f31fd79": {
+      "name": "onLostPointerCapture",
+      "required": false,
+      "type": "PointerEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5f9bb55fc4becc05": {
+      "name": "onLostPointerCaptureCapture",
+      "required": false,
+      "type": "PointerEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "50e24b98b3d9e311": {
+      "name": "onScroll",
+      "required": false,
+      "type": "UIEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "cdd2eea7c47961e3": {
+      "name": "onScrollCapture",
+      "required": false,
+      "type": "UIEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "bade090de49d86ab": {
+      "name": "onWheel",
+      "required": false,
+      "type": "WheelEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "830d8bdc5dae3815": {
+      "name": "onWheelCapture",
+      "required": false,
+      "type": "WheelEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b568fba6109a52a2": {
+      "name": "onAnimationStart",
+      "required": false,
+      "type": "AnimationEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5f5e3ddf11b45b84": {
+      "name": "onAnimationStartCapture",
+      "required": false,
+      "type": "AnimationEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0808c7e2c64ec260": {
+      "name": "onAnimationEnd",
+      "required": false,
+      "type": "AnimationEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c0e501291ef8b282": {
+      "name": "onAnimationEndCapture",
+      "required": false,
+      "type": "AnimationEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "99b900630aa91b6d": {
+      "name": "onAnimationIteration",
+      "required": false,
+      "type": "AnimationEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0bc795cd6f02f5d1": {
+      "name": "onAnimationIterationCapture",
+      "required": false,
+      "type": "AnimationEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "02eb29da320c43dc": {
+      "name": "onTransitionEnd",
+      "required": false,
+      "type": "TransitionEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e8900a8c79ebf5ad": {
+      "name": "onTransitionEndCapture",
+      "required": false,
+      "type": "TransitionEventHandler<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ca22d3cadeee4338": {
+      "name": "ref",
+      "required": false,
+      "type": "LegacyRef<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
     "5dd6b820c2403ee4": {
       "name": "onCopy",
       "required": false,
@@ -29510,7 +32317,7 @@
         {
           "name": "state",
           "required": false,
-          "type": "\"streaming\" | \"complete\" | \"cancelled\" | \"failed\" | undefined",
+          "type": "\"cancelled\" | \"streaming\" | \"complete\" | \"failed\" | undefined",
           "native": false,
           "description": ""
         },
@@ -29767,6 +32574,20 @@
           "type": "ReactNode",
           "native": false,
           "description": ""
+        },
+        {
+          "name": "tooltip",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": "Additional information, never a repeated caption or familiar action name."
+        },
+        {
+          "name": "tooltipWhenTruncated",
+          "required": false,
+          "type": "boolean | undefined",
+          "native": false,
+          "description": "Show tooltip only while the target's text is clipped."
         }
       ],
       "nativeProps": [
@@ -31144,6 +33965,13 @@
       "description": "A retained navigation target with a readable label and an independent trailing count.",
       "props": [
         {
+          "name": "tooltip",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": "Additional information, never a repeated caption or familiar action name."
+        },
+        {
           "name": "size",
           "required": false,
           "type": "\"sm\" | \"md\" | undefined",
@@ -31184,6 +34012,13 @@
           "type": "ReactNode",
           "native": false,
           "description": ""
+        },
+        {
+          "name": "tooltipWhenTruncated",
+          "required": false,
+          "type": "boolean | undefined",
+          "native": false,
+          "description": "Show tooltip only while the target's text is clipped."
         },
         {
           "name": "label",
@@ -31879,6 +34714,13 @@
           "description": ""
         },
         {
+          "name": "tooltip",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": "Additional information, never a repeated caption or familiar action name."
+        },
+        {
           "name": "layout",
           "required": false,
           "type": "\"row\" | \"command\" | \"tile\" | \"surface\" | undefined",
@@ -31891,6 +34733,13 @@
           "type": "ReactNode",
           "native": false,
           "description": ""
+        },
+        {
+          "name": "tooltipWhenTruncated",
+          "required": false,
+          "type": "boolean | undefined",
+          "native": false,
+          "description": "Show tooltip only while the target's text is clipped."
         }
       ],
       "nativeProps": [
@@ -34540,6 +37389,20 @@
           "type": "ReactNode",
           "native": false,
           "description": ""
+        },
+        {
+          "name": "tooltip",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": "Additional information, never a repeated caption or familiar action name."
+        },
+        {
+          "name": "tooltipWhenTruncated",
+          "required": false,
+          "type": "boolean | undefined",
+          "native": false,
+          "description": "Show tooltip only while the target's text is clipped."
         }
       ],
       "nativeProps": [
@@ -35110,6 +37973,20 @@
           "name": "actionId",
           "required": false,
           "type": "string | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "tooltip",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "tooltipWhenTruncated",
+          "required": false,
+          "type": "boolean | undefined",
           "native": false,
           "description": ""
         }
@@ -39992,6 +42869,20 @@
           "type": "ReactNode",
           "native": false,
           "description": ""
+        },
+        {
+          "name": "tooltip",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": "Additional information, never a repeated caption or familiar action name."
+        },
+        {
+          "name": "tooltipWhenTruncated",
+          "required": false,
+          "type": "boolean | undefined",
+          "native": false,
+          "description": "Show tooltip only while the target's text is clipped."
         }
       ],
       "nativeProps": [
@@ -45616,6 +48507,508 @@
       "nativeProps": []
     },
     {
+      "id": "chatgpt-desktop-kit:TaskStateIcon",
+      "name": "TaskStateIcon",
+      "importPath": "chatgpt-desktop-kit",
+      "family": "runtime",
+      "implementation": "src/task-state-icon.tsx",
+      "description": "Compact task state; excluded work keeps its state shape and adds a minus mark.",
+      "props": [
+        {
+          "name": "state",
+          "required": true,
+          "type": "TaskState",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "excludedFromStats",
+          "required": false,
+          "type": "boolean | undefined",
+          "native": false,
+          "description": ""
+        }
+      ],
+      "nativeProps": [
+        "51f9507a65352cff",
+        "4c8a56e6e80dc7a0",
+        "1af9857937727a9f",
+        "f807dacbb7c785e4",
+        "653092775be5509a",
+        "3bf9ffb031db54c9",
+        "44cc2de8bf0186f8",
+        "af381642320760f4",
+        "7a59011047465b2c",
+        "4291933e132b1ba7",
+        "e94ead5c98c83a06",
+        "d9b870d67f4534b8",
+        "885375b47648badc",
+        "7e0ff93e1421b041",
+        "9c337a9455021dbf",
+        "548471eea24c23d0",
+        "83c160b2f06ef571",
+        "4fe1678e5e7367c9",
+        "849e58621502196e",
+        "54eea79818e165df",
+        "42238265aef0bec1",
+        "75f0b86b4bd46326",
+        "a871b16220f2b80b",
+        "7d84ee230833caaf",
+        "ad353911b04a4486",
+        "8045cbebc2adeac1",
+        "2823f9cc1469c21e",
+        "c3c9e3103a780b90",
+        "83d2d185ecfa8093",
+        "d9ada4dfaabd6ade",
+        "038bbf0410fccd40",
+        "9f2c0059cf108e2b",
+        "c08e1478900ff64d",
+        "e472b9f5738b0776",
+        "bb0c046c8b5a4663",
+        "b374fb604fceb1b8",
+        "2b562cef5ab09194",
+        "e9d655b775a1ea62",
+        "16281433065af75a",
+        "29770eac82cfcf50",
+        "8341dc1118cbe32f",
+        "bc16941d8b842e65",
+        "50b2cee5d5a72e80",
+        "f6570b2dea42861e",
+        "16b13fbbd987d40b",
+        "f778f5832711a2ac",
+        "bd45faadfec7e2ff",
+        "29596e8773fb3b98",
+        "3e31d261331e61c0",
+        "0b734c1fb617772f",
+        "4dcdb903c776af20",
+        "5266431a83b5f3b5",
+        "2642b00c0fb1697c",
+        "bf158443b42ce757",
+        "811c793aa38cc806",
+        "e0fcca6324c5d7ae",
+        "1742a756f127b4d0",
+        "2428759248f50399",
+        "14b956e02c52e052",
+        "330da44902b9d5fa",
+        "5a59dc99b8d1ea71",
+        "a05990ebb6493522",
+        "5185f5a2c0091147",
+        "4cf051caa3e03a0b",
+        "60448d278d26baa1",
+        "87fc33611df982c7",
+        "f6bd1f3ce0e8def5",
+        "adc3fe6a60ffaaa7",
+        "6e74e2c25cd4cb1e",
+        "da97eebf84be37d9",
+        "db2a44653707360e",
+        "29013a3a865f395e",
+        "ad671a713f053cc4",
+        "901dad4b9a95afbc",
+        "2de6ee0230637892",
+        "7a0873bda590b243",
+        "44300c05c38829bd",
+        "d0a73b9eda7057ba",
+        "f2864f10e8cf0a08",
+        "5533381594ed3501",
+        "f4018309437db60a",
+        "42aa0db3c5458b54",
+        "8f2712433916fa75",
+        "0389df4f2244aede",
+        "59db3e2006fa938c",
+        "b0b4ae332b01995b",
+        "3ac0de139a6e2361",
+        "802227a8387cadfd",
+        "c4c9f62d148b7a10",
+        "a732c98a98c0c6ae",
+        "09b8acdf9f76887f",
+        "25e09d63f5286a2a",
+        "5bb72a4deacc97bd",
+        "ad8f33c7c45bc7f7",
+        "9ab8bdd507ca5d1a",
+        "f3524b437ae691b5",
+        "7710a95aad3fdc80",
+        "4635a56e1e27bbdb",
+        "057f727cbcc88d8d",
+        "00d3b4812e8946aa",
+        "e12fec50d61006b6",
+        "bce85b8f89c0c8da",
+        "2372cfe4155ae770",
+        "bba5b083c1a6904a",
+        "5ad36475032df62b",
+        "c85b5e0a2580a82d",
+        "94d91b5b7cda6037",
+        "35003ad317b20d0f",
+        "5487cfc62de1dd18",
+        "891b1324b632ef1f",
+        "137905b7149acf1d",
+        "fbd1deeb2c3e38ed",
+        "2294de022c243930",
+        "a5026083fa664fa1",
+        "6058d6e700c9ea34",
+        "82cfb99e06a3c4cf",
+        "5f4bd291539606b9",
+        "11f74bb21bdf2a7d",
+        "4645021632140011",
+        "8214cb89eb75f56f",
+        "2966094cc12ed48a",
+        "1db2962d70cbdeb2",
+        "34f56bead975568d",
+        "41a886d894885155",
+        "2faf0ee4cd183136",
+        "737cf917f9264214",
+        "05945a4514495f60",
+        "ceec2dbf096508eb",
+        "74293dec94932a38",
+        "c0eea72ea9763faa",
+        "aaef55d8aaf10212",
+        "af6b32db5cb61877",
+        "2224b7cb76b04827",
+        "c385de2a737ab140",
+        "b2620aa0ad4be897",
+        "61a673f1bdcbbdf0",
+        "19a9c7736f3681d9",
+        "6b59d9ba477165d6",
+        "553b4d4191e27a3e",
+        "abbac120939176da",
+        "a3ac11681cef374a",
+        "6e5bc96885285af6",
+        "1fc69e7717f81af1",
+        "0a6b158f45581b64",
+        "bb782c773bd99980",
+        "899b8d3578781f5c",
+        "401153c8d1a708cc",
+        "0cc7e649aa08b0e8",
+        "fc49b5b32df09a17",
+        "7198d013bc320a06",
+        "da2979865f8be773",
+        "80e6247f0798feb9",
+        "78bdd1dc58ef5f4f",
+        "d713d8e606dfc235",
+        "fdb05e19a4a4ae3d",
+        "c3e56b8500a0befd",
+        "105fa747716c0bc0",
+        "d56f0080685eda29",
+        "dd0f16993b1a6562",
+        "d3a4d32ddd0ac13c",
+        "9fb82d1f13885e95",
+        "56021a71e270013f",
+        "798a7721a907f9ae",
+        "7bea605cff738888",
+        "397e2e2926844e48",
+        "945aa3c974beb0ce",
+        "8022b938a305585a",
+        "d4a85fc0cac0311a",
+        "1c30633340f21a22",
+        "9cf9827a215ddb71",
+        "6609fd30c0f5a27c",
+        "be67bdc5d520ec49",
+        "362a8a175c45a452",
+        "0369c5e6f3a3ae51",
+        "43dd6f6289046d33",
+        "eef8764e5719c18d",
+        "b5e50ff19540fc04",
+        "96551e4cd6b48e7a",
+        "bec2c4b73c05f28e",
+        "213403f189a6e94c",
+        "f52aef74bffa604d",
+        "8b37cbeebfe2e61a",
+        "3e0aa1e6457fb4f5",
+        "8db7193b8f884ed8",
+        "22e770d60f98d363",
+        "b239001942014f3c",
+        "e69ea6cc0351c708",
+        "ffa8d0c4bde0f109",
+        "174107d70a915154",
+        "2e10190654ffa9d3",
+        "816be91c95f513db",
+        "37e56b477bc9c94e",
+        "fdb5682ff6d918a1",
+        "9d826ab8db373fa2",
+        "902bf3f4e67a0487",
+        "7c6ad578fc394c7d",
+        "e3d53ab2e72cbaa4",
+        "f78c3e934e5da363",
+        "a7f08ee300caab14",
+        "8c1fd0b9f5ca1680",
+        "dc88d562ae6294a6",
+        "eaad08813bbc0f5d",
+        "3e6f84c777f8234a",
+        "3d7de8b0ed1f0aee",
+        "ef6c6a914409cb3f",
+        "3ccf902d30aff268",
+        "fa74d5fe5ee1433e",
+        "8664a1c710d8d1a9",
+        "7e3405c17c24b072",
+        "d75408504dd8c2f7",
+        "ab140ae5d011cb84",
+        "f4495fb2ffa160ac",
+        "7d8517440c2dbb10",
+        "9bc4be6834b3a259",
+        "da014fcc59bb24d8",
+        "224365d9a71c3f48",
+        "12a6db65d133b44d",
+        "a68eaae9fa92aa92",
+        "6da9151943567714",
+        "243e222707f52d30",
+        "225a04907b121dfb",
+        "2fc2b4ead55a246e",
+        "2d57d216f284fb9e",
+        "710a2414322a9a61",
+        "d96d8c4becc39d16",
+        "a46deda9574ca223",
+        "27f4c0ed9aa7fa28",
+        "c36f96f7b0b7fba8",
+        "a3e8c13de2f5863b",
+        "47611377639cc164",
+        "ef8609b38efc8c1d",
+        "b59f4d7ddcd2167c",
+        "d05f1f6727e395b9",
+        "73f82059b347917f",
+        "390c1a251d3ea6e0",
+        "af8880b422f6584c",
+        "e03d6857464181d0",
+        "f7e453bb174c18bb",
+        "5006ff96cb557f0e",
+        "9bc7f31e0d357ebc",
+        "1ce582bd887eb1e0",
+        "9d5d9f38feca198b",
+        "45f890cb79291956",
+        "8fb91df6266bd785",
+        "49bf04f4840d5313",
+        "525129f34392dbff",
+        "222acd2f3ac012af",
+        "c4f5ec64a9f56019",
+        "12aef07e55bbff76",
+        "8a8888d5ed60416d",
+        "baef75e3c4d7725d",
+        "66718fdb96cd9b60",
+        "3fd107d92404dd2a",
+        "c99dbdb5abd3cd26",
+        "dad3b994ad54c63d",
+        "7d057943a0854096",
+        "d0b8c353b29d4853",
+        "973ac9f342833b47",
+        "b6ef184ae1670082",
+        "d5c96073055de137",
+        "c4064fc426aa2d73",
+        "0d6d2895792254b5",
+        "3909957c7689e36c",
+        "3a9552f26f63bd42",
+        "2479771f46785b5a",
+        "86828207c5c51f1f",
+        "fbceb60275ace2b2",
+        "380898b5e32036c7",
+        "44d42ae77bdc214f",
+        "2abcb2017f65f9c1",
+        "4b62625346e0f5ec",
+        "402dc0a4b5546b5f",
+        "fc0fa651370547e3",
+        "679db8ef2fe3976d",
+        "85353dbd4b876e20",
+        "2c0ed5b877c15e1a",
+        "23c7ed6762ae3909",
+        "f1106f51cfbd3c9a",
+        "cccb14974af350fc",
+        "794a693b859a8340",
+        "c862ae898dff099e",
+        "3ed607153829f231",
+        "4cc9b5f5a121f197",
+        "ad17bf90e765f22e",
+        "3a6b556cf8b23fbc",
+        "e75a3f19767cf979",
+        "7515edf8d3608bf6",
+        "66f76ac880140ca7",
+        "00ac781d246b3f68",
+        "96f4908fcd16108a",
+        "08caee40fee0857e",
+        "4e44cc9c1ed6f3a5",
+        "12ae8dc4851a635e",
+        "a5ad8a7f9b5ba9bc",
+        "4e27e7acd839e4a1",
+        "cb158207746e6bb9",
+        "c49cbd91d1843f99",
+        "a2a2cd4fbba448d0",
+        "3d6aa4108f2b8c32",
+        "64a3906ab80858f3",
+        "68d7f73d9645d906",
+        "4cd166b22dc09153",
+        "565c31f2a3cee300",
+        "997fe13cf60495e5",
+        "b7787a274ef3310e",
+        "df0b03ec4973e477",
+        "1f86e2f75ac6e140",
+        "6d76a40c85b0bf1f",
+        "b0483557eb584ead",
+        "ac1ff6b3e5032100",
+        "03484b4b1d86e92f",
+        "c01934236d41c34f",
+        "57b07e0f6124ced5",
+        "3d374b8e347fe3d3",
+        "38a872e40c6c6308",
+        "7cdb8af317bd47ff",
+        "008485c5e2615e2f",
+        "d2cd0af7c004744a",
+        "462cd1f8efbedccc",
+        "675211230a354255",
+        "b97f99a7e14fbf12",
+        "48a7bdd82b4fe94d",
+        "22a196fcd7b46c77",
+        "2cc2ca42d82e7a40",
+        "c2cbe87dbe64201b",
+        "be7ff9e18831ca67",
+        "384c324fc90c9e5a",
+        "edaf9342b7bc6942",
+        "0f966f7ab2759f22",
+        "086daf50d5128c3b",
+        "e09bb528302e72bb",
+        "29ff203c475c05b3",
+        "59e73166891dfab1",
+        "2cee522e660e9be4",
+        "41c9371d9a47f1dc",
+        "1d600ed15786b717",
+        "cb6f2842ae0d73c8",
+        "0acb2aa83937fd62",
+        "c7fb56a9ff6d3026",
+        "4ea33c4f2bf2ab71",
+        "8267e7866b52f951",
+        "4bf164f44c7e3d62",
+        "f0524ec2be20b7ee",
+        "cac17293b6fa6d67",
+        "52cd3f9a0f58202e",
+        "70a08255f785aceb",
+        "b1a043281d107713",
+        "26b14f62e3c64f17",
+        "f3d1afed52cec717",
+        "f395452b5400156c",
+        "8e016ca95489990c",
+        "e62cf3060f23c938",
+        "8ff7d02e2184ca83",
+        "84d54b2f8eaa2e8d",
+        "bc78d51a175ec720",
+        "cf427346150ab685",
+        "36230b43073b08cc",
+        "f11bc86bf5ed2bef",
+        "5f836d81bc70b7d1",
+        "ce2bf4793243fab2",
+        "fe517b926c823ef8",
+        "53557af6ac03cb1c",
+        "2f48d93accea79fe",
+        "738898a2bfd69a2a",
+        "33473a4da3ea59d5",
+        "0836b1bc88726180",
+        "d4c324671dd9425f",
+        "e591730ae1e4eda2",
+        "7deeec7f55502c5b",
+        "faf0f26f264113c9",
+        "6c2d563de006ae5a",
+        "091cf7bfecbe17ae",
+        "424d73ca4007bde8",
+        "bd09acbec99d5fa9",
+        "9fe13337a063434e",
+        "acb2e8eaad9443eb",
+        "d1481f8432e28385",
+        "cf2e130112a9519a",
+        "80fea2b0a0b975ff",
+        "1a0c061968f6aa65",
+        "f5dbf30c28a7a73f",
+        "076a634c773fae83",
+        "6b472506571ea082",
+        "e63ab5e2b00c390a",
+        "555044d166a8a0de",
+        "023412fa50c41595",
+        "bbc96e084d764422",
+        "b245270e81e614d1",
+        "2a6fef936d6a1061",
+        "9aa5dba9f7268553",
+        "7b00214f54e2393a",
+        "90c9b6794786e0ca",
+        "b6bb871c270fc0bd",
+        "57db897bd5daa4f8",
+        "5ef5a974e39d5b3c",
+        "49d842e56e891ce5",
+        "7273642b55859f1a",
+        "94e05de7adcffba5",
+        "67efc3682541cacd",
+        "712577a9e850ad7e",
+        "ffb511c285d457fa",
+        "66cec59f154b55f0",
+        "a176e8534a54a4f3",
+        "d7b0d4424a46e932",
+        "ce1cae953809e201",
+        "0885ccfb83d0dc87",
+        "feb503de8ddf581d",
+        "698483f626db6a3d",
+        "7bb13f08f681f0bb",
+        "8d049076cb569190",
+        "f5b35dac923d6b02",
+        "e55908d5cfdb1f79",
+        "d892c38eddadd587",
+        "555d133751d6314f",
+        "0aabf997010c5e1b",
+        "d673608b99aa6e9e",
+        "66c742cf149da49e",
+        "49dabf32226d9454",
+        "269550da3efee21e",
+        "c06c95387fd2f57d",
+        "605acbf138339c2b",
+        "c683ba4913f52e4f",
+        "350cec6bc7fac63c",
+        "f4babf0cc07b525b",
+        "f20f7285f741cefe",
+        "417ad96c1d2b2f39",
+        "22c35b3992fcb827",
+        "30d98149f6e93e71",
+        "44aa13a8a612adbb",
+        "ddcb92bba6026dfb",
+        "ea8effce3d4291eb",
+        "9ac388cd1d9eb93e",
+        "0fbfc5f80faa7039",
+        "ec3967ea45b1f0bc",
+        "22f6ea1abf6e438f",
+        "a231e91b09c26fa8",
+        "0a19d4f155d8db27",
+        "a6dd3e6e967ff2d9",
+        "eb6eafdf55126045",
+        "545cd7276bf451de",
+        "f85341bb304a1ab9",
+        "28c587912eef9661",
+        "e923f7007ee8514b",
+        "fa064217690ab8ff",
+        "499d0128a84edb87",
+        "a2bcc95e5cc6b3e4",
+        "547e904e1500a2e2",
+        "4b7db6f50bf58f01",
+        "cc2c4c0c7101b546",
+        "79d2e7bcc2210731",
+        "b00f54585f2ce649",
+        "f852feb0c6803428",
+        "00318491c38aa2e4",
+        "be87752b3760407f",
+        "33a2d27fdc11ca19",
+        "67348f00933c23d7",
+        "498fded3e7f78ef1",
+        "7e7b726a80d4d77b",
+        "0ca6f1b2cdb00431",
+        "4be28e4e1d11dc4d",
+        "5a8e14bd2f31fd79",
+        "5f9bb55fc4becc05",
+        "50e24b98b3d9e311",
+        "cdd2eea7c47961e3",
+        "bade090de49d86ab",
+        "830d8bdc5dae3815",
+        "b568fba6109a52a2",
+        "5f5e3ddf11b45b84",
+        "0808c7e2c64ec260",
+        "c0e501291ef8b282",
+        "99b900630aa91b6d",
+        "0bc795cd6f02f5d1",
+        "02eb29da320c43dc",
+        "e8900a8c79ebf5ad",
+        "ca22d3cadeee4338",
+        "b71c25c8048699fd"
+      ]
+    },
+    {
       "id": "chatgpt-desktop-kit:TemporalPicker",
       "name": "TemporalPicker",
       "importPath": "chatgpt-desktop-kit",
@@ -46816,6 +50209,13 @@
           "type": "\"top\" | \"right\" | \"bottom\" | \"left\" | undefined",
           "native": false,
           "description": ""
+        },
+        {
+          "name": "overflowOnly",
+          "required": false,
+          "type": "boolean | undefined",
+          "native": false,
+          "description": "Show full text only when it is visibly clipped."
         }
       ],
       "nativeProps": []
@@ -52244,6 +55644,13 @@
       "description": "",
       "props": [
         {
+          "name": "tooltip",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": "Supplemental information only; aria-label and iconOnly do not create tooltips."
+        },
+        {
           "name": "asChild",
           "required": false,
           "type": "boolean | undefined",
@@ -52305,6 +55712,13 @@
           "type": "React.ReactNode",
           "native": false,
           "description": "A real count/state badge, separate from the hidden action caption."
+        },
+        {
+          "name": "tooltipWhenTruncated",
+          "required": false,
+          "type": "boolean | undefined",
+          "native": false,
+          "description": ""
         }
       ],
       "nativeProps": [
@@ -52871,6 +56285,13 @@
       "description": "",
       "props": [
         {
+          "name": "tooltip",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": "Supplemental information only; aria-label and iconOnly do not create tooltips."
+        },
+        {
           "name": "asChild",
           "required": false,
           "type": "boolean | undefined",
@@ -52932,6 +56353,13 @@
           "type": "React.ReactNode",
           "native": false,
           "description": "A real count/state badge, separate from the hidden action caption."
+        },
+        {
+          "name": "tooltipWhenTruncated",
+          "required": false,
+          "type": "boolean | undefined",
+          "native": false,
+          "description": ""
         }
       ],
       "nativeProps": [
@@ -55958,6 +59386,13 @@
       "description": "",
       "props": [
         {
+          "name": "tooltip",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": "Supplemental information only; aria-label and iconOnly do not create tooltips."
+        },
+        {
           "name": "asChild",
           "required": false,
           "type": "boolean | undefined",
@@ -56019,6 +59454,13 @@
           "type": "React.ReactNode",
           "native": false,
           "description": "A real count/state badge, separate from the hidden action caption."
+        },
+        {
+          "name": "tooltipWhenTruncated",
+          "required": false,
+          "type": "boolean | undefined",
+          "native": false,
+          "description": ""
         }
       ],
       "nativeProps": [
@@ -59954,6 +63396,20 @@
           "type": "React.ReactNode",
           "native": false,
           "description": "A real count/state badge, separate from the hidden action caption."
+        },
+        {
+          "name": "tooltip",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": "Supplemental information only; aria-label and iconOnly do not create tooltips."
+        },
+        {
+          "name": "tooltipWhenTruncated",
+          "required": false,
+          "type": "boolean | undefined",
+          "native": false,
+          "description": ""
         },
         {
           "name": "layout",
@@ -73933,6 +77389,13 @@
           "name": "children",
           "required": true,
           "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "overflowOnly",
+          "required": false,
+          "type": "boolean | undefined",
           "native": false,
           "description": ""
         }

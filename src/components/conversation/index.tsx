@@ -62,6 +62,7 @@ export const ComposerActionButton = forwardRef<HTMLButtonElement, ComposerAction
         className={classes('desktop-send-control', className)}
         data-composer-state={state}
         aria-label={label}
+        tooltip={props.tooltip ?? (busy ? label : undefined)}
         aria-busy={busy || undefined}
         iconOnly
         disabled={disabled || busy || (stop ? !onStop : sendDisabled)}

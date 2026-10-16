@@ -84,7 +84,7 @@ try {
       assert.equal(paint.font, '13px');
       assert.ok(paint.left >= 0 && paint.right <= width && paint.bottom <= height && !paint.overflow);
       await page.getByRole('button', { name: 'Close host notice' }).focus();
-      await page.getByRole('tooltip', { name: 'Close host notice' }).waitFor();
+      await page.waitForTimeout(400); assert.equal(await page.getByRole('tooltip').count(), 0);
       await page.keyboard.press('Enter');
       await notice.waitFor({ state: 'detached' });
       for (const kind of ['success', 'error', 'warning', 'info']) {
@@ -168,7 +168,7 @@ try {
         checks: [
           'neutral borders',
           'wrapping',
-          'keyboard close tooltip',
+          'keyboard close without redundant tooltip',
           'queue success/error/warning/info',
           'undo',
           'auto-dismiss',

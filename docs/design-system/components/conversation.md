@@ -19,7 +19,7 @@ One presenter for streamed increments and complete responses. Canonical content 
 | content | yes | `string` |
 | responseId | yes | `string` |
 | animate | no | `boolean \| undefined` |
-| state | no | `"streaming" \| "complete" \| "cancelled" \| "failed" \| undefined` |
+| state | no | `"cancelled" \| "streaming" \| "complete" \| "failed" \| undefined` |
 | className | no | `string \| undefined` |
 | components | no | `Components \| undefined` |
 | onReveal | no | `(() => void) \| undefined` |
@@ -82,8 +82,10 @@ One ChatGPT-style circular action for message composers; Hosts own operation sta
 | sendingLabel | no | `string \| undefined` |
 | stopLabel | no | `string \| undefined` |
 | stoppingLabel | no | `string \| undefined` |
+| tooltip | no | `string \| undefined` |
 | layout | no | `"row" \| "command" \| "tile" \| "surface" \| undefined` |
 | badge | no | `ReactNode` |
+| tooltipWhenTruncated | no | `boolean \| undefined` |
 
 ## ConversationMessage (chatgpt-desktop-kit)
 

@@ -24,7 +24,9 @@ function Fixture() {
             <AppDialogTitle>Viewer</AppDialogTitle>
           </AppDialogHeader>
           <AppDialogBody>
-            <Button aria-label="Zoom out">Zoom out</Button>
+            <Button aria-label="Zoom out" tooltip="Mouse wheel also changes zoom">
+              Zoom out
+            </Button>
           </AppDialogBody>
         </AppDialogContent>
       </AppDialog>

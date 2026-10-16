@@ -1,9 +1,17 @@
 import { ActionTooltip } from '../../action-tooltip';
 import type { ReactElement } from 'react';
 
-export function Tooltip({ label, children }: { label: string; children: ReactElement }) {
+export function Tooltip({
+  label,
+  children,
+  overflowOnly = false,
+}: {
+  label: string;
+  children: ReactElement;
+  overflowOnly?: boolean;
+}) {
   return (
-    <ActionTooltip label={label} side="right">
+    <ActionTooltip label={label} side="right" overflowOnly={overflowOnly} direct={overflowOnly}>
       {children}
     </ActionTooltip>
   );

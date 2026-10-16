@@ -16,6 +16,10 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Opt in only for familiar, compact toolbar controls. */
   iconOnly?: boolean;
   badge?: ReactNode;
+  /** Additional information, never a repeated caption or familiar action name. */
+  tooltip?: string;
+  /** Show tooltip only while the target's text is clipped. */
+  tooltipWhenTruncated?: boolean;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
@@ -68,7 +72,11 @@ export const RecordLink = forwardRef<
 
 export const IconButton = forwardRef<
   HTMLButtonElement,
-  ButtonHTMLAttributes<HTMLButtonElement> & { actionId?: string }
+  ButtonHTMLAttributes<HTMLButtonElement> & {
+    actionId?: string;
+    tooltip?: string;
+    tooltipWhenTruncated?: boolean;
+  }
 >(function IconButton({ className, type = 'button', actionId, title, ...props }, ref) {
   return (
     <ControlButton

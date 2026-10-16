@@ -11,7 +11,7 @@ for passive glyphs, 28px for an independent button). Commands
 appear on hover, focus, an open child menu, or coarse pointers. Records have no
 separator. TaskStateIcon uses shape as well as semantic color; excluded work adds
 a minus marker without changing the underlying state. Hosts map domain status codes
-and provide localized button labels and tooltips. Never use a spinning state glyph
+and provide localized accessible button labels. Icon-only state glyphs may expose the current state as supplemental information. Never use a spinning state glyph
 for an ordinary in-progress task.
 
 Contextual sidebars use `ClientSidebarToolbar` as the single owner of title-row
@@ -71,7 +71,7 @@ Use icon-only controls for familiar contextual actions: attachment, edit, delete
 
 Use the exported `AttachmentIcon` (paperclip), `DeleteIcon` (trash), `EditIcon` (pencil), `RefreshIcon`, `LinkIcon`, `SourceIcon` (external link), `SaveIcon` (disk) and `CompleteIcon` (circle check). Plus means creation; never use it for attachments. X means close/cancel/remove from an unsaved selection, not permanent deletion. A check means completion, not saving. Navigation has its existing outline/fill vocabulary.
 
-Icon-only actions require a localized accessible name and hover/focus tooltip, including disabled and busy states. Preserve field labels, selected values, user content and useful errors. Common actions stay visible; low-frequency actions may enter a labelled menu. Never infer icon meaning or presentation from label text at runtime.
+Icon-only actions require a localized accessible name, including disabled and busy states. Accessible names, icon captions and familiar actions never automatically create tooltips. Buttons opt in with `tooltip` only for supplemental information: a disabled/failure reason, otherwise hidden identity or state, or an unfamiliar operation. Do not repeat visible captions or obvious click instructions. The legacy `title` prop remains an explicit supplemental tooltip alias. Use `tooltipWhenTruncated` (or `Tooltip overflowOnly`) for full values only while text is actually clipped. Module names in an icon-only navigation rail remain useful destination identification. Ordinary controls render without a tooltip provider, wrapper or timer. Preserve field labels, selected values, user content and useful errors. Common actions stay visible; low-frequency actions may enter a labelled menu. Never infer icon meaning or presentation from label text at runtime.
 
 This specification combines measured screenshot patterns with an existing desktop implementation. Values below are implementation targets, not a claim that every ChatGPT version has the same pixels. Use the synthetic gallery examples and inspect the target viewport before tuning.
 
@@ -238,7 +238,7 @@ Use one horizontal module navigation layer. Promote independent work destination
 
 ## Composer send and stop action
 
-Message composers use `ComposerActionButton` in chat, Codex/work, threads, follow-up instructions, agent conversations, mail and comments. The supplied ChatGPT client button captures are the reference for the blue circular up-arrow and filled square. Use one 32px circle in every composer, a 16px up-arrow, a 10px filled square and the shared send foreground/background/hover tokens; the chat client profile must not override size or colors. Preserve keyboard focus and hover/focus tooltips.
+Message composers use `ComposerActionButton` in chat, Codex/work, threads, follow-up instructions, agent conversations, mail and comments. The supplied ChatGPT client button captures are the reference for the blue circular up-arrow and filled square. Use one 32px circle in every composer, a 16px up-arrow, a 10px filled square and the shared send foreground/background/hover tokens; the chat client profile must not override size or colors. Preserve keyboard focus and accessible names. Ready Send and ordinary Stop do not repeat their familiar action in a tooltip; busy acknowledgement states may provide supplemental status.
 
 | Host state | Glyph | Interaction |
 | --- | --- | --- |
@@ -247,7 +247,7 @@ Message composers use `ComposerActionButton` in chat, Codex/work, threads, follo
 | stoppable | Filled square | Stop the active response when the Host supports cancellation |
 | stopping | Progress ring | Disabled until cancellation is acknowledged |
 
-State is explicit, never inferred from button text or a CSS class. `sendDisabled` only affects Send; an empty next draft cannot disable Stop. Sending must not claim cancellation is possible unless the Host provides it. Disabled/busy controls retain a localized accessible name and tooltip. Enter submits only a ready Send, Shift+Enter/IME remain text input, and Enter in an active response must not stop it. Stop is a pointer/Space command. Hosts own duplicate suppression, operation acknowledgements, failure recovery, draft preservation and correlated usage outcomes. The component owns presentation and action markers only.
+State is explicit, never inferred from button text or a CSS class. `sendDisabled` only affects Send; an empty next draft cannot disable Stop. Sending must not claim cancellation is possible unless the Host provides it. Disabled/busy controls retain a localized accessible name. Show a tooltip only for additional state or an actual unavailability reason. Enter submits only a ready Send, Shift+Enter/IME remain text input, and Enter in an active response must not stop it. Stop is a pointer/Space command. Hosts own duplicate suppression, operation acknowledgements, failure recovery, draft preservation and correlated usage outcomes. The component owns presentation and action markers only.
 
 A labelled business operation (create, publish a report, apply, run a batch, stop a service) remains a labelled action; use its semantic icon. It is not a message composer simply because its handler submits data. Do not apply the circle to every form submit or Worker lifecycle command. The composer state gallery is `examples/composer-actions.tsx`; `npm run test:composer` covers all states, work/chat profile parity, keyboard behavior, draft preservation, reduced motion, both themes and 125% emulation.
 

@@ -9,6 +9,7 @@ import { Button, IconButton } from '../actions';
 import { classes } from '../classes';
 import { InternalScrollArea } from '../lists';
 import { createDesktopPortal } from '../../scoped-surface';
+import { ActionTooltip } from '../../action-tooltip';
 const MenuPortal = createDesktopPortal(DropdownMenuPrimitive.Portal);
 const DialogPortal = createDesktopPortal(DialogPrimitive.Portal);
 
@@ -67,9 +68,9 @@ export function ContextAttachment({
           {icon}
         </span>
       )}
-      <span className="desktop-context-attachment__label" title={label}>
-        {label}
-      </span>
+      <ActionTooltip label={label} overflowOnly direct>
+        <span className="desktop-context-attachment__label">{label}</span>
+      </ActionTooltip>
       <Button
         size="sm"
         variant="ghost"

@@ -22,6 +22,8 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | icon | no | `ReactNode` |
 | iconOnly | no | `boolean \| undefined` |
 | badge | no | `ReactNode` |
+| tooltip | no | `string \| undefined` |
+| tooltipWhenTruncated | no | `boolean \| undefined` |
 
 ## FloatingLauncher (chatgpt-desktop-kit)
 
@@ -39,6 +41,8 @@ Reusable floating surfaces; positioning and application state belong to the Host
 | icon | no | `ReactNode` |
 | iconOnly | no | `boolean \| undefined` |
 | badge | no | `ReactNode` |
+| tooltip | no | `string \| undefined` |
+| tooltipWhenTruncated | no | `boolean \| undefined` |
 
 ## IconButton (chatgpt-desktop-kit)
 
@@ -47,6 +51,8 @@ Reusable floating surfaces; positioning and application state belong to the Host
 | Prop | Required | Type |
 | --- | --- | --- |
 | actionId | no | `string \| undefined` |
+| tooltip | no | `string \| undefined` |
+| tooltipWhenTruncated | no | `boolean \| undefined` |
 
 ## RecordAction (chatgpt-desktop-kit)
 
@@ -64,6 +70,8 @@ A record command with feedback confined to its actual hit target.
 | icon | no | `ReactNode` |
 | iconOnly | no | `boolean \| undefined` |
 | badge | no | `ReactNode` |
+| tooltip | no | `string \| undefined` |
+| tooltipWhenTruncated | no | `boolean \| undefined` |
 
 ## RecordLink (chatgpt-desktop-kit)
 

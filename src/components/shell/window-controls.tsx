@@ -28,7 +28,6 @@ export function WindowControls({
       <IconButton
         actionId={actionIds.minimize}
         aria-label={labels.minimize}
-        title={labels.minimize}
         disabled={!onMinimize}
         onClick={onMinimize}
       >
@@ -39,7 +38,6 @@ export function WindowControls({
       <IconButton
         actionId={actionIds.maximize}
         aria-label={maximized ? labels.restore : labels.maximize}
-        title={maximized ? labels.restore : labels.maximize}
         disabled={!onMaximize}
         onClick={onMaximize}
       >
@@ -58,7 +56,6 @@ export function WindowControls({
         className="kit-window-close"
         actionId={actionIds.close}
         aria-label={labels.close}
-        title={labels.close}
         disabled={!onClose}
         onClick={onClose}
       >

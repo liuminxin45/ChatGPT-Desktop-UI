@@ -42,6 +42,9 @@ const Button = React.forwardRef<
       iconOnly?: boolean;
       /** A real count/state badge, separate from the hidden action caption. */
       badge?: React.ReactNode;
+      /** Supplemental information only; aria-label and iconOnly do not create tooltips. */
+      tooltip?: string;
+      tooltipWhenTruncated?: boolean;
       layout?: 'command' | 'row' | 'tile' | 'surface';
     }
 >(

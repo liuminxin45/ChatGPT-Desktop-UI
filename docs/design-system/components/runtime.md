@@ -93,6 +93,17 @@ One event boundary per Host; DOM scopes also work for React portal dialogs.
 | --- | --- | --- |
 | children | yes | `ReactNode` |
 
+## TaskStateIcon (chatgpt-desktop-kit)
+
+[Implementation](../../../src/task-state-icon.tsx)
+
+Compact task state; excluded work keeps its state shape and adds a minus mark.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| state | yes | `TaskState` |
+| excludedFromStats | no | `boolean \| undefined` |
+
 ## UIStringsProvider (chatgpt-desktop-kit)
 
 [Implementation](../../../src/strings.tsx)
