@@ -22,7 +22,10 @@
     "composer_action_cases": 6,
     "prepared_integration_cases": 8,
     "skill_package": "passed",
-    "source_ownership": "passed"
+    "source_ownership": "passed",
+    "permission_geometry": "28x28 in all 12 reference cases; consumer baseline 35x30 failed before root CSS fix",
+    "menu_regression_cases": 6,
+    "api_docs_newlines": "normalized JSDoc and checkout newlines; Linux CI follow-up"
   },
   "rendering": {
     "themes": [

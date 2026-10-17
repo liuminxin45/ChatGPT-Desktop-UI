@@ -30,7 +30,7 @@ try{
    const r=s=>{const b=document.querySelector(s).getBoundingClientRect();return {x:b.x,y:b.y,w:b.width,h:b.height}};
    return {editor:r('.desktop-composer-surface-editor'),toolbar:r('.desktop-composer-surface-toolbar'),add:r('[aria-label="Add attachments"]'),permission:r('#permission'),model:r('#model'),action:r('[data-composer-state]'),overflow:document.documentElement.scrollWidth>innerWidth};
   });
-  assert(!geometry.overflow);assert(geometry.editor.y<geometry.toolbar.y);assert(geometry.add.x<geometry.permission.x);assert(geometry.permission.x<geometry.model.x);assert(geometry.model.x<geometry.action.x);
+  assert(!geometry.overflow);assert.equal(geometry.permission.w,28);assert.equal(geometry.permission.h,28);assert(geometry.editor.y<geometry.toolbar.y);assert(geometry.add.x<geometry.permission.x);assert(geometry.permission.x<geometry.model.x);assert(geometry.model.x<geometry.action.x);
   const name=`${theme}-${width}-${scale}`;
   await page.locator('.reference-composer').screenshot({path:path.join(out,`${name}.png`)});
   const box=async()=>page.locator('.desktop-composer-surface-toolbar').evaluate(e=>JSON.stringify([...e.querySelectorAll('button,svg')].map(n=>{const r=n.getBoundingClientRect();return [r.x,r.y,r.width,r.height]})));
