@@ -61,3 +61,25 @@ it('a proposed plan is readable but never executes without an explicit enabled c
   fireEvent.click(screen.getByRole('button', { name: 'Implement this plan' }));
   expect(run).toHaveBeenCalledOnce();
 });
+
+it('model descriptions are inline and Escape returns directly to effort', async () => {
+  render(
+    <ComposerModelPicker
+      model="sol"
+      effort="high"
+      models={[{ value: 'sol', label: 'Sol', description: 'For daily work' }]}
+      efforts={[{ value: 'high', label: 'High' }]}
+      onModelChange={() => {}}
+      onEffortChange={() => {}}
+    />,
+  );
+  fireEvent.click(screen.getByRole('button', { name: 'Select effort' }));
+  fireEvent.click(await screen.findByRole('button', { name: 'Select model' }));
+  const option = await screen.findByRole('menuitemradio');
+  expect(option.textContent).toContain('For daily work');
+  fireEvent.focus(option);
+  expect(screen.queryByRole('tooltip')).toBeNull();
+  fireEvent.keyDown(option, { key: 'Escape' });
+  expect(screen.queryByRole('menuitemradio')).toBeNull();
+  expect(screen.getByRole('dialog', { name: 'Select effort' })).not.toBeNull();
+});

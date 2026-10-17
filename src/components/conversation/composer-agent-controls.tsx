@@ -313,28 +313,27 @@ export function ComposerModelPicker({
                 </Button>
               )}
               {models.map((option) => (
-                <ActionTooltip
+                <Button
                   key={option.value}
-                  label={option.description || option.label}
-                  side="right"
-                  direct
+                  role="menuitemradio"
+                  aria-checked={option.value === model}
+                  layout="command"
+                  variant="ghost"
+                  className="desktop-model-panel__option"
+                  disabled={disabled || option.disabled}
+                  onClick={() => {
+                    if (option.value !== model) onModelChange(option.value);
+                    setOpen(false);
+                  }}
                 >
-                  <Button
-                    role="menuitemradio"
-                    aria-checked={option.value === model}
-                    layout="command"
-                    variant="ghost"
-                    className="desktop-model-panel__option"
-                    disabled={disabled || option.disabled}
-                    onClick={() => {
-                      if (option.value !== model) onModelChange(option.value);
-                      setOpen(false);
-                    }}
-                  >
-                    <span>{option.label}</span>
-                    {option.value === model && <Check size={15} aria-hidden="true" />}
-                  </Button>
-                </ActionTooltip>
+                  <span>
+                    {option.label}
+                    {option.description && option.description !== option.label ? (
+                      <small>{option.description}</small>
+                    ) : null}
+                  </span>
+                  {option.value === model && <Check size={15} aria-hidden="true" />}
+                </Button>
               ))}
             </div>
           </>
