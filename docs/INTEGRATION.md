@@ -336,3 +336,6 @@ list below 768 CSS px; `labels.back` localizes Back. No horizontal submenu may
 extend beyond a narrow viewport. Desktop cascades are unchanged. Back dismisses
 Appearance before its parent menu, then the navigation drawer. Menu theme
 changes do not remount the surrounding workspace or clear drafts.
+
+Closed, obscured or suppressed tooltips immediately release their dismissal layer;
+exit motion must never consume the first Escape of a newly opened dialog.
