@@ -76,3 +76,5 @@
 
 .kit-settings-scroll--embedded{padding-top:20px}
 @media(max-width:767px){.kit-settings-scroll--embedded{padding:8px 16px calc(24px + env(safe-area-inset-bottom))}}
+
+@media(max-width:767px){.kit-settings-scroll--embedded .client-settings-group{margin-bottom:28px}}

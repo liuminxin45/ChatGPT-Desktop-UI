@@ -21,7 +21,7 @@ function App() {
     [selected, setSelected] = useState('Module 1');
   const modules = Array.from({ length: 20 }, (_, i) => 'Module ' + (i + 1));
   return (
-    <DesktopProvider>
+    <DesktopProvider className="example-root">
       <ChatAppSurface>
         <NavigationDrawer
           open={open}

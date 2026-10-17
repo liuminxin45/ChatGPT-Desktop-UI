@@ -328,7 +328,8 @@ a permanent phone bottom bar.
 with readable object title and 44px actions. The floating default is unchanged.
 `SettingsPage embedded` keeps its one bounded scroll owner and readable column
 while an external ChatHeader owns the title and actions. It renders no second
-heading. Its accessible name comes from the required title prop.
+heading. Its accessible name comes from the required title prop. Embedded phone
+settings use 28px group separation; the native desktop profile is unchanged.
 
 AvatarMenu automatically replaces Appearance with a same-panel Back and radio
 list below 768 CSS px; `labels.back` localizes Back. No horizontal submenu may
