@@ -275,10 +275,12 @@ export function EditableCombobox({
 export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   /** Grow with content and width changes; at a CSS max-height the field scrolls internally. */
   autoSize?: boolean;
+  /** Cap auto-sized content to this many text lines; excess content scrolls. */
+  maxRows?: number;
 }
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function Textarea(
-  { className, autoSize = false, onInput, ...props },
+  { className, autoSize = false, maxRows, onInput, ...props },
   ref,
 ) {
   const element = useRef<HTMLTextAreaElement | null>(null);
@@ -287,11 +289,18 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
     if (!autoSize || !node || !node.clientWidth) return;
     node.style.height = 'auto';
     const border = node.offsetHeight - node.clientHeight;
-    node.style.height = `${node.scrollHeight + border}px`;
+    let height = node.scrollHeight + border;
+    if (maxRows !== undefined && Number.isFinite(maxRows)) {
+      const style = getComputedStyle(node);
+      const line = parseFloat(style.lineHeight) || parseFloat(style.fontSize) * 1.2;
+      const padding = parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
+      height = Math.min(height, line * Math.max(1, Math.floor(maxRows)) + padding + border);
+    }
+    node.style.height = `${height}px`;
     // CSS max-height may clamp the measured height. Keep the rest of the draft
     // reachable instead of leaving auto-sized fields permanently overflow:hidden.
     node.style.overflowY = node.scrollHeight > node.clientHeight + 1 ? 'auto' : 'hidden';
-  }, [autoSize]);
+  }, [autoSize, maxRows]);
   useEffect(() => {
     resize();
     if (!autoSize || !element.current) return;

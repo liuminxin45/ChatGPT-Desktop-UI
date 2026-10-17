@@ -303,3 +303,11 @@ loading/error/empty strings; the kit never fetches data or owns routes. Arrow
 keys move the active option; Enter selects, IME/repeated Enter do not. Opening or
 cancelling search cannot change a selected business object or discard a draft.
 Use SidebarIcon for folding a sidebar; CloseIcon remains close/cancel.
+
+## Bounded auto-sized drafts
+
+`Textarea autoSize maxRows={4}` limits growth by the computed text line height,
+padding and border; longer drafts scroll inside the same textarea. Changing
+`maxRows` resizes the mounted field without replacing its value, focus or caret.
+The host may calculate the row budget from its available workspace height.
+CSS minimum and maximum heights still apply. Omit `maxRows` for existing behavior.
