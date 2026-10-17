@@ -75,7 +75,7 @@ it('model descriptions are inline and Escape returns directly to effort', async 
   );
   fireEvent.click(screen.getByRole('button', { name: 'Select effort' }));
   fireEvent.click(await screen.findByRole('button', { name: 'Select model' }));
-  const option = await screen.findByRole('menuitemradio');
+  const option = await screen.findByRole('menuitemradio', { name: 'Sol', exact: true });
   expect(option.textContent).toContain('For daily work');
   fireEvent.focus(option);
   expect(screen.queryByRole('tooltip')).toBeNull();

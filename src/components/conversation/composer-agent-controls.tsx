@@ -312,10 +312,16 @@ export function ComposerModelPicker({
                   </span>
                 </Button>
               )}
-              {models.map((option) => (
+              {models.map((option, index) => (
                 <Button
                   key={option.value}
                   role="menuitemradio"
+                  aria-label={option.label}
+                  aria-describedby={
+                    option.description && option.description !== option.label
+                      ? `${tickId}-model-${index}`
+                      : undefined
+                  }
                   aria-checked={option.value === model}
                   layout="command"
                   variant="ghost"
@@ -329,7 +335,7 @@ export function ComposerModelPicker({
                   <span>
                     {option.label}
                     {option.description && option.description !== option.label ? (
-                      <small>{option.description}</small>
+                      <small id={`${tickId}-model-${index}`}>{option.description}</small>
                     ) : null}
                   </span>
                   {option.value === model && <Check size={15} aria-hidden="true" />}
