@@ -79,8 +79,22 @@ try {
       p.on('pageerror', (e) => errors.push(e.message));
       p.on('console', (m) => {
         if (m.type() === 'error') errors.push(m.text());
+        if (m.text().startsWith('UI_ESCAPE_TRACE')) console.log(m.text());
       });
       await p.goto(`http://127.0.0.1:${server.address().port}/?theme=${theme}`);
+      await p.evaluate(() => {
+        document.addEventListener('keydown', (event) => {
+          if (event.key !== 'Escape') return;
+          queueMicrotask(() => console.info('UI_ESCAPE_TRACE', JSON.stringify({
+            prevented: event.defaultPrevented,
+            composing: event.isComposing,
+            target: event.target?.getAttribute?.('aria-label') || event.target?.textContent?.slice(0, 45),
+            focus: document.activeElement?.outerHTML?.slice(0, 250),
+            layers: [...document.querySelectorAll('[role="dialog"],[role="menu"],[role="tooltip"]')].map(element => ({role:element.getAttribute('role'),state:element.getAttribute('data-state'),text:element.textContent?.slice(0, 70),hidden:!!element.closest('[aria-hidden="true"],[inert]')})),
+          }))));
+        }, true);
+      });
+
       const trigger = p.locator('#model');
       await trigger.click();
       await p.getByRole('slider', { name: 'Select effort' }).waitFor();
