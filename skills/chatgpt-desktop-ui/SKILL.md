@@ -59,6 +59,8 @@ Choose shared Button geometry explicitly: command for compact centered actions, 
 
 Verify nested overlay keyboard ownership: Escape closes only the active Select, menu, Popover or child Dialog, preserving its parent editor and draft. Respect consumed keys and IME composition. Only the top visible Dialog contains Tab, and dismissal restores focus to its trigger; test this in the actual consumer portal/CSS pipeline.
 
+Keep tooltips on obscured (`aria-hidden`, `inert` or hidden) actions closed, including delayed focus/hover from a previous popup. Reopen a modal and verify one Escape still dismisses it without a background tooltip taking ownership.
+
 Audit compatibility aliases such as `SelectControl`, not only canonical names. Use the shared `size="sm"` API rather than Host height, padding, font or color overrides. Use `AppConfirmDialog` or `Dialog` for draft-discard and destructive confirmation, preserving drafts on cancellation. Verify the actual clean shared source at the pinned revision; an installed package without source cannot establish a clean source audit.
 
 The versioned reference is Windows ChatGPT **26.1002.7124.0**, observed on 2026-10-09. For an explicit client replica, reuse `DesktopClientSurface`, `ClientSidebar`, `SidebarSection`, `DesktopMenu` and grouped `SettingsGroup`/`SettingsField`; match the observed layouts instead of designing a new dashboard. This profile uses 44px title bar, 52px rail, 36px selected tile, 372px contextual sidebar, 728px settings body, 28px bold settings heading and 14px body. Portable defaults below apply to adaptations that do not opt into the profile. Embedded Tool typography and Host ownership remain authoritative.

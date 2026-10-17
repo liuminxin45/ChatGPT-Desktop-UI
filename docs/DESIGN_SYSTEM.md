@@ -21,6 +21,8 @@ Button geometry is explicit: `layout="command"` is the compact centered command 
 
 Escape dismisses only the active overlay: an open Select, menu, Popover or nested Dialog closes before its parent editor. Respect consumed keyboard events and IME composition; never discard a draft because Escape cancelled composition. Dialog focus containment applies only to the top visible Dialog, and dismissal returns focus to its own trigger. Verify nested layers through the consumer's real CSS and portal pipeline.
 
+Tooltips on obscured (`aria-hidden`, `inert` or hidden) triggers must stay closed. Delayed focus restoration or hover timers from a background action cannot create a tooltip above a new modal or consume its first Escape. Open tooltips observe isolation changes and dismiss when their trigger becomes obscured.
+
 `SelectControl` forwards to canonical `Select`, including compact density, empty values and long-value behavior. Compatibility aliases do not permit Host padding, type or paint overrides. Browser `confirm/alert/prompt` dialogs must use shared `AppConfirmDialog` or `Dialog`; keep drafts until the user confirms. Source audits require the actual clean shared source at the consumer's pinned revision, never an empty `node_modules/src` scan.
 
 Prepared desktop controls support `style-src 'self'`: notification and Select

@@ -13,6 +13,8 @@ import {
   PlanReview,
   Markdown,
   Input,
+  Dialog,
+  Button,
 } from '../src';
 import '../src/desktop.css';
 import './composer-model-modes.css';
@@ -38,6 +40,7 @@ function App() {
     [plan, setPlan] = useState(false),
     [goal, setGoal] = useState(true),
     [paused, setPaused] = useState(false),
+    [viewGoal, setViewGoal] = useState(false),
     [writes, setWrites] = useState<string[]>([]);
   const change = (name: string, value: string) => {
     setWrites((old) => [...old, name + ':' + value]);
@@ -74,7 +77,10 @@ function App() {
                 onResume={() => setPaused(false)}
                 onRemove={() => setGoal(false)}
                 onEdit={() => setWrites((old) => [...old, 'edit-goal'])}
-                onExpand={() => setWrites((old) => [...old, 'view-goal'])}
+                onExpand={() => {
+                  setWrites((old) => [...old, 'view-goal']);
+                  setViewGoal(true);
+                }}
               />
             )}
             <ComposerSurface
@@ -163,6 +169,10 @@ function App() {
             />
           </ComposerStack>
           <Input aria-label="Outcome" readOnly value={writes.join(',')} />
+          <Dialog open={viewGoal} title="Goal details" onClose={() => setViewGoal(false)}>
+            <p>Full goal objective</p>
+            <Button>Edit goal</Button>
+          </Dialog>
           <span data-plan={plan} />
         </main>
       </DesktopRoot>

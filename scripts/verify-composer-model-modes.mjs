@@ -136,6 +136,19 @@ try {
       await p.getByRole('button', { name: 'Pause goal', exact: true }).click();
       await p.getByRole('button', { name: 'Resume goal', exact: true }).click();
       await p.getByRole('button', { name: 'View goal', exact: true }).click();
+      await p.getByRole('dialog', { name: 'Goal details' }).waitFor();
+      await p.keyboard.press('Escape');
+      await p.getByRole('dialog', { name: 'Goal details' }).waitFor({ state: 'hidden' });
+      await p.getByRole('button', { name: 'View goal', exact: true }).click();
+      await p.getByRole('dialog', { name: 'Goal details' }).waitFor();
+      // Simulate a delayed host focus restoration on the now-obscured trigger.
+      await p
+        .getByRole('button', { name: 'View goal', exact: true, includeHidden: true })
+        .evaluate((e) => e.dispatchEvent(new FocusEvent('focusin', { bubbles: true })));
+      await p.waitForTimeout(400);
+      assert.equal(await p.getByRole('tooltip', { name: 'View goal', exact: true }).count(), 0);
+      await p.keyboard.press('Escape');
+      await p.getByRole('dialog', { name: 'Goal details' }).waitFor({ state: 'hidden' });
       assert.equal(await p.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
       assert.equal((await p.getByRole('textbox', { name: 'Outcome' }).inputValue()).includes('send'), false);
       assert.equal(
