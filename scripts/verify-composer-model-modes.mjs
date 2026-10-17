@@ -137,6 +137,10 @@ try {
       await p.getByRole('button', { name: 'Resume goal', exact: true }).click();
       await p.getByRole('button', { name: 'View goal', exact: true }).click();
       await p.getByRole('dialog', { name: 'Goal details' }).waitFor();
+      await p.waitForFunction(() => document.activeElement?.closest('[role="dialog"]'));
+      await p.evaluate(
+        () => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))),
+      );
       await p.keyboard.press('Escape');
       await p.getByRole('dialog', { name: 'Goal details' }).waitFor({ state: 'hidden' });
       await p.getByRole('button', { name: 'View goal', exact: true }).click();
