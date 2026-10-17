@@ -36328,6 +36328,13 @@
           "description": "Sheets dock to the visual viewport on phones; desktop keeps the normal dialog."
         },
         {
+          "name": "variant",
+          "required": false,
+          "type": "\"search\" | \"default\" | undefined",
+          "native": false,
+          "description": "Search keeps an accessible title while letting the query lead visually."
+        },
+        {
           "name": "onClose",
           "required": true,
           "type": "() => void",
@@ -42846,6 +42853,94 @@
         "9c92424bf8e89e31",
         "ce4f3ddbebf8fa39"
       ]
+    },
+    {
+      "id": "chatgpt-desktop-kit:SearchDialog",
+      "name": "SearchDialog",
+      "importPath": "chatgpt-desktop-kit",
+      "family": "overlays",
+      "implementation": "src/components/overlays/index.tsx",
+      "description": "Controlled results and transport belong to the Host; the kit owns presentation and keys.",
+      "props": [
+        {
+          "name": "open",
+          "required": true,
+          "type": "boolean",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "onClose",
+          "required": true,
+          "type": "() => void",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "title",
+          "required": true,
+          "type": "string",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "query",
+          "required": true,
+          "type": "string",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "onQueryChange",
+          "required": true,
+          "type": "(value: string) => void",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "sections",
+          "required": true,
+          "type": "{ id: string; label: string; items: SearchDialogItem[]; }[]",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "emptyLabel",
+          "required": true,
+          "type": "string",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "loadingLabel",
+          "required": true,
+          "type": "string",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "busy",
+          "required": false,
+          "type": "boolean | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "error",
+          "required": false,
+          "type": "ReactNode",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "onRetry",
+          "required": false,
+          "type": "ReactNode",
+          "native": false,
+          "description": ""
+        }
+      ],
+      "nativeProps": []
     },
     {
       "id": "chatgpt-desktop-kit:Select",

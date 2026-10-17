@@ -323,3 +323,27 @@ consumer's settings, attachments and queue edit regressions; capture running,
 open menus, long drafts, failures and both themes at desktop/phone widths.
 
 Measured capture colors: composer #363636, queue #2d2d2d, canvas #181818, blue action #2c67c5. The canonical composer action is 28 CSS pixels; the supplied capture does not establish OS scaling. The established hover/press geometry invariant still applies.
+
+
+## Compact dialogs, search and navigation (2026-10-17)
+
+Use a page for durable settings and multi-record administration; enter Settings
+through AvatarMenu in the rail footer, matching the client demo. Reserve Dialog
+for a bounded decision, picker or short edit. Give each visible action one home:
+module destinations in navigation, notifications in the current header, and one
+New conversation command in the contextual sidebar. Retain a reachable mobile
+navigation route rather than duplicating application-switch dialogs.
+
+Dialog titles alone use the 17/24 semantic title role at emphasis weight. Body
+headings use Section, secondary copy uses Supporting, and ordinary controls keep
+Body. A descendant h2 must not become a second dialog title. Avoid explanatory
+copy which repeats a field or action; preserve errors and destructive consequences.
+
+SearchDialog extracts the existing client demo search pattern into the public
+kit: query-led surface, quiet section captions, compact result rows and secondary
+metadata. It retains a screen-reader title, close action, focus containment and
+focus return. Hosts provide controlled query, sections, result selection and
+loading/error/empty strings; the kit never fetches data or owns routes. Arrow
+keys move the active option; Enter selects, IME/repeated Enter do not. Opening or
+cancelling search cannot change a selected business object or discard a draft.
+Use SidebarIcon for folding a sidebar; CloseIcon remains close/cancel.

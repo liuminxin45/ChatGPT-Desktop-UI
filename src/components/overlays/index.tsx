@@ -1,5 +1,5 @@
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
-import { useContext, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
+import { useContext, useEffect, useId, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { protectModalEscape } from '../../runtime/modal-keyboard';
 import { AttachmentIcon, ChevronDownIcon, CloseIcon } from '../../icons';
@@ -10,6 +10,7 @@ import { useDismissDrag } from '../../runtime/dismiss-drag';
 import { Button, IconButton } from '../actions';
 import { classes } from '../classes';
 import { InternalScrollArea } from '../lists';
+import { Input } from '../forms';
 import { createDesktopPortal } from '../../scoped-surface';
 const MenuPortal = createDesktopPortal(DropdownMenuPrimitive.Portal);
 const DialogPortal = createDesktopPortal(DialogPrimitive.Portal);
@@ -148,6 +149,7 @@ export function Dialog({
   children,
   footer,
   presentation = 'dialog',
+  variant = 'default',
   onClose,
 }: {
   actionId?: string;
@@ -159,6 +161,8 @@ export function Dialog({
   footer?: ReactNode;
   /** Sheets dock to the visual viewport on phones; desktop keeps the normal dialog. */
   presentation?: 'dialog' | 'sheet' | 'fullscreen';
+  /** Search keeps an accessible title while letting the query lead visually. */
+  variant?: 'default' | 'search';
   onClose(): void;
 }) {
   const translate = useTranslation();
@@ -223,6 +227,7 @@ export function Dialog({
             ref={dialogContent}
             className={classes('desktop-dialog', className)}
             data-presentation={presentation}
+            data-variant={variant}
             {...drag}
             {...(!description ? { 'aria-describedby': undefined } : {})}
             onOpenAutoFocus={(event) => {
@@ -253,7 +258,7 @@ export function Dialog({
             <header>
               <div>
                 <DialogPrimitive.Title asChild>
-                  <h2>{title}</h2>
+                  <h2 className="desktop-dialog__title">{title}</h2>
                 </DialogPrimitive.Title>
                 {description ? (
                   <DialogPrimitive.Description asChild>
@@ -277,5 +282,124 @@ export function Dialog({
         </DialogPortal>
       </DialogPrimitive.Root>
     </DismissalBoundary>
+  );
+}
+
+export interface SearchDialogItem {
+  id: string;
+  label: string;
+  metadata?: string;
+  icon?: ReactNode;
+  disabled?: boolean;
+  onSelect(): void;
+}
+
+/** Controlled results and transport belong to the Host; the kit owns presentation and keys. */
+export function SearchDialog({
+  open,
+  onClose,
+  title,
+  query,
+  onQueryChange,
+  sections,
+  emptyLabel,
+  loadingLabel,
+  busy = false,
+  error,
+  onRetry,
+}: {
+  open: boolean;
+  onClose(): void;
+  title: string;
+  query: string;
+  onQueryChange(value: string): void;
+  sections: Array<{ id: string; label: string; items: SearchDialogItem[] }>;
+  emptyLabel: string;
+  loadingLabel: string;
+  busy?: boolean;
+  error?: ReactNode;
+  onRetry?: ReactNode;
+}) {
+  const id = useId(),
+    [selected, setSelected] = useState('');
+  const items = sections.flatMap((section) => section.items).filter((item) => !item.disabled);
+  const current = items.find((item) => item.id === selected) ?? items[0];
+  const optionId = (item: SearchDialogItem) => `${id}-${encodeURIComponent(item.id)}`;
+  useEffect(() => setSelected(''), [open, query]);
+  const activeOptionId = current ? optionId(current) : undefined;
+  useEffect(() => {
+    if (open && activeOptionId) document.getElementById(activeOptionId)?.scrollIntoView({ block: 'nearest' });
+  }, [open, activeOptionId]);
+  return (
+    <Dialog open={open} onClose={onClose} title={title} variant="search">
+      <Input
+        role="combobox"
+        aria-label={title}
+        placeholder={title}
+        autoComplete="off"
+        aria-autocomplete="list"
+        aria-expanded="true"
+        aria-controls={`${id}-results`}
+        aria-activedescendant={current ? optionId(current) : undefined}
+        value={query}
+        onChange={(event) => onQueryChange(event.target.value)}
+        onKeyDown={(event) => {
+          if (event.nativeEvent.isComposing || event.keyCode === 229) return;
+          if (['ArrowDown', 'ArrowUp'].includes(event.key) && items.length) {
+            event.preventDefault();
+            const index = items.findIndex((item) => item.id === current?.id);
+            setSelected(
+              items[(index + (event.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length].id,
+            );
+          } else if (event.key === 'Enter' && !event.repeat && current) {
+            event.preventDefault();
+            current.onSelect();
+          }
+        }}
+      />
+      {busy && (
+        <p className="desktop-search-status" role="status">
+          {loadingLabel}
+        </p>
+      )}
+      {error && (
+        <div className="desktop-search-status" role="alert">
+          {error}
+          {onRetry}
+        </div>
+      )}
+      <div id={`${id}-results`} role="listbox" aria-label={title} aria-busy={busy}>
+        {sections
+          .filter((section) => section.items.length)
+          .map((section) => (
+            <div key={section.id} role="group" aria-label={section.label}>
+              <h3 className="desktop-search-heading">{section.label}</h3>
+              {section.items.map((item) => (
+                <Button
+                  key={item.id}
+                  id={optionId(item)}
+                  layout="row"
+                  variant="ghost"
+                  role="option"
+                  aria-selected={current?.id === item.id}
+                  disabled={item.disabled}
+                  className="desktop-search-result"
+                  icon={item.icon}
+                  onPointerMove={() => setSelected(item.id)}
+                  onClick={item.onSelect}
+                >
+                  <span className="desktop-search-result__label">{item.label}</span>
+                  {item.metadata && <small>{item.metadata}</small>}
+                </Button>
+              ))}
+            </div>
+          ))}
+        {!busy && !error && !sections.some((section) => section.items.length) && (
+          <p className="desktop-search-status" role="status">
+            {emptyLabel}
+          </p>
+        )}
+      </div>
+    </Dialog>
   );
 }

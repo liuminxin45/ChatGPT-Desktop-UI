@@ -10,6 +10,7 @@ export {
   CircleCheck as CompleteIcon,
   TerminalSquare as AssistantIcon,
   Monitor as ComputerIcon,
+  PanelLeft as SidebarIcon,
   ArrowUp as SendIcon,
   ArrowDown as ScrollToBottomIcon,
   Bug as BugIcon,

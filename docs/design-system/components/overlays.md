@@ -22,6 +22,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | children | no | `ReactNode` |
 | footer | no | `ReactNode` |
 | presentation | no | `"dialog" \| "sheet" \| "fullscreen" \| undefined` |
+| variant | no | `"search" \| "default" \| undefined` |
 | onClose | yes | `() => void` |
 
 ## DropOverlay (chatgpt-desktop-kit)
@@ -67,3 +68,23 @@ Visual-only image inspection. The Host owns URLs, credentials and downloads.
 | side | no | `"top" \| "right" \| "bottom" \| "left" \| undefined` |
 | onOpenChange | no | `((open: boolean) => void) \| undefined` |
 | items | yes | `{ label: ReactNode; icon?: ReactNode; actionId: string; disabled?: boolean; onSelect(): void; }[]` |
+
+## SearchDialog (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/overlays/index.tsx)
+
+Controlled results and transport belong to the Host; the kit owns presentation and keys.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| open | yes | `boolean` |
+| onClose | yes | `() => void` |
+| title | yes | `string` |
+| query | yes | `string` |
+| onQueryChange | yes | `(value: string) => void` |
+| sections | yes | `{ id: string; label: string; items: SearchDialogItem[]; }[]` |
+| emptyLabel | yes | `string` |
+| loadingLabel | yes | `string` |
+| busy | no | `boolean \| undefined` |
+| error | no | `ReactNode` |
+| onRetry | no | `ReactNode` |
