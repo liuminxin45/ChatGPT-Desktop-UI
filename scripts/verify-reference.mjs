@@ -191,11 +191,24 @@ try {
     await noPointerRing(page.getByRole('combobox', { name: 'Owner', exact: true }));
     const menu = page.getByRole('button', { name: 'Actions', exact: true });
     await menu.click();
+    await page.getByRole('menuitem', { name: 'Rename', exact: true }).waitFor();
+    await page.waitForFunction(() => document.activeElement?.closest('[role="menu"]'));
+    // Radix deliberately registers outside-pointer handling after the opening
+    // pointer event. Let the rendered layer settle before testing dismissal.
+    await page.evaluate(
+      () => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))),
+    );
     await dismissOutside(page);
+    await page.getByRole('menuitem', { name: 'Rename', exact: true }).waitFor({ state: 'hidden' });
     await noPointerRing(menu);
     const details = page.getByRole('button', { name: 'Details', exact: true });
     await details.click();
+    await page.getByText('Release checklist', { exact: true }).waitFor();
+    await page.evaluate(
+      () => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))),
+    );
     await dismissOutside(page);
+    await page.getByText('Release checklist', { exact: true }).waitFor({ state: 'hidden' });
     await noPointerRing(details);
     assert.match(await page.getByRole('combobox', { name: 'Owner', exact: true }).textContent(), /Release/);
     assert.equal(

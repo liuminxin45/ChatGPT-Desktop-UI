@@ -1082,6 +1082,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 | Prop | Required | Type |
 | --- | --- | --- |
+| triggerContent | no | `React.ReactNode` |
 | size | no | `"sm" \| "md" \| undefined` |
 | actionId | no | `string \| undefined` |
 | featureId | no | `string \| undefined` |

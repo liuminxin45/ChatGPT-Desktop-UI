@@ -32,15 +32,31 @@ export function MenuButton({
   toolId,
   items,
   onOpenChange,
+  icon,
+  iconOnly = false,
+  className,
+  disabled,
+  side = 'bottom',
 }: {
   label?: string;
   actionId: string;
   featureId?: string;
   surfaceId?: string;
   toolId?: string;
+  icon?: ReactNode;
+  iconOnly?: boolean;
+  className?: string;
+  disabled?: boolean;
+  side?: 'top' | 'bottom' | 'left' | 'right';
   /** Host observes user opening/dismissal without moving action ownership. */
   onOpenChange?(open: boolean): void;
-  items: Array<{ label: ReactNode; actionId: string; disabled?: boolean; onSelect(): void }>;
+  items: Array<{
+    label: ReactNode;
+    icon?: ReactNode;
+    actionId: string;
+    disabled?: boolean;
+    onSelect(): void;
+  }>;
 }) {
   const translate = useTranslation();
   const visible = useContext(ToolVisibilityContext);
@@ -74,15 +90,25 @@ export function MenuButton({
           onOpenChange?.(!open);
         }}
       >
-        <Button size="sm" variant="ghost" actionId={actionId}>
-          {label ?? translate('更多')}
-          <ChevronDownIcon size={14} aria-hidden="true" />
+        <Button
+          size="sm"
+          variant="ghost"
+          actionId={actionId}
+          icon={icon}
+          iconOnly={iconOnly}
+          aria-label={iconOnly ? label : undefined}
+          className={className}
+          disabled={disabled}
+        >
+          {!iconOnly && (label ?? translate('更多'))}
+          {!iconOnly && <ChevronDownIcon size={14} aria-hidden="true" />}
         </Button>
       </DropdownMenuPrimitive.Trigger>
       <MenuPortal>
         <DropdownMenuPrimitive.Content
           className="desktop-menu"
           align="end"
+          side={side}
           sideOffset={5}
           data-desktop-feature={featureId}
           data-desktop-surface={surfaceId}
@@ -99,6 +125,11 @@ export function MenuButton({
               disabled={item.disabled}
               onSelect={item.onSelect}
             >
+              {item.icon && (
+                <span className="desktop-menu-item-icon" aria-hidden="true">
+                  {item.icon}
+                </span>
+              )}
               {item.label}
             </DropdownMenuPrimitive.Item>
           ))}
