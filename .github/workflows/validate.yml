@@ -51,7 +51,10 @@ jobs:
         with:
           name: validated-package
           path: validated-package
-      - run: npm run test:package -- --archive=validated-package/chatgpt-desktop-kit-0.6.0.tgz
+      - run: |
+          archives=(validated-package/*.tgz)
+          test "${#archives[@]}" -eq 1 && test -f "${archives[0]}"
+          npm run test:package -- --archive="${archives[0]}"
         env:
           DESKTOP_UI_REACT_MATRIX: ${{ matrix.react }}
   windows-visual:

@@ -134,8 +134,29 @@ try {
       // Send Escape to the opened calendar, rather than racing its previous trigger.
       await page.locator('.desktop-calendar').waitFor();
       await page.waitForFunction(() => document.activeElement?.closest('.desktop-date-picker-popover'));
+      await page.evaluate(
+        () => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))),
+      );
       await page.keyboard.press('Escape');
-      await page.locator('.desktop-calendar').waitFor({ state: 'hidden' });
+      try {
+        await page.locator('.desktop-calendar').waitFor({ state: 'hidden' });
+      } catch (error) {
+        console.error(
+          JSON.stringify(
+            await page.evaluate(() => ({
+              active: document.activeElement?.outerHTML.slice(0, 300),
+              layers: [
+                ...document.querySelectorAll('[data-slot="popover-content"],[role="tooltip"],[role="menu"]'),
+              ].map((node) => ({
+                role: node.getAttribute('role'),
+                state: node.getAttribute('data-state'),
+                text: node.textContent?.slice(0, 100),
+              })),
+            })),
+          ),
+        );
+        throw error;
+      }
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
       assert.deepEqual(await page.evaluate(() => window.__csp), []);
       assert.deepEqual(errors, []);
