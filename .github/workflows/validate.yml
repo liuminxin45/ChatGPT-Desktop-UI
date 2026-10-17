@@ -53,7 +53,10 @@ jobs:
           path: validated-package
       - run: |
           archives=(validated-package/*.tgz)
-          test "${#archives[@]}" -eq 1 && test -f "${archives[0]}"
+          if [ "${#archives[@]}" -ne 1 ] || [ ! -f "${archives[0]}" ]; then
+            echo "Expected exactly one validated package archive" >&2
+            exit 1
+          fi
           npm run test:package -- --archive="${archives[0]}"
         env:
           DESKTOP_UI_REACT_MATRIX: ${{ matrix.react }}
