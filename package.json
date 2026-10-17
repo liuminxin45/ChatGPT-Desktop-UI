@@ -1,6 +1,6 @@
 {
   "name": "chatgpt-desktop-kit",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "description": "ChatGPT desktop UI controls, semantic tokens, measured reference profiles and an agent skill.",
   "license": "MIT",
   "type": "module",
@@ -111,7 +111,8 @@
     "test:settings-profile": "node scripts/verify-settings-profile.mjs",
     "test:action-layout": "node scripts/verify-action-layout.mjs",
     "test:chat-workspace": "node scripts/verify-chat-workspace.mjs",
-    "test:composer-reference": "node scripts/verify-composer-reference.mjs"
+    "test:composer-reference": "node scripts/verify-composer-reference.mjs",
+    "test:dialog-search": "node scripts/verify-dialog-search.mjs"
   },
   "peerDependencies": {
     "react": "^18.3.1 || ^19.0.0",

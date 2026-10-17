@@ -61,3 +61,27 @@ Exports and imports are not rendered adoption. Capture each consumer page in lig
 - Auto-sized Textarea respects a CSS max-height and switches to internal vertical scrolling after the clamp. Keep a stable scrollbar gutter; long drafts must remain readable, selectable and editable without expanding indefinitely or clipping received text.
 - Use the public `DatePicker` for calendar selection. Supply its accessible name, disabled state and `clearable={false}` for required day navigation. Date-only serialization and timezone policy belong to the Host. No business native date input is an equivalent calendar renderer. Retained hidden surfaces close its popup.
 - Settings use `SettingsPage`, `SettingsGroup` and `SettingsField`. `SettingsPage` accepts `leading` and `actions` for a back command or page operations, with one real scroll owner. `RecordLink` defaults to a stacked record-content target; do not pass separate icon/label/arrow children and repaint it into a navigation row. A static SettingsField label with an independent named RecordLink/Button keeps proper alignment and action ownership.
+
+
+## Compact dialogs, search and navigation (2026-10-17)
+
+Use a page for durable settings and multi-record administration; enter Settings
+through AvatarMenu in the rail footer, matching the client demo. Reserve Dialog
+for a bounded decision, picker or short edit. Give each visible action one home:
+module destinations in navigation, notifications in the current header, and one
+New conversation command in the contextual sidebar. Retain a reachable mobile
+navigation route rather than duplicating application-switch dialogs.
+
+Dialog titles alone use the 17/24 semantic title role at emphasis weight. Body
+headings use Section, secondary copy uses Supporting, and ordinary controls keep
+Body. A descendant h2 must not become a second dialog title. Avoid explanatory
+copy which repeats a field or action; preserve errors and destructive consequences.
+
+SearchDialog extracts the existing client demo search pattern into the public
+kit: query-led surface, quiet section captions, compact result rows and secondary
+metadata. It retains a screen-reader title, close action, focus containment and
+focus return. Hosts provide controlled query, sections, result selection and
+loading/error/empty strings; the kit never fetches data or owns routes. Arrow
+keys move the active option; Enter selects, IME/repeated Enter do not. Opening or
+cancelling search cannot change a selected business object or discard a draft.
+Use SidebarIcon for folding a sidebar; CloseIcon remains close/cancel.

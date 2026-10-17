@@ -47,6 +47,7 @@ import {
   InternalScrollArea,
   Tooltip,
   Dialog,
+  SearchDialog,
   useDesktopTheme,
   type DesktopMenuItem,
 } from "../../src";
@@ -1221,71 +1222,61 @@ export function ClientDemo() {
           {panel ? <BrowserPanel full={panelFull} onFull={() => setPanelFull(!panelFull)} onClose={() => { setPanel(false); setPanelFull(false); }} onInfo={showInfo} /> : null}
         </div>
       </DesktopShell>
-      <Dialog
+      <SearchDialog
         open={search}
         title="Search chats"
-        className="client-search-dialog"
-        actionId="client.search.dialog"
+        query={query}
+        onQueryChange={setQuery}
         onClose={() => setSearch(false)}
-      >
-        <Input
-          aria-label="Search chats"
-          placeholder="Search chats"
-          autoFocus
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <h2>Chats</h2>
-        <InternalScrollArea>
-          {chats
-            .filter((item) =>
-              `${item.title} ${item.project}`
-                .toLowerCase()
-                .includes(query.toLowerCase()),
-            )
-            .slice(0, 9)
-            .map((item, index) => (
-              <Button
-                key={item.id}
-                className="client-search-result"
-                actionId="client.search.select"
-                onClick={() => select(item)}
-              >
-                <span>{item.title}</span>
-                <small>
-                  {
-                    projects.find((project) => project.id === item.project)
-                      ?.name
-                  }
-                </small>
-                <kbd>Alt+{index + 1}</kbd>
-              </Button>
-            ))}
-        </InternalScrollArea>
-        <h2>Recent Pages</h2>
-        <Button
-          className="client-search-result"
-          actionId="client.search.page"
-          onClick={() => {
-            setSearch(false);
-            showInfo("Your notes", "Sample ideas and decisions.");
-          }}
-        >
-          ✨ Your notes
-        </Button>
-        <h2>Quick actions</h2>
-        <Button
-          className="client-search-result"
-          actionId="client.search.new"
-          onClick={() => {
-            setSearch(false);
-            newChat("");
-          }}
-        >
-          <NotePencil size={16} />
-          New chat<kbd>Ctrl+N</kbd>
-        </Button>
-      </Dialog>
+        emptyLabel="No matching chats"
+        loadingLabel="Searching…"
+        sections={[
+          {
+            id: 'chats',
+            label: 'Chats',
+            items: chats
+              .filter((item) => `${item.title} ${item.project}`.toLowerCase().includes(query.toLowerCase()))
+              .slice(0, 9)
+              .map((item) => ({
+                id: item.id,
+                label: item.title,
+                metadata: projects.find((project) => project.id === item.project)?.name,
+                onSelect: () => select(item),
+              })),
+          },
+          {
+            id: 'pages',
+            label: 'Recent Pages',
+            items: [
+              {
+                id: 'notes',
+                label: 'Your notes',
+                onSelect: () => {
+                  setSearch(false);
+                  showInfo('Your notes', 'Sample ideas and decisions.');
+                },
+              },
+            ],
+          },
+          {
+            id: 'actions',
+            label: 'Quick actions',
+            items: [
+              {
+                id: 'new',
+                label: 'New chat',
+                icon: <NotePencil size={16} />,
+                onSelect: () => {
+                  setSearch(false);
+                  newChat('');
+                },
+              },
+            ],
+          },
+        ]}
+      />
+
+
       <Dialog
         open={create}
         title={discard ? "Discard this project?" : "Create project"}

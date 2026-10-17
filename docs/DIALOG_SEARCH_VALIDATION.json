@@ -1,0 +1,40 @@
+{
+  "version": "0.8.3",
+  "reference": "User supplied ChatGPT search screenshot and maintained client demo; not an unobserved native version claim",
+  "prepared_package_probe": "tests/output/dialog-search/verification.json",
+  "checks": 8,
+  "viewports": [
+    1920,
+    1280,
+    390,
+    320
+  ],
+  "themes": [
+    "light",
+    "dark"
+  ],
+  "scale_emulation_1280": 1.25,
+  "real_device": false,
+  "changes": [
+    "Dialog title no longer styles descendant h2 headings",
+    "Portal owns system font and hierarchy",
+    "Public controlled SearchDialog replaces demo-only search CSS",
+    "AvatarMenu registers dismissal and omits unsupported exit",
+    "Semantic SidebarIcon"
+  ],
+  "limitations": [
+    "Physical devices and Windows system scaling not tested",
+    "Full legacy icon suite was not rerun; no unrelated glyph changes"
+  ],
+  "client_demo": {
+    "render_cases": 54,
+    "interaction_groups": 16,
+    "status": "passed"
+  },
+  "checks_other": {
+    "unit": 21,
+    "integration": 13,
+    "package_contract": 5,
+    "skill_links": 68
+  }
+}

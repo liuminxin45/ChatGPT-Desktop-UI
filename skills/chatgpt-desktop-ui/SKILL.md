@@ -188,3 +188,16 @@ side placement. Keep shared focus, Escape and dismissal-layer behavior. Run
 `test:composer-reference`, `test:composer`, `test:composer-integration` and the
 consumer's settings, attachments and queue edit regressions; capture running,
 open menus, long drafts, failures and both themes at desktop/phone widths.
+
+
+### Compact popup and navigation ownership
+
+Use SettingsPage for settings and computer/device administration, entered from
+AvatarMenu at the rail footer. Dialog is for a short edit, picker or decision.
+SearchDialog is the public query-led search palette used by the client demo;
+provide controlled query, sections and localized loading/empty/error state.
+Never copy the retired demo search CSS into a Host. Title uses Dialog Title,
+section labels use Section, secondary content Supporting. Do not style all h2
+inside Dialog as titles. Keep one visible New conversation command, one module
+navigation and current-header notifications. SidebarIcon folds navigation;
+CloseIcon closes an overlay. Phone navigation must remain reachable.
