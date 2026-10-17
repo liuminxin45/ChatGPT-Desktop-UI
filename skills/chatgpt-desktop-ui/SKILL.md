@@ -21,12 +21,22 @@ emulation. Read the source repository's `docs/INTEGRATION.md` and run
 desktop/phone/320px widths. Browser emulation is not a physical device check.
 
 For browser/mobile chat products, use `ChatAppSurface`, `ChatHeader` and controlled
-`ChatWorkspace`. The mobile header has independent floating targets; the retained
+`ChatWorkspace`. Use `ChatHeader presentation="bar"` for one compact app bar;
+the default mobile profile has independent floating targets; the retained
 sidebar becomes a modal drawer without remounting its content or draft. Keep
 browser back layers in the Host, respect nested Escape and IME, and test both themes
 and real composer bounds. This supplements the native Windows profile rather than
 claiming its title bar, geometry or unobserved mobile timing. Read
 `docs/CHAT_APP_ALIGNMENT.json` in the source repository for provenance and limits.
+
+Use `NavigationDrawer` for scalable phone module navigation, with host-controlled
+open state, navigation content and account footer. It shares ChatWorkspace's
+retained DOM, focus, drag and dismissal implementation; do not copy a drawer or
+append every future module to a permanent bottom bar. Keep the module registry
+and contextual business lists in the host. `SettingsPage embedded` retains one
+scroll owner when an external header already provides title/actions. AvatarMenu
+uses a same-panel Appearance/Back flow on phones; localize `labels.back` instead
+of repainting or repositioning its submenus in application CSS.
 
 For mobile return handling, wrap the application once in `DismissalLayerProvider`
 with a stable Host-owned `registerLayer` callback. Canonical Dialog, Select,

@@ -47,3 +47,12 @@
  .desktop-chat-app .desktop-conversation-message-actions{opacity:1}
 }
 @media(prefers-reduced-motion:reduce){.desktop-chat-workspace__sidebar,.desktop-chat-workspace__backdrop{transition:none}}
+
+.desktop-navigation-drawer__body{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden}
+.desktop-navigation-drawer__footer{flex:none;padding:12px 16px calc(12px + env(safe-area-inset-bottom));border-top:1px solid var(--desktop-color-panel-boundary)}
+@media(max-width:767px){
+ .desktop-chat-header--bar{min-height:60px;gap:4px;padding:8px 12px;background:var(--desktop-color-background)}
+ .desktop-chat-header--bar .desktop-chat-header__copy{flex:1;min-height:0;padding:0 4px;border-radius:0;background:transparent;box-shadow:none;overflow:hidden}
+ .desktop-chat-header--bar .desktop-chat-header__title{display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:var(--desktop-font-size-toolbar)}
+ .desktop-chat-header--bar .desktop-chat-header__leading,.desktop-chat-header--bar .desktop-chat-header__actions{border-radius:0;background:transparent;box-shadow:none}
+}

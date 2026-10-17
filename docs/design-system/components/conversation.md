@@ -58,6 +58,7 @@ One quiet object header; mobile controls use the reference's separate floating s
 | actions | no | `ReactNode` |
 | mobileTitle | no | `ReactNode` |
 | hideMobileTitle | no | `boolean \| undefined` |
+| presentation | no | `"floating" \| "bar" \| undefined` |
 
 ## ChatWorkspace (chatgpt-desktop-kit)
 
@@ -312,6 +313,23 @@ Relative scroll viewport; floating commands stay outside ScrollEdgeFade.
 
 | Prop | Required | Type |
 | --- | --- | --- |
+
+## NavigationDrawer (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/index.tsx)
+
+Phone navigation sharing ChatWorkspace's retained DOM, focus, drag and history contract.
+Desktop hosts provide their own persistent navigation beside this container.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| open | yes | `boolean` |
+| onOpenChange | yes | `(open: boolean) => void` |
+| label | yes | `string` |
+| closeLabel | yes | `string` |
+| navigation | yes | `ReactNode` |
+| footer | no | `ReactNode` |
+| header | no | `ReactNode` |
 
 ## PlanReview (chatgpt-desktop-kit)
 
