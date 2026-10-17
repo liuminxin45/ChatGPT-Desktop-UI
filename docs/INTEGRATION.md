@@ -1,5 +1,32 @@
 # Integration
 
+## Model, effort and agent composer controls
+
+Use `ComposerModelPicker` for the captured single trigger → effort slider →
+model list flow. Supply the actual model catalogue, supported effort levels,
+the current model's default and confirmed values. The Host commits settings
+with its normal acknowledgement/retry policy; changing the preview does not
+send a message. `Ctrl+Shift+M` opens the effort panel (set `shortcut=""` to opt
+out). Arrow/Home/End keys select supported steps; a gesture produces one
+callback. Escape from the model list returns to effort, then closes the panel.
+The compatibility `ComposerModelControl` delegates to the same renderer.
+
+`ComposerAddMenu` takes capability-driven sections and items with optional
+descriptions, checked state and shared files/plan/goal/skills icons. Open an
+exported `SearchDialog` to choose installed skills; the Host owns discovery,
+search results and native skill input. Do not invent plugin/native operations.
+`ComposerGoal` is a static record: objective, elapsed and state come from the
+Host, and edit/pause/resume/remove/expand are independent targets. No timer,
+goal continuation loop or persistence belongs in the UI kit. `PlanReview`
+renders complete Markdown supplied through `children`; its explicit actions
+do not grant execution until the Host accepts the user's command. Preserve
+drafts, clarification answers and security policy through all these changes.
+
+Run `test:composer-model-modes` against the built package in both themes at
+1920, 1280, 499, 390 and 320px and 125% emulation. Captures supplied on
+2026-10-17 establish this interaction; they do not establish an app version,
+physical Android behavior or Windows system scaling.
+
 For chat-focused browser/mobile products, compose `ChatAppSurface`, `ChatHeader`
 and `ChatWorkspace`. Supply `sidebarOpen`, `onSidebarOpenChange`, localized
 `sidebarLabel`/`closeSidebarLabel`, and optional `sidebarId`/`contentId` for existing

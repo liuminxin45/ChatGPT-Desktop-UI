@@ -134,8 +134,33 @@ try {
       // Send Escape to the opened calendar, rather than racing its previous trigger.
       await page.locator('.desktop-calendar').waitFor();
       await page.waitForFunction(() => document.activeElement?.closest('.desktop-date-picker-popover'));
+      // Scoped portal focus is a layout effect; Radix installs its dismissable
+      // layer in the following passive effect/render. Fast headless Linux can
+      // otherwise deliver Escape between those phases, before the layer owns it.
+      await page.evaluate(
+        () => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))),
+      );
+      const calendarReady = await page.evaluate(() => ({
+        focus: document.activeElement?.tagName,
+        expanded: document.querySelector('[aria-label="资讯日期"]')?.getAttribute('aria-expanded'),
+        tooltips: [...document.querySelectorAll('[role="tooltip"]')].map((e) => e.textContent),
+      }));
+      assert.deepEqual(calendarReady.tooltips, []);
       await page.keyboard.press('Escape');
-      await page.locator('.desktop-calendar').waitFor({ state: 'hidden' });
+      try {
+        await page.locator('.desktop-calendar').waitFor({ state: 'hidden' });
+      } catch (error) {
+        console.error(
+          JSON.stringify({
+            width,
+            theme,
+            scale,
+            calendarReady,
+            active: await page.evaluate(() => document.activeElement?.outerHTML),
+          }),
+        );
+        throw error;
+      }
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
       assert.deepEqual(await page.evaluate(() => window.__csp), []);
       assert.deepEqual(errors, []);

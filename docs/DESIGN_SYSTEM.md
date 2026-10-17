@@ -21,6 +21,8 @@ Button geometry is explicit: `layout="command"` is the compact centered command 
 
 Escape dismisses only the active overlay: an open Select, menu, Popover or nested Dialog closes before its parent editor. Respect consumed keyboard events and IME composition; never discard a draft because Escape cancelled composition. Dialog focus containment applies only to the top visible Dialog, and dismissal returns focus to its own trigger. Verify nested layers through the consumer's real CSS and portal pipeline.
 
+Tooltips on obscured (`aria-hidden`, `inert` or hidden) triggers must stay closed. Delayed focus restoration or hover timers from a background action cannot create a tooltip above a new modal or consume its first Escape. Open tooltips observe isolation changes and dismiss when their trigger becomes obscured.
+
 `SelectControl` forwards to canonical `Select`, including compact density, empty values and long-value behavior. Compatibility aliases do not permit Host padding, type or paint overrides. Browser `confirm/alert/prompt` dialogs must use shared `AppConfirmDialog` or `Dialog`; keep drafts until the user confirms. Source audits require the actual clean shared source at the consumer's pinned revision, never an empty `node_modules/src` scan.
 
 Prepared desktop controls support `style-src 'self'`: notification and Select
@@ -304,9 +306,12 @@ paperclip action: its Plus opens attachment acquisition. Elsewhere keep
 `AttachmentIcon`. `ComposerPermissionSelect` renders a shield and exposes the
 selected permission as accessible text and tooltip; `risk="elevated"` only
 changes presentation, never permissions. Host data decides risk and capability.
-`ComposerModelControl` groups two real Select controls on one baseline. Model
-and reasoning remain independently selectable and preserve their full popup
-labels. Closed model values may ellipsize in the bounded toolbar.
+`ComposerModelPicker` uses the captured interaction: one model/effort trigger
+opens the compact effort panel, whose model caption opens the full model list.
+The stepped slider commits once at the end of a pointer or keyboard gesture;
+only Host-confirmed values appear on the closed trigger. Reset selects the
+current model's real default. `ComposerModelControl` forwards its compatibility
+props to this same renderer. Closed model values may ellipsize in the toolbar.
 
 Hosts own drafts, files, model lists, configuration acknowledgements, queue
 mutation IDs and stop/pause semantics. Opening a menu or selecting settings

@@ -5,6 +5,21 @@ description: Build or refactor a desktop-style app to match the supplied ChatGPT
 
 # ChatGPT-style desktop UI
 
+For the supplied 2026-10-17 agent composer captures, use `ComposerModelPicker`:
+one combined trigger opens effort, a stepped slider commits once per gesture,
+the centered model caption opens model choices, and Reset uses that model's
+actual default. Do not recreate two separate model/effort dropdowns or hide
+reasoning in a settings dialog. `ComposerModelControl` forwards old props to the
+same implementation. Keep Host acknowledgement, retry IDs and send gating.
+Use `ComposerAddMenu` for files, Plan, Goal and skills the Host can actually run;
+`ComposerGoal` for objective, authoritative elapsed/state and independent
+edit/pause/remove/expand commands; `PlanReview` for the full proposed Markdown
+and explicit execute/continue actions. The Host owns native skills, clarification
+questions, goal lifecycle and persistence. No fake plugins or prompt-only mode
+emulation. Read the source repository's `docs/INTEGRATION.md` and run
+`test:composer-model-modes` through the prepared package in both themes and at
+desktop/phone/320px widths. Browser emulation is not a physical device check.
+
 For browser/mobile chat products, use `ChatAppSurface`, `ChatHeader` and controlled
 `ChatWorkspace`. The mobile header has independent floating targets; the retained
 sidebar becomes a modal drawer without remounting its content or draft. Keep
@@ -43,6 +58,8 @@ Tooltips must preserve layout ownership: row, tile and surface actions use the r
 Choose shared Button geometry explicitly: command for compact centered actions, row for left-aligned single-target records with shared insets, tile for square contained image previews. Group stacked title and metadata as one content block. Do not apply ordinary command geometry to lists or media. Surface layout is reserved for documented domain graphics such as schedule cells, with native action/accessibility behavior but domain-owned geometry. Multi-action records remain static RecordRow groups.
 
 Verify nested overlay keyboard ownership: Escape closes only the active Select, menu, Popover or child Dialog, preserving its parent editor and draft. Respect consumed keys and IME composition. Only the top visible Dialog contains Tab, and dismissal restores focus to its trigger; test this in the actual consumer portal/CSS pipeline.
+
+Keep tooltips on obscured (`aria-hidden`, `inert` or hidden) actions closed, including delayed focus/hover from a previous popup. Reopen a modal and verify one Escape still dismisses it without a background tooltip taking ownership.
 
 Audit compatibility aliases such as `SelectControl`, not only canonical names. Use the shared `size="sm"` API rather than Host height, padding, font or color overrides. Use `AppConfirmDialog` or `Dialog` for draft-discard and destructive confirmation, preserving drafts on cancellation. Verify the actual clean shared source at the pinned revision; an installed package without source cannot establish a clean source audit.
 

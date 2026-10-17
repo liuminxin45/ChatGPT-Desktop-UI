@@ -128,6 +128,18 @@ One ChatGPT-style circular action for message composers; Hosts own operation sta
 | layout | no | `"row" \| "command" \| "tile" \| "surface" \| undefined` |
 | badge | no | `ReactNode` |
 
+## ComposerAddMenu (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/composer-agent-controls.tsx)
+
+Capability-driven Add menu. File acquisition and agent/skill semantics belong to the Host.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| label | no | `string \| undefined` |
+| disabled | no | `boolean \| undefined` |
+| sections | yes | `readonly { id: string; label?: string; items: readonly ComposerAddItem[]; }[]` |
+
 ## ComposerAttachmentButton (chatgpt-desktop-kit)
 
 [Implementation](../../../src/components/conversation/composer-tools.tsx)
@@ -144,17 +156,63 @@ Plus opens Host attachment acquisition; it does not imply a new conversation.
 | badge | no | `ReactNode` |
 | label | no | `string \| undefined` |
 
+## ComposerGoal (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/composer-agent-controls.tsx)
+
+A static goal record with independent commands; elapsed time is authoritative Host data.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| objective | yes | `string` |
+| statusLabel | yes | `string` |
+| elapsed | yes | `string` |
+| paused | no | `boolean \| undefined` |
+| disabled | no | `boolean \| undefined` |
+| onEdit | no | `(() => void) \| undefined` |
+| onPause | no | `(() => void) \| undefined` |
+| onResume | no | `(() => void) \| undefined` |
+| onRemove | no | `(() => void) \| undefined` |
+| onExpand | no | `(() => void) \| undefined` |
+| labels | no | `{ edit?: string; pause?: string; resume?: string; remove?: string; expand?: string; } \| undefined` |
+
 ## ComposerModelControl (chatgpt-desktop-kit)
 
 [Implementation](../../../src/components/conversation/composer-tools.tsx)
 
-A cohesive display with two independent native selectors, no settings dialog.
+Compatibility props forwarding to the canonical effort panel and model picker.
 
 | Prop | Required | Type |
 | --- | --- | --- |
 | model | yes | `SelectProps` |
 | effort | no | `SelectProps \| undefined` |
 | label | no | `string \| undefined` |
+
+## ComposerModelPicker (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/composer-agent-controls.tsx)
+
+Controlled, acknowledged configuration. The draft slider commits once per gesture.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| id | no | `string \| undefined` |
+| model | yes | `string` |
+| effort | yes | `string` |
+| models | yes | `readonly ComposerModelOption[]` |
+| efforts | yes | `readonly ComposerModelOption[]` |
+| defaultEffort | no | `string \| undefined` |
+| disabled | no | `boolean \| undefined` |
+| effortDisabled | no | `boolean \| undefined` |
+| onModelChange | yes | `(value: string) => void` |
+| onEffortChange | yes | `(value: string) => void` |
+| label | no | `string \| undefined` |
+| modelLabel | no | `string \| undefined` |
+| resetLabel | no | `string \| undefined` |
+| defaultLabel | no | `string \| undefined` |
+| defaultDescription | no | `string \| undefined` |
+| onDefault | no | `(() => void) \| undefined` |
+| shortcut | no | `string \| undefined` |
 
 ## ComposerPermissionSelect (chatgpt-desktop-kit)
 
@@ -254,6 +312,23 @@ Relative scroll viewport; floating commands stay outside ScrollEdgeFade.
 
 | Prop | Required | Type |
 | --- | --- | --- |
+
+## PlanReview (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/composer-agent-controls.tsx)
+
+Proposed Markdown and explicit review actions. This component never authorizes execution.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| title | yes | `string` |
+| children | yes | `ReactNode` |
+| onExecute | no | `(() => void) \| undefined` |
+| onContinue | no | `(() => void) \| undefined` |
+| executeLabel | no | `string \| undefined` |
+| continueLabel | no | `string \| undefined` |
+| disabled | no | `boolean \| undefined` |
+| actionsDisabled | no | `boolean \| undefined` |
 
 ## ScrollToBottomButton (chatgpt-desktop-kit)
 

@@ -39,8 +39,8 @@ try{
   await page.screenshot({path:path.join(out,`${name}-menu.png`)});await page.keyboard.press('Escape');
   await page.getByRole('combobox',{name:'Permissions',exact:true}).click();await page.getByRole('option',{name:'Read only',exact:true}).click();
   assert.equal(await page.getByLabel('Outcome').textContent(),'none');
-  await page.getByRole('combobox',{name:'Model',exact:true}).click();await page.getByRole('option',{name:'GPT-6 Astra',exact:true}).click();
-  await page.getByRole('combobox',{name:'Reasoning',exact:true}).click();await page.getByRole('option',{name:'High',exact:true}).click();
+  await page.locator('#model').click();await page.getByRole('button',{name:'Model',exact:true}).click();await page.getByRole('menuitemradio',{name:'GPT-6 Astra',exact:true}).click();
+  await page.locator('#model').click();await page.getByRole('slider',{name:'Model and reasoning',exact:true}).press('Home');await page.keyboard.press('Escape');
   assert.equal(await page.getByLabel('Outcome').textContent(),'none');
   await page.getByRole('textbox',{name:'Draft'}).fill(Array.from({length:40},(_,i)=>`Draft line ${i}: retain all input`).join('\n'));
   const input=await page.getByRole('textbox',{name:'Draft'}).evaluate(e=>({h:e.clientHeight,scroll:e.scrollHeight,overflow:getComputedStyle(e).overflowY}));
