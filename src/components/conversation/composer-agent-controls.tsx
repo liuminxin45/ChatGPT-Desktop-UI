@@ -312,29 +312,34 @@ export function ComposerModelPicker({
                   </span>
                 </Button>
               )}
-              {models.map((option) => (
-                <ActionTooltip
+              {models.map((option, index) => (
+                <Button
                   key={option.value}
-                  label={option.description || option.label}
-                  side="right"
-                  direct
+                  role="menuitemradio"
+                  aria-labelledby={`${tickId}-label-${index}`}
+                  aria-describedby={
+                    option.description && option.description !== option.label
+                      ? `${tickId}-model-${index}`
+                      : undefined
+                  }
+                  aria-checked={option.value === model}
+                  layout="command"
+                  variant="ghost"
+                  className="desktop-model-panel__option"
+                  disabled={disabled || option.disabled}
+                  onClick={() => {
+                    if (option.value !== model) onModelChange(option.value);
+                    setOpen(false);
+                  }}
                 >
-                  <Button
-                    role="menuitemradio"
-                    aria-checked={option.value === model}
-                    layout="command"
-                    variant="ghost"
-                    className="desktop-model-panel__option"
-                    disabled={disabled || option.disabled}
-                    onClick={() => {
-                      if (option.value !== model) onModelChange(option.value);
-                      setOpen(false);
-                    }}
-                  >
-                    <span>{option.label}</span>
-                    {option.value === model && <Check size={15} aria-hidden="true" />}
-                  </Button>
-                </ActionTooltip>
+                  <span>
+                    <span id={`${tickId}-label-${index}`}>{option.label}</span>
+                    {option.description && option.description !== option.label ? (
+                      <small id={`${tickId}-model-${index}`}>{option.description}</small>
+                    ) : null}
+                  </span>
+                  {option.value === model && <Check size={15} aria-hidden="true" />}
+                </Button>
               ))}
             </div>
           </>

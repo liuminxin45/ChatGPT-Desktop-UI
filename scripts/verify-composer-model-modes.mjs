@@ -81,6 +81,7 @@ try {
         if (m.type() === 'error') errors.push(m.text());
       });
       await p.goto(`http://127.0.0.1:${server.address().port}/?theme=${theme}`);
+
       const trigger = p.locator('#model');
       await trigger.click();
       await p.getByRole('slider', { name: 'Select effort' }).waitFor();
@@ -137,10 +138,16 @@ try {
       await p.getByRole('button', { name: 'Resume goal', exact: true }).click();
       await p.getByRole('button', { name: 'View goal', exact: true }).click();
       await p.getByRole('dialog', { name: 'Goal details' }).waitFor();
+      // Visibility can precede Radix's focus/layer effects by one frame. Wait for
+      // keyboard ownership, then still require exactly one Escape to dismiss.
+      await p.getByRole('dialog', { name: 'Goal details' }).and(p.locator(':focus-within')).waitFor();
       await p.keyboard.press('Escape');
       await p.getByRole('dialog', { name: 'Goal details' }).waitFor({ state: 'hidden' });
       await p.getByRole('button', { name: 'View goal', exact: true }).click();
       await p.getByRole('dialog', { name: 'Goal details' }).waitFor();
+      // Visibility can precede Radix's focus/layer effects by one frame. Wait for
+      // keyboard ownership, then still require exactly one Escape to dismiss.
+      await p.getByRole('dialog', { name: 'Goal details' }).and(p.locator(':focus-within')).waitFor();
       // Simulate a delayed host focus restoration on the now-obscured trigger.
       await p
         .getByRole('button', { name: 'View goal', exact: true, includeHidden: true })

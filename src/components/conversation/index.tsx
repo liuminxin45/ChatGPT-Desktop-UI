@@ -33,6 +33,8 @@ export interface ChatHeaderProps extends Omit<HTMLAttributes<HTMLElement>, 'titl
   mobileTitle?: ReactNode;
   /** Icon-only mobile header; the object title remains available on desktop. */
   hideMobileTitle?: boolean;
+  /** A single compact application bar instead of separate floating targets. */
+  presentation?: 'floating' | 'bar';
 }
 
 /** One quiet object header; mobile controls use the reference's separate floating surfaces. */
@@ -43,13 +45,19 @@ export function ChatHeader({
   actions,
   mobileTitle,
   hideMobileTitle = false,
+  presentation = 'floating',
   className,
   ...props
 }: ChatHeaderProps) {
   return (
     <header
       {...props}
-      className={classes('desktop-chat-header', hideMobileTitle && 'desktop-chat-header--compact', className)}
+      className={classes(
+        'desktop-chat-header',
+        presentation === 'bar' && 'desktop-chat-header--bar',
+        hideMobileTitle && 'desktop-chat-header--compact',
+        className,
+      )}
     >
       {leading ? <div className="desktop-chat-header__leading">{leading}</div> : null}
       <div className="desktop-chat-header__copy">
@@ -216,6 +224,58 @@ export function ChatWorkspace({
         </div>
       </div>
     </DismissalBoundary>
+  );
+}
+
+export interface NavigationDrawerProps extends HTMLAttributes<HTMLDivElement> {
+  open: boolean;
+  onOpenChange(open: boolean): void;
+  label: string;
+  closeLabel: string;
+  navigation: ReactNode;
+  footer?: ReactNode;
+  header?: ReactNode;
+}
+
+/** Phone navigation sharing ChatWorkspace's retained DOM, focus, drag and history contract.
+ * Desktop hosts provide their own persistent navigation beside this container. */
+export function NavigationDrawer({
+  open,
+  onOpenChange,
+  label,
+  closeLabel,
+  navigation,
+  footer,
+  children,
+  className,
+  ...props
+}: NavigationDrawerProps) {
+  const [mobile, setMobile] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches,
+  );
+  useEffect(() => {
+    const query = window.matchMedia('(max-width: 767px)');
+    const update = () => setMobile(query.matches);
+    query.addEventListener('change', update);
+    return () => query.removeEventListener('change', update);
+  }, []);
+  return (
+    <ChatWorkspace
+      {...props}
+      className={classes('desktop-navigation-drawer', className)}
+      sidebarOpen={mobile && open}
+      onSidebarOpenChange={onOpenChange}
+      sidebarLabel={label}
+      closeSidebarLabel={closeLabel}
+      sidebar={
+        <>
+          <div className="desktop-navigation-drawer__body">{navigation}</div>
+          {footer ? <div className="desktop-navigation-drawer__footer">{footer}</div> : null}
+        </>
+      }
+    >
+      {children}
+    </ChatWorkspace>
   );
 }
 

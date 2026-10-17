@@ -352,3 +352,27 @@ loading/error/empty strings; the kit never fetches data or owns routes. Arrow
 keys move the active option; Enter selects, IME/repeated Enter do not. Opening or
 cancelling search cannot change a selected business object or discard a draft.
 Use SidebarIcon for folding a sidebar; CloseIcon remains close/cancel.
+
+
+## Responsive application navigation (0.8.6)
+
+`NavigationDrawer` extracts the retained ChatWorkspace drawer contract for phone
+application navigation. Supply controlled `open/onOpenChange`, localized
+`label/closeLabel`, `navigation`, optional `footer/header`, and page `children`.
+The drawer is modal only below 768 CSS px, with focus return, nested dismissal,
+IME protection and drag-to-dismiss. Desktop hosts retain their persistent rail.
+Keep module data, registry, searches and contextual content in the host. Keep
+navigation content bounded and scrollable; never append growing module tabs to
+a permanent phone bottom bar.
+
+`ChatHeader presentation="bar"` provides a compact single mobile application bar
+with readable object title and 44px actions. The floating default is unchanged.
+`SettingsPage embedded` keeps its one bounded scroll owner and readable column
+while an external ChatHeader owns the title and actions. It renders no second
+heading. Its accessible name comes from the required title prop.
+
+AvatarMenu automatically replaces Appearance with a same-panel Back and radio
+list below 768 CSS px; `labels.back` localizes Back. No horizontal submenu may
+extend beyond a narrow viewport. Desktop cascades are unchanged. Back dismisses
+Appearance before its parent menu, then the navigation drawer. Menu theme
+changes do not remount the surrounding workspace or clear drafts.

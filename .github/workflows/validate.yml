@@ -19,10 +19,12 @@ jobs:
           cache: npm
       - run: npm ci --ignore-scripts
       - run: npx playwright install --with-deps chromium
+      # Exercise rapid nested dismissal before the longer full regression matrix.
+      - run: npm run build:library
+      - run: npm run test:composer-model-modes
       - run: npm run ci
         env:
           UI_BROWSER_CHANNEL: chromium
-      - run: npm run test:composer-model-modes
       - uses: actions/upload-artifact@v4
         with:
           name: validated-package

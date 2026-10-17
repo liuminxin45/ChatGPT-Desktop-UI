@@ -88,11 +88,14 @@ export function ActionTooltip({
               </span>
             )}
           </Primitive.Trigger>
+          {/* A closed hint cannot retain Radix's dismissable layer during its exit animation. */}
           <TooltipPortal>
-            <Primitive.Content side={side} sideOffset={5} collisionPadding={8} className="desktop-tooltip">
-              {label}
-              {shortcut && <kbd className="desktop-tooltip__shortcut">{shortcut}</kbd>}
-            </Primitive.Content>
+            {open && visible && !suppressed ? (
+              <Primitive.Content side={side} sideOffset={5} collisionPadding={8} className="desktop-tooltip">
+                {label}
+                {shortcut && <kbd className="desktop-tooltip__shortcut">{shortcut}</kbd>}
+              </Primitive.Content>
+            ) : null}
           </TooltipPortal>
         </Primitive.Root>
       </Primitive.Provider>
