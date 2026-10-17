@@ -16,8 +16,7 @@
 .desktop-chat-app .desktop-conversation-message{font-size:var(--desktop-size-chat-message,16px);line-height:1.75}
 .desktop-chat-app .desktop-conversation-message--user>div:first-child{border-radius:22px;padding:10px 18px;background:var(--desktop-color-surface-muted)}
 .desktop-chat-app .desktop-conversation-message--assistant{margin-bottom:32px}
-.desktop-chat-app .desktop-composer-surface{border-radius:26px;background:var(--desktop-color-composer);box-shadow:var(--desktop-shadow-subtle);border-color:var(--desktop-color-border);padding:10px 12px}
-.desktop-chat-app .desktop-composer-surface textarea{font-size:16px;line-height:24px;min-height:44px;max-height:200px}
+.desktop-chat-app .desktop-composer-surface--chat textarea{font-size:16px;line-height:24px;min-height:44px;max-height:200px}
 .desktop-chat-app .desktop-composer-surface-controls{gap:0}
 .desktop-chat-app .desktop-composer-surface--chat{padding:6px 8px;border-radius:28px}
 .desktop-chat-app .desktop-composer-surface--chat textarea{min-height:36px}
@@ -45,7 +44,6 @@
  .desktop-chat-header:has(.desktop-chat-header__mobile-title) .desktop-chat-header__copy{display:none}
  .desktop-chat-header__mobile-title{display:flex;align-items:center;min-width:0;flex:1}
  .desktop-chat-header__mobile-title>.desktop-button{height:44px;max-width:100%;border-radius:var(--desktop-radius-chat-header);background:var(--desktop-color-surface-overlay);box-shadow:var(--desktop-shadow-subtle);font-size:17px;padding-inline:14px}
- .desktop-chat-app .desktop-composer-surface{border-radius:26px;padding:10px}
  .desktop-chat-app .desktop-conversation-message-actions{opacity:1}
 }
 @media(prefers-reduced-motion:reduce){.desktop-chat-workspace__sidebar,.desktop-chat-workspace__backdrop{transition:none}}

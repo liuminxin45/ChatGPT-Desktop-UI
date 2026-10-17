@@ -16,6 +16,7 @@ import { ScrollToBottomIcon } from '../../icons';
 import { useTranslation } from '../../strings';
 import { DismissalBoundary, useDismissalLayer } from '../../dismissal';
 import { useDismissDrag } from '../../runtime/dismiss-drag';
+export * from './composer-tools';
 
 /** Responsive chat profile. Hosts retain routing, persistence, services and all business state. */
 export function ChatAppSurface({ className, ...props }: HTMLAttributes<HTMLDivElement>) {

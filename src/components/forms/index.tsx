@@ -331,6 +331,8 @@ export interface SelectOption {
 }
 
 export interface SelectProps {
+  /** Custom trigger presentation; options retain their complete labels in the popup. */
+  triggerContent?: ReactNode;
   /** Compact row controls retain full values, wrapping within their assigned column. */
   size?: 'sm' | 'md';
   actionId?: string;
@@ -356,6 +358,7 @@ export interface SelectProps {
 const EMPTY_SELECT_VALUE = '__desktop_empty_select_value__';
 
 export function Select({
+  triggerContent,
   size = 'md',
   actionId,
   featureId,
@@ -403,7 +406,7 @@ export function Select({
         aria-labelledby={ariaLabelledBy}
         className={classes('desktop-select', size === 'sm' && 'desktop-select--sm', className)}
       >
-        <SelectPrimitive.Value placeholder={placeholder} />
+        <SelectPrimitive.Value placeholder={placeholder}>{triggerContent}</SelectPrimitive.Value>
         <SelectPrimitive.Icon className="desktop-select__icon">
           <ChevronDownIcon size={15} aria-hidden="true" />
         </SelectPrimitive.Icon>

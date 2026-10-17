@@ -128,6 +128,98 @@ One ChatGPT-style circular action for message composers; Hosts own operation sta
 | layout | no | `"row" \| "command" \| "tile" \| "surface" \| undefined` |
 | badge | no | `ReactNode` |
 
+## ComposerAttachmentButton (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/composer-tools.tsx)
+
+Plus opens Host attachment acquisition; it does not imply a new conversation.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| size | no | `"sm" \| "md" \| undefined` |
+| layout | no | `"row" \| "command" \| "tile" \| "surface" \| undefined` |
+| variant | no | `ButtonVariant \| undefined` |
+| actionId | no | `string \| undefined` |
+| confirmOnEnter | no | `boolean \| undefined` |
+| badge | no | `ReactNode` |
+| label | no | `string \| undefined` |
+
+## ComposerModelControl (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/composer-tools.tsx)
+
+A cohesive display with two independent native selectors, no settings dialog.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| model | yes | `SelectProps` |
+| effort | no | `SelectProps \| undefined` |
+| label | no | `string \| undefined` |
+
+## ComposerPermissionSelect (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/composer-tools.tsx)
+
+Permissions remain a real Select: only its closed trigger is a shield.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| triggerContent | no | `ReactNode` |
+| size | no | `"sm" \| "md" \| undefined` |
+| actionId | no | `string \| undefined` |
+| featureId | no | `string \| undefined` |
+| surfaceId | no | `string \| undefined` |
+| toolId | no | `string \| undefined` |
+| options | yes | `readonly SelectOption[]` |
+| value | no | `string \| undefined` |
+| defaultValue | no | `string \| undefined` |
+| onValueChange | no | `((value: string) => void) \| undefined` |
+| placeholder | no | `ReactNode` |
+| className | no | `string \| undefined` |
+| contentClassName | no | `string \| undefined` |
+| disabled | no | `boolean \| undefined` |
+| name | no | `string \| undefined` |
+| required | no | `boolean \| undefined` |
+| id | no | `string \| undefined` |
+| title | no | `string \| undefined` |
+| aria-label | no | `string \| undefined` |
+| aria-labelledby | no | `string \| undefined` |
+| risk | no | `"default" \| "elevated" \| undefined` |
+
+## ComposerQueue (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/composer-tools.tsx)
+
+Static queued records, independent commands, collision-aware per-message menus.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| items | yes | `readonly ComposerQueueItem[]` |
+| label | no | `string \| undefined` |
+| activity | no | `ReactNode` |
+| description | no | `ReactNode` |
+| paused | no | `boolean \| undefined` |
+| disabled | no | `boolean \| undefined` |
+| steerLabel | no | `string \| undefined` |
+| editLabel | no | `string \| undefined` |
+| removeLabel | no | `string \| undefined` |
+| moreLabel | no | `string \| undefined` |
+| pauseLabel | no | `string \| undefined` |
+| resumeLabel | no | `string \| undefined` |
+| pausedLabel | no | `string \| undefined` |
+| onPause | no | `(() => void) \| undefined` |
+| onResume | no | `(() => void) \| undefined` |
+| maxVisible | no | `number \| undefined` |
+| viewAllLabel | no | `string \| undefined` |
+| onViewAll | no | `(() => void) \| undefined` |
+
+## ComposerStack (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/composer-tools.tsx)
+
+| Prop | Required | Type |
+| --- | --- | --- |
+
 ## ComposerSurface (chatgpt-desktop-kit)
 
 [Implementation](../../../src/components/conversation/index.tsx)

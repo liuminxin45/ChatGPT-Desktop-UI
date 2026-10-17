@@ -60,5 +60,10 @@ Visual-only image inspection. The Host owns URLs, credentials and downloads.
 | featureId | no | `string \| undefined` |
 | surfaceId | no | `string \| undefined` |
 | toolId | no | `string \| undefined` |
+| icon | no | `ReactNode` |
+| iconOnly | no | `boolean \| undefined` |
+| className | no | `string \| undefined` |
+| disabled | no | `boolean \| undefined` |
+| side | no | `"top" \| "right" \| "bottom" \| "left" \| undefined` |
 | onOpenChange | no | `((open: boolean) => void) \| undefined` |
-| items | yes | `{ label: ReactNode; actionId: string; disabled?: boolean; onSelect(): void; }[]` |
+| items | yes | `{ label: ReactNode; icon?: ReactNode; actionId: string; disabled?: boolean; onSelect(): void; }[]` |

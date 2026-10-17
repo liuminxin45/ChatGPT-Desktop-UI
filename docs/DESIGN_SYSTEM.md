@@ -280,3 +280,46 @@ with explicit zoom/reset controls and bounded pinch/pan. At original scale a
 downward release can close it; zoomed movement and cancelled gestures preserve
 the preview. These shared controls own appearance and gesture geometry, while
 Hosts retain URLs, drafts, history and all data operations.
+
+
+## Reference work composer and inline queue (2026-10-17)
+
+The user-supplied 499x173 dark capture shows an upper draft editor and a lower
+command row: Plus for attachment acquisition and a permissions shield on the
+left, model plus muted reasoning value on the right, followed by the blue
+Send/Stop circle. Use `ComposerSurface layout="work"` for this two-level
+composition; `layout="chat"` remains the intentionally compact inline layout.
+The screenshot does not establish a ChatGPT package version, device scale,
+light theme or phone geometry. The kit's phone/light adaptations are verified
+browser layouts, not claims about an unobserved native client.
+
+Compose `ComposerStack`, `ComposerQueue` and `ComposerSurface`. The queue uses
+static one-line message previews, independent Steer/Delete targets, a per-item
+More menu, and optional live activity. A bounded preview can expose a Host-owned
+complete queue view. Blank row space is inert. Do not replace it with a single
+queue-count button and require a dialog to see the next message.
+
+`ComposerAttachmentButton` is the explicit composer exception to the ordinary
+paperclip action: its Plus opens attachment acquisition. Elsewhere keep
+`AttachmentIcon`. `ComposerPermissionSelect` renders a shield and exposes the
+selected permission as accessible text and tooltip; `risk="elevated"` only
+changes presentation, never permissions. Host data decides risk and capability.
+`ComposerModelControl` groups two real Select controls on one baseline. Model
+and reasoning remain independently selectable and preserve their full popup
+labels. Closed model values may ellipsize in the bounded toolbar.
+
+Hosts own drafts, files, model lists, configuration acknowledgements, queue
+mutation IDs and stop/pause semantics. Opening a menu or selecting settings
+never sends a message. Supply accurate localized commands; do not offer side
+chat, voice or queue modes without actual Host capabilities. Do not infer
+"disable queueing" semantics from a Host operation which pauses active output.
+Unavailable edit/steer actions remain disabled. Unknown original attachments
+must never be silently discarded when editing a queued message.
+
+`MenuButton` supports a named icon-only trigger, item icons and collision-aware
+side placement. Keep shared focus, Escape and dismissal-layer behavior. Run
+`test:composer-reference`, `test:composer`, `test:composer-integration` and the
+consumer's settings, attachments and queue edit regressions; capture running,
+open menus, long drafts, failures and both themes at desktop/phone widths.
+
+Measured capture colors: composer #363636, queue #2d2d2d, canvas #181818, blue action #2c67c5. The canonical composer action is 28 CSS pixels; the supplied capture does not establish OS scaling. The established hover/press geometry invariant still applies.
