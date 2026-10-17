@@ -75,6 +75,7 @@ Retained desktop sidebar/mobile drawer. Opening, folding and resizing never remo
 | sidebarId | no | `string \| undefined` |
 | contentId | no | `string \| undefined` |
 | header | no | `ReactNode` |
+| sidebarPresentation | no | `"drawer" \| "catalog" \| undefined` |
 
 ## ClientComposer (chatgpt-desktop-kit)
 

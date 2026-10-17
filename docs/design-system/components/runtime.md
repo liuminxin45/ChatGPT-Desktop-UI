@@ -74,6 +74,17 @@ Backward-compatible name; the root and its context have one implementation.
 | onAction | no | `((outcome: "exposed" \| "invoked") => void) \| undefined` |
 | labels | no | `{ appearance: string; system: string; light: string; dark: string; } \| undefined` |
 
+## DismissalLayerProvider (chatgpt-desktop-kit)
+
+[Implementation](../../../src/dismissal.tsx)
+
+Opt in to host navigation without importing browser history or a native bridge.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| registerLayer | yes | `RegisterDismissalLayer` |
+| children | yes | `ReactNode` |
+
 ## FixedVirtualList (chatgpt-desktop-kit)
 
 [Implementation](../../../src/fixed-virtual-list.tsx)

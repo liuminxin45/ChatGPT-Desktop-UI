@@ -157,3 +157,53 @@ Exports and imports are not rendered adoption. Capture each consumer page in lig
 - Auto-sized Textarea respects a CSS max-height and switches to internal vertical scrolling after the clamp. Keep a stable scrollbar gutter; long drafts must remain readable, selectable and editable without expanding indefinitely or clipping received text.
 - Use the public `DatePicker` for calendar selection. Supply its accessible name, disabled state and `clearable={false}` for required day navigation. Date-only serialization and timezone policy belong to the Host. No business native date input is an equivalent calendar renderer. Retained hidden surfaces close its popup.
 - Settings use `SettingsPage`, `SettingsGroup` and `SettingsField`. `SettingsPage` accepts `leading` and `actions` for a back command or page operations, with one real scroll owner. `RecordLink` defaults to a stacked record-content target; do not pass separate icon/label/arrow children and repaint it into a navigation row. A static SettingsField label with an independent named RecordLink/Button keeps proper alignment and action ownership.
+
+
+## Host-owned mobile Back and cancellable drawer dragging
+
+Wrap a retained application in `DismissalLayerProvider` and pass a stable
+`registerLayer(dismiss)` callback that returns a cleanup function. The Host owns
+browser/native history and must consume exactly one registered layer per Back.
+The library never calls History APIs or native IPC. Canonical `Dialog`, `Select`,
+`EditableCombobox`, `MenuButton`, `Popover` (including `DatePicker`) and a modal
+`ChatWorkspace` drawer register their visible open state. Do not add a second
+Host registration around these controls. Initial nested Dialogs register their
+parent before their child, even though React mounts child effects first.
+Dismissing a chooser closes it without applying a selection or submitting data.
+
+Use `ChatWorkspace sidebarPresentation="catalog"` at a mobile module root: the
+catalog fills the phone, does not trap focus as a modal and does not register an
+extra dismissible layer. The Host still owns route selection and the decision
+to show this root. Use the default `"drawer"` for a conversation's overlaid list.
+
+Drawer dragging starts only on the dedicated inner right edge below the header,
+never across the entire page or OS back edge. Movement locks horizontally after
+intent is clear; vertical movement stays scrolling. The panel and backdrop follow
+the pointer. A cancelled/lost pointer restores the open state; dismissal commits
+only on a sufficient release distance or velocity. Text controls, selection,
+links and horizontal content retain their normal touch behavior. The close
+button and backdrop remain alternatives, and reduced motion removes settling
+animation rather than changing action semantics. Browser synthetic touch is not
+evidence of a physical Android/iOS system gesture or predictive Back.
+
+`Dialog presentation="sheet"` uses the normal desktop dialog and a bottom-docked
+phone sheet. It follows `visualViewport`, reserves the safe area and owns its
+close target geometry. Only its grip can drag-dismiss; body scrolling cannot.
+Cancellation retains the controlled open value, children and Host draft. Keep
+the close button as the keyboard/assistive alternative. `presentation="fullscreen"`
+fills the visual viewport without changing the shared focus/dismissal contract.
+
+`ImageViewer` composes that fullscreen Dialog. Pass `open`, `onClose`, `src`, `alt`
+and optionally `title`; keep URL authorization, file selection, download and
+persistence in the Host. It supplies 1–4x pinch/toolbar zoom, bounded panning,
+double-click and +/-/0 keyboard controls. Downward dismissal is available only at
+original scale, and cancelling a pointer restores the gesture's initial view.
+Zoomed panning or lifting one finger after a pinch cannot commit a dismissal.
+Only the image canvas uses `touch-action:none`; the rest of the application keeps
+browser zoom, scrolling and system gesture ownership. Test failed images too.
+
+Native shells that dispatch a cancelable synthetic Escape on `document` must
+observe its final `defaultPrevented` result before traversing history. Do not
+dispatch Escape and call history.back unconditionally. Native IME ordering and
+predictive progress/cancel transport require host implementation and real-device
+evidence; the library does not infer them from a mobile user agent.

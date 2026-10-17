@@ -21,6 +21,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | description | no | `ReactNode` |
 | children | no | `ReactNode` |
 | footer | no | `ReactNode` |
+| presentation | no | `"dialog" \| "sheet" \| "fullscreen" \| undefined` |
 | onClose | yes | `() => void` |
 
 ## DropOverlay (chatgpt-desktop-kit)
@@ -33,6 +34,20 @@ Non-interactive file drop feedback; the Host owns drag events and attachment sco
 | --- | --- | --- |
 | label | yes | `string` |
 | surfaceId | no | `string \| undefined` |
+
+## ImageViewer (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/overlays/image-viewer.tsx)
+
+Visual-only image inspection. The Host owns URLs, credentials and downloads.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| open | yes | `boolean` |
+| src | yes | `string` |
+| alt | yes | `string` |
+| title | no | `string \| undefined` |
+| onClose | yes | `() => void` |
 
 ## MenuButton (chatgpt-desktop-kit)
 
