@@ -50,6 +50,7 @@ const server = http.createServer(async (req, res) => {
 await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
 const browser = await chromium.launch({
     channel: process.env.UI_BROWSER_CHANNEL || 'msedge',
+    executablePath: process.env.UI_BROWSER_EXECUTABLE,
     headless: true,
   }),
   checks = [];
@@ -127,6 +128,7 @@ try {
       await page.screenshot({ path: path.join(output, `${width}-${theme}-calendar.png`) });
       await page.locator('.desktop-calendar-day').filter({ hasText: /^15$/ }).click();
       assert.match(await date.innerText(), /15/);
+      await page.locator('.desktop-calendar').waitFor({ state: 'hidden' });
       await date.click();
       // A click acknowledgement can precede the scoped portal's mount/focus.
       // Send Escape to the opened calendar, rather than racing its previous trigger.
