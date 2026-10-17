@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Settings, Plus, Loader2, Check, X, UserRound, LogOut, Forward, ListTodo, Sparkles } from 'lucide-react';
-import { Button, DesktopRoot, Input, Textarea, MenuButton, SaveIcon, DeleteIcon, AttachmentIcon, CompleteIcon, ToolVisibilityContext, Tooltip } from '../src';
+import { Button, DesktopRoot, Input, Textarea, MenuButton, SaveIcon, DeleteIcon, AttachmentIcon, CompleteIcon, ComputerIcon, ToolVisibilityContext, Tooltip } from '../src';
 import { Button as HostButton } from '../src/compat/button';
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '../src/compat/dropdown-menu';
 import '../src/styles.css';
@@ -32,6 +32,7 @@ function Fixture() {
     </div>
     <p role="status">{count}</p>
     <Button actionId="fixture.attachment" iconOnly icon={<AttachmentIcon size={16}/>}>Attach file</Button>
+    <Button actionId="fixture.computer" iconOnly icon={<ComputerIcon size={20}/>}>Switch computer</Button>
     <Button actionId="fixture.complete" icon={<CompleteIcon size={16}/>}>Mark complete</Button>
     <Textarea aria-label="Growing note" autoSize rows={2} />
     <MenuButton label="Collection actions" actionId="fixture.collection.more" onOpenChange={open => { document.body.dataset.collectionOpen = String(open); }} items={[{label:'Full collection',actionId:'fixture.collection.full',onSelect:() => setCount(n => n + 1)}]} />

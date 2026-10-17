@@ -9,6 +9,7 @@ export {
   Save as SaveIcon,
   CircleCheck as CompleteIcon,
   TerminalSquare as AssistantIcon,
+  Monitor as ComputerIcon,
   ArrowUp as SendIcon,
   ArrowDown as ScrollToBottomIcon,
   Bug as BugIcon,
