@@ -115,3 +115,4 @@ Explicit responsive form layout; never repaint arbitrary Host forms or labels.
 | Prop | Required | Type |
 | --- | --- | --- |
 | autoSize | no | `boolean \| undefined` |
+| maxRows | no | `number \| undefined` |

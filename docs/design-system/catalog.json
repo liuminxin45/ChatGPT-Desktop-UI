@@ -47441,6 +47441,13 @@
           "type": "boolean | undefined",
           "native": false,
           "description": "Grow with content and width changes; at a CSS max-height the field scrolls internally."
+        },
+        {
+          "name": "maxRows",
+          "required": false,
+          "type": "number | undefined",
+          "native": false,
+          "description": "Cap auto-sized content to this many text lines; excess content scrolls."
         }
       ],
       "nativeProps": [
@@ -74350,6 +74357,13 @@
           "type": "boolean | undefined",
           "native": false,
           "description": "Grow with content and width changes; at a CSS max-height the field scrolls internally."
+        },
+        {
+          "name": "maxRows",
+          "required": false,
+          "type": "number | undefined",
+          "native": false,
+          "description": "Cap auto-sized content to this many text lines; excess content scrolls."
         }
       ],
       "nativeProps": [
