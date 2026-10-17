@@ -1,0 +1,14 @@
+{
+  "kitVersion": "0.8.1",
+  "scope": "Add the shared semantic ComputerIcon export for host-owned computer switching. Existing controls and styles are unchanged.",
+  "checks": {
+    "npm run check": "passed: lint, 18 unit tests, typecheck, library build, generated docs, library contract, formatting, namespace and 13 integration tests",
+    "npm run test:package-contract": "passed: 5 cases",
+    "node scripts/verify-computer-icon.mjs": "passed: 8 light/dark desktop/mobile renders, accessible glyph and tooltip, stable hover and press geometry",
+    "npm run skill:package && npm run skill:check": "passed: 68 resource links"
+  },
+  "limitations": [
+    "The broader test:icons run timed out on the disabled Saving tooltip hover assertion. Tooltip and disabled-button implementations were not changed; the dedicated ComputerIcon checks pass.",
+    "Browser scaling and phone viewport emulation do not establish Windows system scaling or physical device acceptance."
+  ]
+}

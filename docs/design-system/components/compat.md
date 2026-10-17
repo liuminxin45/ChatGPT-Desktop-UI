@@ -26,6 +26,23 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | cancelActionId | no | `string \| undefined` |
 | onConfirm | yes | `() => void \| boolean \| Promise<void \| boolean>` |
 
+## DatePicker (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/radix/date-picker.tsx)
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| value | yes | `Date \| undefined` |
+| onChange | yes | `(date: Date \| undefined) => void` |
+| placeholder | no | `string \| undefined` |
+| className | no | `string \| undefined` |
+| triggerClassName | no | `string \| undefined` |
+| actionId | no | `string \| undefined` |
+| id | no | `string \| undefined` |
+| aria-label | no | `string \| undefined` |
+| disabled | no | `boolean \| undefined` |
+| clearable | no | `boolean \| undefined` |
+
 ## Popover (chatgpt-desktop-kit)
 
 [Implementation](../../../src/components/radix/popover.tsx)
@@ -715,6 +732,10 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | className | no | `string \| undefined` |
 | triggerClassName | no | `string \| undefined` |
 | actionId | no | `string \| undefined` |
+| id | no | `string \| undefined` |
+| aria-label | no | `string \| undefined` |
+| disabled | no | `boolean \| undefined` |
+| clearable | no | `boolean \| undefined` |
 
 ## DropdownMenu (chatgpt-desktop-kit/compat/dropdown-menu)
 
@@ -1061,6 +1082,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 | Prop | Required | Type |
 | --- | --- | --- |
+| triggerContent | no | `React.ReactNode` |
 | size | no | `"sm" \| "md" \| undefined` |
 | actionId | no | `string \| undefined` |
 | featureId | no | `string \| undefined` |
@@ -1185,6 +1207,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | Prop | Required | Type |
 | --- | --- | --- |
 | autoSize | no | `boolean \| undefined` |
+| maxRows | no | `number \| undefined` |
 
 ## Tooltip (chatgpt-desktop-kit/compat/tooltip)
 

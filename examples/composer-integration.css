@@ -1,0 +1,6 @@
+html,body,#root{height:100%;margin:0;overflow:hidden}
+.integration-example{display:flex;flex-direction:column;height:100%;min-height:0}
+.integration-messages{padding:24px}
+
+.integration-example{font:400 var(--desktop-font-size-body)/var(--desktop-line-height-ui) var(--desktop-font-sans)}
+@media(max-width:767px){.integration-example{--desktop-font-size-body:16px}}

@@ -19,6 +19,8 @@ export interface AIResponseProps {
   state?: 'streaming' | 'complete' | 'cancelled' | 'failed';
   className?: string;
   components?: Parameters<typeof Markdown>[0]['components'];
+  /** Native clipboard adapter receives canonical fenced source, as in Markdown. */
+  onCopyCode?: Parameters<typeof Markdown>[0]['onCopyCode'];
   /** Host can remeasure and follow the bottom without scrolling readers away from history. */
   onReveal?: () => void;
 }
@@ -31,6 +33,7 @@ export function AIResponse({
   state = 'complete',
   className,
   components,
+  onCopyCode,
   onReveal,
 }: AIResponseProps) {
   const shared = useContext(RevealContext);
@@ -128,6 +131,7 @@ export function AIResponse({
       variant="ai"
       className={className}
       components={components}
+      onCopyCode={onCopyCode}
       copyDisabled={offset < content.length}
       data-ai-response={responseId}
       aria-busy={state === 'streaming' || offset < content.length}

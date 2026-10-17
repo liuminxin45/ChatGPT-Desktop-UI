@@ -3,6 +3,8 @@ import { CaretRight, MagnifyingGlass, PushPin } from '@phosphor-icons/react';
 import { classes } from '../classes';
 import * as Menu from '@radix-ui/react-dropdown-menu';
 import { forwardRef, useEffect, useState, type ReactElement, type ReactNode } from 'react';
+import { useDismissalLayer } from '../../dismissal';
+import { protectModalEscape } from '../../runtime/modal-keyboard';
 import { ActionTooltip } from '../../action-tooltip';
 import { IconButton, Input, InternalScrollArea } from '../../controls';
 import {
@@ -297,11 +299,13 @@ export function AvatarMenu({
     dark: string;
   };
 }) {
+  const [open, setOpen] = useState(false);
+  useDismissalLayer(open, () => setOpen(false));
   const { theme, setTheme } = useDesktopTheme();
   const [failedImage, setFailedImage] = useState(false);
   useEffect(() => setFailedImage(false), [image]);
   return (
-    <Menu.Root>
+    <Menu.Root open={open} onOpenChange={setOpen}>
       <Menu.Trigger className="kit-avatar" aria-label={name} data-desktop-action="account.menu.open">
         {image && !failedImage ? (
           <img src={image} alt="" onError={() => setFailedImage(true)} />
@@ -312,6 +316,7 @@ export function AvatarMenu({
       <Menu.Portal>
         <Menu.Content
           className="desktop-menu kit-account-menu"
+          onEscapeKeyDown={protectModalEscape}
           side="right"
           align="end"
           sideOffset={6}
@@ -365,15 +370,17 @@ export function AvatarMenu({
             <Gear size={16} />
             {labels.settings}
           </Menu.Item>
-          <Menu.Item
-            className="desktop-menu-item"
-            data-desktop-action="application.exit"
-            disabled={!onExit}
-            onSelect={onExit}
-          >
-            <SignOut size={16} />
-            {labels.exit}
-          </Menu.Item>
+          {onExit && (
+            <Menu.Item
+              className="desktop-menu-item"
+              data-desktop-action="application.exit"
+              disabled={!onExit}
+              onSelect={onExit}
+            >
+              <SignOut size={16} />
+              {labels.exit}
+            </Menu.Item>
+          )}
         </Menu.Content>
       </Menu.Portal>
     </Menu.Root>
@@ -514,12 +521,24 @@ export function SettingsNavigation({
 
 export const SettingsPage = forwardRef<
   HTMLDivElement,
-  Omit<import('react').HTMLAttributes<HTMLDivElement>, 'title'> & { title: ReactNode }
->(function SettingsPage({ title, children, className, ...props }, ref) {
+  Omit<import('react').HTMLAttributes<HTMLDivElement>, 'title'> & {
+    title: ReactNode;
+    leading?: ReactNode;
+    actions?: ReactNode;
+  }
+>(function SettingsPage({ title, children, className, leading, actions, ...props }, ref) {
   return (
     <InternalScrollArea ref={ref} className={classes('kit-settings-scroll', className)} {...props}>
       <div className="kit-settings-content">
-        <h1>{title}</h1>
+        {leading || actions ? (
+          <header className="kit-settings-heading">
+            {leading}
+            <h1>{title}</h1>
+            {actions}
+          </header>
+        ) : (
+          <h1>{title}</h1>
+        )}
         {children}
       </div>
     </InternalScrollArea>

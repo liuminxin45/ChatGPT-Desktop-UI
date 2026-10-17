@@ -40,7 +40,11 @@ function moduleFor(specifier, file, directory, contract) {
       ? path.resolve(directory, specifier.slice(2))
       : null;
   if (directory === root && relative) {
-    if (relative === path.join(root, 'src') || relative === path.join(root, 'src/index'))
+    if (
+      relative === path.join(root, 'src') ||
+      relative === path.join(root, 'src/index') ||
+      relative === path.join(root, 'dist/index.js')
+    )
       return 'chatgpt-desktop-kit';
     if (relative.startsWith(path.join(root, 'src/compat') + path.sep))
       return 'chatgpt-desktop-kit/compat/' + path.basename(relative).replace(/\.tsx?$/, '');

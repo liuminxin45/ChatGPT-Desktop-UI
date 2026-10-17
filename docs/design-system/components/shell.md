@@ -97,6 +97,8 @@ Shared settings shell; the Host owns category state and contextual sidebar visib
 | Prop | Required | Type |
 | --- | --- | --- |
 | title | yes | `ReactNode` |
+| leading | no | `ReactNode` |
+| actions | no | `ReactNode` |
 
 ## SettingsSection (chatgpt-desktop-kit)
 

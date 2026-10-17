@@ -19,3 +19,4 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | onValueChange | yes | `(value: string) => void` |
 | ariaLabel | no | `string \| undefined` |
 | actionId | no | `string \| undefined` |
+| stretch | no | `boolean \| undefined` |
