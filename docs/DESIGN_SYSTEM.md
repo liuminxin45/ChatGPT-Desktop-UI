@@ -192,7 +192,7 @@ Use one horizontal module navigation layer. Promote independent work destination
 
 ## Composer send and stop action
 
-Message composers use `ComposerActionButton` in chat, Codex/work, threads, follow-up instructions, agent conversations, mail and comments. The supplied ChatGPT client button captures are the reference for the blue circular up-arrow and filled square. Use one 32px circle in every composer, a 16px up-arrow, a 10px filled square and the shared send foreground/background/hover tokens; the chat client profile must not override size or colors. Preserve keyboard focus and hover/focus tooltips.
+Message composers use `ComposerActionButton` in chat, Codex/work, threads, follow-up instructions, agent conversations, mail and comments. The supplied ChatGPT client button captures are the reference for the blue circular up-arrow and filled square. Use one circle sized by `--desktop-size-composer-action` (28px in the current reference) in every composer, a 16px up-arrow, a 10px filled square and the shared send foreground/background/hover tokens; the chat client profile must not override size or colors. Preserve keyboard focus and hover/focus tooltips.
 
 | Host state | Glyph | Interaction |
 | --- | --- | --- |
