@@ -35751,7 +35751,7 @@
       "importPath": "chatgpt-desktop-kit",
       "family": "runtime",
       "implementation": "src/scoped-surface.tsx",
-      "description": "Explicit document styling ownership for desktop applications using desktop.css.\r\nThe Host continues to own theme, persistence and native window behavior.",
+      "description": "Explicit document styling ownership for desktop applications using desktop.css.\nThe Host continues to own theme, persistence and native window behavior.",
       "props": [
         {
           "name": "children",
@@ -74254,7 +74254,7 @@
       "importPath": "chatgpt-desktop-kit/compat/virtual-list",
       "family": "compat",
       "implementation": "src/components/radix/virtual-list.tsx",
-      "description": "Standard internal long-list surface. It owns viewport scrolling, row\r\nvirtualization, dynamic measurement, overscan, and the shared scrollbar skin.",
+      "description": "Standard internal long-list surface. It owns viewport scrolling, row\nvirtualization, dynamic measurement, overscan, and the shared scrollbar skin.",
       "props": [
         {
           "name": "items",

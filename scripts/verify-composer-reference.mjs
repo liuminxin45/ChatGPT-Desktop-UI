@@ -16,7 +16,7 @@ const server=http.createServer(async(req,res)=>{
  res.end(asset?await fs.readFile(path.join(temp,name.slice(1))):'<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/composer-reference.css"></head><body><div id="root"></div><script type="module" src="/composer-reference.js"></script></body></html>');
 });
 await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
-const browser=await chromium.launch({channel:'msedge',headless:true}),cases=[];
+const browser=await chromium.launch({channel:process.env.UI_BROWSER_CHANNEL || 'msedge',headless:true}),cases=[];
 try{
  for(const theme of ['light','dark'])for(const [width,height,scale] of [[1920,1080,1],[1280,800,1],[1280,800,1.25],[499,600,1],[390,844,1],[320,700,1]]){
   const context=await browser.newContext({viewport:{width,height},deviceScaleFactor:scale,isMobile:width<768}),page=await context.newPage(),errors=[];
