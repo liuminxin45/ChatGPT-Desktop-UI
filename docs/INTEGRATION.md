@@ -8,6 +8,10 @@ drawer owns focus containment, Escape, backdrop and edge swipe; the Host owns
 route changes, browser back layers and desired initial visibility. Header slots
 accept existing shared controls. Never repaint them in consumer CSS.
 
+Use the semantic `ComputerIcon` for a computer/device switch action. An icon-only
+header trigger retains its accessible name and tooltip; the Host owns the device
+choices, current selection, connectivity and draft restoration.
+
 Use `ChatHeader.hideMobileTitle` for the icon-only phone header when its title is
 already present in the document. `ComposerSurface layout="chat"` puts attachment,
 editable draft and the canonical Send/Stop action in one compact row. Optional
