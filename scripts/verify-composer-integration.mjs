@@ -128,6 +128,10 @@ try {
       await page.locator('.desktop-calendar-day').filter({ hasText: /^15$/ }).click();
       assert.match(await date.innerText(), /15/);
       await date.click();
+      // A click acknowledgement can precede the scoped portal's mount/focus.
+      // Send Escape to the opened calendar, rather than racing its previous trigger.
+      await page.locator('.desktop-calendar').waitFor();
+      await page.waitForFunction(() => document.activeElement?.closest('.desktop-date-picker-popover'));
       await page.keyboard.press('Escape');
       await page.locator('.desktop-calendar').waitFor({ state: 'hidden' });
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
