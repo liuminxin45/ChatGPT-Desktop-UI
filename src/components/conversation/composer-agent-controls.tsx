@@ -316,7 +316,7 @@ export function ComposerModelPicker({
                 <Button
                   key={option.value}
                   role="menuitemradio"
-                  aria-label={option.label}
+                  aria-labelledby={`${tickId}-label-${index}`}
                   aria-describedby={
                     option.description && option.description !== option.label
                       ? `${tickId}-model-${index}`
@@ -333,7 +333,7 @@ export function ComposerModelPicker({
                   }}
                 >
                   <span>
-                    {option.label}
+                    <span id={`${tickId}-label-${index}`}>{option.label}</span>
                     {option.description && option.description !== option.label ? (
                       <small id={`${tickId}-model-${index}`}>{option.description}</small>
                     ) : null}
