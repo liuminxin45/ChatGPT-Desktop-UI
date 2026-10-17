@@ -5,6 +5,21 @@ description: Build or refactor a desktop-style app to match the supplied ChatGPT
 
 # ChatGPT-style desktop UI
 
+For the supplied 2026-10-17 agent composer captures, use `ComposerModelPicker`:
+one combined trigger opens effort, a stepped slider commits once per gesture,
+the centered model caption opens model choices, and Reset uses that model's
+actual default. Do not recreate two separate model/effort dropdowns or hide
+reasoning in a settings dialog. `ComposerModelControl` forwards old props to the
+same implementation. Keep Host acknowledgement, retry IDs and send gating.
+Use `ComposerAddMenu` for files, Plan, Goal and skills the Host can actually run;
+`ComposerGoal` for objective, authoritative elapsed/state and independent
+edit/pause/remove/expand commands; `PlanReview` for the full proposed Markdown
+and explicit execute/continue actions. The Host owns native skills, clarification
+questions, goal lifecycle and persistence. No fake plugins or prompt-only mode
+emulation. Read the source repository's `docs/INTEGRATION.md` and run
+`test:composer-model-modes` through the prepared package in both themes and at
+desktop/phone/320px widths. Browser emulation is not a physical device check.
+
 For browser/mobile chat products, use `ChatAppSurface`, `ChatHeader` and controlled
 `ChatWorkspace`. The mobile header has independent floating targets; the retained
 sidebar becomes a modal drawer without remounting its content or draft. Keep

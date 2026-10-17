@@ -33526,6 +33526,38 @@
       ]
     },
     {
+      "id": "chatgpt-desktop-kit:ComposerAddMenu",
+      "name": "ComposerAddMenu",
+      "importPath": "chatgpt-desktop-kit",
+      "family": "conversation",
+      "implementation": "src/components/conversation/composer-agent-controls.tsx",
+      "description": "Capability-driven Add menu. File acquisition and agent/skill semantics belong to the Host.",
+      "props": [
+        {
+          "name": "label",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "disabled",
+          "required": false,
+          "type": "boolean | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "sections",
+          "required": true,
+          "type": "readonly { id: string; label?: string; items: readonly ComposerAddItem[]; }[]",
+          "native": false,
+          "description": ""
+        }
+      ],
+      "nativeProps": []
+    },
+    {
       "id": "chatgpt-desktop-kit:ComposerAttachmentButton",
       "name": "ComposerAttachmentButton",
       "importPath": "chatgpt-desktop-kit",
@@ -34145,12 +34177,100 @@
       ]
     },
     {
+      "id": "chatgpt-desktop-kit:ComposerGoal",
+      "name": "ComposerGoal",
+      "importPath": "chatgpt-desktop-kit",
+      "family": "conversation",
+      "implementation": "src/components/conversation/composer-agent-controls.tsx",
+      "description": "A static goal record with independent commands; elapsed time is authoritative Host data.",
+      "props": [
+        {
+          "name": "objective",
+          "required": true,
+          "type": "string",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "statusLabel",
+          "required": true,
+          "type": "string",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "elapsed",
+          "required": true,
+          "type": "string",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "paused",
+          "required": false,
+          "type": "boolean | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "disabled",
+          "required": false,
+          "type": "boolean | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "onEdit",
+          "required": false,
+          "type": "(() => void) | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "onPause",
+          "required": false,
+          "type": "(() => void) | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "onResume",
+          "required": false,
+          "type": "(() => void) | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "onRemove",
+          "required": false,
+          "type": "(() => void) | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "onExpand",
+          "required": false,
+          "type": "(() => void) | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "labels",
+          "required": false,
+          "type": "{ edit?: string; pause?: string; resume?: string; remove?: string; expand?: string; } | undefined",
+          "native": false,
+          "description": ""
+        }
+      ],
+      "nativeProps": []
+    },
+    {
       "id": "chatgpt-desktop-kit:ComposerModelControl",
       "name": "ComposerModelControl",
       "importPath": "chatgpt-desktop-kit",
       "family": "conversation",
       "implementation": "src/components/conversation/composer-tools.tsx",
-      "description": "A cohesive display with two independent native selectors, no settings dialog.",
+      "description": "Compatibility props forwarding to the canonical effort panel and model picker.",
       "props": [
         {
           "name": "model",
@@ -34172,6 +34292,136 @@
           "type": "string | undefined",
           "native": false,
           "description": ""
+        }
+      ],
+      "nativeProps": []
+    },
+    {
+      "id": "chatgpt-desktop-kit:ComposerModelPicker",
+      "name": "ComposerModelPicker",
+      "importPath": "chatgpt-desktop-kit",
+      "family": "conversation",
+      "implementation": "src/components/conversation/composer-agent-controls.tsx",
+      "description": "Controlled, acknowledged configuration. The draft slider commits once per gesture.",
+      "props": [
+        {
+          "name": "id",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "model",
+          "required": true,
+          "type": "string",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "effort",
+          "required": true,
+          "type": "string",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "models",
+          "required": true,
+          "type": "readonly ComposerModelOption[]",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "efforts",
+          "required": true,
+          "type": "readonly ComposerModelOption[]",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "defaultEffort",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "disabled",
+          "required": false,
+          "type": "boolean | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "effortDisabled",
+          "required": false,
+          "type": "boolean | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "onModelChange",
+          "required": true,
+          "type": "(value: string) => void",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "onEffortChange",
+          "required": true,
+          "type": "(value: string) => void",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "label",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "modelLabel",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "resetLabel",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "defaultLabel",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "defaultDescription",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "onDefault",
+          "required": false,
+          "type": "(() => void) | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "shortcut",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": "Empty disables the standard composer shortcut. No message is ever submitted here."
         }
       ],
       "nativeProps": []
@@ -40482,6 +40732,73 @@
         "3b729fce59f02c4c",
         "416315b665707faa"
       ]
+    },
+    {
+      "id": "chatgpt-desktop-kit:PlanReview",
+      "name": "PlanReview",
+      "importPath": "chatgpt-desktop-kit",
+      "family": "conversation",
+      "implementation": "src/components/conversation/composer-agent-controls.tsx",
+      "description": "Proposed Markdown and explicit review actions. This component never authorizes execution.",
+      "props": [
+        {
+          "name": "title",
+          "required": true,
+          "type": "string",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "children",
+          "required": true,
+          "type": "ReactNode",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "onExecute",
+          "required": false,
+          "type": "(() => void) | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "onContinue",
+          "required": false,
+          "type": "(() => void) | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "executeLabel",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "continueLabel",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "disabled",
+          "required": false,
+          "type": "boolean | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "actionsDisabled",
+          "required": false,
+          "type": "boolean | undefined",
+          "native": false,
+          "description": ""
+        }
+      ],
+      "nativeProps": []
     },
     {
       "id": "chatgpt-desktop-kit:Popover",

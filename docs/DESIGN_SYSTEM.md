@@ -304,9 +304,12 @@ paperclip action: its Plus opens attachment acquisition. Elsewhere keep
 `AttachmentIcon`. `ComposerPermissionSelect` renders a shield and exposes the
 selected permission as accessible text and tooltip; `risk="elevated"` only
 changes presentation, never permissions. Host data decides risk and capability.
-`ComposerModelControl` groups two real Select controls on one baseline. Model
-and reasoning remain independently selectable and preserve their full popup
-labels. Closed model values may ellipsize in the bounded toolbar.
+`ComposerModelPicker` uses the captured interaction: one model/effort trigger
+opens the compact effort panel, whose model caption opens the full model list.
+The stepped slider commits once at the end of a pointer or keyboard gesture;
+only Host-confirmed values appear on the closed trigger. Reset selects the
+current model's real default. `ComposerModelControl` forwards its compatibility
+props to this same renderer. Closed model values may ellipsize in the toolbar.
 
 Hosts own drafts, files, model lists, configuration acknowledgements, queue
 mutation IDs and stop/pause semantics. Opening a menu or selecting settings

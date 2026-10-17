@@ -61,7 +61,7 @@ it('displays both model values without hiding selected permission from accessibi
       />
     </>,
   );
-  expect(screen.getByRole('combobox', { name: 'Model' }).textContent).toContain('GPT-6.1 Sol');
-  expect(screen.getByRole('combobox', { name: 'Reasoning' }).textContent).toContain('Extra High');
+  expect(screen.getByRole('button', { name: 'Model and reasoning' }).textContent).toContain('GPT-6.1 Sol');
+  expect(screen.getByRole('button', { name: 'Model and reasoning' }).textContent).toContain('Extra High');
   expect(screen.getByRole('combobox', { name: 'Permissions' }).textContent).toContain('Full access');
 });

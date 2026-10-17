@@ -17,8 +17,9 @@ import { Select, type SelectProps } from '../forms';
 import { MenuButton } from '../overlays';
 import { classes } from '../classes';
 import { ActionTooltip } from '../../action-tooltip';
+import { ComposerModelPicker } from './composer-agent-controls';
 
-/** A cohesive display with two independent native selectors, no settings dialog. */
+/** Compatibility props forwarding to the canonical effort panel and model picker. */
 export function ComposerModelControl({
   model,
   effort,
@@ -29,16 +30,25 @@ export function ComposerModelControl({
   label?: string;
 }) {
   return (
-    <div className="desktop-composer-model" role="group" aria-label={label}>
-      <Select {...model} size="sm" className={classes('desktop-composer-model__name', model.className)} />
-      {effort && (
-        <Select
-          {...effort}
-          size="sm"
-          className={classes('desktop-composer-model__effort', effort.className)}
-        />
-      )}
-    </div>
+    <ComposerModelPicker
+      id={model.id}
+      label={label}
+      modelLabel={model['aria-label'] || 'Select model'}
+      model={model.value || ''}
+      effort={effort?.value || ''}
+      models={model.options.map((option) => ({
+        ...option,
+        label: typeof option.label === 'string' ? option.label : option.value,
+      }))}
+      efforts={(effort?.options || []).map((option) => ({
+        ...option,
+        label: typeof option.label === 'string' ? option.label : option.value,
+      }))}
+      disabled={model.disabled}
+      effortDisabled={effort?.disabled || !effort}
+      onModelChange={(value) => model.onValueChange?.(value)}
+      onEffortChange={(value) => effort?.onValueChange?.(value)}
+    />
   );
 }
 

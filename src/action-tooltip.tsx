@@ -16,8 +16,9 @@ export function actionLabel(children: ReactNode): string {
   }).join('').replace(/\s+/g, ' ').trim();
 }
 
-export function ActionTooltip({ label, children, side = 'bottom', disabled = false, direct = false, suppressed = false }: {
+export function ActionTooltip({ label, shortcut, children, side = 'bottom', disabled = false, direct = false, suppressed = false }: {
   label: string;
+  shortcut?: string;
   children: ReactElement;
   side?: 'right' | 'bottom' | 'top' | 'left';
   disabled?: boolean;
@@ -37,7 +38,7 @@ export function ActionTooltip({ label, children, side = 'bottom', disabled = fal
         <Primitive.Trigger asChild>
           {direct ? children : <span className="desktop-action-tooltip" tabIndex={disabled ? 0 : undefined}>{children}</span>}
         </Primitive.Trigger>
-        <TooltipPortal><Primitive.Content side={side} sideOffset={5} collisionPadding={8} className="desktop-tooltip">{label}</Primitive.Content></TooltipPortal>
+        <TooltipPortal><Primitive.Content side={side} sideOffset={5} collisionPadding={8} className="desktop-tooltip">{label}{shortcut&&<kbd className="desktop-tooltip__shortcut">{shortcut}</kbd>}</Primitive.Content></TooltipPortal>
       </Primitive.Root>
     </Primitive.Provider>
   </TooltipBoundary.Provider>;
