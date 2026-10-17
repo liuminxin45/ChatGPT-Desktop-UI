@@ -19,6 +19,7 @@ import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '../../icons';
 import { useLocale, useTranslation } from '../../strings';
 import { isInputComposing } from '../../input-behavior';
 import { ToolVisibilityContext } from '../../surface-visibility';
+import { useDismissalLayer } from '../../dismissal';
 import { classes } from '../classes';
 import { createDesktopPortal } from '../../scoped-surface';
 const SelectPortal = createDesktopPortal(SelectPrimitive.Portal);
@@ -147,6 +148,7 @@ export function EditableCombobox({
   const listId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
+  useDismissalLayer(open && visible && !props.disabled, () => setOpen(false));
   const [activeIndex, setActiveIndex] = useState(-1);
   const committed = useRef(false);
   const visibleOptions = useMemo(() => {
@@ -380,6 +382,7 @@ export function Select({
     if (!visible) setOpen(false);
   }, [visible]);
   const hasEmptyOption = options.some((option) => option.value === '');
+  useDismissalLayer(open && visible && !disabled, () => setOpen(false));
   const encode = (next: string | undefined) => (next === '' && hasEmptyOption ? EMPTY_SELECT_VALUE : next);
   const decode = (next: string) => (next === EMPTY_SELECT_VALUE ? '' : next);
   return (

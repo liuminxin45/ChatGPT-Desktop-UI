@@ -24,10 +24,15 @@
 @media(max-width:1199px) and (min-width:768px){.desktop-chat-app{--desktop-size-chat-sidebar:280px}}
 @media(max-width:767px){
  .desktop-chat-app{--desktop-font-size-body:16px;--desktop-line-height-ui:24px;--desktop-size-chat-sidebar:min(340px,calc(100vw - 48px));--desktop-size-chat-header:68px}
- .desktop-chat-workspace__sidebar{position:absolute;inset:0 auto 0 0;z-index:32;width:var(--desktop-size-chat-sidebar);transform:translateX(0);opacity:1;transition:transform 240ms cubic-bezier(.2,.8,.2,1);padding-top:env(safe-area-inset-top)}
+ .desktop-chat-workspace__sidebar{position:absolute;inset:0 auto 0 0;z-index:32;width:var(--desktop-size-chat-sidebar);transform:translateX(var(--desktop-chat-drag-offset,0px));opacity:1;transition:transform 240ms cubic-bezier(.2,.8,.2,1);padding-top:env(safe-area-inset-top)}
  .desktop-chat-workspace[data-sidebar-open=false]>.desktop-chat-workspace__sidebar{width:var(--desktop-size-chat-sidebar);opacity:1;transform:translateX(-100%)}
  .desktop-chat-workspace__backdrop{position:absolute;inset:0;z-index:31;display:block;appearance:none;border:0;border-radius:0;padding:0;background:var(--desktop-color-backdrop);opacity:0;visibility:hidden;pointer-events:none;transition:opacity 240ms ease,visibility 240ms}
- .desktop-chat-workspace[data-sidebar-open=true]>.desktop-chat-workspace__backdrop{visibility:visible;opacity:1;pointer-events:auto}
+ .desktop-chat-workspace[data-sidebar-open=true]>.desktop-chat-workspace__backdrop{visibility:visible;opacity:calc(1 - var(--desktop-chat-drag-progress,0));pointer-events:auto}
+ .desktop-chat-workspace__drag-edge{position:absolute;inset:68px 0 0 auto;width:12px;touch-action:pan-y pinch-zoom;user-select:none}
+ .desktop-chat-workspace[data-dragging=true]>.desktop-chat-workspace__sidebar,.desktop-chat-workspace[data-dragging=true]>.desktop-chat-workspace__backdrop{transition:none}
+ .desktop-chat-workspace[data-sidebar-presentation=catalog]>.desktop-chat-workspace__sidebar{width:100%}
+ .desktop-chat-workspace[data-sidebar-presentation=catalog]>.desktop-chat-workspace__backdrop{display:none}
+ .desktop-chat-workspace[data-sidebar-presentation=catalog][data-sidebar-open=true]>.desktop-chat-workspace__content{visibility:hidden}
  .desktop-chat-header{gap:8px;padding:10px 12px;background:transparent;min-height:var(--desktop-size-chat-header)}
  .desktop-chat-header__copy{flex:0 1 auto;min-width:0;padding-inline:12px;align-content:center;min-height:44px;border-radius:var(--desktop-radius-chat-header);background:var(--desktop-color-surface-overlay);box-shadow:var(--desktop-shadow-subtle)}
  .desktop-chat-header__actions{margin-inline-start:auto}

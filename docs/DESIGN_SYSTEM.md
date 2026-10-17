@@ -262,3 +262,21 @@ Exports and imports are not rendered adoption. Capture each consumer page in lig
 - Auto-sized Textarea respects a CSS max-height and switches to internal vertical scrolling after the clamp. Keep a stable scrollbar gutter; long drafts must remain readable, selectable and editable without expanding indefinitely or clipping received text.
 - Use the public `DatePicker` for calendar selection. Supply its accessible name, disabled state and `clearable={false}` for required day navigation. Date-only serialization and timezone policy belong to the Host. No business native date input is an equivalent calendar renderer. Retained hidden surfaces close its popup.
 - Settings use `SettingsPage`, `SettingsGroup` and `SettingsField`. `SettingsPage` accepts `leading` and `actions` for a back command or page operations, with one real scroll owner. `RecordLink` defaults to a stacked record-content target; do not pass separate icon/label/arrow children and repaint it into a navigation row. A static SettingsField label with an independent named RecordLink/Button keeps proper alignment and action ownership.
+
+
+Mobile transient layers can opt in to `DismissalLayerProvider`; history and native
+Back remain Host responsibilities. Root catalogs are primary content and use
+`ChatWorkspace.sidebarPresentation="catalog"`; overlaid lists use `"drawer"`.
+A drawer follows dragging on its inner edge, fades the backdrop in proportion and
+restores on cancellation. Content scrolling, text selection, OS gestures and
+explicit close controls keep their own ownership. This is an interaction
+adaptation; no native animation timing or physical-device verification is implied.
+
+Contextual phone operations can opt into `Dialog presentation="sheet"`; desktop
+keeps the standard dialog. The visual viewport and safe area own its bounds.
+Drag dismissal belongs to the grip, with a stable explicit close target; scrolling
+the body never closes the sheet. Fullscreen image inspection uses `ImageViewer`
+with explicit zoom/reset controls and bounded pinch/pan. At original scale a
+downward release can close it; zoomed movement and cancelled gestures preserve
+the preview. These shared controls own appearance and gesture geometry, while
+Hosts retain URLs, drafts, history and all data operations.

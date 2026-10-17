@@ -14,6 +14,8 @@ import { ArrowUp, LoaderCircle } from 'lucide-react';
 import { classes } from '../classes';
 import { ScrollToBottomIcon } from '../../icons';
 import { useTranslation } from '../../strings';
+import { DismissalBoundary, useDismissalLayer } from '../../dismissal';
+import { useDismissDrag } from '../../runtime/dismiss-drag';
 
 /** Responsive chat profile. Hosts retain routing, persistence, services and all business state. */
 export function ChatAppSurface({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
@@ -67,6 +69,8 @@ export interface ChatWorkspaceProps extends HTMLAttributes<HTMLDivElement> {
   sidebarId?: string;
   contentId?: string;
   header?: ReactNode;
+  /** A module-root catalog is primary content, not a dismissible history layer. */
+  sidebarPresentation?: 'drawer' | 'catalog';
 }
 
 /** Retained desktop sidebar/mobile drawer. Opening, folding and resizing never remount either subtree. */
@@ -79,6 +83,7 @@ export function ChatWorkspace({
   sidebarId,
   contentId,
   header,
+  sidebarPresentation = 'drawer',
   children,
   className,
   onKeyDown,
@@ -86,14 +91,27 @@ export function ChatWorkspace({
 }: ChatWorkspaceProps) {
   const id = useId(),
     panel = useRef<HTMLElement>(null),
-    content = useRef<HTMLDivElement>(null);
-  const restoreFocus = useRef<HTMLElement | null>(null),
-    gesture = useRef<{ x: number; y: number } | null>(null);
+    content = useRef<HTMLDivElement>(null),
+    root = useRef<HTMLDivElement>(null);
+  const restoreFocus = useRef<HTMLElement | null>(null);
   const close = useRef(onSidebarOpenChange);
   close.current = onSidebarOpenChange;
   const [mobile, setMobile] = useState(
     () => typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches,
   );
+  const modal = mobile && sidebarOpen && sidebarPresentation === 'drawer';
+  useDismissalLayer(modal, () => close.current(false));
+  const drag = useDismissDrag({
+    enabled: modal,
+    axis: 'x',
+    direction: -1,
+    surface: root,
+    extent: panel,
+    attribute: 'data-drawer-drag',
+    onDismiss: () => close.current(false),
+    offsetProperty: '--desktop-chat-drag-offset',
+    progressProperty: '--desktop-chat-drag-progress',
+  });
   useEffect(() => {
     const query = window.matchMedia('(max-width: 767px)'),
       update = () => setMobile(query.matches);
@@ -105,7 +123,7 @@ export function ChatWorkspace({
       contentElement = content.current;
     if (panelElement) panelElement.inert = !sidebarOpen;
     if (contentElement) contentElement.inert = mobile && sidebarOpen;
-    if (!mobile || !sidebarOpen) return;
+    if (!modal) return;
     restoreFocus.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     panelElement?.focus({ preventScroll: true });
     return () => {
@@ -114,93 +132,88 @@ export function ChatWorkspace({
       if (target?.isConnected && !target.closest('[inert],[aria-hidden="true"]'))
         target.focus({ preventScroll: true });
     };
-  }, [mobile, sidebarOpen]);
+  }, [mobile, sidebarOpen, modal]);
   return (
-    <div
-      {...props}
-      className={classes('desktop-chat-workspace', className)}
-      data-sidebar-open={sidebarOpen}
-      onKeyDown={(event) => {
-        onKeyDown?.(event);
-        if (
-          !mobile ||
-          !sidebarOpen ||
-          event.defaultPrevented ||
-          event.nativeEvent.isComposing ||
-          !panel.current?.contains(event.target as Node)
-        )
-          return;
-        if (event.key === 'Escape') {
-          event.preventDefault();
-          event.stopPropagation();
-          close.current(false);
-        }
-        if (event.key !== 'Tab') return;
-        const targets = [
-          ...panel.current.querySelectorAll<HTMLElement>(
-            'button:not(:disabled),input:not(:disabled),a[href],[tabindex="0"]',
-          ),
-        ].filter((element) => element.getClientRects().length && !element.closest('[inert],[hidden]'));
-        const first = targets[0],
-          last = targets.at(-1);
-        if (!first) {
-          event.preventDefault();
-          panel.current.focus();
-        } else if (
-          event.shiftKey &&
-          (document.activeElement === first || document.activeElement === panel.current)
-        ) {
-          event.preventDefault();
-          last?.focus();
-        } else if (!event.shiftKey && document.activeElement === last) {
-          event.preventDefault();
-          first.focus();
-        }
-      }}
-    >
-      <button
-        type="button"
-        className="desktop-chat-workspace__backdrop"
-        tabIndex={-1}
-        aria-label={closeSidebarLabel}
-        aria-hidden={!mobile || !sidebarOpen}
-        onClick={() => onSidebarOpenChange(false)}
-      />
-      <aside
-        ref={panel}
-        id={sidebarId ?? id}
-        className="desktop-chat-workspace__sidebar"
-        tabIndex={-1}
-        role={mobile && sidebarOpen ? 'dialog' : undefined}
-        aria-modal={(mobile && sidebarOpen) || undefined}
-        aria-label={sidebarLabel}
-        aria-hidden={!sidebarOpen}
-        onPointerDown={(event) => {
-          if (mobile && event.clientX > (panel.current?.getBoundingClientRect().right ?? 0) - 28)
-            gesture.current = { x: event.clientX, y: event.clientY };
-        }}
-        onPointerUp={(event) => {
-          const start = gesture.current;
-          gesture.current = null;
-          if (start && start.x - event.clientX > 64 && Math.abs(start.y - event.clientY) < 48)
-            onSidebarOpenChange(false);
-        }}
-        onPointerCancel={() => {
-          gesture.current = null;
-        }}
-      >
-        {sidebar}
-      </aside>
+    <DismissalBoundary>
       <div
-        ref={content}
-        id={contentId}
-        className="desktop-chat-workspace__content"
-        aria-hidden={(mobile && sidebarOpen) || undefined}
+        {...props}
+        ref={root}
+        className={classes('desktop-chat-workspace', className)}
+        data-sidebar-open={sidebarOpen}
+        data-sidebar-presentation={sidebarPresentation}
+        onKeyDown={(event) => {
+          onKeyDown?.(event);
+          if (
+            !modal ||
+            event.defaultPrevented ||
+            event.nativeEvent.isComposing ||
+            event.nativeEvent.keyCode === 229 ||
+            !panel.current?.contains(event.target as Node)
+          )
+            return;
+          if (event.key === 'Escape') {
+            event.preventDefault();
+            event.stopPropagation();
+            close.current(false);
+          }
+          if (event.key !== 'Tab') return;
+          const targets = [
+            ...panel.current.querySelectorAll<HTMLElement>(
+              'button:not(:disabled),input:not(:disabled),a[href],[tabindex="0"]',
+            ),
+          ].filter((element) => element.getClientRects().length && !element.closest('[inert],[hidden]'));
+          const first = targets[0],
+            last = targets.at(-1);
+          if (!first) {
+            event.preventDefault();
+            panel.current.focus();
+          } else if (
+            event.shiftKey &&
+            (document.activeElement === first || document.activeElement === panel.current)
+          ) {
+            event.preventDefault();
+            last?.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+          }
+        }}
       >
-        {header}
-        {children}
+        <button
+          type="button"
+          className="desktop-chat-workspace__backdrop"
+          tabIndex={-1}
+          aria-label={closeSidebarLabel}
+          aria-hidden={!modal}
+          onClick={() => onSidebarOpenChange(false)}
+        />
+        <aside
+          ref={panel}
+          id={sidebarId ?? id}
+          className="desktop-chat-workspace__sidebar"
+          tabIndex={-1}
+          role={modal ? 'dialog' : undefined}
+          aria-modal={modal || undefined}
+          aria-label={sidebarLabel}
+          aria-hidden={!sidebarOpen}
+          {...drag}
+        >
+          {sidebar}
+          {modal ? (
+            <div className="desktop-chat-workspace__drag-edge" data-drawer-drag aria-hidden="true" />
+          ) : null}
+        </aside>
+        <div
+          ref={content}
+          id={contentId}
+          className="desktop-chat-workspace__content"
+          aria-hidden={(mobile && sidebarOpen) || undefined}
+        >
+          {header}
+          {children}
+        </div>
       </div>
-    </div>
+    </DismissalBoundary>
   );
 }
 

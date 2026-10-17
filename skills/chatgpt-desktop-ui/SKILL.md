@@ -13,6 +13,31 @@ and real composer bounds. This supplements the native Windows profile rather tha
 claiming its title bar, geometry or unobserved mobile timing. Read
 `docs/CHAT_APP_ALIGNMENT.json` in the source repository for provenance and limits.
 
+For mobile return handling, wrap the application once in `DismissalLayerProvider`
+with a stable Host-owned `registerLayer` callback. Canonical Dialog, Select,
+EditableCombobox, MenuButton, Popover/DatePicker and the modal ChatWorkspace drawer
+register their own dismissal; remove duplicate Host registrations. The Host owns
+history entries and native event consumption. Test a cancelable Escape dispatched
+on `document` as well as keyboard Escape; opening several nested layers in one
+commit must still dismiss the deepest first. Predictive Android gesture progress
+requires an actual native bridge and physical-device evidence.
+
+Use `ChatWorkspace sidebarPresentation="catalog"` for a full-width mobile root
+catalog and `"drawer"` for contextual conversation navigation. Only the drawer
+owns modal focus and a dismissal layer. Its dedicated drag edge follows the finger;
+vertical intent and cancellation retain the drawer, content and draft. Do not add
+a full-page JavaScript edge-back recognizer that competes with the operating system.
+
+Use `Dialog presentation="sheet"` for contextual phone operations. Desktop retains
+the standard dialog; the mobile sheet docks to the visual viewport, owns safe-area
+spacing, and permits drag dismissal only from its grip. Body scrolling never
+dismisses it. Keep a visible close button and preserve the Host draft on cancellation.
+Use `ImageViewer` for image inspection with a Host-provided URL and accessible alt:
+it supplies fullscreen presentation, pinch/toolbar zoom, bounded panning and downward
+dismissal only at original scale. It does not fetch credentials or download files.
+Validate cancellation, multiple fingers, failed images, keyboard alternatives and
+retained underlying state in both themes. Browser touch emulation is not a device test.
+
 Tooltips must preserve layout ownership: row, tile and surface actions use the real button as their trigger, including explicit grid placement. Test with accessible labels and disabled states; an unlabeled fixture cannot detect wrapper-induced sizing defects.
 
 Choose shared Button geometry explicitly: command for compact centered actions, row for left-aligned single-target records with shared insets, tile for square contained image previews. Group stacked title and metadata as one content block. Do not apply ordinary command geometry to lists or media. Surface layout is reserved for documented domain graphics such as schedule cells, with native action/accessibility behavior but domain-owned geometry. Multi-action records remain static RecordRow groups.

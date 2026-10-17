@@ -31781,6 +31781,13 @@
           "type": "ReactNode",
           "native": false,
           "description": ""
+        },
+        {
+          "name": "sidebarPresentation",
+          "required": false,
+          "type": "\"drawer\" | \"catalog\" | undefined",
+          "native": false,
+          "description": "A module-root catalog is primary content, not a dismissible history layer."
         }
       ],
       "nativeProps": [
@@ -35114,9 +35121,41 @@
           "description": ""
         },
         {
+          "name": "presentation",
+          "required": false,
+          "type": "\"dialog\" | \"sheet\" | \"fullscreen\" | undefined",
+          "native": false,
+          "description": "Sheets dock to the visual viewport on phones; desktop keeps the normal dialog."
+        },
+        {
           "name": "onClose",
           "required": true,
           "type": "() => void",
+          "native": false,
+          "description": ""
+        }
+      ],
+      "nativeProps": []
+    },
+    {
+      "id": "chatgpt-desktop-kit:DismissalLayerProvider",
+      "name": "DismissalLayerProvider",
+      "importPath": "chatgpt-desktop-kit",
+      "family": "runtime",
+      "implementation": "src/dismissal.tsx",
+      "description": "Opt in to host navigation without importing browser history or a native bridge.",
+      "props": [
+        {
+          "name": "registerLayer",
+          "required": true,
+          "type": "RegisterDismissalLayer",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "children",
+          "required": true,
+          "type": "ReactNode",
           "native": false,
           "description": ""
         }
@@ -36838,6 +36877,52 @@
         "91f66b8c77770205",
         "b71c25c8048699fd"
       ]
+    },
+    {
+      "id": "chatgpt-desktop-kit:ImageViewer",
+      "name": "ImageViewer",
+      "importPath": "chatgpt-desktop-kit",
+      "family": "overlays",
+      "implementation": "src/components/overlays/image-viewer.tsx",
+      "description": "Visual-only image inspection. The Host owns URLs, credentials and downloads.",
+      "props": [
+        {
+          "name": "open",
+          "required": true,
+          "type": "boolean",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "src",
+          "required": true,
+          "type": "string",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "alt",
+          "required": true,
+          "type": "string",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "title",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "onClose",
+          "required": true,
+          "type": "() => void",
+          "native": false,
+          "description": ""
+        }
+      ],
+      "nativeProps": []
     },
     {
       "id": "chatgpt-desktop-kit:InlineNotice",
