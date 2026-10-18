@@ -101,6 +101,8 @@ export function ChatWorkspace({
 }: ChatWorkspaceProps) {
   const id = useId(),
     panel = useRef<HTMLElement>(null),
+    backdrop = useRef<HTMLButtonElement>(null),
+    backdropPressed = useRef(false),
     content = useRef<HTMLDivElement>(null),
     root = useRef<HTMLDivElement>(null);
   const restoreFocus = useRef<HTMLElement | null>(null);
@@ -151,6 +153,13 @@ export function ChatWorkspace({
         className={classes('desktop-chat-workspace', className)}
         data-sidebar-open={sidebarOpen}
         data-sidebar-presentation={sidebarPresentation}
+        onPointerDownCapture={(event) => {
+          // A touch can open a portalled menu on pointerdown. Its synthesized
+          // click may hit the backdrop after the menu changes hit testing.
+          // Dismiss only a gesture that actually began on this backdrop.
+          backdropPressed.current = event.target === backdrop.current;
+          props.onPointerDownCapture?.(event);
+        }}
         onKeyDown={(event) => {
           onKeyDown?.(event);
           if (
@@ -190,12 +199,20 @@ export function ChatWorkspace({
         }}
       >
         <button
+          ref={backdrop}
           type="button"
           className="desktop-chat-workspace__backdrop"
           tabIndex={-1}
           aria-label={closeSidebarLabel}
           aria-hidden={!modal}
-          onClick={() => onSidebarOpenChange(false)}
+          onPointerCancel={() => {
+            backdropPressed.current = false;
+          }}
+          onClick={(event) => {
+            const pressed = backdropPressed.current;
+            backdropPressed.current = false;
+            if (pressed || event.detail === 0) onSidebarOpenChange(false);
+          }}
         />
         <aside
           ref={panel}

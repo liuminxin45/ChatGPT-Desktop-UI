@@ -1,5 +1,10 @@
 # Integration
 
+Mobile drawers dismiss on a pointer gesture that starts on their backdrop.
+A touch opening a portalled menu can retarget its synthesized click to the
+backdrop; that click must keep the drawer and nested menu open. Use the shared
+NavigationDrawer/ChatWorkspace contract without Host click or CSS workarounds.
+
 ## Model, effort and agent composer controls
 
 Use `ComposerModelPicker` for the captured single trigger → effort slider →

@@ -24,6 +24,29 @@ function media(mobile: boolean) {
   });
 }
 
+it('ignores a retargeted touch click but dismisses a real backdrop gesture', () => {
+  media(true);
+  const change = vi.fn();
+  render(
+    <ChatWorkspace
+      sidebarOpen
+      onSidebarOpenChange={change}
+      sidebarLabel="Navigation"
+      closeSidebarLabel="Close navigation"
+      sidebar={<button>Account</button>}
+    >
+      <textarea aria-label="Draft" />
+    </ChatWorkspace>,
+  );
+  const backdrop = screen.getByRole('button', { name: 'Close navigation' });
+  fireEvent.pointerDown(screen.getByRole('button', { name: 'Account' }));
+  fireEvent.click(backdrop, { detail: 1 });
+  expect(change).not.toHaveBeenCalled();
+  fireEvent.pointerDown(backdrop);
+  fireEvent.click(backdrop, { detail: 1 });
+  expect(change).toHaveBeenCalledWith(false);
+});
+
 it('retains the exact sidebar and draft nodes while folding and opening', () => {
   media(false);
   function Fixture() {
