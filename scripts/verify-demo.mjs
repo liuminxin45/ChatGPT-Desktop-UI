@@ -207,7 +207,7 @@ try {
   await page
     .getByRole("button", { name: "Toggle sidebar", exact: true })
     .click();
-  assert.equal(await page.locator(".kit-sidebar").isVisible(), false);
+  await page.locator(".kit-sidebar").waitFor({ state: "hidden" });
   assert.equal(
     await page
       .getByRole("textbox", { name: "Message", exact: true })
