@@ -19,7 +19,12 @@ const cases = [];
 const errors = [];
 const focusStyle = (element) => {
   const style = getComputedStyle(element);
-  return { active: document.activeElement === element, outline: style.outlineStyle, shadow: style.boxShadow };
+  return {
+    active: document.activeElement === element,
+    outline: style.outlineStyle,
+    shadow: style.boxShadow,
+    background: style.backgroundColor,
+  };
 };
 const noPointerRing = async (control) => {
   const style = await control.evaluate(focusStyle);
@@ -115,6 +120,7 @@ try {
     await appearance.click();
     await dismissOutside(page);
     await noPointerRing(appearance);
+    const pointerStyle = await appearance.evaluate(focusStyle);
     // First Tab originates outside the React tree. Keyboard modality must still be restored.
     await page.evaluate(() => {
       document.body.tabIndex = -1;
@@ -126,7 +132,34 @@ try {
     }
     await page.evaluate(() => document.body.removeAttribute('tabindex'));
     assert.equal((await appearance.evaluate(focusStyle)).active, true);
-    assert.notEqual((await appearance.evaluate(focusStyle)).shadow, 'none', 'keyboard focus remains visible');
+    try {
+      await page.waitForFunction(
+        (previous) =>
+          getComputedStyle(document.querySelector('[aria-label="Appearance"]')).backgroundColor !== previous,
+        pointerStyle.background,
+        { timeout: 3000 },
+      );
+    } catch (error) {
+      console.error(
+        await page.evaluate(() => ({
+          focusVisible: document.activeElement?.matches(':focus-visible'),
+          pointerMarkers: [...document.querySelectorAll('[data-desktop-input-modality="pointer"]')].map(
+            (element) => ({
+              tag: element.tagName,
+              class: element.className,
+              visible: Boolean(element.getClientRects().length),
+              hidden: Boolean(element.closest('[hidden],[aria-hidden="true"],[inert]')),
+            }),
+          ),
+        })),
+      );
+      throw error;
+    }
+    assert.notEqual(
+      (await appearance.evaluate(focusStyle)).background,
+      pointerStyle.background,
+      'keyboard focus uses the neutral fill',
+    );
     await page.keyboard.press('ArrowDown');
     await page.getByRole('listbox').waitFor();
     await page.waitForFunction(() => document.activeElement?.getAttribute('role') === 'option');
@@ -135,9 +168,15 @@ try {
     await page.waitForFunction(
       () => document.querySelector('[aria-label="Appearance"]') === document.activeElement,
     );
+    await page.waitForFunction(
+      (previous) =>
+        getComputedStyle(document.querySelector('[aria-label="Appearance"]')).backgroundColor !== previous,
+      pointerStyle.background,
+      { timeout: 3000 },
+    );
     assert.notEqual(
-      (await appearance.evaluate(focusStyle)).shadow,
-      'none',
+      (await appearance.evaluate(focusStyle)).background,
+      pointerStyle.background,
       'keyboard selection returns visible focus',
     );
     assert.equal(
@@ -159,6 +198,10 @@ try {
     await page.getByRole('dialog', { name: 'Edit project' }).waitFor();
     await page.keyboard.press('Escape');
     assert.equal(await page.getByRole('dialog').count(), 0);
+    await page
+      .getByRole('button', { name: 'Edit project', exact: true })
+      .and(page.locator(':focus'))
+      .waitFor();
     assert.equal(
       await page
         .getByRole('button', { name: 'Edit project', exact: true })

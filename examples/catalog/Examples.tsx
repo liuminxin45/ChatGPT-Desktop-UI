@@ -18,6 +18,7 @@ import {
   Checkbox,
   Switch,
   Select,
+  TemporalPicker,
   EditableCombobox,
   Tabs,
   MenuButton,
@@ -86,6 +87,11 @@ export function Examples({ family }: { family: string }) {
   const [submitted, setSubmitted] = useState('');
   const [dragPreview, setDragPreview] = useState(false);
   const [contextAttached, setContextAttached] = useState(true);
+  const [temporal, setTemporal] = useState({
+    date: '2026-10-14',
+    month: '2026-10',
+    datetime: '2026-10-14T09:30',
+  });
 
   const [hostDraft, setHostDraft] = useState('Host-owned attachment and keyboard behavior');
   const field = (
@@ -104,6 +110,40 @@ export function Examples({ family }: { family: string }) {
       ]}
     />
   );
+  if (family === 'temporal')
+    return (
+      <div className="reference-fields">
+        <FieldRow>
+          Date
+          <TemporalPicker
+            aria-label="Date"
+            actionId="reference.temporal.date"
+            value={temporal.date}
+            onValueChange={(date) => setTemporal((old) => ({ ...old, date }))}
+          />
+        </FieldRow>
+        <FieldRow>
+          Month
+          <TemporalPicker
+            aria-label="Month"
+            actionId="reference.temporal.month"
+            mode="month"
+            value={temporal.month}
+            onValueChange={(month) => setTemporal((old) => ({ ...old, month }))}
+          />
+        </FieldRow>
+        <FieldRow>
+          Date and time
+          <TemporalPicker
+            aria-label="Date and time"
+            actionId="reference.temporal.datetime"
+            mode="datetime-local"
+            value={temporal.datetime}
+            onValueChange={(datetime) => setTemporal((old) => ({ ...old, datetime }))}
+          />
+        </FieldRow>
+      </div>
+    );
   if (family === 'tables')
     return (
       <>
