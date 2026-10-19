@@ -17,8 +17,8 @@ try {
     const context = await browser.newContext({ viewport: { width,height }, colorScheme: theme, deviceScaleFactor: scale });
     const page = await context.newPage(); page.on('pageerror', error => errors.push(error.message));
     await page.goto(`http://127.0.0.1:${server.address().port}`);
-    for (const [id,label] of [['workspace','Workspace'],['chat','Chat'],['settings','Settings'],['components','Components']]) {
-      await page.getByRole('button',{ name: label, exact:true }).click(); await page.waitForTimeout(180);
+    for (const id of ['workspace','chat','settings','components']) {
+      await page.locator(`[data-desktop-action="navigation.${id}"]`).click(); await page.waitForTimeout(180);
       if (id === 'workspace') await page.getByRole('list',{ name:'Work items' }).getByRole('listitem').first().waitFor();
       const metrics = await page.evaluate(() => {
         const rail = document.querySelector('.kit-rail'), item = rail.querySelector('[aria-current=page]'), main = document.querySelector('.kit-shell__main'), heading = document.querySelector('section:not([hidden]) .kit-settings-content');
@@ -40,7 +40,7 @@ try {
   const list = page.getByRole('list',{name:'Work items'}); assert.ok(await list.getByRole('listitem').count() < 100);
   await list.evaluate(element=>element.scrollTop=element.scrollHeight); await page.locator('[data-desktop-item-key="99"]').waitFor();
   // Open/floating controls are keyboard reachable and collision bounded.
-  await page.getByRole('button',{name:'Workspace',exact:true}).hover(); await page.getByRole('tooltip',{name:'Workspace',exact:true}).waitFor(); await page.screenshot({path:path.join(root,'docs/gallery/rail-tooltip.png')});
+  await page.locator('[data-desktop-action="navigation.workspace"]').hover(); await page.getByRole('tooltip',{name:'Workspace',exact:true}).waitFor(); await page.screenshot({path:path.join(root,'docs/gallery/rail-tooltip.png')});
   await page.getByRole('button',{name:'Alex Taylor',exact:true}).click(); await page.getByRole('menu').waitFor();
   const menuBounds = await page.getByRole('menu').evaluate(element=>{const r=element.getBoundingClientRect();return{left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:innerWidth,height:innerHeight};});
   assert.ok(menuBounds.left>=0&&menuBounds.right<=menuBounds.width&&menuBounds.top>=0&&menuBounds.bottom<=menuBounds.height);
@@ -51,14 +51,14 @@ try {
   await page.getByRole('combobox',{name:'Theme',exact:true}).click(); await page.getByRole('option',{name:'Light',exact:true}).click(); assert.equal(await page.getByRole('textbox',{name:'Default workspace'}).inputValue(),'Synthetic draft');
   await page.getByRole('combobox',{name:'Theme',exact:true}).click(); await page.getByRole('option',{name:'Dark',exact:true}).click();
   await page.getByRole('combobox',{name:'Theme',exact:true}).click(); await page.getByRole('listbox').waitFor(); await page.waitForTimeout(180); await page.screenshot({path:path.join(root,'docs/gallery/dropdown.png')}); await page.keyboard.press('Escape');
-  await page.getByRole('button',{name:'Toggle page sidebar',exact:true}).click(); assert.equal(await page.locator('.kit-sidebar').isVisible(),false); assert.equal(await page.getByRole('textbox',{name:'Default workspace'}).inputValue(),'Synthetic draft');
-  await page.getByRole('button',{name:'Toggle page sidebar',exact:true}).click(); assert.equal(await page.locator('.kit-sidebar').isVisible(),true);
+  await page.getByRole('button',{name:'Toggle page sidebar',exact:true}).click(); await page.locator('.kit-sidebar').waitFor({state:'hidden'}); assert.equal(await page.getByRole('textbox',{name:'Default workspace'}).inputValue(),'Synthetic draft');
+  await page.getByRole('button',{name:'Toggle page sidebar',exact:true}).click(); await page.locator('.kit-sidebar').waitFor({state:'visible'});
   // Failed saves and close/navigation protect the same draft.
-  await page.getByRole('button',{name:'Workspace',exact:true}).click(); await page.getByRole('button',{name:'New project',exact:true}).click(); await page.getByLabel('Project name').fill('Synthetic project'); await page.getByRole('button',{name:'Save',exact:true}).click(); assert.equal(await page.getByLabel('Project name').inputValue(),'Synthetic project'); assert.ok(await page.getByRole('alert').isVisible());
+  await page.locator('[data-desktop-action="navigation.workspace"]').click(); await page.getByRole('button',{name:'New project',exact:true}).click(); await page.getByLabel('Project name').fill('Synthetic project'); await page.getByRole('button',{name:'Save',exact:true}).click(); assert.equal(await page.getByLabel('Project name').inputValue(),'Synthetic project'); assert.ok(await page.getByRole('alert').isVisible());
   await page.screenshot({path:path.join(root,'docs/gallery/dialog-failure.png')});
   await page.keyboard.press('Escape'); assert.ok(await page.getByRole('dialog',{name:'Discard changes?'}).isVisible()); await page.getByRole('button',{name:'Keep editing'}).click(); assert.equal(await page.getByLabel('Project name').inputValue(),'Synthetic project');
   for(let i=0;i<8;i++){await page.keyboard.press('Tab');assert.equal(await page.evaluate(()=>!!document.activeElement.closest('[role=dialog]')),true);}
-  await page.keyboard.press('Escape'); await page.getByRole('button',{name:'Discard',exact:true}).click(); assert.equal(await page.getByRole('dialog').count(),0);
+  await page.keyboard.press('Escape'); await page.getByRole('button',{name:'Discard',exact:true}).click(); await page.getByRole('dialog').waitFor({state:'detached'});
   await page.reload(); assert.equal(await page.evaluate(()=>document.documentElement.classList.contains('dark')),true);
   assert.deepEqual(errors,[]);
   await writeFile(path.join(root,'docs/VALIDATION.json'),JSON.stringify({node:process.version,status:'passed',renderCases:cases.length,cases,interactions:['virtual-list-end','keyboard-focus','theme-draft-preservation','theme-persistence','category-search','sidebar-preserves-draft','portal-collision','failed-save','discard-guard'],limitations:['Synthetic browser gallery; no native window/credential services tested.','125% uses deviceScaleFactor emulation.']},null,2)+'\n');

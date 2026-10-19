@@ -1,8 +1,23 @@
 import type { Icon } from '@phosphor-icons/react';
 import { CaretRight, MagnifyingGlass, PushPin } from '@phosphor-icons/react';
 import { classes } from '../classes';
+import { ClientSidebarHeading } from '../client/sidebar-heading';
+import { SidebarPanel, type SidebarResizeOptions } from './sidebar-panel';
+export { SidebarPanel, type SidebarResizeOptions } from './sidebar-panel';
 import * as Menu from '@radix-ui/react-dropdown-menu';
-import { forwardRef, useEffect, useState, type ReactElement, type ReactNode } from 'react';
+import {
+  forwardRef,
+  useEffect,
+  useState,
+  type HTMLAttributes,
+  type ReactElement,
+  type ReactNode,
+} from 'react';
+import { NavigationRailItem } from './navigation-rail-item';
+export { NavigationRailItem, type NavigationRailItemProps } from './navigation-rail-item';
+export { WindowControls, type WindowControlsProps } from './window-controls';
+import { useDismissalLayer } from '../../dismissal';
+import { protectModalEscape } from '../../runtime/modal-keyboard';
 import { ActionTooltip } from '../../action-tooltip';
 import { IconButton, Input, InternalScrollArea } from '../../controls';
 import {
@@ -46,7 +61,9 @@ export interface ShellMenu {
   label: string;
   actions: ShellAction[];
 }
-export interface TitleBarProps {
+export interface TitleBarProps extends HTMLAttributes<HTMLElement> {
+  /** Host action trees retain their commands, stable IDs and edit-target ownership. */
+  actions?: ReactNode;
   onBack?: () => void;
   onForward?: () => void;
   onToggleSidebar?: () => void;
@@ -67,65 +84,79 @@ export function TitleBar({
   canForward = false,
   canToggleSidebar = false,
   menus = [],
+  actions,
   trailing,
   windowControls,
+  className,
   labels = { back: 'Back', forward: 'Forward', sidebar: 'Toggle page sidebar' },
+  ...props
 }: TitleBarProps) {
   return (
-    <header className="kit-titlebar" data-desktop-feature="shell" data-desktop-surface="titlebar">
+    <header
+      data-desktop-feature="shell"
+      data-desktop-surface="titlebar"
+      {...props}
+      className={classes('kit-titlebar', className)}
+    >
       <div className="kit-titlebar__actions">
-        <Tooltip label={labels.back} side="bottom">
-          <IconButton
-            actionId="navigation.back"
-            aria-label={labels.back}
-            disabled={!canBack || !onBack}
-            onClick={onBack}
-          >
-            <ArrowLeft size={16} />
-          </IconButton>
-        </Tooltip>
-        <Tooltip label={labels.forward} side="bottom">
-          <IconButton
-            actionId="navigation.forward"
-            aria-label={labels.forward}
-            disabled={!canForward || !onForward}
-            onClick={onForward}
-          >
-            <ArrowRight size={16} />
-          </IconButton>
-        </Tooltip>
-        <Tooltip label={labels.sidebar} side="bottom">
-          <IconButton
-            actionId="navigation.sidebar.toggle"
-            aria-label={labels.sidebar}
-            disabled={!canToggleSidebar || !onToggleSidebar}
-            onClick={onToggleSidebar}
-          >
-            <SidebarSimple size={16} />
-          </IconButton>
-        </Tooltip>
-        {menus.map((menu) => (
-          <Menu.Root key={menu.id}>
-            <Menu.Trigger data-desktop-action={`menu.${menu.id}.open`} className="kit-titlebar__menu">
-              {menu.label}
-            </Menu.Trigger>
-            <MenuPortal>
-              <Menu.Content className="desktop-menu" sideOffset={5} collisionPadding={8}>
-                {menu.actions.map((action) => (
-                  <Menu.Item
-                    key={action.id}
-                    className="desktop-menu-item"
-                    data-desktop-action={action.id}
-                    disabled={action.disabled || !action.onSelect}
-                    onSelect={action.onSelect}
-                  >
-                    {action.label}
-                  </Menu.Item>
-                ))}
-              </Menu.Content>
-            </MenuPortal>
-          </Menu.Root>
-        ))}
+        {actions !== undefined ? (
+          actions
+        ) : (
+          <>
+            <Tooltip label={labels.back} side="bottom">
+              <IconButton
+                actionId="navigation.back"
+                aria-label={labels.back}
+                disabled={!canBack || !onBack}
+                onClick={onBack}
+              >
+                <ArrowLeft size={16} />
+              </IconButton>
+            </Tooltip>
+            <Tooltip label={labels.forward} side="bottom">
+              <IconButton
+                actionId="navigation.forward"
+                aria-label={labels.forward}
+                disabled={!canForward || !onForward}
+                onClick={onForward}
+              >
+                <ArrowRight size={16} />
+              </IconButton>
+            </Tooltip>
+            <Tooltip label={labels.sidebar} side="bottom">
+              <IconButton
+                actionId="navigation.sidebar.toggle"
+                aria-label={labels.sidebar}
+                disabled={!canToggleSidebar || !onToggleSidebar}
+                onClick={onToggleSidebar}
+              >
+                <SidebarSimple size={16} />
+              </IconButton>
+            </Tooltip>
+            {menus.map((menu) => (
+              <Menu.Root key={menu.id}>
+                <Menu.Trigger data-desktop-action={`menu.${menu.id}.open`} className="kit-titlebar__menu">
+                  {menu.label}
+                </Menu.Trigger>
+                <MenuPortal>
+                  <Menu.Content className="desktop-menu" sideOffset={5} collisionPadding={8}>
+                    {menu.actions.map((action) => (
+                      <Menu.Item
+                        key={action.id}
+                        className="desktop-menu-item"
+                        data-desktop-action={action.id}
+                        disabled={action.disabled || !action.onSelect}
+                        onSelect={action.onSelect}
+                      >
+                        {action.label}
+                      </Menu.Item>
+                    ))}
+                  </Menu.Content>
+                </MenuPortal>
+              </Menu.Root>
+            ))}
+          </>
+        )}
       </div>
       <div className="kit-titlebar__trailing">
         {trailing}
@@ -143,9 +174,10 @@ export interface NavigationItem {
   disabled?: boolean;
 }
 export function NavigationRail({
-  items,
-  selected,
+  items = [],
+  selected = '',
   onSelect,
+  children,
   footer,
   pinnedIds,
   onPinnedChange,
@@ -154,10 +186,12 @@ export function NavigationRail({
   moreLabel = 'More',
   pinLabel = 'Pin',
   unpinLabel = 'Unpin',
-}: {
-  items: NavigationItem[];
-  selected: string;
-  onSelect(id: string): void;
+  className,
+  ...props
+}: Omit<HTMLAttributes<HTMLElement>, 'onSelect'> & {
+  items?: NavigationItem[];
+  selected?: string;
+  onSelect?(id: string): void;
   footer?: ReactNode;
   pinnedIds?: readonly string[];
   onPinnedChange?(ids: string[]): void;
@@ -170,29 +204,30 @@ export function NavigationRail({
   const shown = pinnedIds ? items.filter((item) => pinnedIds.includes(item.id)) : items;
   return (
     <nav
-      className="kit-rail"
+      className={classes('kit-rail', className)}
       aria-label={ariaLabel}
       data-desktop-feature="shell"
       data-desktop-surface="navigation"
+      {...props}
     >
       <div className="kit-rail__items">
+        {children}
         {shown.map((item) => {
           const ItemIcon = item.icon;
           const active = item.id === selected;
           return (
-            <Tooltip label={item.label} key={item.id}>
-              <IconButton
-                className="kit-rail__item"
-                aria-label={item.label}
-                aria-current={active ? 'page' : undefined}
-                actionId={`navigation.${item.id}`}
-                disabled={item.disabled}
-                onClick={() => onSelect(item.id)}
-              >
-                <ItemIcon size={20} weight={active ? 'fill' : 'regular'} aria-hidden="true" />
-                {item.unread ? <span className="kit-unread" aria-label={unreadLabel} /> : null}
-              </IconButton>
-            </Tooltip>
+            <NavigationRailItem
+              key={item.id}
+              label={item.label}
+              aria-label={item.unread ? `${item.label}, ${unreadLabel}` : item.label}
+              selected={active}
+              unread={item.unread}
+              actionId={`navigation.${item.id}`}
+              disabled={item.disabled || !onSelect}
+              onClick={() => onSelect?.(item.id)}
+            >
+              <ItemIcon size={20} weight={active ? 'fill' : 'regular'} aria-hidden="true" />
+            </NavigationRailItem>
           );
         })}
         {pinnedIds ? (
@@ -229,7 +264,7 @@ export function NavigationRail({
                         className="desktop-menu-item kit-navigation-menu__destination"
                         disabled={item.disabled}
                         data-desktop-action={`navigation.${item.id}`}
-                        onSelect={() => onSelect(item.id)}
+                        onSelect={() => onSelect?.(item.id)}
                       >
                         <ItemIcon
                           size={16}
@@ -281,6 +316,7 @@ export function AvatarMenu({
     system: 'System',
     light: 'Light',
     dark: 'Dark',
+    back: 'Back',
   },
 }: {
   name?: string;
@@ -297,13 +333,33 @@ export function AvatarMenu({
     system: string;
     light: string;
     dark: string;
+    back?: string;
   };
 }) {
+  const [open, setOpen] = useState(false);
+  const [appearanceOpen, setAppearanceOpen] = useState(false);
+  const [compact, setCompact] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches,
+  );
+  useEffect(() => {
+    const query = window.matchMedia('(max-width: 767px)');
+    const update = () => {
+      setCompact(query.matches);
+      setAppearanceOpen(false);
+    };
+    query.addEventListener('change', update);
+    return () => query.removeEventListener('change', update);
+  }, []);
+  useEffect(() => {
+    if (!open) setAppearanceOpen(false);
+  }, [open]);
+  useDismissalLayer(open, () => setOpen(false));
+  useDismissalLayer(open && compact && appearanceOpen, () => setAppearanceOpen(false));
   const { theme, setTheme } = useDesktopTheme();
   const [failedImage, setFailedImage] = useState(false);
   useEffect(() => setFailedImage(false), [image]);
   return (
-    <Menu.Root>
+    <Menu.Root open={open} onOpenChange={setOpen}>
       <Menu.Trigger className="kit-avatar" aria-label={name} data-desktop-action="account.menu.open">
         {image && !failedImage ? (
           <img src={image} alt="" onError={() => setFailedImage(true)} />
@@ -314,68 +370,121 @@ export function AvatarMenu({
       <MenuPortal>
         <Menu.Content
           className="desktop-menu kit-account-menu"
-          side="right"
+          onEscapeKeyDown={(event) => {
+            if (compact && appearanceOpen) {
+              event.preventDefault();
+              setAppearanceOpen(false);
+            } else protectModalEscape(event);
+          }}
+          side={compact ? 'top' : 'right'}
           align="end"
           sideOffset={6}
           collisionPadding={8}
           data-desktop-feature="account"
           data-desktop-surface="account.menu"
         >
-          <Menu.Label className="kit-account-menu__identity">
-            {name}
-            {status ? <small>{status}</small> : null}
-          </Menu.Label>
-          <Menu.Sub>
-            <Menu.SubTrigger className="desktop-menu-item">
-              <Moon size={16} />
-              {labels.appearance}
-              <CaretRight className="kit-menu-chevron" size={16} aria-hidden="true" />
-            </Menu.SubTrigger>
-            <MenuPortal>
-              <Menu.SubContent className="desktop-menu" sideOffset={6} collisionPadding={8}>
-                <Menu.RadioGroup value={theme} onValueChange={(value) => setTheme(value as Theme)}>
-                  {(['system', 'light', 'dark'] as const).map((value) => (
-                    <Menu.RadioItem
-                      key={value}
-                      className="desktop-menu-item"
-                      value={value}
-                      data-desktop-action={`appearance.${value}`}
-                    >
-                      {labels[value]}
-                      <Menu.ItemIndicator className="kit-menu-chevron">✓</Menu.ItemIndicator>
-                    </Menu.RadioItem>
-                  ))}
-                </Menu.RadioGroup>
-              </Menu.SubContent>
-            </MenuPortal>
-          </Menu.Sub>
-          <Menu.Item
-            className="desktop-menu-item"
-            data-desktop-action="account.manage"
-            disabled={!onAccount}
-            onSelect={onAccount}
-          >
-            <UserCircle size={16} />
-            {labels.account}
-          </Menu.Item>
-          <Menu.Item
-            className="desktop-menu-item"
-            data-desktop-action="settings.open"
-            disabled={!onSettings}
-            onSelect={onSettings}
-          >
-            <Gear size={16} />
-            {labels.settings}
-          </Menu.Item>
-          <Menu.Item
-            className="desktop-menu-item"
-            data-desktop-action="application.exit"
-            disabled={!onExit}
-            onSelect={onExit}
-          >
-            <SignOut size={16} />
-            {labels.exit}
-          </Menu.Item>
+          {compact && appearanceOpen ? (
+            <>
+              <Menu.Item
+                className="desktop-menu-item"
+                onSelect={(event) => {
+                  event.preventDefault();
+                  setAppearanceOpen(false);
+                }}
+              >
+                <ArrowLeft size={16} />
+                {labels.back ?? 'Back'}
+              </Menu.Item>
+              <Menu.Label className="kit-account-menu__identity">{labels.appearance}</Menu.Label>
+              <Menu.RadioGroup value={theme} onValueChange={(value) => setTheme(value as Theme)}>
+                {(['system', 'light', 'dark'] as const).map((value) => (
+                  <Menu.RadioItem
+                    key={value}
+                    className="desktop-menu-item"
+                    value={value}
+                    data-desktop-action={`appearance.${value}`}
+                  >
+                    {labels[value]}
+                    <Menu.ItemIndicator className="kit-menu-chevron">✓</Menu.ItemIndicator>
+                  </Menu.RadioItem>
+                ))}
+              </Menu.RadioGroup>
+            </>
+          ) : (
+            <>
+              <Menu.Label className="kit-account-menu__identity">
+                {name}
+                {status ? <small>{status}</small> : null}
+              </Menu.Label>
+              {compact ? (
+                <Menu.Item
+                  className="desktop-menu-item"
+                  onSelect={(event) => {
+                    event.preventDefault();
+                    setAppearanceOpen(true);
+                  }}
+                >
+                  <Moon size={16} />
+                  {labels.appearance}
+                  <CaretRight className="kit-menu-chevron" size={16} aria-hidden="true" />
+                </Menu.Item>
+              ) : (
+                <Menu.Sub>
+                  <Menu.SubTrigger className="desktop-menu-item">
+                    <Moon size={16} />
+                    {labels.appearance}
+                    <CaretRight className="kit-menu-chevron" size={16} aria-hidden="true" />
+                  </Menu.SubTrigger>
+                  <MenuPortal>
+                    <Menu.SubContent className="desktop-menu" sideOffset={6} collisionPadding={8}>
+                      <Menu.RadioGroup value={theme} onValueChange={(value) => setTheme(value as Theme)}>
+                        {(['system', 'light', 'dark'] as const).map((value) => (
+                          <Menu.RadioItem
+                            key={value}
+                            className="desktop-menu-item"
+                            value={value}
+                            data-desktop-action={`appearance.${value}`}
+                          >
+                            {labels[value]}
+                            <Menu.ItemIndicator className="kit-menu-chevron">✓</Menu.ItemIndicator>
+                          </Menu.RadioItem>
+                        ))}
+                      </Menu.RadioGroup>
+                    </Menu.SubContent>
+                  </MenuPortal>
+                </Menu.Sub>
+              )}
+              <Menu.Item
+                className="desktop-menu-item"
+                data-desktop-action="account.manage"
+                disabled={!onAccount}
+                onSelect={onAccount}
+              >
+                <UserCircle size={16} />
+                {labels.account}
+              </Menu.Item>
+              <Menu.Item
+                className="desktop-menu-item"
+                data-desktop-action="settings.open"
+                disabled={!onSettings}
+                onSelect={onSettings}
+              >
+                <Gear size={16} />
+                {labels.settings}
+              </Menu.Item>
+              {onExit && (
+                <Menu.Item
+                  className="desktop-menu-item"
+                  data-desktop-action="application.exit"
+                  disabled={!onExit}
+                  onSelect={onExit}
+                >
+                  <SignOut size={16} />
+                  {labels.exit}
+                </Menu.Item>
+              )}
+            </>
+          )}
         </Menu.Content>
       </MenuPortal>
     </Menu.Root>
@@ -390,7 +499,9 @@ export function DesktopShell({
   sidebarVisible = true,
   sidebarLayout = 'default',
   children,
-}: {
+  className,
+  ...props
+}: HTMLAttributes<HTMLDivElement> & {
   titlebar?: ReactNode;
   navigation: ReactNode;
   navigationVisible?: boolean;
@@ -401,20 +512,23 @@ export function DesktopShell({
   children: ReactNode;
 }) {
   return (
-    <div className="kit-shell">
+    <div {...props} className={classes('kit-shell', className)}>
       {titlebar}
       <div className="kit-shell__body">
         <div className="kit-shell__navigation" hidden={!navigationVisible}>
           {navigation}
         </div>
-        <aside
-          className="kit-sidebar"
-          data-desktop-sidebar-layout={sidebarLayout}
-          hidden={!sidebarVisible || !sidebar}
-        >
-          {sidebar}
-        </aside>
-        <main className="kit-shell__main">{children}</main>
+        <div className="kit-shell__workspace">
+          <aside
+            className="kit-sidebar"
+            data-desktop-sidebar-layout={sidebarLayout}
+            hidden={!sidebarVisible || !sidebar}
+            {...(!sidebarVisible || !sidebar ? { inert: '' } : {})}
+          >
+            {sidebar}
+          </aside>
+          <main className="kit-shell__main">{children}</main>
+        </div>
       </div>
     </div>
   );
@@ -433,6 +547,7 @@ export function SettingsLayout({
   sidebarVisible = true,
   sidebarId,
   sidebarLabel,
+  sidebarResize,
   children,
   className,
   ...props
@@ -441,12 +556,13 @@ export function SettingsLayout({
   sidebarVisible?: boolean;
   sidebarId?: string;
   sidebarLabel?: string;
+  sidebarResize?: SidebarResizeOptions;
 }) {
   return (
     <div className={classes('kit-settings-layout', className)} {...props}>
-      <aside id={sidebarId} aria-label={sidebarLabel} className="kit-sidebar" hidden={!sidebarVisible}>
+      <SidebarPanel id={sidebarId} aria-label={sidebarLabel} hidden={!sidebarVisible} resize={sidebarResize}>
         {sidebar}
-      </aside>
+      </SidebarPanel>
       {children}
     </div>
   );
@@ -477,7 +593,7 @@ export function SettingsNavigation({
   );
   return (
     <div className="kit-settings-nav">
-      <h2>{title}</h2>
+      <ClientSidebarHeading>{title}</ClientSidebarHeading>
       <div className="kit-settings-search">
         <MagnifyingGlass size={16} />
         <Input
@@ -523,12 +639,35 @@ export function SettingsNavigation({
 
 export const SettingsPage = forwardRef<
   HTMLDivElement,
-  Omit<import('react').HTMLAttributes<HTMLDivElement>, 'title'> & { title: ReactNode }
->(function SettingsPage({ title, children, className, ...props }, ref) {
+  Omit<import('react').HTMLAttributes<HTMLDivElement>, 'title'> & {
+    title: ReactNode;
+    showTitle?: boolean;
+    leading?: ReactNode;
+    actions?: ReactNode;
+    /** Let the host's single page header own title/actions; retain this scroll owner. */
+    embedded?: boolean;
+  }
+>(function SettingsPage(
+  { title, showTitle = true, children, className, leading, actions, embedded = false, ...props },
+  ref,
+) {
   return (
-    <InternalScrollArea ref={ref} className={classes('kit-settings-scroll', className)} {...props}>
+    <InternalScrollArea
+      ref={ref}
+      className={classes('kit-settings-scroll', embedded && 'kit-settings-scroll--embedded', className)}
+      aria-label={typeof title === 'string' ? title : undefined}
+      {...props}
+    >
       <div className="kit-settings-content">
-        <h1>{title}</h1>
+        {embedded ? null : leading || actions ? (
+          <header className="kit-settings-heading">
+            {leading}
+            {showTitle ? <h1>{title}</h1> : null}
+            {actions}
+          </header>
+        ) : showTitle ? (
+          <h1>{title}</h1>
+        ) : null}
         {children}
       </div>
     </InternalScrollArea>

@@ -1,5 +1,5 @@
 {
   "extends": "./tsconfig.json",
-  "compilerOptions": { "rootDir": ".", "declaration": false, "noEmit": true, "resolveJsonModule": true },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "examples/gallery/**/*.tsx", "examples/demo/**/*.tsx", "examples/catalog/**/*.tsx", "examples/input-contract.tsx", "examples/composer-layout-types.tsx", "examples/settings-profile.tsx"]
+  "compilerOptions": { "rootDir": ".", "declaration": false, "noEmit": true, "resolveJsonModule": true, "paths": { "chatgpt-desktop-kit": ["./src/index.ts"] } },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "examples/gallery/**/*.tsx", "examples/demo/**/*.tsx", "examples/catalog/**/*.tsx", "examples/input-contract.tsx", "examples/composer-layout-types.tsx", "examples/settings-profile.tsx", "examples/window-shell.tsx"]
 }

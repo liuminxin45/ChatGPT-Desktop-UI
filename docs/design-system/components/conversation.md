@@ -22,6 +22,7 @@ One presenter for streamed increments and complete responses. Canonical content 
 | state | no | `"streaming" \| "complete" \| "cancelled" \| "failed" \| undefined` |
 | className | no | `string \| undefined` |
 | components | no | `Components \| undefined` |
+| onCopyCode | no | `((text: string) => void \| Promise<void>) \| undefined` |
 | onReveal | no | `(() => void) \| undefined` |
 
 ## AIResponseProvider (chatgpt-desktop-kit)
@@ -33,6 +34,49 @@ Mount above virtualized conversations. Only offsets and timing are retained, nev
 | Prop | Required | Type |
 | --- | --- | --- |
 | children | yes | `ReactNode` |
+
+## ChatAppSurface (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/index.tsx)
+
+Responsive chat profile. Hosts retain routing, persistence, services and all business state.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+
+## ChatHeader (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/index.tsx)
+
+One quiet object header; mobile controls use the reference's separate floating surfaces.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| title | yes | `ReactNode` |
+| subtitle | no | `ReactNode` |
+| leading | no | `ReactNode` |
+| actions | no | `ReactNode` |
+| mobileTitle | no | `ReactNode` |
+| hideMobileTitle | no | `boolean \| undefined` |
+| presentation | no | `"floating" \| "bar" \| undefined` |
+
+## ChatWorkspace (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/index.tsx)
+
+Retained desktop sidebar/mobile drawer. Opening, folding and resizing never remount either subtree.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| sidebar | yes | `ReactNode` |
+| sidebarOpen | yes | `boolean` |
+| onSidebarOpenChange | yes | `(open: boolean) => void` |
+| sidebarLabel | yes | `string` |
+| closeSidebarLabel | yes | `string` |
+| sidebarId | no | `string \| undefined` |
+| contentId | no | `string \| undefined` |
+| header | no | `ReactNode` |
+| sidebarPresentation | no | `"drawer" \| "catalog" \| undefined` |
 
 ## ClientComposer (chatgpt-desktop-kit)
 
@@ -84,6 +128,169 @@ One ChatGPT-style circular action for message composers; Hosts own operation sta
 | stoppingLabel | no | `string \| undefined` |
 | badge | no | `ReactNode` |
 
+## ComposerAddMenu (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/composer-agent-controls.tsx)
+
+Capability-driven Add menu. File acquisition and agent/skill semantics belong to the Host.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| label | no | `string \| undefined` |
+| disabled | no | `boolean \| undefined` |
+| sections | yes | `readonly { id: string; label?: string; items: readonly ComposerAddItem[]; }[]` |
+
+## ComposerAttachmentButton (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/composer-tools.tsx)
+
+Plus opens Host attachment acquisition; it does not imply a new conversation.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| size | no | `"sm" \| "md" \| undefined` |
+| layout | no | `"row" \| "command" \| "tile" \| "surface" \| undefined` |
+| variant | no | `ButtonVariant \| undefined` |
+| actionId | no | `string \| undefined` |
+| confirmOnEnter | no | `boolean \| undefined` |
+| badge | no | `ReactNode` |
+| label | no | `string \| undefined` |
+
+## ComposerGoal (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/composer-agent-controls.tsx)
+
+A static goal record with independent commands; elapsed time is authoritative Host data.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| objective | yes | `string` |
+| statusLabel | yes | `string` |
+| elapsed | yes | `string` |
+| paused | no | `boolean \| undefined` |
+| disabled | no | `boolean \| undefined` |
+| onEdit | no | `(() => void) \| undefined` |
+| onPause | no | `(() => void) \| undefined` |
+| onResume | no | `(() => void) \| undefined` |
+| onRemove | no | `(() => void) \| undefined` |
+| onExpand | no | `(() => void) \| undefined` |
+| labels | no | `{ edit?: string; pause?: string; resume?: string; remove?: string; expand?: string; } \| undefined` |
+
+## ComposerModelControl (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/composer-tools.tsx)
+
+Compatibility props forwarding to the canonical effort panel and model picker.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| model | yes | `SelectProps` |
+| effort | no | `SelectProps \| undefined` |
+| label | no | `string \| undefined` |
+
+## ComposerModelPicker (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/composer-agent-controls.tsx)
+
+Controlled, acknowledged configuration. The draft slider commits once per gesture.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| id | no | `string \| undefined` |
+| model | yes | `string` |
+| effort | yes | `string` |
+| models | yes | `readonly ComposerModelOption[]` |
+| efforts | yes | `readonly ComposerModelOption[]` |
+| defaultEffort | no | `string \| undefined` |
+| disabled | no | `boolean \| undefined` |
+| effortDisabled | no | `boolean \| undefined` |
+| onModelChange | yes | `(value: string) => void` |
+| onEffortChange | yes | `(value: string) => void` |
+| label | no | `string \| undefined` |
+| modelLabel | no | `string \| undefined` |
+| resetLabel | no | `string \| undefined` |
+| defaultLabel | no | `string \| undefined` |
+| defaultDescription | no | `string \| undefined` |
+| onDefault | no | `(() => void) \| undefined` |
+| shortcut | no | `string \| undefined` |
+
+## ComposerPermissionSelect (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/composer-tools.tsx)
+
+Permissions remain a real Select: only its closed trigger is a shield.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| triggerContent | no | `ReactNode` |
+| size | no | `"sm" \| "md" \| undefined` |
+| actionId | no | `string \| undefined` |
+| featureId | no | `string \| undefined` |
+| surfaceId | no | `string \| undefined` |
+| toolId | no | `string \| undefined` |
+| options | yes | `readonly SelectOption[]` |
+| value | no | `string \| undefined` |
+| defaultValue | no | `string \| undefined` |
+| onValueChange | no | `((value: string) => void) \| undefined` |
+| placeholder | no | `ReactNode` |
+| className | no | `string \| undefined` |
+| contentClassName | no | `string \| undefined` |
+| disabled | no | `boolean \| undefined` |
+| name | no | `string \| undefined` |
+| required | no | `boolean \| undefined` |
+| id | no | `string \| undefined` |
+| title | no | `string \| undefined` |
+| aria-label | no | `string \| undefined` |
+| aria-labelledby | no | `string \| undefined` |
+| risk | no | `"default" \| "elevated" \| undefined` |
+
+## ComposerQueue (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/composer-tools.tsx)
+
+Static queued records, independent commands, collision-aware per-message menus.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| items | yes | `readonly ComposerQueueItem[]` |
+| label | no | `string \| undefined` |
+| activity | no | `ReactNode` |
+| description | no | `ReactNode` |
+| paused | no | `boolean \| undefined` |
+| disabled | no | `boolean \| undefined` |
+| steerLabel | no | `string \| undefined` |
+| editLabel | no | `string \| undefined` |
+| removeLabel | no | `string \| undefined` |
+| moreLabel | no | `string \| undefined` |
+| pauseLabel | no | `string \| undefined` |
+| resumeLabel | no | `string \| undefined` |
+| pausedLabel | no | `string \| undefined` |
+| onPause | no | `(() => void) \| undefined` |
+| onResume | no | `(() => void) \| undefined` |
+| maxVisible | no | `number \| undefined` |
+| viewAllLabel | no | `string \| undefined` |
+| onViewAll | no | `(() => void) \| undefined` |
+
+## ComposerStack (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/composer-tools.tsx)
+
+| Prop | Required | Type |
+| --- | --- | --- |
+
+## ComposerSurface (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/index.tsx)
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| layout | no | `"work" \| "chat" \| undefined` |
+| input | no | `ReactNode` |
+| attachments | no | `ReactNode` |
+| leading | no | `ReactNode` |
+| controls | no | `ReactNode` |
+| action | no | `ReactNode` |
+
 ## ConversationMessage (chatgpt-desktop-kit)
 
 [Implementation](../../../src/components/conversation/index.tsx)
@@ -96,3 +303,63 @@ Shared message geometry; message content and contextual action definitions stay 
 | children | yes | `ReactNode` |
 | actions | no | `ReactNode` |
 | label | yes | `string` |
+
+## ConversationViewport (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/index.tsx)
+
+Relative scroll viewport; floating commands stay outside ScrollEdgeFade.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+
+## NavigationDrawer (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/index.tsx)
+
+Phone navigation sharing ChatWorkspace's retained DOM, focus, drag and history contract.
+Desktop hosts provide their own persistent navigation beside this container.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| open | yes | `boolean` |
+| onOpenChange | yes | `(open: boolean) => void` |
+| label | yes | `string` |
+| closeLabel | yes | `string` |
+| navigation | yes | `ReactNode` |
+| footer | no | `ReactNode` |
+| header | no | `ReactNode` |
+
+## PlanReview (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/composer-agent-controls.tsx)
+
+Proposed Markdown and explicit review actions. This component never authorizes execution.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| title | yes | `string` |
+| children | yes | `ReactNode` |
+| onExecute | no | `(() => void) \| undefined` |
+| onContinue | no | `(() => void) \| undefined` |
+| executeLabel | no | `string \| undefined` |
+| continueLabel | no | `string \| undefined` |
+| disabled | no | `boolean \| undefined` |
+| actionsDisabled | no | `boolean \| undefined` |
+
+## ScrollToBottomButton (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/conversation/index.tsx)
+
+Hosts own follow-bottom state and scrolling; the kit owns the floating action.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| size | no | `"sm" \| "md" \| undefined` |
+| layout | no | `"row" \| "command" \| "tile" \| "surface" \| undefined` |
+| variant | no | `ButtonVariant \| undefined` |
+| actionId | no | `string \| undefined` |
+| confirmOnEnter | no | `boolean \| undefined` |
+| badge | no | `ReactNode` |
+| visible | no | `boolean \| undefined` |
+| label | no | `string \| undefined` |

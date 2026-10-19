@@ -8,6 +8,16 @@ Runnable composition: [example](../../../examples/catalog/Examples.tsx).
 
 Generated from TypeScript exports; edit implementation props/JSDoc, then run `npm run docs:generate`. Native React attributes remain available in the online API catalog.
 
+## ChatMenuIcon (chatgpt-desktop-kit)
+
+[Implementation](../../../src/chat-menu-icon.tsx)
+
+Two-line navigation target used by the public mobile chat profile.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| size | no | `number \| undefined` |
+
 ## DesktopDocumentAdapter (chatgpt-desktop-kit)
 
 [Implementation](../../../src/scoped-surface.tsx)
@@ -63,6 +73,17 @@ Backward-compatible name; the root and its context have one implementation.
 | --- | --- | --- |
 | onAction | no | `((outcome: "exposed" \| "invoked") => void) \| undefined` |
 | labels | no | `{ appearance: string; system: string; light: string; dark: string; } \| undefined` |
+
+## DismissalLayerProvider (chatgpt-desktop-kit)
+
+[Implementation](../../../src/dismissal.tsx)
+
+Opt in to host navigation without importing browser history or a native bridge.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| registerLayer | yes | `RegisterDismissalLayer` |
+| children | yes | `ReactNode` |
 
 ## FixedVirtualList (chatgpt-desktop-kit)
 

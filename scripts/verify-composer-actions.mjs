@@ -67,8 +67,8 @@ try {
         }),
       );
       for (const g of geometry) {
-        assert.equal(g.width, 32);
-        assert.equal(g.height, 32);
+        assert.equal(g.width, 28);
+        assert.equal(g.height, 28);
         assert.equal(g.radius, '50%');
         assert.equal(g.background, geometry[0].background);
         assert.equal(g.color, geometry[0].color);

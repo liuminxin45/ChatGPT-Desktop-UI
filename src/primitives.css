@@ -1,19 +1,15 @@
-:where(.desktop-focus-ring):focus-visible {
-  outline: 2px solid var(--desktop-color-focus);
-  outline-offset: 1px;
+:root:not(:has([data-desktop-input-modality="pointer"])) :where(.desktop-focus-ring):focus-visible{
+  outline: none;
+  background: var(--desktop-color-surface-hover);
 }
 
 :where(.desktop-pressable) {
   transition:
     background-color var(--desktop-motion-fast) ease,
     border-color var(--desktop-motion-fast) ease,
-    color var(--desktop-motion-fast) ease,
-    transform var(--desktop-motion-press) ease;
+    color var(--desktop-motion-fast) ease;
 }
 
-:where(.desktop-pressable):active:not(:disabled) {
-  transform: scale(0.98);
-}
 
 :where(.desktop-surface) {
   border: 0;

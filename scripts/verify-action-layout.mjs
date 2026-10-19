@@ -119,10 +119,26 @@ try {
           }
         }
         const surface = page.locator('[data-testid=matrix][data-layout=surface]').first();
+        const restingFill = await surface.evaluate((node) => getComputedStyle(node).backgroundColor);
+        await page.keyboard.press('Tab');
         await surface.focus();
-        assert.equal(await surface.evaluate((node) => getComputedStyle(node).outlineStyle), 'solid');
-      await surface.evaluate((node) => delete node.dataset.invoked);
-      await surface.press('Space');
+        const focus = await surface.evaluate((node) => {
+          const probe = document.createElement('span');
+          probe.style.background = 'var(--desktop-color-surface-hover)';
+          node.append(probe);
+          const expected = getComputedStyle(probe).backgroundColor;
+          probe.remove();
+          const style = getComputedStyle(node);
+          return { active: document.activeElement === node, outline: style.outlineStyle,
+            shadow: style.boxShadow, fill: style.backgroundColor, expected };
+        });
+        assert.equal(focus.active, true);
+        assert.equal(focus.outline, 'none');
+        assert.equal(focus.shadow, 'none');
+        assert.equal(focus.fill, focus.expected, 'domain resting fills must preserve shared keyboard feedback');
+        assert.notEqual(focus.fill, restingFill);
+        await surface.evaluate((node) => delete node.dataset.invoked);
+        await surface.press('Space');
         assert.equal(await surface.getAttribute('data-invoked'), 'true');
         assert.deepEqual(errors, []);
         cases.push({ portable, theme, width, height, scale, matrix });

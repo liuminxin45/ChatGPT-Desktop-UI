@@ -5,10 +5,24 @@ import * as PopoverPrimitive from '@radix-ui/react-popover';
 
 import { cn } from './utils';
 import { createDesktopPortal } from '../../scoped-surface';
+import { DismissalBoundary, useDismissalLayer } from '../../dismissal';
+import { ToolVisibilityContext } from '../../surface-visibility';
 const PopoverPortal = createDesktopPortal(PopoverPrimitive.Portal);
 
 function Popover({ ...props }: React.ComponentProps<typeof PopoverPrimitive.Root>) {
-  return <PopoverPrimitive.Root data-slot="popover" {...props} />;
+  const [localOpen, setLocalOpen] = React.useState(props.defaultOpen ?? false);
+  const visible = React.useContext(ToolVisibilityContext);
+  const open = props.open ?? localOpen;
+  const change = (next: boolean) => {
+    setLocalOpen(next);
+    props.onOpenChange?.(next);
+  };
+  useDismissalLayer(open && visible, () => change(false));
+  return (
+    <DismissalBoundary>
+      <PopoverPrimitive.Root data-slot="popover" {...props} open={open && visible} onOpenChange={change} />
+    </DismissalBoundary>
+  );
 }
 
 const PopoverTrigger = React.forwardRef<

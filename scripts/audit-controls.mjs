@@ -29,7 +29,7 @@ export function auditControls(directory, files) {
       source,
       ts.ScriptTarget.Latest,
       true,
-      /\.tsx$/.test(file) ? ts.ScriptKind.TSX : ts.ScriptKind.TS,
+      /\.[jt]sx$/.test(file) ? ts.ScriptKind.TSX : ts.ScriptKind.TS,
     );
     const controls = new Set();
     const definitions = new Map();
@@ -300,7 +300,7 @@ export function auditControls(directory, files) {
       source,
       ts.ScriptTarget.Latest,
       true,
-      /\.tsx$/.test(file) ? ts.ScriptKind.TSX : ts.ScriptKind.TS,
+      /\.[jt]sx$/.test(file) ? ts.ScriptKind.TSX : ts.ScriptKind.TS,
     );
     function visit(node) {
       if (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) {
@@ -312,7 +312,9 @@ export function auditControls(directory, files) {
             line: tree.getLineAndCharacterOfPosition(node.getStart(tree)).line + 1,
             tag,
           };
-          if (
+          if (tag === 'input' && /type=["']hidden["']/.test(attributes))
+            exceptions.push({ ...item, reason: 'Nonvisual form transport field; no visible control implementation.' });
+          else if (
             tag === 'input' &&
             /type=["']file["']/.test(attributes) &&
             /\bhidden\b|visually-hidden-file|sr-only/.test(attributes)

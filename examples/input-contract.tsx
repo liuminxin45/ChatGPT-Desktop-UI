@@ -16,7 +16,11 @@ function Example() {
   const [disabled, setDisabled] = useState(false);
   const [sharedDraft, setSharedDraft] = useState('');
   const [busy, setBusy] = useState(false);
+  const [boundedRows, setBoundedRows] = useState(4);
+  const [boundedDraft, setBoundedDraft] = useState('Long draft\n'.repeat(40));
+  Object.assign(window, { setInputContractRows: setBoundedRows });
   return <main style={{ padding: 24, maxWidth: 760, margin: 'auto' }}>
+    <Textarea aria-label="Bounded draft" autoSize maxRows={boundedRows} value={boundedDraft} onChange={event => setBoundedDraft(event.target.value)} />
     <form onSubmit={event => { event.preventDefault(); record('form'); }}>
       <Input aria-label="Form field" required />
       <Textarea aria-label="Form notes" />

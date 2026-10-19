@@ -140,11 +140,19 @@ try {
         if (shell) {
           const nav = await page.locator('.kit-settings-search input').elementHandle();
           await page.getByRole('button', { name: 'Toggle layout', exact: true }).click();
+          await page.waitForFunction(
+            expected => document.querySelector('.kit-sidebar').getBoundingClientRect().width === expected,
+            width <= 1000 ? 300 : 372,
+          );
           assert.equal(
             await page.locator('.kit-sidebar').evaluate((n) => n.getBoundingClientRect().width),
             width <= 1000 ? 300 : 372,
           );
           await page.getByRole('button', { name: 'Toggle layout', exact: true }).click();
+          await page.waitForFunction(
+            expected => document.querySelector('.kit-sidebar').getBoundingClientRect().width === expected,
+            width <= 1000 ? 260 : 336,
+          );
           assert.equal(
             await nav.evaluate((n) => n === document.querySelector('.kit-settings-search input')),
             true,
@@ -168,8 +176,12 @@ try {
               name,
             );
             if (name === 'Test account') {
-              await page.getByRole('menuitem', { name: 'Appearance', exact: true }).focus();
-              await page.keyboard.press('ArrowRight');
+              if (width < 768) {
+                await page.getByRole('menuitem', { name: 'Appearance', exact: true }).click();
+              } else {
+                await page.getByRole('menuitem', { name: 'Appearance', exact: true }).focus();
+                await page.keyboard.press('ArrowRight');
+              }
               await page.getByRole('menuitemradio', { name: 'Dark', exact: true }).waitFor();
               assert.equal(
                 await page

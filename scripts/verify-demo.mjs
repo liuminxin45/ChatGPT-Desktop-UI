@@ -207,7 +207,7 @@ try {
   await page
     .getByRole("button", { name: "Toggle sidebar", exact: true })
     .click();
-  assert.equal(await page.locator(".kit-sidebar").isVisible(), false);
+  await page.locator(".kit-sidebar").waitFor({ state: "hidden" });
   assert.equal(
     await page
       .getByRole("textbox", { name: "Message", exact: true })
@@ -274,18 +274,18 @@ try {
   checks.push("local message submission");
   await page.keyboard.press("Control+k");
   await page
-    .getByRole("textbox", { name: "Search chats", exact: true })
+    .getByRole("combobox", { name: "Search chats", exact: true })
     .fill("Review navigation");
   assert.equal(
     await page
-      .locator(".client-search-dialog .client-search-result")
+      .locator("[data-variant=search] .desktop-search-result")
       .filter({ hasText: "Review navigation behavior" })
       .count(),
     1,
   );
   await screenshot(page, "search");
   await page
-    .getByRole("button", { name: /Review navigation behavior.*Alt\+1/ })
+    .getByRole("option", { name: /Review navigation behavior/ })
     .click();
   checks.push("chat search and selection");
   await page

@@ -29,4 +29,23 @@ describe('ClientSidebarItem', () => {
     expect(select).not.toHaveBeenCalled();
     expect(button.querySelector('.client-sidebar-count')).toBeNull();
   });
+  it('keeps trailing commands and blank record space independent from navigation', () => {
+    const select = vi.fn(),
+      command = vi.fn();
+    const { container } = render(
+      <ClientSidebarItem
+        label="Project with actions"
+        onClick={select}
+        actions={<button onClick={command}>Project operations</button>}
+      />,
+    );
+    const action = screen.getByRole('button', { name: 'Project operations' });
+    expect(action.closest('.client-sidebar-link')).toBeNull();
+    action.click();
+    container.querySelector<HTMLElement>('.client-sidebar-record')!.click();
+    expect(command).toHaveBeenCalledOnce();
+    expect(select).not.toHaveBeenCalled();
+    screen.getByRole('button', { name: 'Project with actions' }).click();
+    expect(select).toHaveBeenCalledOnce();
+  });
 });

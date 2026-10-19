@@ -1,6 +1,10 @@
 import { createContext, useContext, type ReactNode } from 'react';
 
 const defaults: Record<string, string> = {
+  '选择月份': 'Select month', '选择日期时间': 'Select date and time', '年份': 'Year', '月份': 'Month',
+  '上一年': 'Previous year', '下一年': 'Next year', '小时': 'Hour', '分钟': 'Minute', '今天': 'Today', '本月': 'This month',
+
+  '图片加载失败': 'Image failed to load', '缩放': 'Zoom', '缩小': 'Zoom out', '放大': 'Zoom in', '重置缩放': 'Reset zoom',
   '没有匹配项': 'No matches', '页面导航': 'Page navigation', '页面导航与操作': 'Page navigation and actions',
   '更多': 'More', '关闭': 'Close', '通知': 'Notifications', '出现问题': 'Something went wrong',
   '关闭弹窗': 'Close dialog', '确定': 'Confirm', '取消': 'Cancel', '操作失败，请重试': 'Operation failed. Try again.',

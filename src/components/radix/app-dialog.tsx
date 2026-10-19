@@ -32,6 +32,8 @@ export const AppDialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
     size?: AppDialogSize;
+    /** Media uses a transparent full-window stage over a dim backdrop. */
+    variant?: 'default' | 'media';
     showCloseButton?: boolean;
     closeActionId?: string;
     closeDisabled?: boolean;
@@ -42,6 +44,7 @@ export const AppDialogContent = React.forwardRef<
     className,
     children,
     size = 'md',
+    variant = 'default',
     showCloseButton = true,
     closeActionId = 'dialog.close',
     closeDisabled = false,
@@ -53,6 +56,7 @@ export const AppDialogContent = React.forwardRef<
   ref,
 ) {
   const translate = useTranslation();
+  const previousFocus = React.useRef<HTMLElement | null>(null);
   const childNodes = React.Children.toArray(children);
   const hasExplicitBody = childNodes.some(
     (child) => React.isValidElement(child) && child.type === AppDialogBody,
@@ -81,14 +85,32 @@ export const AppDialogContent = React.forwardRef<
     );
   return (
     <DialogPortal>
-      <DialogPrimitive.Overlay className={appDialogOverlayClassName} />
+      <DialogPrimitive.Overlay className={appDialogOverlayClassName} data-variant={variant} />
       <DialogPrimitive.Content
         ref={ref}
         data-size={size}
+        data-variant={variant}
         className={cn(appDialogContentClassName, className)}
         onPointerDownOutside={onPointerDownOutside}
         onInteractOutside={onInteractOutside}
         {...props}
+        onOpenAutoFocus={(event) => {
+          previousFocus.current =
+            document.activeElement instanceof HTMLElement ? document.activeElement : null;
+          props.onOpenAutoFocus?.(event);
+        }}
+        onCloseAutoFocus={(event) => {
+          props.onCloseAutoFocus?.(event);
+          const target = previousFocus.current;
+          if (
+            !event.defaultPrevented &&
+            target?.isConnected &&
+            !target.closest('[inert],[aria-hidden="true"]')
+          ) {
+            event.preventDefault();
+            target.focus();
+          }
+        }}
         onEscapeKeyDown={(event) => {
           props.onEscapeKeyDown?.(event);
           protectModalEscape(event);

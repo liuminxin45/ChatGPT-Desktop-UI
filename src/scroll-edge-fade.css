@@ -14,7 +14,7 @@
 .desktop-composer-dock {
   position: relative;
   flex-shrink: 0;
-  padding: 0 var(--desktop-space-composer-dock) var(--desktop-space-composer-dock);
+  padding: 0 var(--desktop-space-composer-dock) max(var(--desktop-space-composer-dock), env(safe-area-inset-bottom));
 }
 .desktop-internal-scroll[data-desktop-scroll-fade-padding='virtual'] {
   padding-bottom: 0 !important;

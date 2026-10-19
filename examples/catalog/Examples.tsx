@@ -18,11 +18,13 @@ import {
   Checkbox,
   Switch,
   Select,
+  TemporalPicker,
   EditableCombobox,
   Tabs,
   MenuButton,
   Dialog,
   DropOverlay,
+  ContextAttachment,
   EmptyState,
   ErrorState,
   ToastNotice,
@@ -40,6 +42,8 @@ import {
   WorkbenchPage,
   FloatingLauncher,
   FloatingPanel,
+  MediaImage,
+  MediaToolbar,
   InternalScrollArea,
   FixedVirtualList,
   UIStringsProvider,
@@ -54,13 +58,19 @@ import {
   SettingRow,
   DesktopClientSurface,
   ClientSidebar,
+  ClientSidebarHeading,
+  ClientModeSwitcher,
+  ClientSidebarToolbar,
   ClientSidebarItem,
+  SidebarPanel,
   SidebarSection,
   DesktopMenu,
   SettingsGroup,
   SettingsField,
   SettingsDisclosure,
   ClientComposer,
+  ComposerSurface,
+  ComposerActionButton,
   ConversationMessage,
   Plus,
   House,
@@ -68,6 +78,7 @@ import {
 } from '../../src';
 
 export function Examples({ family }: { family: string }) {
+  const [workMode, setWorkMode] = useState('Projects');
   const [value, setValue] = useState('Release notes');
   const [selected, setSelected] = useState('design');
   const [checked, setChecked] = useState(true);
@@ -75,6 +86,14 @@ export function Examples({ family }: { family: string }) {
   const [section, setSection] = useState(true);
   const [submitted, setSubmitted] = useState('');
   const [dragPreview, setDragPreview] = useState(false);
+  const [contextAttached, setContextAttached] = useState(true);
+  const [temporal, setTemporal] = useState({
+    date: '2026-10-14',
+    month: '2026-10',
+    datetime: '2026-10-14T09:30',
+  });
+
+  const [hostDraft, setHostDraft] = useState('Host-owned attachment and keyboard behavior');
   const field = (
     <Input aria-label="Project name" value={value} onChange={(event) => setValue(event.target.value)} />
   );
@@ -91,6 +110,40 @@ export function Examples({ family }: { family: string }) {
       ]}
     />
   );
+  if (family === 'temporal')
+    return (
+      <div className="reference-fields">
+        <FieldRow>
+          Date
+          <TemporalPicker
+            aria-label="Date"
+            actionId="reference.temporal.date"
+            value={temporal.date}
+            onValueChange={(date) => setTemporal((old) => ({ ...old, date }))}
+          />
+        </FieldRow>
+        <FieldRow>
+          Month
+          <TemporalPicker
+            aria-label="Month"
+            actionId="reference.temporal.month"
+            mode="month"
+            value={temporal.month}
+            onValueChange={(month) => setTemporal((old) => ({ ...old, month }))}
+          />
+        </FieldRow>
+        <FieldRow>
+          Date and time
+          <TemporalPicker
+            aria-label="Date and time"
+            actionId="reference.temporal.datetime"
+            mode="datetime-local"
+            value={temporal.datetime}
+            onValueChange={(datetime) => setTemporal((old) => ({ ...old, datetime }))}
+          />
+        </FieldRow>
+      </div>
+    );
   if (family === 'tables')
     return (
       <>
@@ -279,6 +332,27 @@ export function Examples({ family }: { family: string }) {
   if (family === 'layout')
     return (
       <Surface>
+        {contextAttached ? (
+          <ContextAttachment
+            label="Release reference"
+            removeLabel="Remove reference"
+            removeActionId="reference.context.remove"
+            onRemove={() => setContextAttached(false)}
+          />
+        ) : (
+          <Button actionId="reference.context.restore" onClick={() => setContextAttached(true)}>
+            Attach reference
+          </Button>
+        )}
+        <MediaToolbar>
+          <Button actionId="reference.media.reset" onClick={() => setSubmitted('Image view reset')}>
+            Reset image view
+          </Button>
+        </MediaToolbar>
+        <MediaImage
+          alt="Screenshot preview"
+          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='120'%3E%3Crect width='240' height='120' fill='white'/%3E%3Ctext x='20' y='66' fill='black'%3EScreenshot preview%3C/text%3E%3C/svg%3E"
+        />
         <Button actionId="reference.drop.preview" onClick={() => setDragPreview((v) => !v)}>
           Preview file drop
         </Button>
@@ -344,30 +418,82 @@ export function Examples({ family }: { family: string }) {
           context={<span>This computer</span>}
         />
         <span role="status">{submitted}</span>
+        <ComposerSurface aria-label="Host-composed message">
+          <Textarea
+            aria-label="Host draft"
+            rows={1}
+            autoSize
+            value={hostDraft}
+            onChange={(event) => setHostDraft(event.target.value)}
+          />
+          <ComposerActionButton
+            state="ready"
+            actionId="reference.host.send"
+            sendDisabled={!hostDraft.trim()}
+            onSend={() => {
+              setSubmitted(hostDraft);
+              setHostDraft('');
+            }}
+          />
+        </ComposerSurface>
       </div>
     );
   if (family === 'client')
     return (
       <DesktopClientSurface>
         <div className="reference-client">
-          <ClientSidebar header={<span>Codex</span>}>
-            <SidebarSection
-              title="Projects"
-              open={section}
-              onOpenChange={setSection}
-              actionId="reference.projects.toggle"
+          <SidebarPanel>
+            <ClientSidebar
+              header={
+                <ClientModeSwitcher
+                  label={workMode}
+                  ariaLabel="Work destination"
+                  actionId="reference.work-mode.open"
+                  items={[
+                    {
+                      id: 'reference.work-mode.projects',
+                      label: 'Projects',
+                      checked: workMode === 'Projects',
+                      onSelect: () => setWorkMode('Projects'),
+                    },
+                    {
+                      id: 'reference.work-mode.tasks',
+                      label: 'Tasks',
+                      checked: workMode === 'Tasks',
+                      onSelect: () => setWorkMode('Tasks'),
+                    },
+                  ]}
+                />
+              }
             >
-              <ClientSidebarItem
-                actionId="reference.project.open"
-                label="Design system"
-                selected
-                icon={<House />}
-                count={12}
-                onClick={() => setSubmitted('Project opened')}
-              />
-            </SidebarSection>
-          </ClientSidebar>
+              <SidebarSection
+                title="Projects"
+                open={section}
+                onOpenChange={setSection}
+                actionId="reference.projects.toggle"
+              >
+                <ClientSidebarItem
+                  actionId="reference.project.open"
+                  label="Design system"
+                  selected
+                  icon={<House />}
+                  count={12}
+                  onClick={() => setSubmitted('Project opened')}
+                />
+              </SidebarSection>
+            </ClientSidebar>
+          </SidebarPanel>
           <SettingsGroup title="General">
+            <ClientSidebarToolbar
+              title={<ClientSidebarHeading as="span">Project actions</ClientSidebarHeading>}
+              actions={
+                <Button actionId="reference.sidebar.search" onClick={() => setSection((value) => !value)}>
+                  Search
+                </Button>
+              }
+            >
+              {section ? field : null}
+            </ClientSidebarToolbar>
             <SettingsField label="Project name">{field}</SettingsField>
             <SettingsDisclosure title="Advanced">
               <SettingsField label="Project">{select}</SettingsField>
