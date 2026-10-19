@@ -133,7 +133,7 @@ try {
       // A click acknowledgement can precede the scoped portal's mount/focus.
       // Send Escape to the opened calendar, rather than racing its previous trigger.
       await page.locator('.desktop-calendar').waitFor();
-      await page.waitForFunction(() => document.activeElement?.closest('.desktop-date-picker-popover'));
+      await page.waitForFunction(() => document.activeElement?.closest('.desktop-temporal-popover'));
       // Scoped portal focus is a layout effect; Radix installs its dismissable
       // layer in the following passive effect/render. Fast headless Linux can
       // otherwise deliver Escape between those phases, before the layer owns it.
