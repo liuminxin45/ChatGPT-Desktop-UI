@@ -33,6 +33,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | navigationVisible | no | `boolean \| undefined` |
 | sidebar | no | `ReactNode` |
 | sidebarVisible | no | `boolean \| undefined` |
+| sidebarLayout | no | `"default" \| "settings" \| undefined` |
 
 ## NavigationRail (chatgpt-desktop-kit)
 
@@ -112,6 +113,7 @@ Shared settings shell; the Host owns category state and contextual sidebar visib
 | Prop | Required | Type |
 | --- | --- | --- |
 | title | yes | `ReactNode` |
+| showTitle | no | `boolean \| undefined` |
 | leading | no | `ReactNode` |
 | actions | no | `ReactNode` |
 | embedded | no | `boolean \| undefined` |

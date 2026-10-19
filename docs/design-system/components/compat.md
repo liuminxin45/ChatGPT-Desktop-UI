@@ -30,6 +30,8 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 
 [Implementation](../../../src/components/radix/date-picker.tsx)
 
+Compatibility preserves the Date API; rendering belongs to the shared picker.
+
 | Prop | Required | Type |
 | --- | --- | --- |
 | value | yes | `Date \| undefined` |
@@ -39,9 +41,10 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | triggerClassName | no | `string \| undefined` |
 | actionId | no | `string \| undefined` |
 | id | no | `string \| undefined` |
-| aria-label | no | `string \| undefined` |
 | disabled | no | `boolean \| undefined` |
+| readOnly | no | `boolean \| undefined` |
 | clearable | no | `boolean \| undefined` |
+| aria-label | no | `string \| undefined` |
 
 ## Popover (chatgpt-desktop-kit)
 
@@ -738,9 +741,10 @@ Compatibility preserves the Date API; rendering belongs to the shared picker.
 | triggerClassName | no | `string \| undefined` |
 | actionId | no | `string \| undefined` |
 | id | no | `string \| undefined` |
-| aria-label | no | `string \| undefined` |
 | disabled | no | `boolean \| undefined` |
+| readOnly | no | `boolean \| undefined` |
 | clearable | no | `boolean \| undefined` |
+| aria-label | no | `string \| undefined` |
 
 ## DropdownMenu (chatgpt-desktop-kit/compat/dropdown-menu)
 

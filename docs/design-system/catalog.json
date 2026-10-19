@@ -20254,10 +20254,17 @@
       "native": true,
       "description": ""
     },
-    "4fe1678e5e7367c9": {
-      "name": "crossOrigin",
+    "806ec3d454e09aae": {
+      "name": "children",
+      "required": true,
+      "type": "ReactNode",
+      "native": true,
+      "description": ""
+    },
+    "a613e8410070e6f5": {
+      "name": "ref",
       "required": false,
-      "type": "\"\" | \"anonymous\" | \"use-credentials\" | undefined",
+      "type": "LegacyRef<HTMLElement> | undefined",
       "native": true,
       "description": ""
     },
@@ -20282,10 +20289,10 @@
       "native": true,
       "description": ""
     },
-    "ecec09aa6c44124c": {
+    "75f0b86b4bd46326": {
       "name": "alignmentBaseline",
       "required": false,
-      "type": "\"inherit\" | \"alphabetic\" | \"hanging\" | \"ideographic\" | \"mathematical\" | \"middle\" | \"baseline\" | \"auto\" | \"before-edge\" | \"text-before-edge\" | \"central\" | \"after-edge\" | \"text-after-edge\" | undefined",
+      "type": "\"inherit\" | \"alphabetic\" | \"hanging\" | \"ideographic\" | \"mathematical\" | \"auto\" | \"middle\" | \"baseline\" | \"before-edge\" | \"text-before-edge\" | \"central\" | \"after-edge\" | \"text-after-edge\" | undefined",
       "native": true,
       "description": ""
     },
@@ -20555,10 +20562,10 @@
       "native": true,
       "description": ""
     },
-    "252eed25934d4035": {
+    "5a59dc99b8d1ea71": {
       "name": "dominantBaseline",
       "required": false,
-      "type": "\"inherit\" | \"alphabetic\" | \"hanging\" | \"ideographic\" | \"mathematical\" | \"middle\" | \"auto\" | \"text-before-edge\" | \"central\" | \"text-after-edge\" | \"use-script\" | \"no-change\" | \"reset-size\" | undefined",
+      "type": "\"inherit\" | \"alphabetic\" | \"hanging\" | \"ideographic\" | \"mathematical\" | \"auto\" | \"middle\" | \"text-before-edge\" | \"central\" | \"text-after-edge\" | \"use-script\" | \"no-change\" | \"reset-size\" | undefined",
       "native": true,
       "description": ""
     },
@@ -23065,6 +23072,1112 @@
       "name": "ref",
       "required": false,
       "type": "LegacyRef<SVGSVGElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5dd6b820c2403ee4": {
+      "name": "onCopy",
+      "required": false,
+      "type": "ClipboardEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7f4c1b6ef0329f5c": {
+      "name": "onCopyCapture",
+      "required": false,
+      "type": "ClipboardEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f6c789f5a123c34d": {
+      "name": "onCut",
+      "required": false,
+      "type": "ClipboardEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "12ed2d1413704bb2": {
+      "name": "onCutCapture",
+      "required": false,
+      "type": "ClipboardEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a0f99f1e13efed90": {
+      "name": "onPaste",
+      "required": false,
+      "type": "ClipboardEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d8715924e6dc9d2b": {
+      "name": "onPasteCapture",
+      "required": false,
+      "type": "ClipboardEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5a9b276ef4a59459": {
+      "name": "onCompositionEnd",
+      "required": false,
+      "type": "CompositionEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f562fec6db0f57a4": {
+      "name": "onCompositionEndCapture",
+      "required": false,
+      "type": "CompositionEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f095ee95046b466d": {
+      "name": "onCompositionStart",
+      "required": false,
+      "type": "CompositionEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "2966f0f133254a92": {
+      "name": "onCompositionStartCapture",
+      "required": false,
+      "type": "CompositionEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "48d6e187595b0a1f": {
+      "name": "onCompositionUpdate",
+      "required": false,
+      "type": "CompositionEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "bfdfa50df7b30258": {
+      "name": "onCompositionUpdateCapture",
+      "required": false,
+      "type": "CompositionEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "db47ff32d9651cc0": {
+      "name": "onFocus",
+      "required": false,
+      "type": "FocusEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e14f9bbff83cf00e": {
+      "name": "onFocusCapture",
+      "required": false,
+      "type": "FocusEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "6d7f676f15683ab2": {
+      "name": "onBlur",
+      "required": false,
+      "type": "FocusEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "888d81ac11753a23": {
+      "name": "onBlurCapture",
+      "required": false,
+      "type": "FocusEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "496543174bca90a4": {
+      "name": "onChange",
+      "required": false,
+      "type": "FormEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "801587bf0a14e976": {
+      "name": "onChangeCapture",
+      "required": false,
+      "type": "FormEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8407834eb61e8d4a": {
+      "name": "onBeforeInput",
+      "required": false,
+      "type": "InputEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c5347554f452a0e2": {
+      "name": "onBeforeInputCapture",
+      "required": false,
+      "type": "FormEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e765d59525ead1bb": {
+      "name": "onInput",
+      "required": false,
+      "type": "FormEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "9c03cfae00b95540": {
+      "name": "onInputCapture",
+      "required": false,
+      "type": "FormEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8993220d4219980f": {
+      "name": "onReset",
+      "required": false,
+      "type": "FormEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "555d4ce9f2cab85f": {
+      "name": "onResetCapture",
+      "required": false,
+      "type": "FormEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f277e789371fad2f": {
+      "name": "onSubmit",
+      "required": false,
+      "type": "FormEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "3ad07fe73cd07023": {
+      "name": "onSubmitCapture",
+      "required": false,
+      "type": "FormEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "9cad8eeb685750ba": {
+      "name": "onInvalid",
+      "required": false,
+      "type": "FormEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8ad8f76d966e4bd7": {
+      "name": "onInvalidCapture",
+      "required": false,
+      "type": "FormEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b53437730a0dea00": {
+      "name": "onLoad",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "9ca54b115b8ddd65": {
+      "name": "onLoadCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "84e5b7ad4c11d275": {
+      "name": "onError",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e6adc99f249889dd": {
+      "name": "onErrorCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f8ea879d6826c03c": {
+      "name": "onKeyDown",
+      "required": false,
+      "type": "KeyboardEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c978d0f468effb23": {
+      "name": "onKeyDownCapture",
+      "required": false,
+      "type": "KeyboardEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "206590da31cf53ee": {
+      "name": "onKeyPress",
+      "required": false,
+      "type": "KeyboardEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f341165145be6e07": {
+      "name": "onKeyPressCapture",
+      "required": false,
+      "type": "KeyboardEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ff542d128f798317": {
+      "name": "onKeyUp",
+      "required": false,
+      "type": "KeyboardEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5e9280fe0eccbbc3": {
+      "name": "onKeyUpCapture",
+      "required": false,
+      "type": "KeyboardEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8ece6fa361cb2656": {
+      "name": "onAbort",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "423699283b202be7": {
+      "name": "onAbortCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5f2fb9bb1e52d2d5": {
+      "name": "onCanPlay",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "08977176fbf65ace": {
+      "name": "onCanPlayCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "acc2335c827d5350": {
+      "name": "onCanPlayThrough",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "090ac3c99445b774": {
+      "name": "onCanPlayThroughCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "76691bb2925d0cda": {
+      "name": "onDurationChange",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "40295d61d2d03e3c": {
+      "name": "onDurationChangeCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "695eda03c95babea": {
+      "name": "onEmptied",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "53c61f6ff9970208": {
+      "name": "onEmptiedCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "36c883d48fe3b095": {
+      "name": "onEncrypted",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "3cab4f96987e76c1": {
+      "name": "onEncryptedCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c38f461839cbeb8c": {
+      "name": "onEnded",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "68a11d1fc397ca21": {
+      "name": "onEndedCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8341a3491781d5d9": {
+      "name": "onLoadedData",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5dee38f071a3d59b": {
+      "name": "onLoadedDataCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7662f8106d1f99a9": {
+      "name": "onLoadedMetadata",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "1ca3b6b7b58c590a": {
+      "name": "onLoadedMetadataCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "dd3d116d48435edc": {
+      "name": "onLoadStart",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "93e2da496100621f": {
+      "name": "onLoadStartCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5e8f676059f911f2": {
+      "name": "onPause",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "4ed68391247ceda8": {
+      "name": "onPauseCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "116dd47f9e813593": {
+      "name": "onPlay",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7720b442863041a9": {
+      "name": "onPlayCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f4aed771bb27cba0": {
+      "name": "onPlaying",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "d2bd265a8971ba91": {
+      "name": "onPlayingCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "bb8466fcf3d83bd3": {
+      "name": "onProgress",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "cd2afee60cb18b48": {
+      "name": "onProgressCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "37c8d690a399fda4": {
+      "name": "onRateChange",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b597c310caf8fd63": {
+      "name": "onRateChangeCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "2ffe0f54a1b704a7": {
+      "name": "onSeeked",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "9f2e39ce59b65513": {
+      "name": "onSeekedCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "44853007cfb10ec8": {
+      "name": "onSeeking",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "645a94ef952e6419": {
+      "name": "onSeekingCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "af18cf4a877c406a": {
+      "name": "onStalled",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "501e59d056bc0840": {
+      "name": "onStalledCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5ffed4e25b64caa7": {
+      "name": "onSuspend",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "68ea18b29e3d367e": {
+      "name": "onSuspendCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "678ec1ab8aef6f9c": {
+      "name": "onTimeUpdate",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e0855b17aad51f24": {
+      "name": "onTimeUpdateCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "424a2f3a2b378869": {
+      "name": "onVolumeChange",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0a40108151579178": {
+      "name": "onVolumeChangeCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "1d21be36c2c8f13d": {
+      "name": "onWaiting",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "f235e5c74e6884b6": {
+      "name": "onWaitingCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7622b8b81df21b42": {
+      "name": "onAuxClick",
+      "required": false,
+      "type": "MouseEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e966ac92fa5a5428": {
+      "name": "onAuxClickCapture",
+      "required": false,
+      "type": "MouseEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "eac85d70bf34b22f": {
+      "name": "onClick",
+      "required": false,
+      "type": "MouseEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "39d9dfcbd395523a": {
+      "name": "onClickCapture",
+      "required": false,
+      "type": "MouseEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "28d8907d54483d2d": {
+      "name": "onContextMenu",
+      "required": false,
+      "type": "MouseEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0c97d982b4a038ac": {
+      "name": "onContextMenuCapture",
+      "required": false,
+      "type": "MouseEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "6437ff2c40e79a47": {
+      "name": "onDoubleClick",
+      "required": false,
+      "type": "MouseEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "1d75634e31448915": {
+      "name": "onDoubleClickCapture",
+      "required": false,
+      "type": "MouseEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a118a9cdb2590965": {
+      "name": "onDrag",
+      "required": false,
+      "type": "DragEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "488e938a8a730f42": {
+      "name": "onDragCapture",
+      "required": false,
+      "type": "DragEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "25b6f5e46552dd31": {
+      "name": "onDragEnd",
+      "required": false,
+      "type": "DragEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b70875d112cbc9c9": {
+      "name": "onDragEndCapture",
+      "required": false,
+      "type": "DragEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ac9f718ffe588247": {
+      "name": "onDragEnter",
+      "required": false,
+      "type": "DragEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "67cb84d2e98424c7": {
+      "name": "onDragEnterCapture",
+      "required": false,
+      "type": "DragEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7aca1c2d3567a3cd": {
+      "name": "onDragExit",
+      "required": false,
+      "type": "DragEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8cd6c8f130135e6d": {
+      "name": "onDragExitCapture",
+      "required": false,
+      "type": "DragEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e665928ef7f74877": {
+      "name": "onDragLeave",
+      "required": false,
+      "type": "DragEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "4fe3d3b42670f072": {
+      "name": "onDragLeaveCapture",
+      "required": false,
+      "type": "DragEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "fb539adf013bf170": {
+      "name": "onDragOver",
+      "required": false,
+      "type": "DragEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "3f0b4ac29383cc9b": {
+      "name": "onDragOverCapture",
+      "required": false,
+      "type": "DragEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e377dd078b28967d": {
+      "name": "onDragStart",
+      "required": false,
+      "type": "DragEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "169723834e8cd6ab": {
+      "name": "onDragStartCapture",
+      "required": false,
+      "type": "DragEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "5484095a3a40b5c8": {
+      "name": "onDrop",
+      "required": false,
+      "type": "DragEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7c381b76476af7cd": {
+      "name": "onDropCapture",
+      "required": false,
+      "type": "DragEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ad78e228870db298": {
+      "name": "onMouseDown",
+      "required": false,
+      "type": "MouseEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "eab78e633a8c1a6c": {
+      "name": "onMouseDownCapture",
+      "required": false,
+      "type": "MouseEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "86c73cc60dda6afc": {
+      "name": "onMouseEnter",
+      "required": false,
+      "type": "MouseEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "cb99dc8baed6d605": {
+      "name": "onMouseLeave",
+      "required": false,
+      "type": "MouseEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "cf1639bb370c93b6": {
+      "name": "onMouseMove",
+      "required": false,
+      "type": "MouseEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "4f12f4aaa9314947": {
+      "name": "onMouseMoveCapture",
+      "required": false,
+      "type": "MouseEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "68331ca930388e79": {
+      "name": "onMouseOut",
+      "required": false,
+      "type": "MouseEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ae89b8b2a146f816": {
+      "name": "onMouseOutCapture",
+      "required": false,
+      "type": "MouseEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "fb0e88db957b7e4f": {
+      "name": "onMouseOver",
+      "required": false,
+      "type": "MouseEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "940b506005281b48": {
+      "name": "onMouseOverCapture",
+      "required": false,
+      "type": "MouseEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "6f62a3d53429b713": {
+      "name": "onMouseUp",
+      "required": false,
+      "type": "MouseEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "182ae38fbea4d2ab": {
+      "name": "onMouseUpCapture",
+      "required": false,
+      "type": "MouseEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "838da52f644f5183": {
+      "name": "onSelect",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8884a91f513b340b": {
+      "name": "onSelectCapture",
+      "required": false,
+      "type": "ReactEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e664ac47e6cb3599": {
+      "name": "onTouchCancel",
+      "required": false,
+      "type": "TouchEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e5a7eebb47f9d044": {
+      "name": "onTouchCancelCapture",
+      "required": false,
+      "type": "TouchEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "1337a065cfe43a36": {
+      "name": "onTouchEnd",
+      "required": false,
+      "type": "TouchEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "31aa0483fb54d317": {
+      "name": "onTouchEndCapture",
+      "required": false,
+      "type": "TouchEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "60e88462805bcd5f": {
+      "name": "onTouchMove",
+      "required": false,
+      "type": "TouchEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "53821c8144766b8a": {
+      "name": "onTouchMoveCapture",
+      "required": false,
+      "type": "TouchEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "65191af6fbe5e2f3": {
+      "name": "onTouchStart",
+      "required": false,
+      "type": "TouchEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "620573e58e939215": {
+      "name": "onTouchStartCapture",
+      "required": false,
+      "type": "TouchEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "eb4ac54030ba8f90": {
+      "name": "onPointerDown",
+      "required": false,
+      "type": "PointerEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e749aaeb3a9eaeb4": {
+      "name": "onPointerDownCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8c156bb01833410f": {
+      "name": "onPointerMove",
+      "required": false,
+      "type": "PointerEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8dd3ca596a958e46": {
+      "name": "onPointerMoveCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "abb7a77ddb529864": {
+      "name": "onPointerUp",
+      "required": false,
+      "type": "PointerEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "201a742e72311a0f": {
+      "name": "onPointerUpCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "e1aa620ae0007c67": {
+      "name": "onPointerCancel",
+      "required": false,
+      "type": "PointerEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "fc9b1f556af5a0cb": {
+      "name": "onPointerCancelCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "6a3ea611325ae46b": {
+      "name": "onPointerEnter",
+      "required": false,
+      "type": "PointerEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "75e6389e5d255a6a": {
+      "name": "onPointerLeave",
+      "required": false,
+      "type": "PointerEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "ca4c64ff303da3d1": {
+      "name": "onPointerOver",
+      "required": false,
+      "type": "PointerEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "3445294b466e95fc": {
+      "name": "onPointerOverCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "cb7297c51e4b5e15": {
+      "name": "onPointerOut",
+      "required": false,
+      "type": "PointerEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b9e6b92f9b6fc976": {
+      "name": "onPointerOutCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "36c01e43ee82ecce": {
+      "name": "onGotPointerCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8021931284822cee": {
+      "name": "onGotPointerCaptureCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "b266eea652791dbe": {
+      "name": "onLostPointerCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c4fe72c2e4b89ee9": {
+      "name": "onLostPointerCaptureCapture",
+      "required": false,
+      "type": "PointerEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "2f9153e23e15439c": {
+      "name": "onScroll",
+      "required": false,
+      "type": "UIEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "a0aa276382d18de1": {
+      "name": "onScrollCapture",
+      "required": false,
+      "type": "UIEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "033e2a86d15d1d30": {
+      "name": "onWheel",
+      "required": false,
+      "type": "WheelEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "430e3d33c54590fa": {
+      "name": "onWheelCapture",
+      "required": false,
+      "type": "WheelEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "1b49b96dcf6971b6": {
+      "name": "onAnimationStart",
+      "required": false,
+      "type": "AnimationEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "716aa9cc66c4f671": {
+      "name": "onAnimationStartCapture",
+      "required": false,
+      "type": "AnimationEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "8465da084c0b871a": {
+      "name": "onAnimationEnd",
+      "required": false,
+      "type": "AnimationEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "c2c821eb4b3e7bbf": {
+      "name": "onAnimationEndCapture",
+      "required": false,
+      "type": "AnimationEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "37cf2b22ff80366b": {
+      "name": "onAnimationIteration",
+      "required": false,
+      "type": "AnimationEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "7e0341dce50024d8": {
+      "name": "onAnimationIterationCapture",
+      "required": false,
+      "type": "AnimationEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "81f789e8974fc1f7": {
+      "name": "onTransitionEnd",
+      "required": false,
+      "type": "TransitionEventHandler<HTMLHeadingElement> | undefined",
+      "native": true,
+      "description": ""
+    },
+    "0a4a78da6fe9576f": {
+      "name": "onTransitionEndCapture",
+      "required": false,
+      "type": "TransitionEventHandler<HTMLHeadingElement> | undefined",
       "native": true,
       "description": ""
     },
@@ -27510,34 +28623,6 @@
       "name": "onTransitionEndCapture",
       "required": false,
       "type": "React.TransitionEventHandler<HTMLImageElement> | undefined",
-      "native": true,
-      "description": ""
-    },
-    "d8c8dd0711f5e994": {
-      "name": "useMap",
-      "required": false,
-      "type": "string | undefined",
-      "native": true,
-      "description": ""
-    },
-    "f8a29316e98b3cdc": {
-      "name": "decoding",
-      "required": false,
-      "type": "\"async\" | \"auto\" | \"sync\" | undefined",
-      "native": true,
-      "description": ""
-    },
-    "14201835aac49597": {
-      "name": "fetchPriority",
-      "required": false,
-      "type": "\"high\" | \"low\" | \"auto\" | undefined",
-      "native": true,
-      "description": ""
-    },
-    "d1b57bf47e9f8c6b": {
-      "name": "loading",
-      "required": false,
-      "type": "\"eager\" | \"lazy\" | undefined",
       "native": true,
       "description": ""
     },
@@ -32414,7 +33499,7 @@
         "849e58621502196e",
         "54eea79818e165df",
         "42238265aef0bec1",
-        "ecec09aa6c44124c",
+        "75f0b86b4bd46326",
         "a871b16220f2b80b",
         "7d84ee230833caaf",
         "ad353911b04a4486",
@@ -32453,7 +33538,7 @@
         "2428759248f50399",
         "14b956e02c52e052",
         "330da44902b9d5fa",
-        "252eed25934d4035",
+        "5a59dc99b8d1ea71",
         "a05990ebb6493522",
         "5185f5a2c0091147",
         "4cf051caa3e03a0b",
@@ -37345,6 +38430,52 @@
       ]
     },
     {
+      "id": "chatgpt-desktop-kit:ContextAttachment",
+      "name": "ContextAttachment",
+      "importPath": "chatgpt-desktop-kit",
+      "family": "overlays",
+      "implementation": "src/components/overlays/index.tsx",
+      "description": "Removable draft context; the attachment owns the complete action hit area.",
+      "props": [
+        {
+          "name": "label",
+          "required": true,
+          "type": "string",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "icon",
+          "required": false,
+          "type": "ReactNode",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "removeLabel",
+          "required": true,
+          "type": "string",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "removeActionId",
+          "required": true,
+          "type": "string",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "onRemove",
+          "required": true,
+          "type": "() => void",
+          "native": false,
+          "description": ""
+        }
+      ],
+      "nativeProps": []
+    },
+    {
       "id": "chatgpt-desktop-kit:ConversationMessage",
       "name": "ConversationMessage",
       "importPath": "chatgpt-desktop-kit",
@@ -37666,7 +38797,7 @@
       "importPath": "chatgpt-desktop-kit",
       "family": "compat",
       "implementation": "src/components/radix/date-picker.tsx",
-      "description": "",
+      "description": "Compatibility preserves the Date API; rendering belongs to the shared picker.",
       "props": [
         {
           "name": "value",
@@ -37718,14 +38849,14 @@
           "description": ""
         },
         {
-          "name": "aria-label",
+          "name": "disabled",
           "required": false,
-          "type": "string | undefined",
+          "type": "boolean | undefined",
           "native": false,
           "description": ""
         },
         {
-          "name": "disabled",
+          "name": "readOnly",
           "required": false,
           "type": "boolean | undefined",
           "native": false,
@@ -37736,7 +38867,14 @@
           "required": false,
           "type": "boolean | undefined",
           "native": false,
-          "description": "Required day navigation can omit the clear command without a Host CSS override."
+          "description": ""
+        },
+        {
+          "name": "aria-label",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": ""
         }
       ],
       "nativeProps": []
@@ -38208,6 +39346,13 @@
           "type": "boolean | undefined",
           "native": false,
           "description": ""
+        },
+        {
+          "name": "sidebarLayout",
+          "required": false,
+          "type": "\"default\" | \"settings\" | undefined",
+          "native": false,
+          "description": "Settings category navigation uses the shared settings width without remounting its contents."
         }
       ],
       "nativeProps": [
@@ -48530,6 +49675,13 @@
           "name": "title",
           "required": true,
           "type": "ReactNode",
+          "native": false,
+          "description": ""
+        },
+        {
+          "name": "showTitle",
+          "required": false,
+          "type": "boolean | undefined",
           "native": false,
           "description": ""
         },
@@ -69324,14 +70476,14 @@
           "description": ""
         },
         {
-          "name": "aria-label",
+          "name": "disabled",
           "required": false,
-          "type": "string | undefined",
+          "type": "boolean | undefined",
           "native": false,
           "description": ""
         },
         {
-          "name": "disabled",
+          "name": "readOnly",
           "required": false,
           "type": "boolean | undefined",
           "native": false,
@@ -69342,7 +70494,14 @@
           "required": false,
           "type": "boolean | undefined",
           "native": false,
-          "description": "Required day navigation can omit the clear command without a Host CSS override."
+          "description": ""
+        },
+        {
+          "name": "aria-label",
+          "required": false,
+          "type": "string | undefined",
+          "native": false,
+          "description": ""
         }
       ],
       "nativeProps": []

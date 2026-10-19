@@ -647,7 +647,10 @@ export const SettingsPage = forwardRef<
     /** Let the host's single page header own title/actions; retain this scroll owner. */
     embedded?: boolean;
   }
->(function SettingsPage({ title, showTitle = true, children, className, leading, actions, embedded = false, ...props }, ref) {
+>(function SettingsPage(
+  { title, showTitle = true, children, className, leading, actions, embedded = false, ...props },
+  ref,
+) {
   return (
     <InternalScrollArea
       ref={ref}

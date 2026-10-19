@@ -97,7 +97,8 @@ const ScopedPortalContent = forwardRef<
         if (value === null || value === undefined) portal.removeAttribute(attribute);
         else portal.setAttribute(attribute, value);
       }
-      for (const property of computed) {
+      for (let index = 0; index < computed.length; index++) {
+        const property = computed.item(index);
         if (!property.startsWith('--desktop-') && !property.startsWith('--kit-')) continue;
         const value = computed.getPropertyValue(property);
         if (portal.style.getPropertyValue(property) !== value) portal.style.setProperty(property, value);
