@@ -1,5 +1,21 @@
 # Desktop design system
 
+Contextual navigation titles use `ClientSidebarHeading`, including titles nested
+inside mode selectors. It shares Settings sidebar emphasis and the client title
+size. A navigation-owned category appears once, in its sidebar; content toolbars
+retain commands, status and actual object names. `SettingsPage showTitle={false}`
+omits the visible category heading without changing the default Settings demo.
+Hosts supply an accessible content name when hiding that heading. Chat search
+expands below the retained title/action row using the shared sidebar toolbar slots.
+
+Buttons, icon actions, Tabs, navigation and Select/menu/Popover triggers never draw a focus outline or outer ring in either theme. Keyboard focus uses a neutral fill inside the existing target; primary/send actions retain their semantic foreground and use their hover fill. Pointer dismissal restores DOM focus without a residual trigger highlight. Escape is dismissal, not a switch to keyboard navigation. Keep native focus, Tab/arrow navigation, Enter/Space activation and disabled semantics; never blur controls to hide a visual state. Text entry retains neutral inset focus and invalid fields retain their error boundary. Tooltips are descriptive: the same Escape removes a visible tooltip and dismisses the active interactive overlay; a tooltip must never require a preliminary Escape. Open Select/menu/Popover and child Dialog still dismiss before their parent, and IME Escape never closes them.
+
+Chat media uses `MediaImage` for an unmasked image with layered soft shadows instead of a thin outline. `AppDialogContent variant="media"` supplies a transparent full-window stage, a dim media backdrop, shared close control and reserved toolbar area. Image pixels, including screenshot text and transparent assets, remain intact. Hosts own fit/zoom/pan geometry and image loading; use shared buttons and MediaToolbar for the toolbar. Background dismissal requires a click without a preceding pan; Escape and focus return follow the shared dialog contract.
+
+`VirtualList scrollSession` changes a Host-owned dataset and restores its saved
+anchor while retaining the viewport. Hosts must not key the list by the selected
+navigation mode merely to restore scroll position.
+
 Button geometry is explicit: `layout="command"` is the compact centered command default. Single-target navigation/selection records use `layout="row"`, with left alignment, natural height and shared insets; place stacked title/metadata in one content group. Image pickers use `layout="tile"`, a square with contained media that fills the available preview rather than retaining tiny intrinsic dimensions. Do not override command height/padding to imitate records. `layout="surface"` carries native action, accessibility and instrumentation behavior without command geometry; reserve it for documented domain graphics such as schedule cells. Hosts own those graphics' grid boundaries, not ordinary control styles. Multi-action records still use static `RecordRow` and independent commands.
 
 Escape dismisses only the active overlay: an open Select, menu, Popover or nested Dialog closes before its parent editor. Respect consumed keyboard events and IME composition; never discard a draft because Escape cancelled composition. Dialog focus containment applies only to the top visible Dialog, and dismissal returns focus to its own trigger. Verify nested layers through the consumer's real CSS and portal pipeline.
@@ -34,16 +50,16 @@ This specification combines measured screenshot patterns with an existing deskto
 | Role | Light | Dark | Token |
 | --- | --- | --- | --- |
 | Window shell | #f0f3f9 | #202123 | `--desktop-color-shell` |
-| Contextual sidebar | #fafbfd | #1c1d1e | `--desktop-color-sidebar` |
+| Contextual sidebar | #ffffff | #1c1d1e | `--desktop-color-sidebar` |
 | Main canvas | #ffffff | #181818 | `--desktop-color-background` |
-| Grouped settings | #fafbfd | #232323 | `--desktop-color-surface` |
+| Grouped settings | Same as main canvas | #232323 | `--desktop-color-background` in light; `--desktop-color-surface` in dark |
 | Input | #ededed | #2a2a2a | `--desktop-color-surface-muted` |
 | Composer | #ffffff | #2a2a2a | `--desktop-color-composer` |
 | Floating menu | #ffffff | #2b2b2b | `--desktop-color-surface-overlay` |
 | Hover | #f0f1f3 | #333333 | `--desktop-color-surface-hover` |
 | Selected rail | #e4e7ec | #303134 | `--desktop-color-navigation-selected` |
 
-Use tokens in application CSS, not the literals from this table. Main canvas, sidebar, groups and floats have distinct surfaces. Neutral grays carry hierarchy; blue carries unread/send and non-text control focus states; danger remains available for business errors. Do not recolor errors blue merely to match unread dots.
+Use tokens in application CSS, not the literals from this table. In light mode, grouped settings share the main canvas color and use fine borders and dividers. Sidebar and floating surfaces retain their own roles. Neutral grays carry hierarchy; blue carries unread/send states; danger remains available for business errors. Do not recolor errors blue merely to match unread dots.
 
 Idle buttons and dropdown triggers have no decorative border or fill. The dropdown is text with a small down chevron. Hover introduces a compact filled target; the opened menu has a rounded surface and subtle shadow. Inputs have a light surface rather than a surrounding box. Text entry uses neutral inset focus or a subtly filled composer, without a blue outer ring. Preserve visible keyboard focus, table boundaries, actual drag targets and error state boundaries. “Boundary-free” does not mean invisible states.
 
@@ -53,7 +69,11 @@ Menu items use the shared hover fill for pointer highlight and keyboard focus, i
 
 ### Versioned client profile
 
-The Demo recreates Windows ChatGPT **26.1002.7124.0**, inspected on 2026-10-09. `DesktopClientSurface` opts into the measured 44px title bar, 52px rail, 36px tile, 372px sidebar, 728px Settings column and 28/36px bold Settings heading. Its body is 14/20px; compact setting labels are 13/20px bold and descriptions 12/16px regular. Sidebar chat rows are 31px. Settings groups use a 16px rounded surface, internal dividers and 52px between groups. Menus use a 16px radius, 29px rows and 16px submenu arrows; the native application menu uses a smaller corner radius.
+The window-shell correction measured on 2026-10-14 uses one continuous shell behind the title bar and rail. The light shell is #f0f3f9; the dark client profile uses a reproducible blue-gray gradient (top-left #1b202d, mid-rail #1a2033, far-right #1e2023). It is a CSS adaptation of the supplied capture, not an assertion about native material behavior or cross-monitor color differences. Title bar and rail are transparent within the shell. The contextual sidebar is white in light mode and #1a1b1d in this dark profile; the main canvas stays white/#181818.
+
+`DesktopShell` owns one workspace clipping surface around both contextual sidebar and content: 14px corners, a subtle outside boundary and 4px shell insets at the right and bottom. The profile keeps a 44px title bar, with its actions in the upper 36px, a 52px rail and 36px navigation targets starting 8px below the work area top. Collapsing a sidebar or hiding the rail retains the workspace corners and mounted content. Hosts compose `TitleBar.actions`, `NavigationRail.children`, `NavigationRailItem` (including `asChild` router links) and `WindowControls`; they do not reconstruct the shell or add a second rail inset. Window callbacks, stable action IDs, native drag regions and menu editing stay Host-owned.
+
+The Demo recreates Windows ChatGPT **26.1002.7124.0**, inspected on 2026-10-09. `DesktopClientSurface` opts into the measured 44px title bar, 52px rail, 36px tile, 372px sidebar, 728px Settings column and 28/36px bold Settings heading. Its body is 14/20px; compact setting labels are 13/20px bold and descriptions 12/16px regular. Sidebar chat rows are 31px. Settings groups use a 16px rounded boundary, 16px horizontal inset, ordinary 44px minimum rows with 8px vertical padding, internal dividers and 52px between groups. Long descriptions and wrapped controls increase row height naturally. Compact dropdowns use a transparent pill with a fine neutral border. Menus use a 16px radius, 29px rows and 16px submenu arrows; the native application menu uses a smaller corner radius.
 
 These values belong to the versioned client profile. Embedded Tools inside that profile inherit it; portable Tool Hosts keep their separate regular typography. Portable defaults below remain available for existing products. A browser recreation must follow the observed client structure; do not invent dashboard cards, explanatory badges or alternate workflows. Keep private content synthetic. Record an observed package version and an annotated tag for every alignment release; never infer it from a publication date. See [CLIENT_ALIGNMENT.json](CLIENT_ALIGNMENT.json).
 
@@ -77,6 +97,15 @@ Remove the selected rail's left stripe. Tooltips sit immediately beside the rail
 Rail hover uses the navigation tile surface and foreground rather than the generic control hover surface, which is too close to the pale shell in light mode. Idle destinations retain outline icons; the selected destination retains its filled icon. Pointer exit clears only the hover fill.
 
 ### Icon and label alignment
+
+Resizable contextual sidebars compose `SidebarPanel`, or `SettingsLayout.sidebarResize`.
+The shared panel owns the edge target, pointer capture, keyboard focus and bounded
+geometry; the Host owns width, visibility, persistence and gesture outcomes.
+PHD uses a 240–460px range: reaching 240px folds immediately, and reopening uses
+the remembered 240px width. Escape or pointer cancellation restores the gesture's
+initial width. Home folds, End selects the maximum, and arrow keys adjust 10px.
+Scaling must convert pointer movement to CSS pixels. Folding retains mounted
+children, drafts, selection and Tool leases.
 
 Use `Button.icon` for a leading action glyph and keep the label in `children`. Sibling navigation actions must share an icon column, label left edge and vertical baseline. The visible glyph can be smaller than its column; it remains centered and cannot move the label. Trailing status icons and counts remain separate from the leading action slot. Do not fix alignment with per-label margins, transforms or different gaps.
 
@@ -105,7 +134,9 @@ Text controls use a 20px line box with descender clearance; never clip a selecte
 
 `NavigationRail` can receive controlled `pinnedIds` and `onPinnedChange` props. Its More menu lists every available destination and exposes a separate pin toggle. The Host owns the pinned set; opening and closing this menu cannot remount page content. `DesktopShell.navigationVisible` retains the navigation subtree when collapsed.
 
-`SettingsCategory.group` provides optional named category sections. Settings sections use a distinct semantic surface and neutral internal row dividers in both themes. Menus use real 16px chevrons rather than a tiny text arrow.
+Contextual sidebars transition width and opacity on both expansion and collapse, retaining their content throughout. Collapsed panels become inert immediately and leave layout after the shared motion interval; reduced motion disables the transition. Resize gestures update geometry immediately. Persisted widths use shared sidebar width tokens so folding still reaches zero width. Contextual sidebar headings use the same semantic emphasis and 18px title size as Settings navigation.
+
+`SettingsCategory.group` provides optional named category sections. Settings sections share the page background in light mode and retain their semantic surface in dark mode, with neutral borders and internal row dividers. Menus use real 16px chevrons rather than a tiny text arrow.
 
 ## Layout choice
 
@@ -137,7 +168,7 @@ Text controls use a 20px line box with descender clearance; never clip a selecte
 | Short list flow | `ListStack` |
 | Plain workspace | `WorkbenchPage`, `PageBar`, `PageToolbar` |
 
-Select/Menu portals inherit tokens and close predictably. Pointer dismissal or selection returns DOM focus without adding an outer trigger ring. `InputBehaviorRoot` tracks input modality at the document boundary so portal controls follow the same rule; keyboard navigation retains a visible focus indicator, including the first Tab from the document body. Do not blur restored triggers or remove keyboard indicators to imitate pointer behavior. Dialog supports Escape, backdrop close, focus containment and return to trigger; the consumer intercepts `onClose` to protect drafts. Default `Button` is secondary and `type=button`; explicitly opt into primary and form submit.
+Select/Menu portals inherit tokens and close predictably. Pointer dismissal or selection returns DOM focus without adding an outer trigger ring. `InputBehaviorRoot` tracks input modality at the document boundary so portal controls follow the same rule; keyboard navigation retains a neutral filled focus target, including the first Tab from the document body. Do not blur restored triggers or remove keyboard indicators to imitate pointer behavior. Dialog supports Escape, backdrop close, focus containment and return to trigger; the consumer intercepts `onClose` to protect drafts. Default `Button` is secondary and `type=button`; explicitly opt into primary and form submit.
 
 The controlled `ClientComposer` separates work and chat input layouts. Work input has a contextual toolbar; chat input has a compact 52px pill, a 24px multiline line box and a 36px circular send target. Text grows to 200px before internal scrolling. Empty, submitting, stoppable and unavailable voice states are explicit. These chat measurements supplement the desktop reference with the signed-out web interface inspected on 2026-10-09; authenticated desktop ChatGPT mode remains a separate fidelity acceptance item. `ConversationMessage` defines neutral user bubbles and response actions, without embedding data services. See `COMPONENTS.md` for ownership and `REPLICA_CONTRACT.md` for the acceptance matrix.
 
@@ -221,6 +252,24 @@ RecordRow owns record padding. Use density="compact" for dense groups and separa
 
 All client routes opt into `DesktopClientSurface`. Its overlays inherit the client profile after entering a portal. Native Tools inside that profile retain semantic setting-label emphasis; portable Tool Hosts keep their regular typography policy. Hosts must not flatten shared weights with document-wide overrides.
 
-Settings compose `SettingsLayout`, `SettingsNavigation`, `SettingsPage`, `SettingsGroup`, `SettingsField` and `SettingsDisclosure`. The reference settings category sidebar is 336px (260px at compact widths), independently of the 372px general contextual sidebar. The body remains 728px, its page title 28/36px at 600 weight, and its groups use one 16px inset and 60px field rows. The setting sidebar measurement follows the supplied desktop Settings reference; it is not a measurement of unobserved destinations.
+Settings compose `SettingsLayout`, `SettingsNavigation`, `SettingsPage`, `SettingsGroup`, `SettingsField` and `SettingsDisclosure`. The reference settings category sidebar is 336px (260px at compact widths), independently of the 372px general contextual sidebar. The body remains 728px, its page title 28/36px at 600 weight, and its groups use one 16px inset and 44px minimum ordinary field rows; long content grows naturally. The setting sidebar measurement follows the supplied desktop Settings reference; it is not a measurement of unobserved destinations.
 
 `SettingsPage` forwards the real scroll-owner ref for navigation and deep links. `SettingsGroup` accepts Host identity and instrumentation attributes. `SettingsDisclosure` can preserve an initially expanded section with `defaultOpen` and a stable Host `actionId`. Long field labels wrap, and text/secret inputs share the same control-column baseline. Keep Host styles component-scoped; import the library styles once without a parallel Host design system.
+
+## Calendar selection
+
+`TemporalPicker` is the popup-only date, month and local date-time control. Its filled trigger follows Input geometry and uses the direct button as the tooltip/Popover target. Calendar captions use shared compact month/year Select controls; month selection uses a four-column, three-row grid with independent selected/current/focus states. Neutral selection and shared overlay tokens apply in both themes. Popup width is 280px, bounded to the viewport with 12px collision padding; business Hosts must not repaint these controls.
+
+Date/month selection commits immediately. Date-time selection owns a temporary draft, 24-hour hour/minute Select controls, and explicit Cancel/Confirm actions. Dismissal preserves the committed value. Today/current-month and clear actions honor bounds and whether the business field allows an empty value. Keyboard selection never submits a parent editor; Escape dismisses only the active child layer and restores its trigger focus.
+
+## Work destination selection and auxiliary row commands
+
+ClientModeSwitcher uses an 18/24px, 600-weight trigger and 16/24px, 600-weight choices. Other menus retain their existing density. ClientSidebarItem actions render beside the navigation button in a static RecordRow; auxiliary commands appear on hover, focus and while their menu is open. Blank record space never navigates. Dynamic VirtualList exposes apiRef.scrollToIndex for measured, gap-aware navigation without Host row-height arithmetic. Dialog forwards surface identity to its real portal content.
+
+## Draft context and drop boundaries
+
+ContextAttachment contains its removal button and tooltip trigger within the attachment geometry. Hosts supply labels, action identity and removal state; do not constrain its height or override the action size. DropOverlay variant="boundary" marks the visible Host drop surface with a moving dashed perimeter. active strengthens the boundary; reduced motion is static. The decoration never owns pointer input or expands acceptance beyond the Host target.
+
+## Settings reference refinement, 2026-10-14
+
+The user-supplied Appearance capture establishes same-color card/page backgrounds in light mode and approximately 44px ordinary rows. Keep the 728px column, shared section spacing and user-controlled sidebar widths. Hosts compose vertical SettingsGroup sections, without nested decorative frames or section-switching tabs. Controlled SettingsDisclosure supports deep links while retaining mounted drafts and list state. Reference captures are private and are not redistributed.

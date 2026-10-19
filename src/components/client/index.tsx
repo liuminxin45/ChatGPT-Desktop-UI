@@ -1,11 +1,39 @@
-import { CaretRight, Check } from '@phosphor-icons/react';
+import { CaretDown, CaretRight, Check } from '@phosphor-icons/react';
 import * as Menu from '@radix-ui/react-dropdown-menu';
 import { cloneElement, type HTMLAttributes, type ReactElement, type ReactNode, useId, useState } from 'react';
-import { InternalScrollArea } from '../lists';
+import { InternalScrollArea, RecordRow } from '../lists';
 import { Button, type ButtonProps } from '../actions';
 import { classes } from '../classes';
 import { ClientProfileContext, createDesktopPortal } from '../../scoped-surface';
+import { ClientSidebarHeading } from './sidebar-heading';
+export { ClientSidebarHeading } from './sidebar-heading';
 const MenuPortal = createDesktopPortal(Menu.Portal);
+
+/** Prominent client destination selector; menu commands remain Host-owned. */
+export function ClientModeSwitcher({
+  label,
+  actionId,
+  ariaLabel,
+  items,
+}: {
+  label: string;
+  actionId: string;
+  ariaLabel: string;
+  items: DesktopMenuItem[];
+}) {
+  return (
+    <DesktopMenu
+      className="client-mode-menu"
+      trigger={
+        <Button actionId={actionId} aria-label={ariaLabel} className="client-mode-switcher">
+          <ClientSidebarHeading as="span">{label}</ClientSidebarHeading>
+          <CaretDown size={14} aria-hidden="true" />
+        </Button>
+      }
+      items={items}
+    />
+  );
+}
 
 export interface DesktopMenuItem {
   id: string;
@@ -89,7 +117,9 @@ export function DesktopMenu({
       <Menu.Trigger asChild>
         {cloneElement(trigger, {
           'data-desktop-action':
-            trigger.props['data-desktop-action'] || `${items[0]?.id || 'client.menu'}.open`,
+            trigger.props['data-desktop-action'] ||
+            trigger.props.actionId ||
+            `${items[0]?.id || 'client.menu'}.open`,
         })}
       </Menu.Trigger>
       <MenuPortal>
@@ -116,6 +146,25 @@ export function DesktopClientSurface({ children }: { children: ReactNode }) {
     </ClientProfileContext.Provider>
   );
 }
+/** Title/actions stay in place while optional search content expands below them. */
+export function ClientSidebarToolbar({
+  title,
+  actions,
+  children,
+  className,
+  ...props
+}: Omit<HTMLAttributes<HTMLDivElement>, 'title'> & { title: ReactNode; actions?: ReactNode }) {
+  return (
+    <div {...props} className={classes('client-sidebar-toolbar', className)}>
+      <div className="client-sidebar-toolbar__row">
+        <ClientSidebarHeading>{title}</ClientSidebarHeading>
+        <div className="client-sidebar-toolbar__actions">{actions}</div>
+      </div>
+      {children}
+    </div>
+  );
+}
+
 export function ClientSidebar({
   header,
   children,
@@ -137,13 +186,16 @@ export function ClientSidebarItem({
   selected = false,
   className,
   icon,
+  actions,
   ...props
 }: Omit<ButtonProps, 'children' | 'variant' | 'iconOnly'> & {
   label: ReactNode;
   count?: number;
   selected?: boolean;
+  /** Independent commands; revealed on hover, focus or an open descendant menu. */
+  actions?: ReactNode;
 }) {
-  return (
+  const navigation = (
     <Button
       {...props}
       icon={icon || <span aria-hidden="true" />}
@@ -154,6 +206,14 @@ export function ClientSidebarItem({
       <span className="client-sidebar-label">{label}</span>
       {count !== undefined && <span className="client-sidebar-count">{count}</span>}
     </Button>
+  );
+  return actions ? (
+    <RecordRow density="compact" className="client-sidebar-record">
+      {navigation}
+      <div className="client-sidebar-record-actions">{actions}</div>
+    </RecordRow>
+  ) : (
+    navigation
   );
 }
 export function SidebarSection({
@@ -221,13 +281,15 @@ export function SettingsField({
   label,
   description,
   children,
-}: {
+  className,
+  ...props
+}: Omit<HTMLAttributes<HTMLDivElement>, 'children'> & {
   label: ReactNode;
   description?: ReactNode;
   children: ReactNode;
 }) {
   return (
-    <div className="client-settings-field">
+    <div {...props} className={classes('client-settings-field', className)}>
       <div>
         <h3>{label}</h3>
         {description ? <p>{description}</p> : null}
@@ -240,26 +302,39 @@ export function SettingsDisclosure({
   title,
   children,
   defaultOpen = false,
+  open: controlledOpen,
+  onOpenChange,
   actionId = 'settings.advanced.toggle',
 }: {
   title: string;
   children: ReactNode;
   defaultOpen?: boolean;
+  /** Controlled expansion preserves retained content and supports deep links. */
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
   actionId?: string;
 }) {
-  const [open, setOpen] = useState(defaultOpen);
+  const [localOpen, setLocalOpen] = useState(defaultOpen);
+  const open = controlledOpen ?? localOpen;
+  const contentId = useId();
   return (
     <section className="client-settings-disclosure">
       <button
         type="button"
         aria-expanded={open}
+        aria-controls={contentId}
         data-desktop-action={actionId}
-        onClick={() => setOpen(!open)}
+        onClick={() => {
+          setLocalOpen(!open);
+          onOpenChange?.(!open);
+        }}
       >
         {title}
         <CaretRight size={14} />
       </button>
-      <div hidden={!open}>{children}</div>
+      <div id={contentId} hidden={!open}>
+        {children}
+      </div>
     </section>
   );
 }

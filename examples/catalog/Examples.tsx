@@ -23,6 +23,7 @@ import {
   MenuButton,
   Dialog,
   DropOverlay,
+  ContextAttachment,
   EmptyState,
   ErrorState,
   ToastNotice,
@@ -40,6 +41,8 @@ import {
   WorkbenchPage,
   FloatingLauncher,
   FloatingPanel,
+  MediaImage,
+  MediaToolbar,
   InternalScrollArea,
   FixedVirtualList,
   UIStringsProvider,
@@ -54,7 +57,11 @@ import {
   SettingRow,
   DesktopClientSurface,
   ClientSidebar,
+  ClientSidebarHeading,
+  ClientModeSwitcher,
+  ClientSidebarToolbar,
   ClientSidebarItem,
+  SidebarPanel,
   SidebarSection,
   DesktopMenu,
   SettingsGroup,
@@ -68,6 +75,7 @@ import {
 } from '../../src';
 
 export function Examples({ family }: { family: string }) {
+  const [workMode, setWorkMode] = useState('Projects');
   const [value, setValue] = useState('Release notes');
   const [selected, setSelected] = useState('design');
   const [checked, setChecked] = useState(true);
@@ -75,6 +83,7 @@ export function Examples({ family }: { family: string }) {
   const [section, setSection] = useState(true);
   const [submitted, setSubmitted] = useState('');
   const [dragPreview, setDragPreview] = useState(false);
+  const [contextAttached, setContextAttached] = useState(true);
   const field = (
     <Input aria-label="Project name" value={value} onChange={(event) => setValue(event.target.value)} />
   );
@@ -279,6 +288,27 @@ export function Examples({ family }: { family: string }) {
   if (family === 'layout')
     return (
       <Surface>
+        {contextAttached ? (
+          <ContextAttachment
+            label="Release reference"
+            removeLabel="Remove reference"
+            removeActionId="reference.context.remove"
+            onRemove={() => setContextAttached(false)}
+          />
+        ) : (
+          <Button actionId="reference.context.restore" onClick={() => setContextAttached(true)}>
+            Attach reference
+          </Button>
+        )}
+        <MediaToolbar>
+          <Button actionId="reference.media.reset" onClick={() => setSubmitted('Image view reset')}>
+            Reset image view
+          </Button>
+        </MediaToolbar>
+        <MediaImage
+          alt="Screenshot preview"
+          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='120'%3E%3Crect width='240' height='120' fill='white'/%3E%3Ctext x='20' y='66' fill='black'%3EScreenshot preview%3C/text%3E%3C/svg%3E"
+        />
         <Button actionId="reference.drop.preview" onClick={() => setDragPreview((v) => !v)}>
           Preview file drop
         </Button>
@@ -350,24 +380,58 @@ export function Examples({ family }: { family: string }) {
     return (
       <DesktopClientSurface>
         <div className="reference-client">
-          <ClientSidebar header={<span>Codex</span>}>
-            <SidebarSection
-              title="Projects"
-              open={section}
-              onOpenChange={setSection}
-              actionId="reference.projects.toggle"
+          <SidebarPanel>
+            <ClientSidebar
+              header={
+                <ClientModeSwitcher
+                  label={workMode}
+                  ariaLabel="Work destination"
+                  actionId="reference.work-mode.open"
+                  items={[
+                    {
+                      id: 'reference.work-mode.projects',
+                      label: 'Projects',
+                      checked: workMode === 'Projects',
+                      onSelect: () => setWorkMode('Projects'),
+                    },
+                    {
+                      id: 'reference.work-mode.tasks',
+                      label: 'Tasks',
+                      checked: workMode === 'Tasks',
+                      onSelect: () => setWorkMode('Tasks'),
+                    },
+                  ]}
+                />
+              }
             >
-              <ClientSidebarItem
-                actionId="reference.project.open"
-                label="Design system"
-                selected
-                icon={<House />}
-                count={12}
-                onClick={() => setSubmitted('Project opened')}
-              />
-            </SidebarSection>
-          </ClientSidebar>
+              <SidebarSection
+                title="Projects"
+                open={section}
+                onOpenChange={setSection}
+                actionId="reference.projects.toggle"
+              >
+                <ClientSidebarItem
+                  actionId="reference.project.open"
+                  label="Design system"
+                  selected
+                  icon={<House />}
+                  count={12}
+                  onClick={() => setSubmitted('Project opened')}
+                />
+              </SidebarSection>
+            </ClientSidebar>
+          </SidebarPanel>
           <SettingsGroup title="General">
+            <ClientSidebarToolbar
+              title={<ClientSidebarHeading as="span">Project actions</ClientSidebarHeading>}
+              actions={
+                <Button actionId="reference.sidebar.search" onClick={() => setSection((value) => !value)}>
+                  Search
+                </Button>
+              }
+            >
+              {section ? field : null}
+            </ClientSidebarToolbar>
             <SettingsField label="Project name">{field}</SettingsField>
             <SettingsDisclosure title="Advanced">
               <SettingsField label="Project">{select}</SettingsField>

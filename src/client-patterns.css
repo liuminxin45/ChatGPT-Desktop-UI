@@ -1,19 +1,30 @@
 /* Windows client reference profile, measured against the version in docs/CLIENT_ALIGNMENT.json. */
 .client-section-toggle{display:flex;align-items:center;gap:4px;height:24px;margin:-2px -4px;padding:2px 4px;border:0;border-radius:6px;background:transparent;color:inherit;font:inherit;text-align:left}
 .client-section-toggle:hover{color:var(--desktop-color-text)}
-.client-section-toggle:focus-visible{outline:2px solid var(--desktop-color-focus);outline-offset:1px}
+:root:not(:has([data-desktop-input-modality="pointer"])) .client-section-toggle:focus-visible{outline:none;background:var(--desktop-color-surface-hover)}
 .client-section-toggle>svg{opacity:0;transform:rotate(90deg);transition:opacity var(--desktop-motion-fast),transform var(--desktop-motion-fast)}
 .client-section-toggle:is(:hover,:focus-visible)>svg,.client-section-toggle[aria-expanded=false]>svg{opacity:1}
 .client-section-toggle[aria-expanded=false]>svg{transform:rotate(0deg)}
 @media(prefers-reduced-motion:reduce){.client-section-toggle>svg{transition:none}}
-.desktop-client{height:100%;font-size:14px;line-height:20px;font-family:var(--desktop-font-sans);font-synthesis:none;--desktop-font-size-body:14px;--desktop-size-client-sidebar:372px;--desktop-color-client-topbar:#e9e9ed;--desktop-color-client-input:#efefef;--desktop-color-client-pill:#eeeeee}
-.dark .desktop-client{--desktop-color-client-topbar:#1e2128;--desktop-color-client-input:#303030;--desktop-color-client-pill:#2c2c2c;--desktop-color-sidebar:#191b1d;--desktop-color-surface-overlay:#2c2c2c;--desktop-color-surface-hover:#363636}
-.desktop-client .kit-titlebar{height:44px;background:var(--desktop-color-client-topbar)}
+.desktop-client{height:100%;font-size:14px;line-height:20px;font-family:var(--desktop-font-sans);font-synthesis:none;--desktop-font-size-body:14px;--desktop-size-client-sidebar:372px;--desktop-color-shell:#f0f3f9;--desktop-color-sidebar:#ffffff;--desktop-color-navigation-selected:#e4e8ed;--desktop-color-on-navigation-selected:#1a1c1f;--desktop-color-client-topbar:var(--desktop-color-shell);--desktop-color-client-input:#efefef;--desktop-color-client-pill:#eeeeee;--desktop-background-shell:var(--desktop-color-shell);--desktop-color-workspace-boundary:rgb(0 0 0 / .08)}
+.dark .desktop-client{--desktop-color-shell:#1e2023;--desktop-background-shell:linear-gradient(90deg,transparent 52px,#1e2023 720px),linear-gradient(180deg,#1b202d 0%,#1a2033 46.3%,#1a1f35 60%,#1c1f30 78.7%,#1b1f32 100%);--desktop-color-navigation-selected:rgb(255 255 255 / .08);--desktop-color-on-navigation-selected:#ffffff;--desktop-color-unread:#3a83f7;--desktop-color-client-input:#2d2d2f;--desktop-color-client-pill:#2c2c2c;--desktop-color-sidebar:#1a1b1d;--desktop-color-surface-overlay:#2c2c2c;--desktop-color-surface-hover:#363636;--desktop-color-workspace-boundary:rgb(255 255 255 / .04)}
+.desktop-client .kit-titlebar{height:44px;align-items:flex-start;background:transparent}
+.desktop-client .kit-titlebar__actions,.desktop-client .kit-titlebar__trailing{height:36px}
+.desktop-client .kit-window-controls>.desktop-action-tooltip>.desktop-icon-control,.desktop-client .kit-window-controls>.desktop-icon-control,.desktop-client .kit-window-controls>.desktop-action-tooltip>.desktop-button,.desktop-client .kit-window-controls>.desktop-button{height:36px}
 .desktop-client .kit-titlebar__menu{font-size:14px}.desktop-client .kit-titlebar__actions{gap:6px}
-.desktop-client .kit-shell__navigation{width:52px}.desktop-client .kit-rail{width:52px;padding-top:8px}
+.desktop-client .kit-shell__navigation{width:52px}.desktop-client .kit-rail{width:52px;padding-top:8px;background:transparent}
 .desktop-client .kit-rail__items{gap:8px}.desktop-client .kit-rail .kit-rail__item{width:36px;height:36px}
-.desktop-client .kit-sidebar{width:var(--desktop-size-client-sidebar);border-inline-end:1px solid var(--desktop-color-border);border-top-left-radius:14px;overflow:hidden}
-.desktop-client .kit-shell__main{border-top-left-radius:0}.desktop-client .kit-shell__body{padding-right:4px;padding-bottom:4px}
+.desktop-client .kit-sidebar{--desktop-sidebar-width:var(--desktop-size-client-sidebar);border-inline-end:1px solid var(--desktop-color-border);border-radius:0;overflow:hidden}
+.desktop-client .kit-sidebar[hidden]{border-inline-end-width:0}
+.client-sidebar-heading{margin:0;min-width:0;padding-inline:4px;font-size:var(--desktop-font-size-toolbar);line-height:var(--desktop-line-height-heading);font-weight:var(--desktop-font-weight-emphasis);text-align:start;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.desktop-client .client-sidebar-heading{font-size:18px}
+.client-sidebar>header .desktop-button:has(.client-sidebar-heading){padding-inline:0;height:auto}
+.client-sidebar-toolbar{display:flex;flex-direction:column;flex:none;padding:8px 12px;gap:8px}
+.client-sidebar-toolbar__row{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:32px}
+.client-sidebar-toolbar__actions{display:flex;align-items:center;gap:2px;flex:none}
+.desktop-settings-form>.client-settings-group{margin-bottom:0}
+.desktop-client .kit-shell__main{display:flex;flex-direction:column;border-radius:0}.desktop-client .kit-shell__body{padding-right:4px;padding-bottom:4px}
+.desktop-client .kit-shell__workspace{border-radius:14px;box-shadow:0 0 0 1px var(--desktop-color-workspace-boundary)}
 .client-sidebar{height:100%;display:flex;flex-direction:column}.client-sidebar>header{display:flex;align-items:center;justify-content:space-between;height:48px;padding:8px 12px;flex:none}.client-sidebar-scroll{flex:1;min-height:0;padding:0 8px 20px}
 .client-sidebar-link.desktop-button{display:flex;width:100%;justify-content:flex-start;min-height:32px;height:auto;padding:6px 8px;gap:10px;border-radius:10px;font-size:14px;line-height:20px;font-weight:500;white-space:normal}
 .client-sidebar-label{flex:1;min-width:0;overflow-wrap:anywhere;white-space:normal;text-align:start}.client-sidebar-count{flex:none;color:var(--desktop-color-text-muted)}
@@ -21,10 +32,17 @@
 .client-sidebar-link.desktop-button>.desktop-action-glyph{width:16px;height:20px;flex:none}
 .client-sidebar .client-sidebar-link.desktop-button:hover:not(:disabled){background:var(--desktop-color-client-pill,var(--desktop-color-surface-hover))}
 .client-sidebar-link.desktop-button:active{transform:none}
+.client-mode-switcher.desktop-button{font-size:18px;line-height:24px;font-weight:var(--desktop-font-weight-emphasis);gap:6px;min-height:32px}
+.client-mode-menu .client-menu-item{font-size:16px;line-height:24px;font-weight:var(--desktop-font-weight-emphasis);min-height:36px}
+.client-sidebar-record.desktop-record-row{display:flex;align-items:center;gap:4px;padding:0}
+.client-sidebar-record>.client-sidebar-link{flex:1;min-width:0}
+.client-sidebar-record-actions{flex:none;opacity:0;pointer-events:none}
+.client-sidebar-record:hover>.client-sidebar-record-actions,.client-sidebar-record:focus-within>.client-sidebar-record-actions,.client-sidebar-record:has([data-state=open])>.client-sidebar-record-actions{opacity:1;pointer-events:auto}
+@media(hover:none){.client-sidebar-record-actions{opacity:1;pointer-events:auto}}
 .client-sidebar-section{margin:24px 0 0}.client-sidebar-section>header{display:flex;align-items:center;justify-content:space-between;padding:0 8px 8px}.client-sidebar-section h2{font-size:14px;line-height:20px;color:var(--desktop-color-text-muted);font-weight:600;margin:0}.client-sidebar-section>header>div{display:flex}
 .client-menu{min-width:220px;font-size:13px;line-height:20px;padding:5px;max-height:min(var(--radix-dropdown-menu-content-available-height,calc(100vh - 16px)),calc(100vh - 16px));overflow:auto;border-radius:16px}.client-menu-entry{display:contents}.client-menu-item{min-height:29px;padding:4px 8px;gap:8px}.client-menu-item>svg{width:16px;height:16px;flex:none}.client-menu-item>span{flex:1}.client-menu-item>small,.client-menu-item>kbd{color:var(--desktop-color-text-muted);font:inherit;font-size:12px;white-space:nowrap}.client-menu-separator{height:1px;background:var(--desktop-color-border-strong);margin:5px 8px}.client-menu-heading{padding:8px 10px;color:var(--desktop-color-text-muted)}
-.client-settings-group{margin:0 0 52px}.client-settings-group>h2{font-weight:600;font-size:14px;line-height:20px;margin:0 0 16px!important}.client-settings-card{padding:0 16px;background:var(--desktop-color-surface);border:1px solid var(--desktop-color-border);border-radius:16px}.client-settings-field{min-height:60px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:12px 0}.client-settings-field+.client-settings-field{border-top:1px solid var(--desktop-color-border-strong)}.client-settings-field>div:first-child{min-width:0;max-width:520px;flex:1;overflow-wrap:anywhere}.client-settings-field>div:last-child{min-width:0;max-width:50%;display:flex;align-items:center;gap:8px}.client-settings-field h3{font-size:13px;line-height:20px;font-weight:600;margin:0}.client-settings-field p{font-size:12px;line-height:16px;margin:2px 0 0;color:var(--desktop-color-text-subtle)}
-.client-settings-field .desktop-select{width:auto;min-width:72px;min-height:28px;height:auto;padding-block:3px;font-size:12px;border:1px solid var(--desktop-color-border-strong);background:var(--desktop-color-client-pill);border-radius:10px}
+.client-settings-group{margin:0 0 52px}.client-settings-group>h2{font-weight:600;font-size:14px;line-height:20px;margin:0 0 16px!important}.client-settings-card{padding:0 16px;background:var(--desktop-color-background);border:1px solid var(--desktop-color-border);border-radius:16px}.client-settings-field{min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:8px 0}.client-settings-field~.client-settings-field{border-top:1px solid var(--desktop-color-border)}.client-settings-field>div:first-child{min-width:0;max-width:520px;flex:1;overflow-wrap:anywhere}.client-settings-field>div:last-child{min-width:0;max-width:50%;display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:8px}.client-settings-field h3{font-size:13px;line-height:20px;font-weight:600;margin:0}.client-settings-field p{font-size:12px;line-height:16px;margin:2px 0 0;color:var(--desktop-color-text-subtle)}
+.client-settings-field .desktop-select{width:auto;min-width:72px;min-height:28px;height:auto;font-size:12px;border:1px solid var(--desktop-color-border);background:transparent;border-radius:999px;padding:2px 8px}
 .client-settings-field .desktop-switch{width:32px;height:20px}.client-settings-field .desktop-switch--checked>span{transform:translateX(12px)}.client-settings-field .desktop-switch>span{background:var(--desktop-color-on-send)}
 .client-settings-disclosure>button{display:flex;align-items:center;gap:6px;background:none;border:0;color:var(--desktop-color-text);font:inherit;font-weight:600;padding:0}.client-settings-disclosure>button[aria-expanded=true]>svg{transform:rotate(90deg)}.client-settings-disclosure>div{margin-top:24px}.client-settings-disclosure>div[hidden]{display:none}
 @media(max-width:1000px){.desktop-client{--desktop-size-client-sidebar:300px}.client-settings-field{gap:12px}}
@@ -51,5 +69,17 @@
 .client-settings-field>div:last-child:has(>.desktop-input,>.desktop-input-group){width:50%}
 .desktop-client :is(.kit-settings-layout>.kit-sidebar,.kit-sidebar[data-desktop-sidebar-layout=settings]){width:336px}
 @media(max-width:1000px){.desktop-client :is(.kit-settings-layout>.kit-sidebar,.kit-sidebar[data-desktop-sidebar-layout=settings]){width:260px}}
+.desktop-client .kit-settings-layout>.kit-sidebar{--desktop-sidebar-width:336px}
+@media(max-width:1000px){.desktop-client .kit-settings-layout>.kit-sidebar{--desktop-sidebar-width:260px}}
 
 .desktop-ui-portal.desktop-client{height:auto}
+
+.dark .desktop-client .kit-window-controls{--desktop-color-text-subtle:#ffffff}
+
+/* Grouped records share the settings card inset; controls retain their own geometry. */
+.dark .client-settings-card{background:var(--desktop-color-surface)}
+.client-settings-card>.desktop-record-row{--desktop-space-record-inline:0;--desktop-space-record-block:12px}
+.client-settings-card>.client-settings-disclosure{padding-block:12px}
+.client-settings-card>.client-settings-disclosure>div{margin-top:12px}
+
+.client-settings-card>.desktop-record-row[data-separator=true]:last-child{border-bottom:0}

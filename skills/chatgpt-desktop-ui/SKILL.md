@@ -5,6 +5,8 @@ description: Build or refactor a desktop-style app to match the supplied ChatGPT
 
 # ChatGPT-style desktop UI
 
+Buttons, icon actions, Tabs, navigation and Select/menu/Popover triggers never draw a focus outline or outer ring in either theme. Keyboard focus uses a neutral fill inside the existing target; primary/send actions retain their semantic foreground and use their hover fill. Pointer dismissal restores DOM focus without a residual trigger highlight. Escape is dismissal, not a switch to keyboard navigation. Keep native focus, Tab/arrow navigation, Enter/Space activation and disabled semantics; never blur controls to hide a visual state. Text entry retains neutral inset focus and invalid fields retain their error boundary. Tooltips are descriptive: the same Escape removes a visible tooltip and dismisses the active interactive overlay; a tooltip must never require a preliminary Escape. Open Select/menu/Popover and child Dialog still dismiss before their parent, and IME Escape never closes them.
+
 Tooltips must preserve layout ownership: row, tile and surface actions use the real button as their trigger, including explicit grid placement. Test with accessible labels and disabled states; an unlabeled fixture cannot detect wrapper-induced sizing defects.
 
 Choose shared Button geometry explicitly: command for compact centered actions, row for left-aligned single-target records with shared insets, tile for square contained image previews. Group stacked title and metadata as one content block. Do not apply ordinary command geometry to lists or media. Surface layout is reserved for documented domain graphics such as schedule cells, with native action/accessibility behavior but domain-owned geometry. Multi-action records remain static RecordRow groups.
@@ -24,6 +26,8 @@ Create a faithful adaptation of the supplied client design language while preser
 Read [design-system.md](references/design-system.md) and the relevant images in [visual-references.md](references/visual-references.md). For a redesign, also read [design-guidance.md](references/design-guidance.md). Read [integration.md](references/integration.md) before adapting host behavior, persistence or embedded surfaces.
 
 ## Implement
+
+For a native client frame, reuse DesktopShell's complete workspace radius and outer insets. TitleBar.actions and NavigationRail.children retain Host action trees and router links; NavigationRailItem and WindowControls own target geometry, glyphs and focus feedback. The 2026-10-14 window-shell profile shares one continuous background across title bar and rail, with 36px title actions inside the 44px header. Never add a second rail top inset or reconstruct the frame in a Host.
 
 Include transient and failure surfaces in the audit. Use shared `Toaster`/`toast`, Host-controlled `ToastNotice`, anchored `Popover` and persistent `InlineNotice`. Do not import a third-party toast renderer or hand-paint notifications/popovers. Remove Host overrides of shared overlay backgrounds, corners, shadows and insets; place domain layout inside the overlay. Check notification success/error/undo/dismissal, localized close tooltips, Escape and focus return through the real consumer pipeline. Scan CSS and raw containers as well as shared imports.
 
@@ -45,7 +49,7 @@ For a new React example, copy `assets/ui` and `assets/starter` to adjacent direc
 
 The key visual relationships are a neutral window shell, quiet contextual sidebar, darker main canvas in dark mode, borderless idle controls, filled hover states and compact rounded floats. Use the 40px window bar, 48px global rail, 32px selected tile, 20px outline/fill icons and 8px blue unread dots when the target actually has that shell. Keep workspaces full width; settings body maximum 720px. Typography defaults to system fonts and regular weight, with a restrained 11–20px UI scale. Do not force an icon rail or custom title bar into every standalone utility.
 
-Use semantic tokens, not per-page gray literals. Respect explicit user cursor/font preferences; the packaged arrow-cursor policy is an originating desktop preference. Distinguish errors from unread states. Keep visible keyboard focus and labels. Name-only navigation tooltips must have no shortcut line or arrow.
+Use semantic tokens, not per-page gray literals. Respect explicit user cursor/font preferences; the packaged arrow-cursor policy is an originating desktop preference. Distinguish errors from unread states. Keep visible keyboard focus through neutral target fill and labels. Name-only navigation tooltips must have no shortcut line or arrow.
 
 Menu pointer highlight and keyboard focus use the shared surface fill without an outer outline or ring. Radix also focuses items during pointer movement. Reuse the menu's semantic focus rules instead of adding Tailwind outline utilities or allowing generic control focus rules to recolor them. Verify submenu, checkbox/radio, disabled, arrow navigation, Enter activation and focus return through the actual consumer CSS pipeline.
 

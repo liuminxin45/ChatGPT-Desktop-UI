@@ -64,7 +64,7 @@ export function InputBehaviorRoot({ children }: { children: ReactNode }) {
     const document = element.ownerDocument;
     const pointer = () => { element.dataset.desktopInputModality = 'pointer'; };
     const keyboard = (event: globalThis.KeyboardEvent) => {
-      if (!['Shift', 'Control', 'Alt', 'Meta'].includes(event.key) && !event.isComposing) {
+      if (!['Shift', 'Control', 'Alt', 'Meta', 'Escape'].includes(event.key) && !event.isComposing && event.keyCode !== 229) {
         element.dataset.desktopInputModality = 'keyboard';
       }
     };

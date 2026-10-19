@@ -73,6 +73,7 @@
     "test": "node scripts/verify.mjs",
     "test:composer": "node scripts/verify-composer-actions.mjs",
     "test:input": "node scripts/verify-input.mjs",
+    "test:temporal": "node scripts/verify-temporal.mjs",
     "test:menus": "node scripts/verify-menu-focus.mjs",
     "test:record-actions": "node scripts/verify-record-actions.mjs",
     "test:list-spacing": "node scripts/verify-list-spacing.mjs",
@@ -106,9 +107,11 @@
     "prepublishOnly": "npm run check && npm run test:package",
     "test:unit": "vitest run --dir src/components --maxWorkers=1",
     "test:visual": "node scripts/verify-visual.mjs",
+    "test:window-shell": "node scripts/verify-window-shell.mjs",
     "test:visual:update": "node scripts/verify-visual.mjs --update",
     "test:settings-profile": "node scripts/verify-settings-profile.mjs",
-    "test:action-layout": "node scripts/verify-action-layout.mjs"
+    "test:action-layout": "node scripts/verify-action-layout.mjs",
+    "test:context-drop": "node scripts/verify-context-drop.mjs"
   },
   "peerDependencies": {
     "react": "^18.3.1 || ^19.0.0",
