@@ -1,3 +1,4 @@
+import { browserOptions } from './browser-options.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -14,7 +15,7 @@ const server=http.createServer(async(req,res)=>{
   else {res.setHeader('Content-Type','text/html');res.end('<!doctype html><html><head><link rel="stylesheet" href="/icon-actions.css"></head><body><div id="root"></div><script src="/icon-actions.js"></script></body></html>');}
 });
 await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
-const browser=await chromium.launch({channel:'msedge',headless:true}),checks=[],errors=[];
+const browser=await chromium.launch(browserOptions()),checks=[],errors=[];
 try{
   for(const theme of ['light','dark'])for(const width of [1920,1280,390,320]){
     const context=await browser.newContext({colorScheme:theme,viewport:{width,height:800},deviceScaleFactor:width===1280?1.25:1});
