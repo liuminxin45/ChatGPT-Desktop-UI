@@ -75,7 +75,8 @@
 .desktop-button--tile>span:has(>img){display:block;width:100%;height:100%}
 .desktop-surface-action{font:inherit;color:inherit;cursor:pointer}
 .desktop-surface-action:disabled{cursor:default;opacity:.55}
-:root:not(:has([data-desktop-input-modality="pointer"])) .desktop-surface-action:focus-visible{outline:none;background:var(--desktop-color-surface-hover)}
+/* Domain surfaces may supply an inline resting fill; shared keyboard feedback still owns focus. */
+:root:not(:has([data-desktop-input-modality="pointer"])) .desktop-surface-action:focus-visible{outline:none;background:var(--desktop-color-surface-hover)!important}
 .desktop-input:hover:not(:disabled),.desktop-textarea:hover:not(:disabled){background:var(--desktop-color-surface-hover)}
 .desktop-textarea--auto{overflow-y:hidden;resize:none;scrollbar-gutter:stable;scrollbar-width:thin;scrollbar-color:var(--desktop-color-border-strong) transparent}
 .desktop-input:focus,.desktop-textarea:focus{box-shadow:var(--desktop-input-focus-ring)}

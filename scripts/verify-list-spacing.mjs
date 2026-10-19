@@ -84,7 +84,7 @@ try {
       await page.waitForFunction(() => {
         const element = document.querySelector('[role="tab"][aria-selected="true"]');
         const probe = document.createElement('span');
-        probe.style.background = 'var(--desktop-color-surface-selected)';
+        probe.style.background = 'var(--desktop-color-surface-hover)';
         element.append(probe);
         const ready = getComputedStyle(element).backgroundColor === getComputedStyle(probe).backgroundColor;
         probe.remove();
@@ -93,25 +93,29 @@ try {
       const tabAppearance = await tab.evaluate((element) => {
         const css = getComputedStyle(element);
         const probe = document.createElement('span');
-        probe.style.background = 'var(--desktop-color-surface-selected)';
+        probe.style.background = 'var(--desktop-color-surface-hover)';
         element.append(probe);
-        const selected = getComputedStyle(probe).backgroundColor;
+        const focusedFill = getComputedStyle(probe).backgroundColor;
         probe.remove();
         return {
           border: css.borderWidth,
           fill: css.backgroundColor,
-          selected,
+          focusedFill,
           radius: css.borderRadius,
           bottomRadius: css.borderBottomLeftRadius,
           fontWeight: css.fontWeight,
           outline: css.outlineStyle,
+          shadow: css.boxShadow,
+          focused: document.activeElement === element,
         };
       });
       assert.equal(tabAppearance.border, '0px', 'selected Tabs must not retain a legacy bottom line');
-      assert.equal(tabAppearance.fill, tabAppearance.selected);
+      assert.equal(tabAppearance.fill, tabAppearance.focusedFill, 'keyboard focus uses the shared neutral fill');
       assert.equal(tabAppearance.bottomRadius, tabAppearance.radius);
       assert.equal(tabAppearance.fontWeight, '400');
-      assert.notEqual(tabAppearance.outline, 'none', 'keyboard focus remains visible');
+      assert.equal(tabAppearance.outline, 'none');
+      assert.equal(tabAppearance.shadow, 'none');
+      assert.equal(tabAppearance.focused, true, 'arrow navigation retains focus on the filled selected Tab');
       await page.getByRole('button', { name: 'Menu', exact: true }).click();
       assert.ok((await gap(page.getByRole('menuitem'))) >= 4);
       await page.waitForFunction(() => document.activeElement?.closest('[role="menu"]'));
