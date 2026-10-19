@@ -141,6 +141,7 @@ try {
       // Visibility can precede Radix's focus/layer effects by one frame. Wait for
       // keyboard ownership, then still require exactly one Escape to dismiss.
       await p.getByRole('dialog', { name: 'Goal details' }).and(p.locator(':focus-within')).waitFor();
+      await p.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
       await p.keyboard.press('Escape');
       await p.getByRole('dialog', { name: 'Goal details' }).waitFor({ state: 'hidden' });
       await p.getByRole('button', { name: 'View goal', exact: true }).click();
