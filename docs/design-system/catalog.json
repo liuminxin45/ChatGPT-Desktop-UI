@@ -28995,13 +28995,6 @@
           "description": ""
         },
         {
-          "name": "layout",
-          "required": false,
-          "type": "\"row\" | \"command\" | \"tile\" | \"surface\" | undefined",
-          "native": false,
-          "description": "Commands are compact; rows and media own distinct, shared geometry. Surface is reserved for domain graphics such as schedule grids."
-        },
-        {
           "name": "badge",
           "required": false,
           "type": "ReactNode",
@@ -30076,6 +30069,13 @@
           "type": "boolean | undefined",
           "native": false,
           "description": ""
+        },
+        {
+          "name": "sidebarLayout",
+          "required": false,
+          "type": "\"default\" | \"settings\" | undefined",
+          "native": false,
+          "description": "Settings category navigation uses the shared settings width without remounting its contents."
         },
         {
           "name": "children",

@@ -8,6 +8,7 @@ import {
   InputBehaviorRoot,
   Button,
   type ComposerActionState,
+  type ComposerActionButtonProps,
 } from '../src';
 import '../src/styles.css';
 const events = { send: 0, stop: 0 };
@@ -53,6 +54,24 @@ function Example() {
             onSend={() => events.send++}
           />
         </div>
+      </section>
+      <section aria-label="Untyped layout overrides" style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
+        {(['command', 'row', 'tile', 'surface'] as const).flatMap((layout) =>
+          (['ready', 'sending', 'stoppable', 'stopping'] as const).map((state) => (
+            <ComposerActionButton
+              key={`${layout}-${state}`}
+              {...({ layout } as unknown as Partial<ComposerActionButtonProps>)}
+              state={state}
+              actionId={`fixture.override.${layout}.${state}`}
+              sendLabel={`${layout} ready`}
+              sendingLabel={`${layout} sending`}
+              stopLabel={`${layout} stoppable`}
+              stoppingLabel={`${layout} stopping`}
+              onSend={() => {}}
+              onStop={() => {}}
+            />
+          )),
+        )}
       </section>
       <section style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
         <div style={{ width: 460 }}>

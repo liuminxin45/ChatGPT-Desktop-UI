@@ -1,3 +1,4 @@
+import { browserOptions } from './browser-options.mjs';
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
@@ -5,7 +6,7 @@ import { createDemoServer } from './serve-demo.mjs';
 const server = createDemoServer();
 await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
 await mkdir('docs/validation/ai-output', { recursive: true });
-const browser = await chromium.launch({ channel: process.env.UI_BROWSER_CHANNEL || 'msedge', headless: true });
+const browser = await chromium.launch(browserOptions());
 const checks = [];
 const errors = [];
 try {

@@ -1,3 +1,4 @@
+import { browserOptions } from './browser-options.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -58,8 +59,7 @@ let completed = false;
 await fs.writeFile(path.join(evidence, 'report.json'), JSON.stringify({ status: 'running' }));
 let browser;
 try {
-  const channel = process.env.UI_BROWSER_CHANNEL || 'msedge';
-  browser = await chromium.launch({ headless: true, ...(channel === 'chromium' ? {} : { channel }) });
+  browser = await chromium.launch(browserOptions());
   for (const [width, height, scale] of [
     [1920, 1080, 1],
     [1280, 800, 1],

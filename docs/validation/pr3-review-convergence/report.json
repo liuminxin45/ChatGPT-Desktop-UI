@@ -1,0 +1,596 @@
+{
+  "date": "2026-10-13",
+  "repository": "liuminxin45/ChatGPT-Desktop-UI",
+  "reviewedPullRequest": 3,
+  "reviewedMain": "ecd29c9e5ecd3bc514ef40ee1330d8def136f6f6",
+  "referenceVersion": "Windows ChatGPT 26.1002.7124.0",
+  "scope": "Post-merge review convergence on a separate branch. This task does not modify PR #3 comments, resolution state or metadata.",
+  "classification": {
+    "alreadyFixed": 0,
+    "outdatedDefect": 0,
+    "stillValidDefect": 8,
+    "supersededCiFailurePredictions": 2
+  },
+  "threads": [
+    {
+      "url": "https://github.com/liuminxin45/ChatGPT-Desktop-UI/pull/3#discussion_r4254008945",
+      "path": "scripts/verify-settings-profile.mjs",
+      "subject": "Browser channel",
+      "classification": "still-valid",
+      "verification": "Still valid: the settings probe hard-coded Edge. The predicted CI launch failure is not an observed failure; recorded workflows succeeded.",
+      "fix": "All Chromium probes use browserOptions(), honoring UI_BROWSER_CHANNEL and omitting channel for bundled Chromium."
+    },
+    {
+      "url": "https://github.com/liuminxin45/ChatGPT-Desktop-UI/pull/3#discussion_r4254008952",
+      "path": "src/client-patterns.css",
+      "subject": "Settings sidebar",
+      "classification": "still-valid",
+      "verification": "Still valid: the retained Demo SettingsNavigation lives in DesktopShell, outside SettingsLayout.",
+      "fix": "DesktopShell.sidebarLayout selects shared settings geometry without remounting the sidebar; the Demo passes settings for its Settings route."
+    },
+    {
+      "url": "https://github.com/liuminxin45/ChatGPT-Desktop-UI/pull/3#discussion_r4254008954",
+      "path": "src/controls.css",
+      "subject": "Native Tool typography",
+      "classification": "still-valid",
+      "verification": "Still valid: client-hosted Tool descendants were exempt from both the system font and regular-weight constraints.",
+      "fix": "System font and regular weight are enforced for Tools, with narrow semantic Settings emphasis and inherited emphasis for composed labels."
+    },
+    {
+      "url": "https://github.com/liuminxin45/ChatGPT-Desktop-UI/pull/3#discussion_r4254078390",
+      "path": "src/components/shell/index.tsx",
+      "subject": "Shell menu portals",
+      "classification": "still-valid",
+      "verification": "Still valid: TitleBar, NavigationRail and AvatarMenu, including its Appearance submenu, used raw Radix portals.",
+      "fix": "All four shell portals use createDesktopPortal and retain client profile, tokens and scoped ownership."
+    },
+    {
+      "url": "https://github.com/liuminxin45/ChatGPT-Desktop-UI/pull/3#discussion_r4254078400",
+      "path": "src/controls.css",
+      "subject": "Sender weight",
+      "classification": "still-valid",
+      "verification": "Still valid: the portable sender semantic class was globally assigned weight 600.",
+      "fix": "Sender labels use the shared regular-weight token."
+    },
+    {
+      "url": "https://github.com/liuminxin45/ChatGPT-Desktop-UI/pull/3#discussion_r4254256523",
+      "path": "scripts/verify-action-layout.mjs",
+      "subject": "Browser channel",
+      "classification": "still-valid",
+      "verification": "Still valid: the action layout probe hard-coded Edge. The prediction that CI necessarily fails is not supported by successful runs.",
+      "fix": "Uses the same browserOptions() helper as every other Chromium probe."
+    },
+    {
+      "url": "https://github.com/liuminxin45/ChatGPT-Desktop-UI/pull/3#discussion_r4254256527",
+      "path": "src/controls.css",
+      "subject": "Disabled Surface actions",
+      "classification": "still-valid",
+      "verification": "Still valid: Surface actions omit desktop-button and had no shared disabled opacity or cursor.",
+      "fix": "Surface :disabled has opacity 0.55 and default cursor, preserving domain-owned geometry and native command suppression."
+    },
+    {
+      "url": "https://github.com/liuminxin45/ChatGPT-Desktop-UI/pull/3#discussion_r4254256533",
+      "path": "src/components/conversation/index.tsx",
+      "subject": "Composer geometry",
+      "classification": "still-valid",
+      "verification": "Still valid: layout was inherited from ButtonProps and forwarded, allowing row/tile/surface to change the fixed send/stop geometry.",
+      "fix": "layout is omitted from public composer props, and command is forced after the props spread for untyped callers."
+    }
+  ],
+  "priorCi": [
+    {
+      "url": "https://github.com/liuminxin45/ChatGPT-Desktop-UI/actions/runs/38338983824",
+      "sha": "ffb8c5a499f4035aa2146071bb5c044bdad413ef",
+      "conclusion": "success",
+      "kind": "final-pr3-head"
+    },
+    {
+      "url": "https://github.com/liuminxin45/ChatGPT-Desktop-UI/actions/runs/38339992808",
+      "sha": "ef06f747ced25e2c480bf0c8756af881efae065a",
+      "conclusion": "success",
+      "kind": "merged-main"
+    },
+    {
+      "url": "https://github.com/liuminxin45/ChatGPT-Desktop-UI/actions/runs/38366715719",
+      "sha": "ecd29c9e5ecd3bc514ef40ee1330d8def136f6f6",
+      "conclusion": "success",
+      "kind": "latest-main-at-audit"
+    }
+  ],
+  "regressionSensitivity": {
+    "baseline": {
+      "base": "ecd29c9e5ecd3bc514ef40ee1330d8def136f6f6",
+      "results": [
+        {
+          "name": "composer",
+          "status": 1,
+          "expectedFailure": true,
+          "signal": null
+        },
+        {
+          "name": "action-layout",
+          "status": 1,
+          "expectedFailure": true,
+          "signal": null
+        },
+        {
+          "name": "settings-profile",
+          "status": 1,
+          "expectedFailure": true,
+          "signal": null
+        }
+      ]
+    },
+    "isolatedMutations": [
+      {
+        "name": "sender",
+        "status": 1,
+        "detected": true
+      },
+      {
+        "name": "tool-font",
+        "status": 1,
+        "detected": true
+      },
+      {
+        "name": "settings-sidebar",
+        "status": 1,
+        "detected": true
+      },
+      {
+        "name": "shell-portals",
+        "status": 1,
+        "detected": true
+      }
+    ]
+  },
+  "checks": [
+    {
+      "command": "npm run ci",
+      "status": "passed",
+      "exitCode": 0,
+      "browserChannel": "chromium",
+      "node": "24.19.0",
+      "scope": "Full local CI pipeline; after the final CSS correction, typecheck/build and final package/Windows visual checks were also repeated."
+    },
+    {
+      "command": "npm run check",
+      "status": "passed",
+      "node": "24.19.0",
+      "unitTests": 25,
+      "integrationTests": 13,
+      "includes": [
+        "lint",
+        "typecheck including Composer layout API assertion",
+        "library build",
+        "generated API docs check",
+        "shared-client library composition contract",
+        "format check",
+        "namespace",
+        "integration and browser configuration tests"
+      ]
+    },
+    {
+      "command": "npm run test:composer",
+      "browserChannel": "msedge",
+      "status": "passed",
+      "cases": 6
+    },
+    {
+      "command": "npm run test:settings-profile",
+      "browserChannel": "msedge",
+      "status": "passed",
+      "cases": 16
+    },
+    {
+      "command": "npm run test:package",
+      "status": "passed",
+      "node": "24.19.0",
+      "reactVersions": [
+        "18.3.1",
+        "19.0.0",
+        "19.3.0"
+      ],
+      "includes": [
+        "normal tarball install",
+        "typecheck",
+        "browser build",
+        "SSR"
+      ],
+      "scope": "Executed before the final CSS-only Select height correction; final distribution rendering and pixel baselines were rechecked after rebuilding that CSS."
+    },
+    {
+      "command": "npm run test:package-contract",
+      "status": "passed",
+      "browserChannel": "msedge",
+      "cases": 5,
+      "scope": "Final rebuilt distribution"
+    },
+    {
+      "command": "npm run test:visual",
+      "status": "passed",
+      "browserChannel": "msedge",
+      "cases": 8,
+      "baselineUpdated": false,
+      "scope": "Final rebuilt distribution"
+    },
+    {
+      "command": "npm run test:demo",
+      "status": "passed",
+      "browserChannel": "chromium",
+      "renderCases": 54,
+      "interactionGroups": 16
+    },
+    {
+      "command": "npm run test:reference",
+      "status": "passed",
+      "browserChannel": "chromium",
+      "renderCases": 26,
+      "interactions": 12
+    },
+    {
+      "command": "npm test",
+      "status": "passed",
+      "browserChannel": "chromium",
+      "renderCases": 24,
+      "interactionChecks": 9
+    },
+    {
+      "command": "npm run typecheck && npm run build:library",
+      "status": "passed",
+      "scope": "Repeated after the Select correction; new settings fixture is included in typecheck."
+    },
+    {
+      "command": "npm run test:action-layout",
+      "status": "passed",
+      "browserChannel": "chromium",
+      "cases": 16,
+      "scope": "Final regression also clears invocation state before asserting Space activation."
+    },
+    {
+      "command": "npm run test:action-layout",
+      "status": "passed",
+      "browserChannel": "msedge",
+      "cases": 16,
+      "scope": "Final regression also clears invocation state before asserting Space activation."
+    },
+    {
+      "command": "npm run audit:public",
+      "status": "passed",
+      "files": 358,
+      "historyCommits": 100,
+      "findings": 0
+    },
+    {
+      "command": "npm run test:settings-profile",
+      "status": "passed",
+      "browserChannel": "chromium",
+      "cases": 16,
+      "scope": "Final full-pipeline settings check includes selected-text bounds."
+    },
+    {
+      "command": "npm run skill:package && npm run skill:check",
+      "status": "passed",
+      "resourceLinks": 68
+    }
+  ],
+  "limits": [
+    "125% cases use browser emulation, not a change to Windows display scaling.",
+    "Synthetic fixtures and the real Demo are tested. Consumer application dependency upgrades and installed PHD/Collector/Processor acceptance are outside this PR.",
+    "The full client surface inventory still has unobserved destinations; this change does not claim complete native client fidelity.",
+    "Node 22 and Linux are not locally tested; their new-PR workflow results must be checked separately."
+  ],
+  "additionalFinding": {
+    "subject": "Long setting Select labels at narrow widths",
+    "verification": "Manual screenshot inspection found wrapped selected text extending beyond the fixed 28px setting Select and overlapping adjacent fields.",
+    "fix": "Keep the 28px minimum for short options, allow natural height for wrapped text, and assert selected-text bounds inside its control.",
+    "regressionDetectedOldHeight": true,
+    "oldHeightFailureBounds": {
+      "controlTop": 264,
+      "controlBottom": 300,
+      "valueTop": 261,
+      "valueBottom": 303
+    }
+  },
+  "screenshots": {
+    "source": "Synthetic library fixtures, rendered with Windows Edge and manually inspected. Existing Windows/Edge pixel baselines were not updated. The two Demo Settings captures use bundled Chromium.",
+    "files": [
+      "actions-light.png",
+      "actions-dark.png",
+      "composer-light.png",
+      "composer-dark.png",
+      "settings-narrow-light.png",
+      "settings-narrow-dark.png",
+      "demo-settings-light.png",
+      "demo-settings-dark.png"
+    ],
+    "inspectedViewports": [
+      "1920x1080",
+      "1280x800",
+      "1536x864 at deviceScaleFactor 1.25",
+      "760x800 settings"
+    ]
+  },
+  "settingsMeasurements": [
+    {
+      "shell": false,
+      "theme": "light",
+      "width": 1920,
+      "scale": 1,
+      "sidebar": 336,
+      "column": 728,
+      "toolBodyWeight": "400",
+      "labelWeight": "600",
+      "senderWeight": "400",
+      "selectBounds": {
+        "controlTop": 264,
+        "controlBottom": 314,
+        "valueTop": 268,
+        "valueBottom": 310
+      }
+    },
+    {
+      "shell": false,
+      "theme": "light",
+      "width": 1280,
+      "scale": 1,
+      "sidebar": 336,
+      "column": 728,
+      "toolBodyWeight": "400",
+      "labelWeight": "600",
+      "senderWeight": "400",
+      "selectBounds": {
+        "controlTop": 264,
+        "controlBottom": 314,
+        "valueTop": 268,
+        "valueBottom": 310
+      }
+    },
+    {
+      "shell": false,
+      "theme": "light",
+      "width": 1536,
+      "scale": 1.25,
+      "sidebar": 336,
+      "column": 728,
+      "toolBodyWeight": "400",
+      "labelWeight": "600",
+      "senderWeight": "400",
+      "selectBounds": {
+        "controlTop": 264,
+        "controlBottom": 314,
+        "valueTop": 268,
+        "valueBottom": 310
+      }
+    },
+    {
+      "shell": false,
+      "theme": "light",
+      "width": 760,
+      "scale": 1,
+      "sidebar": 260,
+      "column": 442,
+      "toolBodyWeight": "400",
+      "labelWeight": "600",
+      "senderWeight": "400",
+      "selectBounds": {
+        "controlTop": 280,
+        "controlBottom": 350,
+        "valueTop": 284,
+        "valueBottom": 346
+      }
+    },
+    {
+      "shell": false,
+      "theme": "dark",
+      "width": 1920,
+      "scale": 1,
+      "sidebar": 336,
+      "column": 728,
+      "toolBodyWeight": "400",
+      "labelWeight": "600",
+      "senderWeight": "400",
+      "selectBounds": {
+        "controlTop": 264,
+        "controlBottom": 314,
+        "valueTop": 268,
+        "valueBottom": 310
+      }
+    },
+    {
+      "shell": false,
+      "theme": "dark",
+      "width": 1280,
+      "scale": 1,
+      "sidebar": 336,
+      "column": 728,
+      "toolBodyWeight": "400",
+      "labelWeight": "600",
+      "senderWeight": "400",
+      "selectBounds": {
+        "controlTop": 264,
+        "controlBottom": 314,
+        "valueTop": 268,
+        "valueBottom": 310
+      }
+    },
+    {
+      "shell": false,
+      "theme": "dark",
+      "width": 1536,
+      "scale": 1.25,
+      "sidebar": 336,
+      "column": 728,
+      "toolBodyWeight": "400",
+      "labelWeight": "600",
+      "senderWeight": "400",
+      "selectBounds": {
+        "controlTop": 264,
+        "controlBottom": 314,
+        "valueTop": 268,
+        "valueBottom": 310
+      }
+    },
+    {
+      "shell": false,
+      "theme": "dark",
+      "width": 760,
+      "scale": 1,
+      "sidebar": 260,
+      "column": 442,
+      "toolBodyWeight": "400",
+      "labelWeight": "600",
+      "senderWeight": "400",
+      "selectBounds": {
+        "controlTop": 280,
+        "controlBottom": 350,
+        "valueTop": 284,
+        "valueBottom": 346
+      }
+    },
+    {
+      "shell": true,
+      "theme": "light",
+      "width": 1920,
+      "scale": 1,
+      "sidebar": 336,
+      "column": 728,
+      "toolBodyWeight": "400",
+      "labelWeight": "600",
+      "senderWeight": "400",
+      "selectBounds": {
+        "controlTop": 344,
+        "controlBottom": 394,
+        "valueTop": 348,
+        "valueBottom": 390
+      }
+    },
+    {
+      "shell": true,
+      "theme": "light",
+      "width": 1280,
+      "scale": 1,
+      "sidebar": 336,
+      "column": 728,
+      "toolBodyWeight": "400",
+      "labelWeight": "600",
+      "senderWeight": "400",
+      "selectBounds": {
+        "controlTop": 344,
+        "controlBottom": 394,
+        "valueTop": 348,
+        "valueBottom": 390
+      }
+    },
+    {
+      "shell": true,
+      "theme": "light",
+      "width": 1536,
+      "scale": 1.25,
+      "sidebar": 336,
+      "column": 728,
+      "toolBodyWeight": "400",
+      "labelWeight": "600",
+      "senderWeight": "400",
+      "selectBounds": {
+        "controlTop": 344,
+        "controlBottom": 394,
+        "valueTop": 348,
+        "valueBottom": 390
+      }
+    },
+    {
+      "shell": true,
+      "theme": "light",
+      "width": 760,
+      "scale": 1,
+      "sidebar": 260,
+      "column": 386,
+      "toolBodyWeight": "400",
+      "labelWeight": "600",
+      "senderWeight": "400",
+      "selectBounds": {
+        "controlTop": 360,
+        "controlBottom": 450,
+        "valueTop": 364,
+        "valueBottom": 446
+      }
+    },
+    {
+      "shell": true,
+      "theme": "dark",
+      "width": 1920,
+      "scale": 1,
+      "sidebar": 336,
+      "column": 728,
+      "toolBodyWeight": "400",
+      "labelWeight": "600",
+      "senderWeight": "400",
+      "selectBounds": {
+        "controlTop": 344,
+        "controlBottom": 394,
+        "valueTop": 348,
+        "valueBottom": 390
+      }
+    },
+    {
+      "shell": true,
+      "theme": "dark",
+      "width": 1280,
+      "scale": 1,
+      "sidebar": 336,
+      "column": 728,
+      "toolBodyWeight": "400",
+      "labelWeight": "600",
+      "senderWeight": "400",
+      "selectBounds": {
+        "controlTop": 344,
+        "controlBottom": 394,
+        "valueTop": 348,
+        "valueBottom": 390
+      }
+    },
+    {
+      "shell": true,
+      "theme": "dark",
+      "width": 1536,
+      "scale": 1.25,
+      "sidebar": 336,
+      "column": 728,
+      "toolBodyWeight": "400",
+      "labelWeight": "600",
+      "senderWeight": "400",
+      "selectBounds": {
+        "controlTop": 344,
+        "controlBottom": 394,
+        "valueTop": 348,
+        "valueBottom": 390
+      }
+    },
+    {
+      "shell": true,
+      "theme": "dark",
+      "width": 760,
+      "scale": 1,
+      "sidebar": 260,
+      "column": 386,
+      "toolBodyWeight": "400",
+      "labelWeight": "600",
+      "senderWeight": "400",
+      "selectBounds": {
+        "controlTop": 360,
+        "controlBottom": 450,
+        "valueTop": 364,
+        "valueBottom": 446
+      }
+    }
+  ],
+  "observedWarnings": [
+    "Browserslist requested a data refresh during the reference build.",
+    "Notification fixture bundling reported ignored bare imports from a side-effect-free generated chunk. All corresponding tests passed."
+  ],
+  "initialVerificationIssues": [
+    "An early typecheck was started before dependency installation completed and reported missing icon exports; after installation, the full and final typechecks passed.",
+    "Initial fixture checks needed the document adapter and unique matrix labels; corrected fixtures passed all final checks."
+  ]
+}

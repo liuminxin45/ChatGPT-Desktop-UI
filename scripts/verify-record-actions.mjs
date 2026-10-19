@@ -1,3 +1,4 @@
+import { browserOptions } from './browser-options.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -32,7 +33,7 @@ let browser;
 const results = [];
 const background = (element) => getComputedStyle(element).backgroundColor;
 try {
-  browser = await chromium.launch({ channel: process.env.UI_BROWSER_CHANNEL || 'msedge', headless: true });
+  browser = await chromium.launch(browserOptions());
   for (const theme of ['light', 'dark'])
     for (const [width, height, scale] of [
       [1920, 1080, 1],
