@@ -8,6 +8,7 @@ export {
   ExternalLink as SourceIcon,
   Save as SaveIcon,
   CircleCheck as CompleteIcon,
+  CircleAlert as AlertIcon,
   TerminalSquare as AssistantIcon,
   Monitor as ComputerIcon,
   PanelLeft as SidebarIcon,

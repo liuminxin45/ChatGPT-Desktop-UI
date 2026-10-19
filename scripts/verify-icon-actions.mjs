@@ -38,6 +38,15 @@ try {
     await page.getByRole('button', {name:'Attach file',exact:true}).focus();
     await page.getByRole('tooltip', {name:'Attach file',exact:true}).waitFor();
     await page.getByRole('button', {name:'Mark complete',exact:true}).waitFor();
+    for (const name of ['Production failed','Production submitted']) {
+      const action=page.getByRole('button',{name,exact:true});
+      assert.equal(await action.locator('svg').count(),1);
+      const before=await action.boundingBox();await action.hover();
+      await page.getByRole('tooltip',{name,exact:true}).waitFor();
+      const hover=await action.boundingBox();assert.deepEqual([hover.width,hover.height],[before.width,before.height]);
+      await page.mouse.down();const pressed=await action.boundingBox();await page.mouse.up();
+      assert.deepEqual([pressed.width,pressed.height],[before.width,before.height]);
+    }
     await page.getByRole('button', {name:'Collection actions',exact:true}).click();
     assert.equal(await page.locator('body').getAttribute('data-collection-open'), 'true');
     await page.getByRole('menuitem', {name:'Full collection',exact:true}).waitFor();

@@ -91,6 +91,11 @@ Embedded Tools inherit Host styles and typography. They must not mount another t
 
 ## Icon actions
 
+Use `Plus`, `CheckIcon` and `AlertIcon` for compact create, submitted and failed
+record actions. `AlertIcon` is the shared outline circle with an exclamation mark;
+the Host owns the status and the localized accessible name. Do not replace these
+actions with emoji or a locally drawn glyph.
+
 Use shared semantic action exports for attachment/delete/edit/refresh/link/source/save/complete. Auxiliary contextual actions may be icon-only; save, complete, apply, recording and confirmations keep short visible labels. Do not add redundant icons to all text actions. `Textarea.autoSize` is opt-in and shares measurement across portable and compatibility controls; its surrounding body owns scrolling. Existing inputs remain unchanged.
 
 Pass the action glyph as `icon` to either Button entry and keep its translated label in `children`. Labels remain visible by default. Menus, view/filter choices, primary workflow actions, confirmation/destructive actions and business-specific operations need visible names; an icon alone is insufficient.
