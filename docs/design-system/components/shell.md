@@ -20,7 +20,7 @@ Generated from TypeScript exports; edit implementation props/JSDoc, then run `np
 | onAccount | no | `(() => void) \| undefined` |
 | onSettings | no | `(() => void) \| undefined` |
 | onExit | no | `(() => void) \| undefined` |
-| labels | no | `{ appearance: string; account: string; settings: string; exit: string; system: string; light: string; dark: string; } \| undefined` |
+| labels | no | `{ appearance: string; account: string; settings: string; exit: string; system: string; light: string; dark: string; back?: string; } \| undefined` |
 
 ## DesktopShell (chatgpt-desktop-kit)
 
@@ -112,7 +112,9 @@ Shared settings shell; the Host owns category state and contextual sidebar visib
 | Prop | Required | Type |
 | --- | --- | --- |
 | title | yes | `ReactNode` |
-| showTitle | no | `boolean \| undefined` |
+| leading | no | `ReactNode` |
+| actions | no | `ReactNode` |
+| embedded | no | `boolean \| undefined` |
 
 ## SettingsSection (chatgpt-desktop-kit)
 

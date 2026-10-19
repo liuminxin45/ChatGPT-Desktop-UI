@@ -1,8 +1,283 @@
 import { Waveform } from '@phosphor-icons/react';
-import { forwardRef, useLayoutEffect, useRef, type ReactNode } from 'react';
+import {
+  forwardRef,
+  useEffect,
+  useId,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type HTMLAttributes,
+  type ReactNode,
+} from 'react';
 import { Button, Textarea, type ButtonProps } from '../../controls';
 import { ArrowUp, LoaderCircle } from 'lucide-react';
 import { classes } from '../classes';
+import { ScrollToBottomIcon } from '../../icons';
+import { useTranslation } from '../../strings';
+import { DismissalBoundary, useDismissalLayer } from '../../dismissal';
+import { useDismissDrag } from '../../runtime/dismiss-drag';
+export * from './composer-tools';
+export * from './composer-agent-controls';
+
+/** Responsive chat profile. Hosts retain routing, persistence, services and all business state. */
+export function ChatAppSurface({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
+  return <div {...props} className={classes('desktop-chat-app', className)} />;
+}
+
+export interface ChatHeaderProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
+  title: ReactNode;
+  subtitle?: ReactNode;
+  leading?: ReactNode;
+  actions?: ReactNode;
+  /** Floating mobile targets supplement a normal desktop object header. */
+  mobileTitle?: ReactNode;
+  /** Icon-only mobile header; the object title remains available on desktop. */
+  hideMobileTitle?: boolean;
+  /** A single compact application bar instead of separate floating targets. */
+  presentation?: 'floating' | 'bar';
+}
+
+/** One quiet object header; mobile controls use the reference's separate floating surfaces. */
+export function ChatHeader({
+  title,
+  subtitle,
+  leading,
+  actions,
+  mobileTitle,
+  hideMobileTitle = false,
+  presentation = 'floating',
+  className,
+  ...props
+}: ChatHeaderProps) {
+  return (
+    <header
+      {...props}
+      className={classes(
+        'desktop-chat-header',
+        presentation === 'bar' && 'desktop-chat-header--bar',
+        hideMobileTitle && 'desktop-chat-header--compact',
+        className,
+      )}
+    >
+      {leading ? <div className="desktop-chat-header__leading">{leading}</div> : null}
+      <div className="desktop-chat-header__copy">
+        <div className="desktop-chat-header__title">{title}</div>
+        {subtitle ? <div className="desktop-chat-header__subtitle">{subtitle}</div> : null}
+      </div>
+      {mobileTitle ? <div className="desktop-chat-header__mobile-title">{mobileTitle}</div> : null}
+      {actions ? <div className="desktop-chat-header__actions">{actions}</div> : null}
+    </header>
+  );
+}
+
+export interface ChatWorkspaceProps extends HTMLAttributes<HTMLDivElement> {
+  sidebar: ReactNode;
+  sidebarOpen: boolean;
+  onSidebarOpenChange(open: boolean): void;
+  sidebarLabel: string;
+  closeSidebarLabel: string;
+  sidebarId?: string;
+  contentId?: string;
+  header?: ReactNode;
+  /** A module-root catalog is primary content, not a dismissible history layer. */
+  sidebarPresentation?: 'drawer' | 'catalog';
+}
+
+/** Retained desktop sidebar/mobile drawer. Opening, folding and resizing never remount either subtree. */
+export function ChatWorkspace({
+  sidebar,
+  sidebarOpen,
+  onSidebarOpenChange,
+  sidebarLabel,
+  closeSidebarLabel,
+  sidebarId,
+  contentId,
+  header,
+  sidebarPresentation = 'drawer',
+  children,
+  className,
+  onKeyDown,
+  ...props
+}: ChatWorkspaceProps) {
+  const id = useId(),
+    panel = useRef<HTMLElement>(null),
+    content = useRef<HTMLDivElement>(null),
+    root = useRef<HTMLDivElement>(null);
+  const restoreFocus = useRef<HTMLElement | null>(null);
+  const close = useRef(onSidebarOpenChange);
+  close.current = onSidebarOpenChange;
+  const [mobile, setMobile] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches,
+  );
+  const modal = mobile && sidebarOpen && sidebarPresentation === 'drawer';
+  useDismissalLayer(modal, () => close.current(false));
+  const drag = useDismissDrag({
+    enabled: modal,
+    axis: 'x',
+    direction: -1,
+    surface: root,
+    extent: panel,
+    attribute: 'data-drawer-drag',
+    onDismiss: () => close.current(false),
+    offsetProperty: '--desktop-chat-drag-offset',
+    progressProperty: '--desktop-chat-drag-progress',
+  });
+  useEffect(() => {
+    const query = window.matchMedia('(max-width: 767px)'),
+      update = () => setMobile(query.matches);
+    query.addEventListener('change', update);
+    return () => query.removeEventListener('change', update);
+  }, []);
+  useLayoutEffect(() => {
+    const panelElement = panel.current,
+      contentElement = content.current;
+    if (panelElement) panelElement.inert = !sidebarOpen;
+    if (contentElement) contentElement.inert = mobile && sidebarOpen;
+    if (!modal) return;
+    restoreFocus.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    panelElement?.focus({ preventScroll: true });
+    return () => {
+      if (contentElement) contentElement.inert = false;
+      const target = restoreFocus.current;
+      if (target?.isConnected && !target.closest('[inert],[aria-hidden="true"]'))
+        target.focus({ preventScroll: true });
+    };
+  }, [mobile, sidebarOpen, modal]);
+  return (
+    <DismissalBoundary>
+      <div
+        {...props}
+        ref={root}
+        className={classes('desktop-chat-workspace', className)}
+        data-sidebar-open={sidebarOpen}
+        data-sidebar-presentation={sidebarPresentation}
+        onKeyDown={(event) => {
+          onKeyDown?.(event);
+          if (
+            !modal ||
+            event.defaultPrevented ||
+            event.nativeEvent.isComposing ||
+            event.nativeEvent.keyCode === 229 ||
+            !panel.current?.contains(event.target as Node)
+          )
+            return;
+          if (event.key === 'Escape') {
+            event.preventDefault();
+            event.stopPropagation();
+            close.current(false);
+          }
+          if (event.key !== 'Tab') return;
+          const targets = [
+            ...panel.current.querySelectorAll<HTMLElement>(
+              'button:not(:disabled),input:not(:disabled),a[href],[tabindex="0"]',
+            ),
+          ].filter((element) => element.getClientRects().length && !element.closest('[inert],[hidden]'));
+          const first = targets[0],
+            last = targets.at(-1);
+          if (!first) {
+            event.preventDefault();
+            panel.current.focus();
+          } else if (
+            event.shiftKey &&
+            (document.activeElement === first || document.activeElement === panel.current)
+          ) {
+            event.preventDefault();
+            last?.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+          }
+        }}
+      >
+        <button
+          type="button"
+          className="desktop-chat-workspace__backdrop"
+          tabIndex={-1}
+          aria-label={closeSidebarLabel}
+          aria-hidden={!modal}
+          onClick={() => onSidebarOpenChange(false)}
+        />
+        <aside
+          ref={panel}
+          id={sidebarId ?? id}
+          className="desktop-chat-workspace__sidebar"
+          tabIndex={-1}
+          role={modal ? 'dialog' : undefined}
+          aria-modal={modal || undefined}
+          aria-label={sidebarLabel}
+          aria-hidden={!sidebarOpen}
+          {...drag}
+        >
+          {sidebar}
+          {modal ? (
+            <div className="desktop-chat-workspace__drag-edge" data-drawer-drag aria-hidden="true" />
+          ) : null}
+        </aside>
+        <div
+          ref={content}
+          id={contentId}
+          className="desktop-chat-workspace__content"
+          aria-hidden={(mobile && sidebarOpen) || undefined}
+        >
+          {header}
+          {children}
+        </div>
+      </div>
+    </DismissalBoundary>
+  );
+}
+
+export interface NavigationDrawerProps extends HTMLAttributes<HTMLDivElement> {
+  open: boolean;
+  onOpenChange(open: boolean): void;
+  label: string;
+  closeLabel: string;
+  navigation: ReactNode;
+  footer?: ReactNode;
+  header?: ReactNode;
+}
+
+/** Phone navigation sharing ChatWorkspace's retained DOM, focus, drag and history contract.
+ * Desktop hosts provide their own persistent navigation beside this container. */
+export function NavigationDrawer({
+  open,
+  onOpenChange,
+  label,
+  closeLabel,
+  navigation,
+  footer,
+  children,
+  className,
+  ...props
+}: NavigationDrawerProps) {
+  const [mobile, setMobile] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches,
+  );
+  useEffect(() => {
+    const query = window.matchMedia('(max-width: 767px)');
+    const update = () => setMobile(query.matches);
+    query.addEventListener('change', update);
+    return () => query.removeEventListener('change', update);
+  }, []);
+  return (
+    <ChatWorkspace
+      {...props}
+      className={classes('desktop-navigation-drawer', className)}
+      sidebarOpen={mobile && open}
+      onSidebarOpenChange={onOpenChange}
+      sidebarLabel={label}
+      closeSidebarLabel={closeLabel}
+      sidebar={
+        <>
+          <div className="desktop-navigation-drawer__body">{navigation}</div>
+          {footer ? <div className="desktop-navigation-drawer__footer">{footer}</div> : null}
+        </>
+      }
+    >
+      {children}
+    </ChatWorkspace>
+  );
+}
 
 export type ComposerActionState = 'ready' | 'sending' | 'stoppable' | 'stopping';
 
@@ -92,6 +367,90 @@ export const ComposerActionButton = forwardRef<HTMLButtonElement, ComposerAction
   },
 );
 export { AIResponse, AIResponseProvider, type AIResponseProps } from './ai-response';
+
+/** Shared input boundary for Hosts with their own attachment, draft and keyboard lifecycle. */
+export interface ComposerSurfaceProps extends HTMLAttributes<HTMLDivElement> {
+  /** Chat places attachment, draft and action in one row, with optional settings below. */
+  layout?: 'work' | 'chat';
+  /** Structured work input. Omit to retain the inline children composition. */
+  input?: ReactNode;
+  attachments?: ReactNode;
+  leading?: ReactNode;
+  controls?: ReactNode;
+  action?: ReactNode;
+}
+export const ComposerSurface = forwardRef<HTMLDivElement, ComposerSurfaceProps>(function ComposerSurface(
+  { className, layout = 'work', input, attachments, leading, controls, action, children, ...props },
+  ref,
+) {
+  return (
+    <div
+      {...props}
+      ref={ref}
+      className={classes(
+        'desktop-composer desktop-composer-surface',
+        !!input && `desktop-composer-surface--${layout}`,
+        className,
+      )}
+    >
+      {input ? (
+        <>
+          {attachments ? <div className="desktop-composer-surface-attachments">{attachments}</div> : null}
+          {layout === 'chat' ? (
+            <>
+              <div className="desktop-composer-surface-chat-row">
+                {leading}
+                <div className="desktop-composer-surface-editor">{input}</div>
+                {action}
+              </div>
+              {controls ? <div className="desktop-composer-surface-controls">{controls}</div> : null}
+            </>
+          ) : (
+            <>
+              <div className="desktop-composer-surface-editor">{input}</div>
+              <div className="desktop-composer-surface-toolbar">
+                {leading}
+                <div className="desktop-composer-surface-controls">{controls}</div>
+                {action}
+              </div>
+            </>
+          )}
+          {children}
+        </>
+      ) : (
+        children
+      )}
+    </div>
+  );
+});
+
+/** Relative scroll viewport; floating commands stay outside ScrollEdgeFade. */
+export const ConversationViewport = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+  function ConversationViewport({ className, ...props }, ref) {
+    return <div {...props} ref={ref} className={classes('desktop-conversation-viewport', className)} />;
+  },
+);
+
+/** Hosts own follow-bottom state and scrolling; the kit owns the floating action. */
+export function ScrollToBottomButton({
+  visible = true,
+  label,
+  actionId = 'conversation.bottom',
+  ...props
+}: Omit<ButtonProps, 'children' | 'icon' | 'iconOnly'> & { visible?: boolean; label?: string }) {
+  const translate = useTranslation();
+  if (!visible) return null;
+  return (
+    <Button
+      {...props}
+      actionId={actionId}
+      className={classes('desktop-scroll-to-bottom', props.className)}
+      aria-label={label ?? translate('Scroll to bottom')}
+      iconOnly
+      icon={<ScrollToBottomIcon size={18} />}
+    />
+  );
+}
 
 export interface ClientComposerProps {
   value: string;

@@ -36,6 +36,20 @@ try {
     const page = await context.newPage(); const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(`http://127.0.0.1:${server.address().port}`);
+    const bounded = page.getByLabel('Bounded draft');
+    await bounded.focus();
+    const boundedDraft = await bounded.inputValue();
+    await bounded.evaluate(node => { window.boundedInputNode = node; node.setSelectionRange(3, 3); });
+    for (const rows of [4, 2, 1, 4]) {
+      await page.evaluate(rows => window.setInputContractRows(rows), rows);
+      await page.waitForFunction(rows => {
+        const node = document.querySelector('[aria-label="Bounded draft"]'), style = getComputedStyle(node);
+        return node.clientHeight <= Math.max(parseFloat(style.minHeight) || 0, parseFloat(style.lineHeight) * rows + parseFloat(style.paddingTop) + parseFloat(style.paddingBottom)) + 1;
+      }, rows);
+      assert.equal(await bounded.inputValue(), boundedDraft);
+      assert.ok(await bounded.evaluate(node => node === window.boundedInputNode && document.activeElement === node && node.selectionStart === 3 && node.scrollHeight > node.clientHeight && getComputedStyle(node).overflowY === 'auto'));
+      assert.equal(await bounded.getAttribute('maxRows'), null, 'maxRows is consumed by the shared component');
+    }
     const count = key => page.evaluate(key => window.inputContract[key] || 0, key);
     await page.getByLabel('Form field').fill('Example');
     await page.getByLabel('Form notes').fill('First'); await page.getByLabel('Form notes').press('Shift+Enter'); await page.keyboard.type('Second');

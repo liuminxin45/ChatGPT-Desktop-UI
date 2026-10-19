@@ -19,6 +19,9 @@ jobs:
           cache: npm
       - run: npm ci --ignore-scripts
       - run: npx playwright install --with-deps chromium
+      # Exercise rapid nested dismissal before the longer full regression matrix.
+      - run: npm run build:library
+      - run: npm run test:composer-model-modes
       - run: npm run ci
         env:
           UI_BROWSER_CHANNEL: chromium
@@ -51,7 +54,13 @@ jobs:
         with:
           name: validated-package
           path: validated-package
-      - run: npm run test:package -- --archive=validated-package/chatgpt-desktop-kit-0.6.0.tgz
+      - run: |
+          archives=(validated-package/*.tgz)
+          if [ "${#archives[@]}" -ne 1 ] || [ ! -f "${archives[0]}" ]; then
+            echo "Expected exactly one validated package archive" >&2
+            exit 1
+          fi
+          npm run test:package -- --archive="${archives[0]}"
         env:
           DESKTOP_UI_REACT_MATRIX: ${{ matrix.react }}
   windows-visual:

@@ -67,6 +67,7 @@ Native mutually exclusive choice; the Host supplies name, value and grouping lab
 
 | Prop | Required | Type |
 | --- | --- | --- |
+| triggerContent | no | `ReactNode` |
 | size | no | `"sm" \| "md" \| undefined` |
 | actionId | no | `string \| undefined` |
 | featureId | no | `string \| undefined` |
@@ -114,3 +115,4 @@ Explicit responsive form layout; never repaint arbitrary Host forms or labels.
 | Prop | Required | Type |
 | --- | --- | --- |
 | autoSize | no | `boolean \| undefined` |
+| maxRows | no | `number \| undefined` |

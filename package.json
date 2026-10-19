@@ -1,6 +1,6 @@
 {
   "name": "chatgpt-desktop-kit",
-  "version": "0.6.0",
+  "version": "0.8.6",
   "description": "ChatGPT desktop UI controls, semantic tokens, measured reference profiles and an agent skill.",
   "license": "MIT",
   "type": "module",
@@ -72,6 +72,7 @@
     "test:polish": "node scripts/verify-client-polish.mjs",
     "test": "node scripts/verify.mjs",
     "test:composer": "node scripts/verify-composer-actions.mjs",
+    "test:composer-integration": "node scripts/verify-composer-integration.mjs",
     "test:input": "node scripts/verify-input.mjs",
     "test:temporal": "node scripts/verify-temporal.mjs",
     "test:menus": "node scripts/verify-menu-focus.mjs",
@@ -96,7 +97,7 @@
     "test:reference": "node scripts/verify-reference.mjs",
     "format:check": "prettier --check src/components examples/catalog \"scripts/{component-catalog,audit-adoption,check-library,build-catalog,build-site,verify-reference}.mjs\"",
     "check": "npm run lint && npm run test:unit && npm run typecheck && npm run build:library && npm run docs:check && npm run check:library && npm run format:check && npm run test:namespace && npm run test:integration",
-    "ci": "npm run check && npm run test:package-contract && npm run test:package && npm run site:build && npm run test:reference && npm test && npm run test:demo && npm run test:polish && npm run test:input && npm run test:menus && npm run test:composer && npm run test:ai && npm run test:scroll-edge-fade && npm run test:action-layout && npm run test:list-spacing && npm run test:tables && npm run test:record-actions && npm run test:icons && npm run test:notifications && npm run skill:package && npm run skill:check && npm run audit:public && npm run test:settings-profile",
+    "ci": "npm run check && npm run test:package-contract && npm run test:package && npm run site:build && npm run test:reference && npm test && npm run test:demo && npm run test:polish && npm run test:input && npm run test:menus && npm run test:composer && npm run test:composer-reference && npm run test:composer-integration && npm run test:chat-workspace && npm run test:ai && npm run test:scroll-edge-fade && npm run test:action-layout && npm run test:list-spacing && npm run test:tables && npm run test:record-actions && npm run test:icons && npm run test:notifications && npm run skill:package && npm run skill:check && npm run audit:public && npm run test:settings-profile",
     "test:tables": "node scripts/verify-tables.mjs",
     "test:ai": "node scripts/verify-ai.mjs",
     "test:scroll-edge-fade": "node scripts/verify-scroll-edge-fade.mjs",
@@ -111,7 +112,11 @@
     "test:visual:update": "node scripts/verify-visual.mjs --update",
     "test:settings-profile": "node scripts/verify-settings-profile.mjs",
     "test:action-layout": "node scripts/verify-action-layout.mjs",
-    "test:context-drop": "node scripts/verify-context-drop.mjs"
+    "test:context-drop": "node scripts/verify-context-drop.mjs",
+    "test:chat-workspace": "node scripts/verify-chat-workspace.mjs",
+    "test:composer-reference": "node scripts/verify-composer-reference.mjs",
+    "test:composer-model-modes": "node scripts/verify-composer-model-modes.mjs",
+    "test:dialog-search": "node scripts/verify-dialog-search.mjs"
   },
   "peerDependencies": {
     "react": "^18.3.1 || ^19.0.0",

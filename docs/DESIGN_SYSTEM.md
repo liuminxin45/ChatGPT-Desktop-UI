@@ -16,9 +16,28 @@ Chat media uses `MediaImage` for an unmasked image with layered soft shadows ins
 anchor while retaining the viewport. Hosts must not key the list by the selected
 navigation mode merely to restore scroll position.
 
+## Responsive chat application profile
+
+`ChatAppSurface` opts a browser/mobile application into the public ChatGPT chat
+reference relationships documented in `CHAT_APP_ALIGNMENT.json`. `ChatHeader`
+provides one compact desktop object heading and separate 44px floating mobile
+targets. `ChatWorkspace` composes a retained sidebar and content subtree: the
+sidebar folds on desktop and becomes a bounded modal drawer on phones. Hosts
+control visibility, selection, routing and business state. Escape respects nested
+controls and IME; focus is contained only while the mobile drawer is open, and
+closing restores its trigger. The backdrop and right-edge swipe dismiss it.
+
+This profile does not replace the measured Windows `DesktopClientSurface`.
+Portable controls keep their API, send/stop semantics and stable hover geometry.
+Motion uses transform and opacity on phones and honors reduced motion. The 240ms
+drawer duration is an adaptation, not a measured native timing claim. See the
+independent `examples/chat-workspace.tsx` fixture for actual rendered adoption.
+
 Button geometry is explicit: `layout="command"` is the compact centered command default. Single-target navigation/selection records use `layout="row"`, with left alignment, natural height and shared insets; place stacked title/metadata in one content group. Image pickers use `layout="tile"`, a square with contained media that fills the available preview rather than retaining tiny intrinsic dimensions. Do not override command height/padding to imitate records. `layout="surface"` carries native action, accessibility and instrumentation behavior without command geometry; reserve it for documented domain graphics such as schedule cells. Hosts own those graphics' grid boundaries, not ordinary control styles. Multi-action records still use static `RecordRow` and independent commands.
 
 Escape dismisses only the active overlay: an open Select, menu, Popover or nested Dialog closes before its parent editor. Respect consumed keyboard events and IME composition; never discard a draft because Escape cancelled composition. Dialog focus containment applies only to the top visible Dialog, and dismissal returns focus to its own trigger. Verify nested layers through the consumer's real CSS and portal pipeline.
+
+Tooltips on obscured (`aria-hidden`, `inert` or hidden) triggers must stay closed. Delayed focus restoration or hover timers from a background action cannot create a tooltip above a new modal or consume its first Escape. Open tooltips observe isolation changes and dismiss when their trigger becomes obscured.
 
 `SelectControl` forwards to canonical `Select`, including compact density, empty values and long-value behavior. Compatibility aliases do not permit Host padding, type or paint overrides. Browser `confirm/alert/prompt` dialogs must use shared `AppConfirmDialog` or `Dialog`; keep drafts until the user confirms. Source audits require the actual clean shared source at the consumer's pinned revision, never an empty `node_modules/src` scan.
 
@@ -206,7 +225,7 @@ Use one horizontal module navigation layer. Promote independent work destination
 
 ## Composer send and stop action
 
-Message composers use `ComposerActionButton` in chat, Codex/work, threads, follow-up instructions, agent conversations, mail and comments. The supplied ChatGPT client button captures are the reference for the blue circular up-arrow and filled square. Use one 32px circle in every composer, a 16px up-arrow, a 10px filled square and the shared send foreground/background/hover tokens; the chat client profile must not override size or colors. Preserve keyboard focus and hover/focus tooltips.
+Message composers use `ComposerActionButton` in chat, Codex/work, threads, follow-up instructions, agent conversations, mail and comments. The supplied ChatGPT client button captures are the reference for the blue circular up-arrow and filled square. Use one circle sized by `--desktop-size-composer-action` (28px in the current reference) in every composer, a 16px up-arrow, a 10px filled square and the shared send foreground/background/hover tokens; the chat client profile must not override size or colors. Preserve keyboard focus and hover/focus tooltips.
 
 | Host state | Glyph | Interaction |
 | --- | --- | --- |
@@ -273,3 +292,136 @@ ContextAttachment contains its removal button and tooltip trigger within the att
 ## Settings reference refinement, 2026-10-14
 
 The user-supplied Appearance capture establishes same-color card/page backgrounds in light mode and approximately 44px ordinary rows. Keep the 728px column, shared section spacing and user-controlled sidebar widths. Hosts compose vertical SettingsGroup sections, without nested decorative frames or section-switching tabs. Controlled SettingsDisclosure supports deep links while retaining mounted drafts and list state. Reference captures are private and are not redistributed.
+
+## Host adapters without local control CSS
+
+Buttons keep their text/icon geometry stable on hover and press; feedback changes color and keyboard focus. Hosts must not restore pressed scaling or counteract it with local overrides.
+
+Use `ComposerSurface` when Host attachment, keyboard or native draft contracts require a custom composition. It supplies the shared input boundary, insets and textarea sizing; Host children retain all state and event ownership. `ClientComposer` remains the ready-made composition. `Tabs stretch` supports equal-width mobile navigation without Host rules targeting shared tab buttons.
+
+`Dialog` follows the visual viewport, including keyboard resize and viewport offset, and owns its responsive margins. Do not reposition the shared dialog with Host CSS. `ToastNotice` and `Toaster` accept `mobileBottomInset` (pixels, default 12) to reserve Host navigation space without repainting notifications.
+
+`Markdown variant="ai"` accepts `onCopyCode(text)` for a native clipboard bridge. The shared renderer retains code surfaces, language headers, failure feedback and keyboard access; the callback receives exact canonical source. Hosts can normalize transport trailing newlines deliberately in that callback. Use the semantic `CopyIcon` export for copy commands.
+
+## Conversation and settings adoption acceptance
+
+Exports and imports are not rendered adoption. Capture each consumer page in light/dark at desktop and phone widths, then compare the scroll-up, executing-without-output, long-draft, open-calendar and settings states against `examples/composer-integration.tsx`. The prepared-package probe is `npm run test:composer-integration`; it retains strict self-only script/style CSP.
+
+- Compose `ConversationViewport`, a `ScrollEdgeFade`-wrapped shared scroll area, and `ScrollToBottomButton` outside the mask. Show the arrow whenever the reader is above the bottom, even when no new message arrived. Host state owns scrolling, follow-bottom and history anchors. Place `ComposerDock` immediately after the viewport. Do not replace the alpha mask with a Host gradient.
+- Use `AIActivity` for an executing task, including an empty assistant response. A plain status tag or an unused AIActivity import does not adopt its sweep. Reduced motion must retain readable static text.
+- `ComposerSurface` accepts `input`, `attachments`, `leading`, `controls` and `action` slots for a work composer. Model, effort and permission Select controls belong in its shared toolbar. An unrelated settings Dialog is not the same interaction. The legacy inline `children` form remains supported. Hosts own configuration acknowledgements, permissions, stable retry IDs and send gating; selecting a setting never sends a message. Do not clear drafts or disable Stop while synchronizing unrelated configuration.
+- Auto-sized Textarea respects a CSS max-height and switches to internal vertical scrolling after the clamp. Keep a stable scrollbar gutter; long drafts must remain readable, selectable and editable without expanding indefinitely or clipping received text.
+- Use the public `DatePicker` for calendar selection. Supply its accessible name, disabled state and `clearable={false}` for required day navigation. Date-only serialization and timezone policy belong to the Host. No business native date input is an equivalent calendar renderer. Retained hidden surfaces close its popup.
+- Settings use `SettingsPage`, `SettingsGroup` and `SettingsField`. `SettingsPage` accepts `leading` and `actions` for a back command or page operations, with one real scroll owner. `RecordLink` defaults to a stacked record-content target; do not pass separate icon/label/arrow children and repaint it into a navigation row. A static SettingsField label with an independent named RecordLink/Button keeps proper alignment and action ownership.
+
+
+Mobile transient layers can opt in to `DismissalLayerProvider`; history and native
+Back remain Host responsibilities. Root catalogs are primary content and use
+`ChatWorkspace.sidebarPresentation="catalog"`; overlaid lists use `"drawer"`.
+A drawer follows dragging on its inner edge, fades the backdrop in proportion and
+restores on cancellation. Content scrolling, text selection, OS gestures and
+explicit close controls keep their own ownership. This is an interaction
+adaptation; no native animation timing or physical-device verification is implied.
+
+Contextual phone operations can opt into `Dialog presentation="sheet"`; desktop
+keeps the standard dialog. The visual viewport and safe area own its bounds.
+Drag dismissal belongs to the grip, with a stable explicit close target; scrolling
+the body never closes the sheet. Fullscreen image inspection uses `ImageViewer`
+with explicit zoom/reset controls and bounded pinch/pan. At original scale a
+downward release can close it; zoomed movement and cancelled gestures preserve
+the preview. These shared controls own appearance and gesture geometry, while
+Hosts retain URLs, drafts, history and all data operations.
+
+
+## Reference work composer and inline queue (2026-10-17)
+
+The user-supplied 499x173 dark capture shows an upper draft editor and a lower
+command row: Plus for attachment acquisition and a permissions shield on the
+left, model plus muted reasoning value on the right, followed by the blue
+Send/Stop circle. Use `ComposerSurface layout="work"` for this two-level
+composition; `layout="chat"` remains the intentionally compact inline layout.
+The screenshot does not establish a ChatGPT package version, device scale,
+light theme or phone geometry. The kit's phone/light adaptations are verified
+browser layouts, not claims about an unobserved native client.
+
+Compose `ComposerStack`, `ComposerQueue` and `ComposerSurface`. The queue uses
+static one-line message previews, independent Steer/Delete targets, a per-item
+More menu, and optional live activity. A bounded preview can expose a Host-owned
+complete queue view. Blank row space is inert. Do not replace it with a single
+queue-count button and require a dialog to see the next message.
+
+`ComposerAttachmentButton` is the explicit composer exception to the ordinary
+paperclip action: its Plus opens attachment acquisition. Elsewhere keep
+`AttachmentIcon`. `ComposerPermissionSelect` renders a shield and exposes the
+selected permission as accessible text and tooltip; `risk="elevated"` only
+changes presentation, never permissions. Host data decides risk and capability.
+`ComposerModelPicker` uses the captured interaction: one model/effort trigger
+opens the compact effort panel, whose model caption opens the full model list.
+The stepped slider commits once at the end of a pointer or keyboard gesture;
+only Host-confirmed values appear on the closed trigger. Reset selects the
+current model's real default. `ComposerModelControl` forwards its compatibility
+props to this same renderer. Closed model values may ellipsize in the toolbar.
+
+Hosts own drafts, files, model lists, configuration acknowledgements, queue
+mutation IDs and stop/pause semantics. Opening a menu or selecting settings
+never sends a message. Supply accurate localized commands; do not offer side
+chat, voice or queue modes without actual Host capabilities. Do not infer
+"disable queueing" semantics from a Host operation which pauses active output.
+Unavailable edit/steer actions remain disabled. Unknown original attachments
+must never be silently discarded when editing a queued message.
+
+`MenuButton` supports a named icon-only trigger, item icons and collision-aware
+side placement. Keep shared focus, Escape and dismissal-layer behavior. Run
+`test:composer-reference`, `test:composer`, `test:composer-integration` and the
+consumer's settings, attachments and queue edit regressions; capture running,
+open menus, long drafts, failures and both themes at desktop/phone widths.
+
+Measured capture colors: composer #363636, queue #2d2d2d, canvas #181818, blue action #2c67c5. The canonical composer action is 28 CSS pixels; the supplied capture does not establish OS scaling. The established hover/press geometry invariant still applies.
+
+
+## Compact dialogs, search and navigation (2026-10-17)
+
+Use a page for durable settings and multi-record administration; enter Settings
+through AvatarMenu in the rail footer, matching the client demo. Reserve Dialog
+for a bounded decision, picker or short edit. Give each visible action one home:
+module destinations in navigation, notifications in the current header, and one
+New conversation command in the contextual sidebar. Retain a reachable mobile
+navigation route rather than duplicating application-switch dialogs.
+
+Dialog titles alone use the 17/24 semantic title role at emphasis weight. Body
+headings use Section, secondary copy uses Supporting, and ordinary controls keep
+Body. A descendant h2 must not become a second dialog title. Avoid explanatory
+copy which repeats a field or action; preserve errors and destructive consequences.
+
+SearchDialog extracts the existing client demo search pattern into the public
+kit: query-led surface, quiet section captions, compact result rows and secondary
+metadata. It retains a screen-reader title, close action, focus containment and
+focus return. Hosts provide controlled query, sections, result selection and
+loading/error/empty strings; the kit never fetches data or owns routes. Arrow
+keys move the active option; Enter selects, IME/repeated Enter do not. Opening or
+cancelling search cannot change a selected business object or discard a draft.
+Use SidebarIcon for folding a sidebar; CloseIcon remains close/cancel.
+
+
+## Responsive application navigation (0.8.6)
+
+`NavigationDrawer` extracts the retained ChatWorkspace drawer contract for phone
+application navigation. Supply controlled `open/onOpenChange`, localized
+`label/closeLabel`, `navigation`, optional `footer/header`, and page `children`.
+The drawer is modal only below 768 CSS px, with focus return, nested dismissal,
+IME protection and drag-to-dismiss. Desktop hosts retain their persistent rail.
+Keep module data, registry, searches and contextual content in the host. Keep
+navigation content bounded and scrollable; never append growing module tabs to
+a permanent phone bottom bar.
+
+`ChatHeader presentation="bar"` provides a compact single mobile application bar
+with readable object title and 44px actions. The floating default is unchanged.
+`SettingsPage embedded` keeps its one bounded scroll owner and readable column
+while an external ChatHeader owns the title and actions. It renders no second
+heading. Its accessible name comes from the required title prop.
+
+AvatarMenu automatically replaces Appearance with a same-panel Back and radio
+list below 768 CSS px; `labels.back` localizes Back. No horizontal submenu may
+extend beyond a narrow viewport. Desktop cascades are unchanged. Back dismisses
+Appearance before its parent menu, then the navigation drawer. Menu theme
+changes do not remount the surrounding workspace or clear drafts.

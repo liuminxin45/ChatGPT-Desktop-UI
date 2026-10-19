@@ -1,0 +1,52 @@
+{
+  "version": "0.8.2",
+  "reference": {
+    "kind": "user supplied image",
+    "size": [
+      499,
+      173
+    ],
+    "capture_date": "unverified",
+    "application_version": "unverified",
+    "device_scale": "unverified",
+    "not_committed": true
+  },
+  "validation": {
+    "node": "24.19.0",
+    "typecheck": "passed",
+    "build": "passed",
+    "eslint": "passed",
+    "format": "passed",
+    "unit_tests_passed": 21,
+    "reference_visual_cases": 12,
+    "composer_action_cases": 6,
+    "prepared_integration_cases": 8,
+    "skill_package": "passed",
+    "source_ownership": "passed",
+    "permission_geometry": "28x28 in all 12 reference cases; consumer baseline 35x30 failed before root CSS fix",
+    "menu_regression_cases": 6,
+    "api_docs_newlines": "normalized JSDoc and checkout newlines; Linux CI follow-up"
+  },
+  "rendering": {
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "widths": [
+      1920,
+      1280,
+      499,
+      390,
+      320
+    ],
+    "scale_emulation": 1.25,
+    "real_windows_scaling_tested": false,
+    "physical_android_tested": false,
+    "synthetic_only": true
+  },
+  "intentional_adaptations": [
+    "Keep model and reasoning independently keyboard-selectable in one shared visual group.",
+    "Do not invent side chat, microphone or turn-off-queueing backend capabilities.",
+    "Pause labels must describe host cancellation semantics accurately."
+  ]
+}

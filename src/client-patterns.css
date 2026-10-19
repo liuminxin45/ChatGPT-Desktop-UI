@@ -67,8 +67,8 @@
 /* Client settings use one row contract, including long values and nested Tools. */
 .client-settings-field>div:last-child>:is(.desktop-select,.desktop-input,.desktop-input-group){max-width:100%;min-width:0}
 .client-settings-field>div:last-child:has(>.desktop-input,>.desktop-input-group){width:50%}
-.desktop-client :is(.kit-settings-layout>.kit-sidebar,.kit-sidebar[data-desktop-sidebar-layout=settings]){width:336px}
-@media(max-width:1000px){.desktop-client :is(.kit-settings-layout>.kit-sidebar,.kit-sidebar[data-desktop-sidebar-layout=settings]){width:260px}}
+.desktop-client :is(.kit-settings-layout>.kit-sidebar,.kit-sidebar[data-desktop-sidebar-layout=settings]){--desktop-sidebar-width:336px}
+@media(max-width:1000px){.desktop-client :is(.kit-settings-layout>.kit-sidebar,.kit-sidebar[data-desktop-sidebar-layout=settings]){--desktop-sidebar-width:260px}}
 .desktop-client .kit-settings-layout>.kit-sidebar{--desktop-sidebar-width:336px}
 @media(max-width:1000px){.desktop-client .kit-settings-layout>.kit-sidebar{--desktop-sidebar-width:260px}}
 

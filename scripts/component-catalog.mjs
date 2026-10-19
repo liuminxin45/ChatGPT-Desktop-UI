@@ -6,6 +6,9 @@ import { fileURLToPath } from 'node:url';
 
 export const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const slash = (value) => value.replaceAll('\\', '/');
+// TypeScript preserves JSDoc source newlines. Git checkouts on Windows and
+// Linux must generate the same public API metadata, including descriptions.
+const normalizeNewlines = (value) => value.replace(/\r\n?/g, '\n');
 export const families = {
   temporal: {
     description: 'Local date, month and date-time selection with shared popup geometry.',
@@ -136,7 +139,7 @@ export function createCatalog() {
               .typeToString(value, declaration, ts.TypeFormatFlags.NoTruncation)
               .replace(/import\("[^"]+"\)\./g, ''),
             native: location.includes('node_modules/@types/react'),
-            description: ts.displayPartsToString(prop.getDocumentationComment(checker)),
+            description: normalizeNewlines(ts.displayPartsToString(prop.getDocumentationComment(checker))),
           };
         });
       const nativeProps = props
@@ -164,7 +167,7 @@ export function createCatalog() {
               : undefined,
         family,
         implementation,
-        description: ts.displayPartsToString(symbol.getDocumentationComment(checker)),
+        description: normalizeNewlines(ts.displayPartsToString(symbol.getDocumentationComment(checker))),
         props: props.filter((prop) => !prop.native),
         nativeProps,
       });
@@ -202,7 +205,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   for (const [file, content] of catalogOutputs(catalog)) {
     const destination = path.join(root, file);
     if (check) {
-      if (!fs.existsSync(destination) || fs.readFileSync(destination, 'utf8') !== content)
+      if (!fs.existsSync(destination) || normalizeNewlines(fs.readFileSync(destination, 'utf8')) !== content)
         throw Error(`Stale API documentation: ${file}; run npm run docs:generate`);
     } else {
       fs.mkdirSync(path.dirname(destination), { recursive: true });

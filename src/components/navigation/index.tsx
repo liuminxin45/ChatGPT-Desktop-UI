@@ -16,12 +16,15 @@ export function Tabs({
   onValueChange,
   ariaLabel,
   actionId = 'tabs',
+  stretch = false,
 }: {
   value: string;
   items: TabsItem[];
   onValueChange(value: string): void;
   ariaLabel?: string;
   actionId?: string;
+  /** Equal-width choices, for example in a Host's bottom navigation. */
+  stretch?: boolean;
 }) {
   const translate = useTranslation();
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
@@ -33,6 +36,7 @@ export function Tabs({
       role="tablist"
       aria-label={ariaLabel ?? translate('页面导航')}
       aria-orientation="horizontal"
+      data-stretch={stretch || undefined}
     >
       {items.map((item, index) => (
         <button

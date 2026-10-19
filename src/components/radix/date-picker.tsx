@@ -11,6 +11,7 @@ export interface DatePickerProps {
   className?: string;
   triggerClassName?: string;
   actionId?: string;
+  id?: string;
   disabled?: boolean;
   readOnly?: boolean;
   clearable?: boolean;

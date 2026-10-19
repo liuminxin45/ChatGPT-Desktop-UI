@@ -73,6 +73,7 @@ AI typography is opt-in; default parsing and custom element adapters stay compat
 | components | no | `Components \| undefined` |
 | variant | no | `"default" \| "ai" \| undefined` |
 | copyDisabled | no | `boolean \| undefined` |
+| onCopyCode | no | `((text: string) => void \| Promise<void>) \| undefined` |
 
 ## Toaster (chatgpt-desktop-kit)
 
@@ -87,6 +88,7 @@ Single shared notification appearance; Sonner only owns queueing and dismissal b
 | label | no | `string \| undefined` |
 | actionId | no | `string \| undefined` |
 | surfaceId | no | `string \| undefined` |
+| mobileBottomInset | no | `number \| undefined` |
 
 ## ToastNotice (chatgpt-desktop-kit)
 
@@ -102,3 +104,4 @@ Host-owned transient result; state, dismissal timing and commands stay in the Ho
 | onClose | yes | `() => void` |
 | closeLabel | yes | `string` |
 | actionId | yes | `string` |
+| mobileBottomInset | no | `number \| undefined` |

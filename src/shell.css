@@ -55,6 +55,9 @@
 .kit-setting-row>.desktop-select{width:auto;min-width:112px}
 .kit-settings-content{width:100%;max-width:var(--desktop-size-settings-column);margin-inline:auto}
 .kit-settings-content h1{font-size:var(--desktop-font-size-emphasis);line-height:var(--desktop-line-height-emphasis);margin:0 0 40px;font-weight:var(--desktop-font-weight-regular)}
+.kit-settings-heading{display:flex;align-items:center;gap:12px;margin-bottom:32px}
+.kit-settings-heading>h1{flex:1;min-width:0;margin:0}
+@media(max-width:767px){.kit-settings-scroll{padding:20px var(--desktop-space-page-inline) 32px}.kit-settings-heading{margin-bottom:24px}}
 .kit-settings-section{margin-bottom:40px}
 .kit-settings-section h2{font-size:var(--desktop-font-size-body);margin:0 0 12px}
 .kit-settings-section__rows{border-radius:var(--desktop-radius-overlay);padding-inline:16px}
@@ -84,3 +87,9 @@ html:root body .kit-sidebar-resizer{cursor:ew-resize!important}
 html:root:has(.kit-sidebar[data-resizing=true]) body,html:root:has(.kit-sidebar[data-resizing=true]) body *,html:root:has(.kit-sidebar[data-resizing=true]) body *::before,html:root:has(.kit-sidebar[data-resizing=true]) body *::after{cursor:ew-resize!important}
 .kit-sidebar-resizer:hover{background:var(--desktop-color-surface-hover)}
 :root:not(:has([data-desktop-input-modality="pointer"])) .kit-sidebar-resizer:focus-visible{outline:none;background:var(--desktop-color-surface-hover)}
+
+
+.kit-settings-scroll--embedded{padding-top:20px}
+@media(max-width:767px){.kit-settings-scroll--embedded{padding:8px 16px calc(24px + env(safe-area-inset-bottom))}}
+
+@media(max-width:767px){.kit-settings-scroll--embedded .client-settings-group{margin-bottom:28px}}

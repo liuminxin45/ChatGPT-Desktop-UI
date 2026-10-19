@@ -16,6 +16,8 @@ import {
 import { NavigationRailItem } from './navigation-rail-item';
 export { NavigationRailItem, type NavigationRailItemProps } from './navigation-rail-item';
 export { WindowControls, type WindowControlsProps } from './window-controls';
+import { useDismissalLayer } from '../../dismissal';
+import { protectModalEscape } from '../../runtime/modal-keyboard';
 import { ActionTooltip } from '../../action-tooltip';
 import { IconButton, Input, InternalScrollArea } from '../../controls';
 import {
@@ -314,6 +316,7 @@ export function AvatarMenu({
     system: 'System',
     light: 'Light',
     dark: 'Dark',
+    back: 'Back',
   },
 }: {
   name?: string;
@@ -330,13 +333,33 @@ export function AvatarMenu({
     system: string;
     light: string;
     dark: string;
+    back?: string;
   };
 }) {
+  const [open, setOpen] = useState(false);
+  const [appearanceOpen, setAppearanceOpen] = useState(false);
+  const [compact, setCompact] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches,
+  );
+  useEffect(() => {
+    const query = window.matchMedia('(max-width: 767px)');
+    const update = () => {
+      setCompact(query.matches);
+      setAppearanceOpen(false);
+    };
+    query.addEventListener('change', update);
+    return () => query.removeEventListener('change', update);
+  }, []);
+  useEffect(() => {
+    if (!open) setAppearanceOpen(false);
+  }, [open]);
+  useDismissalLayer(open, () => setOpen(false));
+  useDismissalLayer(open && compact && appearanceOpen, () => setAppearanceOpen(false));
   const { theme, setTheme } = useDesktopTheme();
   const [failedImage, setFailedImage] = useState(false);
   useEffect(() => setFailedImage(false), [image]);
   return (
-    <Menu.Root>
+    <Menu.Root open={open} onOpenChange={setOpen}>
       <Menu.Trigger className="kit-avatar" aria-label={name} data-desktop-action="account.menu.open">
         {image && !failedImage ? (
           <img src={image} alt="" onError={() => setFailedImage(true)} />
@@ -347,68 +370,121 @@ export function AvatarMenu({
       <MenuPortal>
         <Menu.Content
           className="desktop-menu kit-account-menu"
-          side="right"
+          onEscapeKeyDown={(event) => {
+            if (compact && appearanceOpen) {
+              event.preventDefault();
+              setAppearanceOpen(false);
+            } else protectModalEscape(event);
+          }}
+          side={compact ? 'top' : 'right'}
           align="end"
           sideOffset={6}
           collisionPadding={8}
           data-desktop-feature="account"
           data-desktop-surface="account.menu"
         >
-          <Menu.Label className="kit-account-menu__identity">
-            {name}
-            {status ? <small>{status}</small> : null}
-          </Menu.Label>
-          <Menu.Sub>
-            <Menu.SubTrigger className="desktop-menu-item">
-              <Moon size={16} />
-              {labels.appearance}
-              <CaretRight className="kit-menu-chevron" size={16} aria-hidden="true" />
-            </Menu.SubTrigger>
-            <MenuPortal>
-              <Menu.SubContent className="desktop-menu" sideOffset={6} collisionPadding={8}>
-                <Menu.RadioGroup value={theme} onValueChange={(value) => setTheme(value as Theme)}>
-                  {(['system', 'light', 'dark'] as const).map((value) => (
-                    <Menu.RadioItem
-                      key={value}
-                      className="desktop-menu-item"
-                      value={value}
-                      data-desktop-action={`appearance.${value}`}
-                    >
-                      {labels[value]}
-                      <Menu.ItemIndicator className="kit-menu-chevron">✓</Menu.ItemIndicator>
-                    </Menu.RadioItem>
-                  ))}
-                </Menu.RadioGroup>
-              </Menu.SubContent>
-            </MenuPortal>
-          </Menu.Sub>
-          <Menu.Item
-            className="desktop-menu-item"
-            data-desktop-action="account.manage"
-            disabled={!onAccount}
-            onSelect={onAccount}
-          >
-            <UserCircle size={16} />
-            {labels.account}
-          </Menu.Item>
-          <Menu.Item
-            className="desktop-menu-item"
-            data-desktop-action="settings.open"
-            disabled={!onSettings}
-            onSelect={onSettings}
-          >
-            <Gear size={16} />
-            {labels.settings}
-          </Menu.Item>
-          <Menu.Item
-            className="desktop-menu-item"
-            data-desktop-action="application.exit"
-            disabled={!onExit}
-            onSelect={onExit}
-          >
-            <SignOut size={16} />
-            {labels.exit}
-          </Menu.Item>
+          {compact && appearanceOpen ? (
+            <>
+              <Menu.Item
+                className="desktop-menu-item"
+                onSelect={(event) => {
+                  event.preventDefault();
+                  setAppearanceOpen(false);
+                }}
+              >
+                <ArrowLeft size={16} />
+                {labels.back ?? 'Back'}
+              </Menu.Item>
+              <Menu.Label className="kit-account-menu__identity">{labels.appearance}</Menu.Label>
+              <Menu.RadioGroup value={theme} onValueChange={(value) => setTheme(value as Theme)}>
+                {(['system', 'light', 'dark'] as const).map((value) => (
+                  <Menu.RadioItem
+                    key={value}
+                    className="desktop-menu-item"
+                    value={value}
+                    data-desktop-action={`appearance.${value}`}
+                  >
+                    {labels[value]}
+                    <Menu.ItemIndicator className="kit-menu-chevron">✓</Menu.ItemIndicator>
+                  </Menu.RadioItem>
+                ))}
+              </Menu.RadioGroup>
+            </>
+          ) : (
+            <>
+              <Menu.Label className="kit-account-menu__identity">
+                {name}
+                {status ? <small>{status}</small> : null}
+              </Menu.Label>
+              {compact ? (
+                <Menu.Item
+                  className="desktop-menu-item"
+                  onSelect={(event) => {
+                    event.preventDefault();
+                    setAppearanceOpen(true);
+                  }}
+                >
+                  <Moon size={16} />
+                  {labels.appearance}
+                  <CaretRight className="kit-menu-chevron" size={16} aria-hidden="true" />
+                </Menu.Item>
+              ) : (
+                <Menu.Sub>
+                  <Menu.SubTrigger className="desktop-menu-item">
+                    <Moon size={16} />
+                    {labels.appearance}
+                    <CaretRight className="kit-menu-chevron" size={16} aria-hidden="true" />
+                  </Menu.SubTrigger>
+                  <MenuPortal>
+                    <Menu.SubContent className="desktop-menu" sideOffset={6} collisionPadding={8}>
+                      <Menu.RadioGroup value={theme} onValueChange={(value) => setTheme(value as Theme)}>
+                        {(['system', 'light', 'dark'] as const).map((value) => (
+                          <Menu.RadioItem
+                            key={value}
+                            className="desktop-menu-item"
+                            value={value}
+                            data-desktop-action={`appearance.${value}`}
+                          >
+                            {labels[value]}
+                            <Menu.ItemIndicator className="kit-menu-chevron">✓</Menu.ItemIndicator>
+                          </Menu.RadioItem>
+                        ))}
+                      </Menu.RadioGroup>
+                    </Menu.SubContent>
+                  </MenuPortal>
+                </Menu.Sub>
+              )}
+              <Menu.Item
+                className="desktop-menu-item"
+                data-desktop-action="account.manage"
+                disabled={!onAccount}
+                onSelect={onAccount}
+              >
+                <UserCircle size={16} />
+                {labels.account}
+              </Menu.Item>
+              <Menu.Item
+                className="desktop-menu-item"
+                data-desktop-action="settings.open"
+                disabled={!onSettings}
+                onSelect={onSettings}
+              >
+                <Gear size={16} />
+                {labels.settings}
+              </Menu.Item>
+              {onExit && (
+                <Menu.Item
+                  className="desktop-menu-item"
+                  data-desktop-action="application.exit"
+                  disabled={!onExit}
+                  onSelect={onExit}
+                >
+                  <SignOut size={16} />
+                  {labels.exit}
+                </Menu.Item>
+              )}
+            </>
+          )}
         </Menu.Content>
       </MenuPortal>
     </Menu.Root>
@@ -563,12 +639,32 @@ export function SettingsNavigation({
 
 export const SettingsPage = forwardRef<
   HTMLDivElement,
-  Omit<import('react').HTMLAttributes<HTMLDivElement>, 'title'> & { title: ReactNode; showTitle?: boolean }
->(function SettingsPage({ title, showTitle = true, children, className, ...props }, ref) {
+  Omit<import('react').HTMLAttributes<HTMLDivElement>, 'title'> & {
+    title: ReactNode;
+    showTitle?: boolean;
+    leading?: ReactNode;
+    actions?: ReactNode;
+    /** Let the host's single page header own title/actions; retain this scroll owner. */
+    embedded?: boolean;
+  }
+>(function SettingsPage({ title, showTitle = true, children, className, leading, actions, embedded = false, ...props }, ref) {
   return (
-    <InternalScrollArea ref={ref} className={classes('kit-settings-scroll', className)} {...props}>
+    <InternalScrollArea
+      ref={ref}
+      className={classes('kit-settings-scroll', embedded && 'kit-settings-scroll--embedded', className)}
+      aria-label={typeof title === 'string' ? title : undefined}
+      {...props}
+    >
       <div className="kit-settings-content">
-        {showTitle ? <h1>{title}</h1> : null}
+        {embedded ? null : leading || actions ? (
+          <header className="kit-settings-heading">
+            {leading}
+            {showTitle ? <h1>{title}</h1> : null}
+            {actions}
+          </header>
+        ) : showTitle ? (
+          <h1>{title}</h1>
+        ) : null}
         {children}
       </div>
     </InternalScrollArea>

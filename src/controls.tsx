@@ -11,4 +11,5 @@ export * from './components/overlays';
 export * from './components/feedback';
 export * from './components/tables';
 export { Popover, PopoverTrigger, PopoverContent } from './components/radix/popover';
+export { DatePicker, type DatePickerProps } from './components/radix/date-picker';
 export { AppConfirmDialog, type AppConfirmDialogProps } from './components/radix/app-dialog';
