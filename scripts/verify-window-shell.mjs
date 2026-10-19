@@ -6,6 +6,7 @@ import http from 'node:http';
 import { fileURLToPath } from 'node:url';
 import { build } from 'esbuild';
 import { chromium } from 'playwright';
+import { browserOptions } from './browser-options.mjs';
 import { PNG } from 'pngjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -46,7 +47,7 @@ let browser;
 const near = (actual, expected, label) =>
   assert.ok(Math.abs(actual - expected) <= 1, `${label}: ${actual} != ${expected}`);
 try {
-  browser = await chromium.launch({ channel: 'msedge', headless: true });
+  browser = await chromium.launch(browserOptions());
   for (const theme of ['light', 'dark'])
     for (const [width, height, zoom] of [
       [1920, 1080, 1],
@@ -78,6 +79,10 @@ try {
         for (const visible of [true, false, true]) {
           await page.evaluate((value) => window.shellFixture.setSidebar(value), visible);
           await page.waitForTimeout(220);
+          await page.waitForFunction(
+            expected => getComputedStyle(document.querySelector('.kit-shell__main')).backgroundColor === expected,
+            theme === 'dark' ? 'rgb(24, 24, 24)' : 'rgb(255, 255, 255)',
+          );
           const metrics = await page.evaluate(() => {
             const bounds = (selector) => {
               const r = document.querySelector(selector).getBoundingClientRect();

@@ -5,11 +5,12 @@ import path from 'node:path';
 import http from 'node:http';
 import { build } from 'esbuild';
 import { chromium } from 'playwright';
+import { browserOptions } from './browser-options.mjs';
 const temp = await fs.mkdtemp(path.join(os.tmpdir(), 'desktop-context-drop-'));
 await build({ stdin: { contents: `import React from 'react';import{createRoot}from'react-dom/client';import{ContextAttachment,DropOverlay,DesktopDocumentAdapter}from'./src/index';import './dist/desktop.css';createRoot(document.getElementById('root')).render(<DesktopDocumentAdapter><div style={{position:'relative',width:320,height:180,padding:12}}><ContextAttachment label="A long attachment title with several words and details" removeLabel="Remove attachment" removeActionId="test.remove" onRemove={()=>window.removed=true}/><DropOverlay variant="boundary" active label="Drop context"/></div></DesktopDocumentAdapter>);`, resolveDir: process.cwd(), loader:'tsx' }, outfile:path.join(temp,'app.js'),bundle:true,format:'esm',jsx:'automatic' });
 const server=http.createServer(async(req,res)=>{const name=req.url==='/app.js'?'app.js':req.url==='/app.css'?'app.css':null;res.setHeader('Content-Type',name?.endsWith('.js')?'text/javascript':name?'text/css':'text/html');res.end(name?await fs.readFile(path.join(temp,name)):'<html><head><link rel="stylesheet" href="/app.css"></head><body><div id="root"></div><script type="module" src="/app.js"></script></body></html>')});
 await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
-const browser=await chromium.launch({channel:'msedge',headless:true});
+const browser=await chromium.launch(browserOptions());
 try {
   for(const width of [1280,1920])for(const scale of [1,1.25])for(const theme of ['light','dark']){
     const context=await browser.newContext({viewport:{width,height:800},deviceScaleFactor:scale});const page=await context.newPage();

@@ -6,6 +6,7 @@ import http from 'node:http';
 import { fileURLToPath } from 'node:url';
 import { build } from 'esbuild';
 import { chromium } from 'playwright';
+import { browserOptions } from './browser-options.mjs';
 import { spawnSync } from 'node:child_process';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const temp = await fs.mkdtemp(path.join(os.tmpdir(), 'desktop-temporal-'));
@@ -60,7 +61,7 @@ const results = [];
 const trigger = (page, id) => page.locator(`[data-desktop-action="example.${id}"]`);
 const popup = (page) => page.locator('.desktop-temporal-popover');
 try {
-  browser = await chromium.launch({ channel: 'msedge', headless: true });
+  browser = await chromium.launch(browserOptions());
   for (const theme of ['light', 'dark'])
     for (const locale of ['en', 'zh-CN'])
       for (const [width, height, zoom] of [
