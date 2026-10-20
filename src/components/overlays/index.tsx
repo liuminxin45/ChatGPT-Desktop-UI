@@ -238,7 +238,7 @@ export function Dialog({
               const first = dialogContent.current?.querySelector<HTMLElement>(
                 '.desktop-dialog__body :is(input,textarea,select,button,a[href],[tabindex]):not(:disabled):not([tabindex="-1"])',
               );
-              (first ?? dialogContent.current)?.focus();
+              (first ?? dialogContent.current)?.focus({ preventScroll: true });
             }}
             onCloseAutoFocus={(event) => {
               event.preventDefault();
@@ -247,7 +247,7 @@ export function Dialog({
                 previousFocus.current?.isConnected &&
                 !previousFocus.current.closest('[aria-hidden="true"],[inert]')
               )
-                previousFocus.current.focus();
+                previousFocus.current.focus({ preventScroll: true });
             }}
           >
             {presentation === 'sheet' ? (

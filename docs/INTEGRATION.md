@@ -61,6 +61,14 @@ retained; the shared canvas owns body overflow, so overlays do not inject a seco
 global scrollbar sheet or compensate an absent body gutter. Import the shared
 stylesheet once. Do not relax CSP or restore Host scrollbar/control paint.
 
+## Dialog focus and scrolling
+
+Dialog opening and dismissal preserve the host's scroll position. Automatic
+focus uses `preventScroll`, including when background content changes while a
+dialog is open. Focus still returns to the connected trigger; host navigation
+and list anchors remain host-owned. Run `test:dialog-scroll` for the prepared
+package regression in desktop and phone layouts, in both themes.
+
 ## Dependency ownership
 
 Use `chatgpt-desktop-kit` as the sole control, icon, token and base-style implementation. Pin an immutable commit or package version in the consumer lockfile. Update consumers together and validate them against that exact revision. Do not copy source into each client or synchronize implementations bidirectionally.
