@@ -2,7 +2,7 @@
 
 For a bounded read-only text or document preview, use `Surface variant="outlined"`
 with ordinary text/Markdown children. It remains a non-editable `div`, preserves
-native text selection and links, and does not acquire input/textarea semantics.
+native text selection and links, provides 16px document insets, and does not acquire input/textarea semantics.
 Use a labelled region when appropriate; retain actual inputs for editing. The
 library owns the border and theme tokens; the host owns selection annotations
 and persistence. The default Surface remains unchanged.
