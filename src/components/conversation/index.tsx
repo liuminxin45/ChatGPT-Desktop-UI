@@ -141,8 +141,12 @@ export function ChatWorkspace({
     return () => {
       if (contentElement) contentElement.inert = false;
       const target = restoreFocus.current;
-      if (target?.isConnected && !target.closest('[inert],[aria-hidden="true"]'))
-        target.focus({ preventScroll: true });
+      // Cleanup precedes React removing aria-hidden from retained content.
+      // Restore only after that commit; never focus a hidden/new modal surface.
+      queueMicrotask(() => {
+        if (target?.isConnected && !target.closest('[inert],[aria-hidden="true"]'))
+          target.focus({ preventScroll: true });
+      });
     };
   }, [mobile, sidebarOpen, modal]);
   return (

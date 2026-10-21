@@ -116,6 +116,8 @@ The compatibility DropdownMenuItem accepts `icon` and `actionId`, always display
 
 ## Host behavior
 
+Mobile `NavigationDrawer`/`ChatWorkspace` restores trigger focus after retained content leaves its `aria-hidden` state. Hosts must keep the trigger mounted and let the shared drawer own focus trapping, Escape and modal isolation; no Host focus-restoration workaround is needed.
+
 `TitleBar` presents callbacks and capability flags. The Host owns history boundaries, sidebar availability, native editing, tray behavior, maximize and exit saving. Reuse one action definition for custom and native menus; disable unavailable actions.
 
 `DesktopShell` hides contextual sidebars with CSS and preserves their React subtree. Hosts retain selections, drafts and module-specific sidebar preferences. Avatar images come from validated Host identity; absent or failed images use a neutral fallback. Saving configuration does not establish authentication.

@@ -109,6 +109,32 @@ it('owns mobile modal semantics and respects consumed Escape and IME', () => {
   expect(change).toHaveBeenCalledWith(false);
 });
 
+it('restores focus after the mobile content leaves its aria-hidden state', async () => {
+  media(true);
+  function Fixture() {
+    const [open, setOpen] = useState(false);
+    return (
+      <ChatWorkspace
+        sidebarOpen={open}
+        onSidebarOpenChange={setOpen}
+        sidebarLabel="Navigation"
+        closeSidebarLabel="Close navigation"
+        sidebar={<button>Destination</button>}
+      >
+        <button onClick={() => setOpen(true)}>Open navigation</button>
+      </ChatWorkspace>
+    );
+  }
+  render(<Fixture />);
+  const trigger = screen.getByRole('button', { name: 'Open navigation' });
+  trigger.focus();
+  fireEvent.click(trigger);
+  const dialog = screen.getByRole('dialog', { name: 'Navigation' });
+  expect(document.activeElement).toBe(dialog);
+  fireEvent.keyDown(dialog, { key: 'Escape' });
+  await vi.waitFor(() => expect(document.activeElement).toBe(trigger));
+});
+
 it('does not consume a keyboard event belonging to a nested control', () => {
   media(true);
   const change = vi.fn();
