@@ -60,6 +60,7 @@ Bounded metadata pairs, with text wrapping independent of the controls.
 
 | Prop | Required | Type |
 | --- | --- | --- |
+| variant | no | `"default" \| "outlined" \| undefined` |
 
 ## ToolPageBar (chatgpt-desktop-kit)
 

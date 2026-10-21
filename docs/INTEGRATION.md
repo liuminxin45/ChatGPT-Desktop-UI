@@ -1,5 +1,12 @@
 # Integration
 
+For a bounded read-only text or document preview, use `Surface variant="outlined"`
+with ordinary text/Markdown children. It remains a non-editable `div`, preserves
+native text selection and links, and does not acquire input/textarea semantics.
+Use a labelled region when appropriate; retain actual inputs for editing. The
+library owns the border and theme tokens; the host owns selection annotations
+and persistence. The default Surface remains unchanged.
+
 Mobile drawers dismiss on a pointer gesture that starts on their backdrop.
 A touch opening a portalled menu can retarget its synthesized click to the
 backdrop; that click must keep the drawer and nested menu open. Use the shared

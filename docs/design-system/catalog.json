@@ -45421,7 +45421,15 @@
       "family": "layout",
       "implementation": "src/components/layout/index.tsx",
       "description": "",
-      "props": [],
+      "props": [
+        {
+          "name": "variant",
+          "required": false,
+          "type": "\"default\" | \"outlined\" | undefined",
+          "native": false,
+          "description": ""
+        }
+      ],
       "nativeProps": [
         "492c223f0955790c",
         "15ffaab16e1011f9",

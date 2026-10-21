@@ -59,8 +59,21 @@ export function PageToolbar({
   );
 }
 
-export function Surface({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={classes('desktop-ui-surface', className)} {...props} />;
+export function Surface({
+  className,
+  variant = 'default',
+  ...props
+}: HTMLAttributes<HTMLDivElement> & { variant?: 'default' | 'outlined' }) {
+  return (
+    <div
+      className={classes(
+        'desktop-ui-surface',
+        variant === 'outlined' && 'desktop-ui-surface--outlined',
+        className,
+      )}
+      {...props}
+    />
+  );
 }
 
 /** Bounded metadata pairs, with text wrapping independent of the controls. */
