@@ -46,6 +46,32 @@ export const Input = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputE
   return <input ref={ref} className={classes('desktop-input', className)} {...props} />;
 });
 
+export interface SliderProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'value' | 'defaultValue' | 'onChange'> {
+  value: number;
+  onValueChange(value: number): void;
+}
+
+/** Continuous native range; the Host supplies labels and localized value meaning. */
+export const Slider = forwardRef<HTMLInputElement, SliderProps>(function Slider(
+  { className, value, onValueChange, min = 0, max = 100, step = 1, ...props },
+  ref,
+) {
+  return (
+    <input
+      {...props}
+      ref={ref}
+      className={classes('desktop-slider', className)}
+      type="range"
+      min={min}
+      max={max}
+      step={step}
+      value={value}
+      onChange={(event) => onValueChange(Number(event.currentTarget.value))}
+    />
+  );
+});
+
 /** One text-entry boundary for an input with leading icons or trailing actions. */
 export const InputGroup = forwardRef<HTMLLabelElement, LabelHTMLAttributes<HTMLLabelElement>>(
   function InputGroup({ className, ...props }, ref) {

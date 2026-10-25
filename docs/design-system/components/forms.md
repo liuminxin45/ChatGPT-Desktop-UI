@@ -97,6 +97,17 @@ Explicit responsive form layout; never repaint arbitrary Host forms or labels.
 | Prop | Required | Type |
 | --- | --- | --- |
 
+## Slider (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/forms/index.tsx)
+
+Continuous native range; the Host supplies labels and localized value meaning.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| value | yes | `number` |
+| onValueChange | yes | `(value: number) => void` |
+
 ## Switch (chatgpt-desktop-kit)
 
 [Implementation](../../../src/components/forms/index.tsx)

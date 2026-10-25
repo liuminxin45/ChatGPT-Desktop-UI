@@ -1,5 +1,12 @@
 # Integration
 
+Use the controlled `Slider` for a continuous numeric range. Defaults are
+0–100, step 1. Supply a label, `aria-describedby` for a live explanation and
+localized `aria-valuetext`. Values update during the gesture; native Arrow,
+Home and End keys remain available. Hosts own percentages, parameter meaning,
+preview text, persistence and commit acknowledgement. The shared component
+owns the touch target, theme, focus and disabled states without inline styles.
+
 For a bounded read-only text or document preview, use `Surface variant="outlined"`
 with ordinary text/Markdown children. It remains a non-editable `div`, preserves
 native text selection and links, provides 16px document insets, and does not acquire input/textarea semantics.
