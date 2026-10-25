@@ -38,6 +38,7 @@ await fs.writeFile(
   path.join(out, 'fixture.css'),
   'html,body,#root{margin:0;min-height:100%;height:100%}.example-outside{padding:8px}.example-app{max-width:900px;margin:auto;display:grid;gap:20px;padding:24px}.example-tiles{display:grid;grid-template-columns:1fr 1fr;gap:16px}',
 );
+await fs.copyFile(path.join(root, 'dist/controls.css'), path.join(out, 'late-controls.css'));
 const server = http.createServer(async (req, res) => {
   const file = path.basename(new URL(req.url, 'http://localhost').pathname) || 'index.html';
   try {
@@ -91,6 +92,73 @@ try {
       const outside = page.getByRole('button', { name: 'Portable button', exact: true }),
         inside = page.getByRole('button', { name: 'Open sheet', exact: true });
       assert.equal((await outside.boundingBox()).height, 36);
+      const targets = [];
+      for (const name of [
+        'App icon',
+        'App small icon',
+        'App menu',
+        'App row',
+        'App small row',
+        'App disclosure',
+      ]) {
+        const bounds = await page.getByRole('button', { name, exact: true }).boundingBox();
+        targets.push({ name, ...bounds });
+      }
+      await fs.writeFile(path.join(out, `targets-${width}-${theme}.json`), JSON.stringify(targets, null, 2));
+      for (const target of targets) {
+        assert.ok(
+          target.width >= 44 && target.height >= 44,
+          `${target.name}: ${target.width} x ${target.height}`,
+        );
+      }
+      await page.addStyleTag({ url: origin + '/late-controls.css' });
+      for (const name of [
+        'App icon',
+        'App small icon',
+        'App menu',
+        'App row',
+        'App small row',
+        'App disclosure',
+      ]) {
+        const bounds = await page.getByRole('button', { name, exact: true }).boundingBox();
+        assert.ok(
+          bounds.width >= 44 && bounds.height >= 44,
+          `late portable styles ${name}: ${bounds.width} x ${bounds.height}`,
+        );
+      }
+      for (const target of [
+        page.getByRole('textbox', { name: 'App title', exact: true }),
+        page.getByRole('combobox', { name: 'App setting choice', exact: true }),
+        page.getByRole('tab', { name: 'Draft', exact: true }),
+      ]) {
+        const bounds = await target.boundingBox();
+        assert.ok(
+          bounds.width >= 44 && bounds.height >= 44,
+          `app field/tab: ${bounds.width} x ${bounds.height}`,
+        );
+      }
+      assert.equal(
+        (await page.getByRole('button', { name: 'Portable small icon', exact: true }).boundingBox()).width,
+        30,
+      );
+      assert.ok(
+        (await page.getByRole('button', { name: 'Portable disclosure', exact: true }).boundingBox()).height <
+          44,
+      );
+      if (width < 768) {
+        await page.getByRole('button', { name: 'Open app drawer', exact: true }).click();
+        for (const name of ['Drawer destination', 'Drawer icon', 'Drawer disclosure']) {
+          const target = page.getByRole('button', { name, exact: true });
+          await target.waitFor({ state: 'visible' });
+          const bounds = await target.boundingBox();
+          assert.ok(
+            bounds.width >= 44 && bounds.height >= 44,
+            `portalled ${name}: ${bounds.width} x ${bounds.height}`,
+          );
+          assert.equal(await target.evaluate((e) => !!e.closest('.desktop-app')), true);
+        }
+        await page.keyboard.press('Escape');
+      }
       assert.ok((await inside.boundingBox()).height >= 44);
       assert.equal(
         await page
@@ -120,6 +188,13 @@ try {
       await tile.click();
       const dialog = page.getByRole('dialog', { name: 'Adjust the direction', exact: true });
       await dialog.waitFor();
+      for (const name of ['Sheet small icon', 'Sheet disclosure']) {
+        const bounds = await dialog.getByRole('button', { name, exact: true }).boundingBox();
+        assert.ok(
+          bounds.width >= 44 && bounds.height >= 44,
+          `sheet ${name}: ${bounds.width} x ${bounds.height}`,
+        );
+      }
       assert.equal(
         await dialog
           .getByRole('textbox', { name: 'Sheet draft', exact: true })

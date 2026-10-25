@@ -71,8 +71,10 @@
 }
 .desktop-app .desktop-button,.desktop-app .desktop-icon-control,.desktop-app .desktop-select,.desktop-app .desktop-tabs button,.desktop-app .desktop-checkbox,.desktop-app .desktop-radio {min-height:44px}
 .desktop-app .desktop-button--md,.desktop-app .desktop-input,.desktop-app .desktop-select{min-height:48px;height:auto}
-.desktop-app .desktop-button--md{padding:11px 16px}
-.desktop-app .desktop-button--icon,.desktop-app .desktop-icon-control{min-width:44px;padding:10px}
+.desktop-app .desktop-button.desktop-button--md{min-height:48px;height:auto;padding:11px 16px}
+.desktop-app .desktop-button.desktop-button--sm{min-height:44px;height:auto}
+.desktop-app .desktop-button.desktop-button--icon,.desktop-app .desktop-icon-control{min-width:44px;max-width:none;padding:10px}
+.desktop-app .client-settings-disclosure>button{min-width:44px;min-height:44px}
 .desktop-app .desktop-input,.desktop-app .desktop-textarea{font-size:16px;line-height:24px;padding:12px 14px}
 .desktop-app .desktop-slider{height:48px}
 .desktop-app .desktop-tabs{gap:6px}

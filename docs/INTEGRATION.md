@@ -11,6 +11,10 @@ checkbox/radio hit area contains a 20px visual, retaining native keyboard/change
 behavior. Scoped portals inherit the profile and resolved theme from their actual
 origin, including nested sheet/select layers. Reuse `Dialog presentation="sheet"`;
 its handle, focus return, IME/Escape boundaries and drag dismissal are unchanged.
+Default and small icon buttons, row buttons and `SettingsDisclosure` triggers
+retain the app hit area when composed inside `ChatAppSurface` or a portalled
+`NavigationDrawer`. Portable control sizes outside `AppSurface` remain unchanged;
+consumers do not need stylesheet ordering or local size overrides.
 
 `AppHeading` supplies `eyebrow`, `title`, optional `description`, `size="hero"|"section"`
 and optional `as="h1"|"h2"|"h3"`. `AppTile` is one button target with `icon`, `title`,
