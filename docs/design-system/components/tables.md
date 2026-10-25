@@ -32,7 +32,7 @@ Semantic table. The Host owns column geometry; cells own consistent content inse
 | Prop | Required | Type |
 | --- | --- | --- |
 | pinned | no | `boolean \| undefined` |
-| tone | no | `"warning" \| "neutral" \| undefined` |
+| tone | no | `"neutral" \| "warning" \| undefined` |
 
 ## TableHead (chatgpt-desktop-kit)
 

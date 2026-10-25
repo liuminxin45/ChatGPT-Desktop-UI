@@ -8,6 +8,8 @@ examples/catalog/build/
 tests/output/
 artifacts/
 evidence/chat-workspace/
+evidence/app-surface/
+.app-*.log
 .library-*.log
 
 skills/chatgpt-desktop-ui/assets/

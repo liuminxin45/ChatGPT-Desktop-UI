@@ -1,5 +1,17 @@
 # Desktop design system
 
+## Opt-in product app profile
+
+`AppSurface` supplies a touch-first, warm-neutral product canvas, 16px editing,
+44–48px controls, compact semantic glyphs, and an editorial 34/42px hero versus
+22px section hierarchy. Use sparse copper accents via the documented app tokens.
+It intentionally differs from the measured Windows client and never changes that
+profile or portable defaults. Existing `Dialog presentation="sheet"` provides
+mobile bottom sheets; portal content inherits the app origin. `AppTile` is a
+single action, while multi-action records remain static groups. Hosts own content
+and layout, never control paint. Verify light/dark, 320/390px phones, desktop and
+125% device-scale emulation before consuming; emulation is not a real-phone test.
+
 ## Responsive chat application profile
 
 `ChatAppSurface` opts a browser/mobile application into the public ChatGPT chat

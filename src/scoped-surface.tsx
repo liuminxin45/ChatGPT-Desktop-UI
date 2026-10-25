@@ -18,6 +18,8 @@ import { type Theme, useDesktopThemeContext, DesktopThemeContext } from './theme
 const SurfaceContext = createContext(false);
 /** Internal profile marker for portals that leave the client's DOM subtree. */
 export const ClientProfileContext = createContext(false);
+/** Internal opt-in application profile marker retained through portal ownership. */
+export const AppProfileContext = createContext(false);
 const useClientLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
 
 export interface DesktopProviderProps extends HTMLAttributes<HTMLDivElement> {
@@ -87,6 +89,7 @@ const ScopedPortalContent = forwardRef<
         !!source.closest('.desktop-native-tool-surface'),
       );
       portal.classList.toggle('desktop-client', !!source.closest('.desktop-client'));
+      portal.classList.toggle('desktop-app', !!source.closest('.desktop-app'));
       for (const attribute of [
         'data-desktop-input-modality',
         'data-desktop-feature',
@@ -142,8 +145,9 @@ export function createDesktopPortal(Primitive: ComponentType<PortalProps>) {
   return function DesktopPortal({ children, ...props }: PortalProps) {
     const scoped = useContext(SurfaceContext);
     const client = useContext(ClientProfileContext);
+    const app = useContext(AppProfileContext);
     const origin = useRef<HTMLSpanElement>(null);
-    if (!scoped && !client) return <Primitive {...props}>{children}</Primitive>;
+    if (!scoped && !client && !app) return <Primitive {...props}>{children}</Primitive>;
     return (
       <>
         <span hidden ref={origin} data-desktop-portal-origin="" />

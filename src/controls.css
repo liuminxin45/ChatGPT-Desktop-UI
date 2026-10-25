@@ -7,6 +7,7 @@
 @import './conversation.css';
 @import './ai.css';
 @import './chat-shell.css';
+@import './app-surface.css';
 .desktop-input,.desktop-textarea{box-sizing:border-box}
 [data-radix-select-viewport]{scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch}
 [data-radix-select-viewport]::-webkit-scrollbar{display:none}

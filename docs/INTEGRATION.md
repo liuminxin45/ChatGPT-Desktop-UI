@@ -1,5 +1,36 @@
 # Integration
 
+## Touch-first app profile
+
+Wrap a mobile-first product in `AppSurface` inside the existing `DesktopProvider`.
+This is an explicit warm-neutral app profile, separate from portable controls and
+the measured Windows client. Buttons, selects, tabs, checkbox/radio hit areas and
+sheet controls have at least 44 CSS pixels; ordinary app actions and inputs use
+48 pixels. Editable text stays 16px to avoid phone focus zoom. A 44px native
+checkbox/radio hit area contains a 20px visual, retaining native keyboard/change
+behavior. Scoped portals inherit the profile and resolved theme from their actual
+origin, including nested sheet/select layers. Reuse `Dialog presentation="sheet"`;
+its handle, focus return, IME/Escape boundaries and drag dismissal are unchanged.
+
+`AppHeading` supplies `eyebrow`, `title`, optional `description`, `size="hero"|"section"`
+and optional `as="h1"|"h2"|"h3"`. `AppTile` is one button target with `icon`, `title`,
+optional `description`, `trailing` (arrow by default; pass null to omit),
+`layout="row"|"tile"`, `tone="neutral"|"accent"` and optional controlled `selected`.
+Do not nest independent actions in a tile. Hosts own business grids and content.
+
+`AppIcon` has semantic names home, discover, create, poster, article, capture,
+library, tune, reader, review, history, send, arrow, back, style, lock, annotation,
+layers, check, close, more and bookmark. Bold glyphs become filled when selected.
+Glyphs are decorative by default; label the surrounding action or supply
+`aria-label` for an independent informative icon.
+
+Use inherited `--desktop-color-*` tokens for domain artwork. The profile adds
+`--desktop-app-accent`, `--desktop-app-accent-soft` and
+`--desktop-app-on-accent-soft` for sparse accents. Hover/press never changes
+geometry, reduced motion retains static feedback, and changing theme keeps the
+same business subtree mounted. The profile owns no navigation or persistence.
+See `examples/app-surface.tsx` and run `npm run test:app-surface`.
+
 Use the controlled `Slider` for a continuous numeric range. Defaults are
 0–100, step 1. Supply a label, `aria-describedby` for a live explanation and
 localized `aria-valuetext`. Values update during the gesture; native Arrow,

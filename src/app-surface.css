@@ -1,0 +1,114 @@
+/* Explicit product-app profile; portable and measured client defaults are unchanged. */
+.desktop-app {
+  --desktop-color-background:#f7f4ed;
+  --desktop-color-canvas:#f7f4ed;
+  --desktop-color-shell:#f7f4ed;
+  --desktop-color-sidebar:#f7f4ed;
+  --desktop-color-surface:#fffdf8;
+  --desktop-color-surface-muted:#eee9df;
+  --desktop-color-surface-hover:#eae4d9;
+  --desktop-color-surface-selected:#e5ded1;
+  --desktop-color-surface-overlay:#fffdf8;
+  --desktop-color-border:#e3dcd0;
+  --desktop-color-border-strong:#cfc5b6;
+  --desktop-color-text:#27251f;
+  --desktop-color-text-subtle:#575146;
+  --desktop-color-text-muted:#746b5d;
+  --desktop-color-primary:#29261f;
+  --desktop-color-primary-hover:#454035;
+  --desktop-color-on-primary:#fffdf8;
+  --desktop-color-navigation-selected:#e5ded1;
+  --desktop-color-on-navigation-selected:#29261f;
+  --desktop-color-composer:#fffdf8;
+  --desktop-color-focus:#9b432c;
+  --desktop-app-accent:#9b432c;
+  --desktop-app-accent-soft:#f4e1d7;
+  --desktop-app-on-accent-soft:#78331f;
+  --desktop-font-size-body:16px;
+  --desktop-font-size-supporting:13px;
+  --desktop-font-size-caption:12px;
+  --desktop-font-size-dialog-title:21px;
+  --desktop-line-height-ui:24px;
+  --desktop-line-height-heading:1.2;
+  --desktop-radius-control:12px;
+  --desktop-radius-surface:20px;
+  --desktop-radius-overlay:24px;
+  box-sizing:border-box;
+  min-width:0;
+  min-height:100%;
+  color:var(--desktop-color-text);
+  background:var(--desktop-color-background);
+  font:400 var(--desktop-font-size-body)/var(--desktop-line-height-ui) var(--desktop-font-sans);
+  font-synthesis:none;
+  color-scheme:light;
+}
+.desktop-app[data-theme=dark] {
+  --desktop-color-background:#1d1d19;
+  --desktop-color-canvas:#1d1d19;
+  --desktop-color-shell:#1d1d19;
+  --desktop-color-sidebar:#1d1d19;
+  --desktop-color-surface:#282820;
+  --desktop-color-surface-muted:#333229;
+  --desktop-color-surface-hover:#3d3b30;
+  --desktop-color-surface-selected:#464133;
+  --desktop-color-surface-overlay:#2b2b23;
+  --desktop-color-border:#403e32;
+  --desktop-color-border-strong:#625c4b;
+  --desktop-color-text:#f3eee2;
+  --desktop-color-text-subtle:#d4cdbd;
+  --desktop-color-text-muted:#aaa18d;
+  --desktop-color-primary:#f1e9d7;
+  --desktop-color-primary-hover:#fff9ea;
+  --desktop-color-on-primary:#24231d;
+  --desktop-color-navigation-selected:#464133;
+  --desktop-color-on-navigation-selected:#f3eee2;
+  --desktop-color-composer:#282820;
+  --desktop-color-focus:#dc9c78;
+  --desktop-app-accent:#e6a181;
+  --desktop-app-accent-soft:#4b3428;
+  --desktop-app-on-accent-soft:#f0b99b;
+  color-scheme:dark;
+}
+.desktop-app .desktop-button,.desktop-app .desktop-icon-control,.desktop-app .desktop-select,.desktop-app .desktop-tabs button,.desktop-app .desktop-checkbox,.desktop-app .desktop-radio {min-height:44px}
+.desktop-app .desktop-button--md,.desktop-app .desktop-input,.desktop-app .desktop-select{min-height:48px;height:auto}
+.desktop-app .desktop-button--md{padding:11px 16px}
+.desktop-app .desktop-button--icon,.desktop-app .desktop-icon-control{min-width:44px;padding:10px}
+.desktop-app .desktop-input,.desktop-app .desktop-textarea{font-size:16px;line-height:24px;padding:12px 14px}
+.desktop-app .desktop-slider{height:48px}
+.desktop-app .desktop-tabs{gap:6px}
+.desktop-app .desktop-tabs button{padding:10px 16px}
+.desktop-app .desktop-checkbox,.desktop-app .desktop-radio{appearance:none;position:relative;width:44px;height:44px;min-width:44px;margin:0;border:0;background:transparent;cursor:pointer}
+.desktop-app .desktop-checkbox::before,.desktop-app .desktop-radio::before{content:"";position:absolute;inset:12px;box-sizing:border-box;border:1.5px solid var(--desktop-color-border-strong);border-radius:5px;background:var(--desktop-color-surface)}
+.desktop-app .desktop-radio::before{border-radius:50%}
+.desktop-app .desktop-checkbox:checked::before{border-color:var(--desktop-color-primary);background:var(--desktop-color-primary)}
+.desktop-app .desktop-checkbox:checked::after{content:"";position:absolute;left:19px;top:15px;width:5px;height:9px;border:solid var(--desktop-color-on-primary);border-width:0 2px 2px 0;transform:rotate(45deg)}
+.desktop-app .desktop-radio:checked::after{content:"";position:absolute;inset:17px;border-radius:50%;background:var(--desktop-color-primary)}
+.desktop-app .desktop-checkbox:disabled,.desktop-app .desktop-radio:disabled{opacity:.5;cursor:default}
+.desktop-app label:has(>.desktop-checkbox),.desktop-app label:has(>.desktop-radio){display:inline-flex;align-items:center;gap:8px;min-height:44px}
+.desktop-app .desktop-dialog__body{padding-inline:24px}
+.desktop-app .desktop-dialog>header{padding:20px 24px 16px}
+.desktop-app .desktop-dialog>footer{padding:16px 24px max(20px,env(safe-area-inset-bottom));gap:12px;flex-wrap:wrap}
+.desktop-app .desktop-dialog[data-presentation=sheet]>.desktop-dialog__handle{min-height:32px}
+.desktop-app-heading{min-width:0}
+.desktop-app-heading__eyebrow{margin:0 0 10px;color:var(--desktop-app-accent);font-size:13px;line-height:20px;font-weight:600;letter-spacing:.04em}
+.desktop-app-heading__title{margin:0;color:var(--desktop-color-text);font-size:22px;line-height:1.25;font-weight:600;letter-spacing:-.025em;overflow-wrap:anywhere;text-wrap:balance}
+.desktop-app-heading[data-size=hero] .desktop-app-heading__title{font-size:42px;line-height:1.12;letter-spacing:-.045em;max-width:22ch}
+.desktop-app-heading__description{max-width:56ch;margin:12px 0 0;color:var(--desktop-color-text-muted);font-size:15px;line-height:1.65}
+.desktop-app-tile{display:flex;align-items:center;gap:16px;min-width:0;min-height:76px;width:100%;padding:18px;border:0;border-radius:20px;background:var(--desktop-color-surface);color:var(--desktop-color-text);font:inherit;text-align:start;cursor:pointer;transition:background-color 160ms ease,color 160ms ease}
+.desktop-app-tile:hover:not(:disabled){background:var(--desktop-color-surface-hover)}
+.desktop-app-tile:active:not(:disabled){background:var(--desktop-color-surface-selected)}
+.desktop-app-tile:focus-visible{outline:2px solid var(--desktop-color-focus);outline-offset:3px}
+.desktop-app-tile:disabled{cursor:default;opacity:.5}
+.desktop-app-tile[aria-pressed=true]{background:var(--desktop-color-surface-selected)}
+.desktop-app-tile__icon{display:inline-flex;align-items:center;justify-content:center;flex:none;width:44px;height:44px;border-radius:14px;background:var(--desktop-color-surface-muted);color:var(--desktop-color-text)}
+.desktop-app-tile[data-tone=accent] .desktop-app-tile__icon{background:var(--desktop-app-accent-soft);color:var(--desktop-app-on-accent-soft)}
+.desktop-app-tile__copy{display:grid;gap:4px;min-width:0;flex:1}
+.desktop-app-tile__title{font-size:16px;line-height:24px;font-weight:600;overflow-wrap:anywhere}
+.desktop-app-tile__description{font-size:13px;line-height:20px;color:var(--desktop-color-text-muted);overflow-wrap:anywhere}
+.desktop-app-tile__trailing{display:inline-flex;flex:none;color:var(--desktop-color-text-muted)}
+.desktop-app-tile[data-layout=tile]{display:grid;grid-template-columns:minmax(0,1fr) auto;align-content:start;min-height:152px;gap:20px}
+.desktop-app-tile[data-layout=tile] .desktop-app-tile__icon{grid-column:1}
+.desktop-app-tile[data-layout=tile] .desktop-app-tile__copy{grid-column:1/-1}
+.desktop-app-tile[data-layout=tile] .desktop-app-tile__trailing{grid-column:2;grid-row:1;align-self:center}
+@media(max-width:767px){.desktop-app-heading[data-size=hero] .desktop-app-heading__title{font-size:34px}.desktop-app .desktop-dialog>footer{display:grid;grid-auto-flow:row;grid-template-columns:repeat(auto-fit,minmax(120px,1fr))}}
+@media(prefers-reduced-motion:reduce){.desktop-app-tile,.desktop-app .desktop-button,.desktop-app .desktop-select,.desktop-app .desktop-tabs button{transition:none}.desktop-app .desktop-ai-activity,.desktop-app .desktop-skeleton{animation:none}}
