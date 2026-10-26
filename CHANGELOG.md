@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.8.11
+
+- Add opt-in AppSurface workspace profile with cool-white/jade surfaces, compact typography and flat records, a 56px application bar, and 48px phone controls and popup choices. Editorial, portable and Windows client defaults retain their contracts.
+- Add AppActionBar for a readable contextual action boundary, spacing and bottom safe-area padding; hosts retain placement and command ownership.
+- Inherit the explicit app profile through nested portals; keep portal scope wrappers from adding a second canvas height or background.
+- Dismiss Select on window blur, page backgrounding and disable changes, preserving its selection and releasing pointer/scroll isolation. Verify cancellation, focus, scroll, nested Back and retained drafts through the prepared package at phone and desktop sizes in both themes.
+
 ## 0.6.0
 
 - Add scoped component CSS, controlled/local themes and origin-aware Radix portals without host reset/cursor/theme pollution. Retain document entries and add an explicit document adapter.

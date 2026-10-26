@@ -417,8 +417,23 @@ export function Select({
   const visible = useContext(ToolVisibilityContext);
   const [open, setOpen] = useState(false);
   useEffect(() => {
-    if (!visible) setOpen(false);
-  }, [visible]);
+    if (!visible || disabled) setOpen(false);
+  }, [visible, disabled]);
+  useEffect(() => {
+    if (!open) return;
+    // Native choosers dismiss when their window loses focus. Retain the value,
+    // release pointer/scroll isolation and allow the same trigger to reopen.
+    const dismiss = () => setOpen(false);
+    const visibility = () => {
+      if (document.hidden) dismiss();
+    };
+    window.addEventListener('blur', dismiss);
+    document.addEventListener('visibilitychange', visibility);
+    return () => {
+      window.removeEventListener('blur', dismiss);
+      document.removeEventListener('visibilitychange', visibility);
+    };
+  }, [open]);
   const hasEmptyOption = options.some((option) => option.value === '');
   useDismissalLayer(open && visible && !disabled, () => setOpen(false));
   const encode = (next: string | undefined) => (next === '' && hasEmptyOption ? EMPTY_SELECT_VALUE : next);
@@ -452,7 +467,7 @@ export function Select({
           data-desktop-surface={surfaceId}
           data-desktop-tool-surface={toolId}
           onCloseAutoFocus={(event) => {
-            if (!visible) event.preventDefault();
+            if (!visible || document.hidden) event.preventDefault();
           }}
           onPointerDownOutside={(event) => event.detail.originalEvent.preventDefault()}
           position="popper"

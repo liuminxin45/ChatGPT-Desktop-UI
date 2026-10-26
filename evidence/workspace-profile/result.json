@@ -1,0 +1,212 @@
+{
+  "status": "passed",
+  "preparedPackage": true,
+  "realDevice": false,
+  "results": [
+    {
+      "width": 1440,
+      "height": 1000,
+      "scale": 1,
+      "theme": "light",
+      "status": "passed",
+      "selectionCancel": [
+        "escape",
+        "outside",
+        "host-back",
+        "window-blur"
+      ],
+      "nestedBack": true,
+      "disabledReleasesIsolation": true,
+      "inputRetained": true,
+      "profilePortal": true
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "scale": 1,
+      "theme": "dark",
+      "status": "passed",
+      "selectionCancel": [
+        "escape",
+        "outside",
+        "host-back",
+        "window-blur"
+      ],
+      "nestedBack": true,
+      "disabledReleasesIsolation": true,
+      "inputRetained": true,
+      "profilePortal": true
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "scale": 1.25,
+      "theme": "light",
+      "status": "passed",
+      "selectionCancel": [
+        "escape",
+        "outside",
+        "host-back",
+        "window-blur"
+      ],
+      "nestedBack": true,
+      "disabledReleasesIsolation": true,
+      "inputRetained": true,
+      "profilePortal": true
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "scale": 1.25,
+      "theme": "dark",
+      "status": "passed",
+      "selectionCancel": [
+        "escape",
+        "outside",
+        "host-back",
+        "window-blur"
+      ],
+      "nestedBack": true,
+      "disabledReleasesIsolation": true,
+      "inputRetained": true,
+      "profilePortal": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "scale": 1,
+      "theme": "light",
+      "status": "passed",
+      "selectionCancel": [
+        "escape",
+        "outside",
+        "host-back",
+        "window-blur"
+      ],
+      "nestedBack": true,
+      "disabledReleasesIsolation": true,
+      "inputRetained": true,
+      "profilePortal": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "scale": 1,
+      "theme": "dark",
+      "status": "passed",
+      "selectionCancel": [
+        "escape",
+        "outside",
+        "host-back",
+        "window-blur"
+      ],
+      "nestedBack": true,
+      "disabledReleasesIsolation": true,
+      "inputRetained": true,
+      "profilePortal": true
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "scale": 1,
+      "theme": "light",
+      "status": "passed",
+      "selectionCancel": [
+        "escape",
+        "outside",
+        "host-back",
+        "window-blur"
+      ],
+      "nestedBack": true,
+      "disabledReleasesIsolation": true,
+      "inputRetained": true,
+      "profilePortal": true
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "scale": 1,
+      "theme": "dark",
+      "status": "passed",
+      "selectionCancel": [
+        "escape",
+        "outside",
+        "host-back",
+        "window-blur"
+      ],
+      "nestedBack": true,
+      "disabledReleasesIsolation": true,
+      "inputRetained": true,
+      "profilePortal": true
+    },
+    {
+      "width": 320,
+      "height": 740,
+      "scale": 1,
+      "theme": "light",
+      "status": "passed",
+      "selectionCancel": [
+        "escape",
+        "outside",
+        "host-back",
+        "window-blur"
+      ],
+      "nestedBack": true,
+      "disabledReleasesIsolation": true,
+      "inputRetained": true,
+      "profilePortal": true
+    },
+    {
+      "width": 320,
+      "height": 740,
+      "scale": 1,
+      "theme": "dark",
+      "status": "passed",
+      "selectionCancel": [
+        "escape",
+        "outside",
+        "host-back",
+        "window-blur"
+      ],
+      "nestedBack": true,
+      "disabledReleasesIsolation": true,
+      "inputRetained": true,
+      "profilePortal": true
+    },
+    {
+      "width": 430,
+      "height": 932,
+      "scale": 1,
+      "theme": "light",
+      "status": "passed",
+      "selectionCancel": [
+        "escape",
+        "outside",
+        "host-back",
+        "window-blur"
+      ],
+      "nestedBack": true,
+      "disabledReleasesIsolation": true,
+      "inputRetained": true,
+      "profilePortal": true
+    },
+    {
+      "width": 430,
+      "height": 932,
+      "scale": 1,
+      "theme": "dark",
+      "status": "passed",
+      "selectionCancel": [
+        "escape",
+        "outside",
+        "host-back",
+        "window-blur"
+      ],
+      "nestedBack": true,
+      "disabledReleasesIsolation": true,
+      "inputRetained": true,
+      "profilePortal": true
+    }
+  ],
+  "errors": []
+}

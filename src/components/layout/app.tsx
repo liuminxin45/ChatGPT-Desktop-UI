@@ -1,5 +1,7 @@
 import {
   forwardRef,
+  createContext,
+  useContext,
   useEffect,
   useState,
   type ButtonHTMLAttributes,
@@ -35,9 +37,16 @@ import { useDesktopThemeContext } from '../../theme-context';
 import { classes } from '../classes';
 import { ControlButton } from '../actions/control-button';
 
+const AppAppearanceContext = createContext<'editorial' | 'workspace'>('editorial');
+
+export interface AppSurfaceProps extends HTMLAttributes<HTMLDivElement> {
+  /** Editorial keeps the existing warm app. Workspace is a compact jade productivity profile. */
+  profile?: 'editorial' | 'workspace';
+}
+
 /** Opt-in touch-first profile. Host retains navigation, content and persistence. */
-export const AppSurface = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(function AppSurface(
-  { className, children, ...props },
+export const AppSurface = forwardRef<HTMLDivElement, AppSurfaceProps>(function AppSurface(
+  { className, children, profile = 'editorial', ...props },
   ref,
 ) {
   const { theme } = useDesktopThemeContext();
@@ -53,14 +62,17 @@ export const AppSurface = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivEleme
   }, []);
   return (
     <AppProfileContext.Provider value={true}>
-      <div
-        {...props}
-        ref={ref}
-        className={classes('desktop-app', className)}
-        data-theme={theme === 'system' ? (systemDark ? 'dark' : 'light') : theme}
-      >
-        {children}
-      </div>
+      <AppAppearanceContext.Provider value={profile}>
+        <div
+          {...props}
+          ref={ref}
+          className={classes('desktop-app', className)}
+          data-app-profile={profile}
+          data-theme={theme === 'system' ? (systemDark ? 'dark' : 'light') : theme}
+        >
+          {children}
+        </div>
+      </AppAppearanceContext.Provider>
     </AppProfileContext.Provider>
   );
 });
@@ -101,10 +113,11 @@ export interface AppIconProps {
 /** Semantic app glyphs. Decorative by default; label an independent icon action. */
 export function AppIcon({ name, selected = false, size = 22, ...props }: AppIconProps) {
   const Glyph = appIcons[name];
+  const profile = useContext(AppAppearanceContext);
   return (
     <Glyph
       size={size}
-      weight={selected ? 'fill' : 'bold'}
+      weight={selected ? 'fill' : profile === 'workspace' ? 'regular' : 'bold'}
       aria-hidden={props['aria-label'] ? undefined : true}
       role={props['aria-label'] ? 'img' : undefined}
       {...props}
@@ -138,6 +151,14 @@ export function AppHeading({
     </div>
   );
 }
+
+/** Shared readable boundary for task actions; the host owns sticky/fixed placement. */
+export const AppActionBar = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(function AppActionBar(
+  { className, role = 'group', ...props },
+  ref,
+) {
+  return <div {...props} ref={ref} role={role} className={classes('desktop-app-action-bar', className)} />;
+});
 
 export interface AppTileProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children' | 'title'> {
   icon?: ReactNode;

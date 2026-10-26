@@ -69,6 +69,7 @@
   --desktop-app-on-accent-soft:#f0b99b;
   color-scheme:dark;
 }
+.desktop-ui-portal.desktop-app{min-height:0;background:transparent}
 .desktop-app .desktop-button,.desktop-app .desktop-icon-control,.desktop-app .desktop-select,.desktop-app .desktop-tabs button,.desktop-app .desktop-checkbox,.desktop-app .desktop-radio {min-height:44px}
 .desktop-app .desktop-button--md,.desktop-app .desktop-input,.desktop-app .desktop-select{min-height:48px;height:auto}
 .desktop-app .desktop-button.desktop-button--md{min-height:48px;height:auto;padding:11px 16px}
@@ -92,6 +93,7 @@
 .desktop-app .desktop-dialog>footer{padding:16px 24px max(20px,env(safe-area-inset-bottom));gap:12px;flex-wrap:wrap}
 .desktop-app .desktop-dialog[data-presentation=sheet]>.desktop-dialog__handle{min-height:32px}
 .desktop-app-heading{min-width:0}
+.desktop-app-action-bar{display:flex;flex:none;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:8px;min-width:0;box-sizing:border-box;padding:12px 16px max(12px,env(safe-area-inset-bottom));border-top:1px solid var(--desktop-color-border);background:var(--desktop-color-surface);color:var(--desktop-color-text)}
 .desktop-app-heading__eyebrow{margin:0 0 10px;color:var(--desktop-app-accent);font-size:13px;line-height:20px;font-weight:600;letter-spacing:.04em}
 .desktop-app-heading__title{margin:0;color:var(--desktop-color-text);font-size:22px;line-height:1.25;font-weight:600;letter-spacing:-.025em;overflow-wrap:anywhere;text-wrap:balance}
 .desktop-app-heading[data-size=hero] .desktop-app-heading__title{font-size:42px;line-height:1.12;letter-spacing:-.045em;max-width:22ch}
@@ -114,3 +116,121 @@
 .desktop-app-tile[data-layout=tile] .desktop-app-tile__trailing{grid-column:2;grid-row:1;align-self:center}
 @media(max-width:767px){.desktop-app-heading[data-size=hero] .desktop-app-heading__title{font-size:34px}.desktop-app .desktop-dialog>footer{display:grid;grid-auto-flow:row;grid-template-columns:repeat(auto-fit,minmax(120px,1fr))}}
 @media(prefers-reduced-motion:reduce){.desktop-app-tile,.desktop-app .desktop-button,.desktop-app .desktop-select,.desktop-app .desktop-tabs button{transition:none}.desktop-app .desktop-ai-activity,.desktop-app .desktop-skeleton{animation:none}}
+
+/* Opt-in productivity workspace: one calm action color, compact reading hierarchy,
+   flat records and native-sized phone targets. Editorial/portable profiles remain intact. */
+.desktop-app[data-app-profile=workspace] {
+  --desktop-font-sans:"Microsoft YaHei UI","Microsoft YaHei","PingFang SC","Hiragino Sans GB","Segoe UI",system-ui,sans-serif;
+  --desktop-color-background:#f5f7f8;
+  --desktop-color-canvas:#f5f7f8;
+  --desktop-color-shell:#f5f7f8;
+  --desktop-color-sidebar:#ffffff;
+  --desktop-color-surface:#ffffff;
+  --desktop-color-surface-muted:#eef2f3;
+  --desktop-color-surface-hover:#eaf1f2;
+  --desktop-color-surface-selected:#e8f5f3;
+  --desktop-color-surface-overlay:#ffffff;
+  --desktop-color-border:#dce5e7;
+  --desktop-color-border-strong:#a8b9be;
+  --desktop-color-panel-boundary:#dce5e7;
+  --desktop-color-text:#172a2d;
+  --desktop-color-text-subtle:#425c63;
+  --desktop-color-text-muted:#52666d;
+  --desktop-color-primary:#087f78;
+  --desktop-color-primary-hover:#066c66;
+  --desktop-color-on-primary:#ffffff;
+  --desktop-color-navigation-selected:#e8f5f3;
+  --desktop-color-on-navigation-selected:#076d67;
+  --desktop-color-composer:#ffffff;
+  --desktop-color-focus:#087f78;
+  --desktop-app-accent:#087f78;
+  --desktop-app-accent-soft:#e8f5f3;
+  --desktop-app-on-accent-soft:#076d67;
+  --desktop-font-size-body:14px;
+  --desktop-font-size-supporting:13px;
+  --desktop-font-size-section:18px;
+  --desktop-font-size-toolbar:16px;
+  --desktop-font-size-page-title:24px;
+  --desktop-font-size-dialog-title:20px;
+  --desktop-line-height-ui:22px;
+  --desktop-line-height-heading:28px;
+  --desktop-line-height-supporting:20px;
+  --desktop-radius-control:10px;
+  --desktop-radius-surface:12px;
+  --desktop-radius-overlay:16px;
+  --desktop-size-chat-header:56px;
+  --desktop-shadow-subtle:0 2px 8px rgb(23 42 45 / .04);
+  --desktop-shadow-overlay:0 6px 24px rgb(23 42 45 / .12);
+  --desktop-shadow-floating:0 8px 32px rgb(23 42 45 / .14);
+}
+.desktop-app[data-app-profile=workspace][data-theme=dark] {
+  --desktop-color-background:#101c20;
+  --desktop-color-canvas:#101c20;
+  --desktop-color-shell:#101c20;
+  --desktop-color-sidebar:#16262b;
+  --desktop-color-surface:#192a30;
+  --desktop-color-surface-muted:#22363d;
+  --desktop-color-surface-hover:#2a4148;
+  --desktop-color-surface-selected:#183c39;
+  --desktop-color-surface-overlay:#1d3036;
+  --desktop-color-border:#31484f;
+  --desktop-color-border-strong:#5d7d86;
+  --desktop-color-panel-boundary:#31484f;
+  --desktop-color-text:#eef6f7;
+  --desktop-color-text-subtle:#c4d6db;
+  --desktop-color-text-muted:#a8bdc4;
+  --desktop-color-primary:#42c7b8;
+  --desktop-color-primary-hover:#65d8cb;
+  --desktop-color-on-primary:#062c29;
+  --desktop-color-navigation-selected:#183c39;
+  --desktop-color-on-navigation-selected:#a7ede2;
+  --desktop-color-composer:#192a30;
+  --desktop-color-focus:#65d8cb;
+  --desktop-app-accent:#42c7b8;
+  --desktop-app-accent-soft:#183c39;
+  --desktop-app-on-accent-soft:#a7ede2;
+}
+.desktop-app[data-app-profile=workspace] .desktop-app-heading__eyebrow{margin-bottom:4px;letter-spacing:0}
+.desktop-app[data-app-profile=workspace] .desktop-app-heading__title{font-size:18px;line-height:26px;letter-spacing:0}
+.desktop-app[data-app-profile=workspace] .desktop-app-heading[data-size=hero] .desktop-app-heading__title{font-size:24px;line-height:32px;letter-spacing:0;max-width:none}
+.desktop-app[data-app-profile=workspace] .desktop-app-heading__description{font-size:14px;line-height:22px;margin-top:6px}
+.desktop-app[data-app-profile=workspace] .desktop-app-tile{gap:12px;min-height:64px;padding:12px;border-radius:12px}
+.desktop-app[data-app-profile=workspace] .desktop-app-tile__icon{width:36px;height:36px;border-radius:10px;background:transparent}
+.desktop-app[data-app-profile=workspace] .desktop-app-tile__copy{gap:2px}
+.desktop-app[data-app-profile=workspace] .desktop-app-tile__title{font-size:15px;line-height:24px}
+.desktop-app[data-app-profile=workspace] .desktop-app-tile[data-layout=tile]{min-height:116px;gap:12px}
+.desktop-app[data-app-profile=workspace] .desktop-button,.desktop-app[data-app-profile=workspace] .desktop-icon-control,.desktop-app[data-app-profile=workspace] .desktop-select,.desktop-app[data-app-profile=workspace] .desktop-input,.desktop-app[data-app-profile=workspace] .desktop-tabs button{min-height:40px}
+.desktop-app[data-app-profile=workspace] .desktop-button.desktop-button--md{min-height:40px;padding:8px 14px}
+.desktop-app[data-app-profile=workspace] .desktop-button.desktop-button--sm{min-height:36px;padding-block:6px}
+.desktop-app[data-app-profile=workspace] .desktop-button.desktop-button--icon,.desktop-app[data-app-profile=workspace] .desktop-icon-control{min-width:40px;padding:8px}
+.desktop-app[data-app-profile=workspace] .desktop-input,.desktop-app[data-app-profile=workspace] .desktop-textarea{font-size:14px;line-height:22px;padding:10px 12px}
+.desktop-app[data-app-profile=workspace] .desktop-select{padding:8px 12px}
+.desktop-app[data-app-profile=workspace] .desktop-tabs{gap:4px}
+.desktop-app[data-app-profile=workspace] .desktop-tabs button{padding:8px 14px;border-radius:10px}
+.desktop-app[data-app-profile=workspace] .desktop-select-item{min-height:40px;padding:8px 30px 8px 12px;box-sizing:border-box}
+.desktop-app[data-app-profile=workspace] .desktop-button:is([aria-current=page],[aria-current=true]){background:var(--desktop-color-navigation-selected);color:var(--desktop-color-on-navigation-selected)}
+.desktop-app[data-app-profile=workspace] .desktop-page-header{align-items:center;gap:12px}
+.desktop-app[data-app-profile=workspace] .desktop-page-header h1{font-weight:600}
+.desktop-app[data-app-profile=workspace] .desktop-chat-header--bar{box-sizing:border-box;min-height:56px;padding:4px 12px}
+.desktop-app[data-app-profile=workspace] .desktop-chat-header--bar .desktop-chat-header__title{font-size:20px;line-height:28px;font-weight:600}
+.desktop-app[data-app-profile=workspace] .desktop-dialog>header{padding:16px 20px 12px}
+.desktop-app[data-app-profile=workspace] .desktop-dialog__body{padding-inline:20px}
+.desktop-app[data-app-profile=workspace] .desktop-dialog>footer{padding:12px 20px max(16px,env(safe-area-inset-bottom));gap:8px}
+@media(max-width:767px){
+  .desktop-app[data-app-profile=workspace]{--desktop-font-size-body:16px;--desktop-font-size-page-title:20px;--desktop-line-height-ui:24px;--desktop-line-height-heading:28px}
+  .desktop-app[data-app-profile=workspace] .desktop-app-heading[data-size=hero] .desktop-app-heading__title{font-size:20px;line-height:28px}
+  .desktop-app[data-app-profile=workspace] .desktop-app-tile__title{font-size:16px}
+  .desktop-app[data-app-profile=workspace] .desktop-button,.desktop-app[data-app-profile=workspace] .desktop-icon-control,.desktop-app[data-app-profile=workspace] .desktop-select,.desktop-app[data-app-profile=workspace] .desktop-input,.desktop-app[data-app-profile=workspace] .desktop-tabs button,.desktop-app[data-app-profile=workspace] .client-settings-disclosure>button{min-height:48px}
+  .desktop-app[data-app-profile=workspace] .desktop-button.desktop-button--md,.desktop-app[data-app-profile=workspace] .desktop-button.desktop-button--sm{min-height:48px;padding:11px 14px}
+  .desktop-app[data-app-profile=workspace] .desktop-button.desktop-button--icon,.desktop-app[data-app-profile=workspace] .desktop-icon-control{min-width:48px;padding:12px}
+  .desktop-app[data-app-profile=workspace] .desktop-input,.desktop-app[data-app-profile=workspace] .desktop-textarea{font-size:16px;line-height:24px;padding:11px 12px}
+  .desktop-app[data-app-profile=workspace] .desktop-select{padding:11px 12px}
+  .desktop-app[data-app-profile=workspace] .desktop-select-item,.desktop-app[data-app-profile=workspace] .desktop-menu-item{min-height:48px;padding-block:12px;box-sizing:border-box}
+  .desktop-app[data-app-profile=workspace] .desktop-checkbox,.desktop-app[data-app-profile=workspace] .desktop-radio{width:48px;height:48px;min-width:48px;min-height:48px}
+  .desktop-app[data-app-profile=workspace] .desktop-checkbox::before,.desktop-app[data-app-profile=workspace] .desktop-radio::before{inset:14px}
+  .desktop-app[data-app-profile=workspace] .desktop-checkbox:checked::after{left:21px;top:17px}
+  .desktop-app[data-app-profile=workspace] .desktop-radio:checked::after{inset:19px}
+  .desktop-app[data-app-profile=workspace] .desktop-dialog>header{padding:16px 16px 12px}
+  .desktop-app[data-app-profile=workspace] .desktop-dialog__body{padding-inline:16px}
+  .desktop-app[data-app-profile=workspace] .desktop-dialog>footer{padding-inline:16px}
+}

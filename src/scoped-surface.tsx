@@ -95,6 +95,7 @@ const ScopedPortalContent = forwardRef<
         'data-desktop-feature',
         'data-desktop-surface',
         'data-desktop-tool-surface',
+        'data-app-profile',
       ]) {
         const value = source.closest(`[${attribute}]`)?.getAttribute(attribute);
         if (value === null || value === undefined) portal.removeAttribute(attribute);
@@ -120,6 +121,7 @@ const ScopedPortalContent = forwardRef<
           'data-desktop-feature',
           'data-desktop-surface',
           'data-desktop-tool-surface',
+          'data-app-profile',
         ],
       });
     return () => observer.disconnect();

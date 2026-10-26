@@ -1,5 +1,35 @@
 # Desktop design system
 
+## Compact productivity workspace profile (0.8.11)
+
+Use `AppSurface profile="workspace"` for a phone-first productivity application.
+This opt-in profile supplies a cool `#F5F7F8` canvas, white reading surfaces,
+`#172A2D` ink and `#087F78` jade actions, with a corresponding high-contrast dark
+palette. Accent is reserved for the primary action, selection and focus. The
+existing warm `profile="editorial"` remains the default; the measured Windows
+client and portable controls are unchanged.
+
+Workspace hierarchy is compact: page/hero titles are 24px on desktop and 20px on
+phones; section headings are 18px. Body controls are 14px on desktop and 16px on
+phones. A `ChatHeader presentation="bar"` occupies 56px including its insets.
+Controls are 40px on desktop (36px for compact commands), and at least 48px on
+phones, including icon actions, popup choices and disclosures. AppTile records
+use a 12px corner and compact 12px inset instead of oversized editorial tiles.
+Use `Surface variant="outlined"` for selectable read-only text; do not present
+delivered text as a disabled input. A host owns page columns and safe-area
+placement, not these control surfaces or typography.
+
+Portals inherit both workspace tokens and the explicit profile marker, so
+choosers, dialogs and navigation retain their appearance outside the page DOM.
+Portal scope wrappers are transparent and have no canvas minimum height; opening
+a popup must not add a second viewport of blank document space. Window blur,
+backgrounding or disabling a Select dismisses its chooser without changing the
+chosen value. Normal dismissal returns focus to the trigger without moving the
+reading position; hidden business surfaces never steal focus. Host Back still
+uses `DismissalLayerProvider`, dismissing one layer per action. Verify the
+prepared package with `npm run test:workspace-profile`, then test the real host.
+Browser phone-width evidence is separate from physical Android evidence.
+
 ## Opt-in product app profile
 
 `AppSurface` supplies a touch-first, warm-neutral product canvas, 16px editing,

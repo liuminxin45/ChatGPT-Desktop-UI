@@ -2,7 +2,11 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 const manifest=JSON.parse(fs.readFileSync('package.json','utf8'));
-assert.equal(manifest.name,'chatgpt-desktop-kit');assert.equal(manifest.version,JSON.parse(fs.readFileSync('docs/CLIENT_ALIGNMENT.json','utf8')).kitVersion);
+assert.equal(manifest.name,'chatgpt-desktop-kit');
+// The observed client profile is versioned independently of portable/app releases.
+// A new opt-in app profile must not relabel an unchanged native capture.
+const reference=JSON.parse(fs.readFileSync('docs/CLIENT_ALIGNMENT.json','utf8'));
+assert.match(manifest.version,/^\d+\.\d+\.\d+$/);assert.match(reference.kitVersion,/^\d+\.\d+\.\d+$/);
 const legacy=/(?:@ph[d]\/|--ph[d]-|data-ph[d]-|\bPh[d][A-Z]|\bph[d][:-]|\bph[d]T\b)/;
 let checked=0;
 const walk=directory=>{for(const entry of fs.readdirSync(directory,{withFileTypes:true})){const file=path.join(directory,entry.name);if(entry.isDirectory())walk(file);else if(/\.(css|tsx?|jsx?|mjs|json)$/.test(file)){assert.doesNotMatch(fs.readFileSync(file,'utf8'),legacy,file);checked++;}}};

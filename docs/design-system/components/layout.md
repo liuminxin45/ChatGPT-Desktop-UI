@@ -8,6 +8,15 @@ Runnable composition: [example](../../../examples/catalog/Examples.tsx).
 
 Generated from TypeScript exports; edit implementation props/JSDoc, then run `npm run docs:generate`. Native React attributes remain available in the online API catalog.
 
+## AppActionBar (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/layout/app.tsx)
+
+Shared readable boundary for task actions; the host owns sticky/fixed placement.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+
 ## AppHeading (chatgpt-desktop-kit)
 
 [Implementation](../../../src/components/layout/app.tsx)
@@ -44,6 +53,7 @@ Opt-in touch-first profile. Host retains navigation, content and persistence.
 
 | Prop | Required | Type |
 | --- | --- | --- |
+| profile | no | `"editorial" \| "workspace" \| undefined` |
 
 ## AppTile (chatgpt-desktop-kit)
 

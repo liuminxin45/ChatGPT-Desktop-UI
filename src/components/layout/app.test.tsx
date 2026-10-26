@@ -63,6 +63,23 @@ it('renders a semantic heading and a single named tile action', () => {
   expect(tile.querySelectorAll('button,a,input').length).toBe(0);
 });
 
+it('selects the workspace profile explicitly without replacing a retained editor', () => {
+  const view = (theme: 'light' | 'dark') => (
+    <DesktopProvider theme={theme}>
+      <AppSurface profile="workspace">
+        <input aria-label="Workspace draft" defaultValue="retain this" />
+      </AppSurface>
+    </DesktopProvider>
+  );
+  const { rerender } = render(view('light'));
+  const input = screen.getByRole('textbox');
+  expect(document.querySelector('.desktop-app')?.getAttribute('data-app-profile')).toBe('workspace');
+  rerender(view('dark'));
+  expect(screen.getByRole('textbox')).toBe(input);
+  expect((input as HTMLInputElement).value).toBe('retain this');
+  expect(document.querySelector('.desktop-app')?.getAttribute('data-theme')).toBe('dark');
+});
+
 it('supports decorative glyphs, independently labelled glyphs and disabled actions', () => {
   const click = vi.fn();
   render(
