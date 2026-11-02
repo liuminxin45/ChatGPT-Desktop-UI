@@ -6,6 +6,12 @@ Use [usage](docs/usage/README.md) for integration, [design system](docs/design-s
 
 An independent React component library for neutral desktop interfaces. It provides shared controls, semantic themes, compact navigation, layout primitives, synthetic visual examples and a companion agent Skill. It is not affiliated with OpenAI.
 
+## Choose the right starting point
+
+For an application, start with the shared controls and integration guide. For a visual reference, open the synthetic demo or component reference. The host application remains responsible for routes, persistence, credentials, native capabilities, and real AI services.
+
+The demo is not a ChatGPT client or an OpenAI service. It illustrates interface behavior with fictional content; native file access, microphones, accounts, and model calls are simulated or unavailable.
+
 ## Try the demo
 
 [Open the demo](https://liuminxin45.github.io/ChatGPT-Desktop-UI/) — a browser recreation of the Windows **ChatGPT 26.1002.7124.0** client, with synthetic English content. It follows the observed project/chat sidebar, composer, menus, search, new-tab surface and grouped Settings. Create projects, rename and pin chats, explore nested menus, preserve drafts, use navigation history and switch themes.
