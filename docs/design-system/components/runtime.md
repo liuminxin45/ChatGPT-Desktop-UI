@@ -18,6 +18,17 @@ Two-line navigation target used by the public mobile chat profile.
 | --- | --- | --- |
 | size | no | `number \| undefined` |
 
+## CodexIcon (chatgpt-desktop-kit)
+
+[Implementation](../../../src/codex-icon.tsx)
+
+Decorative Codex glyph. Use the filled version for the current destination or open panel.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| selected | no | `boolean \| undefined` |
+| size | no | `string \| number \| undefined` |
+
 ## DesktopDocumentAdapter (chatgpt-desktop-kit)
 
 [Implementation](../../../src/scoped-surface.tsx)
