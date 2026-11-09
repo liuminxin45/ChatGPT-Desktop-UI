@@ -39,3 +39,4 @@ export { House, ChatCircle, Clock, FolderSimple, Gear, MagnifyingGlass, ArrowLef
 
 export { NavigationIcon } from './navigation';
 export { ChatMenuIcon } from './chat-menu-icon';
+export { CodexIcon, type CodexIconProps } from './codex-icon';
