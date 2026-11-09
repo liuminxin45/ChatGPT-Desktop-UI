@@ -1,4 +1,5 @@
 import { AddressBook, ArrowsLeftRight, Bell, BookOpen, Bug, Buildings, CalendarCheck, ChartLine, ChatCircle, Code, Cube, Database, EnvelopeSimple, FileText, FolderSimple, GitPullRequest, ListChecks, Notebook, PaperPlaneTilt, PencilSimple, Question, Robot, Tag, Tray, TreeStructure, Users, UsersThree } from '@phosphor-icons/react';
+import { CodexIcon } from './codex-icon';
 
 const NAVIGATION_ICONS = { projects: FolderSimple, chat: ChatCircle, pending: ListChecks, mail: EnvelopeSimple,
   contacts: AddressBook, knowledge: BookOpen, office: Buildings, agents: Robot, bug: Bug,
@@ -7,6 +8,8 @@ const NAVIGATION_ICONS = { projects: FolderSimple, chat: ChatCircle, pending: Li
 
 /** Navigation alone has a semantic outline/fill pair; tool content keeps its existing icons. */
 export function NavigationIcon({ name, selected = false }: { name: string; selected?: boolean }) {
-  const Icon = NAVIGATION_ICONS[name.replace(/^desktop:/, '') as keyof typeof NAVIGATION_ICONS] || (name.includes('bug') ? Bug : Cube);
+  const key = name.replace(/^desktop:/, '');
+  if (key === 'codex') return <CodexIcon selected={selected} />;
+  const Icon = NAVIGATION_ICONS[key as keyof typeof NAVIGATION_ICONS] || (name.includes('bug') ? Bug : Cube);
   return <Icon size={20} weight={selected ? 'fill' : 'regular'} aria-hidden="true" />;
 }
