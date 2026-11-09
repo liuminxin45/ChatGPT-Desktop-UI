@@ -32,6 +32,7 @@ import {
 } from "@phosphor-icons/react";
 import {
   ClientComposer,
+  CodexIcon,
   AIActivity,
   AIResponse,
   DesktopClientSurface,
@@ -83,30 +84,6 @@ const start: Route = {
   project: "desktop",
   chat: "",
 };
-export function CodexMark() {
-  return (
-    <svg
-      width="52"
-      height="52"
-      viewBox="0 0 52 52"
-      fill="none"
-      aria-hidden="true"
-    >
-      <path
-        d="M17 8c2-6 15-6 18 1 8 0 13 9 9 16 5 8-1 17-9 17-6 8-18 5-21-2-9 0-13-11-7-17-3-8 2-15 10-15Z"
-        stroke="currentColor"
-        strokeWidth="2.5"
-      />
-      <path
-        d="m18 21 5 5-5 5m10 0h7"
-        stroke="currentColor"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 export function ClientDemo() {
   const [generating, setGenerating] = useState('');
   const replyTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
@@ -1156,7 +1133,7 @@ export function ClientDemo() {
               </InternalScrollArea>
             ) : (
               <div className="client-empty-project">
-                {mode === "Codex" ? <CodexMark /> : null}
+                {mode === "Codex" ? <CodexIcon size={52} /> : null}
                 <h1>
                   {mode === "ChatGPT" ? "Where should we begin?" : project ? (
                     <>
@@ -1209,7 +1186,7 @@ export function ClientDemo() {
           >
             <h1>{railItems.find((item) => item.id === route.page)?.label}</h1>
             <div className="client-secondary-inner">
-              <CodexMark />
+              <CodexIcon size={52} />
               <Button
                 actionId="client.home.return"
                 onClick={() => navigate({ page: "home" })}

@@ -128,6 +128,8 @@ Remove the selected rail's left stripe. Tooltips sit immediately beside the rail
 
 Rail hover uses the navigation tile surface and foreground rather than the generic control hover surface, which is too close to the pale shell in light mode. Idle destinations retain outline icons; the selected destination retains its filled icon. Pointer exit clears only the hover fill.
 
+`NavigationIcon name="codex"` uses the shared Codex cloud and terminal mark. The idle outline stays fine at rail and toolbar sizes; the selected mark fills with the navigation foreground and cuts out the terminal details. Use `CodexIcon` for action slots and pass `selected` only when the control represents a current destination or an open panel.
+
 ### Icon and label alignment
 
 Resizable contextual sidebars compose `SidebarPanel`, or `SettingsLayout.sidebarResize`.
