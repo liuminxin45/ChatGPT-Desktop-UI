@@ -54,6 +54,20 @@ Reusable floating surfaces; positioning and application state belong to the Host
 | tooltip | no | `string \| undefined` |
 | tooltipWhenTruncated | no | `boolean \| undefined` |
 
+## PersonPill (chatgpt-desktop-kit)
+
+[Implementation](../../../src/components/actions/person-pill.tsx)
+
+A person label with one compact surface, independent of ordinary button geometry.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| children | yes | `ReactNode` |
+| className | no | `string \| undefined` |
+| tooltip | no | `string \| undefined` |
+| action | no | `PersonPillAction \| undefined` |
+| remove | no | `PersonPillAction \| undefined` |
+
 ## RecordAction (chatgpt-desktop-kit)
 
 [Implementation](../../../src/components/actions/index.tsx)

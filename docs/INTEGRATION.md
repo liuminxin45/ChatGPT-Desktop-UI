@@ -1,4 +1,11 @@
 # Integration
+
+Use `PersonPill` with a Host-supplied label and an optional `action` or
+`remove` command. For an isolated document such as a sanitized email iframe,
+use the built package's `personPillStyles` and `personPillClassName` on the
+native target with a `desktop-person-pill__label` child. The document supplies
+the same surface-selected and text tokens; no React runtime is
+needed inside it.
 Tooltips are opt-in supplemental information. `aria-label`, `iconOnly` and a visible caption never generate a tooltip automatically. Use `Button.tooltip` for otherwise hidden state, identity, a concrete disabled/error reason or an unfamiliar operation; do not repeat obvious click actions. The legacy `title` prop aliases explicit tooltip content. Use `tooltipWhenTruncated` or `Tooltip overflowOnly` only for actually clipped values. Preserve accessible names, keyboard focus and interaction feedback. Icon-only navigation destinations may retain their name for identification.
 
 

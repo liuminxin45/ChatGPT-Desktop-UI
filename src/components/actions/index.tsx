@@ -2,6 +2,8 @@ import { forwardRef, type AnchorHTMLAttributes, type ButtonHTMLAttributes, type 
 import { classes } from '../classes';
 import { ControlButton } from './control-button';
 
+export { PersonPill, personPillClassName, personPillStyles, type PersonPillProps } from './person-pill';
+
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

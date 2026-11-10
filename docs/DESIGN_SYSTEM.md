@@ -1,5 +1,11 @@
 # Desktop design system
 
+Use `PersonPill` for inline person references and selected recipients. The label
+inherits the surrounding line and uses a single rounded surface. An actionable
+label is itself the button; hover and keyboard focus fill that same surface
+without changing its bounds. A removable recipient uses a static label and a
+separate, named remove button inside the pill.
+
 ## Compact contextual navigation
 
 Contextual sidebar navigation uses 13px regular text, 20px line height and 32px

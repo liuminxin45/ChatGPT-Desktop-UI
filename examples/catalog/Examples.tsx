@@ -9,6 +9,7 @@ import {
   InlineNotice,
   Button,
   IconButton,
+  PersonPill,
   Input,
   FieldRow,
   SettingsForm,
@@ -84,6 +85,7 @@ export function Examples({ family }: { family: string }) {
   const [submitted, setSubmitted] = useState('');
   const [dragPreview, setDragPreview] = useState(false);
   const [contextAttached, setContextAttached] = useState(true);
+  const [recipient, setRecipient] = useState(true);
   const field = (
     <Input aria-label="Project name" value={value} onChange={(event) => setValue(event.target.value)} />
   );
@@ -128,6 +130,37 @@ export function Examples({ family }: { family: string }) {
   if (family === 'actions')
     return (
       <>
+        <p>
+          Assigned to{' '}
+          <PersonPill
+            action={{
+              actionId: 'reference.person.open',
+              ariaLabel: 'Open Jordan Lee',
+              onClick: () => setSubmitted('Jordan Lee opened'),
+            }}
+          >
+            @Jordan Lee
+          </PersonPill>
+          .
+        </p>
+        <p>
+          Recipient:{' '}
+          {recipient ? (
+            <PersonPill
+              remove={{
+                actionId: 'reference.recipient.remove',
+                ariaLabel: 'Remove Jordan Lee',
+                onClick: () => setRecipient(false),
+              }}
+            >
+              Jordan Lee
+            </PersonPill>
+          ) : (
+            <Button actionId="reference.recipient.restore" onClick={() => setRecipient(true)}>
+              Restore recipient
+            </Button>
+          )}
+        </p>
         <Button actionId="reference.action" icon={<Plus />} onClick={() => setSubmitted('Project created')}>
           New project
         </Button>

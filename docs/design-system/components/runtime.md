@@ -8,6 +8,17 @@ Runnable composition: [example](../../../examples/catalog/Examples.tsx).
 
 Generated from TypeScript exports; edit implementation props/JSDoc, then run `npm run docs:generate`. Native React attributes remain available in the online API catalog.
 
+## CodexIcon (chatgpt-desktop-kit)
+
+[Implementation](../../../src/codex-icon.tsx)
+
+Decorative Codex glyph. Use the filled version for the current destination or open panel.
+
+| Prop | Required | Type |
+| --- | --- | --- |
+| selected | no | `boolean \| undefined` |
+| size | no | `string \| number \| undefined` |
+
 ## DesktopDocumentAdapter (chatgpt-desktop-kit)
 
 [Implementation](../../../src/scoped-surface.tsx)

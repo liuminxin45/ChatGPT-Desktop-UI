@@ -1,0 +1,60 @@
+.desktop-person-pill {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: baseline;
+  max-inline-size: 100%;
+  min-inline-size: 0;
+  margin: 0;
+  padding: 0 0.4em;
+  border: 0;
+  border-radius: 999px;
+  background: var(--desktop-color-surface-selected);
+  color: var(--desktop-color-text);
+  font: inherit;
+  text-align: start;
+  text-decoration: none;
+  vertical-align: baseline;
+}
+
+.desktop-person-pill__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+button.desktop-person-pill:not(:disabled):is(:hover, :focus-visible),
+.desktop-person-pill:has(> .desktop-person-pill__remove:not(:disabled):is(:hover, :focus-visible)) {
+  background: color-mix(in srgb, var(--desktop-color-surface-selected), var(--desktop-color-text) 10%);
+}
+
+.desktop-person-pill:focus-visible,
+.desktop-person-pill__remove:focus-visible {
+  outline: none;
+}
+
+.desktop-person-pill__remove {
+  align-self: stretch;
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  inline-size: 1.3em;
+  margin: 0 0 0 0.1em;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--desktop-color-text-muted);
+  font: inherit;
+}
+
+.desktop-person-pill__remove svg {
+  inline-size: 0.85em;
+  block-size: 0.85em;
+}
+
+.desktop-person-pill__remove:not(:disabled):is(:hover, :focus-visible) {
+  color: var(--desktop-color-text);
+}
+
+.desktop-person-pill__remove:disabled {
+  opacity: 0.55;
+}

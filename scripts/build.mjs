@@ -18,7 +18,9 @@ const types = spawnSync(process.execPath, ['node_modules/typescript/bin/tsc', '-
 if (types.status) process.exit(types.status);
 const compat = (await readdir(path.join(root,'src/compat'))).filter(file=>/\.tsx?$/.test(file)).map(file=>'src/compat/'+file);
 const components = (await readdir(path.join(root,'src/components'),{withFileTypes:true})).filter(entry=>entry.isDirectory()).map(entry=>'src/components/'+entry.name+'/index.tsx');
-const bundled = await build({ absWorkingDir: root, entryPoints: ['src/index.ts','src/tab-navigation.ts','src/fixed-virtual-list.tsx',...components,...compat], outdir: 'dist', outbase:'src', splitting:true, bundle: true, format: 'esm', platform: 'neutral', mainFields: ['module','main'], banner: {js:'"use client";'}, target: 'es2022', jsx: 'automatic', minify: true, legalComments: 'none', metafile: true, plugins:[staticNotificationStyles,desktopScrollLock], external: ['react', 'react/*', 'react-dom', 'react-dom/*'] });
+const pillCss = await build({ absWorkingDir: root, entryPoints: ['src/person-pill.css'], bundle: true, minify: true, write: false });
+const isolatedStyles = { __DESKTOP_PERSON_PILL_STYLES__: JSON.stringify(pillCss.outputFiles[0].text) };
+const bundled = await build({ absWorkingDir: root, entryPoints: ['src/index.ts','src/tab-navigation.ts','src/fixed-virtual-list.tsx',...components,...compat], outdir: 'dist', outbase:'src', splitting:true, bundle: true, format: 'esm', platform: 'neutral', mainFields: ['module','main'], banner: {js:'"use client";'}, target: 'es2022', jsx: 'automatic', minify: true, legalComments: 'none', metafile: true, define: isolatedStyles, plugins:[staticNotificationStyles,desktopScrollLock], external: ['react', 'react/*', 'react-dom', 'react-dom/*'] });
 const modules = [...new Set(Object.keys(bundled.metafile.inputs).map(input=>input.match(/^node_modules\/(?:@[^/]+\/[^/]+|[^/]+)/)?.[0]).filter(Boolean))].sort();
 let notices = 'Desktop UI Kit source: MIT. Adapted shadcn/ui compatibility components and bundled dependencies retain their original licenses.\n';
 notices += '\n===== shadcn/ui =====\n' + await readFile(path.join(root,'licenses/shadcn-ui.txt'),'utf8');
