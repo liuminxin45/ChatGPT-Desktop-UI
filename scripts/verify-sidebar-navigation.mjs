@@ -72,6 +72,8 @@ try {
               width: row.clientWidth,
               labelBottom: label.bottom,
               labelTop: label.top,
+              labelScroll: row.querySelector('.client-sidebar-label').scrollWidth,
+              labelWidth: row.querySelector('.client-sidebar-label').clientWidth,
             };
           }),
         );
@@ -81,9 +83,10 @@ try {
               row.scroll <= row.width + 1 && row.labelBottom <= row.bottom + 1 && row.labelTop >= row.top,
           ),
         );
-        assert.ok(geometry.every((row) => Math.abs(row.left - geometry[0].left) < 1));
-        assert.ok(geometry[1].height > 32);
-        assert.equal(geometry[0].height, 32);
+        assert.ok(Math.abs(geometry[1].left - geometry[0].left) < 1, 'icon-bearing rows share their label baseline');
+        assert.ok(geometry[2].left < geometry[0].left, 'iconless rows do not reserve a glyph column');
+        assert.ok(geometry.every((row) => row.height === 30), 'single-line rows use the compact profile');
+        assert.ok(geometry[1].labelScroll > geometry[1].labelWidth, 'long labels are truncated');
         assert.equal(
           await page.getByRole('button', { name: 'Data 12' }).getAttribute('aria-current'),
           'page',
@@ -109,7 +112,7 @@ try {
         await context.close();
       }
   await writeFile(path.join(output, 'renderer.json'), JSON.stringify({ results }, null, 2));
-  console.log('PASS shared sidebar label wrapping, counts, alignment and focus: 12 renders');
+  console.log('PASS shared sidebar truncation, counts, alignment and focus: 12 renders');
 } finally {
   await browser?.close();
   await new Promise((r) => server.close(r));

@@ -213,7 +213,8 @@ export function ClientSidebarItem({
   ...props
 }: Omit<ButtonProps, 'children' | 'variant' | 'iconOnly'> & {
   label: ReactNode;
-  count?: number;
+  /** Non-interactive trailing metadata, such as a count or compact status badges. */
+  count?: ReactNode;
   selected?: boolean;
   /** One shared indentation step per tree level; no empty icon column is implied. */
   depth?: number;

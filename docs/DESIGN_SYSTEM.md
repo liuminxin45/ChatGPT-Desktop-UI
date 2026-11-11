@@ -12,6 +12,8 @@ Contextual sidebar navigation uses 13px regular text, 20px line height and 32px
 single-line targets. Module headings use 16px and group headings use 12px. This
 profile applies to Settings and embedded Tool navigation as well as client lists;
 content typography and intentional two-line message previews retain their hierarchy.
+`ClientSidebarItem.count` may contain non-interactive compact metadata in place
+of a number; keep commands in `actions` and expose status meaning accessibly.
 Independent commands use ClientSidebarItem.actions and a fixed status slot (20px
 for passive glyphs, 28px for an independent button). Commands
 appear on hover, focus, an open child menu, or coarse pointers. Records have no
