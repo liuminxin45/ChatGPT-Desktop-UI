@@ -21,6 +21,14 @@ describe('ClientSidebarItem', () => {
     button.click();
     expect(select).toHaveBeenCalledOnce();
   });
+  it('includes non-interactive trailing metadata in the navigation target', () => {
+    const select = vi.fn();
+    render(<ClientSidebarItem label="Chat" count={<span><span aria-label="Pinned" />@2 <span>Draft</span></span>} onClick={select} />);
+    const button = screen.getByRole('button', { name: 'Chat Pinned @2 Draft' });
+    expect(button.querySelector('.client-sidebar-count')).not.toBeNull();
+    button.click();
+    expect(select).toHaveBeenCalledOnce();
+  });
   it('keeps disabled targets inert and omits absent counts', () => {
     const select = vi.fn();
     render(<ClientSidebarItem label="A long category name" disabled onClick={select} />);
