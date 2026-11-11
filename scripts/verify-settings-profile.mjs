@@ -69,6 +69,7 @@ try {
               icon = group.querySelector('svg');
             return (
               input.getBoundingClientRect().left +
+              parseFloat(getComputedStyle(input).borderLeftWidth) +
               parseFloat(getComputedStyle(input).paddingLeft) -
               icon.getBoundingClientRect().right
             );
