@@ -103,7 +103,23 @@
   /* Shape and motion */
   --desktop-radius-control: 8px;
   --desktop-radius-composer: 16px;
-  --desktop-input-focus-ring: inset 0 0 0 1px var(--desktop-color-border-strong);
+  --desktop-sidebar-row-text: #3b3d40;
+  --desktop-sidebar-row-hover: #edeff1;
+  --desktop-sidebar-row-selected: #e9ecef;
+  --desktop-sidebar-action-text: #707477;
+  --desktop-input-background: #ffffff;
+  --desktop-input-hover-background: var(--desktop-input-background);
+  --desktop-input-border-width: 1px;
+  --desktop-input-border: #e4e4e5;
+  --desktop-input-composer-background: #ffffff;
+  --desktop-input-composer-border: var(--desktop-input-border);
+  --desktop-input-composer-focus-border: var(--desktop-input-focus-border);
+  --desktop-input-focus-border: #3a83f7;
+  --desktop-input-focus-ring: none;
+  --desktop-input-invalid-ring: none;
+  --desktop-input-search-radius: var(--desktop-radius-control);
+  --desktop-input-settings-search-radius: var(--desktop-radius-control);
+  --desktop-input-shell-search-radius: var(--desktop-radius-control);
   --desktop-radius-surface: 8px;
   --desktop-radius-window: 12px;
   --desktop-motion-press: 120ms;
@@ -112,6 +128,24 @@
 }
 
 .dark {
+  --desktop-sidebar-row-text: var(--desktop-color-text);
+  --desktop-sidebar-row-hover: var(--desktop-color-client-pill,var(--desktop-color-surface-hover));
+  --desktop-sidebar-row-selected: var(--desktop-color-surface-selected);
+  --desktop-sidebar-action-text: var(--desktop-color-text-muted);
+  --desktop-input-background: var(--desktop-color-surface-muted);
+  --desktop-input-hover-background: var(--desktop-color-surface-hover);
+  --desktop-input-border-width: 0px;
+  --desktop-input-border: transparent;
+  --desktop-input-search-background: var(--desktop-color-client-input,var(--desktop-input-background));
+  --desktop-input-composer-background: initial;
+  --desktop-input-composer-border: initial;
+  --desktop-input-composer-focus-border: initial;
+  --desktop-input-focus-border: var(--desktop-color-border-strong);
+  --desktop-input-focus-ring: inset 0 0 0 1px var(--desktop-input-focus-border);
+  --desktop-input-invalid-ring: inset 0 0 0 1px var(--desktop-color-danger);
+  --desktop-input-search-radius: 999px;
+  --desktop-input-settings-search-radius: 22px;
+  --desktop-input-shell-search-radius: 16px;
   --desktop-color-panel-boundary: transparent;
   --desktop-color-avatar-boundary: transparent;
   --desktop-color-composer: #2a2a2a;

@@ -1,7 +1,7 @@
 import { useState, type CSSProperties } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createPortal } from 'react-dom';
-import { Button, ClientComposer, DesktopRoot, Input, InputGroup, Textarea } from '../src';
+import { Button, ClientComposer, ClientSidebarItem, DesktopRoot, Input, InputGroup, Textarea } from '../src';
 import { Input as HostInput } from '../src/compat/input';
 import { Textarea as HostTextarea } from '../src/compat/textarea';
 import { AppDialog, AppDialogTrigger, AppDialogContent, AppDialogHeader, AppDialogTitle, AppDialogDescription, AppDialogBody, AppDialogClose } from '../src/compat/app-dialog';
@@ -22,13 +22,18 @@ function Example() {
       <Textarea aria-label="Form notes" />
       <Button type="submit" actionId="example.form.confirm">Confirm form</Button>
     </form>
+    <div data-testid="compact-record">
+      <ClientSidebarItem label="Conversation" selected actions={
+        <Button iconOnly icon={<svg viewBox="0 0 16 16"><path d="M2 5h12v8H2z" /></svg>} aria-label="Archive conversation" onClick={() => record('archive')} />
+      } />
+    </div>
     <section data-desktop-input-scope style={{ marginBlock: 24 }}>
       <Input aria-label="Scoped name" />
       <HostInput aria-label="Host name" />
       <HostTextarea aria-label="Host notes" />
       <textarea aria-label="Native notes" />
       <input aria-label="Unmanaged native field" style={{ border: 0, outline: "none" }} />
-      <div role="textbox" aria-label="Rich notes" contentEditable suppressContentEditableWarning style={{ minHeight: 60 }} />
+      <div role="textbox" aria-label="Rich notes" data-desktop-rich-field contentEditable suppressContentEditableWarning style={{ minHeight: 60 }} />
       <Button confirmOnEnter actionId="example.scope.confirm" disabled={disabled} onClick={() => record('scope')}>Confirm changes</Button>
       <Button actionId="example.scope.disable" onClick={() => setDisabled(value => !value)}>Toggle disabled</Button>
       <div data-desktop-input-scope><Input aria-label="Nested filter" /><Button actionId="example.filter.clear">Clear filter</Button></div>

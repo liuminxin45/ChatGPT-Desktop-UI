@@ -47,9 +47,9 @@
 .kit-settings-nav>.client-sidebar-toolbar{margin-bottom:-12px}
 .kit-settings-nav>.kit-settings-search{margin-inline:12px}
 .kit-settings-nav>.kit-settings-nav__list{padding-inline:8px}
-.kit-settings-nav>.desktop-input{height:32px;border-radius:16px}
+.kit-settings-nav>.desktop-input{height:32px;border-radius:var(--desktop-input-shell-search-radius)}
 .kit-settings-nav__list{flex:1;min-height:0}
-.kit-settings-search{position:relative;flex:none}.kit-settings-search>svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--desktop-color-text-muted);pointer-events:none}.kit-settings-search>.desktop-input{padding-left:34px}
+.kit-settings-search{position:relative;flex:none}.kit-settings-search>svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--desktop-color-text-muted);pointer-events:none}.kit-settings-search>.desktop-input{padding-left:calc(34px - var(--desktop-input-border-width))}
 .kit-category{width:100%;display:flex;align-items:center;gap:8px;padding:6px 8px;border:0;border-radius:var(--desktop-radius-control);background:transparent;color:var(--desktop-color-text);font:inherit;text-align:left;white-space:nowrap}
 .kit-category:hover,.kit-category[aria-current=page]{background:var(--desktop-color-surface-hover)}
 .kit-settings-scroll{height:100%;padding:64px var(--desktop-space-page-inline) 32px}

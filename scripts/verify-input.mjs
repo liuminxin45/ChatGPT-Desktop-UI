@@ -37,7 +37,24 @@ try {
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(`http://127.0.0.1:${server.address().port}`);
     const count = key => page.evaluate(key => window.inputContract[key] || 0, key);
-    await page.getByLabel('Form field').fill('Example');
+    const light = theme === 'light';
+    const inputColors = locator => locator.evaluate(el => {
+      const s = getComputedStyle(el);
+      return { fill:s.backgroundColor, border:s.borderColor, width:s.borderWidth, height:el.getBoundingClientRect().height, radius:s.borderRadius, shadow:s.boxShadow };
+    });
+    const name = page.getByLabel('Form field');
+    await name.waitFor();
+    if (light) {
+      const normal = await inputColors(name);
+      assert.deepEqual(normal, {fill:'rgb(255, 255, 255)',border:'rgb(228, 228, 229)',width:'1px',height:36,radius:'8px',shadow:'none'});
+      await name.screenshot({path:path.join(evidence, `field-default-${width}.png`)});
+      await name.click();
+      assert.deepEqual(await inputColors(name), {...normal,border:'rgb(58, 131, 247)'});
+      await name.screenshot({path:path.join(evidence, `field-focused-${width}.png`)});
+      await name.press('Tab');
+      assert.equal((await inputColors(page.getByLabel('Form notes'))).border,'rgb(58, 131, 247)');
+    }
+    await name.fill('Example');
     await page.getByLabel('Form notes').fill('First'); await page.getByLabel('Form notes').press('Shift+Enter'); await page.keyboard.type('Second');
     assert.equal(await page.getByLabel('Form notes').inputValue(), 'First\nSecond'); assert.equal(await count('form'), 0);
     await page.getByLabel('Form notes').press('Enter'); assert.equal(await count('form'), 1);
@@ -63,6 +80,17 @@ try {
     const unmanaged = page.getByLabel('Unmanaged native field');
     await unmanaged.click();
     assert.equal(await unmanaged.evaluate(element => getComputedStyle(element).boxShadow), 'none', 'shared CSS must not add a rectangular frame to unmanaged native fields');
+    const sidebar = page.getByTestId('compact-record');
+    const conversation = sidebar.getByRole('button', {name:'Conversation', exact:true});
+    await conversation.focus();
+    assert.equal(await conversation.evaluate(e => e.getBoundingClientRect().height), 30);
+    if (light) assert.equal(await conversation.evaluate(e => getComputedStyle(e).color), 'rgb(59, 61, 64)');
+    await conversation.press('Tab');
+    const archive = sidebar.getByRole('button', {name:'Archive conversation'});
+    assert.equal(await archive.evaluate(e => e === document.activeElement), true);
+    assert.deepEqual(await archive.evaluate(e => [e.getBoundingClientRect().width, e.getBoundingClientRect().height, e.querySelector('svg').getBoundingClientRect().width]), [24,24,12]);
+    await archive.press('Enter');
+    assert.equal(await count('archive'), 1);
     const groups = [];
     const standalone = page.getByRole('searchbox', { name: 'Standalone search' });
     await standalone.fill('Retained search draft');
@@ -71,8 +99,9 @@ try {
       return { radius: parseFloat(style.borderRadius), height: element.getBoundingClientRect().height,
         border: style.borderWidth, fill: style.backgroundColor };
     });
-    assert.ok(searchGeometry.radius >= searchGeometry.height / 2);
-    assert.equal(searchGeometry.border, '0px');
+    if (light) assert.equal(searchGeometry.radius, 8); else assert.ok(searchGeometry.radius >= searchGeometry.height / 2);
+    assert.equal(searchGeometry.border, light ? '1px' : '0px');
+    if (light) assert.equal(searchGeometry.fill, 'rgb(255, 255, 255)');
     assert.notEqual(searchGeometry.fill, 'rgba(0, 0, 0, 0)');
     for (const label of ['Live filter', 'Legacy filter', 'Compound filter', 'Invalid compound', 'Read only compound']) {
       const field = page.getByLabel(label); await field.focus();
@@ -82,14 +111,19 @@ try {
         const danger = getComputedStyle(probe).color; probe.remove();
         return { danger, outer: getComputedStyle(parent).boxShadow, inner: getComputedStyle(element).boxShadow,
           fill: getComputedStyle(element).backgroundColor, fits: input.top >= bounds.top && input.bottom <= bounds.bottom,
+          outerFill: getComputedStyle(parent).backgroundColor, outerBorder: getComputedStyle(parent).borderColor,
           radius: getComputedStyle(parent).borderRadius, border: getComputedStyle(element).borderWidth };
       });
       assert.equal(geometry.inner, 'none', label + ' must not have a second focus frame');
       assert.equal(geometry.fill, 'rgba(0, 0, 0, 0)'); assert.equal(geometry.fits, true);
-      assert.ok(geometry.outer.includes('inset')); assert.equal(geometry.border, '0px');
-      if (['Live filter', 'Compound filter'].includes(label)) assert.ok(parseFloat(geometry.radius) >= 18, label + ' must retain a pill boundary');
+      if (light) {
+        assert.equal(geometry.outer, 'none');
+        assert.equal(geometry.outerFill, 'rgb(255, 255, 255)');
+        assert.equal(geometry.outerBorder, label === 'Invalid compound' ? geometry.danger : 'rgb(58, 131, 247)');
+      } else assert.ok(geometry.outer.includes('inset')); assert.equal(geometry.border, '0px');
+      if (!light && ['Live filter', 'Compound filter'].includes(label)) assert.ok(parseFloat(geometry.radius) >= 18, label + ' must retain a pill boundary');
       else assert.equal(geometry.radius, '8px', 'ordinary and secret compositions retain control corners');
-      if (label === 'Invalid compound') assert.ok(geometry.outer.includes(geometry.danger), 'invalid group must retain danger focus');
+      if (!light && label === 'Invalid compound') assert.ok(geometry.outer.includes(geometry.danger), 'invalid group must retain danger focus');
       groups.push({ label, ...geometry });
     }
     assert.equal(await page.getByLabel('Disabled compound').isDisabled(), true);
@@ -135,7 +169,7 @@ try {
     results.push({theme,width,height,scale,geometry,groups,typography,compact,dialogTitle:title}); await context.close();
   }
   await fs.writeFile(path.join(evidence, 'input-results.json'), JSON.stringify({node:process.version,results},null,2));
-  console.log('PASS text input confirmation, IME, repeats, scopes, portals, disabled state, neutral focus and 6 themed renders');
+  console.log('PASS text input confirmation, IME, repeats, scopes, portals, disabled state, light and dark focus and 6 themed renders');
 } finally {
   await browser?.close(); await new Promise(resolve => server.close(resolve));
   // This fixture owns this exact root; no consumer data or shared runtime is inside it.

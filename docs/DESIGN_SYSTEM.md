@@ -44,7 +44,7 @@ commands overlay the navigation target and reserve no label space while hidden.
 Hover, keyboard focus and open menus reveal the commands and shorten the label
 by their measured width, without changing row height or navigation bounds.
 
-Buttons, icon actions, Tabs, navigation and Select/menu/Popover triggers never draw a focus outline or outer ring in either theme. Keyboard focus uses a neutral fill inside the existing target; primary/send actions retain their semantic foreground and use their hover fill. Pointer dismissal restores DOM focus without a residual trigger highlight. Escape is dismissal, not a switch to keyboard navigation. Keep native focus, Tab/arrow navigation, Enter/Space activation and disabled semantics; never blur controls to hide a visual state. Text entry retains neutral inset focus and invalid fields retain their error boundary. Tooltips are descriptive: the same Escape removes a visible tooltip and dismisses the active interactive overlay; a tooltip must never require a preliminary Escape. Open Select/menu/Popover and child Dialog still dismiss before their parent, and IME Escape never closes them.
+Buttons, icon actions, Tabs, navigation and Select/menu/Popover triggers never draw a focus outline or outer ring in either theme. Keyboard focus uses a neutral fill inside the existing target; primary/send actions retain their semantic foreground and use their hover fill. Pointer dismissal restores DOM focus without a residual trigger highlight. Escape is dismissal, not a switch to keyboard navigation. Keep native focus, Tab/arrow navigation, Enter/Space activation and disabled semantics; never blur controls to hide a visual state. Text entry uses a blue border in light mode and retains neutral inset focus in dark mode. Invalid fields retain their error boundary. Tooltips are descriptive: the same Escape removes a visible tooltip and dismisses the active interactive overlay; a tooltip must never require a preliminary Escape. Open Select/menu/Popover and child Dialog still dismiss before their parent, and IME Escape never closes them.
 
 Chat media uses `MediaImage` for an unmasked image with layered soft shadows instead of a thin outline. `AppDialogContent variant="media"` supplies a transparent full-window stage, a dim media backdrop, shared close control and reserved toolbar area. Image pixels, including screenshot text and transparent assets, remain intact. Hosts own fit/zoom/pan geometry and image loading; use shared buttons and MediaToolbar for the toolbar. Background dismissal requires a click without a preceding pan; Escape and focus return follow the shared dialog contract.
 
@@ -89,7 +89,7 @@ This specification combines measured screenshot patterns with an existing deskto
 | Contextual sidebar | #fafbfd | approximately #191b21 client gradient | `--desktop-background-sidebar`, `--desktop-color-sidebar` fallback |
 | Main canvas | #ffffff | #181818 | `--desktop-color-background` |
 | Grouped settings | Same as main canvas | #232323 | `--desktop-color-background` in light; `--desktop-color-surface` in dark |
-| Input | #ededed | #2a2a2a | `--desktop-color-surface-muted` |
+| Input | #ffffff | #2a2a2a | `--desktop-input-background` |
 | Composer | #ffffff | #2a2a2a | `--desktop-color-composer` |
 | Floating menu | #ffffff | #2b2b2b | `--desktop-color-surface-overlay` |
 | Hover | #f0f1f3 | #333333 | `--desktop-color-surface-hover` |
@@ -97,13 +97,13 @@ This specification combines measured screenshot patterns with an existing deskto
 
 Use tokens in application CSS, not the literals from this table. In light mode, grouped settings share the main canvas color and use fine borders and dividers. Sidebar and floating surfaces retain their own roles. Neutral grays carry hierarchy; blue carries unread/send states; danger remains available for business errors. Do not recolor errors blue merely to match unread dots.
 
-Idle buttons and dropdown triggers have no decorative border or fill. The dropdown is text with a small down chevron. Hover introduces a compact filled target; the opened menu has a rounded surface and subtle shadow. Inputs have a light surface rather than a surrounding box. Text entry uses neutral inset focus or a subtly filled composer, without a blue outer ring. Preserve visible keyboard focus, table boundaries, actual drag targets and error state boundaries. “Boundary-free” does not mean invisible states.
+Idle buttons and dropdown triggers have no decorative border or fill. The dropdown is text with a small down chevron. Hover introduces a compact filled target; the opened menu has a rounded surface and subtle shadow. Light text fields use a white fill, a 1px #e4e4e5 border and 8px corners. Pointer and keyboard focus replace the existing border with #3a83f7 without adding an outer ring or shifting content. Dark fields keep their neutral inset focus. Composers use the same light fill and border on the outer surface while retaining their own geometry. Preserve visible keyboard focus, table boundaries, actual drag targets and error state boundaries. “Boundary-free” does not mean invisible states.
 
 Menu items use the shared hover fill for pointer highlight and keyboard focus, including submenu, checkbox and radio items. They never draw an outer outline or focus ring. Radix may focus an item on pointer movement; that focus must not activate a generic control outline. Compatibility menus must not use Tailwind `outline-none` (a transparent solid outline in Tailwind 3), and global focus rules must defer to the menu's semantic state. Validate these states through the real Tailwind pipeline and Radix interactions with `npm run test:menus`; keep arrow navigation, Enter activation, disabled items and focus return intact.
 
 ## Geometry
 
-Search fields use `Input type="search"`: a borderless, filled 36px pill, matching the supplied Settings search reference. `InputGroup` detects its direct search input and owns the same pill boundary around icons and trailing actions. Standalone and grouped search use the shared input surface in both themes; keyboard focus remains a neutral inset and invalid focus retains the danger boundary. Hosts declare search semantics and retain handlers, drafts, labels and action IDs; they do not paint field borders, fills or corners. Ordinary text and secret fields retain their control geometry.
+Search fields use `Input type="search"`. Standalone and grouped search use the same white field and blue focus border in light mode and keep their filled pill geometry in dark mode. `InputGroup` owns the single border around the input, icons and trailing actions. Hosts declare semantics and keep handlers, drafts, labels and action IDs. A host rich text editor can opt into the shared field styling with `data-desktop-rich-field`.
 
 ### Versioned client profile
 
@@ -313,3 +313,7 @@ ContextAttachment contains its removal button and tooltip trigger within the att
 ## Settings reference refinement, 2026-10-14
 
 The user-supplied Appearance capture establishes same-color card/page backgrounds in light mode and approximately 44px ordinary rows. Keep the 728px column, shared section spacing and user-controlled sidebar widths. Hosts compose vertical SettingsGroup sections, without nested decorative frames or section-switching tabs. Controlled SettingsDisclosure supports deep links while retaining mounted drafts and list state. Reference captures are private and are not redistributed.
+
+### Compact desktop sidebar records
+
+Single-line sidebar records use 13px regular text and a 30px row with visible spacing. Keep the light sidebar canvas at #fafbfd; use #3b3d40 for labels and a pale hover or selected fill. Do not style a pinned or favorite record as selected; use its section or a marker. Secondary row actions use a 12px glyph inside a 24px target for fine pointers, with accessible names, keyboard reveal and visible focus. Coarse pointers retain the normal control size and visible commands. Two-line records keep their larger geometry, and metadata and actions remain separate from the primary target.
