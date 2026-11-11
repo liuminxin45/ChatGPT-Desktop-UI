@@ -15,7 +15,7 @@
 .desktop-client .kit-shell__navigation{width:52px}.desktop-client .kit-rail{width:52px;padding-top:8px;background:transparent}
 .desktop-client .kit-rail__items{gap:8px}.desktop-client .kit-rail .kit-rail__item{width:36px;height:36px}
 /* Fixed attachment anchors all layers to the desktop viewport, not the scrolling list or resized panel. */
-.desktop-client .kit-sidebar{--desktop-sidebar-width:var(--desktop-size-client-sidebar);background-attachment:fixed;border-inline-end:1px solid var(--desktop-color-border);border-radius:0;overflow:hidden}
+.desktop-client .kit-sidebar{--desktop-sidebar-width:var(--desktop-size-client-sidebar);background-attachment:fixed;border-inline-end-color:var(--desktop-color-border);border-inline-start-color:var(--desktop-color-border);border-radius:0;overflow:hidden}
 .desktop-client .kit-sidebar[hidden]{border-inline-end-width:0}
 .client-sidebar-heading{margin:0;min-width:0;padding-inline:4px;font-size:var(--desktop-font-size-toolbar);line-height:var(--desktop-line-height-heading);font-weight:var(--desktop-font-weight-emphasis);text-align:start;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .desktop-client .client-sidebar-heading{font-size:16px}

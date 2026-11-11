@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type CSSProperties, type HTMLAttributes } from 'react';
+import { forwardRef, useEffect, useRef, useState, type CSSProperties, type HTMLAttributes } from 'react';
 import { classes } from '../classes';
 
 export interface SidebarResizeOptions {
@@ -16,15 +16,20 @@ export interface SidebarResizeOptions {
 }
 
 /** Shared sidebar geometry and resize target; the Host owns width, folding and persistence. */
-export function SidebarPanel({
-  resize,
+export const SidebarPanel = forwardRef<HTMLElement, HTMLAttributes<HTMLElement> & {
+  resize?: SidebarResizeOptions;
+  placement?: "start" | "end" | "overlay-end" | "fill";
+}>(function SidebarPanel({
+  placement = "start",
+  resize: resizeOptions,
   hidden,
   className,
   children,
   style,
   ...props
-}: HTMLAttributes<HTMLElement> & { resize?: SidebarResizeOptions }) {
-  const panel = useRef<HTMLElement>(null);
+}, forwardedRef) {
+  const resize = placement === "start" ? resizeOptions : undefined;
+  const panel = useRef<HTMLElement | null>(null);
   const handle = useRef<HTMLDivElement>(null);
   const [measuredWidth, setMeasuredWidth] = useState<number>();
   const resizable = Boolean(resize);
@@ -72,7 +77,12 @@ export function SidebarPanel({
   return (
     <aside
       {...props}
-      ref={panel}
+      ref={element => {
+        panel.current = element;
+        if (typeof forwardedRef === "function") forwardedRef(element);
+        else if (forwardedRef) forwardedRef.current = element;
+      }}
+      data-sidebar-placement={placement}
       hidden={hidden}
       {...(hidden ? { inert: '' } : {})}
       className={classes('kit-sidebar', resize && 'kit-sidebar--resizable', className)}
@@ -158,4 +168,4 @@ export function SidebarPanel({
       )}
     </aside>
   );
-}
+});
