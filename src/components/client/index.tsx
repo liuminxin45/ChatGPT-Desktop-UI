@@ -190,7 +190,8 @@ export function ClientSidebarItem({
   ...props
 }: Omit<ButtonProps, 'children' | 'variant' | 'iconOnly'> & {
   label: ReactNode;
-  count?: number;
+  /** Non-interactive trailing metadata, such as a count or compact status badges. */
+  count?: ReactNode;
   selected?: boolean;
   /** Independent commands; revealed on hover, focus or an open descendant menu. */
   actions?: ReactNode;
