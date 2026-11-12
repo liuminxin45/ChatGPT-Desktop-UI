@@ -35435,9 +35435,9 @@
         {
           "name": "count",
           "required": false,
-          "type": "number | undefined",
+          "type": "ReactNode",
           "native": false,
-          "description": ""
+          "description": "Non-interactive trailing metadata, such as a count or compact status badges."
         },
         {
           "name": "selected",

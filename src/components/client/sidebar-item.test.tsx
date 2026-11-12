@@ -23,7 +23,18 @@ describe('ClientSidebarItem', () => {
   });
   it('includes non-interactive trailing metadata in the navigation target', () => {
     const select = vi.fn();
-    render(<ClientSidebarItem label="Chat" count={<span><span aria-label="Pinned" />@2 <span>Draft</span></span>} onClick={select} />);
+    render(
+      <ClientSidebarItem
+        label="Chat"
+        count={
+          <span>
+            <span aria-label="Pinned" />
+            @2 <span>Draft</span>
+          </span>
+        }
+        onClick={select}
+      />,
+    );
     const button = screen.getByRole('button', { name: 'Chat Pinned @2 Draft' });
     expect(button.querySelector('.client-sidebar-count')).not.toBeNull();
     button.click();

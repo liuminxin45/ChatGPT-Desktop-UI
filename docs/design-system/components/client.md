@@ -54,7 +54,7 @@ A retained navigation target with a readable label and an independent trailing c
 | icon | no | `ReactNode` |
 | badge | no | `ReactNode` |
 | label | yes | `ReactNode` |
-| count | no | `number \| undefined` |
+| count | no | `ReactNode` |
 | selected | no | `boolean \| undefined` |
 | actions | no | `ReactNode` |
 
