@@ -28,7 +28,7 @@
 .kit-window-controls .desktop-icon-control>svg{width:12px;height:12px}
 :root:not(:has([data-desktop-input-modality="pointer"])) .kit-rail .kit-rail__item:focus-visible{outline:none;background:var(--desktop-color-surface-hover)}
 .kit-rail>.desktop-internal-scroll{width:100%;scrollbar-gutter:auto;scrollbar-width:none}.kit-rail>.desktop-internal-scroll::-webkit-scrollbar{width:0}
-.kit-rail .kit-rail__item:hover:not(:disabled):not([aria-disabled=true]){background:var(--desktop-color-navigation-selected);color:var(--desktop-color-on-navigation-selected)}
+.kit-rail .kit-rail__item:hover:not(:disabled):not([aria-disabled=true]){background:var(--desktop-color-surface-hover);color:var(--desktop-color-text)}
 .kit-rail .kit-rail__item[aria-current=page]{background:var(--desktop-color-navigation-selected);color:var(--desktop-color-on-navigation-selected)}
 .kit-unread{position:absolute;width:8px;height:8px;border-radius:50%;top:3px;right:3px;background:var(--desktop-color-unread)}
 .kit-avatar{width:32px;height:32px;display:grid;place-items:center;padding:3px;border:0;border-radius:var(--desktop-radius-navigation);background:transparent;color:var(--desktop-color-text-muted)}

@@ -30,7 +30,7 @@
 .desktop-checkbox[data-state]{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--desktop-color-border-strong);border-radius:4px;background:var(--desktop-color-surface);padding:0;color:var(--desktop-color-text)}
 .desktop-checkbox[data-state=checked],.desktop-checkbox[data-state=indeterminate]{background:var(--desktop-color-text);border-color:var(--desktop-color-text);color:var(--desktop-color-background)}
 .desktop-checkbox:disabled{opacity:.5}.desktop-checkbox-indicator{display:flex;align-items:center;justify-content:center}.desktop-checkbox-indicator svg{width:14px;height:14px}
-.desktop-switch[data-state=checked]{background:var(--desktop-color-focus)}.desktop-switch[data-state=checked]>span{transform:translateX(16px)}
+.desktop-switch[data-state=checked]{background:var(--desktop-color-primary)}.desktop-switch[data-state=checked]>span{background:var(--desktop-color-on-primary);transform:translateX(16px)}
 .desktop-label{display:flex;align-items:center;gap:8px;font:400 var(--desktop-font-size-body)/var(--desktop-line-height-ui) var(--desktop-font-sans)}
 .desktop-label:has(+ :disabled),.desktop-label[data-disabled]{opacity:.5}
 .desktop-badge{display:inline-flex;align-items:center;justify-content:center;width:fit-content;flex:none;gap:4px;border:1px solid transparent;border-radius:var(--desktop-radius-control);padding:2px 8px;background:var(--desktop-color-surface-muted);color:var(--desktop-color-text);font:400 var(--desktop-font-size-supporting)/var(--desktop-line-height-supporting) var(--desktop-font-sans);white-space:normal;overflow-wrap:anywhere;max-width:100%}
