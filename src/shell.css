@@ -68,9 +68,9 @@
 :root:not(:has([data-desktop-input-modality="pointer"])) .kit-avatar:focus-visible,:root:not(:has([data-desktop-input-modality="pointer"])) .kit-category:focus-visible,:root:not(:has([data-desktop-input-modality="pointer"])) .kit-titlebar__menu:focus-visible{outline:none;background:var(--desktop-color-surface-hover)}
 @media(max-width:760px){.kit-sidebar{--desktop-sidebar-width:200px}.kit-settings-scroll{padding:32px 16px}.kit-setting-row{gap:12px}.kit-setting-row__control{max-width:160px}}
 
-.kit-sidebar{border-inline-end:1px solid var(--desktop-color-panel-boundary)}
+.kit-sidebar{border-inline-end:0}
 .kit-sidebar:is([data-sidebar-placement=end],[data-sidebar-placement=overlay-end],[data-sidebar-placement=fill]){border-inline-end:0;border-radius:0}
-.kit-sidebar:is([data-sidebar-placement=end],[data-sidebar-placement=overlay-end]){border-inline-start:1px solid var(--desktop-color-panel-boundary)}
+.kit-sidebar:is([data-sidebar-placement=end],[data-sidebar-placement=overlay-end]){border-inline-start:0}
 .kit-sidebar[data-sidebar-placement=end][hidden]{border-inline-start-width:0}
 .kit-sidebar[data-sidebar-placement=overlay-end]{transition:transform var(--desktop-motion-fast) ease,opacity var(--desktop-motion-fast) ease,visibility var(--desktop-motion-fast)}
 .kit-sidebar[data-sidebar-placement=overlay-end][hidden]{width:var(--desktop-sidebar-width,248px);transform:translateX(100%)}

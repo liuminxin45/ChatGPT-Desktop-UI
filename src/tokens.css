@@ -2,15 +2,15 @@
   --desktop-font-ai-code: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
   color-scheme: light;
 
-  /* Color primitives — Antigravity Monochrome Light */
-  --desktop-color-canvas: #fafafa;
+  /* Color primitives — Antigravity Monochrome Light (2-Surface Architecture) */
+  --desktop-color-canvas: #ffffff;
   --desktop-color-background: #ffffff;
-  --desktop-color-surface: #f7f7f7;
-  --desktop-color-surface-muted: #efefef;
-  --desktop-color-surface-hover: #e8e8e8;
-  --desktop-color-surface-selected: #e0e0e0;
+  --desktop-color-surface: #ffffff;
+  --desktop-color-surface-muted: #f2f2f2;
+  --desktop-color-surface-hover: #ebebeb;
+  --desktop-color-surface-selected: #e3e3e3;
   --desktop-color-surface-overlay: #ffffff;
-  --desktop-color-border: #ebebeb;
+  --desktop-color-border: #ececec;
   --desktop-color-border-strong: #d4d4d4;
   --desktop-color-text: #111111;
   --desktop-color-text-subtle: #404040;
@@ -21,7 +21,7 @@
   --desktop-color-focus: #141414;
   --desktop-color-success: #247146;
   --desktop-color-success-hover: #1d5e3a;
-  --desktop-color-success-soft: #efefef;
+  --desktop-color-success-soft: #f2f2f2;
   --desktop-color-on-success: #ffffff;
   --desktop-color-danger: #9f2f2d;
   --desktop-color-danger-hover: #812624;
@@ -33,7 +33,7 @@
   --desktop-color-on-warning: #ffffff;
   --desktop-color-info: #141414;
   --desktop-color-info-hover: #292929;
-  --desktop-color-info-soft: #efefef;
+  --desktop-color-info-soft: #f2f2f2;
   --desktop-color-on-info: #ffffff;
   /* Intentionally theme-invariant content canvases. */
   --desktop-color-code-surface: #121212;
@@ -52,9 +52,9 @@
 
 
   /* Desktop shell hierarchy; all consumers inherit these semantic surfaces. */
-  --desktop-color-shell: #f2f2f2;
-  --desktop-color-sidebar: #f8f8f8;
-  --desktop-color-navigation-selected: #e6e6e6;
+  --desktop-color-shell: #f5f5f5;
+  --desktop-color-sidebar: #f5f5f5;
+  --desktop-color-navigation-selected: #e4e4e4;
   --desktop-color-on-navigation-selected: #111111;
   --desktop-color-unread: #141414;
   --desktop-color-send: #141414;
@@ -73,10 +73,10 @@
   --desktop-size-reading-column: 1120px;
   --desktop-size-settings-column: 720px;
 
-  --desktop-color-panel-boundary: #ebebeb;
+  --desktop-color-panel-boundary: transparent;
   --desktop-color-avatar-boundary: transparent;
   --desktop-color-composer: #f4f4f4;
-  --desktop-color-chat-own: #e8e8e8;
+  --desktop-color-chat-own: #ebebeb;
 
   /* Typography */
   --desktop-font-sans: system-ui, sans-serif;
@@ -104,8 +104,8 @@
   --desktop-radius-control: 8px;
   --desktop-radius-composer: 14px;
   --desktop-sidebar-row-text: #262626;
-  --desktop-sidebar-row-hover: #eaeaea;
-  --desktop-sidebar-row-selected: #e2e2e2;
+  --desktop-sidebar-row-hover: #ebebeb;
+  --desktop-sidebar-row-selected: #e3e3e3;
   --desktop-sidebar-action-text: #737373;
   --desktop-input-background: var(--desktop-color-surface-muted);
   --desktop-input-hover-background: var(--desktop-color-surface-hover);
@@ -148,25 +148,25 @@
   --desktop-input-shell-search-radius: 8px;
   --desktop-color-panel-boundary: transparent;
   --desktop-color-avatar-boundary: transparent;
-  --desktop-color-composer: #1b1b1b;
-  --desktop-color-chat-own: #262626;
+  --desktop-color-composer: #1a1a1a;
+  --desktop-color-chat-own: #222222;
   color-scheme: dark;
   --desktop-color-background: #181818;
-  --desktop-color-shell: #0a0a0a;
-  --desktop-color-sidebar: #101010;
-  --desktop-color-navigation-selected: #242424;
+  --desktop-color-shell: #0c0c0c;
+  --desktop-color-sidebar: #0c0c0c;
+  --desktop-color-navigation-selected: #222222;
   --desktop-color-on-navigation-selected: #ffffff;
   --desktop-color-unread: #ededed;
   --desktop-color-send: #ededed;
   --desktop-color-send-hover: #ffffff;
   --desktop-color-on-send: #0f0f0f;
-  --desktop-color-canvas: #131313;
+  --desktop-color-canvas: #181818;
   --desktop-color-surface: #181818;
-  --desktop-color-surface-muted: #1f1f1f;
+  --desktop-color-surface-muted: #202020;
   --desktop-color-surface-hover: #242424;
   --desktop-color-surface-selected: #2a2a2a;
-  --desktop-color-surface-overlay: #1c1c1c;
-  --desktop-color-border: #242424;
+  --desktop-color-surface-overlay: #1e1e1e;
+  --desktop-color-border: #262626;
   --desktop-color-border-strong: #363636;
   --desktop-color-text: #f0f0f0;
   --desktop-color-text-subtle: #c7c7c7;
