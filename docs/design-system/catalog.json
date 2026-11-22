@@ -34030,9 +34030,9 @@
         {
           "name": "count",
           "required": false,
-          "type": "number | undefined",
+          "type": "ReactNode",
           "native": false,
-          "description": ""
+          "description": "Non-interactive trailing metadata, such as a count or compact status badges."
         },
         {
           "name": "selected",
@@ -46387,6 +46387,13 @@
           "type": "SidebarResizeOptions | undefined",
           "native": false,
           "description": ""
+        },
+        {
+          "name": "placement",
+          "required": false,
+          "type": "\"end\" | \"fill\" | \"start\" | \"overlay-end\" | undefined",
+          "native": false,
+          "description": ""
         }
       ],
       "nativeProps": [
@@ -46653,7 +46660,9 @@
         "22f8c724e1c13860",
         "6c06c2cdd1b0362c",
         "76bc16a5e9dc4568",
-        "9654394c224c0006"
+        "9654394c224c0006",
+        "a613e8410070e6f5",
+        "b71c25c8048699fd"
       ]
     },
     {

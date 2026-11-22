@@ -173,9 +173,11 @@ export function Markdown({
       {children}
     </ReactMarkdown>
   );
-  if (variant === 'default' && !className && !Object.keys(props).length) return content;
   return (
-    <div {...props} className={classes(variant === 'ai' && 'desktop-ai-markdown', className)}>
+    <div
+      {...props}
+      className={classes('desktop-markdown', variant === 'ai' && 'desktop-ai-markdown', className)}
+    >
       {content}
     </div>
   );

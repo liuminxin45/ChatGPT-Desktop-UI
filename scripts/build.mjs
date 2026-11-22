@@ -7,7 +7,7 @@ import { staticNotificationStyles } from './static-notification-styles.mjs';
 import { desktopScrollLock } from './desktop-scroll-lock.mjs';
 import { scopeStyles } from './scoped-styles.mjs';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-if (process.version !== 'v24.19.0') throw Error('Use the repository Node 24.19.0 runtime.');
+if (!['v24.19.0', 'v22.23.3'].includes(process.version)) throw Error('Use the repository Node 24.19.0 or 22.23.3 runtime.');
 const output = path.resolve(root, 'dist');
 if (path.dirname(output) !== root || path.basename(output) !== 'dist') throw Error('Invalid library output directory.');
 const previous = await lstat(output).catch(error => { if(error.code !== 'ENOENT') throw error; return null; });

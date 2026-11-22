@@ -57,7 +57,7 @@ A retained navigation target with a readable label and an independent trailing c
 | badge | no | `ReactNode` |
 | tooltipWhenTruncated | no | `boolean \| undefined` |
 | label | yes | `ReactNode` |
-| count | no | `number \| undefined` |
+| count | no | `ReactNode` |
 | selected | no | `boolean \| undefined` |
 | depth | no | `number \| undefined` |
 | actions | no | `ReactNode` |

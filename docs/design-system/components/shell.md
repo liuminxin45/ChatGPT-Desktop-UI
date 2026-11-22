@@ -131,6 +131,7 @@ Shared sidebar geometry and resize target; the Host owns width, folding and pers
 | Prop | Required | Type |
 | --- | --- | --- |
 | resize | no | `SidebarResizeOptions \| undefined` |
+| placement | no | `"end" \| "fill" \| "start" \| "overlay-end" \| undefined` |
 
 ## TitleBar (chatgpt-desktop-kit)
 

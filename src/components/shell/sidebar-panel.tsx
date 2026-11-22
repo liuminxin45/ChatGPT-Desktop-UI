@@ -16,19 +16,17 @@ export interface SidebarResizeOptions {
 }
 
 /** Shared sidebar geometry and resize target; the Host owns width, folding and persistence. */
-export const SidebarPanel = forwardRef<HTMLElement, HTMLAttributes<HTMLElement> & {
-  resize?: SidebarResizeOptions;
-  placement?: "start" | "end" | "overlay-end" | "fill";
-}>(function SidebarPanel({
-  placement = "start",
-  resize: resizeOptions,
-  hidden,
-  className,
-  children,
-  style,
-  ...props
-}, forwardedRef) {
-  const resize = placement === "start" ? resizeOptions : undefined;
+export const SidebarPanel = forwardRef<
+  HTMLElement,
+  HTMLAttributes<HTMLElement> & {
+    resize?: SidebarResizeOptions;
+    placement?: 'start' | 'end' | 'overlay-end' | 'fill';
+  }
+>(function SidebarPanel(
+  { placement = 'start', resize: resizeOptions, hidden, className, children, style, ...props },
+  forwardedRef,
+) {
+  const resize = placement === 'start' ? resizeOptions : undefined;
   const panel = useRef<HTMLElement | null>(null);
   const handle = useRef<HTMLDivElement>(null);
   const [measuredWidth, setMeasuredWidth] = useState<number>();
@@ -77,9 +75,9 @@ export const SidebarPanel = forwardRef<HTMLElement, HTMLAttributes<HTMLElement> 
   return (
     <aside
       {...props}
-      ref={element => {
+      ref={(element) => {
         panel.current = element;
-        if (typeof forwardedRef === "function") forwardedRef(element);
+        if (typeof forwardedRef === 'function') forwardedRef(element);
         else if (forwardedRef) forwardedRef.current = element;
       }}
       data-sidebar-placement={placement}
